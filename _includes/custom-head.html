@@ -1,21 +1,18 @@
-<link rel="icon" href="{{ '/assets/image library/icon library/lyzbcy.ico' | relative_url }}" type="image/x-icon">
-<link rel="shortcut icon" href="{{ '/assets/image library/icon library/lyzbcy.ico' | relative_url }}" type="image/x-icon">
+<link rel="icon" href="{{ '/assets/image library/icon library/lyzbcy.ico?v=2' | relative_url | uri_escape }}" type="image/x-icon">
+<link rel="shortcut icon" href="{{ '/assets/image library/icon library/lyzbcy.ico?v=2' | relative_url | uri_escape }}" type="image/x-icon">
 
-<!-- SVG favicon for modern browsers -->
-<link rel="icon" href="{{ '/assets/img/favicons/favicon.svg' | relative_url }}" type="image/svg+xml">
-
-<!-- PNG fallbacks -->
-<link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/img/favicons/favicon-96x96.png' | relative_url }}">
-<link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/img/favicons/favicon-96x96.png' | relative_url }}">
+<!-- PNG fallbacks (force our PNG instead of theme defaults) -->
+<link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/image library/icon library/lyzbcy.png?v=2' | relative_url | uri_escape }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/image library/icon library/lyzbcy.png?v=2' | relative_url | uri_escape }}">
 
 <!-- Apple Touch Icon -->
-<link rel="apple-touch-icon" href="{{ '/assets/image library/icon library/lyzbcy.png' | relative_url }}">
+<link rel="apple-touch-icon" href="{{ '/assets/image library/icon library/lyzbcy.png?v=2' | relative_url | uri_escape }}">
 
 <!-- PWA manifest -->
 <link rel="manifest" href="{{ '/assets/img/favicons/site.webmanifest' | relative_url }}">
 
 <!-- Safari pinned tab -->
-<link rel="mask-icon" href="{{ '/assets/img/favicons/favicon.svg' | relative_url }}" color="#5bbad5">
+<!-- Intentionally omit theme SVG to avoid overriding our favicon -->
 
 <!-- Windows tiles & theme colors -->
 <meta name="msapplication-TileColor" content="#2d89ef">
