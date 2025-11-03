@@ -1,0 +1,17 @@
+{%- comment -%}
+Override Chirpy's default favicons to use site's own icons.
+{%- endcomment -%}
+
+<link rel="icon" href="{{ '/assets/image library/icon library/lyzbcy.ico?v=3' | relative_url | uri_escape }}" type="image/x-icon">
+<link rel="shortcut icon" href="{{ '/assets/image library/icon library/lyzbcy.ico?v=3' | relative_url | uri_escape }}" type="image/x-icon">
+
+<link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/image library/icon library/lyzbcy.png?v=3' | relative_url | uri_escape }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/image library/icon library/lyzbcy.png?v=3' | relative_url | uri_escape }}">
+
+<link rel="apple-touch-icon" href="{{ '/assets/image library/icon library/lyzbcy.png?v=3' | relative_url | uri_escape }}">
+
+{%- comment -%}
+Intentionally omit SVG and theme's default /assets/img/favicons to prevent override.
+Keep manifest as-is if needed by PWA from the theme.
+{%- endcomment -%}
+
