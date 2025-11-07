@@ -552,51 +552,27 @@ async function loadTasks() {
       console.warn('Liquid 数据无效，尝试 fetch 加载');
     }
     console.log('开始通过 fetch 加载数据...');
-    // 获取当前页面的基础路径
-    const currentPath = window.location.pathname;
-    const basePath = currentPath.substring(0, currentPath.lastIndexOf('/'));
     
-    // 尝试多个可能的路径（Liquid 模板会在构建时解析这些路径）
-    const baseUrl = '{{ site.baseurl }}';
-    const siteUrl = '{{ site.url }}';
-    const possiblePaths = [
-      '{{ "/todos.json" | relative_url }}',  // Jekyll 相对路径
-      '{{ "/todos.json" | absolute_url }}',   // Jekyll 绝对路径
-      baseUrl ? baseUrl + '/todos.json' : '/todos.json',  // 使用 baseurl
-      siteUrl ? siteUrl + '/todos.json' : '/todos.json',  // 使用 site.url
-      '/todos.json',      // 绝对路径
-      basePath + '/todos.json',  // 相对于当前页面
-      '../todos.json',    // 相对路径
-      'todos.json'        // 当前目录
-    ];
-    
-    let loaded = false;
-    for (const path of possiblePaths) {
-      try {
-        console.log('尝试加载路径:', path);
-        const response = await fetch(path);
-        if (response.ok) {
-          const data = await response.json();
-          console.log('成功加载数据:', data);
-          tasksData = data.tasks || data;
-          if (tasksData && Array.isArray(tasksData) && tasksData.length > 0) {
-            loaded = true;
-            console.log('数据加载成功，任务数量:', tasksData.length);
-            break;
-          } else {
-            console.warn('数据为空或格式不正确:', tasksData);
-          }
+    // 直接使用绝对路径（已验证可以工作）
+    try {
+      console.log('尝试加载路径: /todos.json');
+      const response = await fetch('/todos.json');
+      if (response.ok) {
+        const data = await response.json();
+        console.log('✓ 成功加载数据:', data);
+        tasksData = data.tasks || data;
+        if (tasksData && Array.isArray(tasksData) && tasksData.length > 0) {
+          console.log('✓ 数据加载成功，任务数量:', tasksData.length);
         } else {
-          console.warn('路径加载失败:', path, response.status);
+          console.warn('⚠ 数据为空或格式不正确:', tasksData);
+          tasksData = [];
         }
-      } catch (fetchError) {
-        console.warn('路径加载出错:', path, fetchError);
+      } else {
+        console.error('❌ 路径加载失败: /todos.json, 状态码:', response.status);
+        tasksData = [];
       }
-    }
-    
-    if (!loaded) {
-      console.error('所有数据加载方法都失败，使用空数组');
-      console.error('请检查：1. todos.json 文件是否已部署 2. 路径是否正确 3. 浏览器控制台的错误信息');
+    } catch (fetchError) {
+      console.error('❌ 路径加载出错: /todos.json', fetchError);
       tasksData = [];
     }
   }
