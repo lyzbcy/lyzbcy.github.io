@@ -475,6 +475,9 @@ order: 4
 <script>
 // 立即执行的测试，确保脚本加载
 console.log('📝 TodoList 脚本开始加载...');
+console.log('脚本执行时间:', new Date().toISOString());
+console.log('文档状态:', document.readyState);
+console.log('window 对象:', typeof window);
 
 // 任务数据
 let tasks = [];
@@ -1168,4 +1171,13 @@ function formatDate(dateInput) {
   const day = date.getDate();
   return `${month}/${day}`;
 }
+
+// 所有函数定义完成后的检查
+console.log('✅ 所有函数定义完成，检查函数可用性:');
+console.log('  - initTodoList:', typeof window.initTodoList);
+console.log('  - loadTasks:', typeof loadTasks);
+console.log('  - renderCurrentView:', typeof renderCurrentView);
+console.log('  - setupEventListeners:', typeof setupEventListeners);
+console.log('  - renderMasonry:', typeof renderMasonry);
+console.log('  - renderCalendar:', typeof renderCalendar);
 </script>
