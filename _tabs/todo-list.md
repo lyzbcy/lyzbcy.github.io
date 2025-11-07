@@ -513,11 +513,12 @@ function calculateTaskSize(urgency, daysUntil) {
   }
 }
 
-// 初始化
-document.addEventListener('DOMContentLoaded', function() {
+// 初始化函数
+function initTodoList() {
   console.log('=== TodoList 初始化开始 ===');
   console.log('当前 URL:', window.location.href);
   console.log('当前路径:', window.location.pathname);
+  console.log('文档状态:', document.readyState);
   
   setupEventListeners();
   
@@ -532,7 +533,27 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   console.log('=== TodoList 初始化完成 ===');
-});
+}
+
+// 多种方式确保初始化执行
+if (document.readyState === 'loading') {
+  // 文档还在加载中
+  document.addEventListener('DOMContentLoaded', initTodoList);
+  console.log('📌 等待 DOMContentLoaded 事件...');
+} else {
+  // 文档已经加载完成
+  console.log('📌 文档已加载，立即执行初始化...');
+  initTodoList();
+}
+
+// 备用方案：延迟执行
+setTimeout(function() {
+  if (tasks.length === 0 && !window.todoListInitialized) {
+    console.log('⚠️ 备用初始化方案触发');
+    window.todoListInitialized = true;
+    initTodoList();
+  }
+}, 1000);
 
 // 加载任务数据
 async function loadTasks() {
