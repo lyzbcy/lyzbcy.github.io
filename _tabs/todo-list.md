@@ -13,6 +13,15 @@ order: 4
     if (typeof console !== 'undefined') {
       console.log('✅ Console 对象可用');
     }
+    // 检查主脚本是否已加载
+    setTimeout(function() {
+      if (typeof window.initTodoList === 'undefined') {
+        console.error('❌ 主脚本未加载！initTodoList 函数不存在');
+        console.log('请检查页面源代码中的 script 标签是否正确生成');
+      } else {
+        console.log('✅ 主脚本已加载');
+      }
+    }, 2000);
   })();
 </script>
 
@@ -473,11 +482,23 @@ order: 4
 </style>
 
 <script>
-// 立即执行的测试，确保脚本加载
-console.log('📝 TodoList 脚本开始加载...');
-console.log('脚本执行时间:', new Date().toISOString());
-console.log('文档状态:', document.readyState);
-console.log('window 对象:', typeof window);
+// 立即执行的测试，确保脚本加载（使用立即执行函数避免作用域问题）
+(function() {
+  'use strict';
+  console.log('📝 TodoList 脚本开始加载...');
+  console.log('脚本执行时间:', new Date().toISOString());
+  console.log('文档状态:', document.readyState);
+  console.log('window 对象:', typeof window);
+  console.log('document 对象:', typeof document);
+  
+  // 测试基本 JavaScript 功能
+  try {
+    var testVar = 'test';
+    console.log('✓ JavaScript 基本功能正常，testVar =', testVar);
+  } catch (e) {
+    console.error('❌ JavaScript 执行出错:', e);
+  }
+})();
 
 // 任务数据
 let tasks = [];
