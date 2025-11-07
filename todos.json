@@ -1,0 +1,6 @@
+---
+layout: null
+---
+{%- assign todos = site.data.todos -%}
+{{ todos | jsonify }}
+

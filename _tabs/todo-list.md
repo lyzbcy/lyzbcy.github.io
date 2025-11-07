@@ -238,6 +238,7 @@ order: 4
   grid-template-columns: repeat(7, 1fr);
   gap: 10px;
   margin-top: 20px;
+  position: relative;
 }
 
 .calendar-day-header {
@@ -252,11 +253,13 @@ order: 4
 .calendar-day {
   min-height: 100px;
   padding: 10px;
+  padding-top: 35px;
   background: #f8f9fa;
   border-radius: 10px;
   border: 2px solid transparent;
   transition: all 0.3s ease;
   position: relative;
+  overflow: visible;
 }
 
 .calendar-day:hover {
@@ -279,6 +282,10 @@ order: 4
   font-weight: 600;
   margin-bottom: 8px;
   font-size: 14px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
 }
 
 .calendar-task {
@@ -293,27 +300,49 @@ order: 4
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
+/* 当日任务样式 - 提高对比度 */
 .calendar-day.today .calendar-task {
-  background: rgba(255,255,255,0.9);
+  background: #ffffff;
+  color: #333;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  border-left-width: 4px;
 }
 
 .calendar-task:hover {
-  transform: translateX(3px);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  z-index: 10;
 }
 
 .calendar-task.urgency-high {
   border-left-color: #ff6b6b;
+  background: linear-gradient(90deg, #fff5f5 0%, #ffffff 100%);
 }
 
 .calendar-task.urgency-medium {
   border-left-color: #ffd93d;
+  background: linear-gradient(90deg, #fffef5 0%, #ffffff 100%);
 }
 
 .calendar-task.urgency-low {
   border-left-color: #6bcf7f;
+  background: linear-gradient(90deg, #f5fff7 0%, #ffffff 100%);
+}
+
+.calendar-day.today .calendar-task.urgency-high {
+  background: linear-gradient(90deg, #ffe5e5 0%, #ffffff 100%);
+}
+
+.calendar-day.today .calendar-task.urgency-medium {
+  background: linear-gradient(90deg, #fff9e5 0%, #ffffff 100%);
+}
+
+.calendar-day.today .calendar-task.urgency-low {
+  background: linear-gradient(90deg, #e5ffe9 0%, #ffffff 100%);
 }
 
 .calendar-task.completed {
@@ -321,19 +350,60 @@ order: 4
   text-decoration: line-through;
 }
 
-/* 时间段任务样式 */
-.calendar-task.task-range-start {
-  border-left-width: 5px;
-  border-radius: 6px 0 0 6px;
-}
-
-.calendar-task.task-range-end {
-  border-radius: 0 6px 6px 0;
-}
-
-.calendar-task.task-range-middle {
-  border-left-width: 1px;
+/* 跨天任务长条样式 */
+.calendar-task.task-span {
+  position: absolute;
+  margin: 0;
+  z-index: 1;
   border-radius: 0;
+  border-left-width: 4px;
+  border-right: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 22px;
+  line-height: 22px;
+  padding: 0 8px;
+  box-sizing: border-box;
+  /* 确保任务条在日期数字下方 */
+  pointer-events: auto;
+}
+
+.calendar-task.task-span-start {
+  border-radius: 6px 0 0 6px;
+  border-right: 2px dashed rgba(0,0,0,0.15);
+}
+
+.calendar-task.task-span-end {
+  border-radius: 0 6px 6px 0;
+  border-left: none;
+  border-right: 4px solid;
+}
+
+.calendar-task.task-span-middle {
+  border-left: none;
+  border-right: none;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+}
+
+.calendar-task.task-span-single {
+  border-radius: 6px;
+  border-right: 4px solid;
+}
+
+/* 任务条位置计算 - 使用动态计算，确保在日期数字下方 */
+.calendar-task.task-span {
+  top: calc(32px + var(--task-row, 0) * 27px);
+}
+
+/* 当日跨天任务特殊样式 */
+.calendar-day.today .calendar-task.task-span {
+  background: #ffffff;
+  color: #333;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .task-count {
@@ -431,32 +501,47 @@ function calculateTaskSize(urgency, daysUntil) {
 
 // 初始化
 document.addEventListener('DOMContentLoaded', function() {
-  loadTasks();
   setupEventListeners();
-  renderCurrentView();
+  loadTasks().then(() => {
+    renderCurrentView();
+  }).catch(err => {
+    console.error('加载任务数据失败:', err);
+    renderCurrentView(); // 即使加载失败也渲染视图
+  });
 });
 
 // 加载任务数据
-function loadTasks() {
+async function loadTasks() {
+  let tasksData = null;
+  
+  // 方法1: 尝试使用 Jekyll Liquid 模板生成的数据（本地运行）
+  // 注意：Liquid 模板在 Jekyll 构建时执行，如果执行失败，变量会是 undefined
   {% if site.data.todos %}
-  tasks = {{ site.data.todos.tasks | jsonify }};
+  tasksData = {{ site.data.todos.tasks | jsonify }};
   {% else %}
-  // 如果没有数据文件，使用示例数据
-  tasks = [
-    {
-      id: 1,
-      title: "完成项目文档",
-      description: "编写完整的项目文档，包括API说明和使用指南",
-      date: "2025-01-28",
-      urgency: "high",
-      completed: false,
-      category: "工作"
-    }
-  ];
+  // Liquid 模板未找到数据，将在下面使用 fetch 加载
+  tasksData = null;
   {% endif %}
   
+  // 方法2: 如果 Liquid 数据不可用或为空，通过 fetch 动态加载
+  if (!tasksData || !Array.isArray(tasksData) || tasksData.length === 0) {
+    try {
+      const response = await fetch('{{ "/todos.json" | relative_url }}');
+      if (response.ok) {
+        const data = await response.json();
+        tasksData = data.tasks || data;
+      } else {
+        throw new Error('无法加载数据文件: ' + response.status);
+      }
+    } catch (fetchError) {
+      console.warn('动态加载失败:', fetchError);
+      // 如果所有方法都失败，使用空数组
+      tasksData = [];
+    }
+  }
+  
   // 处理日期格式：支持单个日期或时间段
-  tasks = tasks.map(task => {
+  tasks = (tasksData || []).map(task => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     
@@ -521,38 +606,66 @@ function loadTasks() {
 
 // 设置事件监听器
 function setupEventListeners() {
-  document.getElementById('toggleView').addEventListener('click', toggleView);
-  document.getElementById('addTaskBtn').addEventListener('click', () => {
-    alert('添加任务功能待实现，你可以直接编辑 _data/todos.yml 文件来添加任务');
-  });
-  document.getElementById('prevMonth').addEventListener('click', () => {
-    currentDate.setMonth(currentDate.getMonth() - 1);
-    renderCalendar();
-  });
-  document.getElementById('nextMonth').addEventListener('click', () => {
-    currentDate.setMonth(currentDate.getMonth() + 1);
-    renderCalendar();
-  });
+  try {
+    const toggleViewBtn = document.getElementById('toggleView');
+    if (toggleViewBtn) {
+      toggleViewBtn.addEventListener('click', toggleView);
+    }
+    
+    const addTaskBtn = document.getElementById('addTaskBtn');
+    if (addTaskBtn) {
+      addTaskBtn.addEventListener('click', () => {
+        alert('添加任务功能待实现，你可以直接编辑 _data/todos.yml 文件来添加任务');
+      });
+    }
+    
+    const prevMonthBtn = document.getElementById('prevMonth');
+    if (prevMonthBtn) {
+      prevMonthBtn.addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        renderCalendar();
+      });
+    }
+    
+    const nextMonthBtn = document.getElementById('nextMonth');
+    if (nextMonthBtn) {
+      nextMonthBtn.addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        renderCalendar();
+      });
+    }
+  } catch (error) {
+    console.error('设置事件监听器时出错:', error);
+  }
 }
 
 // 切换视图
 function toggleView() {
-  currentView = currentView === 'masonry' ? 'calendar' : 'masonry';
-  
-  const btn = document.getElementById('toggleView');
-  const masonryView = document.getElementById('masonryView');
-  const calendarView = document.getElementById('calendarView');
-  
-  if (currentView === 'masonry') {
-    masonryView.classList.add('active');
-    calendarView.classList.remove('active');
-    btn.innerHTML = '<i class="fas fa-th-large"></i> 模块视图';
-    renderMasonry();
-  } else {
-    calendarView.classList.add('active');
-    masonryView.classList.remove('active');
-    btn.innerHTML = '<i class="fas fa-calendar"></i> 日历视图';
-    renderCalendar();
+  try {
+    currentView = currentView === 'masonry' ? 'calendar' : 'masonry';
+    
+    const btn = document.getElementById('toggleView');
+    const masonryView = document.getElementById('masonryView');
+    const calendarView = document.getElementById('calendarView');
+    
+    if (!btn || !masonryView || !calendarView) {
+      console.error('切换视图时找不到必要的元素');
+      return;
+    }
+    
+    if (currentView === 'masonry') {
+      masonryView.classList.add('active');
+      calendarView.classList.remove('active');
+      btn.innerHTML = '<i class="fas fa-th-large"></i> 模块视图';
+      renderMasonry();
+    } else {
+      calendarView.classList.add('active');
+      masonryView.classList.remove('active');
+      btn.innerHTML = '<i class="fas fa-calendar"></i> 日历视图';
+      renderCalendar();
+    }
+  } catch (error) {
+    console.error('切换视图时出错:', error);
   }
 }
 
@@ -567,23 +680,38 @@ function renderCurrentView() {
 
 // 渲染模块化视图
 function renderMasonry() {
-  const container = document.getElementById('masonryContainer');
-  container.innerHTML = '';
-  
-  // 按紧急程度和日期排序
-  const sortedTasks = [...tasks].sort((a, b) => {
-    if (a.completed !== b.completed) return a.completed ? 1 : -1;
-    const urgencyOrder = { high: 3, medium: 2, low: 1 };
-    if (urgencyOrder[a.urgency] !== urgencyOrder[b.urgency]) {
-      return urgencyOrder[b.urgency] - urgencyOrder[a.urgency];
+  try {
+    const container = document.getElementById('masonryContainer');
+    if (!container) {
+      console.error('找不到模块化视图容器');
+      return;
     }
-    return a.dateObj - b.dateObj;
-  });
-  
-  sortedTasks.forEach(task => {
-    const card = createTaskCard(task);
-    container.appendChild(card);
-  });
+    
+    container.innerHTML = '';
+    
+    // 确保 tasks 是数组
+    if (!Array.isArray(tasks)) {
+      console.warn('tasks 不是数组，使用空数组');
+      tasks = [];
+    }
+    
+    // 按紧急程度和日期排序
+    const sortedTasks = [...tasks].sort((a, b) => {
+      if (a.completed !== b.completed) return a.completed ? 1 : -1;
+      const urgencyOrder = { high: 3, medium: 2, low: 1 };
+      if (urgencyOrder[a.urgency] !== urgencyOrder[b.urgency]) {
+        return urgencyOrder[b.urgency] - urgencyOrder[a.urgency];
+      }
+      return (a.dateObj || 0) - (b.dateObj || 0);
+    });
+    
+    sortedTasks.forEach(task => {
+      const card = createTaskCard(task);
+      container.appendChild(card);
+    });
+  } catch (error) {
+    console.error('渲染模块化视图时出错:', error);
+  }
 }
 
 // 创建任务卡片
@@ -632,95 +760,253 @@ function createTaskCard(task) {
 
 // 渲染日历视图
 function renderCalendar() {
-  const monthYear = document.getElementById('calendarMonth');
-  const grid = document.getElementById('calendarGrid');
-  
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
-  
-  monthYear.textContent = `${year}年 ${month + 1}月`;
-  
-  // 清空网格
-  grid.innerHTML = '';
-  
-  // 添加星期标题
-  const weekDays = ['日', '一', '二', '三', '四', '五', '六'];
-  weekDays.forEach(day => {
-    const header = document.createElement('div');
-    header.className = 'calendar-day-header';
-    header.textContent = day;
-    grid.appendChild(header);
-  });
-  
-  // 获取当月第一天和最后一天
-  const firstDay = new Date(year, month, 1);
-  const lastDay = new Date(year, month + 1, 0);
-  const startDate = new Date(firstDay);
-  startDate.setDate(startDate.getDate() - startDate.getDay()); // 从周日开始
-  
-  // 生成42天（6周）
-  for (let i = 0; i < 42; i++) {
-    const currentDay = new Date(startDate);
-    currentDay.setDate(startDate.getDate() + i);
+  try {
+    const monthYear = document.getElementById('calendarMonth');
+    const grid = document.getElementById('calendarGrid');
     
-    const dayCell = document.createElement('div');
-    dayCell.className = 'calendar-day';
-    
-    if (currentDay.getMonth() !== month) {
-      dayCell.classList.add('other-month');
+    if (!monthYear || !grid) {
+      console.error('找不到日历视图元素');
+      return;
     }
     
-    const today = new Date();
-    if (currentDay.toDateString() === today.toDateString()) {
-      dayCell.classList.add('today');
+    // 确保 tasks 是数组
+    if (!Array.isArray(tasks)) {
+      console.warn('tasks 不是数组，使用空数组');
+      tasks = [];
     }
     
-    const dayNumber = document.createElement('div');
-    dayNumber.className = 'day-number';
-    dayNumber.textContent = currentDay.getDate();
-    dayCell.appendChild(dayNumber);
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
     
-    // 获取当天的任务（支持时间段）
-    const dayTasks = tasks.filter(task => {
-      // 检查当前日期是否在任务的时间范围内（包括开始和结束日期）
-      return currentDay >= task.startDate && currentDay <= task.endDate;
+    monthYear.textContent = `${year}年 ${month + 1}月`;
+    
+    // 清空网格
+    grid.innerHTML = '';
+    
+    // 添加星期标题
+    const weekDays = ['日', '一', '二', '三', '四', '五', '六'];
+    weekDays.forEach(day => {
+      const header = document.createElement('div');
+      header.className = 'calendar-day-header';
+      header.textContent = day;
+      grid.appendChild(header);
     });
     
-    if (dayTasks.length > 0) {
-      dayTasks.forEach(task => {
-        const taskEl = document.createElement('div');
-        taskEl.className = `calendar-task urgency-${task.urgency} ${task.completed ? 'completed' : ''}`;
-        
-        // 如果是时间段任务，显示特殊标识
-        if (task.isRange) {
-          const isStart = currentDay.toDateString() === task.startDate.toDateString();
-          const isEnd = currentDay.toDateString() === task.endDate.toDateString();
-          if (isStart && !isEnd) {
-            taskEl.classList.add('task-range-start');
-          } else if (isEnd && !isStart) {
-            taskEl.classList.add('task-range-end');
-          } else if (!isStart && !isEnd) {
-            taskEl.classList.add('task-range-middle');
-          }
-        }
-        
-        taskEl.textContent = task.title;
-        const tooltip = task.isRange 
-          ? `${task.description || task.title} (${formatDate(task.startDate)} - ${formatDate(task.endDate)})`
-          : (task.description || task.title);
-        taskEl.title = tooltip;
-        dayCell.appendChild(taskEl);
-      });
+    // 获取当月第一天和最后一天
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const startDate = new Date(firstDay);
+    startDate.setDate(startDate.getDate() - startDate.getDay()); // 从周日开始
+    
+    // 创建日期单元格数组
+    const dayCells = [];
+    for (let i = 0; i < 42; i++) {
+      const currentDay = new Date(startDate);
+      currentDay.setDate(startDate.getDate() + i);
       
-      if (dayTasks.length > 3) {
-        const count = document.createElement('div');
-        count.className = 'task-count';
-        count.textContent = dayTasks.length;
-        dayCell.appendChild(count);
+      const dayCell = document.createElement('div');
+      dayCell.className = 'calendar-day';
+      dayCell.dataset.date = currentDay.toISOString().split('T')[0];
+      
+      if (currentDay.getMonth() !== month) {
+        dayCell.classList.add('other-month');
       }
+      
+      const today = new Date();
+      if (currentDay.toDateString() === today.toDateString()) {
+        dayCell.classList.add('today');
+      }
+      
+      const dayNumber = document.createElement('div');
+      dayNumber.className = 'day-number';
+      dayNumber.textContent = currentDay.getDate();
+      dayCell.appendChild(dayNumber);
+      
+      grid.appendChild(dayCell);
+      dayCells.push({ cell: dayCell, date: new Date(currentDay) });
     }
     
-    grid.appendChild(dayCell);
+    // 处理任务渲染 - 实现跨天任务长条显示
+    const visibleTasks = tasks.filter(task => {
+      if (!task.startDate || !task.endDate) return false;
+      // 检查任务是否在当前显示的42天范围内
+      const taskStart = new Date(task.startDate);
+      const taskEnd = new Date(task.endDate);
+      const viewStart = dayCells[0].date;
+      const viewEnd = dayCells[dayCells.length - 1].date;
+      return taskEnd >= viewStart && taskStart <= viewEnd;
+    });
+    
+    // 按开始日期和紧急程度排序
+    visibleTasks.sort((a, b) => {
+      if (a.completed !== b.completed) return a.completed ? 1 : -1;
+      const urgencyOrder = { high: 3, medium: 2, low: 1 };
+      if (urgencyOrder[a.urgency] !== urgencyOrder[b.urgency]) {
+        return urgencyOrder[b.urgency] - urgencyOrder[a.urgency];
+      }
+      return a.startDate - b.startDate;
+    });
+    
+    // 为每个任务分配行位置（避免重叠）
+    const taskRows = [];
+    const taskRenderQueue = [];
+    
+    visibleTasks.forEach(task => {
+      const taskStart = new Date(task.startDate);
+      const taskEnd = new Date(task.endDate);
+      
+      // 找到任务在日历中的起始和结束位置
+      let startIndex = -1;
+      let endIndex = -1;
+      
+      dayCells.forEach((dayInfo, index) => {
+        const dayDate = dayInfo.date;
+        if (dayDate >= taskStart && dayDate <= taskEnd) {
+          if (startIndex === -1) startIndex = index;
+          endIndex = index;
+        }
+      });
+      
+      if (startIndex === -1 || endIndex === -1) return;
+      
+      // 找到可用的行位置（避免重叠）
+      let rowIndex = 0;
+      while (taskRows.some(row => {
+        return row.rowIndex === rowIndex && 
+               !(endIndex < row.startIndex || startIndex > row.endIndex);
+      })) {
+        rowIndex++;
+      }
+      
+      taskRows.push({
+        task: task,
+        startIndex: startIndex,
+        endIndex: endIndex,
+        rowIndex: rowIndex
+      });
+      
+      // 计算任务跨越的周数（处理换行）
+      const startWeek = Math.floor(startIndex / 7);
+      const endWeek = Math.floor(endIndex / 7);
+      
+      taskRenderQueue.push({
+        task: task,
+        startIndex: startIndex,
+        endIndex: endIndex,
+        rowIndex: rowIndex,
+        startWeek: startWeek,
+        endWeek: endWeek
+      });
+    });
+    
+    // 使用 requestAnimationFrame 确保 DOM 渲染完成后再计算位置
+    requestAnimationFrame(() => {
+      taskRenderQueue.forEach(({ task, startIndex, endIndex, rowIndex, startWeek, endWeek }) => {
+        // 如果任务在同一周内
+        if (startWeek === endWeek) {
+          const startCell = dayCells[startIndex].cell;
+          const endCell = dayCells[endIndex].cell;
+          
+          const taskEl = document.createElement('div');
+          taskEl.className = `calendar-task task-span urgency-${task.urgency} ${task.completed ? 'completed' : ''}`;
+          taskEl.style.setProperty('--task-row', rowIndex);
+          
+          if (startIndex === endIndex) {
+            taskEl.classList.add('task-span-single');
+          } else {
+            taskEl.classList.add('task-span-start');
+          }
+          
+          // 计算宽度和位置
+          const startCellRect = startCell.getBoundingClientRect();
+          const endCellRect = endCell.getBoundingClientRect();
+          const gridRect = grid.getBoundingClientRect();
+          
+          // 计算任务条的 top 位置：日期数字高度(约22px) + 间距(10px) + 行偏移
+          const taskTop = startCellRect.top - gridRect.top + 32 + rowIndex * 27;
+          
+          taskEl.style.left = `${startCellRect.left - gridRect.left + grid.scrollLeft}px`;
+          taskEl.style.width = `${endCellRect.right - startCellRect.left}px`;
+          taskEl.style.top = `${taskTop}px`;
+          
+          taskEl.textContent = task.title;
+          const tooltip = task.isRange 
+            ? `${task.description || task.title} (${formatDate(task.startDate)} - ${formatDate(task.endDate)})`
+            : (task.description || task.title);
+          taskEl.title = tooltip;
+          
+          taskEl.addEventListener('click', () => {
+            task.completed = !task.completed;
+            renderCalendar();
+          });
+          
+          grid.appendChild(taskEl);
+        } else {
+          // 任务跨越多周，分段显示
+          for (let week = startWeek; week <= endWeek; week++) {
+            const weekStartIndex = week * 7;
+            const weekEndIndex = Math.min((week + 1) * 7 - 1, dayCells.length - 1);
+            
+            const segmentStart = Math.max(startIndex, weekStartIndex);
+            const segmentEnd = Math.min(endIndex, weekEndIndex);
+            
+            if (segmentStart > segmentEnd) continue;
+            
+            const startCell = dayCells[segmentStart].cell;
+            const endCell = dayCells[segmentEnd].cell;
+            
+            const taskEl = document.createElement('div');
+            taskEl.className = `calendar-task task-span urgency-${task.urgency} ${task.completed ? 'completed' : ''}`;
+            taskEl.style.setProperty('--task-row', rowIndex);
+            
+            if (segmentStart === startIndex && segmentStart === segmentEnd) {
+              taskEl.classList.add('task-span-single');
+            } else if (segmentStart === startIndex) {
+              taskEl.classList.add('task-span-start');
+            } else if (segmentEnd === endIndex) {
+              taskEl.classList.add('task-span-end');
+            } else {
+              taskEl.classList.add('task-span-middle');
+            }
+            
+            // 计算宽度和位置
+            const startCellRect = startCell.getBoundingClientRect();
+            const endCellRect = endCell.getBoundingClientRect();
+            const gridRect = grid.getBoundingClientRect();
+            
+            // 计算任务条的 top 位置：日期数字高度(约22px) + 间距(10px) + 行偏移
+            const taskTop = startCellRect.top - gridRect.top + 32 + rowIndex * 27;
+            
+            taskEl.style.left = `${startCellRect.left - gridRect.left + grid.scrollLeft}px`;
+            taskEl.style.width = `${endCellRect.right - startCellRect.left}px`;
+            taskEl.style.top = `${taskTop}px`;
+            
+            // 只在第一段显示完整标题，其他段显示省略号
+            if (segmentStart === startIndex) {
+              taskEl.textContent = task.title;
+            } else {
+              taskEl.textContent = '⋯';
+              taskEl.style.textAlign = 'center';
+            }
+            
+            const tooltip = task.isRange 
+              ? `${task.description || task.title} (${formatDate(task.startDate)} - ${formatDate(task.endDate)})`
+              : (task.description || task.title);
+            taskEl.title = tooltip;
+            
+            taskEl.addEventListener('click', () => {
+              task.completed = !task.completed;
+              renderCalendar();
+            });
+            
+            grid.appendChild(taskEl);
+          }
+        }
+      });
+    });
+    
+  } catch (error) {
+    console.error('渲染日历视图时出错:', error);
   }
 }
 

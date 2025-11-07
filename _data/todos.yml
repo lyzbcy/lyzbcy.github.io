@@ -3,7 +3,7 @@ tasks:
   - id: 1
     title: "学习变声器app开发"
     description: ""
-    date: "2025-11-06"  # 单个日期，或使用 startDate/endDate 表示时间段
+    date: "2025-11-09"  # 单个日期，或使用 startDate/endDate 表示时间段
     urgency: "medium"  # low, medium, high - 重要性，影响模块大小
     completed: false
     category: "学习"
