@@ -513,26 +513,45 @@ function calculateTaskSize(urgency, daysUntil) {
   }
 }
 
-// 初始化函数
-function initTodoList() {
+// 初始化函数（全局作用域，确保可以访问）
+window.initTodoList = function() {
   console.log('=== TodoList 初始化开始 ===');
   console.log('当前 URL:', window.location.href);
   console.log('当前路径:', window.location.pathname);
   console.log('文档状态:', document.readyState);
   
-  setupEventListeners();
+  if (typeof setupEventListeners === 'function') {
+    setupEventListeners();
+  } else {
+    console.error('❌ setupEventListeners 函数不存在');
+  }
   
-  loadTasks().then(() => {
-    console.log('数据加载完成，开始渲染视图');
-    console.log('任务数量:', tasks.length);
-    renderCurrentView();
-  }).catch(err => {
-    console.error('❌ 加载任务数据失败:', err);
-    console.error('错误堆栈:', err.stack);
-    renderCurrentView(); // 即使加载失败也渲染视图
-  });
+  if (typeof loadTasks === 'function') {
+    loadTasks().then(() => {
+      console.log('数据加载完成，开始渲染视图');
+      console.log('任务数量:', tasks.length);
+      if (typeof renderCurrentView === 'function') {
+        renderCurrentView();
+      } else {
+        console.error('❌ renderCurrentView 函数不存在');
+      }
+    }).catch(err => {
+      console.error('❌ 加载任务数据失败:', err);
+      console.error('错误堆栈:', err.stack);
+      if (typeof renderCurrentView === 'function') {
+        renderCurrentView(); // 即使加载失败也渲染视图
+      }
+    });
+  } else {
+    console.error('❌ loadTasks 函数不存在');
+  }
   
   console.log('=== TodoList 初始化完成 ===');
+};
+
+// 也创建一个普通函数（兼容性）
+function initTodoList() {
+  return window.initTodoList();
 }
 
 // 多种方式确保初始化执行
@@ -560,63 +579,29 @@ async function loadTasks() {
   let tasksData = null;
   let useLiquid = false;
   
-  // 方法1: 尝试使用 Jekyll Liquid 模板生成的数据（本地运行）
-  // 注意：Liquid 模板在 Jekyll 构建时执行，如果执行失败，变量会是 undefined
-  // 使用更安全的方式处理 Liquid 模板，避免生成无效的 JavaScript
-  {% if site.data.todos and site.data.todos.tasks %}
-  // Liquid 数据可用，尝试解析
+  // 直接使用 fetch 加载数据（GitHub Pages 上更可靠）
+  console.log('开始通过 fetch 加载数据...');
+  
   try {
-    var liquidData = {{ site.data.todos.tasks | jsonify }};
-    if (liquidData && Array.isArray(liquidData) && liquidData.length > 0) {
-      tasksData = liquidData;
-      useLiquid = true;
-      console.log('✓ 通过 Liquid 模板加载数据成功:', tasksData);
-    } else {
-      tasksData = null;
-      console.log('⚠ Liquid 模板数据为空，尝试 fetch 加载');
-    }
-  } catch (e) {
-    console.warn('Liquid 模板数据解析失败:', e);
-    tasksData = null;
-  }
-  {% else %}
-  // Liquid 模板未找到数据，将在下面使用 fetch 加载
-  tasksData = null;
-  console.log('⚠ Liquid 模板未找到数据，尝试 fetch 加载');
-  {% endif %}
-  
-  // 方法2: 如果 Liquid 数据不可用或为空，通过 fetch 动态加载
-  // 检查 tasksData 是否有效（可能是 undefined, null, 空数组，或非数组）
-  const isValidData = tasksData && Array.isArray(tasksData) && tasksData.length > 0;
-  
-  if (!isValidData) {
-    if (useLiquid) {
-      console.warn('Liquid 数据无效，尝试 fetch 加载');
-    }
-    console.log('开始通过 fetch 加载数据...');
-    
-    // 直接使用绝对路径（已验证可以工作）
-    try {
-      console.log('尝试加载路径: /todos.json');
-      const response = await fetch('/todos.json');
-      if (response.ok) {
-        const data = await response.json();
-        console.log('✓ 成功加载数据:', data);
-        tasksData = data.tasks || data;
-        if (tasksData && Array.isArray(tasksData) && tasksData.length > 0) {
-          console.log('✓ 数据加载成功，任务数量:', tasksData.length);
-        } else {
-          console.warn('⚠ 数据为空或格式不正确:', tasksData);
-          tasksData = [];
-        }
+    console.log('尝试加载路径: /todos.json');
+    const response = await fetch('/todos.json');
+    if (response.ok) {
+      const data = await response.json();
+      console.log('✓ 成功加载数据:', data);
+      tasksData = data.tasks || data;
+      if (tasksData && Array.isArray(tasksData) && tasksData.length > 0) {
+        console.log('✓ 数据加载成功，任务数量:', tasksData.length);
       } else {
-        console.error('❌ 路径加载失败: /todos.json, 状态码:', response.status);
+        console.warn('⚠ 数据为空或格式不正确:', tasksData);
         tasksData = [];
       }
-    } catch (fetchError) {
-      console.error('❌ 路径加载出错: /todos.json', fetchError);
+    } else {
+      console.error('❌ 路径加载失败: /todos.json, 状态码:', response.status);
       tasksData = [];
     }
+  } catch (fetchError) {
+    console.error('❌ 路径加载出错: /todos.json', fetchError);
+    tasksData = [];
   }
   
   console.log('最终加载的任务数据:', tasksData);
