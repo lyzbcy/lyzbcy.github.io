@@ -17,6 +17,7 @@ order: 4
 
 <div id="masonryView" class="todo-view active">
   <div id="masonryContainer" class="masonry-container"></div>
+  <div id="debugInfo" style="display:none; padding:10px; background:#f0f0f0; margin-top:20px; border-radius:5px; font-family:monospace; font-size:12px;"></div>
 </div>
 
 <div id="calendarView" class="todo-view">
@@ -501,32 +502,55 @@ function calculateTaskSize(urgency, daysUntil) {
 
 // 初始化
 document.addEventListener('DOMContentLoaded', function() {
+  console.log('=== TodoList 初始化开始 ===');
+  console.log('当前 URL:', window.location.href);
+  console.log('当前路径:', window.location.pathname);
+  
   setupEventListeners();
+  
   loadTasks().then(() => {
+    console.log('数据加载完成，开始渲染视图');
+    console.log('任务数量:', tasks.length);
     renderCurrentView();
   }).catch(err => {
-    console.error('加载任务数据失败:', err);
+    console.error('❌ 加载任务数据失败:', err);
+    console.error('错误堆栈:', err.stack);
     renderCurrentView(); // 即使加载失败也渲染视图
   });
+  
+  console.log('=== TodoList 初始化完成 ===');
 });
 
 // 加载任务数据
 async function loadTasks() {
   let tasksData = null;
+  let useLiquid = false;
   
   // 方法1: 尝试使用 Jekyll Liquid 模板生成的数据（本地运行）
   // 注意：Liquid 模板在 Jekyll 构建时执行，如果执行失败，变量会是 undefined
-  {% if site.data.todos %}
-  tasksData = {{ site.data.todos.tasks | jsonify }};
-  console.log('通过 Liquid 模板加载数据:', tasksData);
+  {% if site.data.todos and site.data.todos.tasks %}
+  try {
+    tasksData = {{ site.data.todos.tasks | jsonify }};
+    useLiquid = true;
+    console.log('✓ 通过 Liquid 模板加载数据成功:', tasksData);
+  } catch (e) {
+    console.warn('Liquid 模板数据解析失败:', e);
+    tasksData = null;
+  }
   {% else %}
   // Liquid 模板未找到数据，将在下面使用 fetch 加载
   tasksData = null;
-  console.log('Liquid 模板未找到数据，尝试 fetch 加载');
+  console.log('⚠ Liquid 模板未找到数据，尝试 fetch 加载');
   {% endif %}
   
   // 方法2: 如果 Liquid 数据不可用或为空，通过 fetch 动态加载
-  if (!tasksData || !Array.isArray(tasksData) || tasksData.length === 0) {
+  // 检查 tasksData 是否有效（可能是 undefined, null, 空数组，或非数组）
+  const isValidData = tasksData && Array.isArray(tasksData) && tasksData.length > 0;
+  
+  if (!isValidData) {
+    if (useLiquid) {
+      console.warn('Liquid 数据无效，尝试 fetch 加载');
+    }
     console.log('开始通过 fetch 加载数据...');
     // 获取当前页面的基础路径
     const currentPath = window.location.pathname;
@@ -578,9 +602,39 @@ async function loadTasks() {
   }
   
   console.log('最终加载的任务数据:', tasksData);
+  console.log('数据类型:', typeof tasksData);
+  console.log('是否为数组:', Array.isArray(tasksData));
+  console.log('数据长度:', tasksData ? (Array.isArray(tasksData) ? tasksData.length : '不是数组') : 'null/undefined');
+  
+  // 在页面上显示调试信息（如果数据加载失败）
+  const debugDiv = document.getElementById('debugInfo');
+  if (debugDiv) {
+    if (!tasksData || !Array.isArray(tasksData) || tasksData.length === 0) {
+      debugDiv.style.display = 'block';
+      debugDiv.innerHTML = `
+        <strong>⚠️ 数据加载问题</strong><br>
+        数据类型: ${typeof tasksData}<br>
+        是否为数组: ${Array.isArray(tasksData)}<br>
+        数据值: ${JSON.stringify(tasksData).substring(0, 200)}<br>
+        <br>
+        <strong>请检查：</strong><br>
+        1. 打开浏览器控制台（F12）查看详细日志<br>
+        2. 访问 <a href="/todos.json" target="_blank">/todos.json</a> 检查文件是否存在<br>
+        3. 检查网络请求是否成功
+      `;
+    } else {
+      debugDiv.style.display = 'none';
+    }
+  }
   
   // 处理日期格式：支持单个日期或时间段
-  tasks = (tasksData || []).map(task => {
+  if (!tasksData || !Array.isArray(tasksData)) {
+    console.error('❌ 数据格式错误，tasksData 不是数组:', tasksData);
+    tasks = [];
+    return;
+  }
+  
+  tasks = tasksData.map(task => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     
