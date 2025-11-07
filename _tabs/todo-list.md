@@ -6,6 +6,16 @@ order: 4
 
 # 📋 To Do List
 
+<!-- 测试脚本是否加载 -->
+<script>
+  (function() {
+    console.log('🔍 页面加载测试 - 脚本标签已执行');
+    if (typeof console !== 'undefined') {
+      console.log('✅ Console 对象可用');
+    }
+  })();
+</script>
+
 <div class="todo-controls">
   <button id="toggleView" class="view-toggle-btn">
     <i class="fas fa-th-large"></i> 模块视图
@@ -463,6 +473,9 @@ order: 4
 </style>
 
 <script>
+// 立即执行的测试，确保脚本加载
+console.log('📝 TodoList 脚本开始加载...');
+
 // 任务数据
 let tasks = [];
 let currentView = 'masonry'; // 'masonry' 或 'calendar'
@@ -528,11 +541,19 @@ async function loadTasks() {
   
   // 方法1: 尝试使用 Jekyll Liquid 模板生成的数据（本地运行）
   // 注意：Liquid 模板在 Jekyll 构建时执行，如果执行失败，变量会是 undefined
+  // 使用更安全的方式处理 Liquid 模板，避免生成无效的 JavaScript
   {% if site.data.todos and site.data.todos.tasks %}
+  // Liquid 数据可用，尝试解析
   try {
-    tasksData = {{ site.data.todos.tasks | jsonify }};
-    useLiquid = true;
-    console.log('✓ 通过 Liquid 模板加载数据成功:', tasksData);
+    var liquidData = {{ site.data.todos.tasks | jsonify }};
+    if (liquidData && Array.isArray(liquidData) && liquidData.length > 0) {
+      tasksData = liquidData;
+      useLiquid = true;
+      console.log('✓ 通过 Liquid 模板加载数据成功:', tasksData);
+    } else {
+      tasksData = null;
+      console.log('⚠ Liquid 模板数据为空，尝试 fetch 加载');
+    }
   } catch (e) {
     console.warn('Liquid 模板数据解析失败:', e);
     tasksData = null;
