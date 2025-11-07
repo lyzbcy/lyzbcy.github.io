@@ -21,9 +21,9 @@ order: 4
 
 <div id="calendarView" class="todo-view">
   <div class="calendar-header">
-    <button id="prevMonth" class="calendar-nav-btn"><i class="fas fa-chevron-left"></i></button>
+    <button id="prevMonth" class="calendar-nav-btn" aria-label="上一月" title="上一月"><i class="fas fa-chevron-left"></i></button>
     <h2 id="calendarMonth"></h2>
-    <button id="nextMonth" class="calendar-nav-btn"><i class="fas fa-chevron-right"></i></button>
+    <button id="nextMonth" class="calendar-nav-btn" aria-label="下一月" title="下一月"><i class="fas fa-chevron-right"></i></button>
   </div>
   <div id="calendarGrid" class="calendar-grid"></div>
 </div>
