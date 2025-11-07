@@ -81,8 +81,8 @@ order: 4
 
 .task-card {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 20px;
-  padding: 20px;
+  border-radius: 15px;
+  padding: 15px;
   color: white;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -129,18 +129,18 @@ order: 4
 
 /* 任务大小和紧急程度的视觉表现 */
 .task-card.size-small {
+  --card-height: 15;
+  min-height: 90px;
+}
+
+.task-card.size-medium {
   --card-height: 20;
   min-height: 120px;
 }
 
-.task-card.size-medium {
-  --card-height: 30;
-  min-height: 180px;
-}
-
 .task-card.size-large {
-  --card-height: 40;
-  min-height: 240px;
+  --card-height: 25;
+  min-height: 150px;
 }
 
 .task-card.urgency-high {
@@ -162,14 +162,14 @@ order: 4
 }
 
 .task-card h3 {
-  margin: 0 0 10px 0;
-  font-size: 18px;
+  margin: 0 0 8px 0;
+  font-size: 16px;
   font-weight: 600;
 }
 
 .task-card p {
-  margin: 0 0 10px 0;
-  font-size: 14px;
+  margin: 0 0 8px 0;
+  font-size: 13px;
   opacity: 0.9;
   line-height: 1.4;
 }
@@ -178,8 +178,8 @@ order: 4
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
-  font-size: 12px;
+  margin-top: 8px;
+  font-size: 11px;
   opacity: 0.8;
 }
 
@@ -518,27 +518,66 @@ async function loadTasks() {
   // 注意：Liquid 模板在 Jekyll 构建时执行，如果执行失败，变量会是 undefined
   {% if site.data.todos %}
   tasksData = {{ site.data.todos.tasks | jsonify }};
+  console.log('通过 Liquid 模板加载数据:', tasksData);
   {% else %}
   // Liquid 模板未找到数据，将在下面使用 fetch 加载
   tasksData = null;
+  console.log('Liquid 模板未找到数据，尝试 fetch 加载');
   {% endif %}
   
   // 方法2: 如果 Liquid 数据不可用或为空，通过 fetch 动态加载
   if (!tasksData || !Array.isArray(tasksData) || tasksData.length === 0) {
-    try {
-      const response = await fetch('{{ "/todos.json" | relative_url }}');
-      if (response.ok) {
-        const data = await response.json();
-        tasksData = data.tasks || data;
-      } else {
-        throw new Error('无法加载数据文件: ' + response.status);
+    console.log('开始通过 fetch 加载数据...');
+    // 获取当前页面的基础路径
+    const currentPath = window.location.pathname;
+    const basePath = currentPath.substring(0, currentPath.lastIndexOf('/'));
+    
+    // 尝试多个可能的路径（Liquid 模板会在构建时解析这些路径）
+    const baseUrl = '{{ site.baseurl }}';
+    const siteUrl = '{{ site.url }}';
+    const possiblePaths = [
+      '{{ "/todos.json" | relative_url }}',  // Jekyll 相对路径
+      '{{ "/todos.json" | absolute_url }}',   // Jekyll 绝对路径
+      baseUrl ? baseUrl + '/todos.json' : '/todos.json',  // 使用 baseurl
+      siteUrl ? siteUrl + '/todos.json' : '/todos.json',  // 使用 site.url
+      '/todos.json',      // 绝对路径
+      basePath + '/todos.json',  // 相对于当前页面
+      '../todos.json',    // 相对路径
+      'todos.json'        // 当前目录
+    ];
+    
+    let loaded = false;
+    for (const path of possiblePaths) {
+      try {
+        console.log('尝试加载路径:', path);
+        const response = await fetch(path);
+        if (response.ok) {
+          const data = await response.json();
+          console.log('成功加载数据:', data);
+          tasksData = data.tasks || data;
+          if (tasksData && Array.isArray(tasksData) && tasksData.length > 0) {
+            loaded = true;
+            console.log('数据加载成功，任务数量:', tasksData.length);
+            break;
+          } else {
+            console.warn('数据为空或格式不正确:', tasksData);
+          }
+        } else {
+          console.warn('路径加载失败:', path, response.status);
+        }
+      } catch (fetchError) {
+        console.warn('路径加载出错:', path, fetchError);
       }
-    } catch (fetchError) {
-      console.warn('动态加载失败:', fetchError);
-      // 如果所有方法都失败，使用空数组
+    }
+    
+    if (!loaded) {
+      console.error('所有数据加载方法都失败，使用空数组');
+      console.error('请检查：1. todos.json 文件是否已部署 2. 路径是否正确 3. 浏览器控制台的错误信息');
       tasksData = [];
     }
   }
+  
+  console.log('最终加载的任务数据:', tasksData);
   
   // 处理日期格式：支持单个日期或时间段
   tasks = (tasksData || []).map(task => {
@@ -695,14 +734,64 @@ function renderMasonry() {
       tasks = [];
     }
     
-    // 按紧急程度和日期排序
-    const sortedTasks = [...tasks].sort((a, b) => {
-      if (a.completed !== b.completed) return a.completed ? 1 : -1;
-      const urgencyOrder = { high: 3, medium: 2, low: 1 };
-      if (urgencyOrder[a.urgency] !== urgencyOrder[b.urgency]) {
-        return urgencyOrder[b.urgency] - urgencyOrder[a.urgency];
+    // 计算任务的综合优先级分数（用于排序）
+    function calculatePriorityScore(task) {
+      // 已完成的任务优先级最低
+      if (task.completed) return -1000;
+      
+      // 紧急程度权重：high=3, medium=2, low=1
+      const urgencyWeight = { high: 3, medium: 2, low: 1 };
+      const urgencyValue = urgencyWeight[task.urgency] || 2;
+      
+      // 时间临近程度权重：越近分数越高
+      // 使用 nearestDay（距离今天最近的天数）
+      let timeScore;
+      const nearestDay = task.nearestDay || 0;
+      
+      if (nearestDay < 0) {
+        // 已过期但未完成的任务，给予较高优先级
+        timeScore = 2;
+      } else if (nearestDay === 0) {
+        // 今天或正在进行中
+        timeScore = 5;
+      } else if (nearestDay <= 1) {
+        // 明天
+        timeScore = 4;
+      } else if (nearestDay <= 3) {
+        // 2-3天后
+        timeScore = 3;
+      } else if (nearestDay <= 7) {
+        // 4-7天后
+        timeScore = 2;
+      } else if (nearestDay <= 14) {
+        // 8-14天后
+        timeScore = 1;
+      } else {
+        // 超过14天
+        timeScore = 0.5;
       }
-      return (a.dateObj || 0) - (b.dateObj || 0);
+      
+      // 综合得分 = 紧急程度 * 0.5 + 时间临近程度 * 0.5
+      // 这样两者权重相等，可以综合考虑
+      const priorityScore = urgencyValue * 0.5 + timeScore * 0.5;
+      
+      return priorityScore;
+    }
+    
+    // 按综合优先级排序（综合考虑时间临近程度和重要性）
+    const sortedTasks = [...tasks].sort((a, b) => {
+      const scoreA = calculatePriorityScore(a);
+      const scoreB = calculatePriorityScore(b);
+      
+      // 优先级高的排在前面
+      if (scoreA !== scoreB) {
+        return scoreB - scoreA;
+      }
+      
+      // 如果优先级相同，按日期排序（早的在前）
+      const dateA = a.startDate || a.date || new Date(0);
+      const dateB = b.startDate || b.date || new Date(0);
+      return dateA - dateB;
     });
     
     sortedTasks.forEach(task => {
