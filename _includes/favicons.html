@@ -15,3 +15,18 @@ Intentionally omit SVG and theme's default /assets/img/favicons to prevent overr
 Keep manifest as-is if needed by PWA from the theme.
 {%- endcomment -%}
 
+{%- comment -%}
+Romance theme assets: only load on posts with tag '恋爱'.
+Placed here to ensure inclusion since Chirpy always includes favicons.html in <head>.
+{%- endcomment -%}
+{% if page.tags contains '恋爱' %}
+  <link rel="stylesheet" href="{{ '/assets/lib/romance.css' | relative_url }}">
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (document && document.body) {
+        document.body.classList.add('romance-post');
+      }
+    });
+  </script>
+  <script defer src="{{ '/assets/lib/romance.js' | relative_url }}"></script>
+{% endif %}
