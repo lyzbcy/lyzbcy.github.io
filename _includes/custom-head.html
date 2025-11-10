@@ -18,14 +18,7 @@
 <meta name="msapplication-TileColor" content="#2d89ef">
 <meta name="theme-color" content="#ffffff">
 
-{% if page.tags contains '恋爱' %}
-  <link rel="stylesheet" href="{{ '/assets/lib/romance.css' | relative_url }}">
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      if (document && document.body) {
-        document.body.classList.add('romance-post');
-      }
-    });
-  </script>
+{% assign __tags_csv = page.tags | join: ',' %}
+{% if __tags_csv contains '恋爱' %}
   <script defer src="{{ '/assets/lib/romance.js' | relative_url }}"></script>
 {% endif %}
