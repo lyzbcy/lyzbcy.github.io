@@ -1212,29 +1212,34 @@ console.log('  - renderCalendar:', typeof renderCalendar);
 
 // 修复 SimpleJekyllSearch 的 templateMiddleware 函数缺少返回值的问题
 // 这个错误可能导致 "Unexpected end of input" 错误
+// 通过拦截并修复 SimpleJekyllSearch 的初始化来解决
 (function() {
   'use strict';
-  // 在页面加载后修复 templateMiddleware 函数
-  function fixTemplateMiddleware() {
-    // 查找所有包含 SimpleJekyllSearch 的脚本
-    const scripts = document.querySelectorAll('script');
-    scripts.forEach(script => {
-      const scriptContent = script.textContent || script.innerHTML;
-      if (scriptContent.includes('templateMiddleware') && scriptContent.includes('SimpleJekyllSearch')) {
-        // 检查是否有未闭合的函数
-        const hasReturn = scriptContent.match(/templateMiddleware[^}]*}/);
-        if (hasReturn && !hasReturn[0].includes('return') || hasReturn[0].match(/if\s*\([^)]+\)\s*\{[^}]*\}/g)?.length === 2) {
-          console.warn('⚠️ 检测到 templateMiddleware 函数可能缺少返回值');
-        }
-      }
-    });
-  }
   
-  // 在 DOM 加载完成后执行
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', fixTemplateMiddleware);
-  } else {
-    fixTemplateMiddleware();
-  }
+  // 保存原始的 SimpleJekyllSearch（如果存在）
+  const originalSimpleJekyllSearch = window.SimpleJekyllSearch;
+  
+  // 重写 SimpleJekyllSearch 函数
+  window.SimpleJekyllSearch = function(options) {
+    // 修复 templateMiddleware 函数，确保它有返回值
+    if (options && typeof options.templateMiddleware === 'function') {
+      const originalMiddleware = options.templateMiddleware;
+      options.templateMiddleware = function(prop, value, template) {
+        const result = originalMiddleware.call(this, prop, value, template);
+        // 如果原函数没有返回值，返回空字符串
+        return result !== undefined ? result : '';
+      };
+    }
+    
+    // 调用原始的 SimpleJekyllSearch
+    if (originalSimpleJekyllSearch) {
+      return originalSimpleJekyllSearch.call(this, options);
+    } else {
+      // 如果 SimpleJekyllSearch 还没有加载，等待它加载
+      console.warn('⚠️ SimpleJekyllSearch 尚未加载，将在加载后修复');
+    }
+  };
+  
+  console.log('✅ 已设置 SimpleJekyllSearch 修复函数');
 })();
 </script>
