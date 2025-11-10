@@ -1255,83 +1255,42 @@ console.log('  - renderMasonry:', typeof renderMasonry);
 console.log('  - renderCalendar:', typeof renderCalendar);
 
 // 修复 SimpleJekyllSearch 的 templateMiddleware 函数缺少返回值的问题
-// 这个错误可能导致 "Unexpected end of input" 错误
-// 通过重写 SimpleJekyllSearch 函数来修复
+// 这是导致 "Unexpected end of input" 错误的根本原因
 (function() {
   'use strict';
   
-  // 立即开始修复，不等待 SimpleJekyllSearch 加载
-  // 因为 SimpleJekyllSearch 是通过 defer 加载的，我们需要在它被调用之前就准备好
+  // 使用最简单直接的方法：在 SimpleJekyllSearch 被调用时修复
+  function fixSimpleJekyllSearch() {
+    // 方法1：如果已经加载，立即修复
+    if (typeof window.SimpleJekyllSearch !== 'undefined') {
+      const original = window.SimpleJekyllSearch;
+      window.SimpleJekyllSearch = function(options) {
+        if (options && typeof options.templateMiddleware === 'function') {
+          const orig = options.templateMiddleware;
+          options.templateMiddleware = function(prop, value, template) {
+            const result = orig.call(this, prop, value, template);
+            return result !== undefined ? result : '';
+          };
+        }
+        return original.call(this, options);
+      };
+      console.log('✅ 已修复 SimpleJekyllSearch');
+      return true;
+    }
+    return false;
+  }
   
-  // 方法1：如果 SimpleJekyllSearch 已经加载，立即修复
-  if (typeof window.SimpleJekyllSearch !== 'undefined') {
-    const originalSimpleJekyllSearch = window.SimpleJekyllSearch;
-    window.SimpleJekyllSearch = function(options) {
-      // 修复 templateMiddleware 函数，确保它有返回值
-      if (options && typeof options.templateMiddleware === 'function') {
-        const originalMiddleware = options.templateMiddleware;
-        options.templateMiddleware = function(prop, value, template) {
-          const result = originalMiddleware.call(this, prop, value, template);
-          // 如果原函数没有返回值，返回空字符串
-          return result !== undefined ? result : '';
-        };
-      }
-      return originalSimpleJekyllSearch.call(this, options);
-    };
-    console.log('✅ 已修复 SimpleJekyllSearch 的 templateMiddleware 函数（方法1）');
-  } else {
-    // 方法2：如果还没加载，设置一个拦截器
-    Object.defineProperty(window, 'SimpleJekyllSearch', {
-      set: function(value) {
-        // 当 SimpleJekyllSearch 被设置时，立即包装它
-        const originalSimpleJekyllSearch = value;
-        window._originalSimpleJekyllSearch = originalSimpleJekyllSearch;
-        window.SimpleJekyllSearch = function(options) {
-          // 修复 templateMiddleware 函数，确保它有返回值
-          if (options && typeof options.templateMiddleware === 'function') {
-            const originalMiddleware = options.templateMiddleware;
-            options.templateMiddleware = function(prop, value, template) {
-              const result = originalMiddleware.call(this, prop, value, template);
-              // 如果原函数没有返回值，返回空字符串
-              return result !== undefined ? result : '';
-            };
-          }
-          return originalSimpleJekyllSearch.call(this, options);
-        };
-        console.log('✅ 已修复 SimpleJekyllSearch 的 templateMiddleware 函数（方法2）');
-      },
-      get: function() {
-        return window._SimpleJekyllSearch;
-      },
-      configurable: true
-    });
-    
-    // 方法3：定期检查并修复
-    const checkInterval = setInterval(function() {
-      if (typeof window.SimpleJekyllSearch !== 'undefined' && !window._simpleJekyllSearchFixed) {
-        const originalSimpleJekyllSearch = window.SimpleJekyllSearch;
-        window.SimpleJekyllSearch = function(options) {
-          // 修复 templateMiddleware 函数，确保它有返回值
-          if (options && typeof options.templateMiddleware === 'function') {
-            const originalMiddleware = options.templateMiddleware;
-            options.templateMiddleware = function(prop, value, template) {
-              const result = originalMiddleware.call(this, prop, value, template);
-              // 如果原函数没有返回值，返回空字符串
-              return result !== undefined ? result : '';
-            };
-          }
-          return originalSimpleJekyllSearch.call(this, options);
-        };
-        window._simpleJekyllSearchFixed = true;
-        clearInterval(checkInterval);
-        console.log('✅ 已修复 SimpleJekyllSearch 的 templateMiddleware 函数（方法3）');
+  // 立即尝试修复
+  if (!fixSimpleJekyllSearch()) {
+    // 如果还没加载，定期检查
+    let attempts = 0;
+    const maxAttempts = 200; // 最多检查10秒 (200 * 50ms)
+    const interval = setInterval(function() {
+      attempts++;
+      if (fixSimpleJekyllSearch() || attempts >= maxAttempts) {
+        clearInterval(interval);
       }
     }, 50);
-    
-    // 10秒后停止检查（防止无限循环）
-    setTimeout(function() {
-      clearInterval(checkInterval);
-    }, 10000);
   }
 })();
 </script>
