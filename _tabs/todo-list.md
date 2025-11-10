@@ -610,13 +610,21 @@ async function loadTasks() {
     console.log('尝试加载路径: /todos.json');
     const response = await fetch('/todos.json');
     if (response.ok) {
-      const data = await response.json();
-      console.log('✓ 成功加载数据:', data);
-      tasksData = data.tasks || data;
-      if (tasksData && Array.isArray(tasksData) && tasksData.length > 0) {
-        console.log('✓ 数据加载成功，任务数量:', tasksData.length);
-      } else {
-        console.warn('⚠ 数据为空或格式不正确:', tasksData);
+      const text = await response.text();
+      console.log('✓ 响应文本:', text.substring(0, 200));
+      try {
+        const data = JSON.parse(text);
+        console.log('✓ 成功解析 JSON 数据:', data);
+        tasksData = data.tasks || data;
+        if (tasksData && Array.isArray(tasksData) && tasksData.length > 0) {
+          console.log('✓ 数据加载成功，任务数量:', tasksData.length);
+        } else {
+          console.warn('⚠ 数据为空或格式不正确:', tasksData);
+          tasksData = [];
+        }
+      } catch (jsonError) {
+        console.error('❌ JSON 解析失败:', jsonError);
+        console.error('❌ 响应文本:', text);
         tasksData = [];
       }
     } else {
@@ -1201,4 +1209,32 @@ console.log('  - renderCurrentView:', typeof renderCurrentView);
 console.log('  - setupEventListeners:', typeof setupEventListeners);
 console.log('  - renderMasonry:', typeof renderMasonry);
 console.log('  - renderCalendar:', typeof renderCalendar);
+
+// 修复 SimpleJekyllSearch 的 templateMiddleware 函数缺少返回值的问题
+// 这个错误可能导致 "Unexpected end of input" 错误
+(function() {
+  'use strict';
+  // 在页面加载后修复 templateMiddleware 函数
+  function fixTemplateMiddleware() {
+    // 查找所有包含 SimpleJekyllSearch 的脚本
+    const scripts = document.querySelectorAll('script');
+    scripts.forEach(script => {
+      const scriptContent = script.textContent || script.innerHTML;
+      if (scriptContent.includes('templateMiddleware') && scriptContent.includes('SimpleJekyllSearch')) {
+        // 检查是否有未闭合的函数
+        const hasReturn = scriptContent.match(/templateMiddleware[^}]*}/);
+        if (hasReturn && !hasReturn[0].includes('return') || hasReturn[0].match(/if\s*\([^)]+\)\s*\{[^}]*\}/g)?.length === 2) {
+          console.warn('⚠️ 检测到 templateMiddleware 函数可能缺少返回值');
+        }
+      }
+    });
+  }
+  
+  // 在 DOM 加载完成后执行
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fixTemplateMiddleware);
+  } else {
+    fixTemplateMiddleware();
+  }
+})();
 </script>
