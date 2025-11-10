@@ -502,45 +502,44 @@ order: 4
   
   // 修复 SimpleJekyllSearch 的 templateMiddleware 函数问题
   // 必须在 SimpleJekyllSearch 初始化之前执行
+  // 使用最简单直接的方法：重写 SimpleJekyllSearch 函数
   (function() {
-    // 拦截 document.addEventListener，在 SimpleJekyllSearch 初始化时修复
-    const originalAddEventListener = document.addEventListener;
-    document.addEventListener = function(type, listener, options) {
-      if (type === 'DOMContentLoaded' && listener && typeof listener === 'function') {
-        // 包装监听器，在 SimpleJekyllSearch 调用之前修复
-        const wrappedListener = function(event) {
-          // 修复所有包含 templateMiddleware 的脚本
-          const scripts = document.querySelectorAll('script');
-          scripts.forEach(function(script) {
-            try {
-              const scriptText = script.textContent || script.innerHTML;
-              if (scriptText && scriptText.includes('templateMiddleware') && scriptText.includes('SimpleJekyllSearch')) {
-                // 检查并修复 templateMiddleware 函数
-                const fixedScript = scriptText.replace(
-                  /templateMiddleware:\s*function\s*\([^)]*\)\s*\{([^}]*)\}/s,
-                  function(match, body) {
-                    // 如果函数体中没有默认返回值，添加一个
-                    if (!body.match(/return\s+[^;]+;?\s*$/) && !body.match(/return\s*;?\s*$/)) {
-                      return match.replace(/\}\s*$/, '        return value || \'\';\n      }');
-                    }
-                    return match;
-                  }
-                );
-                // 注意：我们不能直接修改 script.textContent，因为脚本可能已经执行
-                // 所以我们需要在 SimpleJekyllSearch 调用之前拦截
-              }
-            } catch (e) {
-              console.warn('修复 templateMiddleware 时出错:', e);
-            }
-          });
-          
-          // 执行原始监听器
-          return listener.call(this, event);
+    'use strict';
+    
+    // 立即开始修复流程
+    function applyFix() {
+      if (typeof window.SimpleJekyllSearch !== 'undefined') {
+        const original = window.SimpleJekyllSearch;
+        window.SimpleJekyllSearch = function(options) {
+          // 修复 templateMiddleware 函数
+          if (options && typeof options.templateMiddleware === 'function') {
+            const orig = options.templateMiddleware;
+            options.templateMiddleware = function(prop, value, template) {
+              const result = orig.call(this, prop, value, template);
+              // 确保始终有返回值
+              return result !== undefined ? result : '';
+            };
+          }
+          return original.call(this, options);
         };
-        return originalAddEventListener.call(this, type, wrappedListener, options);
+        console.log('✅ [早期修复] SimpleJekyllSearch 已修复');
+        return true;
       }
-      return originalAddEventListener.call(this, type, listener, options);
-    };
+      return false;
+    }
+    
+    // 立即尝试修复
+    if (!applyFix()) {
+      // 如果还没加载，定期检查（最多10秒）
+      let attempts = 0;
+      const maxAttempts = 200;
+      const interval = setInterval(function() {
+        attempts++;
+        if (applyFix() || attempts >= maxAttempts) {
+          clearInterval(interval);
+        }
+      }, 50);
+    }
   })();
 })();
 
