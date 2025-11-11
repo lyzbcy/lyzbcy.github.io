@@ -22,5 +22,5 @@ Placed here to ensure inclusion since Chirpy always includes favicons.html in <h
 {%- assign __tag_source = include.page_tags | default: page.tags -%}
 {%- assign __tags_csv = __tag_source | join: ',' -%}
 {%- if __tags_csv contains '恋爱' -%}
-  <script defer src="{{ '/assets/lib/romance.js' | relative_url }}"></script>
+  <script defer src="{{ '/assets/lib-custom/romance.js' | relative_url }}"></script>
 {%- endif -%}
