@@ -76,6 +76,12 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ '/assets/css/:THEME.css' | replace: ':THEME', site.theme | relative_url }}">
 
+  <!-- PWA manifest -->
+  <link rel="manifest" href="{{ '/assets/img/favicons/site.webmanifest' | relative_url }}">
+
+  <!-- 自定义样式 -->
+  <link rel="stylesheet" href="{{ '/assets/lib-custom/order-card.css' | relative_url }}">
+
   <!-- Web Font -->
   <link rel="stylesheet" href="{{ site.data.origin[type].webfonts | relative_url }}">
 
