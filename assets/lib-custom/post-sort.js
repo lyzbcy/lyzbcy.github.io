@@ -65,57 +65,56 @@
     }
     
     // 格式化日期显示
+    // 完全手动解析日期，兼容微信浏览器等特殊环境
     function formatDate(dateString) {
-      if (!dateString || dateString === 'null' || dateString === null) return '';
+      if (!dateString || dateString === 'null' || dateString === null || typeof dateString !== 'string') {
+        return '';
+      }
       
       try {
-        let date;
-        
-        // 尝试多种日期格式解析，兼容移动端
+        // 完全手动解析日期字符串，不依赖 Date 构造函数
+        // 支持的格式：
         // 格式1: "2025-11-13 10:30:00 +0800" (带时区)
         // 格式2: "2025-11-13 10:30:00" (不带时区)
         // 格式3: "2025-11-13" (只有日期)
-        // 格式4: ISO 8601 格式
+        // 格式4: ISO 8601 格式 "2025-11-13T10:30:00+08:00"
         
-        // 先尝试直接解析
-        date = new Date(dateString);
-        
-        // 检查日期是否有效
-        if (isNaN(date.getTime())) {
-          // 如果直接解析失败，尝试手动解析
-          // 移除时区信息，只保留日期和时间部分
-          const cleaned = dateString.replace(/\s*[+-]\d{4}$/, '').trim();
-          date = new Date(cleaned);
-          
-          // 如果还是无效，尝试只提取日期部分
-          if (isNaN(date.getTime())) {
-            const dateMatch = dateString.match(/(\d{4})-(\d{1,2})-(\d{1,2})/);
-            if (dateMatch) {
-              const year = parseInt(dateMatch[1], 10);
-              const month = parseInt(dateMatch[2], 10) - 1; // 月份从0开始
-              const day = parseInt(dateMatch[3], 10);
-              date = new Date(year, month, day);
-            }
-          }
-        }
-        
-        // 最终检查日期是否有效
-        if (isNaN(date.getTime())) {
-          console.warn('无法解析日期:', dateString);
+        // 提取日期部分：YYYY-MM-DD
+        const dateMatch = dateString.match(/(\d{4})-(\d{1,2})-(\d{1,2})/);
+        if (!dateMatch) {
+          console.warn('无法从字符串中提取日期:', dateString);
           return '';
         }
         
-        const year = date.getFullYear();
-        const month = date.getMonth() + 1;
-        const day = date.getDate();
+        const year = parseInt(dateMatch[1], 10);
+        const month = parseInt(dateMatch[2], 10);
+        const day = parseInt(dateMatch[3], 10);
         
-        // 再次验证年月日是否有效
+        // 验证年月日的有效性
         if (isNaN(year) || isNaN(month) || isNaN(day)) {
-          console.warn('日期解析结果无效:', dateString, {year, month, day});
+          console.warn('日期解析结果包含 NaN:', dateString, {year, month, day});
           return '';
         }
         
-        return `${year}/${String(month).padStart(2, '0')}/${String(day).padStart(2, '0')}`;
+        // 验证日期范围
+        if (year < 1900 || year > 2100) {
+          console.warn('年份超出合理范围:', year);
+          return '';
+        }
+        if (month < 1 || month > 12) {
+          console.warn('月份超出范围:', month);
+          return '';
+        }
+        if (day < 1 || day > 31) {
+          console.warn('日期超出范围:', day);
+          return '';
+        }
+        
+        // 格式化输出：YYYY/MM/DD
+        const monthStr = String(month).padStart(2, '0');
+        const dayStr = String(day).padStart(2, '0');
+        
+        return `${year}/${monthStr}/${dayStr}`;
       } catch (e) {
         console.warn('日期格式化错误:', dateString, e);
         return '';
