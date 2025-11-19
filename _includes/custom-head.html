@@ -13,6 +13,9 @@
 
 <!-- 自定义样式 -->
 <link rel="stylesheet" href="{{ '/assets/lib-custom/order-card.css' | relative_url }}">
+{% if page.layout == 'home' %}
+<link rel="stylesheet" href="{{ '/assets/lib-custom/post-sort.css' | relative_url }}">
+{% endif %}
 
 <!-- Safari pinned tab -->
 <!-- Intentionally omit theme SVG to avoid overriding our favicon -->
@@ -24,4 +27,9 @@
 {% assign __tags_csv = page.tags | join: ',' %}
 {% if __tags_csv contains '恋爱' %}
   <script defer src="{{ '/assets/lib-custom/romance.js' | relative_url }}"></script>
+{% endif %}
+
+{% if page.layout == 'home' %}
+{% include post-sort-data.html %}
+<script defer src="{{ '/assets/lib-custom/post-sort.js' | relative_url }}"></script>
 {% endif %}

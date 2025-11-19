@@ -1,0 +1,102 @@
+/* 文章排序控件样式 */
+.post-sort-controls {
+  margin-bottom: 1rem;
+  padding: 0.5rem 0;
+}
+
+.post-sort-wrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.post-sort-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-color, #666);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.post-sort-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.post-sort-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--text-color, #666);
+  background: transparent;
+  border: 1px solid var(--btn-border, #e0e0e0);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.post-sort-btn:hover {
+  background: var(--btn-hover-bg, #f5f5f5);
+  border-color: var(--btn-hover-border, #ccc);
+  color: var(--text-color, #333);
+}
+
+.post-sort-btn.active {
+  background: var(--btn-active-bg, #667eea);
+  color: #fff;
+  border-color: var(--btn-active-bg, #667eea);
+}
+
+.post-sort-btn.active:hover {
+  background: var(--btn-active-hover-bg, #5568d3);
+  border-color: var(--btn-active-hover-bg, #5568d3);
+}
+
+.post-sort-btn i {
+  font-size: 0.6875rem;
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .post-sort-label {
+    color: var(--text-color, #999);
+  }
+
+  .post-sort-btn {
+    border-color: var(--btn-border, #444);
+    color: var(--text-color, #999);
+  }
+
+  .post-sort-btn:hover {
+    background: var(--btn-hover-bg, #2a2a2a);
+    border-color: var(--btn-hover-border, #555);
+    color: var(--text-color, #e0e0e0);
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .post-sort-controls {
+    margin-bottom: 0.75rem;
+  }
+
+  .post-sort-wrapper {
+    gap: 0.375rem;
+  }
+
+  .post-sort-label {
+    font-size: 0.8125rem;
+  }
+
+  .post-sort-btn {
+    padding: 0.3125rem 0.625rem;
+    font-size: 0.75rem;
+  }
+}
+
