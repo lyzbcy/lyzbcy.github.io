@@ -66,14 +66,58 @@
     
     // 格式化日期显示
     function formatDate(dateString) {
-      if (!dateString) return '';
+      if (!dateString || dateString === 'null' || dateString === null) return '';
+      
       try {
-        const date = new Date(dateString);
+        let date;
+        
+        // 尝试多种日期格式解析，兼容移动端
+        // 格式1: "2025-11-13 10:30:00 +0800" (带时区)
+        // 格式2: "2025-11-13 10:30:00" (不带时区)
+        // 格式3: "2025-11-13" (只有日期)
+        // 格式4: ISO 8601 格式
+        
+        // 先尝试直接解析
+        date = new Date(dateString);
+        
+        // 检查日期是否有效
+        if (isNaN(date.getTime())) {
+          // 如果直接解析失败，尝试手动解析
+          // 移除时区信息，只保留日期和时间部分
+          const cleaned = dateString.replace(/\s*[+-]\d{4}$/, '').trim();
+          date = new Date(cleaned);
+          
+          // 如果还是无效，尝试只提取日期部分
+          if (isNaN(date.getTime())) {
+            const dateMatch = dateString.match(/(\d{4})-(\d{1,2})-(\d{1,2})/);
+            if (dateMatch) {
+              const year = parseInt(dateMatch[1], 10);
+              const month = parseInt(dateMatch[2], 10) - 1; // 月份从0开始
+              const day = parseInt(dateMatch[3], 10);
+              date = new Date(year, month, day);
+            }
+          }
+        }
+        
+        // 最终检查日期是否有效
+        if (isNaN(date.getTime())) {
+          console.warn('无法解析日期:', dateString);
+          return '';
+        }
+        
         const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        return `${year}/${month}/${day}`;
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        
+        // 再次验证年月日是否有效
+        if (isNaN(year) || isNaN(month) || isNaN(day)) {
+          console.warn('日期解析结果无效:', dateString, {year, month, day});
+          return '';
+        }
+        
+        return `${year}/${String(month).padStart(2, '0')}/${String(day).padStart(2, '0')}`;
       } catch (e) {
+        console.warn('日期格式化错误:', dateString, e);
         return '';
       }
     }
@@ -87,7 +131,10 @@
       
       // 获取更新时间，如果没有则使用发布时间
       const updateTime = postData.last_modified_at || postData.date;
-      if (!updateTime) return;
+      // 确保 updateTime 是有效的字符串，不是 null 或 undefined
+      if (!updateTime || updateTime === 'null' || updateTime === null || typeof updateTime !== 'string') {
+        return;
+      }
       
       // 查找日期显示的位置（通常在 .post-meta 或包含日期的元素中）
       const metaElements = card.querySelectorAll('.post-meta, [class*="meta"], [class*="date"]');
