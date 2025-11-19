@@ -64,6 +64,87 @@
       }
     }
     
+    // 格式化日期显示
+    function formatDate(dateString) {
+      if (!dateString) return '';
+      try {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}/${month}/${day}`;
+      } catch (e) {
+        return '';
+      }
+    }
+
+    // 添加更新时间显示
+    function addUpdateTimeDisplay(card, postData) {
+      if (!postData) return;
+      
+      // 检查是否已经添加过更新时间
+      if (card.querySelector('.post-update-time')) return;
+      
+      // 获取更新时间，如果没有则使用发布时间
+      const updateTime = postData.last_modified_at || postData.date;
+      if (!updateTime) return;
+      
+      // 查找日期显示的位置（通常在 .post-meta 或包含日期的元素中）
+      const metaElements = card.querySelectorAll('.post-meta, [class*="meta"], [class*="date"]');
+      let dateContainer = null;
+      
+      // 尝试找到包含日期的容器
+      for (const meta of metaElements) {
+        const text = meta.textContent || '';
+        // 查找包含日期格式的元素（如 2025/11/11）
+        if (/\d{4}\/\d{1,2}\/\d{1,2}/.test(text)) {
+          dateContainer = meta;
+          break;
+        }
+      }
+      
+      // 如果没找到，尝试查找所有包含时间图标的元素
+      if (!dateContainer) {
+        const timeIcons = card.querySelectorAll('i.fa-calendar, i.fa-clock, [class*="calendar"], [class*="time"]');
+        if (timeIcons.length > 0) {
+          dateContainer = timeIcons[0].closest('li, div, span');
+        }
+      }
+      
+      // 如果还是没找到，尝试查找所有 small 或 time 元素
+      if (!dateContainer) {
+        const smallElements = card.querySelectorAll('small, time, .text-muted');
+        for (const el of smallElements) {
+          if (/\d{4}\/\d{1,2}\/\d{1,2}/.test(el.textContent || '')) {
+            dateContainer = el.parentElement;
+            break;
+          }
+        }
+      }
+      
+      if (dateContainer) {
+        // 创建更新时间显示元素
+        const updateTimeEl = document.createElement('span');
+        updateTimeEl.className = 'post-update-time';
+        
+        const updateDate = formatDate(updateTime);
+        
+        // 显示更新时间（如果有）
+        if (updateDate) {
+          updateTimeEl.innerHTML = `<i class="far fa-edit"></i>更新：${updateDate}`;
+          dateContainer.appendChild(updateTimeEl);
+        }
+      }
+    }
+
+    // 规范化文章数据中的 URL
+    postsData.forEach(post => {
+      post.normalizedUrl = normalizeUrl(post.url);
+    });
+    
+    // 创建文章卡片到文章数据的映射
+    const cardToPostDataMap = new Map();
+    
     postCards.forEach(card => {
       const link = card.querySelector('a.post-preview');
       if (link) {
@@ -74,12 +155,17 @@
         if (url !== normalizedUrl) {
           postMap.set(url, card);
         }
+        
+        // 查找对应的文章数据
+        const postData = postsData.find(p => {
+          return p.normalizedUrl === normalizedUrl || p.normalizedUrl === url || p.url === normalizedUrl || p.url === url;
+        });
+        
+        if (postData) {
+          cardToPostDataMap.set(card, postData);
+          addUpdateTimeDisplay(card, postData);
+        }
       }
-    });
-    
-    // 规范化文章数据中的 URL
-    postsData.forEach(post => {
-      post.normalizedUrl = normalizeUrl(post.url);
     });
 
     // 当前排序状态
@@ -113,6 +199,10 @@
         const card = postMap.get(post.url) || postMap.get(post.normalizedUrl);
         if (card) {
           postList.appendChild(card);
+          // 确保更新时间显示存在
+          if (post && !card.querySelector('.post-update-time')) {
+            addUpdateTimeDisplay(card, post);
+          }
         }
       });
 

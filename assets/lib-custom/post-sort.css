@@ -100,3 +100,36 @@
   }
 }
 
+/* 文章更新时间显示样式 */
+.post-update-time {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.75rem;
+  color: var(--text-muted, #999);
+  font-size: 0.875em;
+  white-space: nowrap;
+}
+
+.post-update-time i {
+  margin-right: 0.25rem;
+  font-size: 0.875em;
+  opacity: 0.8;
+}
+
+/* 深色模式下的更新时间样式 */
+@media (prefers-color-scheme: dark) {
+  .post-update-time {
+    color: var(--text-muted, #888);
+  }
+}
+
+/* 移动端响应式 */
+@media (max-width: 768px) {
+  .post-update-time {
+    display: block;
+    margin-left: 0;
+    margin-top: 0.25rem;
+    font-size: 0.8125em;
+  }
+}
+
