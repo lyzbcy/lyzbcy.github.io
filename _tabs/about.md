@@ -16,4 +16,4 @@ order: 6
 
 - 🎬 [B站](https://space.bilibili.com/523537443?spm_id_from=333.1007.0.0)
 - 🎵 [抖音](https://www.douyin.com/user/MS4wLjABAAAAyuCPebezrJtaj66VWDIFJSOw6XZgneF8yE_mfJAs0ME?from_tab_name=main)
-- 💻 [GitHub](https://github.com/lyzbcy)
+- 💻 [我的 GitHub 主页](https://github.com/lyzbcy)
