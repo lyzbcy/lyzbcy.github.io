@@ -38,7 +38,7 @@ social:
   email: lyzbcy@qq.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/lyzbcy # change to your Twitter homepage
+    - /about/ # 个人信息页面
     - https://github.com/lyzbcy # change to your GitHub homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/lyzbcy
