@@ -214,6 +214,21 @@
       }
     });
 
+    // 获取当前页码
+    function getCurrentPage() {
+      const path = window.location.pathname;
+      // Jekyll 分页格式：/page2/, /page3/ 等
+      const match = path.match(/\/page(\d+)\//);
+      if (match) {
+        return parseInt(match[1], 10);
+      }
+      // 首页是第 1 页
+      return 1;
+    }
+
+    // 获取每页显示的文章数量（从配置中获取，默认 10）
+    const postsPerPage = 10;
+
     // 当前排序状态
     let currentSortType = 'updated'; // 'updated' 或 'date'
     let currentSortOrder = 'desc'; // 'asc' 或 'desc'
@@ -223,32 +238,67 @@
       currentSortType = type;
       currentSortOrder = order;
 
-      // 根据排序类型和顺序排序
-      const sortedPosts = postsData
-        .filter(post => {
-          // 尝试匹配原始 URL 或规范化后的 URL
-          return postMap.has(post.url) || postMap.has(post.normalizedUrl);
-        })
-        .sort((a, b) => {
-          const aTime = type === 'updated' ? a.last_modified_ts : a.date_ts;
-          const bTime = type === 'updated' ? b.last_modified_ts : b.date_ts;
-          
-          if (order === 'asc') {
-            return aTime - bTime;
-          } else {
-            return bTime - aTime;
-          }
-        });
+      // 获取当前页码
+      const currentPage = getCurrentPage();
 
-      // 重新排列 DOM 元素
-      sortedPosts.forEach(post => {
+      // 对所有文章进行排序（不仅仅是当前页的）
+      const sortedPosts = postsData.slice().sort((a, b) => {
+        const aTime = type === 'updated' ? a.last_modified_ts : a.date_ts;
+        const bTime = type === 'updated' ? b.last_modified_ts : b.date_ts;
+        
+        if (order === 'asc') {
+          return aTime - bTime;
+        } else {
+          return bTime - aTime;
+        }
+      });
+
+      // 计算当前页应该显示的文章范围（基于全局排序）
+      const startIndex = (currentPage - 1) * postsPerPage;
+      const endIndex = startIndex + postsPerPage;
+      const postsForCurrentPage = sortedPosts.slice(startIndex, endIndex);
+
+      // 检查当前页应该显示的文章是否都在当前页的 DOM 中
+      const allCardsAvailable = postsForCurrentPage.every(post => {
+        return postMap.has(post.url) || postMap.has(post.normalizedUrl);
+      });
+
+      // 如果当前页应该显示的文章不在当前页的 DOM 中，说明需要跳转到正确的页面
+      // 但是，由于 Jekyll 在服务端已经对文章进行了分页，每个页面的 DOM 中只有该页的文章
+      // 所以，如果排序后当前页应该显示的文章不在当前页的 DOM 中，我们需要跳转到第一页
+      // 然后，在页面加载时，根据 localStorage 中的排序偏好，对所有文章进行排序，并只显示当前页应该显示的文章
+      if (!allCardsAvailable) {
+        // 保存排序偏好，然后跳转到第一页
+        saveSortPreference(type, order);
+        // 跳转到第一页，让页面重新加载，然后根据排序偏好进行排序
+        window.location.href = '/';
+        return;
+      }
+
+      // 重新排列 DOM 元素，只显示当前页应该显示的文章
+      const visibleCards = [];
+      postsForCurrentPage.forEach(post => {
         const card = postMap.get(post.url) || postMap.get(post.normalizedUrl);
         if (card) {
-          postList.appendChild(card);
+          visibleCards.push(card);
           // 确保更新时间显示存在
           if (post && !card.querySelector('.post-update-time')) {
             addUpdateTimeDisplay(card, post);
           }
+        }
+      });
+
+      // 将当前页的文章按排序顺序添加到 DOM
+      visibleCards.forEach(card => {
+        postList.appendChild(card);
+        // 显示文章卡片
+        card.style.display = '';
+      });
+
+      // 隐藏不在当前页的文章（如果它们存在于 DOM 中）
+      postCards.forEach(card => {
+        if (!visibleCards.includes(card)) {
+          card.style.display = 'none';
         }
       });
 
