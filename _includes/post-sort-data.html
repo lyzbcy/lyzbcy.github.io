@@ -1,5 +1,10 @@
 <!-- 生成文章排序数据 -->
-<script type="application/json" id="post-sort-data">
+<script
+  type="application/json"
+  id="post-sort-data"
+  data-posts-per-page="{{ site.paginate | default: 10 }}"
+  data-baseurl="{{ site.baseurl | default: '' }}"
+>
 [
   {% for post in site.posts %}
   {% assign post_date_ts = post.date | date: '%s' | plus: 0 %}

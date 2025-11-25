@@ -47,8 +47,9 @@
     console.log('排序控件已创建并插入');
 
     // 获取所有文章卡片
-    const postCards = Array.from(postList.querySelectorAll('.card-wrapper'));
-    console.log('找到', postCards.length, '个文章卡片');
+    const initialCards = Array.from(postList.querySelectorAll('.card-wrapper'));
+    console.log('找到', initialCards.length, '个文章卡片');
+    const allCardElements = new Set(initialCards);
     
     // 创建文章卡片映射（URL -> DOM元素）
     const postMap = new Map();
@@ -183,36 +184,71 @@
       }
     }
 
+    const postsPerPageAttr = parseInt(dataScript.dataset.postsPerPage, 10);
+    const postsPerPage = Number.isFinite(postsPerPageAttr) ? postsPerPageAttr : 10;
+    const siteBaseUrl = (dataScript.dataset.baseurl || '').replace(/\/$/, '');
+
+    function withBase(path) {
+      if (!siteBaseUrl) {
+        return path;
+      }
+
+      if (path === '/') {
+        return `${siteBaseUrl}/`;
+      }
+
+      return `${siteBaseUrl}${path}`;
+    }
+
+    const postsByUrlMap = new Map();
+
     // 规范化文章数据中的 URL
-    postsData.forEach(post => {
+    postsData.forEach((post, index) => {
       post.normalizedUrl = normalizeUrl(post.url);
+      post.originalIndex = index;
+      post.pageNumber = Math.floor(index / postsPerPage) + 1;
+      postsByUrlMap.set(post.url, post);
+      postsByUrlMap.set(post.normalizedUrl, post);
     });
     
     // 创建文章卡片到文章数据的映射
     const cardToPostDataMap = new Map();
     
-    postCards.forEach(card => {
-      const link = card.querySelector('a.post-preview');
-      if (link) {
-        const url = new URL(link.href, window.location.origin).pathname;
-        const normalizedUrl = normalizeUrl(url);
-        postMap.set(normalizedUrl, card);
-        // 同时存储原始 URL 和编码后的 URL，以便匹配
-        if (url !== normalizedUrl) {
-          postMap.set(url, card);
-        }
-        
-        // 查找对应的文章数据
-        const postData = postsData.find(p => {
-          return p.normalizedUrl === normalizedUrl || p.normalizedUrl === url || p.url === normalizedUrl || p.url === url;
-        });
-        
-        if (postData) {
-          cardToPostDataMap.set(card, postData);
-          addUpdateTimeDisplay(card, postData);
-        }
+    function registerCardElement(card) {
+      if (!card || !(card instanceof HTMLElement)) {
+        return;
       }
-    });
+
+      const link = card.querySelector('a.post-preview');
+      if (!link) {
+        return;
+      }
+
+      const href = link.getAttribute('href') || link.href;
+      if (!href) {
+        return;
+      }
+
+      const url = new URL(href, window.location.origin).pathname;
+      const normalizedUrl = normalizeUrl(url);
+
+      if (!postMap.has(normalizedUrl)) {
+        postMap.set(normalizedUrl, card);
+      }
+      if (!postMap.has(url)) {
+        postMap.set(url, card);
+      }
+
+      allCardElements.add(card);
+
+      const postData = postsByUrlMap.get(normalizedUrl) || postsByUrlMap.get(url);
+      if (postData) {
+        cardToPostDataMap.set(card, postData);
+        addUpdateTimeDisplay(card, postData);
+      }
+    }
+
+    initialCards.forEach(registerCardElement);
 
     // 获取当前页码
     function getCurrentPage() {
@@ -226,15 +262,76 @@
       return 1;
     }
 
-    // 获取每页显示的文章数量（从配置中获取，默认 10）
-    const postsPerPage = 10;
+    // 需要异步加载的分页缓存
+    const pageFetchCache = new Map();
+
+    async function loadPageCards(pageNumber) {
+      if (!Number.isFinite(pageNumber) || pageNumber < 1) {
+        return;
+      }
+
+      if (pageNumber === getCurrentPage()) {
+        return;
+      }
+
+      if (pageFetchCache.has(pageNumber)) {
+        return pageFetchCache.get(pageNumber);
+      }
+
+      const pageUrl = pageNumber === 1 ? '/' : `/page${pageNumber}/`;
+      const fetchPromise = fetch(withBase(pageUrl), { credentials: 'same-origin' })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`无法加载第 ${pageNumber} 页内容，状态码：${response.status}`);
+          }
+          return response.text();
+        })
+        .then(html => {
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          const cards = doc.querySelectorAll('#post-list .card-wrapper');
+          cards.forEach(card => {
+            const importedCard = document.importNode(card, true);
+            importedCard.style.display = 'none';
+            registerCardElement(importedCard);
+          });
+        })
+        .catch(error => {
+          console.error(`加载第 ${pageNumber} 页文章失败：`, error);
+        });
+
+      pageFetchCache.set(pageNumber, fetchPromise);
+      return fetchPromise;
+    }
+
+    async function ensureCardsAvailable(posts) {
+      if (!posts || posts.length === 0) {
+        return;
+      }
+
+      const missingPosts = posts.filter(post => !(postMap.has(post.url) || postMap.has(post.normalizedUrl)));
+      if (missingPosts.length === 0) {
+        return;
+      }
+
+      const pagesToFetch = new Set();
+      missingPosts.forEach(post => {
+        if (post.pageNumber) {
+          pagesToFetch.add(post.pageNumber);
+        }
+      });
+
+      for (const pageNumber of pagesToFetch) {
+        await loadPageCards(pageNumber);
+      }
+    }
 
     // 当前排序状态
     let currentSortType = 'updated'; // 'updated' 或 'date'
     let currentSortOrder = 'desc'; // 'asc' 或 'desc'
 
     // 排序函数
-    function sortPosts(type, order) {
+    async function sortPosts(type, order) {
       currentSortType = type;
       currentSortOrder = order;
 
@@ -258,46 +355,37 @@
       const endIndex = startIndex + postsPerPage;
       const postsForCurrentPage = sortedPosts.slice(startIndex, endIndex);
 
-      // 检查当前页应该显示的文章是否都在当前页的 DOM 中
-      const allCardsAvailable = postsForCurrentPage.every(post => {
-        return postMap.has(post.url) || postMap.has(post.normalizedUrl);
-      });
-
-      // 如果当前页应该显示的文章不在当前页的 DOM 中，说明需要跳转到正确的页面
-      // 但是，由于 Jekyll 在服务端已经对文章进行了分页，每个页面的 DOM 中只有该页的文章
-      // 所以，如果排序后当前页应该显示的文章不在当前页的 DOM 中，我们需要跳转到第一页
-      // 然后，在页面加载时，根据 localStorage 中的排序偏好，对所有文章进行排序，并只显示当前页应该显示的文章
-      if (!allCardsAvailable) {
-        // 保存排序偏好，然后跳转到第一页
-        saveSortPreference(type, order);
-        // 跳转到第一页，让页面重新加载，然后根据排序偏好进行排序
-        window.location.href = '/';
-        return;
-      }
+      await ensureCardsAvailable(postsForCurrentPage);
 
       // 重新排列 DOM 元素，只显示当前页应该显示的文章
       const visibleCards = [];
       postsForCurrentPage.forEach(post => {
         const card = postMap.get(post.url) || postMap.get(post.normalizedUrl);
-        if (card) {
-          visibleCards.push(card);
-          // 确保更新时间显示存在
-          if (post && !card.querySelector('.post-update-time')) {
-            addUpdateTimeDisplay(card, post);
+        if (!card) {
+          return;
+        }
+
+        const postData = postsByUrlMap.get(post.normalizedUrl) || postsByUrlMap.get(post.url) || post;
+        if (postData) {
+          cardToPostDataMap.set(card, postData);
+          if (!card.querySelector('.post-update-time')) {
+            addUpdateTimeDisplay(card, postData);
           }
         }
+
+        visibleCards.push(card);
       });
 
       // 将当前页的文章按排序顺序添加到 DOM
       visibleCards.forEach(card => {
         postList.appendChild(card);
-        // 显示文章卡片
         card.style.display = '';
       });
 
       // 隐藏不在当前页的文章（如果它们存在于 DOM 中）
-      postCards.forEach(card => {
-        if (!visibleCards.includes(card)) {
+      const visibleSet = new Set(visibleCards);
+      allCardElements.forEach(card => {
+        if (card.isConnected && !visibleSet.has(card)) {
           card.style.display = 'none';
         }
       });
@@ -338,7 +426,10 @@
         btn.addEventListener('click', () => {
           const type = btn.dataset.type;
           const order = btn.dataset.order;
-          sortPosts(type, order);
+          const result = sortPosts(type, order);
+          if (result && typeof result.then === 'function') {
+            result.catch(err => console.error('排序失败：', err));
+          }
         });
       });
 
@@ -371,13 +462,13 @@
     }
 
     // 加载排序偏好
-    function loadSortPreference() {
+    async function loadSortPreference() {
       try {
         const savedType = localStorage.getItem('postSortType');
         const savedOrder = localStorage.getItem('postSortOrder');
         
         if (savedType && savedOrder) {
-          sortPosts(savedType, savedOrder);
+          await sortPosts(savedType, savedOrder);
           return;
         }
       } catch (e) {
@@ -385,11 +476,13 @@
       }
       
       // 默认按更新时间倒序
-      sortPosts('updated', 'desc');
+      await sortPosts('updated', 'desc');
     }
 
     // 初始化：加载排序偏好或使用默认值
-    loadSortPreference();
+    loadSortPreference().catch(err => {
+      console.error('初始化排序偏好失败：', err);
+    });
   }
 
   // 启动
