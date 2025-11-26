@@ -12,22 +12,27 @@
   const spotData = {};
 
   const tierOrder = ['夯', '顶级', '人上人', 'NPC', '拉完了'];
-  const imageBasePath = '/assets/image%20library/'; // 如果有恋爱项目图片，可以放在这里
+  const imageBasePath = '/assets/image%20library/love-tier-images/';
 
-  // 恋爱项目数据 - 待补充
+  // 恋爱项目数据
   const spots = [
-    // 示例数据结构，后续可以添加实际项目
-    // {
-    //   name: '项目名称',
-    //   tier: '夯',
-    //   tierLabel: '夯 · 描述',
-    //   rating: 5,
-    //   description: '项目描述',
-    //   pros: ['优点1', '优点2'],
-    //   cons: ['缺点1'],
-    //   note: '备注',
-    //   bgImage: imageBasePath + encodeURIComponent('图片.jpg')
-    // }
+    {
+      name: '看电影',
+      tier: '顶级',
+      tierLabel: '顶级 · 老牌不翻车项目',
+      rating: 5,
+      description: '看电影真的算是恋爱里万年不过时的经典项目，尤其是已经确认关系之后，气氛会比暧昧期更加轻松自在。无论是在电影院、家里沙发，还是和火锅、甜品拼成组合套餐，都能轻松延展成一个属于两个人的小仪式。就算前面逛街逛累了，直接钻进影院里休整两个小时，也是一种同步呼吸的幸福感。',
+      pros: [
+        '玩法拓展性极强：沙发电影、火锅电影、主题电影都能玩出花',
+        '作为约会中场休息点，能让两个人迅速回血再出发',
+        '共同的观影体验会自然创造聊天素材，不用担心冷场'
+      ],
+      cons: [
+        '如果真的天天去，会有点审美疲劳，还是得穿插其他项目'
+      ],
+      note: '关键在于挑好片、搭好氛围，别怕自己话多，观影结束后一起拆剧情才是最甜的部分。',
+      bgImage: imageBasePath + encodeURIComponent('看电影.JPG')
+    }
   ];
 
   spots.forEach(spot => {
