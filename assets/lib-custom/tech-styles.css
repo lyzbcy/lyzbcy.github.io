@@ -1,116 +1,125 @@
-/* Modern Glassmorphism Styles - White Theme */
+/* Apple Style & Romance Theme */
 
-/* 1. Global Background & Typography */
+/* 1. Global Variables */
+:root {
+    --bg-gradient: linear-gradient(180deg, #fbfbfd 0%, #f5f5f7 100%);
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --card-border: rgba(0, 0, 0, 0.04);
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    --card-hover-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    --text-primary: #1d1d1f;
+    --text-secondary: #86868b;
+    --accent-color: #0071e3; /* Apple Blue */
+    --font-stack: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+
+/* Romance Mode Overrides */
+body.romance-mode {
+    --bg-gradient: linear-gradient(180deg, #fff0f5 0%, #ffe4e1 100%); /* Misty Rose */
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --card-shadow: 0 10px 30px rgba(255, 105, 180, 0.1);
+    --card-hover-shadow: 0 20px 40px rgba(255, 105, 180, 0.2);
+    --text-primary: #5c2a2a;
+    --accent-color: #ff69b4; /* Hot Pink */
+}
+
+/* 2. Base Styles */
 body {
-    /* Pure white background as requested, with subtle gradient for glass effect */
-    background: linear-gradient(to bottom, #ffffff, #f4f7f6) !important;
+    background: var(--bg-gradient) !important;
     background-attachment: fixed !important;
-    color: #333333 !important; /* Dark text for contrast */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
-    margin: 0 !important; /* Fix potential margin issues */
+    color: var(--text-primary) !important;
+    font-family: var(--font-stack) !important;
+    -webkit-font-smoothing: antialiased;
+    margin: 0 !important;
     padding: 0 !important;
 }
 
-/* 2. Scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
-}
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
-}
-
-/* 3. Glass Cards */
-/* We use a very subtle white glass on top of the white-ish background.
-   To make it visible, we rely on shadows and borders. */
+/* 3. Apple-style Cards (Bento Grid feel) */
 #sidebar, .post-preview, .card, #main-wrapper .post-content {
-    background: rgba(255, 255, 255, 0.7) !important; /* More opaque */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 0, 0, 0.05); /* Subtle grey border */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Soft shadow */
-    border-radius: 16px;
+    background: var(--card-bg) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--card-shadow);
+    border-radius: 20px; /* More rounded */
     margin-bottom: 24px;
-    padding: 24px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 30px;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth Apple easing */
 }
 
-/* Ensure content isn't pushed down */
-#main-wrapper {
-    margin-top: 0 !important;
-    padding-top: 20px; /* Add some breathing room */
-}
-
-/* Hover Lift */
+/* Hover Effect - Scale and Lift */
 .post-preview:hover, .card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transform: scale(1.02) translateY(-5px);
+    box-shadow: var(--card-hover-shadow);
 }
 
 /* 4. Typography */
 h1, h2, h3, h4, h5, h6, .post-title, .site-title {
-    color: #000000 !important;
-    font-family: 'Inter', 'Roboto', sans-serif !important;
-    font-weight: 700;
-    letter-spacing: -0.5px;
+    color: var(--text-primary) !important;
+    font-weight: 600;
+    letter-spacing: -0.02em; /* Tight tracking like Apple */
 }
 
 .site-subtitle {
-    color: #666666 !important;
+    color: var(--text-secondary) !important;
+    font-weight: 400;
 }
 
 /* Links */
 a {
-    color: #007bff; /* Standard blue or a nice teal */
+    color: var(--accent-color);
     text-decoration: none;
     transition: color 0.2s;
 }
 a:hover {
-    color: #0056b3 !important;
-    text-decoration: underline;
+    color: var(--text-primary) !important;
+    text-decoration: none;
 }
 
-/* 5. Tags & Categories */
+/* 5. Tags */
 .post-tag, .categories {
-    background: rgba(0, 0, 0, 0.05) !important;
-    border: 1px solid rgba(0, 0, 0, 0.1) !important;
-    border-radius: 20px;
-    padding: 4px 12px;
-    color: #555 !important;
-    font-size: 0.85rem;
+    background: rgba(0, 0, 0, 0.03) !important;
+    border: none !important;
+    border-radius: 12px;
+    padding: 6px 14px;
+    color: var(--text-secondary) !important;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.2s;
 }
 
 .post-tag:hover {
-    background: rgba(0, 0, 0, 0.1) !important;
+    background: var(--accent-color) !important;
+    color: white !important;
 }
 
-/* 6. Particles Container - Fix Layout Issue */
+/* Romance Mode Specifics */
+body.romance-mode .post-tag {
+    background: rgba(255, 105, 180, 0.1) !important;
+    color: #ff69b4 !important;
+}
+body.romance-mode .post-tag:hover {
+    background: #ff69b4 !important;
+    color: white !important;
+}
+
+/* 6. Footer */
+#tech-stats {
+    font-family: var(--font-stack);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 40px;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* 7. Particles Container */
 #particles-js {
     position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    z-index: -99; /* Deeply behind */
+    z-index: -99;
     pointer-events: none;
-}
-
-/* 7. Footer Stats */
-#tech-stats {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.8rem;
-    color: #999;
-    margin-top: 30px;
-    text-align: center;
-}
-
-#tech-stats span {
-    color: #333;
-    font-weight: 600;
 }
