@@ -1,0 +1,116 @@
+/* Modern Glassmorphism Styles - White Theme */
+
+/* 1. Global Background & Typography */
+body {
+    /* Pure white background as requested, with subtle gradient for glass effect */
+    background: linear-gradient(to bottom, #ffffff, #f4f7f6) !important;
+    background-attachment: fixed !important;
+    color: #333333 !important; /* Dark text for contrast */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    margin: 0 !important; /* Fix potential margin issues */
+    padding: 0 !important;
+}
+
+/* 2. Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* 3. Glass Cards */
+/* We use a very subtle white glass on top of the white-ish background.
+   To make it visible, we rely on shadows and borders. */
+#sidebar, .post-preview, .card, #main-wrapper .post-content {
+    background: rgba(255, 255, 255, 0.7) !important; /* More opaque */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.05); /* Subtle grey border */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Soft shadow */
+    border-radius: 16px;
+    margin-bottom: 24px;
+    padding: 24px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Ensure content isn't pushed down */
+#main-wrapper {
+    margin-top: 0 !important;
+    padding-top: 20px; /* Add some breathing room */
+}
+
+/* Hover Lift */
+.post-preview:hover, .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* 4. Typography */
+h1, h2, h3, h4, h5, h6, .post-title, .site-title {
+    color: #000000 !important;
+    font-family: 'Inter', 'Roboto', sans-serif !important;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.site-subtitle {
+    color: #666666 !important;
+}
+
+/* Links */
+a {
+    color: #007bff; /* Standard blue or a nice teal */
+    text-decoration: none;
+    transition: color 0.2s;
+}
+a:hover {
+    color: #0056b3 !important;
+    text-decoration: underline;
+}
+
+/* 5. Tags & Categories */
+.post-tag, .categories {
+    background: rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 20px;
+    padding: 4px 12px;
+    color: #555 !important;
+    font-size: 0.85rem;
+}
+
+.post-tag:hover {
+    background: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 6. Particles Container - Fix Layout Issue */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -99; /* Deeply behind */
+    pointer-events: none;
+}
+
+/* 7. Footer Stats */
+#tech-stats {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    color: #999;
+    margin-top: 30px;
+    text-align: center;
+}
+
+#tech-stats span {
+    color: #333;
+    font-weight: 600;
+}
