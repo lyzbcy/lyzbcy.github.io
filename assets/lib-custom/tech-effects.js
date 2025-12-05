@@ -16,19 +16,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (typeof particlesJS !== 'undefined') {
         var particleColor = isRomance ? ["#ff69b4", "#ffb6c1", "#ffffff"] : ["#a1c4fd", "#c2e9fb", "#e0e0e0"];
-        var particleShape = isRomance ? "heart" : "circle"; // Particles.js might not support heart natively without SVG, fallback to circle if needed
-        // Actually particles.js supports "circle", "edge", "triangle", "polygon", "star", "image". 
-        // For heart we need "image" or just use circles with pink colors for simplicity first.
-        // Let's stick to circles for stability but use pink colors.
+        var linkedColor = isRomance ? "#ff69b4" : "#a1c4fd"; // Match line color to theme
 
         particlesJS('particles-js', {
             "particles": {
                 "number": { "value": 25, "density": { "enable": true, "value_area": 800 } },
                 "color": { "value": particleColor },
-                "shape": { "type": "circle" }, // Keep simple for now
+                "shape": { "type": "circle" },
                 "opacity": { "value": 0.4, "random": true },
-                "size": { "value": isRomance ? 6 : 40, "random": true }, // Smaller hearts/dots or big bubbles
-                "line_linked": { "enable": false },
+                "size": { "value": isRomance ? 6 : 40, "random": true },
+                "line_linked": { 
+                    "enable": false,
+                    "distance": 150,
+                    "color": linkedColor,
+                    "opacity": 0.6, 
+                    "width": 1.5 
+                },
                 "move": { 
                     "enable": true, 
                     "speed": 1, 
@@ -37,17 +40,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     "straight": false, 
                     "out_mode": "out", 
                     "bounce": false,
-                    "attract": { "enable": true, "rotateX": 600, "rotateY": 1200 } // Slight attraction
+                    "attract": { "enable": true, "rotateX": 600, "rotateY": 1200 }
                 }
             },
             "interactivity": {
                 "detect_on": "window",
                 "events": {
-                    "onhover": { "enable": true, "mode": "bubble" }, // Interaction!
+                    "onhover": { "enable": true, "mode": "grab" },
                     "onclick": { "enable": true, "mode": "push" },
                     "resize": true
                 },
                 "modes": {
+                    "grab": { "distance": 200, "line_linked": { "opacity": 0.8 } },
                     "bubble": { "distance": 200, "size": 10, "duration": 2, "opacity": 0.8, "speed": 3 },
                     "repulse": { "distance": 200, "duration": 0.4 }
                 }
@@ -55,6 +59,21 @@ document.addEventListener('DOMContentLoaded', function() {
             "retina_detect": true
         });
     }
+
+    // 1.5 Spotlight Effect
+    var spotlight = document.createElement('div');
+    spotlight.id = 'cursor-spotlight';
+    document.body.appendChild(spotlight);
+
+    document.addEventListener('mousemove', function(e) {
+        spotlight.style.left = e.clientX + 'px';
+        spotlight.style.top = e.clientY + 'px';
+        spotlight.style.opacity = '1';
+    });
+
+    document.addEventListener('mouseleave', function() {
+        spotlight.style.opacity = '0';
+    });
 
     // 2. Parallax Background Effect (Apple Style)
     // Move the background slightly based on mouse position

@@ -123,3 +123,23 @@ body.romance-mode .post-tag:hover {
     z-index: -99;
     pointer-events: none;
 }
+
+/* 8. Cursor Spotlight */
+#cursor-spotlight {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(0, 113, 227, 0.15) 0%, rgba(0, 113, 227, 0) 70%); /* Apple Blue Glow */
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: -98; /* Above particles, below content */
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+body.romance-mode #cursor-spotlight {
+    background: radial-gradient(circle, rgba(255, 105, 180, 0.2) 0%, rgba(255, 105, 180, 0) 70%); /* Pink Glow */
+}
