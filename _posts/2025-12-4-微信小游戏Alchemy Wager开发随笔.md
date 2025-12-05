@@ -26,4 +26,21 @@ pin: false
       </div>
     </div>
   </details>
+  <details class="order-card">
+    <summary>2. AI coding有bug 跟ai扯皮半天一直改不好</summary>
+    <div class="content">
+      <div class="reflection-item-content">
+        <p><strong>解决方法：</strong></p>
+        <ul>
+          <li>最好的当然是自己看，自己找一下问题在哪，看看为什么 AI 老是改错（一般是 AI 认知的行业常规与这个项目的特殊性冲突了）。</li>
+          <li>自己看不了那就换一个 AI。跟一个 AI 一直扯皮，这个问题会被解决的概率很低。</li>
+        </ul>
+        <p><strong>策略：</strong></p>
+        <p>我会换一个 AI，让这个 AI 来找问题，他就不容易因为历史记录而一直陷入误区。</p>
+        <div style="background-color: #f6f8fa; border: 1px solid #e1e4e8; border-radius: 6px; padding: 16px; margin-top: 10px;">
+          <p style="margin: 0; color: #24292e;">💡 <strong>举例：</strong> 比如我现在的主力是 <strong>Antigravity</strong>，如果它有一直修不好的 bug，我会让 <strong>Cursor</strong> 来尝试解决。</p>
+        </div>
+      </div>
+    </div>
+  </details>
 </div>
