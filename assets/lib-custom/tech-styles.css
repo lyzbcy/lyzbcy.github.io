@@ -146,11 +146,23 @@ body.romance-mode .post-tag:hover {
 }
 
 /* 6. Footer */
+footer {
+    background: transparent !important;
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+footer > div {
+    background: transparent !important;
+}
+
 #tech-stats {
     font-family: var(--font-stack);
     font-size: 0.75rem;
     color: var(--text-secondary);
-    margin-top: 40px;
+    margin-top: 20px;
     text-align: center;
     font-weight: 500;
 }
