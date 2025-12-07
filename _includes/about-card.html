@@ -2,7 +2,7 @@
 /* 局部样式隔离，避免污染全局，但允许 font-awesome 穿透 */
 .about-card-wrapper {
   /* 极深色背景环境，作为卡片的容器背景 */
-  background-color: #0F0F11;
+  background-color: var(--about-wrapper-bg, #0F0F11);
   padding: 3rem 1rem;
   border-radius: 24px;
   display: flex;
@@ -22,7 +22,7 @@
   text-align: center;
   
   /* 核心视觉样式 */
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--about-card-bg, rgba(255, 255, 255, 0.03));
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -58,7 +58,7 @@
 }
 
 .member-info h3 {
-  color: #FFFFFF;
+  color: var(--about-text-title, #FFFFFF);
   font-weight: 800;
   font-size: 1.8rem;
   margin: 0 0 0.5rem 0;
@@ -66,7 +66,7 @@
 }
 
 .member-info p {
-  color: #ADB5BD;
+  color: var(--about-text-desc, #ADB5BD);
   font-family: 'Outfit', sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
   font-size: 1rem;
   margin: 0 0 2rem 0;
@@ -85,12 +85,12 @@
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255,255,255,0.05);
+  background: var(--about-social-bg, rgba(255, 255, 255, 0.1));
+  border: 1px solid var(--about-social-border, rgba(255,255,255,0.05));
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white !important; /* 强制覆盖链接颜色 */
+  color: var(--about-social-color, white) !important; /* 强制覆盖链接颜色 */
   text-decoration: none;
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
@@ -101,13 +101,13 @@
 }
 
 .social-btn:hover {
-  background: #FFFFFF;
+  background: var(--about-social-hover-bg, #FFFFFF);
   transform: scale(1.15);
-  border-color: #FFFFFF;
+  border-color: var(--about-social-hover-bg, #FFFFFF);
 }
 
 .social-btn:hover i {
-  color: #000000;
+  color: var(--about-social-hover-color, #000000);
 }
 
 </style>

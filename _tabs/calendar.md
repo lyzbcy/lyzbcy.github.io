@@ -14,6 +14,30 @@ order: 4
   --calendar-muted: #8a8a8a;
   --calendar-today: #1a1a1a;
   --calendar-card-shadow: 0 12px 30px -18px rgba(0, 0, 0, 0.4);
+  
+  /* Component defaults */
+  --calendar-btn-bg: #f8f8f8;
+  --calendar-btn-hover-bg: #f1f1f1;
+  --calendar-btn-hover-text: #111;
+  --calendar-cell-hover: #fafafa;
+  --calendar-modal-bg: #ffffff;
+  --calendar-item-bg: #f7f7f7;
+}
+
+html[data-mode="dark"] {
+  --calendar-bg: rgba(28, 28, 30, 0.7);
+  --calendar-border: rgba(255, 255, 255, 0.1);
+  --calendar-text: #f5f5f7;
+  --calendar-muted: #86868b;
+  --calendar-today: #0a84ff;
+  --calendar-card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  
+  --calendar-btn-bg: rgba(255, 255, 255, 0.1);
+  --calendar-btn-hover-bg: rgba(255, 255, 255, 0.2);
+  --calendar-btn-hover-text: #ffffff;
+  --calendar-cell-hover: rgba(255, 255, 255, 0.05);
+  --calendar-modal-bg: #1c1c1e;
+  --calendar-item-bg: rgba(255, 255, 255, 0.05);
 }
 
 .calendar-container {
@@ -55,7 +79,7 @@ order: 4
 
 .calendar-nav button {
   border: 1px solid var(--calendar-border);
-  background-color: #f8f8f8;
+  background-color: var(--calendar-btn-bg);
   color: var(--calendar-text);
   border-radius: 10px;
   padding: 8px 14px;
@@ -65,9 +89,9 @@ order: 4
 }
 
 .calendar-nav button:hover {
-  border-color: #111;
-  color: #111;
-  background-color: #f1f1f1;
+  border-color: var(--calendar-btn-hover-text);
+  color: var(--calendar-btn-hover-text);
+  background-color: var(--calendar-btn-hover-bg);
 }
 
 .calendar-nav button:disabled {
@@ -114,7 +138,7 @@ order: 4
 }
 
 .calendar tbody td:hover {
-  background-color: #fafafa;
+  background-color: var(--calendar-cell-hover);
 }
 
 .calendar-day {
@@ -185,7 +209,8 @@ order: 4
 
 .event-modal-content {
   width: min(540px, 100%);
-  background: #fff;
+  background: var(--calendar-modal-bg);
+  color: var(--calendar-text); /* Ensure text follows suit */
   border-radius: 16px;
   padding: 24px;
   animation: modalFade 0.25s ease;
@@ -232,7 +257,7 @@ order: 4
 .event-item {
   border-radius: 12px;
   padding: 14px;
-  background: #f7f7f7;
+  background: var(--calendar-item-bg);
   border: 1px solid var(--calendar-border);
 }
 

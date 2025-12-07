@@ -11,6 +11,48 @@
     --text-secondary: #86868b;
     --accent-color: #0071e3; /* Apple Blue */
     --font-stack: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    
+    /* About Page Wrapper defaults (Light Mode) */
+    --about-wrapper-bg: rgba(255, 255, 255, 0.5); /* Transparent/Light for Light Mode */
+    --about-card-bg: rgba(255, 255, 255, 0.6);
+    --about-text-title: #1d1d1f;
+    --about-text-desc: #86868b;
+    
+    /* Social Buttons (Light Mode Defaults) */
+    --about-social-bg: rgba(0, 0, 0, 0.05); /* Slight dark on light */
+    --about-social-border: rgba(0, 0, 0, 0.1);
+    --about-social-color: #1d1d1f; /* Dark text */
+    --about-social-hover-bg: #1d1d1f;
+    --about-social-hover-color: #ffffff;
+}
+
+/* Dark Mode Overrides */
+html[data-mode="dark"] {
+    --bg-gradient: linear-gradient(180deg, #1c1c1e 0%, #000000 100%); /* Apple Dark Background */
+    --card-bg: rgba(28, 28, 30, 0.7); /* Dark Glass */
+    --card-border: rgba(255, 255, 255, 0.1);
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    --card-hover-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    --text-primary: #f5f5f7;
+    --text-secondary: #86868b;
+    --accent-color: #0a84ff; /* Apple Blue Dark Mode */
+    
+    /* About Page Dark Mode */
+    --about-wrapper-bg: #0F0F11; /* Keep the original dark look for Dark Mode */
+    --about-card-bg: rgba(255, 255, 255, 0.05);
+    --about-text-title: #FFFFFF;
+    --about-text-desc: #ADB5BD;
+    
+    /* Social Buttons (Dark Mode) */
+    --about-social-bg: rgba(255, 255, 255, 0.1);
+    --about-social-border: rgba(255, 255, 255, 0.05);
+    --about-social-color: #FFFFFF;
+    --about-social-hover-bg: #FFFFFF;
+    --about-social-hover-color: #000000;
+}
+
+html[data-mode="dark"] body {
+    color: var(--text-primary) !important;
 }
 
 /* Romance Mode Overrides */
