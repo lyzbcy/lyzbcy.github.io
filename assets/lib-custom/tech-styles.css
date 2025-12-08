@@ -53,6 +53,15 @@ html[data-mode="dark"] {
 
 html[data-mode="dark"] body {
     color: var(--text-primary) !important;
+    background-color: #000000 !important; /* 强制纯黑背景作为底层 */
+    background: var(--bg-gradient) !important;
+}
+
+/* 修复移动端背景固定可能导致的问题 */
+@media (max-width: 768px) {
+    body {
+        background-attachment: scroll !important;
+    }
 }
 
 /* Romance Mode Overrides */
