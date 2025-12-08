@@ -6,15 +6,25 @@
     {% capture title %}{{ page.title }} - {{ site.title }}{% endcapture %}
     {% assign title = title | uri_escape %}
     {% assign url = page.url | absolute_url | url_encode %}
+    
+    <!-- Raw URL for JS usage -->
+    <span id="share-url" style="display:none;">{{ page.url | absolute_url }}</span>
+    <span id="share-title" style="display:none;">{{ page.title }} - {{ site.title }}</span>
 
     <!-- WeChat Share -->
-    <!-- Opens QR code in a new tab for scanning -->
-    <a href="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data={{ page.url | absolute_url }}" target="_blank" rel="noopener" aria-label="Share to WeChat" data-bs-toggle="tooltip" data-bs-placement="top" title="分享到微信">
-      <i class="fa-brands fa-weixin"></i>
-    </a>
+    <div class="wechat-share-wrapper">
+      <a href="javascript:void(0);" class="wechat-icon" aria-label="Share to WeChat" onclick="handleWeChatShare()">
+        <i class="fa-brands fa-weixin"></i>
+      </a>
+      <!-- PC: CSS Hover QR Code (Hidden on mobile via media query if needed, but logic handles click) -->
+      <div class="wechat-qr-dropdown">
+        <div class="qr-title">扫一扫分享</div>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ page.url | absolute_url }}" alt="WeChat QR Code">
+      </div>
+    </div>
 
     <!-- QQ Share -->
-    <a href="https://connect.qq.com/widget/shareqq/index.html?url={{ url }}&title={{ title }}&source={{ site.title | uri_escape }}" target="_blank" rel="noopener" aria-label="Share to QQ" data-bs-toggle="tooltip" data-bs-placement="top" title="分享到QQ">
+    <a href="javascript:void(0);" class="qq-icon" aria-label="Share to QQ" onclick="handleQQShare()">
       <i class="fa-brands fa-qq"></i>
     </a>
 
@@ -26,30 +36,116 @@
       data-bs-toggle="tooltip"
       data-bs-placement="top"
       title="{{ site.data.locales[include.lang].post.button.share_link.title }}"
-      data-title-succeed="{{ site.data.locales[include.lang].post.button.share_link.succeed }}"
+      onclick="handleCopyLink()"
     >
       <i class="fa-solid fa-link"></i>
     </button>
   </span>
 </div>
 
+<!-- Simple Toast Notification -->
+<div id="share-toast" class="share-toast">Links copied!</div>
+
 <style>
-.share-icons a {
-    color: var(--text-muted-color);
+/* Toast Styles */
+.share-toast {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 12px;
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s, bottom 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.share-toast.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 50px;
+}
+
+/* Wrapper to hold the icon and the dropdown */
+.wechat-share-wrapper {
+    position: relative;
+    display: inline-block;
     margin-right: 0.5rem;
+}
+
+/* The Icon */
+.wechat-share-wrapper .wechat-icon, .qq-icon {
+    color: var(--text-muted-color);
     font-size: 1.25rem;
     text-decoration: none;
+    margin-right: 0.5rem;
+    cursor: pointer;
 }
-.share-icons a:hover {
-    color: var(--link-color);
+
+.wechat-share-wrapper .wechat-icon:hover {
+    color: #07c160; /* WeChat Green */
 }
-/* WeChat Green on hover */
-.share-icons a[aria-label="Share to WeChat"]:hover {
-    color: #07c160;
+
+.qq-icon:hover {
+    color: #12b7f5; /* QQ Blue */
 }
-/* QQ Blue on hover */
-.share-icons a[aria-label="Share to QQ"]:hover {
-    color: #12b7f5;
+
+/* The Dropdown (QR Code) - PC Only logic largely */
+.wechat-qr-dropdown {
+    display: none;
+    position: absolute;
+    bottom: 100%; /* Show above the icon */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 10px;
+    border-radius: 8px;
+    z-index: 1000;
+    width: 140px;
+    text-align: center;
+    margin-bottom: 10px; /* Space between icon and popup */
+}
+
+/* Triangle/Arrow at the bottom of the popup */
+.wechat-qr-dropdown::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -6px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: #fff transparent transparent transparent;
+}
+
+/* Show on hover only on PC (handled by JS check, but CSS fallback is good) */
+@media (hover: hover) {
+    .wechat-share-wrapper:hover .wechat-qr-dropdown {
+        display: block;
+    }
+}
+
+.wechat-qr-dropdown .qr-title {
+    font-size: 12px;
+    color: #333;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.wechat-qr-dropdown img {
+    width: 120px;
+    height: 120px;
+    display: block;
+    margin: 0 auto;
 }
 
 .share-icons .btn.small {
@@ -61,3 +157,83 @@
     color: var(--link-color);
 }
 </style>
+
+<script>
+function showToast(message) {
+    var toast = document.getElementById("share-toast");
+    toast.innerText = message;
+    toast.className = "share-toast show";
+    setTimeout(function(){ 
+        toast.className = toast.className.replace("show", ""); 
+    }, 3000);
+}
+
+function copyToClipboard(text, successMsg) {
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(function() {
+            showToast(successMsg);
+        }, function(err) {
+            console.error('Could not copy text: ', err);
+            // Fallback for older browsers
+            var textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("Copy");
+            textArea.remove();
+            showToast(successMsg);
+        });
+    } else {
+        // Fallback
+        var textArea = document.createElement("textarea");
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("Copy");
+        textArea.remove();
+        showToast(successMsg);
+    }
+}
+
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+var shareUrl = document.getElementById('share-url').innerText;
+var shareTitle = document.getElementById('share-title').innerText;
+
+function handleWeChatShare() {
+    if (isMobile()) {
+        // Mobile: Copy link and attempt to open WeChat
+        copyToClipboard(shareUrl, "链接已复制，正在打开微信...");
+        setTimeout(function() {
+            window.location.href = "weixin://";
+        }, 1000);
+    } else {
+        // PC: Hover shows QR code, Click copies link
+        copyToClipboard(shareUrl, "链接已复制，请微信扫码或粘贴分享");
+    }
+}
+
+function handleQQShare() {
+    if (isMobile()) {
+        // Mobile: Deep Link to QQ
+        // mqqapi://share/to_fri?src_type=web&version=1&file_type=news&url=BASE64URL&title=BASE64TITLE...
+        // Note: QQ Scheme often takes parameters directly, but let's use the robust mqqapi logic
+        var targetUrl = "mqqapi://share/to_fri?src_type=web&version=1&file_type=news&url=" + btoa(shareUrl) + "&title=" + btoa(shareTitle);
+        // Fallback to simpler if base64 fails in some versions:
+        // var targetUrl = "mqqapi://share/to_fri?src_type=web&version=1&file_type=news&url=" + encodeURIComponent(shareUrl) + "&title=" + encodeURIComponent(shareTitle);
+        // Using encodeURIComponent is safer for general schemes
+         var targetUrl = "mqqapi://share/to_fri?src_type=web&version=1&file_type=news&url=" + encodeURIComponent(shareUrl) + "&title=" + encodeURIComponent(shareTitle);
+        
+        window.location.href = targetUrl;
+    } else {
+        // PC: Just copy link (User preference)
+        copyToClipboard(shareUrl, "链接已复制，请粘贴给QQ好友");
+    }
+}
+
+function handleCopyLink() {
+    copyToClipboard(shareUrl, "链接已复制成功！");
+}
+</script>
