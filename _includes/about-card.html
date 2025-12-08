@@ -1,20 +1,25 @@
 <style>
-/* 局部样式隔离，避免污染全局，但允许 font-awesome 穿透 */
+/* 局部样式隔离 */
 .about-card-wrapper {
-  /* 极深色背景环境，作为卡片的容器背景 */
+  /* 极深色背景环境 */
   background-color: var(--about-wrapper-bg, #0F0F11);
-  padding: 3rem 1rem;
+  padding: 3rem 2rem; /* More padding on sides */
   border-radius: 24px;
-  display: flex;
-  justify-content: center;
+  
+  /* Use Grid for stable layout */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
   align-items: center;
+  justify-items: center;
+  
   margin: 2rem 0;
 }
 
 .team-member-card {
   position: relative;
   width: 100%;
-  max-width: 400px;
+  max-width: 380px; /* Slightly reduced max-width to help fit two */
   padding: 40px 30px;
   display: flex;
   flex-direction: column;
@@ -26,16 +31,37 @@
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px); /* 磨砂质感 */
+  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 弹性动画 */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .team-member-card:hover {
-  transform: translateY(-15px);
-  background: rgba(255, 255, 255, 0.08); /* 背景变亮 */
+  transform: translateY(-10px); /* Slightly less movement */
+  background: rgba(255, 255, 255, 0.08);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Studio Card Specifics */
+.team-member-card.studio-card {
+    /* Make the studio card flexible but prefer a slightly smaller size visually via padding/content if needed, 
+       but let Grid handle the width consistency for alignment */
+    max-width: 340px; 
+    padding: 35px 25px;
+    cursor: pointer; /* Show pointer to indicate clickable */
+}
+
+/* Link Overlay - Makes the div clickable without breaking layout */
+.card-link-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    border-radius: 20px; /* Match card radius */
+    text-decoration: none;
 }
 
 .member-avatar-container {
@@ -44,59 +70,75 @@
 }
 
 .member-avatar {
-  width: 230px;
-  height: 230px;
+  width: 200px; /* Reduced from 230px to fit better */
+  height: 200px;
   object-fit: cover;
   border-radius: 50%;
   border: 5px solid rgba(255, 255, 255, 0.1);
   transition: all 0.5s ease;
 }
 
+/* Smaller avatar for studio */
+.studio-card .member-avatar {
+    width: 160px;
+    height: 160px;
+}
+
 .team-member-card:hover .member-avatar {
-  transform: scale(1.08) rotate(2deg);
-  border-color: #D4AF37; /* 金色高亮 */
+  transform: scale(1.05) rotate(2deg);
+  border-color: #D4AF37;
 }
 
 .member-info h3 {
   color: var(--about-text-title, #FFFFFF);
   font-weight: 800;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   margin: 0 0 0.5rem 0;
   letter-spacing: 0.5px;
+}
+
+.studio-card .member-info h3 {
+    font-size: 1.4rem;
 }
 
 .member-info p {
   color: var(--about-text-desc, #ADB5BD);
   font-family: 'Outfit', sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
-  font-size: 1rem;
-  margin: 0 0 2rem 0;
+  font-size: 0.95rem;
+  margin: 0 0 1.5rem 0;
   line-height: 1.5;
+}
+
+.studio-card .member-info p {
+    margin-bottom: 0;
 }
 
 .social-links {
   display: flex;
-  gap: 15px;
+  gap: 12px;
   justify-content: center;
   padding: 0;
   list-style: none;
+  z-index: 20; /* Ensure above overlay if needed, though card 1 has no overlay */
+  position: relative;
 }
 
 .social-btn {
-  width: 45px;
-  height: 45px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   background: var(--about-social-bg, rgba(255, 255, 255, 0.1));
   border: 1px solid var(--about-social-border, rgba(255,255,255,0.05));
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--about-social-color, white) !important; /* 强制覆盖链接颜色 */
+  color: var(--about-social-color, white) !important;
   text-decoration: none;
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .social-btn i {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   transition: color 0.3s;
 }
 
@@ -110,9 +152,16 @@
   color: var(--about-social-hover-color, #000000);
 }
 
+@media (max-width: 768px) {
+    .about-card-wrapper {
+        grid-template-columns: 1fr; /* Stack on mobile */
+        padding: 2rem 1rem;
+    }
+}
 </style>
 
 <div class="about-card-wrapper">
+  <!-- Existing Card -->
   <div class="team-member-card">
     <div class="member-avatar-container">
       <img src="https://s41.ax1x.com/2025/12/05/pZmPZPH.png" alt="捞鱼" class="member-avatar">
@@ -140,6 +189,19 @@
       <a href="https://www.douyin.com/user/MS4wLjABAAAAyuCPebezrJtaj66VWDIFJSOw6XZgneF8yE_mfJAs0ME?from_tab_name=main" class="social-btn" title="Douyin" target="_blank">
         <i class="fab fa-tiktok"></i>
       </a>
+    </div>
+  </div>
+
+  <!-- New Studio Card -->
+  <div class="team-member-card studio-card">
+    <a href="https://lyzbcy.github.io/corporate-website/" class="card-link-overlay" target="_blank" rel="noopener noreferrer" aria-label="捞鱼工作室"></a>
+    <div class="member-avatar-container">
+      <img src="https://s41.ax1x.com/2025/12/08/pZnsgKS.jpg" alt="捞鱼工作室" class="member-avatar">
+    </div>
+    
+    <div class="member-info">
+      <h3>捞鱼工作室</h3>
+      <p>捞鱼的项目展示</p>
     </div>
   </div>
 </div>
