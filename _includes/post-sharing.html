@@ -1,0 +1,63 @@
+<!-- Post sharing snippet -->
+
+<div class="share-wrapper d-flex align-items-center">
+  <span class="share-label text-muted">{{ site.data.locales[include.lang].post.share }}</span>
+  <span class="share-icons">
+    {% capture title %}{{ page.title }} - {{ site.title }}{% endcapture %}
+    {% assign title = title | uri_escape %}
+    {% assign url = page.url | absolute_url | url_encode %}
+
+    <!-- WeChat Share -->
+    <!-- Opens QR code in a new tab for scanning -->
+    <a href="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data={{ page.url | absolute_url }}" target="_blank" rel="noopener" aria-label="Share to WeChat" data-bs-toggle="tooltip" data-bs-placement="top" title="分享到微信">
+      <i class="fa-brands fa-weixin"></i>
+    </a>
+
+    <!-- QQ Share -->
+    <a href="http://connect.qq.com/widget/shareqq/index.html?url={{ url }}&title={{ title }}&source={{ site.title | uri_escape }}" target="_blank" rel="noopener" aria-label="Share to QQ" data-bs-toggle="tooltip" data-bs-placement="top" title="分享到QQ">
+      <i class="fa-brands fa-qq"></i>
+    </a>
+
+    <!-- Copy Link -->
+    <button
+      id="copy-link"
+      aria-label="Copy link"
+      class="btn small"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="{{ site.data.locales[include.lang].post.button.share_link.title }}"
+      data-title-succeed="{{ site.data.locales[include.lang].post.button.share_link.succeed }}"
+    >
+      <i class="fa-solid fa-link"></i>
+    </button>
+  </span>
+</div>
+
+<style>
+.share-icons a {
+    color: var(--text-muted-color);
+    margin-right: 0.5rem;
+    font-size: 1.25rem;
+    text-decoration: none;
+}
+.share-icons a:hover {
+    color: var(--link-color);
+}
+/* WeChat Green on hover */
+.share-icons a[aria-label="Share to WeChat"]:hover {
+    color: #07c160;
+}
+/* QQ Blue on hover */
+.share-icons a[aria-label="Share to QQ"]:hover {
+    color: #12b7f5;
+}
+
+.share-icons .btn.small {
+    padding: 0;
+    margin-right: 0.5rem;
+    color: var(--text-muted-color);
+}
+.share-icons .btn.small:hover {
+    color: var(--link-color);
+}
+</style>
