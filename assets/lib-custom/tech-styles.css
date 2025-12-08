@@ -57,10 +57,32 @@ html[data-mode="dark"] body {
     background: var(--bg-gradient) !important;
 }
 
+/* 强制暗黑模式下所有可能的容器元素背景 */
+html[data-mode="dark"],
+html[data-mode="dark"] #wrapper,
+html[data-mode="dark"] #main-wrapper,
+html[data-mode="dark"] .wrapper,
+html[data-mode="dark"] .main,
+html[data-mode="dark"] main {
+    background-color: #000000 !important;
+    background: var(--bg-gradient) !important;
+}
+
 /* 修复移动端背景固定可能导致的问题 */
 @media (max-width: 768px) {
     body {
         background-attachment: scroll !important;
+    }
+    
+    /* 移动端暗黑模式强制背景 */
+    html[data-mode="dark"],
+    html[data-mode="dark"] body,
+    html[data-mode="dark"] #wrapper,
+    html[data-mode="dark"] #main-wrapper,
+    html[data-mode="dark"] .wrapper {
+        background-color: #000000 !important;
+        background-image: none !important;
+        min-height: 100vh;
     }
 }
 
