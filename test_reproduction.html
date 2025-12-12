@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reproduction Test</title>
+<style>
+  /* 1. 仪表盘 & 基础卡片 */
+  .dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin: 2rem 0; }
+  .stat-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 1.5rem; text-align: center; backdrop-filter: blur(12px); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); transition: all 0.3s ease; }
+  /* ... (Standard styles from file) ... */
+  .summary-modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; right: 0; bottom: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+  .summary-modal.active { display: flex !important; align-items: center; justify-content: center; padding: 20px; }
+  .note-modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; right: 0; bottom: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); }
+  .note-modal.active { display: flex !important; align-items: center; justify-content: center; }
+  .image-lightbox { display: none; position: fixed; z-index: 99999; left: 0; top: 0; right: 0; bottom: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(10px); }
+  .image-lightbox.active { display: flex !important; align-items: center; justify-content: center; padding: 20px; }
+  .lightbox-content { position: relative; max-width: 90%; max-height: 90%; }
+  .lightbox-image { max-width: 100%; max-height: 85vh; border-radius: 8px; display: block; }
+  .lightbox-close { position: absolute; top: -40px; right: 0; color: white; cursor: pointer; }
+  
+  [onclick*="openLightbox"] {
+    display: inline-block;
+    position: relative;
+    border: 1px solid red; /* Debug border */
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<h1>Interaction Test</h1>
+
+<!-- 1. Summary Trigger -->
+<button class="summary-trigger" onclick="window.openSummaryBoard()">
+  📋 心得总结收集 (Click Me)
+</button>
+
+<!-- 2. Lightbox Trigger -->
+<div style="margin-top: 20px;">
+  <h3>Diet Images</h3>
+  <span onclick="window.openLightbox('https://via.placeholder.com/300', 'Test Image', event)" style="cursor:pointer; font-size: 2rem;">
+    🍱 (Click Me for Lightbox)
+  </span>
+</div>
+
+<!-- 3. Note Trigger -->
+<div style="margin-top: 20px;">
+    <h3>Note Trigger</h3>
+    <div class="note-emoji" onclick="window.openNote('note-1212')" title="点击查看碎碎念" style="cursor:pointer; font-size: 2rem;">
+        💭💪 (Click Me for Note)
+    </div>
+</div>
+
+<!-- Modals -->
+<div id="summary-modal" class="summary-modal" onclick="window.closeSummaryOnBackdrop(event)">
+  <div class="summary-board" onclick="event.stopPropagation()">
+    <button class="summary-close" onclick="window.closeSummaryBoard()">✕</button>
+    <div class="summary-board-header">Summary Board</div>
+    <div id="sticky-notes-container"></div>
+  </div>
+</div>
+
+<div id="note-1212" class="note-modal" onclick="window.closeNoteOnBackdrop(event, 'note-1212')">
+  <div class="note-paper" onclick="event.stopPropagation()">
+    <button class="note-close" onclick="window.closeNote('note-1212')">✕</button>
+    <div class="note-header">📝 12月12日 碎碎念</div>
+    <div class="note-content">Hello Note 1212</div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script>
+console.log("Script starting...");
+
+// Mock Data
+const notesData = {
+  '12月12日': 'Test content for 12/12'
+};
+
+function extractSummaries() {
+    return [{date: '12月12日', content: 'Summary content'}];
+}
+
+function generateStickyNotes() {
+  const container = document.getElementById('sticky-notes-container');
+  container.innerHTML = '<div>Sticky Note Here</div>';
+}
+
+// Global Functions
+window.openNote = function(noteId) {
+  console.log("openNote called for " + noteId);
+  const modal = document.getElementById(noteId);
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  } else {
+    console.error("Note modal not found: " + noteId);
+  }
+}
+
+window.closeNote = function(noteId) {
+  const modal = document.getElementById(noteId);
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+}
+
+window.closeNoteOnBackdrop = function(event, noteId) {
+  if (event.target.classList.contains('note-modal')) {
+    window.closeNote(noteId);
+  }
+}
+
+window.openSummaryBoard = function() {
+  console.log("openSummaryBoard called");
+  generateStickyNotes();
+  const modal = document.getElementById('summary-modal');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+window.closeSummaryBoard = function() {
+  const modal = document.getElementById('summary-modal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+}
+
+window.closeSummaryOnBackdrop = function(event) {
+  if (event.target.classList.contains('summary-modal')) {
+    window.closeSummaryBoard();
+  }
+}
+
+window.openLightbox = function(imageSrc, imageTitle, event) {
+  console.log("openLightbox called");
+  if (event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+  
+  let lightbox = document.getElementById('image-lightbox');
+  if (!lightbox) {
+    lightbox = document.createElement('div');
+    lightbox.id = 'image-lightbox';
+    lightbox.className = 'image-lightbox';
+    lightbox.innerHTML = `
+      <div class="lightbox-content">
+        <button class="lightbox-close" onclick="window.closeLightbox()">✕</button>
+        <img loading="lazy" class="lightbox-image" src="" alt="">
+        <div class="lightbox-title"></div>
+      </div>
+    `;
+    document.body.appendChild(lightbox);
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === lightbox) {
+        window.closeLightbox();
+      }
+    });
+  }
+  
+  const img = lightbox.querySelector('.lightbox-image');
+  const title = lightbox.querySelector('.lightbox-title');
+  img.src = imageSrc;
+  title.textContent = imageTitle || '';
+  lightbox.classList.add('active');
+}
+
+window.closeLightbox = function() {
+  const lightbox = document.getElementById('image-lightbox');
+  if (lightbox) {
+    lightbox.classList.remove('active');
+  }
+}
+
+console.log("Script loaded and functions attached to window.");
+</script>
+</body>
+</html>
