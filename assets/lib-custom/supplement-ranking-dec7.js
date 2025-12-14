@@ -37,20 +37,40 @@
       costPerf: '1元 ≈ 14g 蛋白质', // 性价比指标
       note: '15元/30个 (约0.5元/个)'
     },
-    '蛋白粉': {
-      name: '蛋白粉 (Protein Powder)',
+    '酵母蛋白粉': {
+      name: '酵母蛋白粉 (Yeast Protein)',
+      tier: '顶级',
+      tierLabel: '🔴 顶级 (Supreme)',
+      tierColor: '#FF6B6B',
+      image: 'https://s41.ax1x.com/2025/12/07/pZne1fK.jpg',
+      description: '米当卡酵母蛋白粉这一档次。大概一个月70元，1元能买9g蛋白质。方便又好喝，缺点是嘌呤含量较高，吸收速度不像乳清蛋白粉那么快，但也挺快的。',
+      pros: [
+        '超高性价比 (1元能买9g蛋白质)',
+        '极致方便，比鸡蛋方便太多',
+        '口味不错，好喝'
+      ],
+      cons: [
+        '嘌呤含量较高，痛风患者慎用',
+        '吸收速度不如乳清蛋白粉快'
+      ],
+      rating: 5,
+      costPerf: '1元 ≈ 9g 蛋白质',
+      note: '约70元/月 (约2.3元/天)'
+    },
+    '乳清蛋白粉': {
+      name: '乳清蛋白粉 (Whey Protein)',
       tier: '人上人',
       tierLabel: '🟡 人上人 (Excellent)',
       tierColor: '#FFD93D',
-      image: 'https://s41.ax1x.com/2025/12/07/pZne1fK.jpg', // User provided image
-      description: '性价比其实中规中矩，可以作为健身食物的性价比参考。最大的优势是方便，口味也不错，好吸收。品牌参考：赛霸、北欧海盗、诺特兰德红桶这一层次。',
+      image: 'https://s41.ax1x.com/2025/12/07/pZne1fK.jpg',
+      description: '性价比其实中规中矩，可以作为健身食物的性价比参考。最大的优势是方便，口味也不错，吸收快。品牌参考：赛霸、北欧海盗、诺特兰德红桶这一层次。',
       pros: [
         '极致方便',
-        '口味不错，好吸收',
+        '口味不错，吸收快',
         '作为参考标杆'
       ],
       cons: [
-        '性价比不如鸡蛋 (1元 ≈ 4.5g 蛋白质)'
+        '性价比不如鸡蛋和酵母蛋白粉 (1元 ≈ 4.5g 蛋白质)'
       ],
       rating: 4,
       costPerf: '1元 ≈ 4.5g 蛋白质',
@@ -60,6 +80,7 @@
 
   // 新版层级颜色映射
   const tierColors = {
+    '顶级': { gradient: 'linear-gradient(135deg, #FF6B6B 0%, #EE5A6F 100%)', textColor: 'white', shadow: 'rgba(255, 107, 107, 0.3)' },
     '夯': { gradient: 'linear-gradient(135deg, #FF6B6B 0%, #EE5A6F 100%)', textColor: 'white', shadow: 'rgba(255, 107, 107, 0.3)' },
     '神': { gradient: 'linear-gradient(135deg, #FFA07A 0%, #FF8C69 100%)', textColor: 'white', shadow: 'rgba(255, 160, 122, 0.3)' },
     '人上人': { gradient: 'linear-gradient(135deg, #FFD93D 0%, #FFC947 100%)', textColor: 'white', shadow: 'rgba(255, 217, 61, 0.3)' },
