@@ -322,3 +322,32 @@
   position: relative;
   z-index: 1;
 }
+
+/* 已解决的习惯卡片 */
+.habit-card.resolved {
+  background: #f0f0f0;
+  border-left-color: #ccc !important;
+  color: #999;
+}
+
+.habit-card.resolved .habit-header {
+  opacity: 0.7;
+}
+
+.habit-card.resolved .habit-title {
+  color: #777;
+  text-decoration: line-through;
+}
+
+.habit-card.resolved .habit-icon {
+  background: #ddd !important;
+  filter: grayscale(100%);
+}
+
+.habit-card.resolved .habit-content {
+  color: #999;
+}
+
+.habit-card.resolved .solution-tag {
+  background: #ccc;
+}
