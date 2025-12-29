@@ -245,6 +245,14 @@
       if (postData) {
         cardToPostDataMap.set(card, postData);
         addUpdateTimeDisplay(card, postData);
+        
+        // 标记加密文章
+        if (postData.encrypted === true) {
+          const postPreview = card.querySelector('.post-preview');
+          if (postPreview) {
+            postPreview.classList.add('encrypted-post');
+          }
+        }
       }
     }
 
