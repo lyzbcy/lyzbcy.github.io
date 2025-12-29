@@ -1,0 +1,102 @@
+/* ============================================
+   GitHub-style Markdown Alerts
+   支持 [!NOTE] [!TIP] [!IMPORTANT] [!WARNING] [!CAUTION]
+   ============================================ */
+
+/* 基础样式 */
+blockquote:has(p:first-child > strong:first-child) {
+  border-left-width: 4px;
+  border-left-style: solid;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  background: transparent;
+}
+
+/* NOTE - 蓝色备注 */
+blockquote:has(p:first-child:contains("[!NOTE]")),
+blockquote p:first-child:has(text:contains("[!NOTE]")) {
+  border-left-color: #0969da;
+  background: rgba(9, 105, 218, 0.08);
+}
+
+/* 使用更可靠的方式：通过 JavaScript 添加类名后的样式 */
+blockquote.alert-note {
+  border-left-color: #0969da !important;
+  background: rgba(9, 105, 218, 0.08) !important;
+}
+
+blockquote.alert-note::before {
+  content: '📘 ';
+}
+
+blockquote.alert-tip {
+  border-left-color: #1a7f37 !important;
+  background: rgba(26, 127, 55, 0.08) !important;
+}
+
+blockquote.alert-tip::before {
+  content: '💡 ';
+}
+
+blockquote.alert-important {
+  border-left-color: #8250df !important;
+  background: rgba(130, 80, 223, 0.08) !important;
+}
+
+blockquote.alert-important::before {
+  content: '🟣 ';
+}
+
+blockquote.alert-warning {
+  border-left-color: #9a6700 !important;
+  background: rgba(154, 103, 0, 0.08) !important;
+}
+
+blockquote.alert-warning::before {
+  content: '⚠️ ';
+}
+
+blockquote.alert-caution {
+  border-left-color: #cf222e !important;
+  background: rgba(207, 34, 46, 0.08) !important;
+}
+
+blockquote.alert-caution::before {
+  content: '🔴 ';
+}
+
+/* 隐藏原始的 [!NOTE] 等标记文字 */
+blockquote.alert-note .alert-title,
+blockquote.alert-tip .alert-title,
+blockquote.alert-important .alert-title,
+blockquote.alert-warning .alert-title,
+blockquote.alert-caution .alert-title {
+  display: none;
+}
+
+/* 深色模式适配 */
+html[data-mode="dark"] blockquote.alert-note {
+  background: rgba(56, 139, 253, 0.15) !important;
+  border-left-color: #388bfd !important;
+}
+
+html[data-mode="dark"] blockquote.alert-tip {
+  background: rgba(46, 160, 67, 0.15) !important;
+  border-left-color: #2ea043 !important;
+}
+
+html[data-mode="dark"] blockquote.alert-important {
+  background: rgba(163, 113, 247, 0.15) !important;
+  border-left-color: #a371f7 !important;
+}
+
+html[data-mode="dark"] blockquote.alert-warning {
+  background: rgba(187, 128, 9, 0.15) !important;
+  border-left-color: #bb8009 !important;
+}
+
+html[data-mode="dark"] blockquote.alert-caution {
+  background: rgba(248, 81, 73, 0.15) !important;
+  border-left-color: #f85149 !important;
+}
