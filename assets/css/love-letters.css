@@ -1,0 +1,648 @@
+/* ============================================
+   Love Letters - 粉色百封情书样式
+   ============================================ */
+
+/* 容器与头部 */
+.love-letters-header {
+  text-align: center;
+  margin: 2rem 0 3rem;
+  position: relative;
+}
+
+.love-letters-header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #ff69b4;
+  background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  position: relative;
+}
+
+.love-letters-header p {
+  color: #ffb6c1;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+}
+
+/* 飘落的爱心动画 */
+@keyframes floatingHeart {
+  0% { transform: translateY(0) rotate(-15deg); opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { transform: translateY(-80px) rotate(15deg) scale(1.2); opacity: 0; }
+}
+
+.floating-heart {
+  position: absolute;
+  color: #ffb6c1;
+  font-size: 1.2rem;
+  animation: floatingHeart 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* 信封网格系统 */
+.love-letters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 30px;
+  padding: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* -------------------------------------
+   信封卡片样式
+   ------------------------------------- */
+.envelope-card {
+  position: relative;
+  height: 180px;
+  background: #fff0f5;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(255, 182, 193, 0.2), 0 0 0 1px rgba(255, 182, 193, 0.4);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.envelope-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 30px rgba(255, 105, 180, 0.25), 0 0 0 2px rgba(255, 105, 180, 0.5);
+  background: #fff9fb;
+}
+
+/* 信封折页效果 (上部三角形) */
+.envelope-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(to bottom, rgba(255,182,193,0.3) 0%, rgba(255,182,193,0) 100%);
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+  transition: all 0.4s ease;
+  z-index: 1;
+}
+
+.envelope-card:hover::before {
+  transform: scaleY(0.9) translateY(-5%);
+}
+
+/* 信封封口贴纸 (小爱心) */
+.envelope-seal {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  background: #ff69b4;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 14px;
+  box-shadow: 0 3px 10px rgba(255, 105, 180, 0.4);
+  z-index: 2;
+  transition: all 0.4s ease;
+}
+
+.envelope-card:hover .envelope-seal {
+  transform: translate(-50%, -60%) scale(1.1);
+  box-shadow: 0 5px 15px rgba(255, 20, 147, 0.5);
+}
+
+/* 卡片文字内容 */
+.envelope-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  z-index: 3;
+  transition: transform 0.3s ease;
+}
+
+.envelope-card:hover .envelope-content {
+  transform: translateY(-5px);
+}
+
+.envelope-title {
+  color: #ff1493;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.envelope-date {
+  color: #ff69b4;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* 有音频提示角标 */
+.has-audio-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 20, 147, 0.1);
+  color: #ff1493;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  z-index: 4;
+}
+
+/* 新信件入场动画 */
+@keyframes letterFadeIn {
+  from { opacity: 0; transform: translateY(30px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.envelope-card {
+  animation: letterFadeIn 0.6s ease backwards;
+}
+
+/* -------------------------------------
+   详情弹窗 Modal
+   ------------------------------------- */
+.letter-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 240, 245, 0.85); /* 半透明粉白 */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 99990;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
+}
+
+.letter-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.letter-modal-container {
+  background: #fff;
+  width: 90%;
+  max-width: 600px;
+  max-height: 85vh;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px rgba(255, 105, 180, 0.15), 0 0 0 1px rgba(255, 182, 193, 0.3);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transform: scale(0.9) translateY(20px);
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+}
+
+/* 信纸纹理背景 */
+.letter-modal-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: repeating-linear-gradient(transparent, transparent 31px, rgba(255, 182, 193, 0.2) 31px, rgba(255, 182, 193, 0.2) 32px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.letter-modal-overlay.active .letter-modal-container {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+/* 关闭按钮 */
+.modal-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #fff0f5;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #ff69b4;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.modal-close-btn:hover {
+  background: #ffb6c1;
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+.modal-header {
+  padding: 2.5rem 2rem 1.5rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.modal-title {
+  color: #ff1493;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.modal-date {
+  color: #ff69b4;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.modal-content-scroll {
+  padding: 0 2rem 2rem;
+  overflow-y: auto;
+  flex-grow: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.letter-text {
+  color: #444;
+  line-height: 1.8;
+  font-size: 1.05rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.letter-text p {
+  margin: 0.2em 0;
+}
+
+/* 自定义滚动条 */
+.modal-content-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.modal-content-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 182, 193, 0.1); 
+  border-radius: 3px;
+}
+.modal-content-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 182, 193, 0.6); 
+  border-radius: 3px;
+}
+
+/* -------------------------------------
+   音频播放器面板 (卡片底部)
+   ------------------------------------- */
+.audio-player-wrapper {
+  margin-top: 2rem;
+  padding: 1.2rem;
+  background: linear-gradient(135deg, #fff5f8 0%, #fff 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 182, 193, 0.4);
+  box-shadow: 0 8px 20px rgba(255, 182, 193, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.play-pause-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+  border: none;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(255, 20, 147, 0.3);
+  transition: all 0.3s ease;
+  font-size: 18px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.play-pause-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(255, 20, 147, 0.4);
+}
+
+.play-pause-btn:active {
+  transform: scale(0.95);
+}
+
+/* 播放时的唱片旋转动画 */
+.play-pause-btn.playing {
+  animation: discSpin 4s linear infinite;
+}
+
+@keyframes discSpin {
+  100% { transform: rotate(360deg); }
+}
+
+.audio-controls {
+  flex-grow: 1;
+}
+
+.progress-container {
+  height: 8px;
+  background: #ffe4ec;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #ffb6c1 0%, #ff1493 100%);
+  border-radius: 4px;
+  width: 0%;
+  transition: width 0.1s linear;
+  position: relative;
+}
+
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(0,0,0,0.2);
+}
+
+.time-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #ff69b4;
+  font-family: monospace;
+}
+
+/* 为了兼容黑暗模式 */
+html[data-mode="dark"] .love-letters-header h1 {
+  background: linear-gradient(135deg, #ff8da1 0%, #ff69b4 100%);
+  -webkit-background-clip: text;
+}
+
+html[data-mode="dark"] .envelope-card {
+  background: #2a1f26;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 105, 180, 0.2);
+}
+
+html[data-mode="dark"] .envelope-card:hover {
+  background: #33242e;
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(255, 105, 180, 0.4);
+}
+
+html[data-mode="dark"] .envelope-card::before {
+  background: linear-gradient(to bottom, rgba(255,105,180,0.15) 0%, rgba(255,105,180,0) 100%);
+}
+
+html[data-mode="dark"] .envelope-title {
+  color: #ff8da1;
+}
+
+html[data-mode="dark"] .letter-modal-overlay {
+  background: rgba(30, 20, 25, 0.9);
+}
+
+html[data-mode="dark"] .letter-modal-container {
+  background: #2a1f26;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 105, 180, 0.2);
+}
+
+html[data-mode="dark"] .letter-modal-container::before {
+  background-image: repeating-linear-gradient(transparent, transparent 31px, rgba(255, 105, 180, 0.1) 31px, rgba(255, 105, 180, 0.1) 32px);
+}
+
+html[data-mode="dark"] .modal-close-btn {
+  background: #3d2a35;
+}
+
+html[data-mode="dark"] .modal-close-btn:hover {
+  background: #ff69b4;
+}
+
+html[data-mode="dark"] .letter-text {
+  color: #ddd;
+}
+
+html[data-mode="dark"] .audio-player-wrapper {
+  background: linear-gradient(135deg, #33242e 0%, #2a1f26 100%);
+  border-color: rgba(255, 105, 180, 0.2);
+}
+
+html[data-mode="dark"] .progress-container {
+  background: #4a3340;
+}
+
+/* -------------------------------------
+   信件照片样式（弹窗内）
+   ------------------------------------- */
+.letter-photo {
+  margin: 0 0 1rem;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: zoom-in;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(255, 182, 193, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.letter-photo:hover {
+  transform: scale(1.01);
+}
+
+.letter-photo::after {
+  content: '🔍 点击查看大图';
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(255, 105, 180, 0.75);
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 3px 10px;
+  border-radius: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.letter-photo:hover::after {
+  opacity: 1;
+}
+
+.letter-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+/* -------------------------------------
+   移动端 & 微信浏览器兼容
+   ------------------------------------- */
+
+/* 微信浏览器不支持 backdrop-filter，提供 fallback */
+@supports not ((-webkit-backdrop-filter: blur(8px)) or (backdrop-filter: blur(8px))) {
+  .letter-modal-overlay {
+    background: rgba(255, 240, 245, 0.95);
+  }
+}
+
+/* 手机端适配 */
+@media (max-width: 768px) {
+  .love-letters-header {
+    margin: 1rem 0 1.5rem;
+  }
+
+  .love-letters-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .love-letters-header p {
+    font-size: 0.9rem;
+  }
+
+  .love-letters-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 16px;
+    padding: 0.5rem;
+  }
+
+  .envelope-card {
+    height: 140px;
+  }
+
+  .envelope-title {
+    font-size: 0.9rem;
+  }
+
+  .envelope-date {
+    font-size: 0.75rem;
+  }
+
+  .envelope-seal {
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
+  }
+
+  /* 弹窗适配手机 */
+  .letter-modal-container {
+    width: 95%;
+    max-height: 90vh; /* 用 90vh 而非 100vh，避免微信底部工具栏遮挡 */
+    max-height: 90dvh; /* 动态视口高度，现代浏览器 */
+    border-radius: 16px;
+  }
+
+  .modal-header {
+    padding: 1.5rem 1.2rem 1rem;
+  }
+
+  .modal-title {
+    font-size: 1.3rem;
+  }
+
+  .modal-content-scroll {
+    padding: 0 1.2rem 1.5rem;
+  }
+
+  .letter-text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  /* 音频播放器手机端 */
+  .audio-player-wrapper {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    padding: 0.8rem;
+    gap: 10px;
+  }
+
+  .play-pause-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 16px;
+  }
+
+  .modal-close-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    top: 10px;
+    right: 10px;
+  }
+
+  /* 手机不显示 hover 提示 */
+  .letter-photo::after {
+    display: none;
+  }
+
+  /* 手机上卡片不需要 hover 效果，用 active 替代 */
+  .envelope-card:hover {
+    transform: none;
+    box-shadow: 0 10px 20px rgba(255, 182, 193, 0.2), 0 0 0 1px rgba(255, 182, 193, 0.4);
+  }
+
+  .envelope-card:active {
+    transform: scale(0.97);
+    transition: transform 0.1s ease;
+  }
+}
+
+/* 超小屏幕（iPhone SE 等） */
+@media (max-width: 375px) {
+  .love-letters-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .envelope-card {
+    height: 120px;
+  }
+
+  .modal-title {
+    font-size: 1.1rem;
+  }
+
+  .letter-text {
+    font-size: 0.9rem;
+  }
+}
