@@ -1,2 +1,3039 @@
-
-
+- date: '2026-03-03'
+  event: '数学二: 高数'
+  type: homework
+- date: '2026-03-03'
+  event: '408: 数据结构'
+  type: homework
+- date: '2026-03-03'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-03-03'
+  event: 'LC: 链表/改简历'
+  type: activity
+- date: '2026-03-03'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-04'
+  event: '数学二: 线代'
+  type: homework
+- date: '2026-03-04'
+  event: '408: 数据结构'
+  type: homework
+- date: '2026-03-04'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-03-04'
+  event: 'LC: 栈队列/探索副业'
+  type: activity
+- date: '2026-03-04'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-05'
+  event: '数学二: 高数'
+  type: homework
+- date: '2026-03-05'
+  event: '408: 数据结构'
+  type: homework
+- date: '2026-03-05'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-03-05'
+  event: 'LC: 哈希/保研材料'
+  type: activity
+- date: '2026-03-05'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-06'
+  event: '数学二: 高数'
+  type: homework
+- date: '2026-03-06'
+  event: '408: 数据结构'
+  type: homework
+- date: '2026-03-06'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-03-06'
+  event: 'LC: 二分/实习投递'
+  type: activity
+- date: '2026-03-06'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-07'
+  event: '数学二: 综合练习'
+  type: homework
+- date: '2026-03-07'
+  event: '408: 复习错题'
+  type: homework
+- date: '2026-03-07'
+  event: '英语二: 真题阅读'
+  type: homework
+- date: '2026-03-07'
+  event: 'LC: 2题/副业开发'
+  type: activity
+- date: '2026-03-07'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-08'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-03-09'
+  event: '数学二: 高数'
+  type: homework
+- date: '2026-03-09'
+  event: '408: 数据结构'
+  type: homework
+- date: '2026-03-09'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-03-09'
+  event: 'LC: 数组/实习投递'
+  type: activity
+- date: '2026-03-09'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-10'
+  event: '数学二: 高数'
+  type: homework
+- date: '2026-03-10'
+  event: '408: 数据结构'
+  type: homework
+- date: '2026-03-10'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-03-10'
+  event: 'LC: 链表/改简历'
+  type: activity
+- date: '2026-03-10'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-11'
+  event: '数学二: 线代'
+  type: homework
+- date: '2026-03-11'
+  event: '408: 数据结构'
+  type: homework
+- date: '2026-03-11'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-03-11'
+  event: 'LC: 栈队列/探索副业'
+  type: activity
+- date: '2026-03-11'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-12'
+  event: '数学二: 高数'
+  type: homework
+- date: '2026-03-12'
+  event: '408: 数据结构'
+  type: homework
+- date: '2026-03-12'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-03-12'
+  event: 'LC: 哈希/保研材料'
+  type: activity
+- date: '2026-03-12'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-13'
+  event: '数学二: 高数'
+  type: homework
+- date: '2026-03-13'
+  event: '408: 数据结构'
+  type: homework
+- date: '2026-03-13'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-03-13'
+  event: 'LC: 二分/实习投递'
+  type: activity
+- date: '2026-03-13'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-14'
+  event: '数学二: 综合练习'
+  type: homework
+- date: '2026-03-14'
+  event: '408: 复习错题'
+  type: homework
+- date: '2026-03-14'
+  event: '英语二: 真题阅读'
+  type: homework
+- date: '2026-03-14'
+  event: 'LC: 2题/副业开发'
+  type: activity
+- date: '2026-03-14'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-15'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-03-16'
+  event: '数学二: 高数'
+  type: homework
+- date: '2026-03-16'
+  event: '408: 数据结构'
+  type: homework
+- date: '2026-03-16'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-03-16'
+  event: 'LC: 数组/实习投递'
+  type: activity
+- date: '2026-03-16'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-17'
+  event: '数学二: 高数'
+  type: homework
+- date: '2026-03-17'
+  event: '408: 数据结构'
+  type: homework
+- date: '2026-03-17'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-03-17'
+  event: 'LC: 链表/改简历'
+  type: activity
+- date: '2026-03-17'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-18'
+  event: '数学二: 线代'
+  type: homework
+- date: '2026-03-18'
+  event: '408: 数据结构'
+  type: homework
+- date: '2026-03-18'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-03-18'
+  event: 'LC: 栈队列/探索副业'
+  type: activity
+- date: '2026-03-18'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-19'
+  event: '数学二: 高数'
+  type: homework
+- date: '2026-03-19'
+  event: '408: 数据结构'
+  type: homework
+- date: '2026-03-19'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-03-19'
+  event: 'LC: 哈希/保研材料'
+  type: activity
+- date: '2026-03-19'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-20'
+  event: '数学二: 高数'
+  type: homework
+- date: '2026-03-20'
+  event: '408: 数据结构'
+  type: homework
+- date: '2026-03-20'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-03-20'
+  event: 'LC: 二分/实习投递'
+  type: activity
+- date: '2026-03-20'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-21'
+  event: '数学二: 综合练习'
+  type: homework
+- date: '2026-03-21'
+  event: '408: 复习错题'
+  type: homework
+- date: '2026-03-21'
+  event: '英语二: 真题阅读'
+  type: homework
+- date: '2026-03-21'
+  event: 'LC: 2题/副业开发'
+  type: activity
+- date: '2026-03-21'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-22'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-03-23'
+  event: '数学二: 高数'
+  type: homework
+- date: '2026-03-23'
+  event: '408: 数据结构'
+  type: homework
+- date: '2026-03-23'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-03-23'
+  event: 'LC: 数组/实习投递'
+  type: activity
+- date: '2026-03-23'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-24'
+  event: '数学二: 高数'
+  type: homework
+- date: '2026-03-24'
+  event: '408: 数据结构'
+  type: homework
+- date: '2026-03-24'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-03-24'
+  event: 'LC: 链表/改简历'
+  type: activity
+- date: '2026-03-24'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-25'
+  event: '数学二: 线代'
+  type: homework
+- date: '2026-03-25'
+  event: '408: 数据结构'
+  type: homework
+- date: '2026-03-25'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-03-25'
+  event: 'LC: 栈队列/探索副业'
+  type: activity
+- date: '2026-03-25'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-26'
+  event: '数学二: 高数'
+  type: homework
+- date: '2026-03-26'
+  event: '408: 数据结构'
+  type: homework
+- date: '2026-03-26'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-03-26'
+  event: 'LC: 哈希/保研材料'
+  type: activity
+- date: '2026-03-26'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-27'
+  event: '数学二: 高数'
+  type: homework
+- date: '2026-03-27'
+  event: '408: 数据结构'
+  type: homework
+- date: '2026-03-27'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-03-27'
+  event: 'LC: 二分/实习投递'
+  type: activity
+- date: '2026-03-27'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-28'
+  event: '数学二: 综合练习'
+  type: homework
+- date: '2026-03-28'
+  event: '408: 复习错题'
+  type: homework
+- date: '2026-03-28'
+  event: '英语二: 真题阅读'
+  type: homework
+- date: '2026-03-28'
+  event: 'LC: 2题/副业开发'
+  type: activity
+- date: '2026-03-28'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-29'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-03-30'
+  event: '数学二: 高数'
+  type: homework
+- date: '2026-03-30'
+  event: '408: 数据结构'
+  type: homework
+- date: '2026-03-30'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-03-30'
+  event: 'LC: 数组/实习投递'
+  type: activity
+- date: '2026-03-30'
+  event: '政治: 马原'
+  type: default
+- date: '2026-03-31'
+  event: '数学二: 高数'
+  type: homework
+- date: '2026-03-31'
+  event: '408: 数据结构'
+  type: homework
+- date: '2026-03-31'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-03-31'
+  event: 'LC: 链表/改简历'
+  type: activity
+- date: '2026-03-31'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-01'
+  event: '数学二: 高数收尾/线代'
+  type: homework
+- date: '2026-04-01'
+  event: '408: 计组'
+  type: homework
+- date: '2026-04-01'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-04-01'
+  event: 'LC: 栈队列/探索副业'
+  type: activity
+- date: '2026-04-01'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-02'
+  event: '数学二: 高数收尾/线代'
+  type: homework
+- date: '2026-04-02'
+  event: '408: 计组'
+  type: homework
+- date: '2026-04-02'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-04-02'
+  event: 'LC: 哈希/保研材料'
+  type: activity
+- date: '2026-04-02'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-03'
+  event: '数学二: 高数收尾/线代'
+  type: homework
+- date: '2026-04-03'
+  event: '408: 计组'
+  type: homework
+- date: '2026-04-03'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-04-03'
+  event: 'LC: 二分/实习投递'
+  type: activity
+- date: '2026-04-03'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-04'
+  event: '数学二: 综合练习'
+  type: homework
+- date: '2026-04-04'
+  event: '408: 复习错题'
+  type: homework
+- date: '2026-04-04'
+  event: '英语二: 真题阅读'
+  type: homework
+- date: '2026-04-04'
+  event: 'LC: 2题/副业开发'
+  type: activity
+- date: '2026-04-04'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-05'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-04-06'
+  event: '数学二: 高数收尾/线代'
+  type: homework
+- date: '2026-04-06'
+  event: '408: 计组'
+  type: homework
+- date: '2026-04-06'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-04-06'
+  event: 'LC: 数组/实习投递'
+  type: activity
+- date: '2026-04-06'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-07'
+  event: '数学二: 高数收尾/线代'
+  type: homework
+- date: '2026-04-07'
+  event: '408: 计组'
+  type: homework
+- date: '2026-04-07'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-04-07'
+  event: 'LC: 链表/改简历'
+  type: activity
+- date: '2026-04-07'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-08'
+  event: '数学二: 高数收尾/线代'
+  type: homework
+- date: '2026-04-08'
+  event: '408: 计组'
+  type: homework
+- date: '2026-04-08'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-04-08'
+  event: 'LC: 栈队列/探索副业'
+  type: activity
+- date: '2026-04-08'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-09'
+  event: '数学二: 高数收尾/线代'
+  type: homework
+- date: '2026-04-09'
+  event: '408: 计组'
+  type: homework
+- date: '2026-04-09'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-04-09'
+  event: 'LC: 哈希/保研材料'
+  type: activity
+- date: '2026-04-09'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-10'
+  event: '数学二: 高数收尾/线代'
+  type: homework
+- date: '2026-04-10'
+  event: '408: 计组'
+  type: homework
+- date: '2026-04-10'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-04-10'
+  event: 'LC: 二分/实习投递'
+  type: activity
+- date: '2026-04-10'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-11'
+  event: '数学二: 综合练习'
+  type: homework
+- date: '2026-04-11'
+  event: '408: 复习错题'
+  type: homework
+- date: '2026-04-11'
+  event: '英语二: 真题阅读'
+  type: homework
+- date: '2026-04-11'
+  event: 'LC: 2题/副业开发'
+  type: activity
+- date: '2026-04-11'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-12'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-04-13'
+  event: '数学二: 高数收尾/线代'
+  type: homework
+- date: '2026-04-13'
+  event: '408: 计组'
+  type: homework
+- date: '2026-04-13'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-04-13'
+  event: 'LC: 数组/实习投递'
+  type: activity
+- date: '2026-04-13'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-14'
+  event: '数学二: 高数收尾/线代'
+  type: homework
+- date: '2026-04-14'
+  event: '408: 计组'
+  type: homework
+- date: '2026-04-14'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-04-14'
+  event: 'LC: 链表/改简历'
+  type: activity
+- date: '2026-04-14'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-15'
+  event: '数学二: 高数收尾/线代'
+  type: homework
+- date: '2026-04-15'
+  event: '408: 计组'
+  type: homework
+- date: '2026-04-15'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-04-15'
+  event: 'LC: 栈队列/探索副业'
+  type: activity
+- date: '2026-04-15'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-16'
+  event: '数学二: 高数收尾/线代'
+  type: homework
+- date: '2026-04-16'
+  event: '408: 计组'
+  type: homework
+- date: '2026-04-16'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-04-16'
+  event: 'LC: 哈希/保研材料'
+  type: activity
+- date: '2026-04-16'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-17'
+  event: '数学二: 高数收尾/线代'
+  type: homework
+- date: '2026-04-17'
+  event: '408: 计组'
+  type: homework
+- date: '2026-04-17'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-04-17'
+  event: 'LC: 二分/实习投递'
+  type: activity
+- date: '2026-04-17'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-18'
+  event: '数学二: 综合练习'
+  type: homework
+- date: '2026-04-18'
+  event: '408: 复习错题'
+  type: homework
+- date: '2026-04-18'
+  event: '英语二: 真题阅读'
+  type: homework
+- date: '2026-04-18'
+  event: 'LC: 2题/副业开发'
+  type: activity
+- date: '2026-04-18'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-19'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-04-20'
+  event: '数学二: 高数收尾/线代'
+  type: homework
+- date: '2026-04-20'
+  event: '408: 计组'
+  type: homework
+- date: '2026-04-20'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-04-20'
+  event: 'LC: 数组/实习投递'
+  type: activity
+- date: '2026-04-20'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-21'
+  event: '数学二: 高数收尾/线代'
+  type: homework
+- date: '2026-04-21'
+  event: '408: 计组'
+  type: homework
+- date: '2026-04-21'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-04-21'
+  event: 'LC: 链表/改简历'
+  type: activity
+- date: '2026-04-21'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-22'
+  event: '数学二: 高数收尾/线代'
+  type: homework
+- date: '2026-04-22'
+  event: '408: 计组'
+  type: homework
+- date: '2026-04-22'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-04-22'
+  event: 'LC: 栈队列/探索副业'
+  type: activity
+- date: '2026-04-22'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-23'
+  event: '数学二: 高数收尾/线代'
+  type: homework
+- date: '2026-04-23'
+  event: '408: 计组'
+  type: homework
+- date: '2026-04-23'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-04-23'
+  event: 'LC: 哈希/保研材料'
+  type: activity
+- date: '2026-04-23'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-24'
+  event: '数学二: 高数收尾/线代'
+  type: homework
+- date: '2026-04-24'
+  event: '408: 计组'
+  type: homework
+- date: '2026-04-24'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-04-24'
+  event: 'LC: 二分/实习投递'
+  type: activity
+- date: '2026-04-24'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-25'
+  event: '数学二: 综合练习'
+  type: homework
+- date: '2026-04-25'
+  event: '408: 复习错题'
+  type: homework
+- date: '2026-04-25'
+  event: '英语二: 真题阅读'
+  type: homework
+- date: '2026-04-25'
+  event: 'LC: 2题/副业开发'
+  type: activity
+- date: '2026-04-25'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-26'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-04-27'
+  event: '数学二: 高数收尾/线代'
+  type: homework
+- date: '2026-04-27'
+  event: '408: 计组'
+  type: homework
+- date: '2026-04-27'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-04-27'
+  event: 'LC: 数组/实习投递'
+  type: activity
+- date: '2026-04-27'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-28'
+  event: '数学二: 高数收尾/线代'
+  type: homework
+- date: '2026-04-28'
+  event: '408: 计组'
+  type: homework
+- date: '2026-04-28'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-04-28'
+  event: 'LC: 链表/改简历'
+  type: activity
+- date: '2026-04-28'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-29'
+  event: '数学二: 高数收尾/线代'
+  type: homework
+- date: '2026-04-29'
+  event: '408: 计组'
+  type: homework
+- date: '2026-04-29'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-04-29'
+  event: 'LC: 栈队列/探索副业'
+  type: activity
+- date: '2026-04-29'
+  event: '政治: 马原'
+  type: default
+- date: '2026-04-30'
+  event: '数学二: 高数收尾/线代'
+  type: homework
+- date: '2026-04-30'
+  event: '408: 计组'
+  type: homework
+- date: '2026-04-30'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-04-30'
+  event: 'LC: 哈希/保研材料'
+  type: activity
+- date: '2026-04-30'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-01'
+  event: '数学二: 真题模拟'
+  type: homework
+- date: '2026-05-01'
+  event: '408: 操作系统'
+  type: homework
+- date: '2026-05-01'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-05-01'
+  event: 'LC: 二分/实习投递'
+  type: activity
+- date: '2026-05-01'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-02'
+  event: '数学二: 综合练习'
+  type: homework
+- date: '2026-05-02'
+  event: '408: 复习'
+  type: homework
+- date: '2026-05-02'
+  event: '英语二: 真题阅读'
+  type: homework
+- date: '2026-05-02'
+  event: 'LC: 2题/副业开发'
+  type: activity
+- date: '2026-05-02'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-03'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-05-04'
+  event: '数学二: 真题模拟'
+  type: homework
+- date: '2026-05-04'
+  event: '408: 操作系统'
+  type: homework
+- date: '2026-05-04'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-05-04'
+  event: 'LC: 数组/实习投递'
+  type: activity
+- date: '2026-05-04'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-05'
+  event: '数学二: 真题模拟'
+  type: homework
+- date: '2026-05-05'
+  event: '408: 操作系统'
+  type: homework
+- date: '2026-05-05'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-05-05'
+  event: 'LC: 链表/改简历'
+  type: activity
+- date: '2026-05-05'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-06'
+  event: '数学二: 真题模拟'
+  type: homework
+- date: '2026-05-06'
+  event: '408: 操作系统'
+  type: homework
+- date: '2026-05-06'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-05-06'
+  event: 'LC: 栈队列/探索副业'
+  type: activity
+- date: '2026-05-06'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-07'
+  event: '数学二: 真题模拟'
+  type: homework
+- date: '2026-05-07'
+  event: '408: 操作系统'
+  type: homework
+- date: '2026-05-07'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-05-07'
+  event: 'LC: 哈希/保研材料'
+  type: activity
+- date: '2026-05-07'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-08'
+  event: '数学二: 真题模拟'
+  type: homework
+- date: '2026-05-08'
+  event: '408: 操作系统'
+  type: homework
+- date: '2026-05-08'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-05-08'
+  event: 'LC: 二分/实习投递'
+  type: activity
+- date: '2026-05-08'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-09'
+  event: '数学二: 综合练习'
+  type: homework
+- date: '2026-05-09'
+  event: '408: 复习'
+  type: homework
+- date: '2026-05-09'
+  event: '英语二: 真题阅读'
+  type: homework
+- date: '2026-05-09'
+  event: 'LC: 2题/副业开发'
+  type: activity
+- date: '2026-05-09'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-10'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-05-11'
+  event: '数学二: 真题模拟'
+  type: homework
+- date: '2026-05-11'
+  event: '408: 操作系统'
+  type: homework
+- date: '2026-05-11'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-05-11'
+  event: 'LC: 数组/实习投递'
+  type: activity
+- date: '2026-05-11'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-12'
+  event: '数学二: 真题模拟'
+  type: homework
+- date: '2026-05-12'
+  event: '408: 操作系统'
+  type: homework
+- date: '2026-05-12'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-05-12'
+  event: 'LC: 链表/改简历'
+  type: activity
+- date: '2026-05-12'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-13'
+  event: '数学二: 真题模拟'
+  type: homework
+- date: '2026-05-13'
+  event: '408: 操作系统'
+  type: homework
+- date: '2026-05-13'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-05-13'
+  event: 'LC: 栈队列/探索副业'
+  type: activity
+- date: '2026-05-13'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-14'
+  event: '数学二: 真题模拟'
+  type: homework
+- date: '2026-05-14'
+  event: '408: 操作系统'
+  type: homework
+- date: '2026-05-14'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-05-14'
+  event: 'LC: 哈希/保研材料'
+  type: activity
+- date: '2026-05-14'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-15'
+  event: '数学二: 真题模拟'
+  type: homework
+- date: '2026-05-15'
+  event: '408: 操作系统'
+  type: homework
+- date: '2026-05-15'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-05-15'
+  event: 'LC: 二分/实习投递'
+  type: activity
+- date: '2026-05-15'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-16'
+  event: '数学二: 综合练习'
+  type: homework
+- date: '2026-05-16'
+  event: '408: 复习'
+  type: homework
+- date: '2026-05-16'
+  event: '英语二: 真题阅读'
+  type: homework
+- date: '2026-05-16'
+  event: 'LC: 2题/副业开发'
+  type: activity
+- date: '2026-05-16'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-17'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-05-18'
+  event: '数学二: 真题模拟'
+  type: homework
+- date: '2026-05-18'
+  event: '408: 操作系统'
+  type: homework
+- date: '2026-05-18'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-05-18'
+  event: 'LC: 数组/实习投递'
+  type: activity
+- date: '2026-05-18'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-19'
+  event: '数学二: 真题模拟'
+  type: homework
+- date: '2026-05-19'
+  event: '408: 操作系统'
+  type: homework
+- date: '2026-05-19'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-05-19'
+  event: 'LC: 链表/改简历'
+  type: activity
+- date: '2026-05-19'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-20'
+  event: '数学二: 真题模拟'
+  type: homework
+- date: '2026-05-20'
+  event: '408: 操作系统'
+  type: homework
+- date: '2026-05-20'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-05-20'
+  event: 'LC: 栈队列/探索副业'
+  type: activity
+- date: '2026-05-20'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-21'
+  event: '数学二: 真题模拟'
+  type: homework
+- date: '2026-05-21'
+  event: '408: 操作系统'
+  type: homework
+- date: '2026-05-21'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-05-21'
+  event: 'LC: 哈希/保研材料'
+  type: activity
+- date: '2026-05-21'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-22'
+  event: '数学二: 真题模拟'
+  type: homework
+- date: '2026-05-22'
+  event: '408: 操作系统'
+  type: homework
+- date: '2026-05-22'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-05-22'
+  event: 'LC: 二分/实习投递'
+  type: activity
+- date: '2026-05-22'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-23'
+  event: '数学二: 综合练习'
+  type: homework
+- date: '2026-05-23'
+  event: '408: 复习'
+  type: homework
+- date: '2026-05-23'
+  event: '英语二: 真题阅读'
+  type: homework
+- date: '2026-05-23'
+  event: 'LC: 2题/副业开发'
+  type: activity
+- date: '2026-05-23'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-24'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-05-25'
+  event: '数学二: 真题模拟'
+  type: homework
+- date: '2026-05-25'
+  event: '408: 操作系统'
+  type: homework
+- date: '2026-05-25'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-05-25'
+  event: 'LC: 数组/实习投递'
+  type: activity
+- date: '2026-05-25'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-26'
+  event: '数学二: 真题模拟'
+  type: homework
+- date: '2026-05-26'
+  event: '408: 操作系统'
+  type: homework
+- date: '2026-05-26'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-05-26'
+  event: 'LC: 链表/改简历'
+  type: activity
+- date: '2026-05-26'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-27'
+  event: '数学二: 真题模拟'
+  type: homework
+- date: '2026-05-27'
+  event: '408: 操作系统'
+  type: homework
+- date: '2026-05-27'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-05-27'
+  event: 'LC: 栈队列/探索副业'
+  type: activity
+- date: '2026-05-27'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-28'
+  event: '数学二: 真题模拟'
+  type: homework
+- date: '2026-05-28'
+  event: '408: 操作系统'
+  type: homework
+- date: '2026-05-28'
+  event: '英语二: 词汇长难句'
+  type: homework
+- date: '2026-05-28'
+  event: 'LC: 哈希/保研材料'
+  type: activity
+- date: '2026-05-28'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-29'
+  event: '数学二: 真题模拟'
+  type: homework
+- date: '2026-05-29'
+  event: '408: 操作系统'
+  type: homework
+- date: '2026-05-29'
+  event: '英语二: 阅读'
+  type: homework
+- date: '2026-05-29'
+  event: 'LC: 二分/实习投递'
+  type: activity
+- date: '2026-05-29'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-30'
+  event: '数学二: 综合练习'
+  type: homework
+- date: '2026-05-30'
+  event: '408: 复习'
+  type: homework
+- date: '2026-05-30'
+  event: '英语二: 真题阅读'
+  type: homework
+- date: '2026-05-30'
+  event: 'LC: 2题/副业开发'
+  type: activity
+- date: '2026-05-30'
+  event: '政治: 马原'
+  type: default
+- date: '2026-05-31'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-06-01'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-01'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-01'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-06-02'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-02'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-02'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-06-03'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-03'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-03'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-06-04'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-04'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-04'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-06-05'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-05'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-05'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-06-06'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-06'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-06'
+  event: 夏令营/实习复盘
+  type: activity
+- date: '2026-06-07'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-06-08'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-08'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-08'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-06-09'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-09'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-09'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-06-10'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-10'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-10'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-06-11'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-11'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-11'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-06-12'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-12'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-12'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-06-13'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-13'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-13'
+  event: 夏令营/实习复盘
+  type: activity
+- date: '2026-06-14'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-06-15'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-15'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-15'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-06-16'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-16'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-16'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-06-17'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-17'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-17'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-06-18'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-18'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-18'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-06-19'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-19'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-19'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-06-20'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-20'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-20'
+  event: 夏令营/实习复盘
+  type: activity
+- date: '2026-06-21'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-06-22'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-22'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-22'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-06-23'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-23'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-23'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-06-24'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-24'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-24'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-06-25'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-25'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-25'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-06-26'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-26'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-26'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-06-27'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-27'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-27'
+  event: 夏令营/实习复盘
+  type: activity
+- date: '2026-06-28'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-06-29'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-29'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-29'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-06-30'
+  event: '数学二: 二刷真题'
+  type: homework
+- date: '2026-06-30'
+  event: '408: 操作系统+网络'
+  type: homework
+- date: '2026-06-30'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-01'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-01'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-01'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-01'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-02'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-02'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-02'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-02'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-03'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-03'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-03'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-03'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-04'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-04'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-04'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-04'
+  event: 夏令营/实习复盘
+  type: activity
+- date: '2026-07-05'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-07-06'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-06'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-06'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-06'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-07'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-07'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-07'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-07'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-08'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-08'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-08'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-08'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-09'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-09'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-09'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-09'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-10'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-10'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-10'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-10'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-11'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-11'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-11'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-11'
+  event: 夏令营/实习复盘
+  type: activity
+- date: '2026-07-12'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-07-13'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-13'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-13'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-13'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-14'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-14'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-14'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-14'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-15'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-15'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-15'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-15'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-16'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-16'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-16'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-16'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-17'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-17'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-17'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-17'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-18'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-18'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-18'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-18'
+  event: 夏令营/实习复盘
+  type: activity
+- date: '2026-07-19'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-07-20'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-20'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-20'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-20'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-21'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-21'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-21'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-21'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-22'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-22'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-22'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-22'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-23'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-23'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-23'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-23'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-24'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-24'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-24'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-24'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-25'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-25'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-25'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-25'
+  event: 夏令营/实习复盘
+  type: activity
+- date: '2026-07-26'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-07-27'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-27'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-27'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-27'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-28'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-28'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-28'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-28'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-29'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-29'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-29'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-29'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-30'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-30'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-30'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-30'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-07-31'
+  event: '数学二: 专题强化'
+  type: homework
+- date: '2026-07-31'
+  event: '408: 第二轮+真题'
+  type: homework
+- date: '2026-07-31'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-07-31'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-08-01'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-01'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-01'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-01'
+  event: 夏令营/实习复盘
+  type: activity
+- date: '2026-08-02'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-08-03'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-03'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-03'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-03'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-08-04'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-04'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-04'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-04'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-08-05'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-05'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-05'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-05'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-08-06'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-06'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-06'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-06'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-08-07'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-07'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-07'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-07'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-08-08'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-08'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-08'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-08'
+  event: 夏令营/实习复盘
+  type: activity
+- date: '2026-08-09'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-08-10'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-10'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-10'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-10'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-08-11'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-11'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-11'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-11'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-08-12'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-12'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-12'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-12'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-08-13'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-13'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-13'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-13'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-08-14'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-14'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-14'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-14'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-08-15'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-15'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-15'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-15'
+  event: 夏令营/实习复盘
+  type: activity
+- date: '2026-08-16'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-08-17'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-17'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-17'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-17'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-08-18'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-18'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-18'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-18'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-08-19'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-19'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-19'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-19'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-08-20'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-20'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-20'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-20'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-08-21'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-21'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-21'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-21'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-08-22'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-22'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-22'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-22'
+  event: 夏令营/实习复盘
+  type: activity
+- date: '2026-08-23'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-08-24'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-24'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-24'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-24'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-08-25'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-25'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-25'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-25'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-08-26'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-26'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-26'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-26'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-08-27'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-27'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-27'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-27'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-08-28'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-28'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-28'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-28'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-08-29'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-29'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-29'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-29'
+  event: 夏令营/实习复盘
+  type: activity
+- date: '2026-08-30'
+  event: 每周休息与复盘
+  type: activity
+- date: '2026-08-31'
+  event: '数学二: 历年真题'
+  type: homework
+- date: '2026-08-31'
+  event: '408: 真题专项'
+  type: homework
+- date: '2026-08-31'
+  event: '政治: 1000题'
+  type: homework
+- date: '2026-08-31'
+  event: 英语二/LeetCode
+  type: default
+- date: '2026-09-01'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-01'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-01'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-02'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-02'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-02'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-03'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-03'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-03'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-04'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-04'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-04'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-05'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-05'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-05'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-06'
+  event: 每周全套模拟与复盘
+  type: test
+- date: '2026-09-07'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-07'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-07'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-08'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-08'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-08'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-09'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-09'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-09'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-10'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-10'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-10'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-11'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-11'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-11'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-12'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-12'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-12'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-13'
+  event: 每周全套模拟与复盘
+  type: test
+- date: '2026-09-14'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-14'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-14'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-15'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-15'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-15'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-16'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-16'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-16'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-17'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-17'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-17'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-18'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-18'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-18'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-19'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-19'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-19'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-20'
+  event: 每周全套模拟与复盘
+  type: test
+- date: '2026-09-21'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-21'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-21'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-22'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-22'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-22'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-23'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-23'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-23'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-24'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-24'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-24'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-25'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-25'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-25'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-26'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-26'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-26'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-27'
+  event: 每周全套模拟与复盘
+  type: test
+- date: '2026-09-28'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-28'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-28'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-29'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-29'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-29'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-09-30'
+  event: '数二/408: 冲刺模拟'
+  type: homework
+- date: '2026-09-30'
+  event: '保研: 预推免'
+  type: activity
+- date: '2026-09-30'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-01'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-01'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-01'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-02'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-02'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-02'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-03'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-03'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-03'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-04'
+  event: 每周全套模拟与复盘
+  type: test
+- date: '2026-10-05'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-05'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-05'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-06'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-06'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-06'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-07'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-07'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-07'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-08'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-08'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-08'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-09'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-09'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-09'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-10'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-10'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-10'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-11'
+  event: 每周全套模拟与复盘
+  type: test
+- date: '2026-10-12'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-12'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-12'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-13'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-13'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-13'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-14'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-14'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-14'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-15'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-15'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-15'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-16'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-16'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-16'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-17'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-17'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-17'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-18'
+  event: 每周全套模拟与复盘
+  type: test
+- date: '2026-10-19'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-19'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-19'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-20'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-20'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-20'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-21'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-21'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-21'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-22'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-22'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-22'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-23'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-23'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-23'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-24'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-24'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-24'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-25'
+  event: 每周全套模拟与复盘
+  type: test
+- date: '2026-10-26'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-26'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-26'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-27'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-27'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-27'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-28'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-28'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-28'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-29'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-29'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-29'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-30'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-30'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-30'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-10-31'
+  event: '数二/408: 全真题模拟'
+  type: test
+- date: '2026-10-31'
+  event: '政治: 8套卷/4套卷'
+  type: homework
+- date: '2026-10-31'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-01'
+  event: 每周全套模拟与复盘
+  type: test
+- date: '2026-11-02'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-02'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-02'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-02'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-03'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-03'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-03'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-03'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-04'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-04'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-04'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-04'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-05'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-05'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-05'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-05'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-06'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-06'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-06'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-06'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-07'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-07'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-07'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-07'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-08'
+  event: 每周全套模拟与复盘
+  type: test
+- date: '2026-11-09'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-09'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-09'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-09'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-10'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-10'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-10'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-10'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-11'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-11'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-11'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-11'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-12'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-12'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-12'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-12'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-13'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-13'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-13'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-13'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-14'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-14'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-14'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-14'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-15'
+  event: 每周全套模拟与复盘
+  type: test
+- date: '2026-11-16'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-16'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-16'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-16'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-17'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-17'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-17'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-17'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-18'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-18'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-18'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-18'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-19'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-19'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-19'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-19'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-20'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-20'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-20'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-20'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-21'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-21'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-21'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-21'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-22'
+  event: 每周全套模拟与复盘
+  type: test
+- date: '2026-11-23'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-23'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-23'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-23'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-24'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-24'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-24'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-24'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-25'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-25'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-25'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-25'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-26'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-26'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-26'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-26'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-27'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-27'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-27'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-27'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-28'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-28'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-28'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-28'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-11-29'
+  event: 每周全套模拟与复盘
+  type: test
+- date: '2026-11-30'
+  event: '数二: 错题/押题卷'
+  type: test
+- date: '2026-11-30'
+  event: '408: 最终模拟'
+  type: test
+- date: '2026-11-30'
+  event: '政治: 肖四大题背诵'
+  type: default
+- date: '2026-11-30'
+  event: '英语二: 作文/阅读'
+  type: homework
+- date: '2026-12-01'
+  event: '备考: 保持手感+错题'
+  type: homework
+- date: '2026-12-01'
+  event: '政治/英语: 背诵模板'
+  type: default
+- date: '2026-12-02'
+  event: '备考: 保持手感+错题'
+  type: homework
+- date: '2026-12-02'
+  event: '政治/英语: 背诵模板'
+  type: default
+- date: '2026-12-03'
+  event: '备考: 保持手感+错题'
+  type: homework
+- date: '2026-12-03'
+  event: '政治/英语: 背诵模板'
+  type: default
+- date: '2026-12-04'
+  event: '备考: 保持手感+错题'
+  type: homework
+- date: '2026-12-04'
+  event: '政治/英语: 背诵模板'
+  type: default
+- date: '2026-12-05'
+  event: '备考: 保持手感+错题'
+  type: homework
+- date: '2026-12-05'
+  event: '政治/英语: 背诵模板'
+  type: default
+- date: '2026-12-06'
+  event: '备考: 保持手感+错题'
+  type: homework
+- date: '2026-12-06'
+  event: '政治/英语: 背诵模板'
+  type: default
+- date: '2026-12-07'
+  event: '备考: 保持手感+错题'
+  type: homework
+- date: '2026-12-07'
+  event: '政治/英语: 背诵模板'
+  type: default
+- date: '2026-12-08'
+  event: '备考: 保持手感+错题'
+  type: homework
+- date: '2026-12-08'
+  event: '政治/英语: 背诵模板'
+  type: default
+- date: '2026-12-09'
+  event: '备考: 保持手感+错题'
+  type: homework
+- date: '2026-12-09'
+  event: '政治/英语: 背诵模板'
+  type: default
+- date: '2026-12-10'
+  event: '备考: 保持手感+错题'
+  type: homework
+- date: '2026-12-10'
+  event: '政治/英语: 背诵模板'
+  type: default
+- date: '2026-12-11'
+  event: '备考: 保持手感+错题'
+  type: homework
+- date: '2026-12-11'
+  event: '政治/英语: 背诵模板'
+  type: default
+- date: '2026-12-12'
+  event: '备考: 保持手感+错题'
+  type: homework
+- date: '2026-12-12'
+  event: '政治/英语: 背诵模板'
+  type: default
+- date: '2026-12-13'
+  event: '备考: 保持手感+错题'
+  type: homework
+- date: '2026-12-13'
+  event: '政治/英语: 背诵模板'
+  type: default
+- date: '2026-12-14'
+  event: '备考: 保持手感+错题'
+  type: homework
+- date: '2026-12-14'
+  event: '政治/英语: 背诵模板'
+  type: default
+- date: '2026-12-15'
+  event: '备考: 保持手感+错题'
+  type: homework
+- date: '2026-12-15'
+  event: '政治/英语: 背诵模板'
+  type: default
+- date: '2026-12-16'
+  event: '备考: 保持手感+错题'
+  type: homework
+- date: '2026-12-16'
+  event: '政治/英语: 背诵模板'
+  type: default
+- date: '2026-12-17'
+  event: '备考: 保持手感+错题'
+  type: homework
+- date: '2026-12-17'
+  event: '政治/英语: 背诵模板'
+  type: default
+- date: '2026-12-18'
+  event: '备考: 保持手感+错题'
+  type: homework
+- date: '2026-12-18'
+  event: '政治/英语: 背诵模板'
+  type: default
+- date: '2026-12-19'
+  event: '备考: 保持手感+错题'
+  type: homework
+- date: '2026-12-19'
+  event: '政治/英语: 背诵模板'
+  type: default
+- date: '2026-12-20'
+  event: '考研Day1: 政治英语'
+  type: test
+- date: '2026-12-21'
+  event: '考研Day2: 数二408'
+  type: test
