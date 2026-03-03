@@ -35,6 +35,8 @@
   };
 
   let calendarData = [];
+  let dailyReviewsData = [];
+
   try {
     const parsed = JSON.parse(dataElement.textContent.trim() || '[]');
     if (Array.isArray(parsed)) {
@@ -43,6 +45,24 @@
   } catch (error) {
     console.error('[Calendar] JSON 解析失败：', error);
   }
+
+  const reviewsElement = document.getElementById('dailyReviewsData');
+  if (reviewsElement) {
+    try {
+      const parsedReviews = JSON.parse(reviewsElement.textContent.trim() || '[]');
+      if (Array.isArray(parsedReviews)) {
+        dailyReviewsData = parsedReviews;
+      }
+    } catch (error) {
+      console.error('[Calendar] Reviews JSON 解析失败：', error);
+    }
+  }
+
+  const reviewsByDate = dailyReviewsData.reduce((acc, review) => {
+    if (!review || !review.date) return acc;
+    acc.set(review.date, review);
+    return acc;
+  }, new Map());
 
   const eventsByDate = calendarData.reduce((acc, event) => {
     if (!event || !event.date) return acc;
@@ -158,12 +178,14 @@
         const eventContainer = document.createElement('div');
         cell.appendChild(eventContainer);
 
-        if (events.length) {
+        if (events.length || reviewsByDate.has(dateStr)) {
           const isMobile = window.innerWidth <= mobileBreakpoint;
           const limit = isMobile ? 1 : 2;
+          const reviewForDay = reviewsByDate.get(dateStr);
+          
           events
             .slice(0, limit)
-            .forEach(event => renderEventBadge(event, eventContainer, dateStr));
+            .forEach(event => renderEventBadge(event, eventContainer, dateStr, reviewForDay));
 
           if (events.length > limit) {
             const more = document.createElement('div');
@@ -171,11 +193,20 @@
             more.textContent = `+${events.length - limit} 更多`;
             eventContainer.appendChild(more);
           }
+          
+          if (events.length === 0 && reviewForDay) {
+             const badge = document.createElement('span');
+             badge.className = `event-badge default`;
+             badge.style.backgroundColor = 'transparent';
+             badge.style.color = 'var(--calendar-text)';
+             badge.innerHTML = reviewForDay.status === 'done' ? '✅ 已复盘' : '⚠️ 未达标';
+             eventContainer.appendChild(badge);
+          }
 
-          cell.addEventListener('click', () => showEventModal(dateStr, events));
+          cell.addEventListener('click', () => showEventModal(dateStr, events, reviewForDay));
         } else {
           cell.addEventListener('click', () => {
-            showEventModal(dateStr, []);
+            showEventModal(dateStr, [], null);
           });
         }
 
@@ -190,11 +221,20 @@
     calendarBody.appendChild(fragment);
   }
 
-  function renderEventBadge(event, container, dateStr) {
+  function renderEventBadge(event, container, dateStr, reviewForDay) {
     const badge = document.createElement('span');
     const type = event.type || 'default';
     badge.className = `event-badge ${type}`;
-    badge.textContent = event.event || '未命名事件';
+    
+    let prefix = '';
+    if (reviewForDay && reviewForDay.status === 'done') {
+      prefix = '✅ ';
+      badge.style.backgroundColor = '#4caf50'; // Override with green if done
+    } else if (reviewForDay && reviewForDay.status !== 'done') {
+      prefix = '⚠️ ';
+    }
+    
+    badge.textContent = prefix + (event.event || '未命名事件');
 
     badge.addEventListener('click', evt => {
       evt.stopPropagation();
@@ -202,21 +242,39 @@
         const target = event.linkTarget || '_self';
         window.open(event.link, target);
       } else {
-        showEventModal(dateStr, [event]);
+        const eventsForDate = eventsByDate.get(dateStr) || [];
+        showEventModal(dateStr, eventsForDate, reviewForDay);
       }
     });
 
     container.appendChild(badge);
   }
 
-  function showEventModal(dateStr, events) {
+  function showEventModal(dateStr, events, reviewForDay) {
     const date = new Date(dateStr);
     modalDateTitle.textContent = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
-    modalDateText.textContent =
-      events.length > 0 ? `共有 ${events.length} 条事件` : '该日期暂无事件，点击日历即可新增提醒。';
+    
+    if (reviewForDay) {
+      modalDateText.innerHTML = `共有 ${events.length} 条事件 <br/><span style="color:${reviewForDay.status === 'done' ? '#4caf50' : '#ff9800'}; font-weight:bold;">${reviewForDay.status === 'done' ? '✅ 今日已复盘' : '⚠️ 今日未达标'} (评分: ${reviewForDay.score})</span>`;
+    } else {
+      modalDateText.textContent = events.length > 0 ? `共有 ${events.length} 条事件` : '该日期暂无事件，点击日历即可新增提醒。';
+    }
+    
     modalEventsList.innerHTML = '';
 
-    if (events.length === 0) {
+    if (reviewForDay && reviewForDay.content) {
+      const reviewBox = document.createElement('div');
+      reviewBox.style.padding = '12px';
+      reviewBox.style.marginBottom = '16px';
+      reviewBox.style.backgroundColor = 'var(--calendar-btn-bg)';
+      reviewBox.style.borderLeft = `4px solid ${reviewForDay.status === 'done' ? '#4caf50' : '#ff9800'}`;
+      reviewBox.style.borderRadius = '4px';
+      reviewBox.style.fontSize = '0.95rem';
+      reviewBox.innerHTML = `<strong>复盘笔记：</strong><br/>${reviewForDay.content.replace(/\n/g, '<br/>')}`;
+      modalEventsList.appendChild(reviewBox);
+    }
+
+    if (events.length === 0 && !reviewForDay) {
       modalEventsList.innerHTML = '<p style="color:#888;">暂未添加事件。</p>';
     } else {
       events.forEach(event => {
@@ -245,7 +303,7 @@
         item.appendChild(title);
 
         const desc = document.createElement('p');
-        desc.textContent = event.link ? '点击标题可跳转详情' : '未设置链接';
+        desc.textContent = event.link ? '点击标题可跳转详情' : '无链接';
         item.appendChild(desc);
         modalEventsList.appendChild(item);
       });

@@ -1,0 +1,11 @@
+- date: "2026-03-03"
+  status: "done"
+  score: "8/10"
+  content: >
+    今天高数复习得不错，错题都在控制范围内。但是LeetCode今天没来得及做，被实习笔试题占用了时间。明早起来补上进度。
+
+# 模板参考（每天复制上面这一块到最上面即可）：
+# - date: "YYYY-MM-DD"
+#   status: "done" 或 "undone"
+#   score: "X/10"
+#   content: "今天的心得..."

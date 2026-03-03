@@ -383,6 +383,10 @@ html[data-mode="dark"] {
 {%- endif -%}
 </script>
 
+<script id="dailyReviewsData" type="application/json">
+{{ site.data.daily_reviews | jsonify }}
+</script>
+
 <script src="{{ '/assets/js/calendar.js' | relative_url }}" defer></script>
 
 
