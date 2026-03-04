@@ -29,53 +29,68 @@
   event: '政治: 马原'
   type: default
 - date: '2026-03-05'
-  event: '数学二: 高数'
+  event: '数学二: 高数（补3.4缺档）'
   type: homework
 - date: '2026-03-05'
-  event: '408: 数据结构'
+  event: '英语二: 阅读2篇（补3.4缺档）'
   type: homework
 - date: '2026-03-05'
+  event: '课上40min→锁定高数视频+背单词'
+  type: activity
+- date: '2026-03-05'
+  event: '政治: 马原1h'
+  type: default
+- date: '2026-03-05'
+  event: '🏋️ 健身（三分化第2天）'
+  type: activity
+- date: '2026-03-06'
+  event: '数学二: 高数1.5h'
+  type: homework
+- date: '2026-03-06'
+  event: '408: 数据结构1.5h'
+  type: homework
+- date: '2026-03-06'
+  event: '课上40min→LC 1题(二分)'
+  type: activity
+- date: '2026-03-06'
+  event: '实习投递3-5家'
+  type: activity
+- date: '2026-03-06'
+  event: '政治: 马原1h'
+  type: default
+- date: '2026-03-06'
+  event: '🏋️ 健身（三分化第3天）'
+  type: activity
+- date: '2026-03-07'
+  event: '数学二: 高数1.5h（两节课占用多，课后专注）'
+  type: homework
+- date: '2026-03-07'
   event: '英语二: 词汇长难句'
   type: homework
-- date: '2026-03-05'
-  event: 'LC: 哈希/保研材料'
-  type: activity
-- date: '2026-03-05'
-  event: '政治: 马原'
-  type: default
-- date: '2026-03-06'
-  event: '数学二: 高数'
-  type: homework
-- date: '2026-03-06'
-  event: '408: 数据结构'
-  type: homework
-- date: '2026-03-06'
-  event: '英语二: 阅读'
-  type: homework
-- date: '2026-03-06'
-  event: 'LC: 二分/实习投递'
-  type: activity
-- date: '2026-03-06'
-  event: '政治: 马原'
-  type: default
 - date: '2026-03-07'
-  event: '数学二: 综合练习'
-  type: homework
-- date: '2026-03-07'
-  event: '408: 复习错题'
-  type: homework
-- date: '2026-03-07'
-  event: '英语二: 真题阅读'
-  type: homework
-- date: '2026-03-07'
-  event: 'LC: 2题/副业开发'
+  event: '课上共80min→LC 2题+政治马原碎片'
   type: activity
 - date: '2026-03-07'
-  event: '政治: 马原'
+  event: '408: 错题回顾30min（缩短，两节课日）'
   type: default
+- date: '2026-03-07'
+  event: '🏋️ 健身休息日（三分化）'
+  type: activity
 - date: '2026-03-08'
-  event: 每周休息与复盘
+  event: '数学二: 线代1.5h（全天自由！）'
+  type: homework
+- date: '2026-03-08'
+  event: '408: 数据结构1.5h+错题总结'
+  type: homework
+- date: '2026-03-08'
+  event: '英语二: 真题阅读1套'
+  type: homework
+- date: '2026-03-08'
+  event: '实习投递5家+简历优化'
   type: activity
+- date: '2026-03-08'
+  event: '政治: 马原1h+每周复盘'
+  type: default
 - date: '2026-03-09'
   event: '数学二: 高数'
   type: homework
