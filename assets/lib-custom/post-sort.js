@@ -251,6 +251,14 @@
           const postPreview = card.querySelector('.post-preview');
           if (postPreview) {
             postPreview.classList.add('encrypted-post');
+            
+            // Apply corresponding theme
+            const isRomance = postData.tags && postData.tags.includes('恋爱');
+            if (isRomance) {
+              postPreview.classList.add('theme-romance');
+            } else {
+              postPreview.classList.add('theme-site');
+            }
           }
         }
       }

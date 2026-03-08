@@ -13,8 +13,8 @@
   overflow: hidden;
 }
 
-/* 加密文章遮罩层 */
-.post-preview.encrypted-post::before {
+/* 加密文章遮罩层 (Theme Romance) */
+.post-preview.encrypted-post.theme-romance::before {
   content: '';
   position: absolute;
   top: 0;
@@ -34,8 +34,23 @@
   border-radius: inherit;
 }
 
-/* 加密标识徽章 */
-.post-preview.encrypted-post::after {
+/* 始终添加一个基础的::before让所有主题共享相同的架构 */
+.post-preview.encrypted-post::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* 加密标识徽章 (Theme Romance) */
+.post-preview.encrypted-post.theme-romance::after {
   content: '🔐 加密文章';
   position: absolute;
   top: 12px;
@@ -52,12 +67,52 @@
   animation: badgeBounce 2s ease-in-out infinite;
 }
 
+/* 始终添加一个基础的::after让所有主题共享相同的文本/动画 */
+.post-preview.encrypted-post::after {
+  content: '🔐 加密文章';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  z-index: 2;
+  animation: badgeBounce 2s ease-in-out infinite;
+}
+
 @keyframes badgeBounce {
   0%, 100% { transform: translateY(0) scale(1); }
   50% { transform: translateY(-3px) scale(1.02); }
 }
 
-/* 加密文章内容区域模糊 */
+/* --------------- Theme Site (Generic) --------------- */
+.post-preview.encrypted-post.theme-site::before {
+  background: linear-gradient(
+    135deg,
+    rgba(173, 216, 230, 0.15) 0%,
+    rgba(240, 248, 255, 0.2) 50%,
+    rgba(173, 216, 230, 0.15) 100%
+  );
+}
+
+.post-preview.encrypted-post.theme-site::after {
+  background: linear-gradient(135deg, #87ceeb 0%, #4682b4 100%);
+  box-shadow: 0 4px 15px rgba(70, 130, 180, 0.4);
+}
+
+.post-preview.encrypted-post.theme-site:hover::before {
+  background: linear-gradient(
+    135deg,
+    rgba(173, 216, 230, 0.1) 0%,
+    rgba(240, 248, 255, 0.15) 50%,
+    rgba(173, 216, 230, 0.1) 100%
+  );
+}
+
+/* 统一加密文章内容区域模糊 */
 .post-preview.encrypted-post .post-content,
 .post-preview.encrypted-post .post-preview-content {
   filter: blur(2px);
@@ -65,7 +120,7 @@
 }
 
 /* 鼠标悬停时稍微清晰一点，暗示可以点击 */
-.post-preview.encrypted-post:hover::before {
+.post-preview.encrypted-post.theme-romance:hover::before {
   background: linear-gradient(
     135deg,
     rgba(255, 182, 193, 0.1) 0%,
@@ -84,13 +139,21 @@
    PART 2: 密码输入页面 - 粉白恋爱主题
    ============================================ */
 
-/* Password Overlay - 全屏粉白渐变背景 */
+/* Password Overlay - 基础共享样式 */
 .password-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Password Overlay - 全屏粉白渐变背景 (Theme Romance) */
+.password-overlay.theme-romance {
   background: linear-gradient(
     135deg,
     #fff5f8 0%,
@@ -101,10 +164,17 @@
   );
   background-size: 400% 400%;
   animation: gradientFlow 15s ease infinite;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
+}
+
+/* Password Overlay - 科技感/磨砂背景 (Theme Site) */
+.password-overlay.theme-site {
+  background: linear-gradient(
+    135deg,
+    rgba(245, 247, 250, 0.9) 0%,
+    rgba(195, 207, 226, 0.9) 100%
+  );
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 @keyframes gradientFlow {
@@ -113,8 +183,8 @@
   100% { background-position: 0% 50%; }
 }
 
-/* 飘落的爱心装饰 */
-.password-overlay::before {
+/* 飘落的爱心装饰 (仅Theme Romance) */
+.password-overlay.theme-romance::before {
   content: '💕';
   position: absolute;
   top: 10%;
@@ -124,7 +194,7 @@
   animation: floatHeart 6s ease-in-out infinite;
 }
 
-.password-overlay::after {
+.password-overlay.theme-romance::after {
   content: '✨';
   position: absolute;
   bottom: 15%;
@@ -134,6 +204,27 @@
   animation: floatHeart 5s ease-in-out infinite reverse;
 }
 
+/* 装饰性漂浮物 (Theme Site) */
+.password-overlay.theme-site::before {
+  content: '💡';
+  position: absolute;
+  top: 15%;
+  left: 20%;
+  font-size: 2rem;
+  opacity: 0.2;
+  animation: floatHeart 7s ease-in-out infinite;
+}
+
+.password-overlay.theme-site::after {
+  content: '🔒';
+  position: absolute;
+  bottom: 20%;
+  right: 25%;
+  font-size: 1.5rem;
+  opacity: 0.15;
+  animation: floatHeart 6s ease-in-out infinite reverse;
+}
+
 @keyframes floatHeart {
   0%, 100% { transform: translateY(0) rotate(0deg); }
   25% { transform: translateY(-20px) rotate(5deg); }
@@ -141,7 +232,7 @@
   75% { transform: translateY(-25px) rotate(3deg); }
 }
 
-/* Password Container - 信封造型 */
+/* Password Container - 共享基础样式 */
 .password-container {
   position: relative;
   background: #ffffff;
@@ -150,12 +241,25 @@
   text-align: center;
   max-width: 380px;
   width: 90%;
+  animation: containerPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: visible;
+}
+
+/* Password Container - 信封造型 (Theme Romance) */
+.password-overlay.theme-romance .password-container {
   box-shadow: 
     0 20px 60px rgba(255, 105, 180, 0.15),
     0 8px 25px rgba(255, 182, 193, 0.2),
     0 0 0 1px rgba(255, 182, 193, 0.3);
-  animation: containerPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-  overflow: visible;
+}
+
+/* Password Container - 现代卡片 (Theme Site) */
+.password-overlay.theme-site .password-container {
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.08),
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    0 0 0 1px rgba(0, 0, 0, 0.03);
+  border-radius: 16px;
 }
 
 /* Q弹入场动画 */
@@ -173,8 +277,8 @@
   }
 }
 
-/* 信封顶部装饰 - 三角形折叠效果 */
-.password-container::before {
+/* 信封顶部装饰 - 三角形折叠效果 (Theme Romance) */
+.password-overlay.theme-romance .password-container::before {
   content: '';
   position: absolute;
   top: -20px;
@@ -188,8 +292,8 @@
   filter: drop-shadow(0 -3px 6px rgba(255, 105, 180, 0.2));
 }
 
-/* 信封封口心形 */
-.password-container::after {
+/* 信封封口心形 (Theme Romance) */
+.password-overlay.theme-romance .password-container::after {
   content: '💗';
   position: absolute;
   top: -35px;
@@ -220,8 +324,8 @@
   75% { transform: rotate(10deg); }
 }
 
-/* Title - 手写风格 */
-.password-container h2 {
+/* Title - 手写风格 (Theme Romance) */
+.password-overlay.theme-romance .password-container h2 {
   color: #ff69b4;
   font-size: 1.5rem;
   font-weight: 700;
@@ -233,27 +337,49 @@
   background-clip: text;
 }
 
-/* Password Hint - 卡片便签风格 */
+/* Title - 现代风格 (Theme Site) */
+.password-overlay.theme-site .password-container h2 {
+  color: #333;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+/* Password Hint - 共享基础 */
 .password-hint {
-  color: #666;
   font-size: 0.9rem;
   margin-bottom: 1.5rem;
   padding: 1rem 1.2rem;
-  background: linear-gradient(135deg, #fff9fb 0%, #fff0f5 100%);
-  border-radius: 16px;
-  border: 2px dashed rgba(255, 105, 180, 0.3);
   position: relative;
   line-height: 1.6;
 }
 
-/* 便签图钉 */
-.password-hint::before {
+/* Password Hint - 卡片便签风格 (Theme Romance) */
+.password-overlay.theme-romance .password-hint {
+  color: #666;
+  background: linear-gradient(135deg, #fff9fb 0%, #fff0f5 100%);
+  border-radius: 16px;
+  border: 2px dashed rgba(255, 105, 180, 0.3);
+}
+
+/* 便签图钉 (Theme Romance) */
+.password-overlay.theme-romance .password-hint::before {
   content: '📌';
   position: absolute;
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 1.2rem;
+}
+
+/* Password Hint - 现代风格 (Theme Site) */
+.password-overlay.theme-site .password-hint {
+  color: #555;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #4a90e2;
+  text-align: left;
 }
 
 /* Input Group */
@@ -263,30 +389,35 @@
   gap: 0.8rem;
 }
 
-/* Password Input - 糖果按钮风格 */
+/* Password Input - 共享基础 */
 #password-input {
   width: 100%;
   padding: 1rem 1.25rem;
   font-size: 1.2rem;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-sizing: border-box;
+  outline: none;
+  -webkit-text-security: disc;
+}
+
+/* Password Input - 糖果按钮风格 (Theme Romance) */
+.password-overlay.theme-romance #password-input {
   border: 3px solid #ffb6c1;
   border-radius: 50px;
   background: #fff;
   color: #ff69b4;
-  text-align: center;
   letter-spacing: 0.4em;
   font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-sizing: border-box;
-  outline: none;
 }
 
-#password-input::placeholder {
+.password-overlay.theme-romance #password-input::placeholder {
   color: #ffb6c1;
   letter-spacing: 0.1em;
   font-weight: 400;
 }
 
-#password-input:focus {
+.password-overlay.theme-romance #password-input:focus {
   border-color: #ff69b4;
   box-shadow: 
     0 0 0 4px rgba(255, 105, 180, 0.15),
@@ -294,24 +425,51 @@
   transform: scale(1.02);
 }
 
-/* Submit Button - 糖果按钮 */
+/* Password Input - 现代风格 (Theme Site) */
+.password-overlay.theme-site #password-input {
+  border: 2px solid #e0e6ed;
+  border-radius: 8px;
+  background: #f8f9fa;
+  color: #333;
+  letter-spacing: 0.3em;
+  font-weight: 500;
+}
+
+.password-overlay.theme-site #password-input::placeholder {
+  color: #a0aec0;
+  letter-spacing: 0.05em;
+  font-weight: 400;
+}
+
+.password-overlay.theme-site #password-input:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+  background: #fff;
+  transform: translateY(-2px);
+}
+
+/* Submit Button - 共享基础 */
 #submit-password {
   padding: 1rem 2rem;
   font-size: 1rem;
   font-weight: 700;
   border: none;
-  border-radius: 50px;
-  background: linear-gradient(135deg, #ff69b4 0%, #ff1493 50%, #ff69b4 100%);
-  background-size: 200% 200%;
-  color: #ffffff;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  letter-spacing: 2px;
   position: relative;
   overflow: hidden;
 }
 
-#submit-password::before {
+/* Submit Button - 糖果按钮 (Theme Romance) */
+.password-overlay.theme-romance #submit-password {
+  border-radius: 50px;
+  background: linear-gradient(135deg, #ff69b4 0%, #ff1493 50%, #ff69b4 100%);
+  background-size: 200% 200%;
+  color: #ffffff;
+  letter-spacing: 2px;
+}
+
+.password-overlay.theme-romance #submit-password::before {
   content: '✨';
   position: absolute;
   left: 20px;
@@ -319,7 +477,7 @@
   transition: all 0.3s ease;
 }
 
-#submit-password::after {
+.password-overlay.theme-romance #submit-password::after {
   content: '✨';
   position: absolute;
   right: 20px;
@@ -327,7 +485,7 @@
   transition: all 0.3s ease;
 }
 
-#submit-password:hover {
+.password-overlay.theme-romance #submit-password:hover {
   transform: translateY(-3px) scale(1.02);
   box-shadow: 
     0 10px 30px rgba(255, 105, 180, 0.4),
@@ -335,22 +493,51 @@
   background-position: 100% 0;
 }
 
-#submit-password:hover::before,
-#submit-password:hover::after {
+.password-overlay.theme-romance #submit-password:hover::before,
+.password-overlay.theme-romance #submit-password:hover::after {
   opacity: 1;
 }
 
-#submit-password:active {
+.password-overlay.theme-romance #submit-password:active {
   transform: translateY(0) scale(0.98);
 }
 
-/* Error Message - 可爱风格 */
+/* Submit Button - 现代按钮 (Theme Site) */
+.password-overlay.theme-site #submit-password {
+  border-radius: 8px;
+  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+  color: #ffffff;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 6px rgba(74, 144, 226, 0.2);
+}
+
+.password-overlay.theme-site #submit-password:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(74, 144, 226, 0.3);
+  background: linear-gradient(135deg, #357abd 0%, #285b8f 100%);
+}
+
+.password-overlay.theme-site #submit-password:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(74, 144, 226, 0.2);
+}
+
+/* Error Message - 共享基础 */
 .error-message {
-  color: #ff6b9d;
   font-size: 0.9rem;
   margin-top: 0.8rem;
   min-height: 1.5em;
   font-weight: 500;
+}
+
+/* Error Message - 可爱风格 (Theme Romance) */
+.password-overlay.theme-romance .error-message {
+  color: #ff6b9d;
+}
+
+/* Error Message - 现代风格 (Theme Site) */
+.password-overlay.theme-site .error-message {
+  color: #e53e3e;
 }
 
 .error-message.shake {
@@ -435,8 +622,8 @@
   }
 }
 
-/* 深色模式 - 保持粉色主题但降低亮度 */
-html[data-mode="dark"] .password-overlay {
+/* 深色模式 (Theme Romance) - 保持粉色主题但降低亮度 */
+html[data-mode="dark"] .password-overlay.theme-romance {
   background: linear-gradient(
     135deg,
     #2a1f2d 0%,
@@ -448,7 +635,7 @@ html[data-mode="dark"] .password-overlay {
   background-size: 400% 400%;
 }
 
-html[data-mode="dark"] .password-container {
+html[data-mode="dark"] .password-overlay.theme-romance .password-container {
   background: rgba(45, 35, 45, 0.95);
   box-shadow: 
     0 20px 60px rgba(0, 0, 0, 0.4),
@@ -456,24 +643,24 @@ html[data-mode="dark"] .password-container {
     0 0 0 1px rgba(255, 182, 193, 0.2);
 }
 
-html[data-mode="dark"] .password-hint {
+html[data-mode="dark"] .password-overlay.theme-romance .password-hint {
   background: rgba(255, 182, 193, 0.1);
   border-color: rgba(255, 182, 193, 0.2);
   color: #ffb6c1;
 }
 
-html[data-mode="dark"] #password-input {
+html[data-mode="dark"] .password-overlay.theme-romance #password-input {
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 182, 193, 0.4);
   color: #ffb6c1;
 }
 
-html[data-mode="dark"] #password-input::placeholder {
+html[data-mode="dark"] .password-overlay.theme-romance #password-input::placeholder {
   color: rgba(255, 182, 193, 0.5);
 }
 
-/* 深色模式下的加密文章卡片 */
-html[data-mode="dark"] .post-preview.encrypted-post::before {
+/* 深色模式下的加密文章卡片 (Theme Romance) */
+html[data-mode="dark"] .post-preview.encrypted-post.theme-romance::before {
   background: linear-gradient(
     135deg,
     rgba(255, 105, 180, 0.1) 0%,
@@ -482,6 +669,64 @@ html[data-mode="dark"] .post-preview.encrypted-post::before {
   );
 }
 
-html[data-mode="dark"] .post-preview.encrypted-post::after {
+html[data-mode="dark"] .post-preview.encrypted-post.theme-romance::after {
   background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+}
+
+/* 深色模式 (Theme Site) */
+html[data-mode="dark"] .password-overlay.theme-site {
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.95) 0%,
+    rgba(30, 41, 59, 0.95) 100%
+  );
+}
+
+html[data-mode="dark"] .password-overlay.theme-site .password-container {
+  background: #1e293b;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 1px 3px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+html[data-mode="dark"] .password-overlay.theme-site .password-container h2 {
+  color: #f1f5f9;
+}
+
+html[data-mode="dark"] .password-overlay.theme-site .password-hint {
+  background: #0f172a;
+  color: #cbd5e1;
+  border-left-color: #3b82f6;
+}
+
+html[data-mode="dark"] .password-overlay.theme-site #password-input {
+  background: #0f172a;
+  border-color: #334155;
+  color: #f8fafc;
+}
+
+html[data-mode="dark"] .password-overlay.theme-site #password-input::placeholder {
+  color: #64748b;
+}
+
+html[data-mode="dark"] .password-overlay.theme-site #password-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  background: #1e293b;
+}
+
+/* 深色模式下的加密文章卡片 (Theme Site) */
+html[data-mode="dark"] .post-preview.encrypted-post.theme-site::before {
+  background: linear-gradient(
+    135deg,
+    rgba(51, 65, 85, 0.3) 0%,
+    rgba(71, 85, 105, 0.4) 50%,
+    rgba(51, 65, 85, 0.3) 100%
+  );
+}
+
+html[data-mode="dark"] .post-preview.encrypted-post.theme-site::after {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
 }
