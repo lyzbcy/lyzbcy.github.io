@@ -34,9 +34,9 @@
 
 <h2 id="2">2. 后端与构建部署 (Backend & Deploy)</h2>
 
-### 📌 GitHub Actions Node 20 弃用警告
-* **情形描述**：`actions/checkout@v4`、`actions/configure-pages@v4` 等基于 Node.js 20，2026年6月2日之后会强制 Node 24 且报错。
-* **正确解法**：在 Workflow 文件的最顶层或 Job 层级加入环境变量 `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true`，以提前适配并消除警告。
+### 📌 GitHub Actions Node 20 弃用警告与强制升级导致的崩溃
+* **情形描述**：`actions/checkout@v4`、`actions/configure-pages@v4` 等依然基于 Node.js 20。如果我们在报错刚出来时，轻信官方警告直接添加 `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true`，可能会由于行动本身的底层依赖还不兼容 Node 24，导致 `Build` 等流程崩溃并无声地抛出 **exit code 1**。
+* **正确解法**：在 2026年9月 Node.js 20 彻底被移除runner之前，**正确的做法是暂时延后升级**，并在 `.github/workflows/pages-deploy.yml` 顶部添加环境变量 `ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: "true"` 进行豁免。这能同时消除 Node 20 警告并保证旧版本 actions 稳定运行。如果非要适配 Node 24，则应该手动把 action 的版本号更新到 v5 (前提是这些库发布了支持 Node 24 的版本)。
 
 ---
 

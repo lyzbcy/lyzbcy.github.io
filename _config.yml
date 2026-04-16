@@ -213,6 +213,7 @@ exclude:
   - tools
   - README.md
   - LICENSE
+  - AI_MISTAKE_BOOK.md
   - purgecss.js
   - "*.config.js"
   - "package*.json"
