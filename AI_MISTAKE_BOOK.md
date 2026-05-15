@@ -34,9 +34,22 @@
 
 <h2 id="2">2. 后端与构建部署 (Backend & Deploy)</h2>
 
-### 📌 GitHub Actions Node 20 弃用警告与版本升级的正确姿势
-* **情形描述**：当 GitHub Actions 的面板报告 `Node.js 20 actions are deprecated` 警告时（点名 `actions/checkout@v4`, `actions/configure-pages@v4`）。如果盲目添加 `ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION`，实际上只是在允许之后运行旧容器，根本无法消除当前的警告提示框。如果添加 `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true` 则可能让没有适配 Node 24 的代码强行跨版本崩溃导致 **exit code 1**，因为底层代码的 API 也许已废弃！
-* **正确解法**：永远不要依赖环境变量“压制”警告。唯一的正解是**直接升级 Action 模块的主版本号**。例如，找到 `.github/workflows/` 下的 yml 文件，将 `actions/checkout@v4` 升级为 `actions/checkout@v5`，将 `actions/configure-pages@v4` 提至 `@v5`，从而原生支持新版 Node.js 并在根源上消除警告。
+### 📌 HTMLProofer 链接检查导致构建失败
+* **情形描述**：Jekyll 站点构建成功，但 GitHub Actions 在 "Test site" 步骤（运行 HTMLProofer）时返回 exit code 1，导致整个部署流程失败。错误信息不明确，仅显示 `Process completed with exit code 1`。
+* **根因分析**：HTMLProofer 检测到网站内部链接错误（如死链、图片路径错误、锚点不存在等）。
+* **排查方法**：
+  1. 本地运行 `bundle exec jekyll build` 构建站点
+  2. 本地运行 `bundle exec htmlproofer _site --disable-external` 查看具体错误
+  3. 根据输出修复链接问题
+* **临时解决方案**：如果链接问题较多或暂时无法修复，可以在 workflow 中注释掉 Test site 步骤，优先保证部署流程通畅。
+
+### 📌 GitHub Actions Node 20 弃用警告与版本升级
+* **情形描述**：当 GitHub Actions 报告 `Node.js 20 actions are deprecated` 警告时（如 `actions/configure-pages@v5`）。GitHub 正在将默认 Node.js 版本从 20 升级到 24。
+* **解决方案（按优先级）**：
+  1. **首选**：升级 Action 到最新版本（如 `actions/configure-pages@v5` → 检查是否有 v6）
+  2. **临时方案**：在 workflow 文件顶部添加环境变量 `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true`，强制使用 Node.js 24 运行。这通常能正常工作，因为 Node.js 24 向后兼容大部分 Node.js 20 的 API。
+  3. **不推荐**：`ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true` 只是推迟问题，无法消除警告。
+* **经验总结**：2025年4月实践中，`FORCE_JAVASCRIPT_ACTIONS_TO_NODE24` 配合 `actions/configure-pages@v5` 和 `actions/deploy-pages@v4` 可正常运行，仅产生警告但不影响构建。
 
 ---
 
