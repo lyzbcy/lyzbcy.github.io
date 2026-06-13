@@ -1,6 +1,7 @@
 import * as THREE from 'three';
+import { placeOnSphere } from '../world/terrain.js';
 
-export function createTower() {
+export function createTower(noise2D) {
   const group = new THREE.Group();
   group.name = 'tower';
 
@@ -13,7 +14,7 @@ export function createTower() {
   });
 
   // Base platform
-  const baseGeo = new THREE.BoxGeometry(8, 0.5, 8);
+  const baseGeo = new THREE.CylinderGeometry(5, 5.5, 0.5, 8);
   const base = new THREE.Mesh(baseGeo, baseMat);
   base.position.y = 0.25;
   base.receiveShadow = true;
@@ -64,6 +65,11 @@ export function createTower() {
   spotLight.target.position.set(0, 0, 8);
   group.add(spotLight);
   group.add(spotLight.target);
+
+  // Place tower at north pole on sphere
+  if (noise2D) {
+    placeOnSphere(group, 0, 0, noise2D, 0);
+  }
 
   return group;
 }

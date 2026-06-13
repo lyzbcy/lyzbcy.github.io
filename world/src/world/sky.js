@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import skyVert from '../shaders/sky.vert?raw';
 import skyFrag from '../shaders/sky.frag?raw';
+import { SPHERE_RADIUS } from './terrain.js';
 
 export function createSky() {
   const geometry = new THREE.SphereGeometry(200, 32, 32);
@@ -28,12 +29,15 @@ export function createFireflies(count = 80) {
   const phases = new Float32Array(count);
 
   for (let i = 0; i < count; i++) {
-    // Scatter fireflies in a dome around the scene
-    const angle = Math.random() * Math.PI * 2;
-    const radius = 5 + Math.random() * 40;
-    positions[i * 3] = Math.cos(angle) * radius;
-    positions[i * 3 + 1] = 1 + Math.random() * 8;
-    positions[i * 3 + 2] = Math.sin(angle) * radius;
+    // Scatter fireflies in a shell around the sphere world
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    const r = SPHERE_RADIUS + 3 + Math.random() * 12;
+
+    positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+    positions[i * 3 + 1] = r * Math.cos(phi);
+    positions[i * 3 + 2] = r * Math.sin(phi) * Math.sin(theta);
+
     sizes[i] = 0.3 + Math.random() * 0.5;
     phases[i] = Math.random() * Math.PI * 2;
   }

@@ -2,7 +2,7 @@ import * as THREE from 'three';
 
 // Polyfill: use Timer if available (r170+), fallback to Clock
 const ClockClass = THREE.Timer || THREE.Clock;
-import { createTerrain } from './world/terrain.js';
+import { createTerrain, SPHERE_RADIUS } from './world/terrain.js';
 import { createWater } from './world/water.js';
 import { createSky, createFireflies } from './world/sky.js';
 import { createDecorations } from './world/decorations.js';
@@ -32,7 +32,7 @@ renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.2;
 
 const scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2(0x0a0a1a, 0.012);
+scene.fog = new THREE.FogExp2(0x0a0a1a, 0.006);
 
 const camera = new THREE.PerspectiveCamera(
   70, window.innerWidth / window.innerHeight, 0.1, 500
@@ -53,12 +53,12 @@ const hemiLight = new THREE.HemisphereLight(0x4466aa, 0x332211, 0.6);
 scene.add(hemiLight);
 
 const sunLight = new THREE.DirectionalLight(0xffeedd, 1.0);
-sunLight.position.set(30, 40, 20);
+sunLight.position.set(30, 50, 20);
 sunLight.castShadow = true;
 sunLight.shadow.mapSize.width = 1024;
 sunLight.shadow.mapSize.height = 1024;
 sunLight.shadow.camera.near = 0.5;
-sunLight.shadow.camera.far = 100;
+sunLight.shadow.camera.far = 120;
 sunLight.shadow.camera.left = -40;
 sunLight.shadow.camera.right = 40;
 sunLight.shadow.camera.top = 40;
@@ -72,12 +72,12 @@ scene.add(moonLight);
 
 updateLoadProgress(20);
 
-// Terrain
+// Terrain (sphere)
 const { mesh: terrain, noise2D } = createTerrain();
 scene.add(terrain);
 updateLoadProgress(35);
 
-// Water
+// Water (sphere shell below terrain)
 const { mesh: water, material: waterMat } = createWater();
 scene.add(water);
 updateLoadProgress(45);
@@ -91,22 +91,21 @@ const { points: fireflies, phases: fireflyPhases } = createFireflies();
 scene.add(fireflies);
 updateLoadProgress(55);
 
-// Decorations (trees, rocks, lamps, paths)
-const decorations = createDecorations(noise2D);
-scene.add(decorations);
+// Tower (placed at north pole)
+const tower = createTower(noise2D);
+scene.add(tower);
 updateLoadProgress(65);
 
-// Tower building
-const tower = createTower();
-scene.add(tower);
+// Display screens on tower (children of tower group)
+const screens = createScreens(posts, tower);
 updateLoadProgress(75);
 
-// Display screens on tower
-const screens = createScreens(posts);
-scene.add(screens);
+// Decorations (trees, rocks, lamps, paths on sphere)
+const decorations = createDecorations(noise2D);
+scene.add(decorations);
 updateLoadProgress(85);
 
-// NPCs
+// NPCs (2D sprites on sphere)
 const npcs = createAllNPCs(noise2D, posts);
 scene.add(npcs);
 updateLoadProgress(95);
@@ -126,10 +125,7 @@ const interaction = new InteractionManager(camera, canvas, allInteractables, dia
 
 // --- Finish loading ---
 updateLoadProgress(100);
-setTimeout(() => {
-  loadingScreen.classList.add('hidden');
-  setTimeout(() => { loadingScreen.style.display = 'none'; }, 800);
-}, 400);
+// Loading screen is now controlled by the "Enter" button in index.html
 
 // --- Resize handler ---
 window.addEventListener('resize', () => {
@@ -167,8 +163,14 @@ let npcAnimTime = 0;
 function animateNPCs(delta) {
   npcAnimTime += delta;
   npcs.userData.interactables.forEach((npc, i) => {
-    // Gentle bobbing
-    npc.position.y += Math.sin(npcAnimTime * 1.5 + i * 0.7) * 0.002;
+    // Gentle floating animation (along the NPC's local Y = sphere normal)
+    const sprite = npc.getObjectByName('npc-sprite');
+    if (sprite) {
+      sprite.position.y = 1.5 + Math.sin(npcAnimTime * 1.5 + i * 0.7) * 0.1;
+      // Subtle scale breathing
+      const breathe = 1.0 + Math.sin(npcAnimTime * 2 + i * 1.1) * 0.03;
+      sprite.scale.set(3 * breathe, 3 * breathe, 1);
+    }
   });
 }
 
@@ -176,12 +178,21 @@ function animateNPCs(delta) {
 function animateFireflies(time) {
   const positions = fireflies.geometry.attributes.position;
   for (let i = 0; i < positions.count; i++) {
-    const baseY = 1 + (i % 8);
-    positions.setY(i, baseY + Math.sin(time * 0.5 + fireflyPhases[i]) * 1.5);
     const x = positions.getX(i);
+    const y = positions.getY(i);
     const z = positions.getZ(i);
-    positions.setX(i, x + Math.sin(time * 0.3 + fireflyPhases[i] * 2) * 0.01);
-    positions.setZ(i, z + Math.cos(time * 0.3 + fireflyPhases[i] * 3) * 0.01);
+
+    // Orbit slowly around the sphere
+    const angle = time * 0.05 + fireflyPhases[i];
+    const cos = Math.cos(0.001);
+    const sin = Math.sin(0.001);
+    const nx = x * cos - z * sin;
+    const nz = x * sin + z * cos;
+
+    // Bob up and down
+    const bobY = y + Math.sin(time * 0.5 + fireflyPhases[i]) * 0.01;
+
+    positions.setXYZ(i, nx, bobY, nz);
   }
   positions.needsUpdate = true;
 

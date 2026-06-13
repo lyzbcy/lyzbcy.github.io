@@ -1,124 +1,111 @@
 import * as THREE from 'three';
-import { getTerrainHeight } from './terrain.js';
+import { placeOnSphere, SPHERE_RADIUS } from './terrain.js';
 
 export function createDecorations(noise2D) {
   const group = new THREE.Group();
   group.name = 'decorations';
 
-  // --- Trees (InstancedMesh) ---
-  const treeCount = 25;
-  const trunkGeo = new THREE.CylinderGeometry(0.15, 0.25, 1.5, 6);
-  const trunkMat = new THREE.MeshToonMaterial({ color: 0x6b4226 });
-  const trunkMesh = new THREE.InstancedMesh(trunkGeo, trunkMat, treeCount);
-  trunkMesh.castShadow = true;
-
-  const foliageGeo = new THREE.ConeGeometry(1.2, 2.5, 6);
-  const foliageMat = new THREE.MeshToonMaterial({ color: 0x2d6b30 });
-  const foliageMesh = new THREE.InstancedMesh(foliageGeo, foliageMat, treeCount);
-  foliageMesh.castShadow = true;
-
-  const dummy = new THREE.Object3D();
+  // --- Trees ---
+  const treeCount = 30;
   let placed = 0;
   const attempts = 200;
 
   for (let i = 0; i < attempts && placed < treeCount; i++) {
     const angle = Math.random() * Math.PI * 2;
-    const radius = 12 + Math.random() * 35;
-    const x = Math.cos(angle) * radius;
-    const z = Math.sin(angle) * radius;
-    const y = getTerrainHeight(noise2D, x, z);
+    const distFromPole = 8 + Math.random() * 30;
 
-    // Only place trees on land above water
-    if (y < 0.2) continue;
+    // Skip trees too close to the north pole (tower area)
+    if (distFromPole < 10) continue;
 
-    const scale = 0.7 + Math.random() * 0.8;
+    const tree = createTree();
+    placeOnSphere(tree, angle, distFromPole, noise2D, 0);
 
-    // Trunk
-    dummy.position.set(x, y + 0.75 * scale, z);
-    dummy.scale.set(scale, scale, scale);
-    dummy.rotation.y = Math.random() * Math.PI;
-    dummy.updateMatrix();
-    trunkMesh.setMatrixAt(placed, dummy.matrix);
+    // Random scale
+    const scale = 0.6 + Math.random() * 0.6;
+    tree.scale.set(scale, scale, scale);
 
-    // Foliage
-    dummy.position.set(x, y + 2.5 * scale, z);
-    dummy.updateMatrix();
-    foliageMesh.setMatrixAt(placed, dummy.matrix);
+    // Random rotation around local Y (normal)
+    tree.rotateY(Math.random() * Math.PI * 2);
 
+    group.add(tree);
     placed++;
   }
 
-  trunkMesh.count = placed;
-  foliageMesh.count = placed;
-  trunkMesh.instanceMatrix.needsUpdate = true;
-  foliageMesh.instanceMatrix.needsUpdate = true;
-  group.add(trunkMesh, foliageMesh);
-
-  // --- Rocks (InstancedMesh) ---
-  const rockCount = 18;
-  const rockGeo = new THREE.DodecahedronGeometry(0.5, 0);
-  const rockMat = new THREE.MeshToonMaterial({ color: 0x7a7a7a });
-  const rockMesh = new THREE.InstancedMesh(rockGeo, rockMat, rockCount);
-  rockMesh.castShadow = true;
-
+  // --- Rocks ---
+  const rockCount = 20;
   let rockPlaced = 0;
   for (let i = 0; i < 150 && rockPlaced < rockCount; i++) {
     const angle = Math.random() * Math.PI * 2;
-    const radius = 8 + Math.random() * 40;
-    const x = Math.cos(angle) * radius;
-    const z = Math.sin(angle) * radius;
-    const y = getTerrainHeight(noise2D, x, z);
+    const distFromPole = 6 + Math.random() * 35;
 
-    if (y < -0.3) continue;
+    const rock = createRock();
+    placeOnSphere(rock, angle, distFromPole, noise2D, 0);
 
-    const scale = 0.4 + Math.random() * 1.0;
-    dummy.position.set(x, y + 0.15 * scale, z);
-    dummy.scale.set(scale, scale * (0.5 + Math.random() * 0.5), scale);
-    dummy.rotation.set(Math.random(), Math.random(), Math.random());
-    dummy.updateMatrix();
-    rockMesh.setMatrixAt(rockPlaced, dummy.matrix);
+    const scale = 0.3 + Math.random() * 0.8;
+    rock.scale.set(scale, scale * (0.5 + Math.random() * 0.5), scale);
+    rock.rotateY(Math.random() * Math.PI * 2);
+
+    group.add(rock);
     rockPlaced++;
   }
 
-  rockMesh.count = rockPlaced;
-  rockMesh.instanceMatrix.needsUpdate = true;
-  group.add(rockMesh);
-
-  // --- Street Lamps ---
+  // --- Street Lamps in a ring around the tower ---
   const lampCount = 8;
   for (let i = 0; i < lampCount; i++) {
     const angle = (i / lampCount) * Math.PI * 2;
-    const radius = 10;
-    const x = Math.cos(angle) * radius;
-    const z = Math.sin(angle) * radius;
-    const y = getTerrainHeight(noise2D, x, z);
+    const distFromPole = 8;
 
     const lamp = createLamp();
-    lamp.position.set(x, Math.max(0, y), z);
+    placeOnSphere(lamp, angle, distFromPole, noise2D, 0);
     group.add(lamp);
   }
 
-  // --- Paths (simple flat strips) ---
-  const pathGeo = new THREE.PlaneGeometry(2, 18, 1, 1);
-  pathGeo.rotateX(-Math.PI / 2);
-  const pathMat = new THREE.MeshToonMaterial({ color: 0x9a8a6a });
-
-  // Path from building toward NPCs
-  for (let i = 0; i < 4; i++) {
-    const path = new THREE.Mesh(pathGeo, pathMat);
-    path.rotation.y = (i / 4) * Math.PI * 2;
-    path.position.y = 0.02;
-    path.position.x = Math.cos(path.rotation.y) * 9;
-    path.position.z = Math.sin(path.rotation.y) * 9;
-    path.receiveShadow = true;
-    group.add(path);
+  // --- Paths (flat strips on sphere surface) ---
+  // Create paths from tower toward NPC clusters
+  const pathCount = 6;
+  for (let i = 0; i < pathCount; i++) {
+    const angle = (i / pathCount) * Math.PI * 2;
+    createPathSegment(group, angle, noise2D);
   }
 
   return group;
 }
 
+function createTree() {
+  const g = new THREE.Group();
+
+  // Trunk
+  const trunkGeo = new THREE.CylinderGeometry(0.15, 0.25, 1.5, 6);
+  const trunkMat = new THREE.MeshToonMaterial({ color: 0x6b4226 });
+  const trunk = new THREE.Mesh(trunkGeo, trunkMat);
+  trunk.position.y = 0.75;
+  trunk.castShadow = true;
+  g.add(trunk);
+
+  // Foliage (cone)
+  const foliageGeo = new THREE.ConeGeometry(1.2, 2.5, 6);
+  const foliageMat = new THREE.MeshToonMaterial({ color: 0x2d6b30 });
+  const foliage = new THREE.Mesh(foliageGeo, foliageMat);
+  foliage.position.y = 2.5;
+  foliage.castShadow = true;
+  g.add(foliage);
+
+  return g;
+}
+
+function createRock() {
+  const geo = new THREE.DodecahedronGeometry(0.5, 0);
+  const mat = new THREE.MeshToonMaterial({ color: 0x7a7a7a });
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.position.y = 0.2;
+  mesh.castShadow = true;
+  const g = new THREE.Group();
+  g.add(mesh);
+  return g;
+}
+
 function createLamp() {
-  const group = new THREE.Group();
+  const g = new THREE.Group();
 
   // Pole
   const poleGeo = new THREE.CylinderGeometry(0.06, 0.08, 3, 6);
@@ -126,7 +113,7 @@ function createLamp() {
   const pole = new THREE.Mesh(poleGeo, poleMat);
   pole.position.y = 1.5;
   pole.castShadow = true;
-  group.add(pole);
+  g.add(pole);
 
   // Light bulb
   const bulbGeo = new THREE.SphereGeometry(0.2, 8, 8);
@@ -137,12 +124,34 @@ function createLamp() {
   });
   const bulb = new THREE.Mesh(bulbGeo, bulbMat);
   bulb.position.y = 3.1;
-  group.add(bulb);
+  g.add(bulb);
 
   // Point light
   const light = new THREE.PointLight(0xffdd88, 3, 10, 2);
   light.position.y = 3.1;
-  group.add(light);
+  g.add(light);
 
-  return group;
+  return g;
+}
+
+/**
+ * Create a path segment from near the tower outward on the sphere
+ */
+function createPathSegment(group, angle, noise2D) {
+  const pathMat = new THREE.MeshToonMaterial({ color: 0x9a8a6a });
+  const segmentCount = 5;
+
+  for (let s = 0; s < segmentCount; s++) {
+    const distFromPole = 5 + s * 3;
+    const pathPiece = new THREE.Group();
+
+    const geo = new THREE.BoxGeometry(1.8, 0.05, 2.5);
+    const mesh = new THREE.Mesh(geo, pathMat);
+    mesh.position.y = 0.03;
+    mesh.receiveShadow = true;
+    pathPiece.add(mesh);
+
+    placeOnSphere(pathPiece, angle, distFromPole, noise2D, 0);
+    group.add(pathPiece);
+  }
 }

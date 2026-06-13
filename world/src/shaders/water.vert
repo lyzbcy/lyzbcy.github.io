@@ -1,5 +1,6 @@
-varying vec2 vUv;
-varying float vElevation;
+varying vec3 vWorldNormal;
+varying vec3 vWorldPos;
+varying float vDisplacement;
 uniform float uTime;
 
 // Simplex noise helpers
@@ -31,13 +32,19 @@ float snoise(vec2 v) {
 }
 
 void main() {
-  vUv = uv;
+  vec3 n = normalize(normal);
   vec3 pos = position;
 
-  float wave1 = snoise(pos.xz * 0.08 + uTime * 0.3) * 0.4;
-  float wave2 = snoise(pos.xz * 0.15 + uTime * 0.5) * 0.2;
-  pos.y += wave1 + wave2;
-  vElevation = pos.y;
+  // Use 3D position for spherical wave patterns
+  float wave1 = snoise(pos.xz * 0.15 + uTime * 0.3) * 0.2;
+  float wave2 = snoise(pos.xy * 0.2 + uTime * 0.5) * 0.12;
+  float wave3 = snoise(pos.yz * 0.18 + uTime * 0.4) * 0.08;
+  float wave = wave1 + wave2 + wave3;
+
+  pos += n * wave;
+  vDisplacement = wave;
+  vWorldNormal = n;
+  vWorldPos = (modelMatrix * vec4(pos, 1.0)).xyz;
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
 }

@@ -9,30 +9,160 @@
     html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a1a; font-family: 'Microsoft YaHei', sans-serif; }
     #canvas { width: 100%; height: 100%; display: block; }
 
-    /* Loading screen */
+    /* ========== Loading / Start Screen ========== */
     #loading {
       position: fixed; inset: 0; z-index: 100;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      background: #0a0a1a; color: #e0e0e0; transition: opacity 0.8s;
+      background: radial-gradient(ellipse at center, #0d1b2a 0%, #0a0a1a 70%);
+      color: #e0e0e0;
+      transition: opacity 1.2s ease-out;
     }
     #loading.hidden { opacity: 0; pointer-events: none; }
-    #loading h1 { font-size: 2rem; margin-bottom: 1rem; letter-spacing: 0.3em; }
-    #loading .bar { width: 200px; height: 4px; background: #222; border-radius: 2px; overflow: hidden; }
-    #loading .bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #4fc3f7, #81d4fa); transition: width 0.3s; }
 
-    /* HUD */
+    /* Starfield background */
+    #loading::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1.5px 1.5px at 50% 10%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 90% 80%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 15% 85%, rgba(255,255,255,0.2), transparent),
+        radial-gradient(1.5px 1.5px at 60% 75%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 80% 15%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 45% 45%, rgba(255,255,255,0.2), transparent),
+        radial-gradient(1px 1px at 25% 35%, rgba(255,255,255,0.35), transparent);
+      animation: twinkle 4s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+
+    /* Title */
+    .title-container {
+      position: relative; z-index: 1;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .title-main {
+      font-size: 3rem;
+      font-weight: bold;
+      letter-spacing: 0.4em;
+      background: linear-gradient(135deg, #4fc3f7, #81d4fa, #b3e5fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+      animation: titleGlow 3s ease-in-out infinite alternate;
+      margin-bottom: 0.5rem;
+    }
+    @keyframes titleGlow {
+      0% { filter: brightness(0.9); }
+      100% { filter: brightness(1.2); }
+    }
+    .title-sub {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.3em;
+    }
+
+    /* Loading bar */
+    .load-section {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 1rem;
+    }
+    .bar-container {
+      width: 240px; height: 3px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px; overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, #4fc3f7, #81d4fa);
+      border-radius: 2px;
+      transition: width 0.4s ease-out;
+      box-shadow: 0 0 10px rgba(79,195,247,0.5);
+    }
+    .load-percent {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.2em;
+    }
+
+    /* Enter button (hidden initially) */
+    #enter-btn {
+      display: none;
+      position: relative; z-index: 1;
+      margin-top: 2rem;
+      padding: 12px 36px;
+      background: transparent;
+      border: 1px solid rgba(79,195,247,0.5);
+      color: #81d4fa;
+      font-size: 1rem;
+      letter-spacing: 0.3em;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s;
+      animation: fadeInUp 0.8s ease-out;
+    }
+    #enter-btn:hover {
+      background: rgba(79,195,247,0.15);
+      border-color: #4fc3f7;
+      box-shadow: 0 0 20px rgba(79,195,247,0.2);
+      transform: translateY(-2px);
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========== HUD ========== */
     #hud {
       position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
       color: #fff; font-size: 14px; text-align: center;
       text-shadow: 0 1px 4px rgba(0,0,0,0.8);
       pointer-events: none; z-index: 10;
+      opacity: 0;
+      transition: opacity 1s ease-in 0.5s;
+    }
+    #hud.visible { opacity: 1; }
+
+    /* Controls hint */
+    #controls-hint {
+      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      z-index: 15; pointer-events: none;
+      display: none;
+      text-align: center;
+      color: rgba(255,255,255,0.6);
+      font-size: 1rem;
+      animation: hintFade 4s ease-in-out forwards;
+    }
+    @keyframes hintFade {
+      0% { opacity: 0; }
+      15% { opacity: 1; }
+      70% { opacity: 1; }
+      100% { opacity: 0; display: none; }
+    }
+    .key-icons {
+      display: flex; gap: 4px; justify-content: center; margin-bottom: 8px;
+    }
+    .key-icon {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; color: rgba(255,255,255,0.5);
     }
 
-    /* Mobile joystick */
+    /* ========== Mobile joystick ========== */
     #joystick-zone {
       position: fixed; bottom: 30px; left: 30px;
       width: 120px; height: 120px; z-index: 20;
-      display: none; /* shown on touch devices */
+      display: none;
     }
     #joystick-base {
       width: 100%; height: 100%; border-radius: 50%;
@@ -46,15 +176,17 @@
       transform: translate(-50%, -50%);
     }
 
-    /* Dialog overlay */
+    /* ========== Dialog overlay ========== */
     #dialog-overlay {
       position: fixed; inset: 0; z-index: 50;
       display: none; align-items: center; justify-content: center;
       background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
     }
     #dialog-overlay.visible { display: flex; }
     #dialog-box {
-      background: #1a1a2e; border: 1px solid #3a3a5e;
+      background: rgba(26,26,46,0.95);
+      border: 1px solid #3a3a5e;
       border-radius: 12px; padding: 24px; max-width: 420px; width: 90%;
       color: #e0e0e0; box-shadow: 0 8px 32px rgba(0,0,0,0.6);
     }
@@ -74,17 +206,18 @@
     }
     #dialog-box .close-btn:hover { background: rgba(79,195,247,0.15); }
 
-    /* Crosshair */
+    /* ========== Crosshair ========== */
     #crosshair {
       position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
       width: 8px; height: 8px; border-radius: 50%;
       border: 1.5px solid rgba(255,255,255,0.5);
       pointer-events: none; z-index: 10;
       transition: border-color 0.2s, transform 0.2s;
+      display: none;
     }
     #crosshair.active { border-color: #4fc3f7; transform: translate(-50%, -50%) scale(1.5); }
 
-    /* Back to site link */
+    /* ========== Back link ========== */
     #back-link {
       position: fixed; top: 16px; left: 16px; z-index: 20;
       color: rgba(255,255,255,0.6); text-decoration: none; font-size: 13px;
@@ -94,23 +227,47 @@
   </style>
 </head>
 <body>
+  <!-- Loading / Start Screen -->
   <div id="loading">
-    <h1>捞鱼的世界</h1>
-    <div class="bar"><div class="bar-fill" id="load-bar"></div></div>
+    <div class="title-container">
+      <div class="title-main">捞鱼的世界</div>
+      <div class="title-sub">探索 · 发现 · 连接</div>
+    </div>
+    <div class="load-section">
+      <div class="bar-container">
+        <div class="bar-fill" id="load-bar"></div>
+      </div>
+      <div class="load-percent" id="load-percent">0%</div>
+    </div>
+    <button id="enter-btn">点击进入世界</button>
   </div>
 
+  <!-- 3D Canvas -->
   <canvas id="canvas"></canvas>
   <div id="crosshair"></div>
   <a id="back-link" href="/">← 返回首页</a>
 
+  <!-- Controls hint -->
+  <div id="controls-hint">
+    <div class="key-icons">
+      <div class="key-icon">W</div>
+      <div class="key-icon">A</div>
+      <div class="key-icon">S</div>
+      <div class="key-icon">D</div>
+    </div>
+    <div>移动探索 · 鼠标转动视角 · 点击交互</div>
+  </div>
+
   <div id="hud">WASD 移动 · 鼠标转动视角 · 点击 NPC 或建筑屏幕交互</div>
 
+  <!-- Mobile joystick -->
   <div id="joystick-zone">
     <div id="joystick-base">
       <div id="joystick-thumb"></div>
     </div>
   </div>
 
+  <!-- Dialog overlay -->
   <div id="dialog-overlay">
     <div id="dialog-box">
       <h2 id="dialog-title"></h2>
@@ -120,5 +277,46 @@
   </div>
 
   <script type="module" src="/src/main.js"></script>
+  <script>
+    // Start screen logic
+    const enterBtn = document.getElementById('enter-btn');
+    const loadPercent = document.getElementById('load-percent');
+    const hud = document.getElementById('hud');
+    const controlsHint = document.getElementById('controls-hint');
+    const loadingScreen = document.getElementById('loading');
+
+    // Observe loading progress changes
+    const loadBar = document.getElementById('load-bar');
+    const observer = new MutationObserver(() => {
+      const width = loadBar.style.width;
+      const pct = parseInt(width) || 0;
+      loadPercent.textContent = pct + '%';
+
+      if (pct >= 100) {
+        loadPercent.style.display = 'none';
+        enterBtn.style.display = 'inline-block';
+      }
+    });
+    observer.observe(loadBar, { attributes: true, attributeFilter: ['style'] });
+
+    // Enter world
+    enterBtn.addEventListener('click', () => {
+      loadingScreen.classList.add('hidden');
+      setTimeout(() => {
+        loadingScreen.style.display = 'none';
+        hud.classList.add('visible');
+
+        // Show controls hint briefly
+        controlsHint.style.display = 'block';
+        setTimeout(() => { controlsHint.style.display = 'none'; }, 4500);
+
+        // Request pointer lock on desktop
+        const canvas = document.getElementById('canvas');
+        if (!('ontouchstart' in window)) {
+          canvas.requestPointerLock();
+        }
+      }, 1200);
+    });
+  </script>
 </body>
 </html>

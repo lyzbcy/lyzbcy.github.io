@@ -1,9 +1,10 @@
 import * as THREE from 'three';
 
 /**
- * Create display screens on the tower showing article lists
+ * Create display screens on the tower showing article lists.
+ * Screens are added as children of the tower group so they inherit its transform.
  */
-export function createScreens(posts) {
+export function createScreens(posts, towerGroup) {
   const group = new THREE.Group();
   group.name = 'screens';
   group.userData.interactables = [];
@@ -16,7 +17,7 @@ export function createScreens(posts) {
     categories[cat].push(post);
   });
 
-  // Create 4 screens facing different directions
+  // Create 4 screens facing different directions on the tower
   const screenConfigs = [
     { rotY: 0, x: 0, z: 3.05, label: '最新文章', posts: posts.slice(0, 6) },
     { rotY: Math.PI / 2, x: 3.05, z: 0, label: '热门推荐', posts: posts.slice(6, 12) },
@@ -54,23 +55,25 @@ export function createScreens(posts) {
       emissiveIntensity: 1.2
     });
 
-    // Top/bottom/left/right frame bars
     const frameThickness = 0.06;
     const frameDepth = 0.05;
 
     const hBar = new THREE.BoxGeometry(4.1, frameThickness, frameDepth);
     const vBar = new THREE.BoxGeometry(frameThickness, 3.1, frameDepth);
 
+    // Top bar
     const top = new THREE.Mesh(hBar, frameMat);
     top.position.set(config.x, 6.52, config.z);
     top.rotation.y = config.rotY;
     group.add(top);
 
+    // Bottom bar
     const bottom = new THREE.Mesh(hBar, frameMat);
     bottom.position.set(config.x, 3.48, config.z);
     bottom.rotation.y = config.rotY;
     group.add(bottom);
 
+    // Left bar
     const left = new THREE.Mesh(vBar, frameMat);
     left.position.set(config.x, 5, config.z);
     left.rotation.y = config.rotY;
@@ -78,6 +81,7 @@ export function createScreens(posts) {
     left.position.z += Math.sin(config.rotY + Math.PI / 2) * 2.03;
     group.add(left);
 
+    // Right bar
     const right = new THREE.Mesh(vBar, frameMat);
     right.position.set(config.x, 5, config.z);
     right.rotation.y = config.rotY;
@@ -85,6 +89,11 @@ export function createScreens(posts) {
     right.position.z -= Math.sin(config.rotY + Math.PI / 2) * 2.03;
     group.add(right);
   });
+
+  // Add screens as children of the tower so they inherit its spherical placement
+  if (towerGroup) {
+    towerGroup.add(group);
+  }
 
   return group;
 }

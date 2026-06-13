@@ -1,8 +1,9 @@
 import * as THREE from 'three';
-import { getTerrainHeight } from '../world/terrain.js';
+import { getTerrainHeightAtPosition, SPHERE_RADIUS } from '../world/terrain.js';
 
 /**
- * Player movement controls - WASD + touch joystick
+ * Player movement controls for spherical world - WASD + touch joystick
+ * Player walks on the surface of a sphere with gravity pointing toward center.
  */
 export class PlayerControls {
   constructor(camera, noise2D, domElement) {
@@ -10,17 +11,16 @@ export class PlayerControls {
     this.noise2D = noise2D;
     this.domElement = domElement;
 
-    this.moveSpeed = 8;
+    this.moveSpeed = 6;
     this.mouseSpeed = 0.002;
 
     // Movement state
     this.keys = { w: false, a: false, s: false, d: false };
-    this.velocity = new THREE.Vector3();
-    this.position = new THREE.Vector3(0, 2, 12); // Start in front of building
-    this.yaw = Math.PI; // Face toward building initially
-    this.pitch = -0.2;
+    this.position = new THREE.Vector3(0, SPHERE_RADIUS + 2, 8); // Start near north pole
+    this.yaw = 0;
+    this.pitch = 0;
 
-    // Player height
+    // Player height above terrain
     this.playerHeight = 1.8;
 
     // Touch joystick state
@@ -56,7 +56,6 @@ export class PlayerControls {
 
     document.addEventListener('pointerlockchange', () => {
       this.isLocked = document.pointerLockElement === this.domElement;
-      // Hide crosshair when not locked
       document.getElementById('crosshair').style.display = this.isLocked ? 'block' : 'none';
     });
 
@@ -74,7 +73,6 @@ export class PlayerControls {
     const base = document.getElementById('joystick-base');
     const thumb = document.getElementById('joystick-thumb');
 
-    // Show joystick on touch devices
     if ('ontouchstart' in window) {
       zone.style.display = 'block';
       document.getElementById('hud').textContent = '左侧摇杆移动 · 右侧滑动转视角 · 点击 NPC 或屏幕交互';
@@ -141,53 +139,70 @@ export class PlayerControls {
   }
 
   update(deltaTime) {
-    // Calculate move direction
-    const forward = new THREE.Vector3(
-      -Math.sin(this.yaw),
-      0,
-      -Math.cos(this.yaw)
-    );
-    const right = new THREE.Vector3(
-      -Math.cos(this.yaw),
-      0,
-      Math.sin(this.yaw)
-    );
+    const normal = this.position.clone().normalize();
 
+    // Compute tangent basis on sphere surface
+    let refUp = new THREE.Vector3(0, 1, 0);
+    if (Math.abs(normal.dot(refUp)) > 0.99) {
+      refUp = new THREE.Vector3(0, 0, -1);
+    }
+    const east = new THREE.Vector3().crossVectors(refUp, normal).normalize();
+    const north = new THREE.Vector3().crossVectors(normal, east).normalize();
+
+    // Apply yaw rotation around normal
+    const forward = north.clone().applyAxisAngle(normal, this.yaw);
+    const right = east.clone().applyAxisAngle(normal, this.yaw);
+
+    // Calculate move direction
     const moveDir = new THREE.Vector3(0, 0, 0);
 
     // Keyboard input
     if (this.keys.w) moveDir.add(forward);
     if (this.keys.s) moveDir.sub(forward);
-    if (this.keys.a) moveDir.add(right);
-    if (this.keys.d) moveDir.sub(right);
+    if (this.keys.d) moveDir.add(right);
+    if (this.keys.a) moveDir.sub(right);
 
     // Joystick input
     if (this.joystickActive) {
       moveDir.add(forward.clone().multiplyScalar(-this.joystickDirection.y));
-      moveDir.add(right.clone().multiplyScalar(-this.joystickDirection.x));
+      moveDir.add(right.clone().multiplyScalar(this.joystickDirection.x));
     }
 
     if (moveDir.length() > 0) {
       moveDir.normalize();
+      // Move along tangent, then re-project to sphere
       this.position.add(moveDir.multiplyScalar(this.moveSpeed * deltaTime));
     }
 
-    // Clamp to island bounds
-    const maxRadius = 48;
-    const distFromCenter = Math.sqrt(this.position.x ** 2 + this.position.z ** 2);
-    if (distFromCenter > maxRadius) {
-      this.position.x *= maxRadius / distFromCenter;
-      this.position.z *= maxRadius / distFromCenter;
-    }
-
-    // Snap Y to terrain height
-    const terrainY = getTerrainHeight(this.noise2D, this.position.x, this.position.z);
-    this.position.y = Math.max(terrainY, 0) + this.playerHeight;
+    // Re-project position to sphere surface
+    const currentNormal = this.position.clone().normalize();
+    const terrainRadius = getTerrainHeightAtPosition(
+      this.noise2D, currentNormal.x, currentNormal.y, currentNormal.z
+    );
+    const surfaceRadius = terrainRadius + this.playerHeight;
+    this.position.copy(currentNormal.multiplyScalar(surfaceRadius));
 
     // Update camera
     this.camera.position.copy(this.position);
-    this.camera.rotation.order = 'YXZ';
-    this.camera.rotation.y = this.yaw;
-    this.camera.rotation.x = this.pitch;
+
+    // Camera orientation: apply pitch around right vector
+    const normalAtPlayer = this.position.clone().normalize();
+
+    let refUp2 = new THREE.Vector3(0, 1, 0);
+    if (Math.abs(normalAtPlayer.dot(refUp2)) > 0.99) {
+      refUp2 = new THREE.Vector3(0, 0, -1);
+    }
+    const east2 = new THREE.Vector3().crossVectors(refUp2, normalAtPlayer).normalize();
+    const north2 = new THREE.Vector3().crossVectors(normalAtPlayer, east2).normalize();
+
+    const fwd2 = north2.clone().applyAxisAngle(normalAtPlayer, this.yaw);
+    const right2 = east2.clone().applyAxisAngle(normalAtPlayer, this.yaw);
+
+    // Apply pitch
+    const lookDir = fwd2.clone().applyAxisAngle(right2, this.pitch);
+    const lookTarget = this.position.clone().add(lookDir);
+
+    this.camera.lookAt(lookTarget);
+    this.camera.up.copy(normalAtPlayer);
   }
 }

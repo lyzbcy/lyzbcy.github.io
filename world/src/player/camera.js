@@ -7,10 +7,10 @@ export class InteractionManager {
   constructor(camera, domElement, interactables, dialog) {
     this.camera = camera;
     this.domElement = domElement;
-    this.interactables = interactables; // Array of meshes/groups to check
+    this.interactables = interactables;
     this.dialog = dialog;
     this.raycaster = new THREE.Raycaster();
-    this.raycaster.far = 10; // Only interact within 10 units
+    this.raycaster.far = 15; // Increased for spherical world
     this.crosshair = document.getElementById('crosshair');
 
     this._init();
@@ -33,10 +33,8 @@ export class InteractionManager {
   }
 
   _checkInteraction() {
-    // Cast ray from center of screen
     this.raycaster.setFromCamera(new THREE.Vector2(0, 0), this.camera);
 
-    // Collect all meshes from interactables (including children)
     const allMeshes = [];
     this.interactables.forEach(obj => {
       if (obj.isMesh) {
@@ -44,7 +42,6 @@ export class InteractionManager {
       } else {
         obj.traverse(child => {
           if (child.isMesh) {
-            // Store reference to parent's userData
             child.userData._parentData = obj.userData;
             allMeshes.push(child);
           }

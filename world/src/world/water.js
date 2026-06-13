@@ -1,16 +1,20 @@
 import * as THREE from 'three';
+import { SPHERE_RADIUS } from './terrain.js';
 import waterVert from '../shaders/water.vert?raw';
 import waterFrag from '../shaders/water.frag?raw';
 
+// Water level: slightly below terrain surface so terrain pokes through
+const WATER_RADIUS = SPHERE_RADIUS + 0.3;
+
 export function createWater() {
-  const geometry = new THREE.PlaneGeometry(130, 130, 60, 60);
-  geometry.rotateX(-Math.PI / 2);
+  const geometry = new THREE.SphereGeometry(WATER_RADIUS, 64, 64);
 
   const material = new THREE.ShaderMaterial({
     vertexShader: waterVert,
     fragmentShader: waterFrag,
     transparent: true,
-    side: THREE.DoubleSide,
+    side: THREE.FrontSide,
+    depthWrite: false,
     uniforms: {
       uTime: { value: 0 },
       uDeepColor: { value: new THREE.Color(0x0a2a4a) },
@@ -19,7 +23,6 @@ export function createWater() {
   });
 
   const mesh = new THREE.Mesh(geometry, material);
-  mesh.position.y = -0.8;
   mesh.name = 'water';
 
   return { mesh, material };
