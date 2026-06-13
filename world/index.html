@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>捞鱼的世界</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a1a; font-family: 'Microsoft YaHei', sans-serif; }
+    #canvas { width: 100%; height: 100%; display: block; }
+
+    /* Loading screen */
+    #loading {
+      position: fixed; inset: 0; z-index: 100;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: #0a0a1a; color: #e0e0e0; transition: opacity 0.8s;
+    }
+    #loading.hidden { opacity: 0; pointer-events: none; }
+    #loading h1 { font-size: 2rem; margin-bottom: 1rem; letter-spacing: 0.3em; }
+    #loading .bar { width: 200px; height: 4px; background: #222; border-radius: 2px; overflow: hidden; }
+    #loading .bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #4fc3f7, #81d4fa); transition: width 0.3s; }
+
+    /* HUD */
+    #hud {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      color: #fff; font-size: 14px; text-align: center;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+      pointer-events: none; z-index: 10;
+    }
+
+    /* Mobile joystick */
+    #joystick-zone {
+      position: fixed; bottom: 30px; left: 30px;
+      width: 120px; height: 120px; z-index: 20;
+      display: none; /* shown on touch devices */
+    }
+    #joystick-base {
+      width: 100%; height: 100%; border-radius: 50%;
+      background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3);
+      position: relative;
+    }
+    #joystick-thumb {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Dialog overlay */
+    #dialog-overlay {
+      position: fixed; inset: 0; z-index: 50;
+      display: none; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.5);
+    }
+    #dialog-overlay.visible { display: flex; }
+    #dialog-box {
+      background: #1a1a2e; border: 1px solid #3a3a5e;
+      border-radius: 12px; padding: 24px; max-width: 420px; width: 90%;
+      color: #e0e0e0; box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    }
+    #dialog-box h2 { font-size: 1.2rem; margin-bottom: 12px; color: #81d4fa; }
+    #dialog-box .articles { list-style: none; }
+    #dialog-box .articles li {
+      padding: 8px 12px; margin: 4px 0; border-radius: 6px;
+      background: rgba(255,255,255,0.05); cursor: pointer;
+      transition: background 0.2s;
+    }
+    #dialog-box .articles li:hover { background: rgba(79,195,247,0.2); }
+    #dialog-box .articles li a { color: #e0e0e0; text-decoration: none; display: block; }
+    #dialog-box .close-btn {
+      margin-top: 16px; padding: 8px 20px; border: 1px solid #3a3a5e;
+      background: transparent; color: #81d4fa; border-radius: 6px; cursor: pointer;
+      transition: background 0.2s;
+    }
+    #dialog-box .close-btn:hover { background: rgba(79,195,247,0.15); }
+
+    /* Crosshair */
+    #crosshair {
+      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 8px; height: 8px; border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.5);
+      pointer-events: none; z-index: 10;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    #crosshair.active { border-color: #4fc3f7; transform: translate(-50%, -50%) scale(1.5); }
+
+    /* Back to site link */
+    #back-link {
+      position: fixed; top: 16px; left: 16px; z-index: 20;
+      color: rgba(255,255,255,0.6); text-decoration: none; font-size: 13px;
+      transition: color 0.2s;
+    }
+    #back-link:hover { color: #fff; }
+  </style>
+</head>
+<body>
+  <div id="loading">
+    <h1>捞鱼的世界</h1>
+    <div class="bar"><div class="bar-fill" id="load-bar"></div></div>
+  </div>
+
+  <canvas id="canvas"></canvas>
+  <div id="crosshair"></div>
+  <a id="back-link" href="/">← 返回首页</a>
+
+  <div id="hud">WASD 移动 · 鼠标转动视角 · 点击 NPC 或建筑屏幕交互</div>
+
+  <div id="joystick-zone">
+    <div id="joystick-base">
+      <div id="joystick-thumb"></div>
+    </div>
+  </div>
+
+  <div id="dialog-overlay">
+    <div id="dialog-box">
+      <h2 id="dialog-title"></h2>
+      <ul class="articles" id="dialog-articles"></ul>
+      <button class="close-btn" id="dialog-close">关闭</button>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
