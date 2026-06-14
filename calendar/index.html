@@ -1,0 +1,3110 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- `site.alt_lang` can specify a language different from the UI -->
+<html lang="zh-CN" >
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta
+    name="viewport"
+    content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
+  ><!-- Setup Open Graph image -->
+
+  
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="日历" />
+<meta property="og:locale" content="zh_CN" />
+<meta name="description" content="这个日历页会自动汇总文章 front matter 中的 reminder_date 以及 _data/calendar.yml 手动事件，集中展示所有待办或活动提醒。" />
+<meta property="og:description" content="这个日历页会自动汇总文章 front matter 中的 reminder_date 以及 _data/calendar.yml 手动事件，集中展示所有待办或活动提醒。" />
+<link rel="canonical" href="https://lyzbcy.github.io/calendar/" />
+<meta property="og:url" content="https://lyzbcy.github.io/calendar/" />
+<meta property="og:site_name" content="捞鱼的笔记" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-06-14T23:32:38+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="日历" />
+<meta name="twitter:site" content="@" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-06-14T23:32:38+08:00","datePublished":"2026-06-14T23:32:38+08:00","description":"这个日历页会自动汇总文章 front matter 中的 reminder_date 以及 _data/calendar.yml 手动事件，集中展示所有待办或活动提醒。","headline":"日历","mainEntityOfPage":{"@type":"WebPage","@id":"https://lyzbcy.github.io/calendar/"},"url":"https://lyzbcy.github.io/calendar/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <title>日历 | 捞鱼的笔记
+  </title>
+
+  <link rel="icon" href="/assets/image%20library/icon%20library/lyzbcy.ico?v=3" type="image/x-icon">
+<link rel="shortcut icon" href="/assets/image%20library/icon%20library/lyzbcy.ico?v=3" type="image/x-icon">
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/image%20library/icon%20library/lyzbcy.png?v=3">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/image%20library/icon%20library/lyzbcy.png?v=3">
+
+<link rel="apple-touch-icon" href="/assets/image%20library/icon%20library/lyzbcy.png?v=3">
+
+  <!-- Resource Hints -->
+  
+    
+      
+        <link rel="preconnect" href="https://fonts.googleapis.com" >
+      
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" >
+      
+    
+      
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" >
+      
+    
+      
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" >
+      
+        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" >
+      
+    
+  
+
+  <!-- Bootstrap -->
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  
+
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/assets/css/jekyll-theme-chirpy.css">
+
+  <!-- PWA manifest -->
+  <link rel="manifest" href="/assets/img/favicons/site.webmanifest">
+
+  <!-- 自定义样式 -->
+  <link rel="stylesheet" href="/assets/lib-custom/order-card.css">
+
+  <!-- Web Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Source+Sans+Pro:wght@400;600;700;900&display=swap">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css">
+
+  <!-- 3rd-party Dependencies -->
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.min.css">
+  
+
+  
+    <!-- Image Popup -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css">
+  
+
+  <!-- Scripts -->
+
+  <script src="/assets/js/dist/theme.min.js"></script>
+
+  <!-- JS selector for site. -->
+
+<!-- commons -->
+
+
+
+<!-- layout specified -->
+
+
+  
+
+  
+    <!-- image lazy-loading & popup & clipboard -->
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+
+
+
+
+
+
+<script defer src="/assets/js/dist/page.min.js"></script>
+
+
+
+<!-- Pageviews -->
+
+
+
+  
+
+  <!-- A placeholder to allow defining custom metadata -->
+
+  <link rel="icon" href="/assets/image%20library/icon%20library/lyzbcy.ico?v=2" type="image/x-icon">
+<link rel="shortcut icon" href="/assets/image%20library/icon%20library/lyzbcy.ico?v=2" type="image/x-icon">
+
+<!-- PNG fallbacks (force our PNG instead of theme defaults) -->
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/image%20library/icon%20library/lyzbcy.png?v=2">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/image%20library/icon%20library/lyzbcy.png?v=2">
+
+<!-- Apple Touch Icon -->
+<link rel="apple-touch-icon" href="/assets/image%20library/icon%20library/lyzbcy.png?v=2">
+
+<!-- PWA manifest -->
+<link rel="manifest" href="/assets/img/favicons/site.webmanifest">
+
+<!-- Preconnect to Image Server -->
+<link rel="preconnect" href="https://s41.ax1x.com">
+<link rel="dns-prefetch" href="https://s41.ax1x.com">
+
+<!-- 自定义样式 -->
+<link rel="stylesheet" href="/assets/lib-custom/order-card.css">
+
+
+<!-- Safari pinned tab -->
+<!-- Intentionally omit theme SVG to avoid overriding our favicon -->
+
+<!-- Windows tiles & theme colors -->
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#ffffff">
+
+
+<script>
+  window.isRomance = false;
+  
+</script>
+
+
+
+
+<!-- Tech Enhancements -->
+<link rel="stylesheet" href="/assets/lib-custom/tech-styles.css">
+<link rel="stylesheet" href="/assets/css/css-starfield.css">
+<!-- Three.js 由各 AR 体验页自行加载，全局不再引入 -->
+<script defer src="/assets/lib-custom/tech-effects.js"></script>
+
+<!-- GitHub-style Alerts -->
+<link rel="stylesheet" href="/assets/css/github-alerts.css">
+<script defer src="/assets/js/github-alerts.js"></script>
+
+</head>
+
+
+
+
+  <body>
+    <!-- The Side Bar -->
+
+<aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end">
+  <header class="profile-wrapper">
+    <a href="/" id="avatar" class="rounded-circle"><img src="/assets/image library/icon library/lyzbcy.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"></a>
+
+    <a class="site-title d-block" href="/">捞鱼的笔记</a>
+    <p class="site-subtitle fst-italic mb-0">会记录一些比较有趣的经验</p>
+  </header>
+  <!-- .profile-wrapper -->
+
+  <nav class="flex-column flex-grow-1 w-100 ps-0">
+    <ul class="nav">
+      <!-- home -->
+      <li class="nav-item">
+        <a href="/" class="nav-link">
+          <i class="fa-fw fas fa-home"></i>
+          <span>首页</span>
+        </a>
+      </li>
+      <!-- the real tabs -->
+      
+        <li class="nav-item">
+          <a href="/categories/" class="nav-link">
+            <i class="fa-fw fas fa-stream"></i>
+            
+
+            <span>分类</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/tags/" class="nav-link">
+            <i class="fa-fw fas fa-tags"></i>
+            
+
+            <span>标签</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/archives/" class="nav-link">
+            <i class="fa-fw fas fa-archive"></i>
+            
+
+            <span>归档</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item active">
+          <a href="/calendar/" class="nav-link">
+            <i class="fa-fw fas fa-calendar"></i>
+            
+
+            <span>日历</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/about/" class="nav-link">
+            <i class="fa-fw fas fa-info-circle"></i>
+            
+
+            <span>关于</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/ar/" class="nav-link">
+            <i class="fa-fw fas fa-vr-cardboard"></i>
+            
+
+            <span>AR</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+    </ul>
+  </nav>
+
+  <div class="sidebar-bottom d-flex flex-wrap  align-items-center w-100">
+    
+      <button type="button" class="btn btn-link nav-link" aria-label="Switch Mode" id="mode-toggle">
+        <i class="fas fa-adjust"></i>
+      </button>
+
+      
+        <span class="icon-border"></span>
+      
+    
+
+    
+
+      
+        <a
+          href="javascript:location.href = 'mailto:' + ['lyzbcy','qq.com'].join('@')"
+          aria-label="email"
+          
+
+          
+
+          
+
+          
+        >
+          <i class="fas fa-envelope"></i>
+        </a>
+      
+    
+          
+        
+
+      
+        <a
+          href="/feed.xml"
+          aria-label="rss"
+          
+
+          
+
+          
+
+          
+        >
+          <i class="fas fa-rss"></i>
+        </a>
+      
+    
+  </div>
+  <!-- .sidebar-bottom -->
+</aside>
+<!-- #sidebar -->
+
+
+    <div id="main-wrapper" class="d-flex justify-content-center">
+      <div class="container d-flex flex-column px-xxl-5">
+        <!-- The Top Bar -->
+
+<header id="topbar-wrapper" class="flex-shrink-0" aria-label="Top Bar">
+  <div
+    id="topbar"
+    class="d-flex align-items-center justify-content-between px-lg-3 h-100"
+  >
+    <nav id="breadcrumb" aria-label="Breadcrumb">
+      
+
+      
+        
+          
+            <span>
+              <a href="/">首页</a>
+            </span>
+
+          
+        
+          
+            
+              <span>日历</span>
+            
+
+          
+        
+      
+    </nav>
+    <!-- endof #breadcrumb -->
+
+    <button type="button" id="sidebar-trigger" class="btn btn-link" aria-label="Sidebar">
+      <i class="fas fa-bars fa-fw"></i>
+    </button>
+
+    <div id="topbar-title">
+      日历
+    </div>
+
+    <button type="button" id="search-trigger" class="btn btn-link" aria-label="Search">
+      <i class="fas fa-search fa-fw"></i>
+    </button>
+
+    <search id="search" class="align-items-center ms-3 ms-lg-0">
+      <i class="fas fa-search fa-fw"></i>
+      <input
+        class="form-control"
+        id="search-input"
+        type="search"
+        aria-label="search"
+        autocomplete="off"
+        placeholder="搜索..."
+      >
+    </search>
+    <button type="button" class="btn btn-link text-decoration-none" id="search-cancel">取消</button>
+  </div>
+</header>
+
+
+        <div class="row flex-grow-1">
+          <main aria-label="Main Content" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            
+              <!-- Refactor the HTML structure -->
+
+
+
+<!--
+  In order to allow a wide table to scroll horizontally,
+  we suround the markdown table with `<div class="table-wrapper">` and `</div>`
+-->
+
+
+
+<!--
+  Fixed kramdown code highlight rendering:
+  https://github.com/penibelst/jekyll-compress-html/issues/101
+  https://github.com/penibelst/jekyll-compress-html/issues/71#issuecomment-188144901
+-->
+
+
+
+<!-- Change the icon of checkbox -->
+
+
+
+<!-- Handle images -->
+
+
+
+
+
+<!-- Add header for code snippets -->
+
+
+
+<!-- Create heading anchors -->
+
+
+
+
+
+  
+  
+
+  
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+
+
+
+<!-- return -->
+
+
+
+
+<article class="px-1">
+  
+    
+    
+    <h1 class="dynamic-title">
+      日历
+    </h1>
+    <div class="content">
+      <blockquote>
+  <p>这个日历页会自动汇总文章 front matter 中的 <code class="language-plaintext highlighter-rouge">reminder_date</code> 以及 <code class="language-plaintext highlighter-rouge">_data/calendar.yml</code> 手动事件，集中展示所有待办或活动提醒。</p>
+</blockquote>
+
+<style>
+:root {
+  --calendar-bg: #ffffff;
+  --calendar-border: #e5e5e5;
+  --calendar-text: #1f1f1f;
+  --calendar-muted: #8a8a8a;
+  --calendar-today: #1a1a1a;
+  --calendar-card-shadow: 0 12px 30px -18px rgba(0, 0, 0, 0.4);
+  
+  /* Component defaults */
+  --calendar-btn-bg: #f8f8f8;
+  --calendar-btn-hover-bg: #f1f1f1;
+  --calendar-btn-hover-text: #111;
+  --calendar-cell-hover: #fafafa;
+  --calendar-modal-bg: #ffffff;
+  --calendar-item-bg: #f7f7f7;
+}
+
+html[data-mode="dark"] {
+  --calendar-bg: rgba(28, 28, 30, 0.7);
+  --calendar-border: rgba(255, 255, 255, 0.1);
+  --calendar-text: #f5f5f7;
+  --calendar-muted: #86868b;
+  --calendar-today: #0a84ff;
+  --calendar-card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  
+  --calendar-btn-bg: rgba(255, 255, 255, 0.1);
+  --calendar-btn-hover-bg: rgba(255, 255, 255, 0.2);
+  --calendar-btn-hover-text: #ffffff;
+  --calendar-cell-hover: rgba(255, 255, 255, 0.05);
+  --calendar-modal-bg: #1c1c1e;
+  --calendar-item-bg: rgba(255, 255, 255, 0.05);
+}
+
+.calendar-container {
+  width: 100%;
+  background-color: var(--calendar-bg);
+  border-radius: 18px;
+  border: 1px solid var(--calendar-border);
+  padding: 24px;
+  box-shadow: var(--calendar-card-shadow);
+}
+
+.calendar-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.calendar-header h3 {
+  margin: 0;
+  font-weight: 600;
+  color: var(--calendar-text);
+}
+
+.calendar-header h3 small {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--calendar-muted);
+  margin-top: 4px;
+}
+
+.calendar-nav {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.calendar-nav button {
+  border: 1px solid var(--calendar-border);
+  background-color: var(--calendar-btn-bg);
+  color: var(--calendar-text);
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.calendar-nav button:hover {
+  border-color: var(--calendar-btn-hover-text);
+  color: var(--calendar-btn-hover-text);
+  background-color: var(--calendar-btn-hover-bg);
+}
+
+.calendar-nav button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.event-stats {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  color: var(--calendar-muted);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.event-stats strong {
+  font-size: 1rem;
+  color: var(--calendar-text);
+  margin-right: 8px;
+}
+
+.calendar {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.calendar thead th {
+  padding: 12px 0;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: var(--calendar-muted);
+}
+
+.calendar tbody td {
+  border: 1px solid var(--calendar-border);
+  height: 120px;
+  padding: 8px;
+  vertical-align: top;
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.calendar tbody td:hover {
+  background-color: var(--calendar-cell-hover);
+}
+
+.calendar-day {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.calendar-day span {
+  font-weight: 600;
+  color: var(--calendar-text);
+}
+
+.calendar-day .day-tag {
+  font-size: 0.75rem;
+  color: var(--calendar-muted);
+}
+
+.calendar tbody td.today {
+  border: 2px solid var(--calendar-today);
+}
+
+.calendar tbody td.past .calendar-day span {
+  color: var(--calendar-muted);
+}
+
+.event-badge {
+  display: block;
+  border-radius: 10px;
+  padding: 6px 8px;
+  color: #fff;
+  font-size: 0.8rem;
+  margin-bottom: 6px;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.event-badge:hover {
+  transform: translateY(-1px);
+}
+
+.event-badge.homework { background-color: #ff6b6b; }
+.event-badge.test { background-color: #ffa726; }
+.event-badge.activity { background-color: #66bb6a; }
+.event-badge.default { background-color: #6c5ce7; }
+
+.more-events {
+  font-size: 0.75rem;
+  color: var(--calendar-muted);
+}
+
+.event-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 999;
+}
+
+.event-modal.show {
+  display: flex;
+}
+
+.event-modal-content {
+  width: min(540px, 100%);
+  background: var(--calendar-modal-bg);
+  color: var(--calendar-text); /* Ensure text follows suit */
+  border-radius: 16px;
+  padding: 24px;
+  animation: modalFade 0.25s ease;
+  max-height: 90vh;
+  overflow: auto;
+}
+
+@keyframes modalFade {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.event-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.event-modal-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.event-modal-close {
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.event-modal-date {
+  color: var(--calendar-muted);
+  margin-bottom: 16px;
+}
+
+.event-modal-events {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.event-item {
+  border-radius: 12px;
+  padding: 14px;
+  background: var(--calendar-item-bg);
+  border: 1px solid var(--calendar-border);
+}
+
+.event-item h4 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.event-item a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.event-item span.badge {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.event-item p {
+  margin: 0;
+  color: var(--calendar-muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .calendar-container {
+    padding: 18px;
+  }
+
+  .calendar tbody td {
+    height: 96px;
+    padding: 6px;
+  }
+
+  .calendar-day span {
+    font-size: 0.95rem;
+  }
+
+  .event-badge {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+  }
+}
+
+@media (max-width: 520px) {
+  .calendar-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .calendar-nav {
+    width: 100%;
+  }
+
+  .calendar-nav button {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}
+</style>
+
+<div class="calendar-container">
+  <div class="calendar-header">
+    <div>
+      <h3 id="monthTitle"><span class="me-2">加载中...</span><a href="#monthTitle" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+      <small id="monthSubtitle">准备中</small>
+    </div>
+    <div class="calendar-nav">
+      <button type="button" id="prevMonth">‹ 上月</button>
+      <button type="button" id="todayBtn">今天</button>
+      <button type="button" id="nextMonth">下月 ›</button>
+    </div>
+  </div>
+
+  <div id="eventStats" class="event-stats"></div>
+
+  <div class="table-wrapper"><table class="calendar">
+    <thead>
+      <tr>
+        <th>日</th>
+        <th>一</th>
+        <th>二</th>
+        <th>三</th>
+        <th>四</th>
+        <th>五</th>
+        <th>六</th>
+      </tr>
+    </thead>
+    <tbody id="calendarBody"></tbody>
+  </table></div>
+</div>
+
+<div id="eventModal" class="event-modal" role="dialog" aria-modal="true" aria-labelledby="modalDateTitle">
+  <div class="event-modal-content">
+    <div class="event-modal-header">
+      <h3 id="modalDateTitle"><span class="me-2">日期详情</span><a href="#modalDateTitle" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+      <button class="event-modal-close" id="modalCloseBtn" aria-label="关闭">×</button>
+    </div>
+    <div class="event-modal-body">
+      <div class="event-modal-date" id="modalDateText">暂无数据</div>
+      <div class="event-modal-events" id="modalEventsList"></div>
+    </div>
+  </div>
+</div>
+
+<script id="calendarData" type="application/json">[{"date":"2026-03-03","event":"数学二: 高数","type":"homework"},{"date":"2026-03-03","event":"408: 数据结构","type":"homework"},{"date":"2026-03-03","event":"英语二: 词汇长难句","type":"homework"},{"date":"2026-03-03","event":"LC: 链表/改简历","type":"activity"},{"date":"2026-03-03","event":"政治: 马原","type":"default"},{"date":"2026-03-04","event":"数学二: 线代","type":"homework"},{"date":"2026-03-04","event":"408: 数据结构","type":"homework"},{"date":"2026-03-04","event":"英语二: 阅读","type":"homework"},{"date":"2026-03-04","event":"LC: 栈队列/探索副业","type":"activity"},{"date":"2026-03-04","event":"政治: 马原","type":"default"},{"date":"2026-03-05","event":"数学二: 高数（补3.4缺档）","type":"homework"},{"date":"2026-03-05","event":"英语二: 阅读2篇（补3.4缺档）","type":"homework"},{"date":"2026-03-05","event":"课上40min→锁定高数视频+背单词","type":"activity"},{"date":"2026-03-05","event":"政治: 马原1h","type":"default"},{"date":"2026-03-05","event":"🏋️ 健身（三分化第2天）","type":"activity"},{"date":"2026-03-06","event":"数学二: 高数1.5h","type":"homework"},{"date":"2026-03-06","event":"408: 数据结构1.5h","type":"homework"},{"date":"2026-03-06","event":"课上40min→LC 1题(二分)","type":"activity"},{"date":"2026-03-06","event":"实习投递3-5家","type":"activity"},{"date":"2026-03-06","event":"政治: 马原1h","type":"default"},{"date":"2026-03-06","event":"🏋️ 健身（三分化第3天）","type":"activity"},{"date":"2026-03-07","event":"数学二: 高数1.5h（两节课占用多，课后专注）","type":"homework"},{"date":"2026-03-07","event":"英语二: 词汇长难句","type":"homework"},{"date":"2026-03-07","event":"课上共80min→LC 2题+政治马原碎片","type":"activity"},{"date":"2026-03-07","event":"408: 错题回顾30min（缩短，两节课日）","type":"default"},{"date":"2026-03-07","event":"🏋️ 健身休息日（三分化）","type":"activity"},{"date":"2026-03-08","event":"数学二: 线代1.5h（全天自由！）","type":"homework"},{"date":"2026-03-08","event":"408: 数据结构1.5h+错题总结","type":"homework"},{"date":"2026-03-08","event":"英语二: 真题阅读1套","type":"homework"},{"date":"2026-03-08","event":"实习投递5家+简历优化","type":"activity"},{"date":"2026-03-08","event":"政治: 马原1h+每周复盘","type":"default"},{"date":"2026-03-09","event":"数学二: 高数","type":"homework"},{"date":"2026-03-09","event":"408: 数据结构","type":"homework"},{"date":"2026-03-09","event":"英语二: 阅读","type":"homework"},{"date":"2026-03-09","event":"LC: 数组/实习投递","type":"activity"},{"date":"2026-03-09","event":"政治: 马原","type":"default"},{"date":"2026-03-10","event":"数学二: 高数","type":"homework"},{"date":"2026-03-10","event":"408: 数据结构","type":"homework"},{"date":"2026-03-10","event":"英语二: 词汇长难句","type":"homework"},{"date":"2026-03-10","event":"LC: 链表/改简历","type":"activity"},{"date":"2026-03-10","event":"政治: 马原","type":"default"},{"date":"2026-03-11","event":"数学二: 线代","type":"homework"},{"date":"2026-03-11","event":"408: 数据结构","type":"homework"},{"date":"2026-03-11","event":"英语二: 阅读","type":"homework"},{"date":"2026-03-11","event":"LC: 栈队列/探索副业","type":"activity"},{"date":"2026-03-11","event":"政治: 马原","type":"default"},{"date":"2026-03-12","event":"数学二: 高数","type":"homework"},{"date":"2026-03-12","event":"408: 数据结构","type":"homework"},{"date":"2026-03-12","event":"英语二: 词汇长难句","type":"homework"},{"date":"2026-03-12","event":"LC: 哈希/保研材料","type":"activity"},{"date":"2026-03-12","event":"政治: 马原","type":"default"},{"date":"2026-03-13","event":"数学二: 高数","type":"homework"},{"date":"2026-03-13","event":"408: 数据结构","type":"homework"},{"date":"2026-03-13","event":"英语二: 阅读","type":"homework"},{"date":"2026-03-13","event":"LC: 二分/实习投递","type":"activity"},{"date":"2026-03-13","event":"政治: 马原","type":"default"},{"date":"2026-03-14","event":"数学二: 综合练习","type":"homework"},{"date":"2026-03-14","event":"408: 复习错题","type":"homework"},{"date":"2026-03-14","event":"英语二: 真题阅读","type":"homework"},{"date":"2026-03-14","event":"LC: 2题/副业开发","type":"activity"},{"date":"2026-03-14","event":"政治: 马原","type":"default"},{"date":"2026-03-15","event":"每周休息与复盘","type":"activity"},{"date":"2026-03-16","event":"数学二: 高数","type":"homework"},{"date":"2026-03-16","event":"408: 数据结构","type":"homework"},{"date":"2026-03-16","event":"英语二: 阅读","type":"homework"},{"date":"2026-03-16","event":"LC: 数组/实习投递","type":"activity"},{"date":"2026-03-16","event":"政治: 马原","type":"default"},{"date":"2026-03-17","event":"数学二: 高数","type":"homework"},{"date":"2026-03-17","event":"408: 数据结构","type":"homework"},{"date":"2026-03-17","event":"英语二: 词汇长难句","type":"homework"},{"date":"2026-03-17","event":"LC: 链表/改简历","type":"activity"},{"date":"2026-03-17","event":"政治: 马原","type":"default"},{"date":"2026-03-18","event":"数学二: 线代","type":"homework"},{"date":"2026-03-18","event":"408: 数据结构","type":"homework"},{"date":"2026-03-18","event":"英语二: 阅读","type":"homework"},{"date":"2026-03-18","event":"LC: 栈队列/探索副业","type":"activity"},{"date":"2026-03-18","event":"政治: 马原","type":"default"},{"date":"2026-03-19","event":"数学二: 高数","type":"homework"},{"date":"2026-03-19","event":"408: 数据结构","type":"homework"},{"date":"2026-03-19","event":"英语二: 词汇长难句","type":"homework"},{"date":"2026-03-19","event":"LC: 哈希/保研材料","type":"activity"},{"date":"2026-03-19","event":"政治: 马原","type":"default"},{"date":"2026-03-20","event":"数学二: 高数","type":"homework"},{"date":"2026-03-20","event":"408: 数据结构","type":"homework"},{"date":"2026-03-20","event":"英语二: 阅读","type":"homework"},{"date":"2026-03-20","event":"LC: 二分/实习投递","type":"activity"},{"date":"2026-03-20","event":"政治: 马原","type":"default"},{"date":"2026-03-21","event":"数学二: 综合练习","type":"homework"},{"date":"2026-03-21","event":"408: 复习错题","type":"homework"},{"date":"2026-03-21","event":"英语二: 真题阅读","type":"homework"},{"date":"2026-03-21","event":"LC: 2题/副业开发","type":"activity"},{"date":"2026-03-21","event":"政治: 马原","type":"default"},{"date":"2026-03-22","event":"每周休息与复盘","type":"activity"},{"date":"2026-03-23","event":"数学二: 高数","type":"homework"},{"date":"2026-03-23","event":"408: 数据结构","type":"homework"},{"date":"2026-03-23","event":"英语二: 阅读","type":"homework"},{"date":"2026-03-23","event":"LC: 数组/实习投递","type":"activity"},{"date":"2026-03-23","event":"政治: 马原","type":"default"},{"date":"2026-03-24","event":"数学二: 高数","type":"homework"},{"date":"2026-03-24","event":"408: 数据结构","type":"homework"},{"date":"2026-03-24","event":"英语二: 词汇长难句","type":"homework"},{"date":"2026-03-24","event":"LC: 链表/改简历","type":"activity"},{"date":"2026-03-24","event":"政治: 马原","type":"default"},{"date":"2026-03-25","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-03-25","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-03-25","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-03-25","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-03-25","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-03-26","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-03-26","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-03-26","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-03-26","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-03-26","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-03-27","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-03-27","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-03-27","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-03-27","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-03-27","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-03-28","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-03-28","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-03-28","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-03-28","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-03-28","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-03-29","event":"每周复盘与综合体能健身休息","type":"activity"},{"date":"2026-03-30","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-03-30","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-03-30","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-03-30","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-03-30","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-03-31","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-03-31","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-03-31","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-03-31","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-03-31","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-01","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-01","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-01","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-01","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-01","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-02","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-02","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-02","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-02","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-02","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-03","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-03","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-03","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-03","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-03","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-04","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-04","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-04","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-04","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-04","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-05","event":"每周复盘与综合体能健身休息","type":"activity"},{"date":"2026-04-06","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-06","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-06","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-06","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-06","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-07","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-07","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-07","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-07","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-07","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-08","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-08","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-08","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-08","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-08","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-09","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-09","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-09","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-09","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-09","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-10","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-10","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-10","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-10","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-10","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-11","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-11","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-11","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-11","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-11","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-12","event":"每周复盘与综合体能健身休息","type":"activity"},{"date":"2026-04-13","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-13","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-13","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-13","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-13","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-14","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-14","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-14","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-14","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-14","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-15","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-15","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-15","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-15","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-15","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-16","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-16","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-16","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-16","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-16","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-17","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-17","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-17","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-17","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-17","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-18","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-18","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-18","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-18","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-18","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-19","event":"每周复盘与综合体能健身休息","type":"activity"},{"date":"2026-04-20","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-20","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-20","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-20","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-20","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-21","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-21","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-21","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-21","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-21","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-22","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-22","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-22","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-22","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-22","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-23","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-23","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-23","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-23","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-23","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-24","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-24","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-24","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-24","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-24","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-25","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-25","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-25","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-25","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-25","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-26","event":"每周复盘与综合体能健身休息","type":"activity"},{"date":"2026-04-27","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-27","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-27","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-27","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-27","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-28","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-28","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-28","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-28","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-28","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-29","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-29","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-29","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-29","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-29","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-04-30","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-04-30","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-04-30","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-04-30","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-04-30","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-01","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-01","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-01","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-01","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-01","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-02","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-02","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-02","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-02","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-02","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-03","event":"每周复盘与综合体能健身休息","type":"activity"},{"date":"2026-05-04","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-04","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-04","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-04","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-04","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-05","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-05","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-05","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-05","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-05","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-06","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-06","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-06","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-06","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-06","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-07","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-07","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-07","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-07","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-07","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-08","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-08","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-08","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-08","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-08","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-09","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-09","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-09","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-09","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-09","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-10","event":"每周复盘与综合体能健身休息","type":"activity"},{"date":"2026-05-11","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-11","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-11","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-11","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-11","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-12","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-12","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-12","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-12","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-12","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-13","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-13","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-13","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-13","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-13","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-14","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-14","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-14","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-14","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-14","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-15","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-15","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-15","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-15","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-15","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-16","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-16","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-16","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-16","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-16","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-17","event":"每周复盘与综合体能健身休息","type":"activity"},{"date":"2026-05-18","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-18","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-18","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-18","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-18","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-19","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-19","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-19","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-19","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-19","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-20","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-20","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-20","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-20","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-20","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-21","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-21","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-21","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-21","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-21","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-22","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-22","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-22","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-22","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-22","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-23","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-23","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-23","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-23","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-23","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-24","event":"每周复盘与综合体能健身休息","type":"activity"},{"date":"2026-05-25","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-25","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-25","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-25","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-25","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-26","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-26","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-26","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-26","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-26","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-27","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-27","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-27","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-27","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-27","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-28","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-28","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-28","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-28","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-28","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-29","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-29","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-29","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-29","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-29","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-30","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-05-30","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-05-30","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-05-30","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-05-30","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-05-31","event":"每周复盘与综合体能健身休息","type":"activity"},{"date":"2026-06-01","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-01","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-01","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-01","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-01","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-02","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-02","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-02","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-02","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-02","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-03","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-03","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-03","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-03","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-03","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-04","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-04","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-04","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-04","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-04","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-05","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-05","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-05","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-05","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-05","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-06","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-06","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-06","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-06","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-06","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-07","event":"每周复盘与综合体能健身休息","type":"activity"},{"date":"2026-06-08","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-08","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-08","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-08","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-08","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-09","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-09","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-09","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-09","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-09","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-10","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-10","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-10","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-10","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-10","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-11","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-11","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-11","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-11","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-11","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-12","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-12","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-12","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-12","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-12","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-13","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-13","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-13","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-13","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-13","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-14","event":"每周复盘与综合体能健身休息","type":"activity"},{"date":"2026-06-15","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-15","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-15","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-15","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-15","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-16","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-16","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-16","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-16","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-16","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-17","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-17","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-17","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-17","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-17","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-18","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-18","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-18","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-18","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-18","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-19","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-19","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-19","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-19","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-19","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-20","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-20","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-20","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-20","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-20","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-21","event":"每周复盘与综合体能健身休息","type":"activity"},{"date":"2026-06-22","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-22","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-22","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-22","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-22","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-23","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-23","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-23","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-23","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-23","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-24","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-24","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-24","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-24","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-24","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-25","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-25","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-25","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-25","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-25","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-26","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-26","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-26","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-26","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-26","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-27","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-27","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-27","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-27","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-27","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-28","event":"每周复盘与综合体能健身休息","type":"activity"},{"date":"2026-06-29","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-29","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-29","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-29","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-29","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-06-30","event":"数学二: 基础视频1节+对应章节习题","type":"homework"},{"date":"2026-06-30","event":"408: 王道视频1节+单科单选题","type":"homework"},{"date":"2026-06-30","event":"英语二: 早期真题阅读精读1篇","type":"homework"},{"date":"2026-06-30","event":"英语二: 单词App复习150词","type":"activity"},{"date":"2026-06-30","event":"活动: 副业/健身/LeetCode","type":"activity"},{"date":"2026-07-01","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-01","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-01","event":"政治: 1000题","type":"homework"},{"date":"2026-07-01","event":"英语二/LeetCode","type":"default"},{"date":"2026-07-02","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-02","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-02","event":"政治: 1000题","type":"homework"},{"date":"2026-07-02","event":"英语二/LeetCode","type":"default"},{"date":"2026-07-03","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-03","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-03","event":"政治: 1000题","type":"homework"},{"date":"2026-07-03","event":"英语二/LeetCode","type":"default"},{"date":"2026-07-04","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-04","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-04","event":"政治: 1000题","type":"homework"},{"date":"2026-07-04","event":"夏令营/实习复盘","type":"activity"},{"date":"2026-07-05","event":"每周休息与复盘","type":"activity"},{"date":"2026-07-06","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-06","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-06","event":"政治: 1000题","type":"homework"},{"date":"2026-07-06","event":"英语二/LeetCode","type":"default"},{"date":"2026-07-07","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-07","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-07","event":"政治: 1000题","type":"homework"},{"date":"2026-07-07","event":"英语二/LeetCode","type":"default"},{"date":"2026-07-08","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-08","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-08","event":"政治: 1000题","type":"homework"},{"date":"2026-07-08","event":"英语二/LeetCode","type":"default"},{"date":"2026-07-09","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-09","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-09","event":"政治: 1000题","type":"homework"},{"date":"2026-07-09","event":"英语二/LeetCode","type":"default"},{"date":"2026-07-10","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-10","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-10","event":"政治: 1000题","type":"homework"},{"date":"2026-07-10","event":"英语二/LeetCode","type":"default"},{"date":"2026-07-11","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-11","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-11","event":"政治: 1000题","type":"homework"},{"date":"2026-07-11","event":"夏令营/实习复盘","type":"activity"},{"date":"2026-07-12","event":"每周休息与复盘","type":"activity"},{"date":"2026-07-13","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-13","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-13","event":"政治: 1000题","type":"homework"},{"date":"2026-07-13","event":"英语二/LeetCode","type":"default"},{"date":"2026-07-14","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-14","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-14","event":"政治: 1000题","type":"homework"},{"date":"2026-07-14","event":"英语二/LeetCode","type":"default"},{"date":"2026-07-15","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-15","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-15","event":"政治: 1000题","type":"homework"},{"date":"2026-07-15","event":"英语二/LeetCode","type":"default"},{"date":"2026-07-16","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-16","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-16","event":"政治: 1000题","type":"homework"},{"date":"2026-07-16","event":"英语二/LeetCode","type":"default"},{"date":"2026-07-17","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-17","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-17","event":"政治: 1000题","type":"homework"},{"date":"2026-07-17","event":"英语二/LeetCode","type":"default"},{"date":"2026-07-18","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-18","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-18","event":"政治: 1000题","type":"homework"},{"date":"2026-07-18","event":"夏令营/实习复盘","type":"activity"},{"date":"2026-07-19","event":"每周休息与复盘","type":"activity"},{"date":"2026-07-20","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-20","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-20","event":"政治: 1000题","type":"homework"},{"date":"2026-07-20","event":"英语二/LeetCode","type":"default"},{"date":"2026-07-21","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-21","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-21","event":"政治: 1000题","type":"homework"},{"date":"2026-07-21","event":"英语二/LeetCode","type":"default"},{"date":"2026-07-22","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-22","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-22","event":"政治: 1000题","type":"homework"},{"date":"2026-07-22","event":"英语二/LeetCode","type":"default"},{"date":"2026-07-23","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-23","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-23","event":"政治: 1000题","type":"homework"},{"date":"2026-07-23","event":"英语二/LeetCode","type":"default"},{"date":"2026-07-24","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-24","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-24","event":"政治: 1000题","type":"homework"},{"date":"2026-07-24","event":"英语二/LeetCode","type":"default"},{"date":"2026-07-25","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-25","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-25","event":"政治: 1000题","type":"homework"},{"date":"2026-07-25","event":"夏令营/实习复盘","type":"activity"},{"date":"2026-07-26","event":"每周休息与复盘","type":"activity"},{"date":"2026-07-27","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-27","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-27","event":"政治: 1000题","type":"homework"},{"date":"2026-07-27","event":"英语二/LeetCode","type":"default"},{"date":"2026-07-28","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-28","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-28","event":"政治: 1000题","type":"homework"},{"date":"2026-07-28","event":"英语二/LeetCode","type":"default"},{"date":"2026-07-29","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-29","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-29","event":"政治: 1000题","type":"homework"},{"date":"2026-07-29","event":"英语二/LeetCode","type":"default"},{"date":"2026-07-30","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-30","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-30","event":"政治: 1000题","type":"homework"},{"date":"2026-07-30","event":"英语二/LeetCode","type":"default"},{"date":"2026-07-31","event":"数学二: 专题强化","type":"homework"},{"date":"2026-07-31","event":"408: 第二轮+真题","type":"homework"},{"date":"2026-07-31","event":"政治: 1000题","type":"homework"},{"date":"2026-07-31","event":"英语二/LeetCode","type":"default"},{"date":"2026-08-01","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-01","event":"408: 真题专项","type":"homework"},{"date":"2026-08-01","event":"政治: 1000题","type":"homework"},{"date":"2026-08-01","event":"夏令营/实习复盘","type":"activity"},{"date":"2026-08-02","event":"每周休息与复盘","type":"activity"},{"date":"2026-08-03","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-03","event":"408: 真题专项","type":"homework"},{"date":"2026-08-03","event":"政治: 1000题","type":"homework"},{"date":"2026-08-03","event":"英语二/LeetCode","type":"default"},{"date":"2026-08-04","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-04","event":"408: 真题专项","type":"homework"},{"date":"2026-08-04","event":"政治: 1000题","type":"homework"},{"date":"2026-08-04","event":"英语二/LeetCode","type":"default"},{"date":"2026-08-05","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-05","event":"408: 真题专项","type":"homework"},{"date":"2026-08-05","event":"政治: 1000题","type":"homework"},{"date":"2026-08-05","event":"英语二/LeetCode","type":"default"},{"date":"2026-08-06","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-06","event":"408: 真题专项","type":"homework"},{"date":"2026-08-06","event":"政治: 1000题","type":"homework"},{"date":"2026-08-06","event":"英语二/LeetCode","type":"default"},{"date":"2026-08-07","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-07","event":"408: 真题专项","type":"homework"},{"date":"2026-08-07","event":"政治: 1000题","type":"homework"},{"date":"2026-08-07","event":"英语二/LeetCode","type":"default"},{"date":"2026-08-08","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-08","event":"408: 真题专项","type":"homework"},{"date":"2026-08-08","event":"政治: 1000题","type":"homework"},{"date":"2026-08-08","event":"夏令营/实习复盘","type":"activity"},{"date":"2026-08-09","event":"每周休息与复盘","type":"activity"},{"date":"2026-08-10","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-10","event":"408: 真题专项","type":"homework"},{"date":"2026-08-10","event":"政治: 1000题","type":"homework"},{"date":"2026-08-10","event":"英语二/LeetCode","type":"default"},{"date":"2026-08-11","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-11","event":"408: 真题专项","type":"homework"},{"date":"2026-08-11","event":"政治: 1000题","type":"homework"},{"date":"2026-08-11","event":"英语二/LeetCode","type":"default"},{"date":"2026-08-12","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-12","event":"408: 真题专项","type":"homework"},{"date":"2026-08-12","event":"政治: 1000题","type":"homework"},{"date":"2026-08-12","event":"英语二/LeetCode","type":"default"},{"date":"2026-08-13","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-13","event":"408: 真题专项","type":"homework"},{"date":"2026-08-13","event":"政治: 1000题","type":"homework"},{"date":"2026-08-13","event":"英语二/LeetCode","type":"default"},{"date":"2026-08-14","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-14","event":"408: 真题专项","type":"homework"},{"date":"2026-08-14","event":"政治: 1000题","type":"homework"},{"date":"2026-08-14","event":"英语二/LeetCode","type":"default"},{"date":"2026-08-15","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-15","event":"408: 真题专项","type":"homework"},{"date":"2026-08-15","event":"政治: 1000题","type":"homework"},{"date":"2026-08-15","event":"夏令营/实习复盘","type":"activity"},{"date":"2026-08-16","event":"每周休息与复盘","type":"activity"},{"date":"2026-08-17","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-17","event":"408: 真题专项","type":"homework"},{"date":"2026-08-17","event":"政治: 1000题","type":"homework"},{"date":"2026-08-17","event":"英语二/LeetCode","type":"default"},{"date":"2026-08-18","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-18","event":"408: 真题专项","type":"homework"},{"date":"2026-08-18","event":"政治: 1000题","type":"homework"},{"date":"2026-08-18","event":"英语二/LeetCode","type":"default"},{"date":"2026-08-19","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-19","event":"408: 真题专项","type":"homework"},{"date":"2026-08-19","event":"政治: 1000题","type":"homework"},{"date":"2026-08-19","event":"英语二/LeetCode","type":"default"},{"date":"2026-08-20","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-20","event":"408: 真题专项","type":"homework"},{"date":"2026-08-20","event":"政治: 1000题","type":"homework"},{"date":"2026-08-20","event":"英语二/LeetCode","type":"default"},{"date":"2026-08-21","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-21","event":"408: 真题专项","type":"homework"},{"date":"2026-08-21","event":"政治: 1000题","type":"homework"},{"date":"2026-08-21","event":"英语二/LeetCode","type":"default"},{"date":"2026-08-22","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-22","event":"408: 真题专项","type":"homework"},{"date":"2026-08-22","event":"政治: 1000题","type":"homework"},{"date":"2026-08-22","event":"夏令营/实习复盘","type":"activity"},{"date":"2026-08-23","event":"每周休息与复盘","type":"activity"},{"date":"2026-08-24","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-24","event":"408: 真题专项","type":"homework"},{"date":"2026-08-24","event":"政治: 1000题","type":"homework"},{"date":"2026-08-24","event":"英语二/LeetCode","type":"default"},{"date":"2026-08-25","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-25","event":"408: 真题专项","type":"homework"},{"date":"2026-08-25","event":"政治: 1000题","type":"homework"},{"date":"2026-08-25","event":"英语二/LeetCode","type":"default"},{"date":"2026-08-26","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-26","event":"408: 真题专项","type":"homework"},{"date":"2026-08-26","event":"政治: 1000题","type":"homework"},{"date":"2026-08-26","event":"英语二/LeetCode","type":"default"},{"date":"2026-08-27","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-27","event":"408: 真题专项","type":"homework"},{"date":"2026-08-27","event":"政治: 1000题","type":"homework"},{"date":"2026-08-27","event":"英语二/LeetCode","type":"default"},{"date":"2026-08-28","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-28","event":"408: 真题专项","type":"homework"},{"date":"2026-08-28","event":"政治: 1000题","type":"homework"},{"date":"2026-08-28","event":"英语二/LeetCode","type":"default"},{"date":"2026-08-29","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-29","event":"408: 真题专项","type":"homework"},{"date":"2026-08-29","event":"政治: 1000题","type":"homework"},{"date":"2026-08-29","event":"夏令营/实习复盘","type":"activity"},{"date":"2026-08-30","event":"每周休息与复盘","type":"activity"},{"date":"2026-08-31","event":"数学二: 历年真题","type":"homework"},{"date":"2026-08-31","event":"408: 真题专项","type":"homework"},{"date":"2026-08-31","event":"政治: 1000题","type":"homework"},{"date":"2026-08-31","event":"英语二/LeetCode","type":"default"},{"date":"2026-09-01","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-01","event":"保研: 预推免","type":"activity"},{"date":"2026-09-01","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-02","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-02","event":"保研: 预推免","type":"activity"},{"date":"2026-09-02","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-03","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-03","event":"保研: 预推免","type":"activity"},{"date":"2026-09-03","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-04","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-04","event":"保研: 预推免","type":"activity"},{"date":"2026-09-04","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-05","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-05","event":"保研: 预推免","type":"activity"},{"date":"2026-09-05","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-06","event":"每周全套模拟与复盘","type":"test"},{"date":"2026-09-07","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-07","event":"保研: 预推免","type":"activity"},{"date":"2026-09-07","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-08","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-08","event":"保研: 预推免","type":"activity"},{"date":"2026-09-08","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-09","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-09","event":"保研: 预推免","type":"activity"},{"date":"2026-09-09","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-10","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-10","event":"保研: 预推免","type":"activity"},{"date":"2026-09-10","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-11","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-11","event":"保研: 预推免","type":"activity"},{"date":"2026-09-11","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-12","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-12","event":"保研: 预推免","type":"activity"},{"date":"2026-09-12","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-13","event":"每周全套模拟与复盘","type":"test"},{"date":"2026-09-14","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-14","event":"保研: 预推免","type":"activity"},{"date":"2026-09-14","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-15","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-15","event":"保研: 预推免","type":"activity"},{"date":"2026-09-15","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-16","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-16","event":"保研: 预推免","type":"activity"},{"date":"2026-09-16","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-17","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-17","event":"保研: 预推免","type":"activity"},{"date":"2026-09-17","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-18","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-18","event":"保研: 预推免","type":"activity"},{"date":"2026-09-18","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-19","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-19","event":"保研: 预推免","type":"activity"},{"date":"2026-09-19","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-20","event":"每周全套模拟与复盘","type":"test"},{"date":"2026-09-21","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-21","event":"保研: 预推免","type":"activity"},{"date":"2026-09-21","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-22","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-22","event":"保研: 预推免","type":"activity"},{"date":"2026-09-22","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-23","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-23","event":"保研: 预推免","type":"activity"},{"date":"2026-09-23","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-24","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-24","event":"保研: 预推免","type":"activity"},{"date":"2026-09-24","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-25","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-25","event":"保研: 预推免","type":"activity"},{"date":"2026-09-25","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-26","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-26","event":"保研: 预推免","type":"activity"},{"date":"2026-09-26","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-27","event":"每周全套模拟与复盘","type":"test"},{"date":"2026-09-28","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-28","event":"保研: 预推免","type":"activity"},{"date":"2026-09-28","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-29","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-29","event":"保研: 预推免","type":"activity"},{"date":"2026-09-29","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-09-30","event":"数二/408: 冲刺模拟","type":"homework"},{"date":"2026-09-30","event":"保研: 预推免","type":"activity"},{"date":"2026-09-30","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-01","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-01","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-01","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-02","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-02","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-02","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-03","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-03","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-03","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-04","event":"每周全套模拟与复盘","type":"test"},{"date":"2026-10-05","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-05","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-05","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-06","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-06","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-06","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-07","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-07","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-07","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-08","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-08","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-08","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-09","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-09","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-09","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-10","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-10","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-10","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-11","event":"每周全套模拟与复盘","type":"test"},{"date":"2026-10-12","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-12","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-12","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-13","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-13","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-13","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-14","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-14","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-14","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-15","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-15","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-15","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-16","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-16","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-16","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-17","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-17","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-17","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-18","event":"每周全套模拟与复盘","type":"test"},{"date":"2026-10-19","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-19","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-19","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-20","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-20","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-20","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-21","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-21","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-21","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-22","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-22","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-22","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-23","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-23","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-23","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-24","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-24","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-24","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-25","event":"每周全套模拟与复盘","type":"test"},{"date":"2026-10-26","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-26","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-26","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-27","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-27","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-27","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-28","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-28","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-28","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-29","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-29","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-29","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-30","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-30","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-30","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-10-31","event":"数二/408: 全真题模拟","type":"test"},{"date":"2026-10-31","event":"政治: 8套卷/4套卷","type":"homework"},{"date":"2026-10-31","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-01","event":"每周全套模拟与复盘","type":"test"},{"date":"2026-11-02","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-02","event":"408: 最终模拟","type":"test"},{"date":"2026-11-02","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-02","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-03","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-03","event":"408: 最终模拟","type":"test"},{"date":"2026-11-03","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-03","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-04","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-04","event":"408: 最终模拟","type":"test"},{"date":"2026-11-04","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-04","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-05","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-05","event":"408: 最终模拟","type":"test"},{"date":"2026-11-05","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-05","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-06","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-06","event":"408: 最终模拟","type":"test"},{"date":"2026-11-06","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-06","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-07","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-07","event":"408: 最终模拟","type":"test"},{"date":"2026-11-07","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-07","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-08","event":"每周全套模拟与复盘","type":"test"},{"date":"2026-11-09","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-09","event":"408: 最终模拟","type":"test"},{"date":"2026-11-09","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-09","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-10","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-10","event":"408: 最终模拟","type":"test"},{"date":"2026-11-10","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-10","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-11","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-11","event":"408: 最终模拟","type":"test"},{"date":"2026-11-11","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-11","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-12","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-12","event":"408: 最终模拟","type":"test"},{"date":"2026-11-12","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-12","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-13","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-13","event":"408: 最终模拟","type":"test"},{"date":"2026-11-13","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-13","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-14","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-14","event":"408: 最终模拟","type":"test"},{"date":"2026-11-14","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-14","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-15","event":"每周全套模拟与复盘","type":"test"},{"date":"2026-11-16","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-16","event":"408: 最终模拟","type":"test"},{"date":"2026-11-16","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-16","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-17","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-17","event":"408: 最终模拟","type":"test"},{"date":"2026-11-17","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-17","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-18","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-18","event":"408: 最终模拟","type":"test"},{"date":"2026-11-18","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-18","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-19","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-19","event":"408: 最终模拟","type":"test"},{"date":"2026-11-19","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-19","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-20","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-20","event":"408: 最终模拟","type":"test"},{"date":"2026-11-20","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-20","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-21","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-21","event":"408: 最终模拟","type":"test"},{"date":"2026-11-21","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-21","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-22","event":"每周全套模拟与复盘","type":"test"},{"date":"2026-11-23","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-23","event":"408: 最终模拟","type":"test"},{"date":"2026-11-23","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-23","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-24","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-24","event":"408: 最终模拟","type":"test"},{"date":"2026-11-24","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-24","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-25","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-25","event":"408: 最终模拟","type":"test"},{"date":"2026-11-25","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-25","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-26","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-26","event":"408: 最终模拟","type":"test"},{"date":"2026-11-26","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-26","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-27","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-27","event":"408: 最终模拟","type":"test"},{"date":"2026-11-27","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-27","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-28","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-28","event":"408: 最终模拟","type":"test"},{"date":"2026-11-28","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-28","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-11-29","event":"每周全套模拟与复盘","type":"test"},{"date":"2026-11-30","event":"数二: 错题/押题卷","type":"test"},{"date":"2026-11-30","event":"408: 最终模拟","type":"test"},{"date":"2026-11-30","event":"政治: 肖四大题背诵","type":"default"},{"date":"2026-11-30","event":"英语二: 作文/阅读","type":"homework"},{"date":"2026-12-01","event":"备考: 保持手感+错题","type":"homework"},{"date":"2026-12-01","event":"政治/英语: 背诵模板","type":"default"},{"date":"2026-12-02","event":"备考: 保持手感+错题","type":"homework"},{"date":"2026-12-02","event":"政治/英语: 背诵模板","type":"default"},{"date":"2026-12-03","event":"备考: 保持手感+错题","type":"homework"},{"date":"2026-12-03","event":"政治/英语: 背诵模板","type":"default"},{"date":"2026-12-04","event":"备考: 保持手感+错题","type":"homework"},{"date":"2026-12-04","event":"政治/英语: 背诵模板","type":"default"},{"date":"2026-12-05","event":"备考: 保持手感+错题","type":"homework"},{"date":"2026-12-05","event":"政治/英语: 背诵模板","type":"default"},{"date":"2026-12-06","event":"备考: 保持手感+错题","type":"homework"},{"date":"2026-12-06","event":"政治/英语: 背诵模板","type":"default"},{"date":"2026-12-07","event":"备考: 保持手感+错题","type":"homework"},{"date":"2026-12-07","event":"政治/英语: 背诵模板","type":"default"},{"date":"2026-12-08","event":"备考: 保持手感+错题","type":"homework"},{"date":"2026-12-08","event":"政治/英语: 背诵模板","type":"default"},{"date":"2026-12-09","event":"备考: 保持手感+错题","type":"homework"},{"date":"2026-12-09","event":"政治/英语: 背诵模板","type":"default"},{"date":"2026-12-10","event":"备考: 保持手感+错题","type":"homework"},{"date":"2026-12-10","event":"政治/英语: 背诵模板","type":"default"},{"date":"2026-12-11","event":"备考: 保持手感+错题","type":"homework"},{"date":"2026-12-11","event":"政治/英语: 背诵模板","type":"default"},{"date":"2026-12-12","event":"备考: 保持手感+错题","type":"homework"},{"date":"2026-12-12","event":"政治/英语: 背诵模板","type":"default"},{"date":"2026-12-13","event":"备考: 保持手感+错题","type":"homework"},{"date":"2026-12-13","event":"政治/英语: 背诵模板","type":"default"},{"date":"2026-12-14","event":"备考: 保持手感+错题","type":"homework"},{"date":"2026-12-14","event":"政治/英语: 背诵模板","type":"default"},{"date":"2026-12-15","event":"备考: 保持手感+错题","type":"homework"},{"date":"2026-12-15","event":"政治/英语: 背诵模板","type":"default"},{"date":"2026-12-16","event":"备考: 保持手感+错题","type":"homework"},{"date":"2026-12-16","event":"政治/英语: 背诵模板","type":"default"},{"date":"2026-12-17","event":"备考: 保持手感+错题","type":"homework"},{"date":"2026-12-17","event":"政治/英语: 背诵模板","type":"default"},{"date":"2026-12-18","event":"备考: 保持手感+错题","type":"homework"},{"date":"2026-12-18","event":"政治/英语: 背诵模板","type":"default"},{"date":"2026-12-19","event":"备考: 保持手感+错题","type":"homework"},{"date":"2026-12-19","event":"政治/英语: 背诵模板","type":"default"},{"date":"2026-12-20","event":"考研Day1: 政治英语","type":"test"},{"date":"2026-12-21","event":"考研Day2: 数二408","type":"test"}]</script>
+
+<script id="dailyReviewsData" type="application/json">
+[{"date":"2026-03-25","status":"ongoing","score":"-/10","content":"今日正式重启考研备考计划！改变策略，进入“基础阶段（至6月底）”。 核心战略：以输出倒逼输入，注重章节练习与基础框架。 【各科新计划】 - 数学：看完基础网课（汤家凤/武忠祥/张宇）接着做对应的章节练习（如1800题基础篇），不再盲目做套卷真题。 - 408：看 B 站王道课程 + 只做对应的课后单科选择题，先跳过大题。强烈建议从《数据结构》或《计算机组成原理》开始。 - 英语：每天精读一篇早期真题阅读，死磕长难句与生词，结合唐迟的视频。坚持背单词。 - 政治：坚决不碰。 - 每日时间参考：早晨(数学大头) + 下午(408专业课) + 傍晚(英语阅读与单词) + 晚上(副业/健身/LeetCode/休息)。 【今日目标】 低门槛启动找回状态，挑一节高数课听完做几道对应小题，精读一篇考研英语阅读。不完美没关系，先坐得住！\n"},{"date":"2026-03-24","status":"undone","score":"0/10","content":"3.8-3.24 期间考研复习处于完全停滞状态，经历了半个多月的状态低迷与休整。 不过没关系，停滞在长期备考中很常见。休息完毕，明天（3.25）满血复活，重新出发！\n"},{"date":"2026-03-07","status":"undone","score":"3/10","content":"睡到中午才醒，吃完饭健完身、理完发，回宿舍玩游戏玩太久了。 感觉有点初三那时候的样子了——一下子颓废太久，导致很长时间的打鸡血状态。 晚上投递简历，准备刷刷题，明天早起补进度。\n"},{"date":"2026-03-06","status":"undone","score":"4/10","content":"周五早上有课，下课后参加了中法交流活动，认识了一个法国朋友。 中午才回宿舍，午休后下午接着上课。 下课后做了会课上布置的作业。 晚上看邹炜琪去南京玩，不想工作了，玩了一晚上。考研复习未作推进。\n"},{"date":"2026-03-05","status":"undone","score":"5/10","content":"早上10点半才起床，起床吃完饭回宿舍修整一下就准备去上下午的课了。 课上有字节跳动的HR联系我，所以我整节课都在修改简历，跟HR沟通。 下课后直接去健身了，健完身吃完晚饭，回宿舍整理内务，然后就开始晚上一边用AI调试我的大创项目，一边休息。 晚上10点半陪女朋友看了两集电视剧，就睡觉了。\n"},{"date":"2026-03-04","status":"done","score":"6/10","content":"上午在上课，课上利用碎片时间做了2道LeetCode（利用率不错）。 下午直到15:00完成了李猛老师布置的学院官网修改任务，完美收尾，后续会有经费入账（副业首单！）。 下午去健身，完成健身打卡。 晚上8点洗完澡，22:00后陪女朋友，考研内容基本暂停。 亮点：实习/外快任务高效完成；LeetCode碎片时间利用棒。 不足：考研主线（高数/英语）今日暂缺，需明天补回。\n"},{"date":"2026-03-03","status":"undone","score":"5/10","content":"高数：寻找了一些视频资源，看了先导课，但尚未找到能系统学习的视频，高数正式学习未启动，仍需继续找资源。 LeetCode：刷了5道题，完成度不错，超出每天1-2题的计划。 接下了李猛老师的外快任务（修改学院官网），副业/外快正式开启。 英语/408/政治今日未推进，属于适应开学节奏的第一天，情有可原。 目标：尽快锁定高数学习视频（建议优先试听汤家凤基础30讲或张宇高数18讲）。\n"}]
+</script>
+
+<script src="/assets/js/calendar.js" defer=""></script>
+
+
+    </div>
+  
+</article>
+
+
+            
+          </main>
+
+          <!-- panel -->
+          <aside aria-label="Panel" id="panel-wrapper" class="col-xl-3 ps-2 text-muted">
+            <div class="access">
+              <!-- Get 5 last posted/updated posts -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <section id="access-lastmod">
+    <h2 class="panel-heading">最近更新</h2>
+    <ul class="content list-unstyled ps-0 pb-1 ms-1 mt-2">
+      
+        
+        
+        
+        
+        <li class="lh-lg mb-2">
+          <div class="text-truncate">
+            <a href="/posts/%E7%BB%99%E6%98%9F%E6%98%9F%E5%B8%83%E4%B8%81%E7%9A%84100%E5%B0%81%E6%83%85%E4%B9%A6/">给星星布丁的100封情书</a>
+          </div>
+          <small class="text-muted">
+            <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1778851270"
+  data-df="YYYY/MM/DD"
+  
+>
+  2026/05/15
+</time>
+
+          </small>
+        </li>
+      
+        
+        
+        
+        
+        <li class="lh-lg mb-2">
+          <div class="text-truncate">
+            <a href="/posts/%E5%91%A8%E4%B8%89%E6%B6%B5%E4%BB%8A%E5%A4%A9%E6%83%B3%E8%AE%B0%E4%B8%8B%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B/">🦞周三涵今天想记下的几件事</a>
+          </div>
+          <small class="text-muted">
+            <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1778850600"
+  data-df="YYYY/MM/DD"
+  
+>
+  2026/05/15
+</time>
+
+          </small>
+        </li>
+      
+        
+        
+        
+        
+        <li class="lh-lg mb-2">
+          <div class="text-truncate">
+            <a href="/posts/%E5%B0%B1%E4%B8%9A&%E8%80%83%E7%A0%94&%E4%BF%9D%E7%A0%94&%E5%A4%96%E5%BF%AB&%E6%8A%80%E8%83%BD-%E8%AE%A1%E5%88%92%E4%B9%A6/">就业&考研&保研&外快&技能 计划书</a>
+          </div>
+          <small class="text-muted">
+            <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1776349664"
+  data-df="YYYY/MM/DD"
+  
+>
+  2026/04/16
+</time>
+
+          </small>
+        </li>
+      
+        
+        
+        
+        
+        <li class="lh-lg mb-2">
+          <div class="text-truncate">
+            <a href="/posts/%E6%94%BB%E7%95%A5%E4%B9%A6.skill&%E4%B8%8A%E9%A5%B6%E4%BA%94%E4%B8%80%E6%94%BB%E7%95%A5%E4%B9%A6-copy/">上饶五一攻略书</a>
+          </div>
+          <small class="text-muted">
+            <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1776308400"
+  data-df="YYYY/MM/DD"
+  
+>
+  2026/04/16
+</time>
+
+          </small>
+        </li>
+      
+        
+        
+        
+        
+        <li class="lh-lg mb-2">
+          <div class="text-truncate">
+            <a href="/posts/%E5%86%99%E4%BD%9C%E5%B0%9D%E8%AF%95/">写作尝试</a>
+          </div>
+          <small class="text-muted">
+            <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1773896400"
+  data-df="YYYY/MM/DD"
+  
+>
+  2026/03/19
+</time>
+
+          </small>
+        </li>
+      
+    </ul>
+  </section>
+  <!-- #access-lastmod -->
+
+
+
+              <!-- The trending tags list -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+  <section>
+    <h2 class="panel-heading">热门标签</h2>
+    <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E6%8A%80%E6%9C%AF%E7%A7%AF%E7%B4%AF/">技术积累</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E6%81%8B%E7%88%B1/">恋爱</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E7%B4%A0%E6%9D%90%E7%A7%AF%E7%B4%AF/">素材积累</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E4%BB%8E%E5%A4%AF%E5%88%B0%E6%8B%89%E6%8E%92%E5%90%8D/">从夯到拉排名</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E5%8A%A0%E5%AF%86%E6%96%87%E4%BB%B6/">加密文件</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">使用说明</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E5%81%A5%E8%BA%AB/">健身</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E6%97%85%E6%B8%B8%E6%94%BB%E7%95%A5/">旅游攻略</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E7%BE%8E%E9%A3%9F/">美食</a>
+      
+    </div>
+  </section>
+
+
+            </div>
+
+            
+          </aside>
+        </div>
+
+        <div class="row">
+          <!-- tail -->
+          <div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            
+
+            <!-- The Footer -->
+
+<footer
+  aria-label="Site Info"
+  class="
+    d-flex flex-column justify-content-center text-muted
+    flex-lg-row justify-content-lg-between align-items-lg-center pb-lg-3
+  "
+>
+  <p>©
+    <time>2026</time>
+
+    
+      <a href="/about/">捞鱼</a>.
+    
+
+    
+      <span
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        title="除非另有说明，本网站上的博客文章均由作者按照知识共享署名 4.0 国际 (CC BY 4.0) 许可协议进行授权。"
+      >保留部分权利。</span>
+    
+  </p>
+
+  <p>本站采用 <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> 主题 <a
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        title="v7.4.1"
+        href="https://github.com/cotes2020/jekyll-theme-chirpy"
+        target="_blank"
+        rel="noopener"
+      >Chirpy</a>
+  </p>
+</footer>
+
+          </div>
+        </div>
+
+        <!-- The Search results -->
+
+<div id="search-result-wrapper" class="d-flex justify-content-center d-none">
+  <div class="col-11 content">
+    <div id="search-hints">
+      <!-- The trending tags list -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+  <section>
+    <h2 class="panel-heading">热门标签</h2>
+    <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E6%8A%80%E6%9C%AF%E7%A7%AF%E7%B4%AF/">技术积累</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E6%81%8B%E7%88%B1/">恋爱</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E7%B4%A0%E6%9D%90%E7%A7%AF%E7%B4%AF/">素材积累</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E4%BB%8E%E5%A4%AF%E5%88%B0%E6%8B%89%E6%8E%92%E5%90%8D/">从夯到拉排名</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E5%8A%A0%E5%AF%86%E6%96%87%E4%BB%B6/">加密文件</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">使用说明</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E5%81%A5%E8%BA%AB/">健身</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E6%97%85%E6%B8%B8%E6%94%BB%E7%95%A5/">旅游攻略</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E7%BE%8E%E9%A3%9F/">美食</a>
+      
+    </div>
+  </section>
+
+
+    </div>
+    <div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
+  </div>
+</div>
+
+      </div>
+
+      <aside aria-label="Scroll to Top">
+        <button id="back-to-top" type="button" class="btn btn-lg btn-box-shadow">
+          <i class="fas fa-angle-up"></i>
+        </button>
+      </aside>
+    </div>
+
+    <div id="mask" class="d-none position-fixed w-100 h-100 z-1"></div>
+
+    
+      <aside
+  id="notification"
+  class="toast"
+  role="alert"
+  aria-live="assertive"
+  aria-atomic="true"
+  data-bs-animation="true"
+  data-bs-autohide="false"
+>
+  <div class="toast-header">
+    <button
+      type="button"
+      class="btn-close ms-auto"
+      data-bs-dismiss="toast"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="toast-body text-center pt-0">
+    <p class="px-2 mb-3">发现新版本的内容。</p>
+    <button type="button" class="btn btn-primary" aria-label="Update">
+      更新
+    </button>
+  </div>
+</aside>
+
+    
+
+    <!-- Embedded scripts -->
+
+    
+
+    <!--
+  Jekyll Simple Search loader
+  See: <https://github.com/christian-fei/Simple-Jekyll-Search>
+-->
+
+
+
+
+
+<script>
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    SimpleJekyllSearch({
+      searchInput: document.getElementById('search-input'),
+      resultsContainer: document.getElementById('search-results'),
+      json: '/assets/js/data/search.json',
+      searchResultTemplate: '  <article class="px-1 px-sm-2 px-lg-4 px-xl-0">    <header>      <h2><a href="{url}">{title}</a></h2>      <div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1">        {categories}        {tags}      </div>    </header>    <p>{content}</p>  </article>',
+      noResultsText: '<p class="mt-5">搜索结果为空</p>',
+      templateMiddleware: function(prop, value, template) {
+        if (prop === 'categories') {
+          if (value === '') {
+            return `${value}`;
+          } else {
+            return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`;
+          }
+        }
+
+        if (prop === 'tags') {
+          if (value === '') {
+            return `${value}`;
+          } else {
+            return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`;
+          }
+        }
+      }
+    });
+  });
+</script>
+
+  </body>
+</html>
+

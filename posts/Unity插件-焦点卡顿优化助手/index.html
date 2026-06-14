@@ -1,0 +1,4607 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- `site.alt_lang` can specify a language different from the UI -->
+<html lang="zh-CN" >
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta
+    name="viewport"
+    content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
+  ><!-- Setup Open Graph image -->
+
+  
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Unity插件-焦点卡顿优化助手" />
+<meta property="og:locale" content="zh_CN" />
+<meta name="description" content="一款内置在Unity引擎中的回归unity焦点时缓解卡顿情况的插件" />
+<meta property="og:description" content="一款内置在Unity引擎中的回归unity焦点时缓解卡顿情况的插件" />
+<link rel="canonical" href="https://lyzbcy.github.io/posts/Unity%E6%8F%92%E4%BB%B6-%E7%84%A6%E7%82%B9%E5%8D%A1%E9%A1%BF%E4%BC%98%E5%8C%96%E5%8A%A9%E6%89%8B/" />
+<meta property="og:url" content="https://lyzbcy.github.io/posts/Unity%E6%8F%92%E4%BB%B6-%E7%84%A6%E7%82%B9%E5%8D%A1%E9%A1%BF%E4%BC%98%E5%8C%96%E5%8A%A9%E6%89%8B/" />
+<meta property="og:site_name" content="捞鱼的笔记" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-11-20T08:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Unity插件-焦点卡顿优化助手" />
+<meta name="twitter:site" content="@" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-11-20T09:15:03+08:00","datePublished":"2025-11-20T08:00:00+08:00","description":"一款内置在Unity引擎中的回归unity焦点时缓解卡顿情况的插件","headline":"Unity插件-焦点卡顿优化助手","mainEntityOfPage":{"@type":"WebPage","@id":"https://lyzbcy.github.io/posts/Unity%E6%8F%92%E4%BB%B6-%E7%84%A6%E7%82%B9%E5%8D%A1%E9%A1%BF%E4%BC%98%E5%8C%96%E5%8A%A9%E6%89%8B/"},"url":"https://lyzbcy.github.io/posts/Unity%E6%8F%92%E4%BB%B6-%E7%84%A6%E7%82%B9%E5%8D%A1%E9%A1%BF%E4%BC%98%E5%8C%96%E5%8A%A9%E6%89%8B/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <title>Unity插件-焦点卡顿优化助手 | 捞鱼的笔记
+  </title>
+
+  <link rel="icon" href="/assets/image%20library/icon%20library/lyzbcy.ico?v=3" type="image/x-icon">
+<link rel="shortcut icon" href="/assets/image%20library/icon%20library/lyzbcy.ico?v=3" type="image/x-icon">
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/image%20library/icon%20library/lyzbcy.png?v=3">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/image%20library/icon%20library/lyzbcy.png?v=3">
+
+<link rel="apple-touch-icon" href="/assets/image%20library/icon%20library/lyzbcy.png?v=3">
+
+  <!-- Resource Hints -->
+  
+    
+      
+        <link rel="preconnect" href="https://fonts.googleapis.com" >
+      
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" >
+      
+    
+      
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" >
+      
+    
+      
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" >
+      
+        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" >
+      
+    
+  
+
+  <!-- Bootstrap -->
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  
+
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/assets/css/jekyll-theme-chirpy.css">
+
+  <!-- PWA manifest -->
+  <link rel="manifest" href="/assets/img/favicons/site.webmanifest">
+
+  <!-- 自定义样式 -->
+  <link rel="stylesheet" href="/assets/lib-custom/order-card.css">
+
+  <!-- Web Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Source+Sans+Pro:wght@400;600;700;900&display=swap">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css">
+
+  <!-- 3rd-party Dependencies -->
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.36.4/dist/tocbot.min.css">
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.min.css">
+  
+
+  
+    <!-- Image Popup -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css">
+  
+
+  <!-- Scripts -->
+
+  <script src="/assets/js/dist/theme.min.js"></script>
+
+  <!-- JS selector for site. -->
+
+<!-- commons -->
+
+
+
+<!-- layout specified -->
+
+
+  
+
+  
+    <!-- image lazy-loading & popup & clipboard -->
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+  
+    
+
+    
+
+  
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.18/dayjs.min.js,npm/dayjs@1.11.18/locale/zh.js,npm/dayjs@1.11.18/plugin/relativeTime.js,npm/dayjs@1.11.18/plugin/localizedFormat.js,npm/tocbot@4.36.4/dist/tocbot.min.js"></script>
+
+
+
+
+
+
+
+<script defer src="/assets/js/dist/post.min.js"></script>
+
+
+
+<!-- Pageviews -->
+
+  
+
+  
+
+
+
+  
+
+  <!-- A placeholder to allow defining custom metadata -->
+
+  <link rel="icon" href="/assets/image%20library/icon%20library/lyzbcy.ico?v=2" type="image/x-icon">
+<link rel="shortcut icon" href="/assets/image%20library/icon%20library/lyzbcy.ico?v=2" type="image/x-icon">
+
+<!-- PNG fallbacks (force our PNG instead of theme defaults) -->
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/image%20library/icon%20library/lyzbcy.png?v=2">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/image%20library/icon%20library/lyzbcy.png?v=2">
+
+<!-- Apple Touch Icon -->
+<link rel="apple-touch-icon" href="/assets/image%20library/icon%20library/lyzbcy.png?v=2">
+
+<!-- PWA manifest -->
+<link rel="manifest" href="/assets/img/favicons/site.webmanifest">
+
+<!-- Preconnect to Image Server -->
+<link rel="preconnect" href="https://s41.ax1x.com">
+<link rel="dns-prefetch" href="https://s41.ax1x.com">
+
+<!-- 自定义样式 -->
+<link rel="stylesheet" href="/assets/lib-custom/order-card.css">
+
+
+<!-- Safari pinned tab -->
+<!-- Intentionally omit theme SVG to avoid overriding our favicon -->
+
+<!-- Windows tiles & theme colors -->
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#ffffff">
+
+
+<script>
+  window.isRomance = false;
+  
+</script>
+
+
+
+
+<!-- Tech Enhancements -->
+<link rel="stylesheet" href="/assets/lib-custom/tech-styles.css">
+<link rel="stylesheet" href="/assets/css/css-starfield.css">
+<!-- Three.js 由各 AR 体验页自行加载，全局不再引入 -->
+<script defer src="/assets/lib-custom/tech-effects.js"></script>
+
+<!-- GitHub-style Alerts -->
+<link rel="stylesheet" href="/assets/css/github-alerts.css">
+<script defer src="/assets/js/github-alerts.js"></script>
+
+</head>
+
+
+
+
+  <body>
+    <!-- The Side Bar -->
+
+<aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end">
+  <header class="profile-wrapper">
+    <a href="/" id="avatar" class="rounded-circle"><img src="/assets/image library/icon library/lyzbcy.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"></a>
+
+    <a class="site-title d-block" href="/">捞鱼的笔记</a>
+    <p class="site-subtitle fst-italic mb-0">会记录一些比较有趣的经验</p>
+  </header>
+  <!-- .profile-wrapper -->
+
+  <nav class="flex-column flex-grow-1 w-100 ps-0">
+    <ul class="nav">
+      <!-- home -->
+      <li class="nav-item">
+        <a href="/" class="nav-link">
+          <i class="fa-fw fas fa-home"></i>
+          <span>首页</span>
+        </a>
+      </li>
+      <!-- the real tabs -->
+      
+        <li class="nav-item">
+          <a href="/categories/" class="nav-link">
+            <i class="fa-fw fas fa-stream"></i>
+            
+
+            <span>分类</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/tags/" class="nav-link">
+            <i class="fa-fw fas fa-tags"></i>
+            
+
+            <span>标签</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/archives/" class="nav-link">
+            <i class="fa-fw fas fa-archive"></i>
+            
+
+            <span>归档</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/calendar/" class="nav-link">
+            <i class="fa-fw fas fa-calendar"></i>
+            
+
+            <span>日历</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/about/" class="nav-link">
+            <i class="fa-fw fas fa-info-circle"></i>
+            
+
+            <span>关于</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+        <li class="nav-item">
+          <a href="/ar/" class="nav-link">
+            <i class="fa-fw fas fa-vr-cardboard"></i>
+            
+
+            <span>AR</span>
+          </a>
+        </li>
+        <!-- .nav-item -->
+      
+    </ul>
+  </nav>
+
+  <div class="sidebar-bottom d-flex flex-wrap  align-items-center w-100">
+    
+      <button type="button" class="btn btn-link nav-link" aria-label="Switch Mode" id="mode-toggle">
+        <i class="fas fa-adjust"></i>
+      </button>
+
+      
+        <span class="icon-border"></span>
+      
+    
+
+    
+
+      
+        <a
+          href="javascript:location.href = 'mailto:' + ['lyzbcy','qq.com'].join('@')"
+          aria-label="email"
+          
+
+          
+
+          
+
+          
+        >
+          <i class="fas fa-envelope"></i>
+        </a>
+      
+    
+          
+        
+
+      
+        <a
+          href="/feed.xml"
+          aria-label="rss"
+          
+
+          
+
+          
+
+          
+        >
+          <i class="fas fa-rss"></i>
+        </a>
+      
+    
+  </div>
+  <!-- .sidebar-bottom -->
+</aside>
+<!-- #sidebar -->
+
+
+    <div id="main-wrapper" class="d-flex justify-content-center">
+      <div class="container d-flex flex-column px-xxl-5">
+        <!-- The Top Bar -->
+
+<header id="topbar-wrapper" class="flex-shrink-0" aria-label="Top Bar">
+  <div
+    id="topbar"
+    class="d-flex align-items-center justify-content-between px-lg-3 h-100"
+  >
+    <nav id="breadcrumb" aria-label="Breadcrumb">
+      
+
+      
+        
+          
+            <span>
+              <a href="/">首页</a>
+            </span>
+
+          
+        
+          
+        
+          
+            
+              <span>Unity插件-焦点卡顿优化助手</span>
+            
+
+          
+        
+      
+    </nav>
+    <!-- endof #breadcrumb -->
+
+    <button type="button" id="sidebar-trigger" class="btn btn-link" aria-label="Sidebar">
+      <i class="fas fa-bars fa-fw"></i>
+    </button>
+
+    <div id="topbar-title">
+      文章
+    </div>
+
+    <button type="button" id="search-trigger" class="btn btn-link" aria-label="Search">
+      <i class="fas fa-search fa-fw"></i>
+    </button>
+
+    <search id="search" class="align-items-center ms-3 ms-lg-0">
+      <i class="fas fa-search fa-fw"></i>
+      <input
+        class="form-control"
+        id="search-input"
+        type="search"
+        aria-label="search"
+        autocomplete="off"
+        placeholder="搜索..."
+      >
+    </search>
+    <button type="button" class="btn btn-link text-decoration-none" id="search-cancel">取消</button>
+  </div>
+</header>
+
+
+        <div class="row flex-grow-1">
+          <main aria-label="Main Content" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            
+              <!-- Refactor the HTML structure -->
+
+
+
+<!--
+  In order to allow a wide table to scroll horizontally,
+  we suround the markdown table with `<div class="table-wrapper">` and `</div>`
+-->
+
+
+
+<!--
+  Fixed kramdown code highlight rendering:
+  https://github.com/penibelst/jekyll-compress-html/issues/101
+  https://github.com/penibelst/jekyll-compress-html/issues/71#issuecomment-188144901
+-->
+
+
+
+<!-- Change the icon of checkbox -->
+
+
+
+<!-- Handle images -->
+
+
+
+
+
+<!-- Add header for code snippets -->
+
+
+
+<!-- Create heading anchors -->
+
+
+
+
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+    
+
+    
+  
+
+
+
+
+<!-- return -->
+
+
+
+
+
+
+
+
+
+
+<article class="px-1" data-toc="true">
+  <header>
+    <h1 data-toc-skip>Unity插件-焦点卡顿优化助手</h1>
+    
+      <p class="post-desc fw-light mb-4">一款内置在Unity引擎中的回归unity焦点时缓解卡顿情况的插件</p>
+    
+
+    <div class="post-meta text-muted">
+      <!-- published date -->
+      <span>
+        发表于
+        <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1763596800"
+  data-df="YYYY/MM/DD"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  2025/11/20
+</time>
+
+      </span>
+
+      <!-- lastmod date -->
+      
+        <span>
+          更新于
+          <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1763601303"
+  data-df="YYYY/MM/DD"
+  
+    data-bs-toggle="tooltip" data-bs-placement="bottom"
+  
+>
+  2025/11/20
+</time>
+
+        </span>
+      
+
+      
+
+      <div class="d-flex justify-content-between">
+        <!-- author(s) -->
+        <span>
+          
+
+          作者
+
+          <em>
+            
+              <a href="/about/">捞鱼</a>
+            
+          </em>
+        </span>
+
+        <div>
+          <!-- pageviews -->
+          
+
+          <!-- read time -->
+          <!-- Calculate the post's reading time, and display the word count in tooltip -->
+
+
+
+<!-- words per minute -->
+
+
+
+
+
+
+
+
+
+
+<!-- return element -->
+<span
+  class="readtime"
+  data-bs-toggle="tooltip"
+  data-bs-placement="bottom"
+  title="3708 字"
+>
+  <em>20 分钟</em>阅读</span>
+
+        </div>
+      </div>
+    </div>
+  </header>
+
+  
+    <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
+      <span class="label text-truncate">Unity插件-焦点卡顿优化助手</span>
+      <button type="button" class="toc-trigger btn me-1">
+        <i class="fa-solid fa-list-ul fa-fw"></i>
+      </button>
+    </div>
+
+    <button id="toc-solo-trigger" type="button" class="toc-trigger btn btn-outline-secondary btn-sm">
+      <span class="label ps-2 pe-1">文章内容</span>
+      <i class="fa-solid fa-angle-right fa-fw"></i>
+    </button>
+
+    <dialog id="toc-popup" class="p-0">
+      <div class="header d-flex flex-row align-items-center justify-content-between">
+        <div class="label text-truncate py-2 ms-4">Unity插件-焦点卡顿优化助手</div>
+        <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
+          <i class="fas fa-close"></i>
+        </button>
+      </div>
+      <div id="toc-popup-content" class="px-4 py-3 pb-4"></div>
+    </dialog>
+  
+
+  <div class="content">
+    <h2 id="使用说明"><span class="me-2">使用说明</span><a href="#使用说明" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<h2 id="-目录"><span class="me-2">📖 目录</span><a href="#-目录" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<ul>
+  <li><a href="#插件简介">插件简介</a></li>
+  <li><a href="#快速开始">快速开始</a></li>
+  <li><a href="#功能详解">功能详解</a></li>
+  <li><a href="#使用场景">使用场景</a></li>
+  <li><a href="#常见问题">常见问题</a></li>
+  <li><a href="#注意事项">注意事项</a></li>
+</ul>
+
+<hr />
+
+<h2 id="插件简介"><span class="me-2">插件简介</span><a href="#插件简介" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p><strong>焦点卡顿优化助手</strong> 是一款专为 Unity 编辑器设计的性能优化工具，旨在解决 Unity 编辑器在重新获得焦点时因自动刷新资源而导致的卡顿问题。</p>
+
+<h3 id="主要解决的问题"><span class="me-2">主要解决的问题</span><a href="#主要解决的问题" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>当你在外部编辑器（如 Visual Studio、VS Code、Rider）中修改代码后，切换回 Unity 编辑器时，Unity 会自动检测并刷新所有资源。对于大型项目，这个过程可能会造成明显的卡顿，影响开发效率。</p>
+
+<h3 id="核心优势"><span class="me-2">核心优势</span><a href="#核心优势" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<ul>
+  <li>✅ <strong>减少焦点切换时的卡顿</strong>：智能控制资源刷新时机</li>
+  <li>✅ <strong>多种刷新策略</strong>：根据项目需求灵活选择</li>
+  <li>✅ <strong>Enter Play Mode 优化</strong>：加快进入播放模式的速度</li>
+  <li>✅ <strong>性能监控</strong>：实时查看刷新耗时和状态</li>
+  <li>✅ <strong>安全可靠</strong>：默认不修改项目设置，可随时恢复</li>
+</ul>
+
+<hr />
+
+<h2 id="快速开始"><span class="me-2">快速开始</span><a href="#快速开始" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<h3 id="1-打开插件窗口"><span class="me-2">1. 打开插件窗口</span><a href="#1-打开插件窗口" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>在 Unity 编辑器顶部菜单栏，点击 <strong><code class="language-plaintext highlighter-rouge">Tools</code> → <code class="language-plaintext highlighter-rouge">焦点卡顿优化助手</code></strong> 打开插件窗口。</p>
+
+<h3 id="2-启用插件"><span class="me-2">2. 启用插件</span><a href="#2-启用插件" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>在打开的窗口中，勾选 <strong>“启用焦点卡顿优化助手”</strong> 选项。</p>
+
+<h3 id="3-选择刷新策略"><span class="me-2">3. 选择刷新策略</span><a href="#3-选择刷新策略" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>根据你的项目大小和开发习惯，选择合适的刷新策略：</p>
+
+<ul>
+  <li><strong>小项目</strong>：选择 <strong>“立即刷新”</strong></li>
+  <li><strong>中大型项目</strong>：选择 <strong>“限流刷新”</strong>（推荐）</li>
+  <li><strong>需要完全控制</strong>：选择 <strong>“手动刷新”</strong></li>
+</ul>
+
+<h3 id="4-开始使用"><span class="me-2">4. 开始使用</span><a href="#4-开始使用" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>配置完成后，插件会自动生效。当你从外部编辑器切换回 Unity 时，插件会按照你设置的策略控制资源刷新。</p>
+
+<hr />
+
+<h2 id="功能详解"><span class="me-2">功能详解</span><a href="#功能详解" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<h3 id="-刷新策略"><span class="me-2">🔄 刷新策略</span><a href="#-刷新策略" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<h4 id="启用焦点卡顿优化助手"><span class="me-2">启用焦点卡顿优化助手</span><a href="#启用焦点卡顿优化助手" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
+
+<p><strong>主开关</strong>，控制插件是否生效。关闭后，Unity 将恢复默认的自动刷新行为。</p>
+
+<h4 id="失焦时暂停自动刷新"><span class="me-2">失焦时暂停自动刷新</span><a href="#失焦时暂停自动刷新" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
+
+<p><strong>推荐开启</strong>。当 Unity 编辑器失去焦点时（例如切换到代码编辑器），自动暂停资源刷新。这样可以避免在外部编辑器中修改代码时触发不必要的刷新。</p>
+
+<p><strong>使用场景</strong>：</p>
+
+<ul>
+  <li>在 Visual Studio 中编写代码时</li>
+  <li>在浏览器中查看文档时</li>
+  <li>切换到其他应用程序时</li>
+</ul>
+
+<h4 id="在控制台输出状态提示"><span class="me-2">在控制台输出状态提示</span><a href="#在控制台输出状态提示" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
+
+<p>开启后，插件会在 Unity 控制台中显示刷新操作的详细信息，包括：</p>
+
+<ul>
+  <li>刷新触发原因</li>
+  <li>刷新执行时间</li>
+  <li>当前刷新状态</li>
+</ul>
+
+<p><strong>适用场景</strong>：调试和监控刷新行为时使用。</p>
+
+<h4 id="焦点回归策略"><span class="me-2">焦点回归策略</span><a href="#焦点回归策略" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
+
+<p>这是插件的核心功能，控制当 Unity 重新获得焦点时的刷新行为。</p>
+
+<h5 id="立即刷新"><span class="me-2">立即刷新</span><a href="#立即刷新" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h5>
+
+<p>Unity 重新获得焦点后，立即执行资源刷新。</p>
+
+<p><strong>适用场景</strong>：</p>
+
+<ul>
+  <li>小型项目（资源数量少）</li>
+  <li>需要立即看到修改效果</li>
+  <li>对卡顿不敏感</li>
+</ul>
+
+<p><strong>优点</strong>：响应迅速，修改后立即生效<br />
+<strong>缺点</strong>：可能造成明显卡顿</p>
+
+<h5 id="限流刷新推荐"><span class="me-2">限流刷新（推荐）</span><a href="#限流刷新推荐" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h5>
+
+<p>Unity 重新获得焦点后，等待一段时间再执行刷新。延迟时间可自定义（建议 1-3 秒）。</p>
+
+<p><strong>适用场景</strong>：</p>
+
+<ul>
+  <li>中大型项目</li>
+  <li>需要平衡响应速度和性能</li>
+  <li>大多数开发场景</li>
+</ul>
+
+<p><strong>优点</strong>：减少卡顿，同时保持自动刷新<br />
+<strong>缺点</strong>：有短暂延迟</p>
+
+<p><strong>延迟秒数设置</strong>：</p>
+
+<ul>
+  <li><strong>0.2-1 秒</strong>：快速响应，适合中小型项目</li>
+  <li><strong>1-3 秒</strong>：推荐值，平衡性能和响应速度</li>
+  <li><strong>3-10 秒</strong>：最大程度减少卡顿，适合大型项目</li>
+</ul>
+
+<h5 id="手动刷新"><span class="me-2">手动刷新</span><a href="#手动刷新" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h5>
+
+<p>Unity 重新获得焦点后，不自动刷新。需要手动点击 <strong>“立即刷新”</strong> 按钮。</p>
+
+<p><strong>适用场景</strong>：</p>
+
+<ul>
+  <li>需要完全控制刷新时机</li>
+  <li>在特定时间点统一刷新</li>
+  <li>避免频繁刷新影响工作流</li>
+</ul>
+
+<p><strong>优点</strong>：完全控制，无意外刷新<br />
+<strong>缺点</strong>：需要手动操作</p>
+
+<p><strong>手动模式提示</strong>：</p>
+
+<ul>
+  <li>开启后，当检测到脚本更新时会显示通知</li>
+  <li>关闭后，需要自己记住手动刷新</li>
+</ul>
+
+<h4 id="操作按钮"><span class="me-2">操作按钮</span><a href="#操作按钮" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
+
+<h5 id="立即刷新-1"><span class="me-2">立即刷新</span><a href="#立即刷新-1" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h5>
+
+<p>无论当前策略如何，点击此按钮都会立即执行资源刷新。</p>
+
+<p><strong>使用场景</strong>：</p>
+
+<ul>
+  <li>手动刷新模式下需要刷新时</li>
+  <li>限流模式下需要立即刷新时</li>
+  <li>测试刷新功能时</li>
+</ul>
+
+<h5 id="重新允许自动刷新"><span class="me-2">重新允许自动刷新</span><a href="#重新允许自动刷新" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h5>
+
+<p>如果自动刷新被暂停，点击此按钮可以立即恢复自动刷新功能。</p>
+
+<p><strong>使用场景</strong>：</p>
+
+<ul>
+  <li>插件暂停了自动刷新，但你想立即恢复时</li>
+  <li>需要强制刷新时</li>
+</ul>
+
+<h4 id="刷新状态"><span class="me-2">刷新状态</span><a href="#刷新状态" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
+
+<p>显示当前自动刷新的状态信息：</p>
+
+<ul>
+  <li><strong>正常</strong>：自动刷新正常运行</li>
+  <li><strong>已暂停</strong>：自动刷新已被暂停</li>
+  <li><strong>预计 X 秒后刷新</strong>：限流模式下，显示距离下次刷新的剩余时间</li>
+</ul>
+
+<hr />
+
+<h3 id="-enter-play-mode-优化"><span class="me-2">🎮 Enter Play Mode 优化</span><a href="#-enter-play-mode-优化" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>这是一个可选功能，可以加快进入播放模式的速度。</p>
+
+<h4 id="启用-enter-play-mode-辅助"><span class="me-2">启用 Enter Play Mode 辅助</span><a href="#启用-enter-play-mode-辅助" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
+
+<p><strong>主开关</strong>，控制 Enter Play Mode 优化功能是否启用。</p>
+
+<h4 id="进入-play-mode-时应用预设"><span class="me-2">进入 Play Mode 时应用预设</span><a href="#进入-play-mode-时应用预设" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
+
+<p>开启后，当进入播放模式时，自动应用下方配置的选项。</p>
+
+<h4 id="预设选项"><span class="me-2">预设选项</span><a href="#预设选项" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
+
+<p>可以选择以下选项：</p>
+
+<h5 id="禁用域重载disable-domain-reload"><span class="me-2">禁用域重载（Disable Domain Reload）</span><a href="#禁用域重载disable-domain-reload" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h5>
+
+<p>跳过脚本重新编译，加快启动速度。</p>
+
+<p><strong>优点</strong>：</p>
+
+<ul>
+  <li>进入播放模式更快</li>
+  <li>减少等待时间</li>
+</ul>
+
+<p><strong>注意事项</strong>：</p>
+
+<ul>
+  <li>静态变量和初始化代码不会重新执行</li>
+  <li>某些依赖域重载的脚本可能无法正常工作</li>
+  <li>建议在测试阶段使用</li>
+</ul>
+
+<h5 id="禁用场景重载disable-scene-reload"><span class="me-2">禁用场景重载（Disable Scene Reload）</span><a href="#禁用场景重载disable-scene-reload" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h5>
+
+<p>保持当前场景状态，更快进入播放模式。</p>
+
+<p><strong>优点</strong>：</p>
+
+<ul>
+  <li>场景状态保持不变</li>
+  <li>进入播放模式更快</li>
+</ul>
+
+<p><strong>注意事项</strong>：</p>
+
+<ul>
+  <li>场景中的对象状态可能不是初始状态</li>
+  <li>某些需要重置的场景逻辑可能受影响</li>
+</ul>
+
+<h4 id="停用时自动恢复原设置"><span class="me-2">停用时自动恢复原设置</span><a href="#停用时自动恢复原设置" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
+
+<p>当禁用辅助功能时，自动恢复 Unity 的原始 Enter Play Mode 设置。</p>
+
+<p><strong>推荐开启</strong>，确保在禁用功能时不会影响项目设置。</p>
+
+<h4 id="立即恢复原-play-mode-设置"><span class="me-2">立即恢复原 Play Mode 设置</span><a href="#立即恢复原-play-mode-设置" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
+
+<p>点击此按钮可以立即恢复 Unity 的原始 Enter Play Mode 设置，无论当前配置如何。</p>
+
+<p><strong>使用场景</strong>：</p>
+
+<ul>
+  <li>需要立即恢复原始设置时</li>
+  <li>测试完成后恢复设置时</li>
+</ul>
+
+<hr />
+
+<h3 id="-刷新统计"><span class="me-2">📊 刷新统计</span><a href="#-刷新统计" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>显示最近一次资源刷新的详细信息，帮助了解刷新性能。</p>
+
+<h4 id="最近刷新原因"><span class="me-2">最近刷新原因</span><a href="#最近刷新原因" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
+
+<p>显示触发最近一次刷新的原因，例如：</p>
+
+<ul>
+  <li>立即刷新</li>
+  <li>限流刷新</li>
+  <li>手动刷新</li>
+  <li>按钮触发</li>
+</ul>
+
+<h4 id="最近耗时"><span class="me-2">最近耗时</span><a href="#最近耗时" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
+
+<p>显示最近一次资源刷新操作所花费的时间（秒）。</p>
+
+<p><strong>性能参考</strong>：</p>
+
+<ul>
+  <li><strong>&lt; 0.5 秒</strong>：优秀（绿色显示）</li>
+  <li><strong>0.5 - 1.0 秒</strong>：良好（黄色显示）</li>
+  <li><strong>&gt; 1.0 秒</strong>：需要优化（红色显示）</li>
+</ul>
+
+<hr />
+
+<h3 id="️-设置"><span class="me-2">⚙️ 设置</span><a href="#️-设置" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>点击窗口右上角的 <strong>“设置”</strong> 按钮，可以打开设置窗口。</p>
+
+<h4 id="界面语言"><span class="me-2">界面语言</span><a href="#界面语言" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
+
+<p>支持三种语言：</p>
+
+<ul>
+  <li><strong>简体中文</strong></li>
+  <li><strong>English</strong></li>
+  <li><strong>日本語</strong></li>
+</ul>
+
+<p>更改语言后，需要重新打开窗口才能生效。</p>
+
+<hr />
+
+<h3 id="-帮助"><span class="me-2">❓ 帮助</span><a href="#-帮助" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p>点击窗口右上角的 <strong>“帮助”</strong> 按钮，可以打开帮助文档页面。</p>
+
+<hr />
+
+<h2 id="使用场景"><span class="me-2">使用场景</span><a href="#使用场景" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<h3 id="场景-1日常开发推荐配置"><span class="me-2">场景 1：日常开发（推荐配置）</span><a href="#场景-1日常开发推荐配置" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p><strong>配置</strong>：</p>
+
+<ul>
+  <li>✅ 启用焦点卡顿优化助手</li>
+  <li>✅ 失焦时暂停自动刷新</li>
+  <li>✅ 焦点回归策略：<strong>限流刷新</strong></li>
+  <li>✅ 延迟秒数：<strong>1.5 秒</strong></li>
+  <li>✅ 在控制台输出状态提示</li>
+</ul>
+
+<p><strong>效果</strong>：</p>
+
+<ul>
+  <li>在代码编辑器中编写代码时，Unity 不会频繁刷新</li>
+  <li>切换回 Unity 后，等待 1.5 秒再刷新，减少卡顿</li>
+  <li>可以在控制台查看刷新状态</li>
+</ul>
+
+<h3 id="场景-2大型项目开发"><span class="me-2">场景 2：大型项目开发</span><a href="#场景-2大型项目开发" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p><strong>配置</strong>：</p>
+
+<ul>
+  <li>✅ 启用焦点卡顿优化助手</li>
+  <li>✅ 失焦时暂停自动刷新</li>
+  <li>✅ 焦点回归策略：<strong>限流刷新</strong></li>
+  <li>✅ 延迟秒数：<strong>3 秒</strong></li>
+  <li>✅ 在控制台输出状态提示</li>
+</ul>
+
+<p><strong>效果</strong>：</p>
+
+<ul>
+  <li>最大程度减少卡顿</li>
+  <li>有足够时间完成代码修改</li>
+  <li>延迟刷新不影响工作流</li>
+</ul>
+
+<h3 id="场景-3需要完全控制"><span class="me-2">场景 3：需要完全控制</span><a href="#场景-3需要完全控制" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p><strong>配置</strong>：</p>
+
+<ul>
+  <li>✅ 启用焦点卡顿优化助手</li>
+  <li>✅ 失焦时暂停自动刷新</li>
+  <li>✅ 焦点回归策略：<strong>手动刷新</strong></li>
+  <li>✅ 手动模式提示：<strong>开启</strong></li>
+</ul>
+
+<p><strong>效果</strong>：</p>
+
+<ul>
+  <li>完全控制刷新时机</li>
+  <li>在需要时手动刷新</li>
+  <li>收到脚本更新通知</li>
+</ul>
+
+<h3 id="场景-4快速迭代测试"><span class="me-2">场景 4：快速迭代测试</span><a href="#场景-4快速迭代测试" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p><strong>配置</strong>：</p>
+
+<ul>
+  <li>✅ 启用焦点卡顿优化助手</li>
+  <li>✅ 失焦时暂停自动刷新</li>
+  <li>✅ 焦点回归策略：<strong>立即刷新</strong></li>
+  <li>✅ 启用 Enter Play Mode 辅助</li>
+  <li>✅ 进入 Play Mode 时应用预设</li>
+  <li>✅ 预设选项：<strong>禁用域重载</strong> + <strong>禁用场景重载</strong></li>
+</ul>
+
+<p><strong>效果</strong>：</p>
+
+<ul>
+  <li>修改代码后立即看到效果</li>
+  <li>进入播放模式非常快</li>
+  <li>适合快速测试和迭代</li>
+</ul>
+
+<h3 id="场景-5团队协作"><span class="me-2">场景 5：团队协作</span><a href="#场景-5团队协作" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p><strong>配置</strong>：</p>
+
+<ul>
+  <li>✅ 启用焦点卡顿优化助手</li>
+  <li>✅ 失焦时暂停自动刷新</li>
+  <li>✅ 焦点回归策略：<strong>限流刷新</strong></li>
+  <li>✅ 延迟秒数：<strong>2 秒</strong></li>
+  <li>❌ 在控制台输出状态提示（减少控制台噪音）</li>
+</ul>
+
+<p><strong>效果</strong>：</p>
+
+<ul>
+  <li>统一的刷新策略</li>
+  <li>减少不必要的刷新</li>
+  <li>保持团队开发效率</li>
+</ul>
+
+<hr />
+
+<h2 id="常见问题"><span class="me-2">常见问题</span><a href="#常见问题" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<h3 id="q1-插件会影响我的项目设置吗"><span class="me-2">Q1: 插件会影响我的项目设置吗？</span><a href="#q1-插件会影响我的项目设置吗" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p><strong>A</strong>: 不会。插件默认不会修改项目的任何设置。所有配置都保存在插件自己的设置文件中（<code class="language-plaintext highlighter-rouge">ProjectSettings/FocusOptimizerSettings.asset</code>）。你可以随时禁用插件，Unity 会恢复默认行为。</p>
+
+<h3 id="q2-为什么我修改代码后没有自动刷新"><span class="me-2">Q2: 为什么我修改代码后没有自动刷新？</span><a href="#q2-为什么我修改代码后没有自动刷新" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p><strong>A</strong>: 请检查以下几点：</p>
+
+<ol>
+  <li>是否启用了”启用焦点卡顿优化助手”？</li>
+  <li>是否选择了”手动刷新”模式？如果是，需要手动点击”立即刷新”按钮</li>
+  <li>是否开启了”失焦时暂停自动刷新”？如果是，需要切换回 Unity 后才会刷新</li>
+  <li>如果选择了”限流刷新”，需要等待延迟时间后才会刷新</li>
+</ol>
+
+<h3 id="q3-限流刷新模式下延迟时间设置多少合适"><span class="me-2">Q3: 限流刷新模式下，延迟时间设置多少合适？</span><a href="#q3-限流刷新模式下延迟时间设置多少合适" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p><strong>A</strong>: 建议值：</p>
+
+<ul>
+  <li><strong>小型项目</strong>（&lt; 1000 个资源）：0.5 - 1 秒</li>
+  <li><strong>中型项目</strong>（1000 - 5000 个资源）：1 - 2 秒</li>
+  <li><strong>大型项目</strong>（&gt; 5000 个资源）：2 - 3 秒</li>
+</ul>
+
+<p>你可以根据实际卡顿情况调整。如果还是觉得卡顿，可以增加延迟时间或切换到手动模式。</p>
+
+<h3 id="q4-enter-play-mode-优化安全吗"><span class="me-2">Q4: Enter Play Mode 优化安全吗？</span><a href="#q4-enter-play-mode-优化安全吗" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p><strong>A</strong>: 对于大多数项目是安全的，但需要注意：</p>
+
+<ul>
+  <li><strong>禁用域重载</strong>：静态变量不会重置，某些初始化代码不会执行</li>
+  <li><strong>禁用场景重载</strong>：场景状态保持不变，可能不是初始状态</li>
+</ul>
+
+<p>建议在测试阶段使用，正式发布前可以关闭。如果遇到问题，可以点击”立即恢复原 Play Mode 设置”按钮。</p>
+
+<h3 id="q5-如何查看刷新是否正常工作"><span class="me-2">Q5: 如何查看刷新是否正常工作？</span><a href="#q5-如何查看刷新是否正常工作" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p><strong>A</strong>:</p>
+
+<ol>
+  <li>开启”在控制台输出状态提示”，在 Unity 控制台查看刷新日志</li>
+  <li>查看窗口底部的”刷新状态”信息</li>
+  <li>查看”刷新统计”中的”最近刷新原因”和”最近耗时”</li>
+</ol>
+
+<h3 id="q6-插件会影响-unity-的编译功能吗"><span class="me-2">Q6: 插件会影响 Unity 的编译功能吗？</span><a href="#q6-插件会影响-unity-的编译功能吗" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p><strong>A</strong>: 不会。插件只控制资源刷新（Asset Refresh）的时机，不会影响脚本编译。脚本编译仍然由 Unity 自动管理。</p>
+
+<h3 id="q7-我可以同时使用多个刷新策略吗"><span class="me-2">Q7: 我可以同时使用多个刷新策略吗？</span><a href="#q7-我可以同时使用多个刷新策略吗" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p><strong>A</strong>: 不可以。你只能选择一个刷新策略（立即刷新、限流刷新或手动刷新）。但你可以随时切换策略。</p>
+
+<h3 id="q8-插件支持哪些-unity-版本"><span class="me-2">Q8: 插件支持哪些 Unity 版本？</span><a href="#q8-插件支持哪些-unity-版本" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p><strong>A</strong>: 插件要求 Unity 2022.3 或更高版本。建议使用 Unity 2022.3 LTS 或更新版本。</p>
+
+<h3 id="q9-如何重置所有设置"><span class="me-2">Q9: 如何重置所有设置？</span><a href="#q9-如何重置所有设置" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p><strong>A</strong>: 删除项目中的 <code class="language-plaintext highlighter-rouge">ProjectSettings/FocusOptimizerSettings.asset</code> 文件，然后重新打开插件窗口，所有设置会恢复为默认值。</p>
+
+<h3 id="q10-插件会保存我的设置吗"><span class="me-2">Q10: 插件会保存我的设置吗？</span><a href="#q10-插件会保存我的设置吗" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<p><strong>A</strong>: 会的。所有设置都会自动保存到 <code class="language-plaintext highlighter-rouge">ProjectSettings/FocusOptimizerSettings.asset</code> 文件中，下次打开 Unity 时会自动加载。</p>
+
+<hr />
+
+<h2 id="注意事项"><span class="me-2">注意事项</span><a href="#注意事项" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<h3 id="️-重要提示"><span class="me-2">⚠️ 重要提示</span><a href="#️-重要提示" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<ol>
+  <li>
+    <p><strong>备份项目</strong>：虽然插件设计为安全可靠，但建议在使用新功能前备份项目。</p>
+  </li>
+  <li>
+    <p><strong>Enter Play Mode 优化</strong>：</p>
+
+    <ul>
+      <li>禁用域重载可能影响某些脚本的初始化</li>
+      <li>如果遇到奇怪的行为，尝试恢复原始设置</li>
+      <li>建议在测试阶段使用，正式发布前关闭</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>手动刷新模式</strong>：</p>
+
+    <ul>
+      <li>需要记住手动刷新，否则可能看不到最新的资源更改</li>
+      <li>建议开启”手动模式提示”，以便及时收到通知</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>团队协作</strong>：</p>
+
+    <ul>
+      <li>插件设置保存在本地，不会影响其他团队成员</li>
+      <li>如果需要统一配置，可以手动同步设置文件</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>性能监控</strong>：</p>
+
+    <ul>
+      <li>定期查看”刷新统计”，了解刷新性能</li>
+      <li>如果刷新耗时过长（&gt; 1 秒），考虑优化项目资源</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="-最佳实践"><span class="me-2">💡 最佳实践</span><a href="#-最佳实践" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<ol>
+  <li>
+    <p><strong>首次使用</strong>：建议先使用默认设置（限流刷新，1.5 秒延迟），然后根据实际情况调整。</p>
+  </li>
+  <li>
+    <p><strong>大型项目</strong>：优先使用限流刷新或手动刷新，避免频繁刷新造成卡顿。</p>
+  </li>
+  <li>
+    <p><strong>快速迭代</strong>：在需要快速测试时，可以临时切换到立即刷新模式。</p>
+  </li>
+  <li>
+    <p><strong>Enter Play Mode 优化</strong>：在开发阶段使用可以显著提升效率，但要注意可能的影响。</p>
+  </li>
+  <li>
+    <p><strong>定期检查</strong>：定期查看刷新统计，了解项目刷新性能，及时发现问题。</p>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="技术支持"><span class="me-2">技术支持</span><a href="#技术支持" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<p>如果你在使用过程中遇到问题或有改进建议，可以通过以下方式联系：</p>
+
+<ul>
+  <li><strong>帮助文档</strong>：点击插件窗口右上角的”帮助”按钮</li>
+  <li><strong>反馈邮箱</strong>：<code class="language-plaintext highlighter-rouge">lyzbcy@qq.com</code></li>
+</ul>
+
+<hr />
+
+<h2 id="更新日志"><span class="me-2">更新日志</span><a href="#更新日志" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<h3 id="v010"><span class="me-2">v0.1.0</span><a href="#v010" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+
+<ul>
+  <li>初始版本发布</li>
+  <li>支持三种刷新策略（立即、限流、手动）</li>
+  <li>支持 Enter Play Mode 优化</li>
+  <li>支持多语言界面（中文、英文、日文）</li>
+  <li>刷新统计和状态监控</li>
+</ul>
+
+<hr />
+
+<p><strong>祝你使用愉快！</strong> 🎉</p>
+
+  </div>
+
+  <div class="post-tail-wrapper text-muted">
+    <!-- categories -->
+    
+      <div class="post-meta mb-3">
+        <i class="far fa-folder-open fa-fw me-1"></i>
+        
+          <a href="/categories/unity%E5%BC%80%E5%8F%91/">Unity开发</a>
+      </div>
+    
+
+    <!-- tags -->
+    
+      <div class="post-tags">
+        <i class="fa fa-tags fa-fw me-1"></i>
+        
+          <a
+            href="/tags/%E6%8A%80%E6%9C%AF%E7%A7%AF%E7%B4%AF/"
+            class="post-tag no-text-decoration"
+          >技术积累</a>
+        
+          <a
+            href="/tags/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"
+            class="post-tag no-text-decoration"
+          >使用说明</a>
+        
+      </div>
+    
+
+    <div
+      class="
+        post-tail-bottom
+        d-flex justify-content-between align-items-center mt-5 pb-2
+      "
+    >
+      <div class="license-wrapper">
+        
+          
+
+          本文由作者按照 
+        <a href="https://creativecommons.org/licenses/by/4.0/">
+          CC BY 4.0
+        </a>
+         进行授权
+        
+      </div>
+
+      <div class="share-wrapper d-flex align-items-center">
+  <span class="share-label text-muted">分享</span>
+  <span class="share-icons">
+    
+    
+    
+    
+    <!-- Raw URL for JS usage -->
+    <span id="share-url" style="display:none;">https://lyzbcy.github.io/posts/Unity%E6%8F%92%E4%BB%B6-%E7%84%A6%E7%82%B9%E5%8D%A1%E9%A1%BF%E4%BC%98%E5%8C%96%E5%8A%A9%E6%89%8B/</span>
+    <span id="share-title" style="display:none;">Unity插件-焦点卡顿优化助手 - 捞鱼的笔记</span>
+
+    <!-- Copy Link -->
+    <button
+      id="copy-link"
+      aria-label="Copy link"
+      class="btn small"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="分享链接"
+      onclick="handleCopyLink()"
+    >
+      <i class="fa-solid fa-link"></i>
+    </button>
+  </span>
+</div>
+
+<!-- Simple Toast Notification -->
+<div id="share-toast" class="share-toast">复制成功</div>
+
+<style>
+/* Toast Styles */
+.share-toast {
+    visibility: hidden;
+    min-width: 120px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    text-align: center;
+    border-radius: 50px; /* Pillow shape for silkier look */
+    padding: 10px 20px;
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%) scale(0.8);
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Q-bounce effect */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    backdrop-filter: blur(4px);
+}
+
+.share-toast.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 80px; /* Pop up higher */
+    transform: translateX(-50%) scale(1);
+}
+
+.share-icons .btn.small {
+    padding: 0;
+    margin-right: 0.5rem;
+    color: var(--text-muted-color);
+}
+.share-icons .btn.small:hover {
+    color: var(--link-color);
+}
+</style>
+
+<script>
+function showToast(message) {
+    var toast = document.getElementById("share-toast");
+    toast.innerText = message || "复制成功";
+    toast.className = "share-toast show";
+    setTimeout(function(){ 
+        toast.className = toast.className.replace("show", ""); 
+    }, 2000); // Shorter duration for snappier feel
+}
+
+function copyToClipboard(text, successMsg) {
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(function() {
+            showToast(successMsg);
+        }, function(err) {
+            console.error('Could not copy text: ', err);
+            // Fallback for older browsers
+            fallbackCopyTextToClipboard(text, successMsg);
+        });
+    } else {
+        fallbackCopyTextToClipboard(text, successMsg);
+    }
+}
+
+function fallbackCopyTextToClipboard(text, successMsg) {
+    var textArea = document.createElement("textarea");
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+        var successful = document.execCommand('copy');
+        if(successful) showToast(successMsg);
+    } catch (err) {
+        console.error('Fallback: Oops, unable to copy', err);
+    }
+    document.body.removeChild(textArea);
+}
+
+var shareUrl = document.getElementById('share-url').innerText;
+
+function handleCopyLink() {
+    copyToClipboard(shareUrl, "复制成功");
+}
+</script>
+
+    </div>
+    <!-- .post-tail-bottom -->
+  </div>
+  <!-- div.post-tail-wrapper -->
+</article>
+
+
+            
+          </main>
+
+          <!-- panel -->
+          <aside aria-label="Panel" id="panel-wrapper" class="col-xl-3 ps-2 text-muted">
+            <div class="access">
+              <!-- Get 5 last posted/updated posts -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <section id="access-lastmod">
+    <h2 class="panel-heading">最近更新</h2>
+    <ul class="content list-unstyled ps-0 pb-1 ms-1 mt-2">
+      
+        
+        
+        
+        
+        <li class="lh-lg mb-2">
+          <div class="text-truncate">
+            <a href="/posts/%E7%BB%99%E6%98%9F%E6%98%9F%E5%B8%83%E4%B8%81%E7%9A%84100%E5%B0%81%E6%83%85%E4%B9%A6/">给星星布丁的100封情书</a>
+          </div>
+          <small class="text-muted">
+            <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1778851270"
+  data-df="YYYY/MM/DD"
+  
+>
+  2026/05/15
+</time>
+
+          </small>
+        </li>
+      
+        
+        
+        
+        
+        <li class="lh-lg mb-2">
+          <div class="text-truncate">
+            <a href="/posts/%E5%91%A8%E4%B8%89%E6%B6%B5%E4%BB%8A%E5%A4%A9%E6%83%B3%E8%AE%B0%E4%B8%8B%E7%9A%84%E5%87%A0%E4%BB%B6%E4%BA%8B/">🦞周三涵今天想记下的几件事</a>
+          </div>
+          <small class="text-muted">
+            <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1778850600"
+  data-df="YYYY/MM/DD"
+  
+>
+  2026/05/15
+</time>
+
+          </small>
+        </li>
+      
+        
+        
+        
+        
+        <li class="lh-lg mb-2">
+          <div class="text-truncate">
+            <a href="/posts/%E5%B0%B1%E4%B8%9A&%E8%80%83%E7%A0%94&%E4%BF%9D%E7%A0%94&%E5%A4%96%E5%BF%AB&%E6%8A%80%E8%83%BD-%E8%AE%A1%E5%88%92%E4%B9%A6/">就业&考研&保研&外快&技能 计划书</a>
+          </div>
+          <small class="text-muted">
+            <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1776349664"
+  data-df="YYYY/MM/DD"
+  
+>
+  2026/04/16
+</time>
+
+          </small>
+        </li>
+      
+        
+        
+        
+        
+        <li class="lh-lg mb-2">
+          <div class="text-truncate">
+            <a href="/posts/%E6%94%BB%E7%95%A5%E4%B9%A6.skill&%E4%B8%8A%E9%A5%B6%E4%BA%94%E4%B8%80%E6%94%BB%E7%95%A5%E4%B9%A6-copy/">上饶五一攻略书</a>
+          </div>
+          <small class="text-muted">
+            <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1776308400"
+  data-df="YYYY/MM/DD"
+  
+>
+  2026/04/16
+</time>
+
+          </small>
+        </li>
+      
+        
+        
+        
+        
+        <li class="lh-lg mb-2">
+          <div class="text-truncate">
+            <a href="/posts/%E5%86%99%E4%BD%9C%E5%B0%9D%E8%AF%95/">写作尝试</a>
+          </div>
+          <small class="text-muted">
+            <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1773896400"
+  data-df="YYYY/MM/DD"
+  
+>
+  2026/03/19
+</time>
+
+          </small>
+        </li>
+      
+    </ul>
+  </section>
+  <!-- #access-lastmod -->
+
+
+
+              <!-- The trending tags list -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+  <section>
+    <h2 class="panel-heading">热门标签</h2>
+    <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E6%8A%80%E6%9C%AF%E7%A7%AF%E7%B4%AF/">技术积累</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E6%81%8B%E7%88%B1/">恋爱</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E7%B4%A0%E6%9D%90%E7%A7%AF%E7%B4%AF/">素材积累</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E4%BB%8E%E5%A4%AF%E5%88%B0%E6%8B%89%E6%8E%92%E5%90%8D/">从夯到拉排名</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E5%8A%A0%E5%AF%86%E6%96%87%E4%BB%B6/">加密文件</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">使用说明</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E5%81%A5%E8%BA%AB/">健身</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E6%97%85%E6%B8%B8%E6%94%BB%E7%95%A5/">旅游攻略</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E7%BE%8E%E9%A3%9F/">美食</a>
+      
+    </div>
+  </section>
+
+
+            </div>
+
+            
+              
+              
+
+
+
+
+
+
+  <div class="toc-border-cover z-3"></div>
+  <section id="toc-wrapper" class="invisible position-sticky ps-0 pe-4 pb-4">
+    <h2 class="panel-heading ps-3 pb-2 mb-0">文章内容</h2>
+    <nav id="toc"></nav>
+  </section>
+
+
+            
+          </aside>
+        </div>
+
+        <div class="row">
+          <!-- tail -->
+          <div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            
+              
+              <!-- Recommend the other 3 posts according to the tags and categories of the current post. -->
+
+<!-- The total size of related posts -->
+
+
+<!-- An random integer that bigger than 0 -->
+
+
+<!-- Equals to TAG_SCORE / {max_categories_hierarchy} -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  <aside id="related-posts" aria-labelledby="related-label">
+    <h3 class="mb-4" id="related-label">相关文章</h3>
+    <nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4">
+      
+        <article class="col">
+          <a href="/posts/Unity%E6%8F%92%E4%BB%B6-pose-controller/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1764244800"
+  data-df="YYYY/MM/DD"
+  
+>
+  2025/11/27
+</time>
+
+              <h4 class="pt-0 my-2">Unity插件-pose controller</h4>
+              <div class="text-muted">
+                <p>一款基于机器学习的一键配置手势操作的Unity插件</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/Unity%E6%8F%92%E4%BB%B6-3D%E9%A1%B9%E7%9B%AE%E4%B8%80%E9%94%AE%E8%BD%AC%E5%8C%96%E4%B8%BAVR%E9%A1%B9%E7%9B%AE/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1763596800"
+  data-df="YYYY/MM/DD"
+  
+>
+  2025/11/20
+</time>
+
+              <h4 class="pt-0 my-2">Unity插件-3D项目一键转化为VR项目</h4>
+              <div class="text-muted">
+                <p>一款内置在Unity中的一键 VR 转换工具（VR Project Converter）使用手册</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+        <article class="col">
+          <a href="/posts/Unity%E6%8F%92%E4%BB%B6-%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%8A%A9%E6%89%8B%E5%BC%80%E5%8F%91%E6%8A%A5%E5%91%8A/" class="post-preview card h-100">
+            <div class="card-body">
+              <!--
+  Date format snippet
+  See: ${JS_ROOT}/utils/locale-dateime.js
+-->
+
+
+
+
+<time
+  
+  data-ts="1763546400"
+  data-df="YYYY/MM/DD"
+  
+>
+  2025/11/19
+</time>
+
+              <h4 class="pt-0 my-2">Unity插件-版本管理助手开发报告</h4>
+              <div class="text-muted">
+                <p>Unity 内置版本管理助手插件的完整用户帮助手册</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      
+    </nav>
+  </aside>
+  <!-- #related-posts -->
+
+
+            
+              
+              <!-- Navigation buttons at the bottom of the post. -->
+
+<nav class="post-navigation d-flex justify-content-between" aria-label="Post Navigation">
+  
+  
+
+  
+    <a
+      href="/posts/Unity%E6%8F%92%E4%BB%B6-3D%E9%A1%B9%E7%9B%AE%E4%B8%80%E9%94%AE%E8%BD%AC%E5%8C%96%E4%B8%BAVR%E9%A1%B9%E7%9B%AE/"
+      class="btn btn-outline-primary"
+      aria-label="上一篇"
+    >
+      <p>Unity插件-3D项目一键转化为VR项目</p>
+    </a>
+  
+
+  
+    <a
+      href="/posts/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E5%B0%8F%E8%AE%B0/"
+      class="btn btn-outline-primary"
+      aria-label="下一篇"
+    >
+      <p>算法刷题小计</p>
+    </a>
+  
+</nav>
+
+            
+
+            <!-- The Footer -->
+
+<footer
+  aria-label="Site Info"
+  class="
+    d-flex flex-column justify-content-center text-muted
+    flex-lg-row justify-content-lg-between align-items-lg-center pb-lg-3
+  "
+>
+  <p>©
+    <time>2026</time>
+
+    
+      <a href="/about/">捞鱼</a>.
+    
+
+    
+      <span
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        title="除非另有说明，本网站上的博客文章均由作者按照知识共享署名 4.0 国际 (CC BY 4.0) 许可协议进行授权。"
+      >保留部分权利。</span>
+    
+  </p>
+
+  <p>本站采用 <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> 主题 <a
+        data-bs-toggle="tooltip"
+        data-bs-placement="top"
+        title="v7.4.1"
+        href="https://github.com/cotes2020/jekyll-theme-chirpy"
+        target="_blank"
+        rel="noopener"
+      >Chirpy</a>
+  </p>
+</footer>
+
+          </div>
+        </div>
+
+        <!-- The Search results -->
+
+<div id="search-result-wrapper" class="d-flex justify-content-center d-none">
+  <div class="col-11 content">
+    <div id="search-hints">
+      <!-- The trending tags list -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+  <section>
+    <h2 class="panel-heading">热门标签</h2>
+    <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E6%8A%80%E6%9C%AF%E7%A7%AF%E7%B4%AF/">技术积累</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E6%81%8B%E7%88%B1/">恋爱</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E7%B4%A0%E6%9D%90%E7%A7%AF%E7%B4%AF/">素材积累</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E4%BB%8E%E5%A4%AF%E5%88%B0%E6%8B%89%E6%8E%92%E5%90%8D/">从夯到拉排名</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E5%8A%A0%E5%AF%86%E6%96%87%E4%BB%B6/">加密文件</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/">使用说明</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E5%81%A5%E8%BA%AB/">健身</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E6%97%85%E6%B8%B8%E6%94%BB%E7%95%A5/">旅游攻略</a>
+      
+        
+        <a class="post-tag btn btn-outline-primary" href="/tags/%E7%BE%8E%E9%A3%9F/">美食</a>
+      
+    </div>
+  </section>
+
+
+    </div>
+    <div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
+  </div>
+</div>
+
+      </div>
+
+      <aside aria-label="Scroll to Top">
+        <button id="back-to-top" type="button" class="btn btn-lg btn-box-shadow">
+          <i class="fas fa-angle-up"></i>
+        </button>
+      </aside>
+    </div>
+
+    <div id="mask" class="d-none position-fixed w-100 h-100 z-1"></div>
+
+    
+      <aside
+  id="notification"
+  class="toast"
+  role="alert"
+  aria-live="assertive"
+  aria-atomic="true"
+  data-bs-animation="true"
+  data-bs-autohide="false"
+>
+  <div class="toast-header">
+    <button
+      type="button"
+      class="btn-close ms-auto"
+      data-bs-dismiss="toast"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="toast-body text-center pt-0">
+    <p class="px-2 mb-3">发现新版本的内容。</p>
+    <button type="button" class="btn btn-primary" aria-label="Update">
+      更新
+    </button>
+  </div>
+</aside>
+
+    
+
+    <!-- Embedded scripts -->
+
+    
+      
+      <!-- The comments switcher -->
+
+
+    
+
+    <!--
+  Jekyll Simple Search loader
+  See: <https://github.com/christian-fei/Simple-Jekyll-Search>
+-->
+
+
+
+
+
+<script>
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    SimpleJekyllSearch({
+      searchInput: document.getElementById('search-input'),
+      resultsContainer: document.getElementById('search-results'),
+      json: '/assets/js/data/search.json',
+      searchResultTemplate: '  <article class="px-1 px-sm-2 px-lg-4 px-xl-0">    <header>      <h2><a href="{url}">{title}</a></h2>      <div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1">        {categories}        {tags}      </div>    </header>    <p>{content}</p>  </article>',
+      noResultsText: '<p class="mt-5">搜索结果为空</p>',
+      templateMiddleware: function(prop, value, template) {
+        if (prop === 'categories') {
+          if (value === '') {
+            return `${value}`;
+          } else {
+            return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`;
+          }
+        }
+
+        if (prop === 'tags') {
+          if (value === '') {
+            return `${value}`;
+          } else {
+            return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`;
+          }
+        }
+      }
+    });
+  });
+</script>
+
+  </body>
+</html>
+
