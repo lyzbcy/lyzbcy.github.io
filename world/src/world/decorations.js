@@ -74,28 +74,41 @@ export function createDecorations(noise2D) {
 function createTree() {
   const g = new THREE.Group();
 
-  // Trunk
-  const trunkGeo = new THREE.CylinderGeometry(0.15, 0.25, 1.5, 6);
-  const trunkMat = new THREE.MeshToonMaterial({ color: 0x6b4226 });
+  const trunkGeo = new THREE.CylinderGeometry(0.12, 0.22, 1.8, 8);
+  const trunkMat = new THREE.MeshStandardMaterial({
+    color: 0x4a3529,
+    roughness: 0.94
+  });
   const trunk = new THREE.Mesh(trunkGeo, trunkMat);
-  trunk.position.y = 0.75;
+  trunk.position.y = 0.9;
   trunk.castShadow = true;
   g.add(trunk);
 
-  // Foliage (cone)
-  const foliageGeo = new THREE.ConeGeometry(1.2, 2.5, 6);
-  const foliageMat = new THREE.MeshToonMaterial({ color: 0x2d6b30 });
-  const foliage = new THREE.Mesh(foliageGeo, foliageMat);
-  foliage.position.y = 2.5;
-  foliage.castShadow = true;
-  g.add(foliage);
+  const foliageMat = new THREE.MeshStandardMaterial({
+    color: 0x254233,
+    roughness: 0.96
+  });
+
+  const canopyBottom = new THREE.Mesh(new THREE.ConeGeometry(1.15, 1.9, 8), foliageMat);
+  canopyBottom.position.y = 2.1;
+  canopyBottom.castShadow = true;
+  g.add(canopyBottom);
+
+  const canopyTop = new THREE.Mesh(new THREE.ConeGeometry(0.8, 1.5, 8), foliageMat);
+  canopyTop.position.y = 3.1;
+  canopyTop.castShadow = true;
+  g.add(canopyTop);
 
   return g;
 }
 
 function createRock() {
   const geo = new THREE.DodecahedronGeometry(0.5, 0);
-  const mat = new THREE.MeshToonMaterial({ color: 0x7a7a7a });
+  const mat = new THREE.MeshStandardMaterial({
+    color: 0x5c6368,
+    roughness: 0.98,
+    metalness: 0.02
+  });
   const mesh = new THREE.Mesh(geo, mat);
   mesh.position.y = 0.2;
   mesh.castShadow = true;
@@ -109,7 +122,11 @@ function createLamp() {
 
   // Pole
   const poleGeo = new THREE.CylinderGeometry(0.06, 0.08, 3, 6);
-  const poleMat = new THREE.MeshToonMaterial({ color: 0x3a3a3a });
+  const poleMat = new THREE.MeshStandardMaterial({
+    color: 0x243241,
+    metalness: 0.45,
+    roughness: 0.52
+  });
   const pole = new THREE.Mesh(poleGeo, poleMat);
   pole.position.y = 1.5;
   pole.castShadow = true;
@@ -120,14 +137,14 @@ function createLamp() {
   const bulbMat = new THREE.MeshStandardMaterial({
     color: 0xffee88,
     emissive: 0xffdd44,
-    emissiveIntensity: 2
+    emissiveIntensity: 2.4
   });
   const bulb = new THREE.Mesh(bulbGeo, bulbMat);
   bulb.position.y = 3.1;
   g.add(bulb);
 
   // Point light
-  const light = new THREE.PointLight(0xffdd88, 3, 10, 2);
+  const light = new THREE.PointLight(0xffd88b, 3.8, 12, 2);
   light.position.y = 3.1;
   g.add(light);
 
@@ -138,18 +155,33 @@ function createLamp() {
  * Create a path segment from near the tower outward on the sphere
  */
 function createPathSegment(group, angle, noise2D) {
-  const pathMat = new THREE.MeshToonMaterial({ color: 0x9a8a6a });
-  const segmentCount = 5;
+  const pathMat = new THREE.MeshStandardMaterial({
+    color: 0x6d6253,
+    roughness: 0.96,
+    metalness: 0.02
+  });
+  const segmentCount = 6;
 
   for (let s = 0; s < segmentCount; s++) {
-    const distFromPole = 5 + s * 3;
+    const distFromPole = 5 + s * 2.7;
     const pathPiece = new THREE.Group();
 
-    const geo = new THREE.BoxGeometry(1.8, 0.05, 2.5);
+    const geo = new THREE.BoxGeometry(1.85, 0.05, 2.6);
     const mesh = new THREE.Mesh(geo, pathMat);
     mesh.position.y = 0.03;
     mesh.receiveShadow = true;
     pathPiece.add(mesh);
+
+    const lightStrip = new THREE.Mesh(
+      new THREE.BoxGeometry(0.18, 0.03, 2.2),
+      new THREE.MeshStandardMaterial({
+        color: 0xa8dfff,
+        emissive: 0x7ecdf9,
+        emissiveIntensity: 1.2
+      })
+    );
+    lightStrip.position.y = 0.065;
+    pathPiece.add(lightStrip);
 
     placeOnSphere(pathPiece, angle, distFromPole, noise2D, 0);
     group.add(pathPiece);

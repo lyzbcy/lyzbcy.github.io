@@ -1,15 +1,15 @@
 import * as THREE from 'three';
 
-// Polyfill: use Timer if available (r170+), fallback to Clock
-const ClockClass = THREE.Timer || THREE.Clock;
+// Use Clock (r170+ Timer lacks elapsedTime, breaking movement & shaders)
+const ClockClass = THREE.Clock;
 import { createTerrain, SPHERE_RADIUS } from './world/terrain.js';
 import { createWater } from './world/water.js';
 import { createSky, createFireflies } from './world/sky.js';
 import { createDecorations } from './world/decorations.js';
 import { createTower } from './building/tower.js';
-import { createScreens } from './building/screens.js';
 import { createAllNPCs } from './npc/npc-factory.js';
 import { NPCDialog } from './npc/npc-dialog.js';
+import { ArticleViewer } from './article-viewer.js';
 import { PlayerControls } from './player/controls.js';
 import { InteractionManager } from './player/camera.js';
 import posts from './data/posts.json';
@@ -29,10 +29,10 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.2;
+renderer.toneMappingExposure = 1.12;
 
 const scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2(0x0a0a1a, 0.006);
+scene.fog = new THREE.FogExp2(0x07101b, 0.0052);
 
 const camera = new THREE.PerspectiveCamera(
   70, window.innerWidth / window.innerHeight, 0.1, 500
@@ -49,11 +49,11 @@ function updateLoadProgress(target) {
 updateLoadProgress(10);
 
 // Lighting
-const hemiLight = new THREE.HemisphereLight(0x4466aa, 0x332211, 0.6);
+const hemiLight = new THREE.HemisphereLight(0x6d89a8, 0x112030, 0.52);
 scene.add(hemiLight);
 
-const sunLight = new THREE.DirectionalLight(0xffeedd, 1.0);
-sunLight.position.set(30, 50, 20);
+const sunLight = new THREE.DirectionalLight(0xfff2d7, 0.9);
+sunLight.position.set(26, 42, 14);
 sunLight.castShadow = true;
 sunLight.shadow.mapSize.width = 1024;
 sunLight.shadow.mapSize.height = 1024;
@@ -66,9 +66,12 @@ sunLight.shadow.camera.bottom = -40;
 scene.add(sunLight);
 
 // Moon light (subtle blue fill)
-const moonLight = new THREE.DirectionalLight(0x4488cc, 0.3);
-moonLight.position.set(-20, 30, -15);
+const moonLight = new THREE.DirectionalLight(0x4c84b8, 0.38);
+moonLight.position.set(-18, 24, -20);
 scene.add(moonLight);
+
+const ambientFill = new THREE.AmbientLight(0x122338, 0.45);
+scene.add(ambientFill);
 
 updateLoadProgress(20);
 
@@ -91,13 +94,9 @@ const { points: fireflies, phases: fireflyPhases } = createFireflies();
 scene.add(fireflies);
 updateLoadProgress(55);
 
-// Tower (placed at north pole)
-const tower = createTower(noise2D);
+// Signature screen tower (placed at north pole)
+const { group: tower, screenData: towerScreens } = createTower(noise2D, posts);
 scene.add(tower);
-updateLoadProgress(65);
-
-// Display screens on tower (children of tower group)
-const screens = createScreens(posts, tower);
 updateLoadProgress(75);
 
 // Decorations (trees, rocks, lamps, paths on sphere)
@@ -113,15 +112,34 @@ updateLoadProgress(95);
 // --- Player controls ---
 const controls = new PlayerControls(camera, noise2D, canvas);
 
+// --- Article Viewer (in-world reading window) ---
+ArticleViewer.injectStyles();
+const articleViewer = new ArticleViewer();
+
 // --- Dialog system ---
-const dialog = new NPCDialog();
+const dialog = new NPCDialog(articleViewer);
 
 // --- Interaction system ---
 const allInteractables = [
-  ...screens.userData.interactables,
+  ...towerScreens,
   ...npcs.userData.interactables
 ];
 const interaction = new InteractionManager(camera, canvas, allInteractables, dialog);
+let worldEntered = Boolean(window.__WORLD_STATE?.entered);
+let worldPaused = false;
+
+window.addEventListener('world:enter', () => {
+  worldEntered = true;
+});
+
+// Pause world when article viewer is open
+window.addEventListener('article-viewer:open', () => {
+  worldPaused = true;
+});
+
+window.addEventListener('article-viewer:close', () => {
+  worldPaused = false;
+});
 
 // --- Finish loading ---
 updateLoadProgress(100);
@@ -171,6 +189,11 @@ function animateNPCs(delta) {
       const breathe = 1.0 + Math.sin(npcAnimTime * 2 + i * 1.1) * 0.03;
       sprite.scale.set(3 * breathe, 3 * breathe, 1);
     }
+
+    const label = npc.getObjectByName('npc-label');
+    if (label) {
+      label.material.opacity = 0.68 + Math.sin(npcAnimTime * 1.25 + i * 0.5) * 0.14;
+    }
   });
 }
 
@@ -200,6 +223,30 @@ function animateFireflies(time) {
   fireflies.material.opacity = 0.5 + Math.sin(time * 2) * 0.3;
 }
 
+function animateTower(time) {
+  tower.rotation.y = Math.sin(time * 0.18) * 0.03;
+
+  tower.userData.screenFrames?.forEach((frame, index) => {
+    frame.material.emissiveIntensity = 0.58 + Math.sin(time * 1.6 + index * 0.12) * 0.16;
+  });
+
+  tower.userData.lightRings?.forEach((ring, index) => {
+    ring.material.emissiveIntensity = 1.15 + Math.sin(time * 1.2 + index * 0.6) * 0.22;
+  });
+}
+
+function updateIntroCamera(elapsed) {
+  const orbitRadius = 36;
+  const orbitHeight = 18 + Math.sin(elapsed * 0.35) * 2.4;
+  const orbitAngle = elapsed * 0.14;
+  camera.position.set(
+    Math.cos(orbitAngle) * orbitRadius,
+    orbitHeight,
+    Math.sin(orbitAngle) * orbitRadius
+  );
+  camera.lookAt(0, 10, 0);
+}
+
 // --- Animation loop ---
 const clock = new ClockClass();
 
@@ -215,10 +262,13 @@ function animate() {
   // Update sky animation
   skyMat.uniforms.uTime.value = elapsed;
 
-  // Update player movement (only if dialog is not open)
-  if (!dialog.isOpen) {
+  // Update player movement (only if dialog and article viewer are not open)
+  if (worldEntered && !dialog.isOpen && !worldPaused) {
     controls.update(delta);
     interaction.update();
+  } else if (!worldEntered) {
+    updateIntroCamera(elapsed);
+    interaction.crosshair.classList.remove('active');
   }
 
   // NPC idle animation
@@ -226,6 +276,7 @@ function animate() {
 
   // Firefly animation
   animateFireflies(elapsed);
+  animateTower(elapsed);
 
   // Adaptive performance
   adaptDPR();

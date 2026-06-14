@@ -75,3 +75,6 @@ bundle exec jekyll serve
     3. 安装 Ruby 环境与依赖。
     4. 执行 `jekyll build` 生成静态文件。
     5. Artifacts 上传并部署至 GitHub Pages 环境。
+
+### 测试环境预览
+当前 Pages workflow 也会监听 `dev` 分支，所以你可以把当前开发内容直接推到 `dev`，云端会自动刷新，不需要先合并到 `master/main`。

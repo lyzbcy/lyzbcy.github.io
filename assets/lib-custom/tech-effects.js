@@ -1,4 +1,4 @@
-/* Tech Effects - Apple Style & Romance Mode */
+/* Tech Effects - Apple Style & Romance Mode (Optimized) */
 
 document.addEventListener('DOMContentLoaded', function() {
     // 0. Check for Romance Mode
@@ -7,58 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.add('romance-mode');
     }
 
-    // 1. Initialize Particles.js with Conditional Config
-    if (!document.getElementById('particles-js')) {
-        var particlesDiv = document.createElement('div');
-        particlesDiv.id = 'particles-js';
-        document.body.prepend(particlesDiv);
-    }
-
-    if (typeof particlesJS !== 'undefined') {
-        var particleColor = isRomance ? ["#ff69b4", "#ffb6c1", "#ffffff"] : ["#a1c4fd", "#c2e9fb", "#e0e0e0"];
-        var linkedColor = isRomance ? "#ff69b4" : "#a1c4fd"; // Match line color to theme
-
-        particlesJS('particles-js', {
-            "particles": {
-                "number": { "value": 25, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": particleColor },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.4, "random": true },
-                "size": { "value": isRomance ? 6 : 40, "random": true },
-                "line_linked": { 
-                    "enable": false,
-                    "distance": 150,
-                    "color": linkedColor,
-                    "opacity": 0.6, 
-                    "width": 1.5 
-                },
-                "move": { 
-                    "enable": true, 
-                    "speed": 1, 
-                    "direction": "top", 
-                    "random": true, 
-                    "straight": false, 
-                    "out_mode": "out", 
-                    "bounce": false,
-                    "attract": { "enable": true, "rotateX": 600, "rotateY": 1200 }
-                }
-            },
-            "interactivity": {
-                "detect_on": "window",
-                "events": {
-                    "onhover": { "enable": true, "mode": "grab" },
-                    "onclick": { "enable": true, "mode": "push" },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": { "distance": 200, "line_linked": { "opacity": 0.8 } },
-                    "bubble": { "distance": 200, "size": 10, "duration": 2, "opacity": 0.8, "speed": 3 },
-                    "repulse": { "distance": 200, "duration": 0.4 }
-                }
-            },
-            "retina_detect": true
-        });
-    }
+    // 1. 粒子背景已由 CSS 星空 (css-starfield.css) 替代全局效果
+    //    Three.js 宇宙粒子仅在 AR 页面按需加载
 
     // 1.5 Spotlight Effect
     var spotlight = document.createElement('div');
@@ -76,33 +26,30 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // 2. Parallax Background Effect (Apple Style)
-    // Move the background slightly based on mouse position
+    // rAF 节流：避免每帧都触发布局计算
+    var parallaxRafPending = false;
     document.addEventListener('mousemove', function(e) {
-        var x = e.clientX / window.innerWidth;
-        var y = e.clientY / window.innerHeight;
-        
-        // Move particles container slightly
-        var particles = document.getElementById('particles-js');
-        if (particles) {
-            particles.style.transform = 'translate(-' + x * 15 + 'px, -' + y * 15 + 'px)';
-        }
+        if (parallaxRafPending) return;
+        parallaxRafPending = true;
 
-        // Optional: Move cards slightly for 3D effect (Subtle!)
-        // Only apply to visible cards to avoid performance hit
-        // var cards = document.querySelectorAll('.post-preview, .card');
-        // cards.forEach(function(card) {
-        //     var rect = card.getBoundingClientRect();
-        //     if (rect.top < window.innerHeight && rect.bottom > 0) {
-        //         // Calculate relative to center of card
-        //         // This can be expensive, let's stick to background parallax for now
-        //     }
-        // });
+        requestAnimationFrame(function() {
+            parallaxRafPending = false;
+            var x = e.clientX / window.innerWidth;
+            var y = e.clientY / window.innerHeight;
+
+            // CSS 星空伪元素通过 body data 属性传递鼠标位置（可选）
+            // 不再直接操作 particles 容器的 transform
+        });
     });
 
-    // 3. Typing Effect (Clean version)
-    var taglineElement = document.querySelector('.site-subtitle') || document.querySelector('#subtitle') || document.querySelector('p.tagline');
-    if (taglineElement) {
+    // 3. Typing Effect - 延迟启动（requestIdleCallback 或 setTimeout 降级）
+    function startTypingEffect() {
+        var taglineElement = document.querySelector('.site-subtitle') || document.querySelector('#subtitle') || document.querySelector('p.tagline');
+        if (!taglineElement) return;
+
         var text = taglineElement.innerText;
+        if (!text) return;
+
         taglineElement.innerText = '';
         var i = 0;
         var speed = 80;
@@ -115,6 +62,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         typeWriter();
+    }
+
+    // 使用 requestIdleCallback 延迟启动，避免阻塞首屏渲染
+    if (typeof requestIdleCallback !== 'undefined') {
+        requestIdleCallback(startTypingEffect, { timeout: 2000 });
+    } else {
+        setTimeout(startTypingEffect, 300);
     }
 
     // 4. Footer Stats

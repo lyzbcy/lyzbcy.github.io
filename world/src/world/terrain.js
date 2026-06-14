@@ -11,20 +11,16 @@ export function createTerrain() {
   const normals = geometry.attributes.normal;
   const colors = new Float32Array(positions.count * 3);
 
-  const grassColor = new THREE.Color(0x4a7c3f);
-  const dirtColor = new THREE.Color(0x8b6d4a);
-  const sandColor = new THREE.Color(0xc4a95a);
-  const darkGrass = new THREE.Color(0x3a6830);
+  const grassColor = new THREE.Color(0x4b6d53);
+  const dirtColor = new THREE.Color(0x5a4b3d);
+  const sandColor = new THREE.Color(0x8b7a56);
+  const darkGrass = new THREE.Color(0x24382f);
+  const cliffColor = new THREE.Color(0x4c4036);
 
   for (let i = 0; i < positions.count; i++) {
     const nx = normals.getX(i);
     const ny = normals.getY(i);
     const nz = normals.getZ(i);
-
-    // Get the undisplaced position on the sphere surface
-    const px = positions.getX(i);
-    const py = positions.getY(i);
-    const pz = positions.getZ(i);
 
     // Multi-octave noise displacement along normal
     let displacement = 0;
@@ -50,21 +46,22 @@ export function createTerrain() {
 
     // Vertex coloring based on displacement height
     const color = new THREE.Color();
-    if (displacement < 0.8) {
+    if (displacement < 0.9) {
       color.copy(sandColor);
-    } else if (displacement < 1.8) {
-      color.lerpColors(sandColor, grassColor, (displacement - 0.8) / 1.0);
-    } else if (displacement < 2.8) {
-      color.lerpColors(grassColor, darkGrass, (displacement - 1.8) / 1.0);
+    } else if (displacement < 1.9) {
+      color.lerpColors(sandColor, grassColor, (displacement - 0.9) / 1.0);
+    } else if (displacement < 3.0) {
+      color.lerpColors(grassColor, darkGrass, (displacement - 1.9) / 1.1);
     } else {
-      color.lerpColors(darkGrass, dirtColor, Math.min(1, (displacement - 2.8) / 2.0));
+      color.lerpColors(darkGrass, cliffColor, Math.min(1, (displacement - 3.0) / 1.8));
     }
 
     // Add slight noise variation to color
-    const colorNoise = noise2D(nx * 15.0, nz * 15.0) * 0.04;
-    color.r = Math.max(0, Math.min(1, color.r + colorNoise));
+    const colorNoise = noise2D(nx * 15.0, nz * 15.0) * 0.03;
+    const coolTint = Math.max(0, ny) * 0.035;
+    color.r = Math.max(0, Math.min(1, color.r + colorNoise * 0.65));
     color.g = Math.max(0, Math.min(1, color.g + colorNoise));
-    color.b = Math.max(0, Math.min(1, color.b + colorNoise));
+    color.b = Math.max(0, Math.min(1, color.b + coolTint + colorNoise * 0.35));
 
     colors[i * 3] = color.r;
     colors[i * 3 + 1] = color.g;
@@ -74,9 +71,11 @@ export function createTerrain() {
   geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
   geometry.computeVertexNormals();
 
-  const material = new THREE.MeshToonMaterial({
+  const material = new THREE.MeshStandardMaterial({
     vertexColors: true,
-    side: THREE.FrontSide
+    side: THREE.FrontSide,
+    roughness: 0.92,
+    metalness: 0.02
   });
 
   const mesh = new THREE.Mesh(geometry, material);
