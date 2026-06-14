@@ -67,14 +67,14 @@ bundle exec jekyll serve
 *注：Windows 环境下使用 `wdm` 用于文件监控。*
 
 ### 持续集成与部署 (CI/CD)
-本项目托管于 GitHub，并使用 **GitHub Actions** 进行自动化构建与部署。
-- **Workflow**: `.github/workflows/pages-deploy.yml`
+本项目改为 **GitHub Pages 分支发布**，不再依赖 GitHub Actions。
+
+- **发布分支**: `gh-pages`
+- **发布内容**: 本地执行 `bundle exec jekyll build` 后生成的静态文件
 - **流程**:
-    1. 代码 Push 到远程分支。
-    2. GitHub Actions 触发构建任务。
-    3. 安装 Ruby 环境与依赖。
-    4. 执行 `jekyll build` 生成静态文件。
-    5. Artifacts 上传并部署至 GitHub Pages 环境。
+    1. 在本地或 CI 外部构建站点
+    2. 将 `_site/` 中的静态文件推送到 `gh-pages`
+    3. 在 GitHub Pages 设置里把发布源切换为 `gh-pages` 分支根目录
 
 ### 测试环境预览
-当前 Pages workflow 也会监听 `dev` 分支，所以你可以把当前开发内容直接推到 `dev`，云端会自动刷新，不需要先合并到 `master/main`。
+如果你想保留 `dev` 作为开发分支，可以继续往 `dev` 提交源码；真正对外展示的静态站点则由 `gh-pages` 分支承载。这样可以彻底绕开 Actions 账单限制。
