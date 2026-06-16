@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>捞鱼的世界</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-deep: #07111b;
+      --bg-mid: #0c1c2e;
+      --panel: rgba(8, 16, 28, 0.76);
+      --panel-strong: rgba(11, 24, 40, 0.92);
+      --line: rgba(116, 165, 201, 0.28);
+      --line-strong: rgba(143, 203, 232, 0.48);
+      --text-main: #edf4f8;
+      --text-soft: rgba(237, 244, 248, 0.68);
+      --text-faint: rgba(237, 244, 248, 0.38);
+      --accent: #84d7ff;
+      --accent-warm: #f2c978;
+      --accent-soft: rgba(132, 215, 255, 0.14);
+    }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #030810; font-family: 'Microsoft YaHei', sans-serif; color: var(--text-main); }
+    #canvas { width: 100%; height: 100%; display: block; }
+
+    /* ========== Loading / Start Screen ========== */
+    #loading {
+      position: fixed; inset: 0; z-index: 100;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 50% 30%, rgba(40, 80, 140, 0.15), transparent 40%),
+        radial-gradient(circle at 82% 18%, rgba(120, 60, 180, 0.1), transparent 25%),
+        linear-gradient(180deg, rgba(3, 6, 14, 0.85), rgba(4, 8, 16, 0.96));
+      color: var(--text-main);
+      transition: opacity 1.2s ease-out;
+    }
+    #loading.hidden { opacity: 0; pointer-events: none; }
+
+    #loading::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.34), transparent),
+        radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.24), transparent),
+        radial-gradient(1.5px 1.5px at 50% 10%, rgba(255,255,255,0.42), transparent),
+        radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,0.22), transparent),
+        radial-gradient(1px 1px at 90% 80%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 15% 85%, rgba(255,255,255,0.16), transparent),
+        radial-gradient(1.5px 1.5px at 60% 75%, rgba(255,255,255,0.28), transparent),
+        radial-gradient(1px 1px at 80% 15%, rgba(255,255,255,0.26), transparent),
+        radial-gradient(1px 1px at 45% 45%, rgba(255,255,255,0.16), transparent),
+        radial-gradient(1px 1px at 25% 35%, rgba(255,255,255,0.22), transparent);
+      animation: twinkle 5s ease-in-out infinite alternate;
+    }
+    #loading::after {
+      content: '';
+      position: absolute;
+      width: 68vmin;
+      height: 68vmin;
+      border-radius: 50%;
+      border: 1px solid rgba(132, 215, 255, 0.12);
+      box-shadow:
+        0 0 0 24px rgba(132, 215, 255, 0.03),
+        0 0 120px rgba(71, 143, 196, 0.18);
+      animation: introRing 10s linear infinite;
+      opacity: 0.85;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+    @keyframes introRing {
+      from { transform: rotate(0deg) scale(0.96); }
+      50% { transform: rotate(180deg) scale(1); }
+      to { transform: rotate(360deg) scale(0.96); }
+    }
+
+    .intro-shell {
+      position: relative;
+      z-index: 1;
+      width: min(980px, 100%);
+      min-height: min(88vh, 760px);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 28px;
+      pointer-events: auto;
+      padding: 42px 28px 30px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+      color: var(--text-soft);
+      background: rgba(132, 215, 255, 0.06);
+      border: 1px solid rgba(132, 215, 255, 0.14);
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 16px rgba(132, 215, 255, 0.78);
+    }
+    .intro-panel {
+      position: relative;
+      width: min(520px, 100%);
+      padding: 0;
+      transform: translate3d(var(--intro-shift-x, 0px), var(--intro-shift-y, 0px), 0);
+      transition: transform 0.5s ease;
+    }
+    .title-main {
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      font-weight: 700;
+      line-height: 0.98;
+      letter-spacing: 0.04em;
+      background: linear-gradient(135deg, #f8fbff 0%, #bfe8ff 45%, #e6f4ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: titleGlow 4s ease-in-out infinite alternate;
+      margin-bottom: 16px;
+    }
+    @keyframes titleGlow {
+      0% { filter: brightness(0.92); }
+      100% { filter: brightness(1.16); }
+    }
+    .title-sub {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--text-soft);
+      max-width: 34ch;
+    }
+    .title-sub strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+    .intro-copy {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 18px;
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+    .intro-copy span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .intro-copy span::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(132, 215, 255, 0.72);
+    }
+
+    .load-section {
+      margin-top: 28px;
+      display: grid;
+      gap: 16px;
+    }
+    .bar-container {
+      width: min(300px, 100%);
+      height: 2px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, #5389c7, #84d7ff, #f2c978);
+      border-radius: 999px;
+      transition: width 0.4s ease-out;
+      box-shadow: 0 0 18px rgba(132, 215, 255, 0.42);
+    }
+    .load-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: min(300px, 100%);
+      font-size: 0.72rem;
+      color: var(--text-faint);
+      letter-spacing: 0.16em;
+    }
+    .load-percent { color: var(--text-soft); }
+    .load-meta .divider {
+      width: 1px;
+      height: 10px;
+      background: rgba(255,255,255,0.12);
+    }
+    #enter-btn {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      padding: 14px 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(132, 215, 255, 0.24);
+      color: var(--text-main);
+      font-size: 0.94rem;
+      letter-spacing: 0.14em;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.3s;
+      animation: fadeInUp 0.8s ease-out;
+      backdrop-filter: blur(12px);
+    }
+    #enter-btn:hover {
+      background: rgba(132, 215, 255, 0.12);
+      border-color: var(--line-strong);
+      box-shadow: 0 10px 32px rgba(79, 145, 197, 0.18);
+      transform: translateY(-2px);
+    }
+    .entry-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    #classic-link {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      padding: 14px 24px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(242, 201, 120, 0.22);
+      color: var(--text-soft);
+      font-size: 0.94rem;
+      letter-spacing: 0.08em;
+      border-radius: 999px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+      animation: fadeInUp 0.8s ease-out;
+      backdrop-filter: blur(12px);
+    }
+    #classic-link:hover {
+      background: rgba(242, 201, 120, 0.1);
+      border-color: rgba(242, 201, 120, 0.4);
+      box-shadow: 0 10px 32px rgba(201, 169, 97, 0.16);
+      transform: translateY(-2px);
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .ambient-note {
+      color: var(--text-faint);
+      font-size: 0.82rem;
+      line-height: 1.7;
+      max-width: 30ch;
+    }
+    .intro-side {
+      position: relative;
+      width: min(360px, 42vw);
+      height: 70vh;
+      min-height: 520px;
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0.98;
+    }
+    .intro-side::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(255, 220, 150, 0.28), transparent 34%),
+        radial-gradient(circle at 50% 60%, rgba(140, 200, 220, 0.18), transparent 40%),
+        linear-gradient(180deg, rgba(255,255,255,0.06), transparent 30%);
+    }
+    .vertical-caption {
+      position: absolute;
+      top: 12%;
+      right: 8px;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      letter-spacing: 0.24em;
+      color: rgba(120, 80, 30, 0.5);
+      font-size: 0.72rem;
+    }
+    /* The little fairy-tale planet at the heart of the loading screen */
+    .preview-orbit {
+      position: absolute;
+      inset: 50% auto auto 50%;
+      width: 320px;
+      height: 320px;
+      transform: translate(-50%, -50%);
+      animation: driftY 6s ease-in-out infinite;
+    }
+    @keyframes driftY {
+      0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+      50% { transform: translate(-50%, -50%) translateY(-12px); }
+    }
+    /* Mini world sphere: green land on a teal ocean */
+    .orbit-core {
+      position: absolute;
+      inset: 50%;
+      width: 130px;
+      height: 130px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 32% 28%, #b8e890 0%, #7fb958 18%, transparent 22%),
+        radial-gradient(circle at 68% 40%, #9ad06a 0%, #7fb958 16%, transparent 20%),
+        radial-gradient(circle at 45% 72%, #a7d76f 0%, #6fa84c 14%, transparent 18%),
+        radial-gradient(circle at 75% 75%, #f2e0ac 0%, #e8c98a 12%, transparent 16%),
+        radial-gradient(circle at 38% 38%, #8fd6e0, #3a9bb0 70%, #2a7a8c 100%);
+      box-shadow:
+        inset -14px -14px 30px rgba(20, 60, 80, 0.4),
+        inset 8px 8px 18px rgba(255,255,255,0.35),
+        0 0 50px rgba(255, 220, 150, 0.35);
+      animation: planetSpin 14s linear infinite;
+    }
+    @keyframes planetSpin {
+      /* subtle shimmer by shifting the highlight */
+      0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+      50% { filter: hue-rotate(-6deg) brightness(1.05); }
+    }
+    /* Orbiting moon + cloud rings */
+    .orbit-ring,
+    .orbit-ring.alt {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 200px;
+      height: 200px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1.5px dashed rgba(200, 160, 80, 0.4);
+      animation: orbitSpin 12s linear infinite;
+    }
+    .orbit-ring.alt {
+      width: 290px;
+      height: 290px;
+      border-color: rgba(140, 200, 220, 0.5);
+      animation-direction: reverse;
+      animation-duration: 18s;
+    }
+    /* little moon / satellite dot riding each ring */
+    .orbit-ring::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -7px;
+      width: 14px;
+      height: 14px;
+      transform: translateY(-50%);
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #fff, #f0dca8 60%, #c9a868);
+      box-shadow: 0 0 12px rgba(255, 220, 150, 0.7);
+    }
+    .orbit-ring.alt::before {
+      width: 9px; height: 9px; left: -4.5px;
+      background: radial-gradient(circle at 35% 30%, #fff, #bfe0e8 60%, #6aa0b0);
+      box-shadow: 0 0 10px rgba(140, 200, 220, 0.7);
+    }
+    @keyframes orbitSpin {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    /* a couple of drifting sparkle particles */
+    .intro-side::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(2px 2px at 20% 30%, rgba(255,235,170,0.9), transparent 60%),
+        radial-gradient(1.5px 1.5px at 70% 25%, rgba(255,255,255,0.8), transparent 60%),
+        radial-gradient(2px 2px at 80% 70%, rgba(255,220,150,0.8), transparent 60%),
+        radial-gradient(1.5px 1.5px at 30% 80%, rgba(255,255,255,0.7), transparent 60%),
+        radial-gradient(2px 2px at 55% 15%, rgba(255,235,170,0.7), transparent 60%);
+      animation: twinkle 4s ease-in-out infinite alternate;
+    }
+    .floating-spec {
+      position: absolute;
+      left: 14px;
+      bottom: 16%;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(8, 17, 29, 0.28);
+      border: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(14px);
+      color: rgba(237, 244, 248, 0.66);
+      font-size: 0.78rem;
+      line-height: 1.8;
+    }
+
+    #hud {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--text-main);
+      font-size: 13px;
+      text-align: center;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+      pointer-events: none;
+      z-index: 10;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(5, 11, 19, 0.58);
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      transition: opacity 1s ease-in 0.5s;
+    }
+    #hud.visible { opacity: 1; }
+    #interact-pill {
+      position: fixed;
+      left: 50%;
+      bottom: 82px;
+      transform: translateX(-50%) translateY(8px);
+      z-index: 12;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(132, 215, 255, 0.16);
+      background: rgba(7, 14, 24, 0.6);
+      backdrop-filter: blur(12px);
+      color: var(--text-main);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    #interact-pill.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Controls hint */
+    #controls-hint {
+      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      z-index: 15; pointer-events: none;
+      display: none;
+      text-align: center;
+      color: rgba(255,255,255,0.72);
+      font-size: 1rem;
+      animation: hintFade 4s ease-in-out forwards;
+    }
+    @keyframes hintFade {
+      0% { opacity: 0; }
+      15% { opacity: 1; }
+      70% { opacity: 1; }
+      100% { opacity: 0; display: none; }
+    }
+    .key-icons {
+      display: flex; gap: 4px; justify-content: center; margin-bottom: 8px;
+    }
+    .key-icon {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.06);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; color: rgba(255,255,255,0.64);
+    }
+
+    /* ========== Mobile joystick ========== */
+    #joystick-zone {
+      position: fixed; bottom: 30px; left: 30px;
+      width: 120px; height: 120px; z-index: 20;
+      display: none;
+    }
+    #joystick-base {
+      width: 100%; height: 100%; border-radius: 50%;
+      background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.24);
+      position: relative;
+      backdrop-filter: blur(8px);
+    }
+    #joystick-thumb {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.42);
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #dialog-overlay {
+      position: fixed; inset: 0; z-index: 50;
+      display: none; align-items: center; justify-content: center;
+      background: rgba(30, 20, 10, 0.4);
+      backdrop-filter: blur(6px);
+    }
+    #dialog-overlay.visible { display: flex; }
+    #dialog-box {
+      background: linear-gradient(180deg, #fbf3df 0%, #f5ead0 100%);
+      border: 2px solid #e8c98a;
+      border-radius: 28px;
+      padding: 28px;
+      max-width: 560px;
+      width: min(92vw, 560px);
+      color: #5a3a1a;
+      box-shadow: 0 30px 80px rgba(90,60,20,0.28), 0 0 0 6px rgba(255,248,230,0.5);
+      position: relative;
+    }
+    /* decorative curl on top corners */
+    #dialog-box::before, #dialog-box::after {
+      content: '✦'; position: absolute; top: 10px;
+      color: rgba(180,130,60,0.4); font-size: 0.9rem;
+    }
+    #dialog-box::before { left: 16px; }
+    #dialog-box::after { right: 16px; }
+    #dialog-box h2 {
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+      color: #5a3a1a;
+      line-height: 1.5;
+      font-family: 'Georgia', 'Microsoft YaHei', serif;
+      text-align: center;
+    }
+    #dialog-meta {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      color: #8a5a24;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+    }
+    #dialog-tag {
+      padding: 3px 12px; border-radius: 999px;
+      background: rgba(200,140,60,0.18);
+      border: 1px solid rgba(200,140,60,0.35);
+    }
+    #dialog-summary {
+      margin-bottom: 20px;
+      color: #6a4a28;
+      line-height: 1.8;
+      font-size: 0.93rem;
+      text-align: center;
+      border-top: 1px dashed rgba(180,130,60,0.35);
+      border-bottom: 1px dashed rgba(180,130,60,0.35);
+      padding: 12px 6px;
+    }
+    #dialog-box .articles {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    #dialog-box .articles li {
+      padding: 0; margin: 0;
+    }
+    #dialog-box .articles li a {
+      color: #4a3520;
+      text-decoration: none;
+      display: block;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(200,160,80,0.3);
+      transition: background 0.2s, transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+    #dialog-box .articles li a:hover {
+      background: #fff;
+      border-color: rgba(200,140,60,0.6);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(120,80,30,0.18);
+    }
+    .article-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 6px;
+    }
+    .article-top strong {
+      font-weight: 600;
+      line-height: 1.5;
+      color: #5a3a1a;
+    }
+    .article-date {
+      color: rgba(120,80,30,0.7);
+      font-size: 0.76rem;
+      white-space: nowrap;
+      letter-spacing: 0.06em;
+    }
+    .article-desc {
+      color: #6a4a28;
+      font-size: 0.84rem;
+      line-height: 1.6;
+    }
+    #dialog-box .close-btn {
+      display: block;
+      margin: 20px auto 0;
+      padding: 10px 28px;
+      border: 2px solid rgba(200,140,60,0.5);
+      background: rgba(255,248,230,0.8);
+      color: #8a5a24;
+      font-weight: 600;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    #dialog-box .close-btn:hover {
+      background: #fff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(120,80,30,0.2);
+    }
+
+    #crosshair {
+      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 10px; height: 10px; border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.45);
+      pointer-events: none; z-index: 10;
+      box-shadow: 0 0 16px rgba(132, 215, 255, 0.18);
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      display: none;
+    }
+    #crosshair.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 18px rgba(132, 215, 255, 0.34);
+      transform: translate(-50%, -50%) scale(1.5);
+    }
+
+    #back-link {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 20;
+      color: rgba(255,255,255,0.72);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s, background 0.2s;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(6, 12, 20, 0.42);
+      border: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(10px);
+    }
+    #back-link:hover { color: #fff; }
+
+    @media (max-width: 900px) {
+      .intro-shell {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-end;
+        min-height: auto;
+        padding: 26px 18px 24px;
+      }
+      .intro-side {
+        width: 100%;
+        height: 320px;
+        min-height: 320px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      #loading {
+        justify-content: flex-start;
+        overflow-y: auto;
+      }
+      .load-meta,
+      .bar-container {
+        width: 100%;
+      }
+      .intro-copy {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .intro-side {
+        height: 240px;
+        min-height: 240px;
+      }
+      .preview-orbit {
+        width: 220px;
+        height: 220px;
+      }
+      #hud {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        transform: none;
+        border-radius: 18px;
+      }
+      .article-top {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      #interact-pill {
+        bottom: 92px;
+        left: 16px;
+        right: 16px;
+        transform: translateY(8px);
+        text-align: center;
+      }
+      #interact-pill.visible {
+        transform: translateY(0);
+      }
+    }
+  </style>
+  <script type="module" crossorigin src="/world/assets/index-DUEu1dxZ.js"></script>
+</head>
+<body>
+  <!-- Loading / Start Screen -->
+  <div id="loading">
+    <div class="intro-shell" id="intro-shell">
+      <section class="intro-panel">
+        <div class="eyebrow">World Entrance</div>
+        <div class="title-main">捞鱼的世界</div>
+        <div class="title-sub">
+          一个可以自由探索的个人网站世界。<strong>中心建筑</strong>负责展示文章，
+          <strong>主题 NPC</strong> 负责把不同专栏变成可对话的角色。
+        </div>
+        <div class="intro-copy">
+          <span>沿地表漫游</span>
+          <span>靠近主塔</span>
+          <span>和角色对话</span>
+        </div>
+        <div class="load-section">
+          <div class="bar-container">
+            <div class="bar-fill" id="load-bar"></div>
+          </div>
+          <div class="load-meta">
+            <div>WORLD INITIALIZING</div>
+            <div class="divider"></div>
+            <div class="load-percent" id="load-percent">0%</div>
+          </div>
+          <button id="enter-btn">进入世界</button>
+          <a id="classic-link" href="/archives/">传统网页版</a>
+          <div class="ambient-note">桌面端进入后点击画面开始转动视角。移动端支持摇杆与触控探索。</div>
+        </div>
+      </section>
+      <aside class="intro-side">
+        <div class="vertical-caption">DISPLAY TOWER · NPC ROUTE · PERSONAL WORLD</div>
+        <div class="preview-orbit">
+          <div class="orbit-ring"></div>
+          <div class="orbit-ring alt"></div>
+          <div class="orbit-core"></div>
+        </div>
+        <div class="floating-spec">
+          主塔屏幕负责文章入口<br />
+          NPC 负责专栏对话<br />
+          整个地图是一颗可漫游星球
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- 3D Canvas -->
+  <canvas id="canvas"></canvas>
+  <div id="crosshair"></div>
+  <div id="interact-pill"></div>
+  <a id="back-link" href="/">← 返回首页</a>
+
+  <!-- Controls hint -->
+  <div id="controls-hint">
+    <div class="key-icons">
+      <div class="key-icon">W</div>
+      <div class="key-icon">A</div>
+      <div class="key-icon">S</div>
+      <div class="key-icon">D</div>
+    </div>
+    <div>移动探索 · 鼠标转动视角 · Shift冲刺 · 点击交互</div>
+  </div>
+
+  <div id="hud">WASD 移动 · Shift 冲刺 · 鼠标转动视角 · 点击 NPC 或建筑屏幕交互</div>
+
+  <!-- Mobile joystick -->
+  <div id="joystick-zone">
+    <div id="joystick-base">
+      <div id="joystick-thumb"></div>
+    </div>
+  </div>
+
+  <!-- Dialog overlay -->
+  <div id="dialog-overlay">
+    <div id="dialog-box">
+      <h2 id="dialog-title"></h2>
+      <div id="dialog-meta">
+        <span id="dialog-tag">Node</span>
+        <span id="dialog-count">0 Articles</span>
+      </div>
+      <div id="dialog-summary"></div>
+      <ul class="articles" id="dialog-articles"></ul>
+      <button class="close-btn" id="dialog-close">关闭</button>
+    </div>
+  </div>
+
+  <script>
+    // Start screen logic
+    const enterBtn = document.getElementById('enter-btn');
+    const loadPercent = document.getElementById('load-percent');
+    const hud = document.getElementById('hud');
+    const controlsHint = document.getElementById('controls-hint');
+    const loadingScreen = document.getElementById('loading');
+    const introShell = document.getElementById('intro-shell');
+    window.__WORLD_STATE = { entered: false };
+
+    // Observe loading progress changes
+    const loadBar = document.getElementById('load-bar');
+    const observer = new MutationObserver(() => {
+      const width = loadBar.style.width;
+      const pct = parseInt(width) || 0;
+      loadPercent.textContent = pct + '%';
+
+      if (pct >= 100) {
+        enterBtn.style.display = 'inline-flex';
+        document.getElementById('classic-link').style.display = 'inline-flex';
+      }
+    });
+    observer.observe(loadBar, { attributes: true, attributeFilter: ['style'] });
+
+    // Intro parallax
+    window.addEventListener('pointermove', (event) => {
+      const xRatio = (event.clientX / window.innerWidth) - 0.5;
+      const yRatio = (event.clientY / window.innerHeight) - 0.5;
+      introShell.style.setProperty('--intro-shift-x', `${xRatio * 14}px`);
+      introShell.style.setProperty('--intro-shift-y', `${yRatio * 10}px`);
+    });
+
+    // Enter world
+    enterBtn.addEventListener('click', () => {
+      window.__WORLD_STATE.entered = true;
+      window.dispatchEvent(new CustomEvent('world:enter'));
+      loadingScreen.classList.add('hidden');
+      setTimeout(() => {
+        loadingScreen.style.display = 'none';
+        hud.classList.add('visible');
+
+        // Show controls hint briefly
+        controlsHint.style.display = 'block';
+        setTimeout(() => { controlsHint.style.display = 'none'; }, 4500);
+
+        // Request pointer lock on desktop
+        const canvas = document.getElementById('canvas');
+        if (!('ontouchstart' in window)) {
+          canvas.requestPointerLock();
+        }
+      }, 1200);
+    });
+  </script>
+</body>
+</html>
