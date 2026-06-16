@@ -109,5 +109,7 @@ export class NPCDialog {
   hide() {
     this.isOpen = false;
     this.overlay.classList.remove('visible');
+    // Notify listeners (e.g. to re-lock the camera pointer)
+    if (this.onClose) this.onClose();
   }
 }

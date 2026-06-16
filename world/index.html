@@ -20,7 +20,7 @@
       --accent-warm: #f2c978;
       --accent-soft: rgba(132, 215, 255, 0.14);
     }
-    html, body { width: 100%; height: 100%; overflow: hidden; background: #050b13; font-family: 'Microsoft YaHei', sans-serif; color: var(--text-main); }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #030810; font-family: 'Microsoft YaHei', sans-serif; color: var(--text-main); }
     #canvas { width: 100%; height: 100%; display: block; }
 
     /* ========== Loading / Start Screen ========== */
@@ -29,9 +29,9 @@
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       padding: 24px;
       background:
-        radial-gradient(circle at 50% 30%, rgba(81, 167, 226, 0.12), transparent 36%),
-        radial-gradient(circle at 82% 18%, rgba(242, 201, 120, 0.12), transparent 22%),
-        linear-gradient(180deg, rgba(4, 10, 18, 0.72), rgba(4, 9, 16, 0.94));
+        radial-gradient(circle at 50% 30%, rgba(40, 80, 140, 0.15), transparent 40%),
+        radial-gradient(circle at 82% 18%, rgba(120, 60, 180, 0.1), transparent 25%),
+        linear-gradient(180deg, rgba(3, 6, 14, 0.85), rgba(4, 8, 16, 0.96));
       color: var(--text-main);
       transition: opacity 1.2s ease-out;
     }
@@ -270,16 +270,16 @@
       min-height: 520px;
       overflow: hidden;
       pointer-events: none;
-      opacity: 0.94;
+      opacity: 0.98;
     }
     .intro-side::before {
       content: '';
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.04), transparent 30%),
-        radial-gradient(circle at 50% 16%, rgba(132, 215, 255, 0.2), transparent 30%),
-        linear-gradient(180deg, rgba(8, 17, 29, 0.08), rgba(8, 17, 29, 0.72) 46%, rgba(8, 17, 29, 0));
+        radial-gradient(circle at 50% 18%, rgba(255, 220, 150, 0.28), transparent 34%),
+        radial-gradient(circle at 50% 60%, rgba(140, 200, 220, 0.18), transparent 40%),
+        linear-gradient(180deg, rgba(255,255,255,0.06), transparent 30%);
     }
     .vertical-caption {
       position: absolute;
@@ -288,84 +288,101 @@
       writing-mode: vertical-rl;
       text-orientation: mixed;
       letter-spacing: 0.24em;
-      color: rgba(237, 244, 248, 0.36);
+      color: rgba(120, 80, 30, 0.5);
       font-size: 0.72rem;
     }
+    /* The little fairy-tale planet at the heart of the loading screen */
     .preview-orbit {
       position: absolute;
       inset: 50% auto auto 50%;
       width: 320px;
       height: 320px;
       transform: translate(-50%, -50%);
-      border-radius: 50%;
-      border: 1px solid rgba(132, 215, 255, 0.12);
-      box-shadow:
-        inset 0 0 60px rgba(132, 215, 255, 0.06),
-        0 0 120px rgba(35, 74, 110, 0.2);
       animation: driftY 6s ease-in-out infinite;
     }
     @keyframes driftY {
       0%, 100% { transform: translate(-50%, -50%) translateY(0); }
-      50% { transform: translate(-50%, -50%) translateY(-10px); }
+      50% { transform: translate(-50%, -50%) translateY(-12px); }
     }
+    /* Mini world sphere: green land on a teal ocean */
     .orbit-core {
       position: absolute;
       inset: 50%;
-      width: 86px;
-      height: 86px;
+      width: 130px;
+      height: 130px;
       transform: translate(-50%, -50%);
-      border-radius: 28px;
-      background: linear-gradient(180deg, rgba(135, 206, 255, 0.18), rgba(15, 40, 65, 0.82));
-      box-shadow: inset 0 0 28px rgba(132, 215, 255, 0.1);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 32% 28%, #b8e890 0%, #7fb958 18%, transparent 22%),
+        radial-gradient(circle at 68% 40%, #9ad06a 0%, #7fb958 16%, transparent 20%),
+        radial-gradient(circle at 45% 72%, #a7d76f 0%, #6fa84c 14%, transparent 18%),
+        radial-gradient(circle at 75% 75%, #f2e0ac 0%, #e8c98a 12%, transparent 16%),
+        radial-gradient(circle at 38% 38%, #8fd6e0, #3a9bb0 70%, #2a7a8c 100%);
+      box-shadow:
+        inset -14px -14px 30px rgba(20, 60, 80, 0.4),
+        inset 8px 8px 18px rgba(255,255,255,0.35),
+        0 0 50px rgba(255, 220, 150, 0.35);
+      animation: planetSpin 14s linear infinite;
     }
-    .orbit-core::before,
-    .orbit-core::after {
-      content: '';
-      position: absolute;
-      inset: 12px;
-      border-radius: 22px;
-      border: 1px solid rgba(132, 215, 255, 0.14);
+    @keyframes planetSpin {
+      /* subtle shimmer by shifting the highlight */
+      0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+      50% { filter: hue-rotate(-6deg) brightness(1.05); }
     }
-    .orbit-core::after {
-      inset: 26px 14px;
-      border-radius: 10px;
-      background: linear-gradient(180deg, rgba(132, 215, 255, 0.1), rgba(132, 215, 255, 0.02));
-    }
+    /* Orbiting moon + cloud rings */
     .orbit-ring,
     .orbit-ring.alt {
       position: absolute;
       left: 50%;
-      top: 55%;
-      width: 180px;
-      height: 180px;
+      top: 50%;
+      width: 200px;
+      height: 200px;
       transform: translate(-50%, -50%);
       border-radius: 50%;
-      border: 1px solid rgba(132, 215, 255, 0.16);
+      border: 1.5px dashed rgba(200, 160, 80, 0.4);
       animation: orbitSpin 12s linear infinite;
     }
     .orbit-ring.alt {
-      width: 280px;
-      height: 280px;
-      border-color: rgba(255, 255, 255, 0.1);
+      width: 290px;
+      height: 290px;
+      border-color: rgba(140, 200, 220, 0.5);
       animation-direction: reverse;
-      animation-duration: 16s;
+      animation-duration: 18s;
     }
-    .orbit-ring::before,
-    .orbit-ring.alt::before {
+    /* little moon / satellite dot riding each ring */
+    .orbit-ring::before {
       content: '';
       position: absolute;
       top: 50%;
-      left: 0;
-      width: 10px;
-      height: 10px;
-      transform: translate(-50%, -50%);
+      left: -7px;
+      width: 14px;
+      height: 14px;
+      transform: translateY(-50%);
       border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 16px rgba(132, 215, 255, 0.65);
+      background: radial-gradient(circle at 35% 30%, #fff, #f0dca8 60%, #c9a868);
+      box-shadow: 0 0 12px rgba(255, 220, 150, 0.7);
+    }
+    .orbit-ring.alt::before {
+      width: 9px; height: 9px; left: -4.5px;
+      background: radial-gradient(circle at 35% 30%, #fff, #bfe0e8 60%, #6aa0b0);
+      box-shadow: 0 0 10px rgba(140, 200, 220, 0.7);
     }
     @keyframes orbitSpin {
       from { transform: translate(-50%, -50%) rotate(0deg); }
       to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    /* a couple of drifting sparkle particles */
+    .intro-side::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(2px 2px at 20% 30%, rgba(255,235,170,0.9), transparent 60%),
+        radial-gradient(1.5px 1.5px at 70% 25%, rgba(255,255,255,0.8), transparent 60%),
+        radial-gradient(2px 2px at 80% 70%, rgba(255,220,150,0.8), transparent 60%),
+        radial-gradient(1.5px 1.5px at 30% 80%, rgba(255,255,255,0.7), transparent 60%),
+        radial-gradient(2px 2px at 55% 15%, rgba(255,235,170,0.7), transparent 60%);
+      animation: twinkle 4s ease-in-out infinite alternate;
     }
     .floating-spec {
       position: absolute;
@@ -474,42 +491,59 @@
     #dialog-overlay {
       position: fixed; inset: 0; z-index: 50;
       display: none; align-items: center; justify-content: center;
-      background: rgba(2, 5, 10, 0.62);
-      backdrop-filter: blur(10px);
+      background: rgba(30, 20, 10, 0.4);
+      backdrop-filter: blur(6px);
     }
     #dialog-overlay.visible { display: flex; }
     #dialog-box {
-      background:
-        linear-gradient(180deg, rgba(11, 21, 36, 0.96), rgba(6, 13, 22, 0.96));
-      border: 1px solid rgba(132, 215, 255, 0.16);
-      border-radius: 24px;
-      padding: 26px;
+      background: linear-gradient(180deg, #fbf3df 0%, #f5ead0 100%);
+      border: 2px solid #e8c98a;
+      border-radius: 28px;
+      padding: 28px;
       max-width: 560px;
       width: min(92vw, 560px);
-      color: var(--text-main);
-      box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+      color: #5a3a1a;
+      box-shadow: 0 30px 80px rgba(90,60,20,0.28), 0 0 0 6px rgba(255,248,230,0.5);
+      position: relative;
     }
+    /* decorative curl on top corners */
+    #dialog-box::before, #dialog-box::after {
+      content: '✦'; position: absolute; top: 10px;
+      color: rgba(180,130,60,0.4); font-size: 0.9rem;
+    }
+    #dialog-box::before { left: 16px; }
+    #dialog-box::after { right: 16px; }
     #dialog-box h2 {
-      font-size: 1.35rem;
+      font-size: 1.4rem;
       margin-bottom: 8px;
-      color: var(--text-main);
+      color: #5a3a1a;
       line-height: 1.5;
+      font-family: 'Georgia', 'Microsoft YaHei', serif;
+      text-align: center;
     }
     #dialog-meta {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       gap: 12px;
       margin-bottom: 18px;
-      color: var(--text-faint);
-      font-size: 0.82rem;
+      color: #8a5a24;
+      font-size: 0.78rem;
       letter-spacing: 0.08em;
-      text-transform: uppercase;
+    }
+    #dialog-tag {
+      padding: 3px 12px; border-radius: 999px;
+      background: rgba(200,140,60,0.18);
+      border: 1px solid rgba(200,140,60,0.35);
     }
     #dialog-summary {
-      margin-bottom: 18px;
-      color: var(--text-soft);
+      margin-bottom: 20px;
+      color: #6a4a28;
       line-height: 1.8;
       font-size: 0.93rem;
+      text-align: center;
+      border-top: 1px dashed rgba(180,130,60,0.35);
+      border-bottom: 1px dashed rgba(180,130,60,0.35);
+      padding: 12px 6px;
     }
     #dialog-box .articles {
       list-style: none;
@@ -517,23 +551,23 @@
       gap: 10px;
     }
     #dialog-box .articles li {
-      padding: 0;
-      margin: 0;
+      padding: 0; margin: 0;
     }
     #dialog-box .articles li a {
-      color: var(--text-main);
+      color: #4a3520;
       text-decoration: none;
       display: block;
       padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.035);
-      border: 1px solid rgba(255,255,255,0.06);
-      transition: background 0.2s, transform 0.2s, border-color 0.2s;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(200,160,80,0.3);
+      transition: background 0.2s, transform 0.2s, border-color 0.2s, box-shadow 0.2s;
     }
     #dialog-box .articles li a:hover {
-      background: rgba(132, 215, 255, 0.08);
-      border-color: rgba(132, 215, 255, 0.2);
-      transform: translateY(-1px);
+      background: #fff;
+      border-color: rgba(200,140,60,0.6);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(120,80,30,0.18);
     }
     .article-top {
       display: flex;
@@ -545,29 +579,36 @@
     .article-top strong {
       font-weight: 600;
       line-height: 1.5;
+      color: #5a3a1a;
     }
     .article-date {
-      color: var(--text-faint);
+      color: rgba(120,80,30,0.7);
       font-size: 0.76rem;
       white-space: nowrap;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
     }
     .article-desc {
-      color: var(--text-soft);
-      font-size: 0.86rem;
-      line-height: 1.65;
+      color: #6a4a28;
+      font-size: 0.84rem;
+      line-height: 1.6;
     }
     #dialog-box .close-btn {
-      margin-top: 18px;
-      padding: 10px 22px;
-      border: 1px solid rgba(132, 215, 255, 0.16);
-      background: transparent;
-      color: var(--text-main);
+      display: block;
+      margin: 20px auto 0;
+      padding: 10px 28px;
+      border: 2px solid rgba(200,140,60,0.5);
+      background: rgba(255,248,230,0.8);
+      color: #8a5a24;
+      font-weight: 600;
       border-radius: 999px;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
     }
-    #dialog-box .close-btn:hover { background: rgba(132, 215, 255, 0.08); }
+    #dialog-box .close-btn:hover {
+      background: #fff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(120,80,30,0.2);
+    }
 
     #crosshair {
       position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -722,10 +763,10 @@
       <div class="key-icon">S</div>
       <div class="key-icon">D</div>
     </div>
-    <div>移动探索 · 鼠标转动视角 · 点击交互</div>
+    <div>移动探索 · 鼠标转动视角 · Shift冲刺 · 点击交互</div>
   </div>
 
-  <div id="hud">WASD 移动 · 鼠标转动视角 · 点击 NPC 或建筑屏幕交互</div>
+  <div id="hud">WASD 移动 · Shift 冲刺 · 鼠标转动视角 · 点击 NPC 或建筑屏幕交互</div>
 
   <!-- Mobile joystick -->
   <div id="joystick-zone">

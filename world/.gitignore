@@ -1,3 +1,11 @@
 node_modules/
 dist/
 .vite/
+# original face images kept as backups before magenta-key removal
+public/faces/_original/
+# local debug screenshots
+zeen-tools/shots/
+# unused face images (only xingxing.png & zhouhan.png are referenced in code)
+public/faces/laoyu.png
+public/faces/laoyu2.png
+public/faces/zhouhanFri.png

@@ -35,7 +35,7 @@ void main() {
   vec3 n = normalize(normal);
   vec3 pos = position;
 
-  // Use 3D position for spherical wave patterns
+  // Layered spherical waves
   float wave1 = snoise(pos.xz * 0.15 + uTime * 0.3) * 0.2;
   float wave2 = snoise(pos.xy * 0.2 + uTime * 0.5) * 0.12;
   float wave3 = snoise(pos.yz * 0.18 + uTime * 0.4) * 0.08;
@@ -43,7 +43,8 @@ void main() {
 
   pos += n * wave;
   vDisplacement = wave;
-  vWorldNormal = n;
+  // World-space normal (sphere normal ≈ normalized world position for a centered sphere)
+  vWorldNormal = normalize((modelMatrix * vec4(n, 0.0)).xyz);
   vWorldPos = (modelMatrix * vec4(pos, 1.0)).xyz;
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);

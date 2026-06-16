@@ -104,30 +104,33 @@ export function createTower(noise2D, posts) {
   // Collect all screens for interaction
   const allScreenData = [];
 
-  // Glowing frame material
+  // Warm wooden frame material — cozy fairy-tale look
   const frameMat = new THREE.MeshStandardMaterial({
-    color: 0x80c5ec,
-    emissive: 0x6ab8e4,
-    emissiveIntensity: 0.8,
-    metalness: 0.4,
-    roughness: 0.32
+    color: 0xb88454,
+    roughness: 0.85,
+    metalness: 0.0
+  });
+
+  // Warm stone for the tower structure / base
+  const stoneMat = new THREE.MeshStandardMaterial({
+    color: 0xe6d8bc,
+    roughness: 0.92,
+    metalness: 0.02
   });
 
   const darkFrameMat = new THREE.MeshStandardMaterial({
-    color: 0x102031,
-    emissive: 0x102031,
-    emissiveIntensity: 0.35,
-    metalness: 0.82,
-    roughness: 0.22
+    color: 0xc9b894,
+    roughness: 0.9,
+    metalness: 0.02
   });
 
-  // Light ring between tiers
+  // Soft warm trim ring between tiers (subtle, not neon)
   const ringMat = new THREE.MeshStandardMaterial({
-    color: 0x7bcfff,
-    emissive: 0x7bcfff,
-    emissiveIntensity: 1.4,
-    metalness: 0.15,
-    roughness: 0.25
+    color: 0xd4a85a,
+    emissive: 0xf0c878,
+    emissiveIntensity: 0.35,
+    metalness: 0.3,
+    roughness: 0.5
   });
 
   screenTiers.forEach((tier, tierIndex) => {
@@ -145,13 +148,14 @@ export function createTower(noise2D, posts) {
         content.posts || []
       );
 
-      // Screen panel geometry
+      // Screen panel geometry — soft warm-backlit panel
       const screenGeo = new THREE.PlaneGeometry(tier.panelWidth, tier.panelHeight);
       const screenMat = new THREE.MeshStandardMaterial({
         map: texture,
-        emissive: 0x222244,
-        emissiveIntensity: 0.4,
-        emissiveMap: texture
+        emissive: 0xfff2dc,
+        emissiveIntensity: 0.28,
+        emissiveMap: texture,
+        roughness: 0.5
       });
 
       const screen = new THREE.Mesh(screenGeo, screenMat);
@@ -228,10 +232,10 @@ export function createTower(noise2D, posts) {
     group.userData.lightRings.push(ring);
     group.add(ring);
 
-    // Point lights around the ring for glow effect
+    // Soft warm lantern lights at each panel for a gentle glow
     for (let i = 0; i < panelCount; i++) {
       const lightAngle = i * angleStep;
-      const light = new THREE.PointLight(0x8ad9ff, 1.3, 6.5, 2);
+      const light = new THREE.PointLight(0xffd896, 0.7, 5.5, 2);
       light.position.x = Math.cos(lightAngle) * r;
       light.position.z = Math.sin(lightAngle) * r;
       light.position.y = tier.height + tier.panelHeight / 2 + 0.3;
@@ -239,52 +243,106 @@ export function createTower(noise2D, posts) {
     }
   });
 
-  // Top spire - a glowing beacon cone made of screen-like material
-  const spireGeo = new THREE.ConeGeometry(0.5, 3, 6);
-  const spireMat = new THREE.MeshStandardMaterial({
-    color: 0x7bcfff,
-    emissive: 0x7bcfff,
-    emissiveIntensity: 2,
-    metalness: 0.42,
-    roughness: 0.16
+  // Central stone column — gives the tower solid fairy-tale structure
+  const column = new THREE.Mesh(
+    new THREE.CylinderGeometry(1.6, 2.0, 16, 16),
+    stoneMat
+  );
+  column.position.y = 8;
+  column.castShadow = true;
+  column.receiveShadow = true;
+  group.add(column);
+
+  // Decorative stone bands around the column at each tier
+  screenTiers.forEach(tier => {
+    const band = new THREE.Mesh(
+      new THREE.TorusGeometry(1.75, 0.12, 8, 20),
+      darkFrameMat
+    );
+    band.position.y = tier.height;
+    band.rotation.x = Math.PI / 2;
+    group.add(band);
   });
-  const spire = new THREE.Mesh(spireGeo, spireMat);
-  spire.position.y = 17;
+
+  // Warm stone spire cap (conical roof)
+  const spire = new THREE.Mesh(
+    new THREE.ConeGeometry(1.9, 3.2, 12),
+    new THREE.MeshStandardMaterial({ color: 0xc06a3a, roughness: 0.85 })
+  );
+  spire.position.y = 17.6;
+  spire.castShadow = true;
   group.add(spire);
 
-  // Spire tip glow sphere
-  const tipGeo = new THREE.SphereGeometry(0.3, 8, 8);
-  const tip = new THREE.Mesh(tipGeo, spireMat);
-  tip.position.y = 18.8;
+  // Roof rim trim
+  const roofRim = new THREE.Mesh(
+    new THREE.TorusGeometry(1.9, 0.12, 8, 20),
+    darkFrameMat
+  );
+  roofRim.position.y = 16.0;
+  roofRim.rotation.x = Math.PI / 2;
+  group.add(roofRim);
+
+  // Golden weather vane pole
+  const goldMat = new THREE.MeshStandardMaterial({
+    color: 0xf2c978, emissive: 0xf0c878, emissiveIntensity: 0.4,
+    metalness: 0.8, roughness: 0.3
+  });
+  const vanePole = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.05, 0.05, 1.8, 8), goldMat
+  );
+  vanePole.position.y = 20.0;
+  group.add(vanePole);
+
+  // Compass-direction cross arms
+  const armNS = new THREE.Mesh(
+    new THREE.BoxGeometry(0.06, 0.06, 1.4), goldMat
+  );
+  armNS.position.y = 20.3;
+  armNS.name = 'vane-arm';
+  group.add(armNS);
+
+  // Arrowhead (N) and tail fin (S) for the weather vane
+  const arrowHead = new THREE.Mesh(new THREE.ConeGeometry(0.18, 0.4, 4), goldMat);
+  arrowHead.rotation.x = -Math.PI / 2;
+  arrowHead.position.set(0, 20.3, 0.9);
+  arrowHead.name = 'vane-head';
+  group.add(arrowHead);
+
+  const tailFin = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.04, 0.3), goldMat);
+  tailFin.position.set(0, 20.3, -0.7);
+  tailFin.name = 'vane-tail';
+  group.add(tailFin);
+
+  // Golden tip ball
+  const tip = new THREE.Mesh(new THREE.SphereGeometry(0.18, 12, 12), goldMat);
+  tip.position.y = 21.0;
   group.add(tip);
 
-  // Top spotlight
-  const spotLight = new THREE.SpotLight(0x8ad9ff, 7.2, 40, Math.PI / 6, 0.5);
-  spotLight.position.set(0, 19, 0);
-  spotLight.target.position.set(0, 0, 5);
-  group.add(spotLight);
-  group.add(spotLight.target);
+  // A soft warm point light at the top, like a friendly beacon in daylight
+  const topLight = new THREE.PointLight(0xffe6b0, 1.2, 14, 2);
+  topLight.position.y = 21;
+  group.add(topLight);
 
-  // Base platform ring
-  const platformGeo = new THREE.TorusGeometry(3.5, 0.2, 8, 16);
-  const platform = new THREE.Mesh(platformGeo, darkFrameMat);
+  // Base platform ring — warm stone steps
+  const platformGeo = new THREE.TorusGeometry(3.5, 0.22, 10, 28);
+  const platform = new THREE.Mesh(platformGeo, stoneMat);
   platform.rotation.x = Math.PI / 2;
   platform.position.y = 0.3;
   platform.receiveShadow = true;
+  platform.castShadow = true;
   group.add(platform);
 
   const innerPlatform = new THREE.Mesh(
-    new THREE.CylinderGeometry(2.4, 2.8, 0.35, 24),
+    new THREE.CylinderGeometry(2.4, 2.8, 0.4, 24),
     new THREE.MeshStandardMaterial({
-      color: 0x101b2a,
-      emissive: 0x0f1a28,
-      emissiveIntensity: 0.2,
-      metalness: 0.56,
-      roughness: 0.48
+      color: 0xe6d8bc,
+      roughness: 0.92,
+      metalness: 0.02
     })
   );
-  innerPlatform.position.y = 0.12;
+  innerPlatform.position.y = 0.2;
   innerPlatform.receiveShadow = true;
+  innerPlatform.castShadow = true;
   group.add(innerPlatform);
 
   // Place at north pole on sphere
@@ -304,76 +362,77 @@ function createScreenCanvas(label, posts) {
   canvas.height = 256;
   const ctx = canvas.getContext('2d');
 
+  // Warm parchment background
   const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-  gradient.addColorStop(0, '#08101a');
-  gradient.addColorStop(0.55, '#0d1d30');
-  gradient.addColorStop(1, '#09111b');
+  gradient.addColorStop(0, '#fbf3df');
+  gradient.addColorStop(0.55, '#f5ead0');
+  gradient.addColorStop(1, '#f0e2c4');
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.03)';
+  // Inner panel
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.28)';
   ctx.fillRect(16, 14, canvas.width - 32, canvas.height - 28);
 
-  ctx.strokeStyle = 'rgba(132, 215, 255, 0.04)';
-  for (let y = 0; y < canvas.height; y += 3) {
-    ctx.beginPath();
-    ctx.moveTo(0, y);
-    ctx.lineTo(canvas.width, y);
-    ctx.stroke();
-  }
-
-  ctx.strokeStyle = 'rgba(132, 215, 255, 0.24)';
-  ctx.lineWidth = 1;
+  // Decorative border
+  ctx.strokeStyle = 'rgba(180, 130, 60, 0.5)';
+  ctx.lineWidth = 1.5;
   ctx.strokeRect(16, 14, canvas.width - 32, canvas.height - 28);
 
-  ctx.fillStyle = 'rgba(237, 244, 248, 0.45)';
+  // Eyebrow
+  ctx.fillStyle = 'rgba(140, 95, 40, 0.7)';
   ctx.font = '10px "Microsoft YaHei", sans-serif';
   ctx.textAlign = 'left';
   ctx.fillText('WORLD NODE', 28, 30);
 
-  ctx.fillStyle = '#dff2ff';
+  // Label
+  ctx.fillStyle = '#5a3a1a';
   ctx.font = 'bold 18px "Microsoft YaHei", sans-serif';
   ctx.fillText(label, 28, 54);
 
-  ctx.fillStyle = 'rgba(237, 244, 248, 0.45)';
+  // Count
+  ctx.fillStyle = 'rgba(140, 95, 40, 0.7)';
   ctx.font = '10px "Microsoft YaHei", sans-serif';
   ctx.textAlign = 'right';
   ctx.fillText(`${String(posts.length).padStart(2, '0')} ARTICLES`, canvas.width - 28, 30);
 
-  ctx.strokeStyle = 'rgba(132, 215, 255, 0.24)';
+  // Divider
+  ctx.strokeStyle = 'rgba(180, 130, 60, 0.4)';
+  ctx.lineWidth = 1;
   ctx.beginPath();
   ctx.moveTo(28, 66);
   ctx.lineTo(canvas.width - 28, 66);
   ctx.stroke();
 
+  // Article list
   ctx.textAlign = 'left';
   const maxPosts = Math.min(posts.length, 6);
   for (let i = 0; i < maxPosts; i++) {
     const y = 92 + i * 24;
-    ctx.fillStyle = 'rgba(132, 215, 255, 0.9)';
+    ctx.fillStyle = 'rgba(200, 140, 50, 0.9)';
     ctx.fillRect(28, y - 7, 7, 1.5);
 
-    ctx.fillStyle = '#d8e6f2';
+    ctx.fillStyle = '#4a3520';
     ctx.font = '11px "Microsoft YaHei", sans-serif';
     const title = posts[i].title.length > 17
       ? posts[i].title.slice(0, 17) + '...'
       : posts[i].title;
     ctx.fillText(title, 42, y);
 
-    ctx.fillStyle = 'rgba(237, 244, 248, 0.34)';
+    ctx.fillStyle = 'rgba(120, 80, 30, 0.7)';
     ctx.font = '10px "Microsoft YaHei", sans-serif';
     ctx.fillText(posts[i].category || '未分类', 42, y + 13);
   }
 
   if (posts.length === 0) {
-    ctx.fillStyle = 'rgba(237, 244, 248, 0.32)';
+    ctx.fillStyle = 'rgba(90, 60, 30, 0.5)';
     ctx.font = '14px "Microsoft YaHei", sans-serif';
     ctx.textAlign = 'center';
     ctx.fillText('暂无文章', canvas.width / 2, canvas.height / 2);
   }
 
   ctx.textAlign = 'left';
-  ctx.fillStyle = 'rgba(242, 201, 120, 0.58)';
+  ctx.fillStyle = 'rgba(180, 110, 40, 0.7)';
   ctx.font = '10px "Microsoft YaHei", sans-serif';
   ctx.fillText('Click to open archive', 28, canvas.height - 24);
 

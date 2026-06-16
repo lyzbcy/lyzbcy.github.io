@@ -12,10 +12,12 @@ export class PlayerControls {
     this.domElement = domElement;
 
     this.moveSpeed = 6;
+    this.sprintSpeed = 12;
+    this.isSprinting = false;
     this.mouseSpeed = 0.002;
 
     // Movement state
-    this.keys = { w: false, a: false, s: false, d: false };
+    this.keys = { w: false, a: false, s: false, d: false, shift: false };
     this.position = new THREE.Vector3(0, SPHERE_RADIUS + 2, 8); // Start near north pole
     this.yaw = 0;
     this.pitch = 0;
@@ -38,34 +40,89 @@ export class PlayerControls {
   _initKeyboard() {
     document.addEventListener('keydown', (e) => {
       const key = e.key.toLowerCase();
+      if (key === 'shift') this.keys.shift = true;
       if (key in this.keys) this.keys[key] = true;
     });
     document.addEventListener('keyup', (e) => {
       const key = e.key.toLowerCase();
+      if (key === 'shift') this.keys.shift = false;
       if (key in this.keys) this.keys[key] = false;
     });
   }
 
   _initMouse() {
-    // Click to request pointer lock
-    this.domElement.addEventListener('click', () => {
-      if (!this.isLocked && !document.getElementById('dialog-overlay').classList.contains('visible')) {
-        this.domElement.requestPointerLock();
+    // Track Alt key state to switch between pointer-lock (camera) and cursor modes.
+    // Default is camera mode (locked). Holding Alt reveals the cursor for UI clicks;
+    // releasing Alt snaps straight back to camera mode.
+    this.altHeld = false;
+
+    // Pointer-lock state
+    document.addEventListener('pointerlockchange', () => {
+      this.isLocked = document.pointerLockElement === this.domElement;
+      const crosshair = document.getElementById('crosshair');
+      if (crosshair) crosshair.style.display = this.isLocked ? 'block' : 'none';
+    });
+
+    // Alt toggles cursor mode while the world is active and no overlay is open.
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Alt') {
+        e.preventDefault();
+        if (this.altHeld) return;
+        this.altHeld = true;
+        if (document.pointerLockElement) {
+          document.exitPointerLock();
+        }
       }
     });
 
-    document.addEventListener('pointerlockchange', () => {
-      this.isLocked = document.pointerLockElement === this.domElement;
-      document.getElementById('crosshair').style.display = this.isLocked ? 'block' : 'none';
+    document.addEventListener('keyup', (e) => {
+      if (e.key === 'Alt') {
+        this.altHeld = false;
+        // Snap back to camera mode unless an overlay (dialog/article) is open
+        this.requestLock();
+      }
     });
 
+    // When the user manually exits the pointer lock (e.g. Esc) while not holding Alt
+    // and no overlay is open, gently re-request it on the next click.
+    this.domElement.addEventListener('click', () => {
+      if (!this.altHeld && !this._anyOverlayOpen() && !this.isLocked) {
+        this.requestLock();
+      }
+    });
+
+    // Camera look only while locked
     document.addEventListener('mousemove', (e) => {
       if (!this.isLocked) return;
-
       this.yaw -= e.movementX * this.mouseSpeed;
       this.pitch -= e.movementY * this.mouseSpeed;
       this.pitch = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, this.pitch));
     });
+  }
+
+  /**
+   * True if any modal overlay (NPC dialog / article viewer) is currently open.
+   */
+  _anyOverlayOpen() {
+    const dialog = document.getElementById('dialog-overlay');
+    const article = document.getElementById('article-viewer-overlay');
+    return (dialog && dialog.classList.contains('visible')) ||
+           (article && article.classList.contains('visible'));
+  }
+
+  /**
+   * Re-enter camera (pointer-lock) mode. Safe to call repeatedly.
+   * Browsers only honor requestPointerLock during a user gesture, so when called
+   * outside one (e.g. after Esc) it falls back to waiting for the next click.
+   */
+  requestLock() {
+    if (this._anyOverlayOpen()) return;
+    if (document.pointerLockElement === this.domElement) return;
+    try {
+      const p = this.domElement.requestPointerLock();
+      // Some browsers return a promise; swallow errors (e.g. not user-gesture)
+      if (p && p.catch) p.catch(() => {});
+    } catch (e) { /* ignore */ }
   }
 
   _initTouch() {
@@ -170,8 +227,8 @@ export class PlayerControls {
 
     if (moveDir.length() > 0) {
       moveDir.normalize();
-      // Move along tangent, then re-project to sphere
-      this.position.add(moveDir.multiplyScalar(this.moveSpeed * deltaTime));
+      const speed = this.keys.shift ? this.sprintSpeed : this.moveSpeed;
+      this.position.add(moveDir.multiplyScalar(speed * deltaTime));
     }
 
     // Re-project position to sphere surface

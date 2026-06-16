@@ -1,7 +1,11 @@
 import * as THREE from 'three';
 import { placeOnSphere } from '../world/terrain.js';
 import { NPC_DATA } from './npc-data.js';
+import { withLife } from './npc-life-data.js';
 import { generateNPCSprite } from './npc-sprites.js';
+
+// Merge life data (personality, schedule, home, face) onto each NPC
+const NPC_DATA_WITH_LIFE = withLife(NPC_DATA);
 
 /**
  * Create all NPCs and place them on the spherical world
@@ -19,7 +23,7 @@ export function createAllNPCs(noise2D, posts) {
     postsByCategory[cat].push(post);
   });
 
-  NPC_DATA.forEach(npcConfig => {
+  NPC_DATA_WITH_LIFE.forEach(npcConfig => {
     const npc = createSingleNPC(npcConfig);
 
     // Place on sphere using angle and radius from config
@@ -27,35 +31,32 @@ export function createAllNPCs(noise2D, posts) {
     const distFromPole = npcConfig.position.radius;
     placeOnSphere(npc, angle, distFromPole, noise2D, 0);
 
-    // Make NPC face toward the north pole (toward the tower)
+    // Face outward in a pleasant default stance (life system will adjust)
     const pos = npc.position.clone();
     const normal = pos.clone().normalize();
-
-    // Forward direction: tangent toward north pole
     const northPole = new THREE.Vector3(0, 1, 0);
-    const forward = northPole.clone()
-      .sub(normal.clone().multiplyScalar(northPole.dot(normal)))
-      .normalize();
-
-    // If near the pole, pick an arbitrary forward
-    if (forward.length() < 0.1) {
-      forward.set(0, 0, -1);
-    }
+    let forward = northPole.clone()
+      .sub(normal.clone().multiplyScalar(northPole.dot(normal)));
+    if (forward.length() < 0.1) forward = new THREE.Vector3(0, 0, -1);
+    forward.normalize();
 
     const right = new THREE.Vector3().crossVectors(forward, normal).normalize();
     const correctedForward = new THREE.Vector3().crossVectors(normal, right).normalize();
-
     const lookMat = new THREE.Matrix4().makeBasis(right, normal, correctedForward);
     npc.quaternion.setFromRotationMatrix(lookMat);
 
-    // Store interaction data
+    // Store interaction + life data
     const categoryPosts = postsByCategory[npcConfig.category] || [];
     npc.userData = {
       type: 'npc',
       name: npcConfig.name,
       category: npcConfig.category,
       greeting: npcConfig.greeting,
-      posts: categoryPosts
+      posts: categoryPosts,
+      personality: npcConfig.personality,
+      homeType: npcConfig.homeType,
+      schedule: npcConfig.schedule,
+      position: { ...npcConfig.position }
     };
 
     group.userData.interactables.push(npc);
@@ -67,31 +68,82 @@ export function createAllNPCs(noise2D, posts) {
     npc.add(label);
   });
 
+  // Expose the life-merged data so scenery can be built from it
+  group.userData.npcData = NPC_DATA_WITH_LIFE;
+
   return group;
 }
 
 /**
- * Create a single NPC as a Sprite with 2D illustration
+ * Create a single NPC as a Sprite with 2D illustration or sticker image.
  */
 function createSingleNPC(config) {
   const group = new THREE.Group();
 
-  // Generate sprite texture
-  const spriteTexture = generateNPCSprite(config);
-
-  // Main character sprite
   const spriteMat = new THREE.SpriteMaterial({
-    map: spriteTexture,
+    map: null,
     transparent: true,
     depthWrite: false,
     sizeAttenuation: true
   });
 
   const sprite = new THREE.Sprite(spriteMat);
-  sprite.scale.set(3, 3, 1);
+  sprite.scale.set(3.5, 3.5, 1);
   sprite.position.y = 1.5;
   sprite.name = 'npc-sprite';
   group.add(sprite);
+
+  // Load the face texture: real sticker for main characters, procedural for others
+  if (config.face === 'image' && config.faceImage) {
+    const loader = new THREE.TextureLoader();
+    loader.load(
+      config.faceImage,
+      (tex) => {
+        tex.colorSpace = THREE.SRGBColorSpace;
+        sprite.material.map = tex;
+        sprite.material.needsUpdate = true;
+      }
+    );
+  } else {
+    sprite.material.map = generateNPCSprite(config);
+    sprite.material.needsUpdate = true;
+  }
+
+  // === Fairy-tale base props (warm, not neon) ===
+  const propColor = new THREE.Color(config.color);
+
+  // Soft themed ground ring (subtle, matte)
+  const platform = new THREE.Mesh(
+    new THREE.RingGeometry(0.85, 1.35, 20),
+    new THREE.MeshStandardMaterial({
+      color: propColor,
+      transparent: true,
+      opacity: 0.28,
+      side: THREE.DoubleSide,
+      roughness: 0.9
+    })
+  );
+  platform.rotation.x = -Math.PI / 2;
+  platform.position.y = 0.05;
+  group.add(platform);
+
+  // Two warm lamp posts flanking the NPC
+  const lampMat = new THREE.MeshStandardMaterial({ color: 0x3d4a40, roughness: 0.55, metalness: 0.4 });
+  for (let side = -1; side <= 1; side += 2) {
+    const post = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.08, 1.3, 6), lampMat);
+    post.position.set(side * 1.2, 0.65, 0);
+    post.castShadow = true;
+    group.add(post);
+
+    const lantern = new THREE.Mesh(
+      new THREE.SphereGeometry(0.12, 10, 10),
+      new THREE.MeshStandardMaterial({
+        color: 0xfff0c0, emissive: 0xffd070, emissiveIntensity: 1.2
+      })
+    );
+    lantern.position.set(side * 1.2, 1.4, 0);
+    group.add(lantern);
+  }
 
   return group;
 }
@@ -105,23 +157,23 @@ function createNameLabel(name, color) {
   canvas.height = 64;
   const ctx = canvas.getContext('2d');
 
-  // Background pill
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+  // Warm cream pill background
+  ctx.fillStyle = 'rgba(255, 248, 230, 0.92)';
   const radius = 16;
   ctx.beginPath();
   ctx.roundRect(20, 10, canvas.width - 40, canvas.height - 20, radius);
   ctx.fill();
 
-  // Border
+  // Theme-colored border
   const hexColor = '#' + new THREE.Color(color).getHexString();
   ctx.strokeStyle = hexColor;
-  ctx.lineWidth = 2;
+  ctx.lineWidth = 2.5;
   ctx.beginPath();
   ctx.roundRect(20, 10, canvas.width - 40, canvas.height - 20, radius);
   ctx.stroke();
 
-  // Text
-  ctx.fillStyle = '#ffffff';
+  // Text (warm brown)
+  ctx.fillStyle = '#5a3a1a';
   ctx.font = 'bold 22px "Microsoft YaHei", sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';

@@ -16,9 +16,13 @@ if errorlevel 1 (
   exit /b 1
 )
 
-if not exist "%PROJECT_ROOT%\node_modules" (
-  echo [安装] 正在安装依赖...
-  call npm install
+REM Vite is a devDependency. Force NODE_ENV=development and --include=dev so
+REM npm never skips it (some machines have NODE_ENV=production or omit=dev set).
+set "NODE_ENV=development"
+
+if not exist "%PROJECT_ROOT%\node_modules\.bin\vite.cmd" (
+  echo [安装] 正在安装依赖（含 vite）...
+  call npm install --include=dev
   if errorlevel 1 (
     echo [错误] 依赖安装失败，请检查网络连接。
     pause

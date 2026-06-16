@@ -1,23 +1,30 @@
 import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 
-// Use Clock (r170+ Timer lacks elapsedTime, breaking movement & shaders)
 const ClockClass = THREE.Clock;
 import { createTerrain, SPHERE_RADIUS } from './world/terrain.js';
 import { createWater } from './world/water.js';
-import { createSky, createFireflies } from './world/sky.js';
+import { createSky, createFireflies, SUN_DIRECTION } from './world/sky.js';
 import { createDecorations } from './world/decorations.js';
 import { createTower } from './building/tower.js';
+import { createLandmarks } from './building/landmarks.js';
 import { createAllNPCs } from './npc/npc-factory.js';
+import { createNPCScenery } from './npc/npc-scenery.js';
+import { NPCLife } from './npc/npc-life.js';
 import { NPCDialog } from './npc/npc-dialog.js';
 import { ArticleViewer } from './article-viewer.js';
 import { PlayerControls } from './player/controls.js';
 import { InteractionManager } from './player/camera.js';
+import { CollectibleSystem } from './world/collectibles.js';
+import { Minimap } from './ui/minimap.js';
 import posts from './data/posts.json';
 
 // --- Setup ---
 const canvas = document.getElementById('canvas');
 const loadBar = document.getElementById('load-bar');
-const loadingScreen = document.getElementById('loading');
 
 const renderer = new THREE.WebGLRenderer({
   canvas,
@@ -27,18 +34,58 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFShadowMap;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.12;
+renderer.toneMappingExposure = 1.15;
 
 const scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2(0x07101b, 0.0052);
+// Soft warm daylight haze that fades into the bright sky horizon
+scene.fog = new THREE.FogExp2(0xc8dde4, 0.0042);
 
 const camera = new THREE.PerspectiveCamera(
   70, window.innerWidth / window.innerHeight, 0.1, 500
 );
 
-// --- Loading progress simulation ---
+// --- Post-processing ---
+const composer = new EffectComposer(renderer);
+const renderPass = new RenderPass(scene, camera);
+composer.addPass(renderPass);
+
+// Bloom for glow effects — gentle in daylight, only for sun/screens
+const bloomPass = new UnrealBloomPass(
+  new THREE.Vector2(window.innerWidth, window.innerHeight),
+  0.32,  // strength — soft, not neon
+  0.55,  // radius
+  0.92   // threshold — only bright highlights bloom
+);
+composer.addPass(bloomPass);
+
+// Vignette shader — very subtle in daylight
+const vignetteShader = {
+  uniforms: {
+    tDiffuse: { value: null },
+    offset: { value: 1.0 },
+    darkness: { value: 0.45 }
+  },
+  vertexShader: `varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
+  fragmentShader: `
+    uniform sampler2D tDiffuse;
+    uniform float offset;
+    uniform float darkness;
+    varying vec2 vUv;
+    void main() {
+      vec4 texel = texture2D(tDiffuse, vUv);
+      vec2 uv = (vUv - vec2(0.5)) * vec2(offset);
+      float vig = clamp(1.0 - dot(uv, uv), 0.0, 1.0);
+      texel.rgb *= mix(1.0, vig, darkness);
+      gl_FragColor = texel;
+    }
+  `
+};
+const vignettePass = new ShaderPass(vignetteShader);
+composer.addPass(vignettePass);
+
+// --- Loading progress ---
 let loadProgress = 0;
 function updateLoadProgress(target) {
   loadProgress = target;
@@ -48,108 +95,138 @@ function updateLoadProgress(target) {
 // --- Build scene ---
 updateLoadProgress(10);
 
-// Lighting
-const hemiLight = new THREE.HemisphereLight(0x6d89a8, 0x112030, 0.52);
+// Warm daylight hemisphere: soft cyan sky top, warm sandy ground bounce
+const hemiLight = new THREE.HemisphereLight(0xbfe0e8, 0xc8b48a, 0.85);
 scene.add(hemiLight);
 
-const sunLight = new THREE.DirectionalLight(0xfff2d7, 0.9);
-sunLight.position.set(26, 42, 14);
+// Main sunlight — warm white, aligned with the sky shader's sun direction
+const sunLight = new THREE.DirectionalLight(0xfff2d8, 1.5);
+sunLight.position.copy(SUN_DIRECTION).multiplyScalar(50);
 sunLight.castShadow = true;
-sunLight.shadow.mapSize.width = 1024;
-sunLight.shadow.mapSize.height = 1024;
+sunLight.shadow.mapSize.width = 2048;
+sunLight.shadow.mapSize.height = 2048;
 sunLight.shadow.camera.near = 0.5;
-sunLight.shadow.camera.far = 120;
-sunLight.shadow.camera.left = -40;
-sunLight.shadow.camera.right = 40;
-sunLight.shadow.camera.top = 40;
-sunLight.shadow.camera.bottom = -40;
+sunLight.shadow.camera.far = 140;
+sunLight.shadow.camera.left = -45;
+sunLight.shadow.camera.right = 45;
+sunLight.shadow.camera.top = 45;
+sunLight.shadow.camera.bottom = -45;
+sunLight.shadow.bias = -0.0004;
+sunLight.shadow.normalBias = 0.02;
 scene.add(sunLight);
 
-// Moon light (subtle blue fill)
-const moonLight = new THREE.DirectionalLight(0x4c84b8, 0.38);
-moonLight.position.set(-18, 24, -20);
-scene.add(moonLight);
+// Cool sky fill from the opposite side (bounce light from the blue sky)
+const skyFill = new THREE.DirectionalLight(0x9ec4d8, 0.35);
+skyFill.position.copy(SUN_DIRECTION).multiplyScalar(-40);
+scene.add(skyFill);
 
-const ambientFill = new THREE.AmbientLight(0x122338, 0.45);
+// Gentle warm ambient to lift shadows without flattening
+const ambientFill = new THREE.AmbientLight(0xfff0e0, 0.25);
 scene.add(ambientFill);
 
 updateLoadProgress(20);
 
-// Terrain (sphere)
+// Terrain
 const { mesh: terrain, noise2D } = createTerrain();
 scene.add(terrain);
 updateLoadProgress(35);
 
-// Water (sphere shell below terrain)
+// Water
 const { mesh: water, material: waterMat } = createWater();
 scene.add(water);
-updateLoadProgress(45);
+updateLoadProgress(40);
 
 // Sky
 const { mesh: sky, material: skyMat } = createSky();
 scene.add(sky);
 
-// Fireflies
+// Ambient particles (fireflies → cosmic dust)
 const { points: fireflies, phases: fireflyPhases } = createFireflies();
 scene.add(fireflies);
-updateLoadProgress(55);
+updateLoadProgress(50);
 
-// Signature screen tower (placed at north pole)
+// Tower
 const { group: tower, screenData: towerScreens } = createTower(noise2D, posts);
 scene.add(tower);
+updateLoadProgress(65);
+
+// Landmarks
+const landmarks = createLandmarks(noise2D);
+scene.add(landmarks);
 updateLoadProgress(75);
 
-// Decorations (trees, rocks, lamps, paths on sphere)
+// Decorations
 const decorations = createDecorations(noise2D);
 scene.add(decorations);
 updateLoadProgress(85);
 
-// NPCs (2D sprites on sphere)
+// NPCs
 const npcs = createAllNPCs(noise2D, posts);
 scene.add(npcs);
-updateLoadProgress(95);
+updateLoadProgress(90);
+
+// NPC homes / booths around the world
+const npcScenery = createNPCScenery(npcs.userData.npcData, noise2D);
+scene.add(npcScenery);
 
 // --- Player controls ---
 const controls = new PlayerControls(camera, noise2D, canvas);
 
-// --- Article Viewer (in-world reading window) ---
+// --- Article Viewer ---
 ArticleViewer.injectStyles();
 const articleViewer = new ArticleViewer();
 
-// --- Dialog system ---
+// --- Dialog ---
 const dialog = new NPCDialog(articleViewer);
 
-// --- Interaction system ---
+// --- NPC life system (routines, mood bubbles, freeze-on-approach) ---
+const npcLife = new NPCLife(npcs, camera, noise2D);
+
+// --- Interaction ---
 const allInteractables = [
   ...towerScreens,
   ...npcs.userData.interactables
 ];
 const interaction = new InteractionManager(camera, canvas, allInteractables, dialog);
+
+// --- Collectibles ---
+const collectibles = new CollectibleSystem(scene, noise2D, camera);
+
+// --- Minimap ---
+const minimap = new Minimap(npcs, landmarks);
+
 let worldEntered = Boolean(window.__WORLD_STATE?.entered);
 let worldPaused = false;
 
 window.addEventListener('world:enter', () => {
   worldEntered = true;
+  collectibles.showUI();
+  minimap.show();
 });
 
-// Pause world when article viewer is open
-window.addEventListener('article-viewer:open', () => {
-  worldPaused = true;
-});
-
+window.addEventListener('article-viewer:open', () => { worldPaused = true; });
 window.addEventListener('article-viewer:close', () => {
   worldPaused = false;
+  // Re-lock camera after the article book closes (wait out the closing animation)
+  setTimeout(() => controls.requestLock(), 420);
 });
+
+// When the NPC dialog closes, snap the camera back into pointer-lock mode
+// so the cursor doesn't linger and re-trigger a dialog by accident.
+dialog.onClose = () => {
+  setTimeout(() => controls.requestLock(), 80);
+};
 
 // --- Finish loading ---
 updateLoadProgress(100);
-// Loading screen is now controlled by the "Enter" button in index.html
 
-// --- Resize handler ---
+// --- Resize ---
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
+  composer.setSize(window.innerWidth, window.innerHeight);
+  bloomPass.resolution.set(window.innerWidth, window.innerHeight);
 });
 
 // --- Adaptive DPR ---
@@ -160,85 +237,84 @@ let currentDPR = Math.min(window.devicePixelRatio, 2);
 function adaptDPR() {
   frameCount++;
   const now = performance.now();
-  if (now - lastFpsCheck > 2000) {
+  if (now - lastFpsCheck > 3000) {
     const fps = (frameCount * 1000) / (now - lastFpsCheck);
     frameCount = 0;
     lastFpsCheck = now;
-
-    if (fps < 30 && currentDPR > 0.75) {
+    if (fps < 28 && currentDPR > 0.75) {
       currentDPR = Math.max(0.75, currentDPR - 0.25);
       renderer.setPixelRatio(currentDPR);
-    } else if (fps > 55 && currentDPR < Math.min(window.devicePixelRatio, 2)) {
+    } else if (fps > 50 && currentDPR < Math.min(window.devicePixelRatio, 2)) {
       currentDPR = Math.min(Math.min(window.devicePixelRatio, 2), currentDPR + 0.25);
       renderer.setPixelRatio(currentDPR);
     }
   }
 }
 
-// --- NPC idle animation ---
+// --- Animations ---
 let npcAnimTime = 0;
 
 function animateNPCs(delta) {
+  // Sprite motion is now driven by the NPC life system; here we only keep the
+  // name label gently pulsing for visibility.
   npcAnimTime += delta;
   npcs.userData.interactables.forEach((npc, i) => {
-    // Gentle floating animation (along the NPC's local Y = sphere normal)
-    const sprite = npc.getObjectByName('npc-sprite');
-    if (sprite) {
-      sprite.position.y = 1.5 + Math.sin(npcAnimTime * 1.5 + i * 0.7) * 0.1;
-      // Subtle scale breathing
-      const breathe = 1.0 + Math.sin(npcAnimTime * 2 + i * 1.1) * 0.03;
-      sprite.scale.set(3 * breathe, 3 * breathe, 1);
-    }
-
     const label = npc.getObjectByName('npc-label');
     if (label) {
-      label.material.opacity = 0.68 + Math.sin(npcAnimTime * 1.25 + i * 0.5) * 0.14;
+      label.material.opacity = 0.78 + Math.sin(npcAnimTime * 1.0 + i * 0.5) * 0.15;
     }
   });
 }
 
-// --- Firefly animation ---
 function animateFireflies(time) {
   const positions = fireflies.geometry.attributes.position;
   for (let i = 0; i < positions.count; i++) {
     const x = positions.getX(i);
     const y = positions.getY(i);
     const z = positions.getZ(i);
-
-    // Orbit slowly around the sphere
-    const angle = time * 0.05 + fireflyPhases[i];
-    const cos = Math.cos(0.001);
-    const sin = Math.sin(0.001);
+    const angle = time * 0.03 + fireflyPhases[i];
+    const cos = Math.cos(0.0008);
+    const sin = Math.sin(0.0008);
     const nx = x * cos - z * sin;
     const nz = x * sin + z * cos;
-
-    // Bob up and down
-    const bobY = y + Math.sin(time * 0.5 + fireflyPhases[i]) * 0.01;
-
+    const bobY = y + Math.sin(time * 0.4 + fireflyPhases[i]) * 0.008;
     positions.setXYZ(i, nx, bobY, nz);
   }
   positions.needsUpdate = true;
-
-  // Pulse opacity
-  fireflies.material.opacity = 0.5 + Math.sin(time * 2) * 0.3;
+  fireflies.material.opacity = 0.45 + Math.sin(time * 1.5) * 0.25;
 }
 
 function animateTower(time) {
-  tower.rotation.y = Math.sin(time * 0.18) * 0.03;
+  // Weather vane slowly turns with the breeze
+  const vaneArm = tower.getObjectByName('vane-arm');
+  const vaneHead = tower.getObjectByName('vane-head');
+  const vaneTail = tower.getObjectByName('vane-tail');
+  if (vaneArm && vaneHead && vaneTail) {
+    const spin = time * 0.25;
+    vaneArm.rotation.y = spin;
+    vaneHead.rotation.y = spin;
+    vaneTail.rotation.y = spin;
+  }
+}
 
-  tower.userData.screenFrames?.forEach((frame, index) => {
-    frame.material.emissiveIntensity = 0.58 + Math.sin(time * 1.6 + index * 0.12) * 0.16;
-  });
-
-  tower.userData.lightRings?.forEach((ring, index) => {
-    ring.material.emissiveIntensity = 1.15 + Math.sin(time * 1.2 + index * 0.6) * 0.22;
+function animateLandmarks(time) {
+  landmarks.children.forEach((lm, i) => {
+    // Subtle floating animation for glow elements
+    lm.traverse(child => {
+      if (child.isMesh && child.geometry.type === 'TorusGeometry') {
+        child.rotation.z = Math.sin(time * 0.8 + i) * 0.1;
+        child.position.y = child.userData.baseY ??
+          (child.userData.baseY = child.position.y);
+        child.position.y = child.userData.baseY + Math.sin(time * 1.2 + i * 0.5) * 0.08;
+      }
+    });
   });
 }
 
 function updateIntroCamera(elapsed) {
-  const orbitRadius = 36;
-  const orbitHeight = 18 + Math.sin(elapsed * 0.35) * 2.4;
-  const orbitAngle = elapsed * 0.14;
+  const orbitRadius = 38;
+  const orbitHeight = 20 + Math.sin(elapsed * 0.3) * 2.5;
+  const orbitAngle = elapsed * 0.1;
   camera.position.set(
     Math.cos(orbitAngle) * orbitRadius,
     orbitHeight,
@@ -252,37 +328,36 @@ const clock = new ClockClass();
 
 function animate() {
   requestAnimationFrame(animate);
-
   const delta = Math.min(clock.getDelta(), 0.1);
   const elapsed = clock.elapsedTime;
 
-  // Update water animation
   waterMat.uniforms.uTime.value = elapsed;
-
-  // Update sky animation
   skyMat.uniforms.uTime.value = elapsed;
 
-  // Update player movement (only if dialog and article viewer are not open)
   if (worldEntered && !dialog.isOpen && !worldPaused) {
     controls.update(delta);
     interaction.update();
+    collectibles.update(delta, elapsed);
+    minimap.update(camera, controls);
   } else if (!worldEntered) {
     updateIntroCamera(elapsed);
     interaction.crosshair.classList.remove('active');
   }
 
-  // NPC idle animation
+  // NPC daily life — runs whenever the world is active (even if dialog open,
+  // so the talked-to NPC faces the player). Suppressed only during intro.
+  npcLife.setDialogOpen(dialog.isOpen || worldPaused);
+  if (worldEntered) {
+    npcLife.update(delta, elapsed);
+  }
   animateNPCs(delta);
-
-  // Firefly animation
   animateFireflies(elapsed);
   animateTower(elapsed);
-
-  // Adaptive performance
+  animateLandmarks(elapsed);
   adaptDPR();
 
-  // Render
-  renderer.render(scene, camera);
+  // Render with post-processing
+  composer.render();
 }
 
 animate();
