@@ -1,10 +1,10 @@
 // site-dev/ar/invite-app.js
-// AR 邀请函：AR.js NFT 图像追踪 + 3D 魔性动画（星球浮起/光环/粒子/飘字）。
+// AR 邀请函：AR.js NFT 图像追踪 + 3D 童话邀请动画（星球浮起/光环/粒子/飘字）。
 // 技术：three 0.169 + AR.js ar-threex（ESM importmap）。
 // 兜底：NFT 识别不到时 demo 模式手动播放动画。
 import * as THREE from 'three';
 import { ArToolkitSource, ArToolkitContext, ArMarkerControls } from 'threex';
-import {showToast, injectCameraSelector, getUserCameraStream} from './shared/fairy-ui.js';
+import {showToast, injectCameraSelector} from './shared/fairy-ui.js';
 import {BaseGame} from './shared/game-state.js';
 
 const game = new BaseGame('invite_best');
@@ -16,18 +16,16 @@ const scanHint = document.getElementById('scan-hint');
 const enterBtn = document.getElementById('enter-btn-ar');
 
 // ---------- Three.js 场景 ----------
-// 严格贴齐 AR.js 官方 NFT 示例（three.js/examples/nft.html）：
-//   - 用 PerspectiveCamera（非裸 Camera，需有投影矩阵）
-//   - ArToolkitContext init 完成后把 AR 投影矩阵 copy 给 camera
-//   - changeMatrixMode='cameraTransformMatrix'：marker 控制 camera，内容固定在世界原点
-// 之前的 bug：用裸 THREE.Camera() 无投影矩阵 + 传不存在的 sourceElement 参数
-// （导致 AR.js 默认走 webcam 分支二次 getUserMedia，和我们的流冲突 → NFT 永不识别）。
+// 使用更稳的 marker-root 结构：
+//   - 用 PerspectiveCamera（非裸 Camera），ctx init 后 copy AR 投影矩阵
+//   - ArMarkerControls 控制 markerRoot，内容挂在 markerRoot 下
+//   - markerRoot.visible 直接代表“是否识别到图”，避免 camera.visible / scene.visible 的歧义
+// 之前的坑：裸 THREE.Camera() 无投影矩阵、sourceElement 无效、matrixAutoUpdate=false 后改 position 不 updateMatrix。
 const scene = new THREE.Scene();
-scene.visible = false;  // 看到图才显示（cameraTransformMatrix 下 camera.visible 反映追踪）
 const camera = new THREE.PerspectiveCamera(0.8 * 180 / Math.PI, 640 / 480);
 scene.add(camera);
 
-const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
+const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true, powerPreference:'high-performance'});
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 renderer.setSize(innerWidth, innerHeight);
 renderer.domElement.style.position='fixed'; renderer.domElement.style.inset='0';
@@ -38,12 +36,21 @@ scene.add(new THREE.AmbientLight(0xffffff, 0.9));
 const dir = new THREE.DirectionalLight(0xfff0d0, 1.0); dir.position.set(1,2,2); scene.add(dir);
 
 // ---------- 邀请函 3D 内容组 ----------
-// ★ 官方结构（已真机验证可见）：内容加到 scene，matrixAutoUpdate=false，
-//   尺寸用毫米（NFT 坐标系是毫米，marker 约 188mm 宽）。
-//   cameraTransformMatrix 模式下 marker 控制 camera，内容固定在世界原点附近。
+// markerRoot 被 AR.js 写入姿态矩阵；内容组使用毫米单位（NFT 坐标系是毫米，marker 约 188mm 宽）。
+const markerRoot = new THREE.Group();
+markerRoot.visible = false;
+scene.add(markerRoot);
+
 const inviteGroup = new THREE.Group();
-scene.add(inviteGroup);
-inviteGroup.matrixAutoUpdate = false;  // 固定世界坐标
+markerRoot.add(inviteGroup);
+
+const surface = new THREE.Mesh(
+  new THREE.CircleGeometry(78, 64),
+  new THREE.MeshBasicMaterial({color:0xffe7aa, transparent:true, opacity:0.16, side:THREE.DoubleSide})
+);
+surface.rotation.x = -Math.PI / 2;
+surface.position.y = -2;
+inviteGroup.add(surface);
 
 // 1. 程序生成星球（半径 25mm，约 marker 的 1/7，从图中央浮起）
 function makePlanetTexture(){
@@ -62,6 +69,20 @@ const planet = new THREE.Mesh(
 );
 planet.position.y = 30; planet.scale.setScalar(0.001);
 inviteGroup.add(planet);
+
+const crown = new THREE.Group();
+for(let i=0;i<7;i++){
+  const star = new THREE.Mesh(
+    new THREE.OctahedronGeometry(3 + (i%2)*1.2, 0),
+    new THREE.MeshStandardMaterial({color:0xfff0b8, emissive:0xffb84d, emissiveIntensity:0.7, roughness:0.42})
+  );
+  const a = i / 7 * Math.PI * 2;
+  star.position.set(Math.cos(a)*42, 48 + Math.sin(i)*3, Math.sin(a)*42);
+  star.rotation.set(a, a*0.4, 0);
+  crown.add(star);
+}
+crown.scale.setScalar(0.001);
+inviteGroup.add(crown);
 
 // 2. 光环（半径 35mm）
 const ring = new THREE.Mesh(
@@ -124,6 +145,11 @@ const particleStartPos = pPos.slice();
 function startSequence(){
   phase='flash'; phaseTime=0;
   document.body.dataset.phase='flash';
+  planet.scale.setScalar(0.001);
+  ring.scale.setScalar(0.001);
+  crown.scale.setScalar(0.001);
+  textSprite.material.opacity = 0;
+  particles.material.opacity = 0;
   showToast('★ 捞鱼世界邀请你', 2000);
 }
 function updateAnimation(dt){
@@ -137,7 +163,9 @@ function updateAnimation(dt){
     const p = Math.min(1, t/1.0);
     const s = 1 - Math.pow(1-p, 3);
     planet.scale.setScalar(s);
+    crown.scale.setScalar(s);
     planet.rotation.y = t * 2;
+    crown.rotation.y = -t * 1.6;
     if(t>1.0){ phase='ring'; phaseTime=0; document.body.dataset.phase='ring'; }
   } else if(phase==='ring'){
     const p = Math.min(1, t/1.0);
@@ -159,6 +187,8 @@ function updateAnimation(dt){
   } else if(phase==='hold'){
     planet.rotation.y += dt*0.5;
     ring.rotation.z += dt*0.8;
+    crown.rotation.y -= dt*0.65;
+    textSprite.position.y = 60 + Math.sin(performance.now()*0.002)*2.5;
   }
 }
 
@@ -196,6 +226,7 @@ async function startCamera(){
   game.setCameraAttempted('true');
   game.setCameraReady('true'); game.setMode('camera'); mode='camera';
   permission.classList.add('hidden'); panel.style.display='none';
+  statusEl.style.display = 'block';
   // 旧的 #video 现在不用了（AR.js 自己创建 #arjs-video），隐藏掉避免空镜像层遮挡
   video.style.display = 'none';
   // 不再自己 getUserMedia！交给 ArToolkitSource(sourceType:'webcam') 全权管理，
@@ -215,7 +246,7 @@ function getSelectedDeviceId(){
 }
 
 function initAR(){
-  LOG('initAR 开始（贴齐官方 nft.html 写法）');
+  LOG('initAR 开始（markerRoot 模式）');
   try{
     const deviceId = getSelectedDeviceId();
     // ArToolkitSource 只认 sourceType:image/video/webcam，sourceElement 是无效参数。
@@ -257,11 +288,10 @@ function initAR(){
              .catch(err=>LOG('ArToolkitContext.init Promise REJECT ✗', err));
     }
 
-    // cameraTransformMatrix：marker 识别时把变换赋给 camera（官方 nft.html 用法）。
-    // 内容（inviteGroup）固定在世界原点，相机移动到对应位置后内容自然出现在图上。
+    // modelViewMatrix：markerRoot 被识别图驱动，内容作为 markerRoot 子物体稳定贴在触发图上。
     try{
-      arControls = new ArMarkerControls(arToolkitContext, camera, {
-        type:'nft', descriptorsUrl:NFT_URL, changeMatrixMode:'cameraTransformMatrix'
+      arControls = new ArMarkerControls(arToolkitContext, markerRoot, {
+        type:'nft', descriptorsUrl:NFT_URL, changeMatrixMode:'modelViewMatrix'
       });
       LOG('ArMarkerControls(NFT) 创建成功 descriptorsUrl=', NFT_URL);
     }catch(e){
@@ -296,7 +326,7 @@ addEventListener('resize', onResize);
 let updateErrCount = 0;
 // 屏幕状态指示（临时诊断：看清正式页到底有没有识别到 marker）
 const statusEl = document.createElement('div');
-statusEl.style.cssText = 'position:fixed;left:50%;top:14%;transform:translateX(-50%);z-index:50;font:bold 16px sans-serif;color:#fff;text-shadow:0 2px 6px #000;pointer-events:none;text-align:center;background:rgba(0,0,0,.5);padding:6px 12px;border-radius:8px';
+statusEl.style.cssText = 'position:fixed;left:50%;top:14%;transform:translateX(-50%);z-index:50;font:bold 16px sans-serif;color:#fff;text-shadow:0 2px 6px #000;pointer-events:none;text-align:center;background:rgba(0,0,0,.5);padding:6px 12px;border-radius:8px;display:none';
 statusEl.textContent = '准备中…';
 document.body.appendChild(statusEl);
 
@@ -309,9 +339,7 @@ function animate(){
       try{ arToolkitContext.update(arToolkitSource.domElement); }
       catch(e){ updateErrCount++; if(updateErrCount<=3) LOG('update() 抛错', e.message); }
     }
-    // cameraTransformMatrix 模式下，marker 识别时 ArMarkerControls 会设 camera.visible=true
-    scene.visible = camera.visible;
-    const tracked = camera.visible;
+    const tracked = markerRoot.visible;
     // 状态指示
     const sr = arToolkitSource ? arToolkitSource.ready : '?';
     statusEl.textContent = `src.ready=${sr} | ${tracked ? '★已识别' : '未识别'} | 把弹珠台图放正·距20-40cm`;
@@ -325,8 +353,7 @@ function animate(){
     }
     if(phase!=='idle') updateAnimation(dt);
   } else if(mode==='demo'){
-    scene.visible = true;
-    camera.visible = true;
+    markerRoot.visible = true;
     if(phase!=='idle') updateAnimation(dt);
   }
   renderer.render(scene, camera);
@@ -337,9 +364,12 @@ function startDemo(){
   mode='demo'; game.setMode('mouse');
   permission.classList.add('hidden'); panel.style.display='none';
   scanHint.style.display='none';
+  statusEl.style.display = 'none';
   // demo 模式下 camera 固定在原点看 -Z，内容放前方（mm单位）
-  camera.position.set(0, 30, 150);  // 站在 marker 前方 150mm 看
+  camera.position.set(0, 42, 190);  // 站在 marker 前方 190mm 看
   camera.lookAt(0, 30, 0);
+  markerRoot.position.set(0, 0, 0);
+  markerRoot.visible = true;
   inviteGroup.position.set(0, 0, 0);
   game.start(); animate();
   startSequence();
