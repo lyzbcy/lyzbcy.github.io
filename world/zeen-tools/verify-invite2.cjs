@@ -1,0 +1,22 @@
+const { chromium } = require('playwright');
+(async () => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+  const errs=[];
+  page.on('pageerror',e=>errs.push(e.message));
+  page.on('console',m=>{if(m.type()==='error')errs.push(m.text())});
+  await page.goto('http://127.0.0.1:5174/world/ar/invite.html',{waitUntil:'domcontentloaded',timeout:20000});
+  await page.waitForTimeout(2000);
+  await page.click('#demo2');
+  await page.waitForTimeout(4500);
+  const mode = await page.evaluate(()=>document.body.dataset.arMode);
+  const phase = await page.evaluate(()=>document.body.dataset.phase);
+  const enter = await page.evaluate(()=>{const b=document.getElementById('enter-btn-ar');return b&&b.classList.contains('show');});
+  const realErrs=errs.filter(e=>!/GPU stall|favicon|Could not load/i.test(e));
+  console.log('mode:',mode,'phase:',phase,'enter:',enter,'errors:',realErrs.length);
+  realErrs.slice(0,2).forEach(e=>console.log('  '+e));
+  await browser.close();
+  let pass = mode==='mouse' && phase==='hold' && enter && realErrs.length===0;
+  console.log(pass?'\n=== INVITE2 PASSED ===':'\n=== INVITE2 CHECK ===');
+  process.exit(pass?0:1);
+})();
