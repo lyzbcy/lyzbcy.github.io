@@ -76,6 +76,15 @@ const machines = [
     accent: 0xe8920c,
     position: [4.5, 0, -6.0],
     rotation: -0.4
+  },
+  {
+    title: 'AR 邀请函',
+    desc: '对准「捞鱼世界邀请函」图，3D 星球从图中浮起、光环旋转、粒子绽放——扫码级传播体验。',
+    arPath: 'invite.html',
+    color: 0xb99df2,
+    accent: 0xffdf8c,
+    position: [-8.5, 0, -3.0],
+    rotation: 0.7
   }
 ];
 
