@@ -29,7 +29,7 @@
   }
   /* renderer canvas 透明覆盖在 video 之上，3D 内容画在 canvas */
   canvas{position:fixed !important;inset:0 !important;width:100vw !important;height:100vh !important;max-width:none !important;max-height:none !important;z-index:1 !important}
-  body[data-tracking="true"] #topbar{opacity:.045;transform:translateY(-14px);transition:opacity .35s ease,transform .35s ease}
+  body[data-tracking="true"] #topbar{opacity:0;visibility:hidden;transform:translateY(-18px);transition:opacity .28s ease,visibility .28s ease,transform .28s ease}
   body[data-tracking="true"] #scan-hint{opacity:0 !important}
   body[data-tracking="true"] #brand{pointer-events:none}
   /* 我们的旧 #video 已废弃（display:none），这里显式确认它不参与 */

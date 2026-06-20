@@ -81,24 +81,24 @@ inviteGroup.add(surface);
 // 至少会有一部分出现在画面里，用来把“已识别但看不见”的风险降到最低。
 const visibilityAnchor = new THREE.Group();
 const anchorCore = new THREE.Mesh(
-  new THREE.SphereGeometry(42, 40, 28),
+  new THREE.SphereGeometry(24, 32, 20),
   new THREE.MeshBasicMaterial({color:0xffd45a, depthTest:false, depthWrite:false})
 );
 anchorCore.renderOrder = 999;
 visibilityAnchor.add(anchorCore);
 const anchorMat = new THREE.MeshBasicMaterial({color:0xfff0a8, transparent:true, opacity:1, side:THREE.DoubleSide, depthTest:false, depthWrite:false});
 for(const rot of [[0,0,0], [Math.PI/2,0,0], [0,Math.PI/2,0]]){
-  const halo = new THREE.Mesh(new THREE.TorusGeometry(52, 2.1, 12, 96), anchorMat.clone());
+  const halo = new THREE.Mesh(new THREE.TorusGeometry(34, 1.4, 12, 80), anchorMat.clone());
   halo.rotation.set(...rot);
   visibilityAnchor.add(halo);
 }
 const spikeMat = new THREE.MeshStandardMaterial({color:0x7bd5ff, emissive:0x2bbcff, emissiveIntensity:0.9, roughness:0.35});
-const spikeY = new THREE.Mesh(new THREE.ConeGeometry(10, 58, 24), spikeMat);
-spikeY.position.y = 48;
+const spikeY = new THREE.Mesh(new THREE.ConeGeometry(6, 32, 20), spikeMat);
+spikeY.position.y = 30;
 visibilityAnchor.add(spikeY);
-const spikeZ = new THREE.Mesh(new THREE.ConeGeometry(10, 58, 24), spikeMat.clone());
+const spikeZ = new THREE.Mesh(new THREE.ConeGeometry(6, 32, 20), spikeMat.clone());
 spikeZ.rotation.x = Math.PI / 2;
-spikeZ.position.z = 48;
+spikeZ.position.z = 30;
 visibilityAnchor.add(spikeZ);
 const directionDots = [
   {name:'z+', color:0x35d7ff, pos:[0,0,78]},
@@ -108,11 +108,12 @@ const directionDots = [
 ];
 for(const d of directionDots){
   const dot = new THREE.Mesh(
-    new THREE.SphereGeometry(12, 20, 16),
+    new THREE.SphereGeometry(7, 16, 12),
     new THREE.MeshBasicMaterial({color:d.color, depthTest:false, depthWrite:false})
   );
   dot.position.set(...d.pos);
   dot.renderOrder = 1000;
+  dot.visible = DEBUG_AR;
   dot.userData.label = d.name;
   visibilityAnchor.add(dot);
 }
@@ -135,10 +136,10 @@ function makePlanetTexture(){
   return new THREE.CanvasTexture(c);
 }
 const planet = new THREE.Mesh(
-  new THREE.SphereGeometry(42, 40, 32),
+  new THREE.SphereGeometry(28, 36, 28),
   new THREE.MeshBasicMaterial({map:makePlanetTexture(), depthTest:false, depthWrite:false})
 );
-planet.position.set(0, 0, 56); planet.renderOrder = 1001; planet.scale.setScalar(0.001);
+planet.position.set(0, 0, 42); planet.renderOrder = 1001; planet.scale.setScalar(0.001);
 inviteGroup.add(planet);
 
 const crown = new THREE.Group();
@@ -157,10 +158,10 @@ inviteGroup.add(crown);
 
 // 2. 光环（半径 35mm）
 const ring = new THREE.Mesh(
-  new THREE.TorusGeometry(48, 2.2, 12, 72),
+  new THREE.TorusGeometry(34, 1.5, 12, 72),
   new THREE.MeshStandardMaterial({color:0xffdf8c, emissive:0xaa7733, emissiveIntensity:0.6, metalness:0.7, roughness:0.3})
 );
-ring.position.set(0, 0, 56); ring.rotation.x = Math.PI/2.6; ring.renderOrder = 1002; ring.scale.setScalar(0.001);
+ring.position.set(0, 0, 42); ring.rotation.x = Math.PI/2.6; ring.renderOrder = 1002; ring.scale.setScalar(0.001);
 inviteGroup.add(ring);
 
 // 3. 粒子绽放
@@ -185,7 +186,7 @@ function makeTextTexture(text){
   return new THREE.CanvasTexture(c);
 }
 const textSprite = new THREE.Sprite(new THREE.SpriteMaterial({map:makeTextTexture('欢迎来到捞鱼世界'), transparent:true}));
-textSprite.scale.set(92,12,1); textSprite.position.set(0, -58, 72); textSprite.renderOrder = 1003; textSprite.material.depthTest=false; textSprite.material.depthWrite=false; textSprite.material.opacity=0;
+textSprite.scale.set(76,10,1); textSprite.position.set(0, -44, 58); textSprite.renderOrder = 1003; textSprite.material.depthTest=false; textSprite.material.depthWrite=false; textSprite.material.opacity=0;
 inviteGroup.add(textSprite);
 
 // 5. 光圈（marker 表面）
@@ -205,8 +206,10 @@ window.addEventListener('arjs-nft-init-data', (e)=>{
     const cy = (d.height / d.dpi * 2.54 * 10) / 2.0;
     // 第二轮真机截图证明：markerRoot 原点在触发图左侧/边缘附近。
     // 在 modelViewMatrix 模式下，NFT 图面更接近 x/y 平面；向 +x、-y 移到图像中心。
-    inviteGroup.position.set(cx, -cy, 0);
-    LOG(`nft-init-data: marker物理尺寸约 ${(cx*2).toFixed(1)}mm × ${(cy*2).toFixed(1)}mm；内容移到中心 x=${cx.toFixed(1)}, y=${(-cy).toFixed(1)}`);
+    const ox = cx * 1.55;
+    const oy = -cy * 1.65;
+    inviteGroup.position.set(ox, oy, 0);
+    LOG(`nft-init-data: marker物理尺寸约 ${(cx*2).toFixed(1)}mm × ${(cy*2).toFixed(1)}mm；内容右上微调 x=${ox.toFixed(1)}, y=${oy.toFixed(1)}`);
   }
 });
 
@@ -259,7 +262,7 @@ function updateAnimation(dt){
     if(t>1.0){ phase='text'; phaseTime=0; document.body.dataset.phase='text'; }
   } else if(phase==='text'){
     textSprite.material.opacity = Math.min(1, t/0.8);
-    textSprite.position.y = -58 - Math.max(0, (0.8-t)/0.8)*15;  // marker中心上方飘字
+    textSprite.position.y = -44 - Math.max(0, (0.8-t)/0.8)*12;  // marker中心上方飘字
     if(t>1.8){ phase='hold'; phaseTime=0; document.body.dataset.phase='hold'; enterBtn.classList.add('show'); }
   } else if(phase==='hold'){
     planet.rotation.y += dt*0.5;
@@ -267,7 +270,7 @@ function updateAnimation(dt){
     crown.rotation.y -= dt*0.65;
     visibilityAnchor.rotation.y += dt*0.55;
     visibilityAnchor.rotation.z += dt*0.25;
-    textSprite.position.y = -58 + Math.sin(performance.now()*0.002)*2.5;
+    textSprite.position.y = -44 + Math.sin(performance.now()*0.002)*2.2;
   }
 }
 
