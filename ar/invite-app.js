@@ -4,7 +4,7 @@
 // 兜底：NFT 识别不到时 demo 模式手动播放动画。
 import * as THREE from 'three';
 import { ArToolkitSource, ArToolkitContext, ArMarkerControls } from 'threex';
-import {showToast} from './shared/fairy-ui.js';
+import {showToast, injectCameraSelector, getUserCameraStream} from './shared/fairy-ui.js';
 import {BaseGame} from './shared/game-state.js';
 
 const game = new BaseGame('invite_best');
@@ -152,7 +152,10 @@ const NFT_URL = 'https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@master/three.js/exa
 async function startCamera(){
   try{
     game.setCameraAttempted('true');
-    const stream = await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});
+    // 用用户在 permission 卡选择的摄像头（默认后置，对准邀请函图）
+    const cardEl = document.querySelector('#permission .perm-card');
+    const sel = (cardEl && cardEl.__camSelector) ? cardEl.__camSelector.getSel() : {facingMode:'environment'};
+    const stream = await getUserCameraStream(sel);
     video.srcObject = stream; await video.play();
     game.setCameraReady('true'); game.setMode('camera'); mode='camera';
     permission.classList.add('hidden'); panel.style.display='none';
@@ -229,3 +232,5 @@ document.getElementById('camera').onclick = startCamera;
 document.getElementById('cam2').onclick = startCamera;
 document.getElementById('demo').onclick = startDemo;
 document.getElementById('demo2').onclick = startDemo;
+// 页面加载时往 permission 卡注入摄像头选择器（应对多摄像头，默认后置对准邀请函图）
+(async ()=>{ try{ const c=document.querySelector('#permission .perm-card'); if(c) c.__camSelector=await injectCameraSelector(c,'environment'); }catch(e){} })();
