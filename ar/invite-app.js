@@ -146,8 +146,8 @@ enterBtn.onclick = ()=>{ window.location.href='/world/'; };
 let arToolkitSource=null, arToolkitContext=null, arControls=null;
 let mode='boot', lastTracked=false;
 
-// L0：先用 pinball 验证；L1 改为 './data/invite/invite'
-const NFT_URL = 'https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@master/three.js/examples/resources/pinball/pinball';
+// 正式触发图：pinball 弹珠台图（NFT 描述符已下载到本地 data/invite/）
+const NFT_URL = './data/invite/invite';
 
 async function startCamera(){
   try{
