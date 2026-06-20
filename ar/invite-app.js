@@ -16,9 +16,15 @@ const scanHint = document.getElementById('scan-hint');
 const enterBtn = document.getElementById('enter-btn-ar');
 
 // ---------- Three.js 场景 ----------
+// 严格贴齐 AR.js 官方 NFT 示例（three.js/examples/nft.html）：
+//   - 用 PerspectiveCamera（非裸 Camera，需有投影矩阵）
+//   - ArToolkitContext init 完成后把 AR 投影矩阵 copy 给 camera
+//   - changeMatrixMode='cameraTransformMatrix'：marker 控制 camera，内容固定在世界原点
+// 之前的 bug：用裸 THREE.Camera() 无投影矩阵 + 传不存在的 sourceElement 参数
+// （导致 AR.js 默认走 webcam 分支二次 getUserMedia，和我们的流冲突 → NFT 永不识别）。
 const scene = new THREE.Scene();
-scene.visible = false;  // 看到图才显示
-const camera = new THREE.Camera();
+scene.visible = false;  // 看到图才显示（cameraTransformMatrix 下 camera.visible 反映追踪）
+const camera = new THREE.PerspectiveCamera(0.8 * 180 / Math.PI, 640 / 480);
 scene.add(camera);
 
 const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
@@ -167,49 +173,59 @@ window.__arInviteLog = () => dbgLog.join('\n');
 
 async function startCamera(){
   LOG('startCamera 被点击');
-  try{
-    game.setCameraAttempted('true');
-    // 用用户在 permission 卡选择的摄像头（默认后置，对准邀请函图）
-    const cardEl = document.querySelector('#permission .perm-card');
-    const sel = (cardEl && cardEl.__camSelector) ? cardEl.__camSelector.getSel() : {facingMode:'environment'};
-    LOG('请求摄像头 sel=', sel);
-    const stream = await getUserCameraStream(sel);
-    LOG('摄像头流获取成功');
-    video.srcObject = stream; await video.play();
-    LOG('video.play() 成功');
-    game.setCameraReady('true'); game.setMode('camera'); mode='camera';
-    permission.classList.add('hidden'); panel.style.display='none';
-    initAR();
-    showToast('对准邀请函图，星球会浮起', 2500);
-    game.start();
-  }catch(e){
-    game.setError(e); game.setMode('fallback');
-    LOG('startCamera 捕获异常 ✗', e);
-    showToast('摄像头不可用，进入演示模式', 2000);
-    startDemo();
-  }
+  game.setCameraAttempted('true');
+  game.setCameraReady('true'); game.setMode('camera'); mode='camera';
+  permission.classList.add('hidden'); panel.style.display='none';
+  // 旧的 #video 现在不用了（AR.js 自己创建 #arjs-video），隐藏掉避免空镜像层遮挡
+  video.style.display = 'none';
+  // 不再自己 getUserMedia！交给 ArToolkitSource(sourceType:'webcam') 全权管理，
+  // 否则两路 getUserMedia 会冲突（之前就是这里导致 NFT 永不识别）。
+  // 用户选的摄像头通过 deviceId 传给 AR.js（{exact:deviceId}）。
+  initAR();
+  showToast('对准邀请函图，星球会浮起', 2500);
+  game.start();
+}
+
+// 用户在 permission 卡选择的 deviceId（null=让 AR.js 默认后置）
+function getSelectedDeviceId(){
+  const cardEl = document.querySelector('#permission .perm-card');
+  const sel = (cardEl && cardEl.__camSelector) ? cardEl.__camSelector.getSel() : null;
+  LOG('摄像头选择 sel=', sel);
+  return (sel && sel.deviceId) ? sel.deviceId : null;
 }
 
 function initAR(){
-  LOG('initAR 开始');
+  LOG('initAR 开始（贴齐官方 nft.html 写法）');
   try{
-    arToolkitSource = new ArToolkitSource({sourceElement:video});
+    const deviceId = getSelectedDeviceId();
+    // ArToolkitSource 只认 sourceType:image/video/webcam，sourceElement 是无效参数。
+    // 让 AR.js 自己创建 video 并 getUserMedia，传 deviceId 指定摄像头。
+    const sourceParams = {sourceType:'webcam', sourceWidth:480, sourceHeight:640, deviceId};
+    if(deviceId === null) delete sourceParams.deviceId;  // null 会让 {exact:null} 失败
+    arToolkitSource = new ArToolkitSource(sourceParams);
     arToolkitSource.init(
-      ()=>{ LOG('ArToolkitSource.init 成功'); onResize(); },
-      (e)=>{ LOG('ArToolkitSource.init 失败', e); onResize(); }
+      ()=>{ LOG('ArToolkitSource.init 成功 ready=', arToolkitSource.ready); onResize(); },
+      (e)=>{ LOG('ArToolkitSource.init 失败 ✗', e && e.message); }
     );
-    LOG('ArToolkitContext 创建中，cameraPara=', CAMERA_PARA_URL);
+
+    LOG('ArToolkitContext 创建中 cameraPara=', CAMERA_PARA_URL);
     arToolkitContext = new ArToolkitContext({
       detectionMode:'mono',
       cameraParametersUrl: CAMERA_PARA_URL,
       canvasWidth:480, canvasHeight:640
     });
-    // init() 是异步的（内部 await loadCamera），失败时回调永不触发 —— 这正是
-    // "图片对准了但模型不出现" 的典型症状。这里抓回调错误 + 返回值（部分版本 init 返回 Promise）。
     let initRet;
     try{
       initRet = arToolkitContext.init(
-        ()=>{ LOG('ArToolkitContext.init 成功 ✓ arController=', !!(arToolkitContext.arController)); onResize(); },
+        ()=>{
+          LOG('ArToolkitContext.init 成功 ✓ arController=', !!(arToolkitContext.arController));
+          // 关键：把 AR 投影矩阵 copy 给 camera（官方示例必须步骤，否则渲染错位）
+          if(arToolkitContext.getProjectionMatrix){
+            camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
+            LOG('已 copy AR 投影矩阵到 camera.projectionMatrix');
+          }
+          onResize();
+        },
         (err)=>{ LOG('ArToolkitContext.init 回调 err=', err); }
       );
     }catch(e){
@@ -219,17 +235,13 @@ function initAR(){
     if(initRet && typeof initRet.then === 'function'){
       initRet.then(()=>LOG('ArToolkitContext.init Promise resolve ✓'))
              .catch(err=>LOG('ArToolkitContext.init Promise REJECT ✗', err));
-    } else {
-      LOG('ArToolkitContext.init() 未返回 Promise（走回调模式）');
     }
+
+    // cameraTransformMatrix：marker 识别时把变换赋给 camera（官方 nft.html 用法）。
+    // 内容（inviteGroup）固定在世界原点，相机移动到对应位置后内容自然出现在图上。
     try{
-      // modelViewMatrix：marker 被识别时，inviteGroup.matrix = (相机看marker的变换)，
-      // 于是 3D 内容直接"贴"在识别图上 —— 这是 AR.js NFT 官方所有示例的标准用法。
-      // （之前用 cameraTransformMatrix 是错的：那种模式下 marker 控制的是 camera
-      //  而非内容，需要内容固定在世界原点并配合特殊投影矩阵，我们没满足，导致
-      //  内容被渲染到屏幕外/相机背后 —— 也就是"识别到了但看不见模型"。）
-      arControls = new ArMarkerControls(arToolkitContext, inviteGroup, {
-        type:'nft', descriptorsUrl:NFT_URL, changeMatrixMode:'modelViewMatrix'
+      arControls = new ArMarkerControls(arToolkitContext, camera, {
+        type:'nft', descriptorsUrl:NFT_URL, changeMatrixMode:'cameraTransformMatrix'
       });
       LOG('ArMarkerControls(NFT) 创建成功 descriptorsUrl=', NFT_URL);
     }catch(e){
@@ -269,14 +281,15 @@ function animate(){
   if(mode==='camera' && arToolkitContext){
     trackFrames++;
     const arCtrl = arToolkitContext.arController;
+    // 官方写法：arToolkitSource 未 ready 就跳过（避免喂空帧）
     if(arToolkitSource && arToolkitSource.ready!==false){
       try{ arToolkitContext.update(arToolkitSource.domElement); }
       catch(e){ updateErrCount++; if(updateErrCount<=3) LOG('update() 抛错', e.message); }
     }
-    // modelViewMatrix 模式下，marker 是否被识别反映在 arControls.object3d.visible
-    // （camera.visible 在此模式下不反映追踪状态，之前用它导致状态"卡 true"）。
-    const tracked = !!(arControls && arControls.object3d && arControls.object3d.visible);
-    scene.visible = true;  // 场景始终渲染；内容由 marker 矩阵决定是否贴在图上
+    // cameraTransformMatrix 模式下，marker 识别时 ArMarkerControls 会设 camera.visible=true
+    // （官方 nft.html 就是 scene.visible = camera.visible）。
+    scene.visible = camera.visible;
+    const tracked = camera.visible;
     if(tracked && !lastTracked){
       lastTracked=true; game.mark('tracking','true');
       LOG('★ 首次识别成功！开始播放动画');
@@ -285,14 +298,15 @@ function animate(){
       lastTracked=false; game.mark('tracking','false');
     }
     if(phase!=='idle') updateAnimation(dt);
-    // 每秒刷新一次调试浮层（避免刷屏）
     if(trackFrames % 30 === 0){
-      const gp = inviteGroup.position;
+      const arjsVideo = document.getElementById('arjs-video');
       dbgShow(
         `mode: ${mode}\n` +
         `arController: ${arCtrl ? '✓已建' : '✗未建(loading)'}\n` +
-        `marker.visible: ${tracked ? '★识别中' : '未识别'}\n` +
-        `inviteGroup.pos: ${gp.x.toFixed(2)},${gp.y.toFixed(2)},${gp.z.toFixed(2)}\n` +
+        `source.ready: ${arToolkitSource ? arToolkitSource.ready : '?'}\n` +
+        `source.domElement: ${arToolkitSource && arToolkitSource.domElement ? arToolkitSource.domElement.tagName + '#' + arToolkitSource.domElement.id : 'null'}\n` +
+        `#arjs-video存在: ${arjsVideo ? '✓' : '✗'}\n` +
+        `camera.visible: ${tracked ? '★识别中' : '未识别'}\n` +
         `frames: ${trackFrames}  updateErr: ${updateErrCount}\n` +
         `phase: ${phase}\n` +
         `--- 最近日志 ---\n` + dbgLog.slice(-4).join('\n')
