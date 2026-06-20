@@ -92,7 +92,7 @@ XMLHttpRequest.prototype.open = function(method, url){
 };
 
 document.getElementById('start').onclick = async ()=>{
-  L('=== 开始 NFT 诊断 ===');
+  L('=== 开始 NFT 诊断（绝对URL版 - 绕过 Worker self.origin=null bug）===');
   L('three版本: ' + THREE.REVISION);
 
   const scene = new THREE.Scene();
@@ -102,6 +102,14 @@ document.getElementById('start').onclick = async ()=>{
   renderer.setSize(innerWidth, innerHeight);
   renderer.domElement.style.position='fixed'; renderer.domElement.style.inset='0'; renderer.domElement.style.zIndex='-1';
   document.body.appendChild(renderer.domElement);
+
+  // ★根因修复：Blob Worker 的 self.origin="null"，相对路径会被拼成 "null/./..." 导致 fetch 失败。
+  // 必须传完整绝对 URL，让 Worker 内部的 regex 检测到 https:// 直接用原值。
+  const BASE = location.origin + '/ar/data/invite';
+  const CAMERA_PARA = BASE + '/camera_para.dat';
+  const DESCRIPTORS = BASE + '/invite';
+  L('★ 使用绝对URL: camera_para=' + CAMERA_PARA);
+  L('★ 使用绝对URL: descriptors=' + DESCRIPTORS);
 
   L('创建 ArToolkitSource (webcam)...');
   const source = new ArToolkitSource({sourceType:'webcam', sourceWidth:480, sourceHeight:640});
@@ -113,7 +121,7 @@ document.getElementById('start').onclick = async ()=>{
   L('创建 ArToolkitContext...');
   const ctx = new ArToolkitContext({
     detectionMode:'mono',
-    cameraParametersUrl:'./data/invite/camera_para.dat',
+    cameraParametersUrl: CAMERA_PARA,
     canvasWidth:480, canvasHeight:640
   });
   ctx.init(()=>{
@@ -122,10 +130,10 @@ document.getElementById('start').onclick = async ()=>{
     L('✓ 已 copy 投影矩阵');
   });
 
-  L('创建 ArMarkerControls (NFT, descriptorsUrl=./data/invite/invite)...');
+  L('创建 ArMarkerControls (NFT, 绝对URL)...');
   try{
     const controls = new ArMarkerControls(ctx, camera, {
-      type:'nft', descriptorsUrl:'./data/invite/invite', changeMatrixMode:'cameraTransformMatrix'
+      type:'nft', descriptorsUrl: DESCRIPTORS, changeMatrixMode:'cameraTransformMatrix'
     });
     L('✓ ArMarkerControls 创建成功（NFT Worker 应已启动，等 endLoading）');
     window.__controls = controls;
