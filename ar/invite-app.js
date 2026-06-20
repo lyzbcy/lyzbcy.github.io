@@ -153,10 +153,14 @@ let arToolkitSource=null, arToolkitContext=null, arControls=null;
 let mode='boot', lastTracked=false;
 
 // 正式触发图：pinball 弹珠台图（NFT 描述符已下载到本地 data/invite/）
-const NFT_URL = './data/invite/invite';
-// 摄像头标定参数：必须自托管！ar.js 3.x 没有发布到 npm，原 npm 路径全部 404，
-// 会导致 loadCamera() 抛错、init() 回调永不触发、tracking 永远不工作。
-const CAMERA_PARA_URL = './data/invite/camera_para.dat';
+// ★ 根因修复：必须用完整绝对URL！AR.js NFT 是 Blob 内联 Worker（createObjectURL），
+// 而 Blob Worker 的 self.origin="null"（MDN/Vite#17507 证实）。Worker 内部对相对路径
+// 会做 I = self.origin + '/' + path = "null/./data/invite/..." → fetch 失败 →
+// initWithDimensions().catch(console.error)（只在Worker console，主线程看不到）
+// → 永不postMessage → NFT永不识别（systematic-debugging确认的根因，真机验证有效）。
+const INVITE_BASE = location.origin + '/ar/data/invite';
+const NFT_URL = INVITE_BASE + '/invite';
+const CAMERA_PARA_URL = INVITE_BASE + '/camera_para.dat';
 // 调试埋点：手机上没控制台，所以每条 LOG 同时进历史 → 显示到屏幕浮层，方便截图反馈
 const dbgLog = [];
 function LOG(...a){
@@ -272,22 +276,13 @@ function onResize(){
 }
 addEventListener('resize', onResize);
 
-// ---------- 可视化调试浮层（手机上没控制台，必须把状态显示到屏幕上）----------
-const dbg = document.createElement('div');
-dbg.id = 'ar-debug';
-dbg.style.cssText = 'position:fixed;left:6px;top:6px;z-index:99;font:11px/1.4 monospace;background:rgba(0,0,0,.72);color:#9f9;padding:6px 8px;border-radius:6px;max-width:62vw;pointer-events:none;white-space:pre-wrap;display:none';
-document.body.appendChild(dbg);
-function dbgShow(text){ dbg.style.display = 'block'; dbg.textContent = text; }
-
-let trackFrames = 0;
+// ---------- 动画主循环 ----------
 let updateErrCount = 0;
 
 function animate(){
   requestAnimationFrame(animate);
   const dt = 0.016;
   if(mode==='camera' && arToolkitContext){
-    trackFrames++;
-    const arCtrl = arToolkitContext.arController;
     // 官方写法：arToolkitSource 未 ready 就跳过（避免喂空帧）
     if(arToolkitSource && arToolkitSource.ready!==false){
       try{ arToolkitContext.update(arToolkitSource.domElement); }
@@ -305,20 +300,6 @@ function animate(){
       lastTracked=false; game.mark('tracking','false');
     }
     if(phase!=='idle') updateAnimation(dt);
-    if(trackFrames % 30 === 0){
-      const arjsVideo = document.getElementById('arjs-video');
-      dbgShow(
-        `mode: ${mode}\n` +
-        `arController: ${arCtrl ? '✓已建' : '✗未建(loading)'}\n` +
-        `source.ready: ${arToolkitSource ? arToolkitSource.ready : '?'}\n` +
-        `source.domElement: ${arToolkitSource && arToolkitSource.domElement ? arToolkitSource.domElement.tagName + '#' + arToolkitSource.domElement.id : 'null'}\n` +
-        `#arjs-video存在: ${arjsVideo ? '✓' : '✗'}\n` +
-        `camera.visible: ${tracked ? '★识别中' : '未识别'}\n` +
-        `frames: ${trackFrames}  updateErr: ${updateErrCount}\n` +
-        `phase: ${phase}\n` +
-        `--- 最近日志 ---\n` + dbgLog.slice(-4).join('\n')
-      );
-    }
   } else if(mode==='demo'){
     scene.visible = true;
     camera.visible = true;
