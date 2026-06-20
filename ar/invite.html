@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>AR 邀请函</title>
+<link rel="stylesheet" href="./shared/arcade-shell.css">
+<style>
+  #enter-btn-ar{position:fixed;left:50%;bottom:120px;transform:translateX(-50%);z-index:10;padding:14px 32px;border-radius:999px;background:linear-gradient(180deg,#f2c978,#e8920c);color:#593a20;border:none;font-size:1.05rem;font-weight:600;cursor:pointer;box-shadow:0 12px 28px rgba(232,146,12,.4);display:none;animation:pulse 1.5s ease-in-out infinite}
+  #enter-btn-ar.show{display:block}
+  @keyframes pulse{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.06)}}
+  #scan-hint{position:fixed;left:50%;top:62%;transform:translate(-50%,-50%);z-index:7;text-align:center;color:#ffdf8c;font-size:1rem;text-shadow:0 2px 8px rgba(0,0,0,.5);pointer-events:none;opacity:.85}
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/",
+  "threex": "https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@master/three.js/build/ar-threex.mjs"
+}}
+</script>
+</head>
+<body data-ar-mode="boot" data-tracking="false" data-phase="idle">
+<video id="video" autoplay playsinline muted></video>
+<div id="veil"></div>
+<div id="topbar">
+  <section id="brand">
+    <h1>AR 邀请函</h1>
+    <p>实物：邀请函图（图像追踪）· 虚拟物体：3D星球、光环、粒子、飘字 · 交互：对准图触发动画，扫码级传播体验。</p>
+  </section>
+</div>
+<div id="scan-hint">对准邀请函图，星球会从中浮起</div>
+<button id="enter-btn-ar">进入捞鱼世界 →</button>
+<section id="panel">
+  <p id="brief">开启摄像头，对准「捞鱼世界邀请函」图（可打印或显示在另一手机上）。3D 星球会从图中浮起、光环旋转、粒子绽放。识别不到可点"演示"手动播放。iOS 请用 Safari，微信内打开请点右上角用系统浏览器。</p>
+  <div id="actions">
+    <button class="primary" id="camera">开启摄像头</button>
+    <button class="ghost" id="demo">演示动画</button>
+    <a class="ghost" href="/ar/" onclick="if(window.parent!==window){event.preventDefault();parent.postMessage({type:'ar:close'},'*')}">返回展区</a>
+  </div>
+</section>
+<div id="permission">
+  <div class="perm-card">
+    <h2>AR 邀请函</h2>
+    <p>用摄像头识别「捞鱼世界邀请函」图（AR.js 图像追踪 NFT），3D 星球从图中浮起的奇幻体验。识别不到可用演示模式。iOS 请用 Safari。</p>
+    <div id="actions">
+      <button class="primary" id="cam2">开启摄像头</button>
+      <button class="ghost" id="demo2">演示动画</button>
+    </div>
+  </div>
+</div>
+<script type="module" src="./invite-app.js"></script>
+</body>
+</html>
