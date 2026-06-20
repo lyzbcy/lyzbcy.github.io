@@ -68,17 +68,19 @@ const surface = new THREE.Mesh(
 );
 surface.rotation.x = -Math.PI / 2;
 surface.position.y = -2;
+surface.visible = false; // 第三轮：灰色大圆盘会造成整屏发雾，正式/验证都先关闭
 inviteGroup.add(surface);
 
 // 可见性锚点：多轴、多平面、大尺寸。只要 markerRoot 的模型矩阵有效，
 // 至少会有一部分出现在画面里，用来把“已识别但看不见”的风险降到最低。
 const visibilityAnchor = new THREE.Group();
 const anchorCore = new THREE.Mesh(
-  new THREE.SphereGeometry(24, 32, 20),
-  new THREE.MeshStandardMaterial({color:0xfff0b8, emissive:0xffb84d, emissiveIntensity:1.55, roughness:0.32})
+  new THREE.SphereGeometry(42, 40, 28),
+  new THREE.MeshBasicMaterial({color:0xffd45a, depthTest:false, depthWrite:false})
 );
+anchorCore.renderOrder = 999;
 visibilityAnchor.add(anchorCore);
-const anchorMat = new THREE.MeshBasicMaterial({color:0xffdf8c, transparent:true, opacity:0.92, side:THREE.DoubleSide});
+const anchorMat = new THREE.MeshBasicMaterial({color:0xfff0a8, transparent:true, opacity:1, side:THREE.DoubleSide, depthTest:false, depthWrite:false});
 for(const rot of [[0,0,0], [Math.PI/2,0,0], [0,Math.PI/2,0]]){
   const halo = new THREE.Mesh(new THREE.TorusGeometry(52, 2.1, 12, 96), anchorMat.clone());
   halo.rotation.set(...rot);
@@ -92,6 +94,26 @@ const spikeZ = new THREE.Mesh(new THREE.ConeGeometry(10, 58, 24), spikeMat.clone
 spikeZ.rotation.x = Math.PI / 2;
 spikeZ.position.z = 48;
 visibilityAnchor.add(spikeZ);
+const directionDots = [
+  {name:'z+', color:0x35d7ff, pos:[0,0,78]},
+  {name:'z-', color:0xff4fa3, pos:[0,0,-78]},
+  {name:'y+', color:0x8cff6a, pos:[0,78,0]},
+  {name:'x+', color:0xffffff, pos:[78,0,0]}
+];
+for(const d of directionDots){
+  const dot = new THREE.Mesh(
+    new THREE.SphereGeometry(12, 20, 16),
+    new THREE.MeshBasicMaterial({color:d.color, depthTest:false, depthWrite:false})
+  );
+  dot.position.set(...d.pos);
+  dot.renderOrder = 1000;
+  dot.userData.label = d.name;
+  visibilityAnchor.add(dot);
+}
+visibilityAnchor.traverse((obj)=>{
+  if(obj.material){ obj.material.depthTest = false; obj.material.depthWrite = false; }
+  obj.renderOrder = Math.max(obj.renderOrder || 0, 999);
+});
 visibilityAnchor.visible = true;
 inviteGroup.add(visibilityAnchor);
 
@@ -107,10 +129,10 @@ function makePlanetTexture(){
   return new THREE.CanvasTexture(c);
 }
 const planet = new THREE.Mesh(
-  new THREE.SphereGeometry(34, 40, 32),
-  new THREE.MeshStandardMaterial({map:makePlanetTexture(), roughness:0.72, metalness:0.08, emissive:0x2b5a88, emissiveIntensity:0.42})
+  new THREE.SphereGeometry(42, 40, 32),
+  new THREE.MeshBasicMaterial({map:makePlanetTexture(), depthTest:false, depthWrite:false})
 );
-planet.position.y = 30; planet.scale.setScalar(0.001);
+planet.position.set(0, 0, 56); planet.renderOrder = 1001; planet.scale.setScalar(0.001);
 inviteGroup.add(planet);
 
 const crown = new THREE.Group();
@@ -132,7 +154,7 @@ const ring = new THREE.Mesh(
   new THREE.TorusGeometry(48, 2.2, 12, 72),
   new THREE.MeshStandardMaterial({color:0xffdf8c, emissive:0xaa7733, emissiveIntensity:0.6, metalness:0.7, roughness:0.3})
 );
-ring.position.y = 30; ring.rotation.x = Math.PI/2.6; ring.scale.setScalar(0.001);
+ring.position.set(0, 0, 56); ring.rotation.x = Math.PI/2.6; ring.renderOrder = 1002; ring.scale.setScalar(0.001);
 inviteGroup.add(ring);
 
 // 3. 粒子绽放
@@ -157,7 +179,7 @@ function makeTextTexture(text){
   return new THREE.CanvasTexture(c);
 }
 const textSprite = new THREE.Sprite(new THREE.SpriteMaterial({map:makeTextTexture('欢迎来到捞鱼世界'), transparent:true}));
-textSprite.scale.set(92,12,1); textSprite.position.y=60; textSprite.material.opacity=0;
+textSprite.scale.set(92,12,1); textSprite.position.set(0, -58, 72); textSprite.renderOrder = 1003; textSprite.material.depthTest=false; textSprite.material.depthWrite=false; textSprite.material.opacity=0;
 inviteGroup.add(textSprite);
 
 // 5. 光圈（marker 表面）
@@ -193,6 +215,7 @@ function startSequence(){
   enterBtn.classList.remove('show');
   visibilityAnchor.visible = true;
   visibilityAnchor.scale.setScalar(1);
+  visibilityAnchor.traverse((obj)=>{ if(obj.material){ obj.material.opacity = obj.material.opacity ?? 1; } });
   planet.scale.setScalar(0.001);
   ring.scale.setScalar(0.001);
   crown.scale.setScalar(0.001);
@@ -230,7 +253,7 @@ function updateAnimation(dt){
     if(t>1.0){ phase='text'; phaseTime=0; document.body.dataset.phase='text'; }
   } else if(phase==='text'){
     textSprite.material.opacity = Math.min(1, t/0.8);
-    textSprite.position.y = 60 - Math.max(0, (0.8-t)/0.8)*15;  // mm单位，从75落到60
+    textSprite.position.y = -58 - Math.max(0, (0.8-t)/0.8)*15;  // marker中心上方飘字
     if(t>1.8){ phase='hold'; phaseTime=0; document.body.dataset.phase='hold'; enterBtn.classList.add('show'); }
   } else if(phase==='hold'){
     planet.rotation.y += dt*0.5;
@@ -238,7 +261,7 @@ function updateAnimation(dt){
     crown.rotation.y -= dt*0.65;
     visibilityAnchor.rotation.y += dt*0.55;
     visibilityAnchor.rotation.z += dt*0.25;
-    textSprite.position.y = 60 + Math.sin(performance.now()*0.002)*2.5;
+    textSprite.position.y = -58 + Math.sin(performance.now()*0.002)*2.5;
   }
 }
 
