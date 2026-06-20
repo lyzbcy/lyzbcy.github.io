@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>NFT 可见性测试</title>
+<style>
+  body{margin:0;background:#111820;color:#9f9;font:12px/1.5 monospace;overflow:hidden}
+  #log{position:fixed;left:0;top:0;width:55%;height:100%;overflow:auto;padding:6px;box-sizing:border-box;white-space:pre-wrap;background:rgba(0,0,0,.85);font-size:10px}
+  #ctl{position:fixed;right:6px;top:6px;z-index:10;display:flex;flex-direction:column;gap:6px;background:rgba(0,0,0,.7);padding:8px;border-radius:8px}
+  #ctl button{padding:8px 10px;font-size:11px;border:1px solid #4a6;background:#1a2;color:#9f9;border-radius:4px}
+  #ctl button.active{background:#4a6;color:#000}
+  #start{position:fixed;right:6px;bottom:80px;padding:12px 20px;font-size:14px;background:#e8920c;color:#fff;border:none;border-radius:999px;z-index:10}
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js",
+  "threex": "https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@master/three.js/build/ar-threex.mjs"
+}}
+</script>
+</head>
+<body>
+<div id="log">先点右下角"开始"…</div>
+<div id="ctl" style="display:none">
+  <button data-mode="cameraTransform">模式A: cameraTransform</button>
+  <button data-mode="modelView">模式B: modelView</button>
+  <hr style="border-color:#4a6">
+  <button data-scale="1">尺寸×1</button>
+  <button data-scale="10">尺寸×10</button>
+  <button data-scale="40">尺寸×40</button>
+  <button data-scale="100">尺寸×100</button>
+</div>
+<button id="start">开始</button>
+<script type="module">
+import * as THREE from 'three';
+import { ArToolkitSource, ArToolkitContext, ArMarkerControls } from 'threex';
+
+const logEl = document.getElementById('log');
+const lines = [];
+function L(m){ lines.push(m); if(lines.length>120)lines.shift(); logEl.textContent=lines.join('\n'); logEl.scrollTop=1e9; }
+
+let scene, camera, renderer, source, ctx, controls;
+let testObj;  // 测试用可见物体
+let curMode = 'cameraTransform';
+let curScale = 40;
+
+document.getElementById('start').onclick = async ()=>{
+  document.getElementById('start').style.display='none';
+  document.getElementById('ctl').style.display='flex';
+  L('=== 开始（绝对URL已修复，识别层已验证可用）===');
+
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(0.8*180/Math.PI, 640/480);
+  scene.add(camera);
+  renderer = new THREE.WebGLRenderer({alpha:true});
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.domElement.style.position='fixed'; renderer.domElement.style.inset='0'; renderer.domElement.style.zIndex='-1';
+  document.body.appendChild(renderer.domElement);
+  scene.add(new THREE.AmbientLight(0xffffff, 1.0));
+
+  // ★ 一个醒目的测试立方体：每个面不同颜色，方便从任何角度看清
+  function makeFaceColor(c){ return new THREE.MeshStandardMaterial({color:c, emissive:c, emissiveIntensity:0.3}); }
+  const cubeMats = [0xff0000,0x00ff00,0x0000ff,0xffff00,0xff00ff,0x00ffff].map(makeFaceColor);
+  testObj = new THREE.Mesh(new THREE.BoxGeometry(1,1,1), cubeMats);
+  testObj.scale.setScalar(curScale);  // 初始尺寸
+  scene.add(testObj);
+  L(`测试立方体已添加（6面色块）尺寸×${curScale}`);
+
+  const BASE = location.origin + '/ar/data/invite';
+  source = new ArToolkitSource({sourceType:'webcam', sourceWidth:480, sourceHeight:640});
+  source.init(()=>L('✓ Source ready'), e=>L('✗ Source fail: '+e));
+  ctx = new ArToolkitContext({detectionMode:'mono', cameraParametersUrl:BASE+'/camera_para.dat', canvasWidth:480, canvasHeight:640});
+  ctx.init(()=>{ camera.projectionMatrix.copy(ctx.getProjectionMatrix()); L('✓ ctx init, 投影矩阵已copy'); });
+
+  rebuildControls();
+  L('对准弹珠台图，看彩色立方体在不在图上。用右侧按钮切换模式/尺寸，告诉我哪个能看到。');
+
+  let found=0, nf=0;
+  (function animate(){
+    requestAnimationFrame(animate);
+    if(source && source.ready!==false && ctx && ctx.arController){
+      try{ ctx.update(source.domElement); }catch(e){}
+      if(camera.visible) found++; else nf++;
+      scene.visible = camera.visible;
+      testObj.rotation.y += 0.03;  // 慢慢转，动的东西更容易看到
+    }
+    if(renderer) renderer.render(scene, camera);
+  })();
+  setInterval(()=>{ if(found+nf>0) L(`[统计] found=${found} notFound=${nf} camera.visible=${camera.visible} 模式=${curMode} 尺寸×${curScale}`); found=0; nf=0; }, 3000);
+};
+
+function rebuildControls(){
+  if(controls){ /* 旧的不太好 dispose，直接重建 controls 指向新对象 */ }
+  const BASE = location.origin + '/ar/data/invite';
+  const mode = curMode==='cameraTransform' ? 'cameraTransformMatrix' : 'modelViewMatrix';
+  const target = curMode==='cameraTransform' ? camera : testObj;
+  controls = new ArMarkerControls(ctx, target, {
+    type:'nft', descriptorsUrl:BASE+'/invite', changeMatrixMode:mode
+  });
+  L(`切换 → 模式=${mode} 目标=${curMode==='cameraTransform'?'camera(相机)':'testObj(立方体)'}`);
+}
+
+document.getElementById('ctl').addEventListener('click', e=>{
+  const b = e.target.closest('button'); if(!b) return;
+  if(b.dataset.mode){
+    document.querySelectorAll('[data-mode]').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    curMode = b.dataset.mode;
+    rebuildControls();
+  } else if(b.dataset.scale){
+    document.querySelectorAll('[data-scale]').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    curScale = parseInt(b.dataset.scale);
+    if(testObj) testObj.scale.setScalar(curScale);
+    L(`尺寸 → ×${curScale}`);
+  }
+});
+</script>
+</body>
+</html>
