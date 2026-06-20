@@ -1,0 +1,71 @@
+/* site-dev/ar/shared/arcade-shell.css
+   童话 4 色：奶油白 / 星金 / 暖棕 / 深夜蓝
+   所有 AR 作品共用（统一童话风格） */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#fff7e8; --gold:#ffdf8c; --brown:#593a20;
+  --night:#162a3d; --brown-soft:#6b4426;
+}
+html,body{width:100%;height:100%;overflow:hidden;background:#111820;
+  font-family:"Microsoft YaHei",sans-serif;color:var(--cream)}
+video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;
+  transform:scaleX(-1);opacity:.72}
+canvas{position:fixed;inset:0;width:100%;height:100%;touch-action:none}
+#veil{position:fixed;inset:0;
+  background:radial-gradient(circle at 50% 25%,rgba(255,226,166,.18),transparent 28%),rgba(17,24,32,.28);
+  pointer-events:none}
+#topbar{position:fixed;left:16px;right:16px;top:14px;z-index:8;
+  display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+#brand{padding:12px 14px;border-radius:18px;background:rgba(255,247,232,.88);
+  color:var(--brown);border:1px solid rgba(232,201,138,.42);
+  box-shadow:0 14px 34px rgba(0,0,0,.16)}
+#brand h1{font-family:Georgia,"Microsoft YaHei",serif;font-size:1.05rem;line-height:1.25;margin-bottom:4px}
+#brand p{font-size:.76rem;line-height:1.55;color:rgba(89,58,32,.72)}
+#score{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.stat{min-width:78px;padding:10px 12px;border-radius:16px;background:rgba(16,22,30,.66);
+  backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);text-align:center}
+.stat strong{display:block;font-size:1.35rem;line-height:1.1;color:var(--gold)}
+.stat span{font-size:.72rem;color:rgba(255,247,232,.72)}
+#panel{position:fixed;left:50%;bottom:18px;z-index:8;width:min(620px,calc(100vw - 24px));
+  transform:translateX(-50%);padding:14px 16px;border-radius:22px;
+  background:rgba(255,247,232,.9);color:var(--brown);
+  border:1px solid rgba(232,201,138,.48);box-shadow:0 18px 46px rgba(0,0,0,.2)}
+#panel p{font-size:.88rem;line-height:1.7}
+#actions{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+button,a{border:none;text-decoration:none;cursor:pointer;font:inherit}
+.primary,.ghost{min-height:42px;padding:0 16px;border-radius:999px;
+  display:inline-flex;align-items:center;justify-content:center}
+.primary{background:linear-gradient(180deg,#28445e,var(--night));color:var(--cream);
+  box-shadow:0 10px 18px rgba(22,42,61,.24)}
+.primary:hover{filter:brightness(1.12)}
+.ghost{background:rgba(255,255,255,.62);color:var(--brown-soft);
+  border:1px solid rgba(163,115,58,.28)}
+.ghost:hover{background:#fff}
+#permission{position:fixed;inset:0;z-index:20;display:flex;align-items:center;
+  justify-content:center;padding:22px;background:rgba(17,24,32,.86);backdrop-filter:blur(10px)}
+#permission.hidden{display:none}
+.perm-card{width:min(520px,94vw);padding:26px;border-radius:26px;
+  background:linear-gradient(180deg,#fff7e8,#f3dfb9);color:var(--brown);
+  text-align:center;border:1px solid rgba(232,201,138,.55)}
+.perm-card h2{font-family:Georgia,"Microsoft YaHei",serif;margin-bottom:10px;font-size:1.45rem}
+.perm-card p{line-height:1.8;color:rgba(89,58,32,.76);margin-bottom:18px}
+#toast{position:fixed;left:50%;top:50%;z-index:9;transform:translate(-50%,-50%);
+  padding:12px 18px;border-radius:999px;background:rgba(16,22,30,.72);
+  border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(12px);
+  opacity:0;transition:opacity .2s;color:var(--cream);pointer-events:none;text-align:center;max-width:80vw}
+#toast.show{opacity:1}
+#result{position:fixed;inset:0;z-index:25;display:none;align-items:center;
+  justify-content:center;padding:22px;background:rgba(17,24,32,.88);backdrop-filter:blur(12px)}
+#result.show{display:flex}
+.result-card{width:min(440px,94vw);padding:28px;border-radius:28px;
+  background:linear-gradient(180deg,#fff7e8,#f3dfb9);color:var(--brown);
+  text-align:center;border:1px solid rgba(232,201,138,.55)}
+.result-card .rank{font-size:4rem;font-family:Georgia,serif;line-height:1;
+  background:linear-gradient(180deg,#ffb84d,#e8920c);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text}
+.result-card h2{font-family:Georgia,"Microsoft YaHei",serif;margin:8px 0 6px;font-size:1.3rem}
+.result-card .desc{line-height:1.8;color:rgba(89,58,32,.8);margin-bottom:14px;font-size:.9rem}
+.result-card .best{font-size:.78rem;color:rgba(89,58,32,.6);margin-bottom:16px}
+@media(max-width:720px){#topbar{align-items:stretch;flex-direction:column}
+  #score{justify-content:flex-start}.stat{min-width:68px}#brand p{display:none}
+  #panel{bottom:10px}#actions{flex-direction:column}.primary,.ghost{width:100%}}
