@@ -38,10 +38,14 @@ scene.add(new THREE.AmbientLight(0xffffff, 0.9));
 const dir = new THREE.DirectionalLight(0xfff0d0, 1.0); dir.position.set(1,2,2); scene.add(dir);
 
 // ---------- 邀请函 3D 内容组 ----------
+// ★ 官方结构（已真机验证可见）：内容加到 scene，matrixAutoUpdate=false，
+//   尺寸用毫米（NFT 坐标系是毫米，marker 约 188mm 宽）。
+//   cameraTransformMatrix 模式下 marker 控制 camera，内容固定在世界原点附近。
 const inviteGroup = new THREE.Group();
 scene.add(inviteGroup);
+inviteGroup.matrixAutoUpdate = false;  // 固定世界坐标
 
-// 1. 程序生成星球
+// 1. 程序生成星球（半径 25mm，约 marker 的 1/7，从图中央浮起）
 function makePlanetTexture(){
   const c=document.createElement('canvas'); c.width=512;c.height=256; const x=c.getContext('2d');
   const g=x.createLinearGradient(0,0,0,256); g.addColorStop(0,'#5ab0d8'); g.addColorStop(1,'#3a7aa8');
@@ -53,18 +57,18 @@ function makePlanetTexture(){
   return new THREE.CanvasTexture(c);
 }
 const planet = new THREE.Mesh(
-  new THREE.SphereGeometry(0.8, 32, 32),
+  new THREE.SphereGeometry(25, 32, 32),
   new THREE.MeshStandardMaterial({map:makePlanetTexture(), roughness:0.8, metalness:0.1, emissive:0x112233, emissiveIntensity:0.2})
 );
-planet.position.y = 0.5; planet.scale.setScalar(0.001);
+planet.position.y = 30; planet.scale.setScalar(0.001);
 inviteGroup.add(planet);
 
-// 2. 光环
+// 2. 光环（半径 35mm）
 const ring = new THREE.Mesh(
-  new THREE.TorusGeometry(1.1, 0.04, 12, 48),
+  new THREE.TorusGeometry(35, 1.2, 12, 48),
   new THREE.MeshStandardMaterial({color:0xffdf8c, emissive:0xaa7733, emissiveIntensity:0.6, metalness:0.7, roughness:0.3})
 );
-ring.position.y = 0.5; ring.rotation.x = Math.PI/2.6; ring.scale.setScalar(0.001);
+ring.position.y = 30; ring.rotation.x = Math.PI/2.6; ring.scale.setScalar(0.001);
 inviteGroup.add(ring);
 
 // 3. 粒子绽放
@@ -72,15 +76,15 @@ const PARTICLE_COUNT=120;
 const particleGeo = new THREE.BufferGeometry();
 const pPos=new Float32Array(PARTICLE_COUNT*3), pVel=new Float32Array(PARTICLE_COUNT*3);
 for(let i=0;i<PARTICLE_COUNT;i++){
-  pPos[i*3]=0; pPos[i*3+1]=0.5; pPos[i*3+2]=0;
-  const a=Math.random()*Math.PI*2, s=0.3+Math.random()*0.5;
-  pVel[i*3]=Math.cos(a)*s; pVel[i*3+1]=0.5+Math.random()*0.4; pVel[i*3+2]=Math.sin(a)*s;
+  pPos[i*3]=0; pPos[i*3+1]=30; pPos[i*3+2]=0;
+  const a=Math.random()*Math.PI*2, s=10+Math.random()*15;  // mm/s
+  pVel[i*3]=Math.cos(a)*s; pVel[i*3+1]=15+Math.random()*12; pVel[i*3+2]=Math.sin(a)*s;
 }
 particleGeo.setAttribute('position', new THREE.BufferAttribute(pPos,3));
-const particles = new THREE.Points(particleGeo, new THREE.PointsMaterial({color:0xffdf8c, size:0.06, transparent:true, opacity:0, blending:THREE.AdditiveBlending, depthWrite:false}));
+const particles = new THREE.Points(particleGeo, new THREE.PointsMaterial({color:0xffdf8c, size:2, transparent:true, opacity:0, blending:THREE.AdditiveBlending, depthWrite:false}));
 inviteGroup.add(particles);
 
-// 4. 飘字
+// 4. 飘字（70mm 宽，在星球上方 60mm）
 function makeTextTexture(text){
   const c=document.createElement('canvas'); c.width=1024;c.height=128; const x=c.getContext('2d');
   x.font='bold 64px Georgia,"Microsoft YaHei",serif'; x.fillStyle='#ffdf8c';
@@ -89,16 +93,28 @@ function makeTextTexture(text){
   return new THREE.CanvasTexture(c);
 }
 const textSprite = new THREE.Sprite(new THREE.SpriteMaterial({map:makeTextTexture('欢迎来到捞鱼世界'), transparent:true}));
-textSprite.scale.set(2.2,0.28,1); textSprite.position.y=2.0; textSprite.material.opacity=0;
+textSprite.scale.set(70,9,1); textSprite.position.y=60; textSprite.material.opacity=0;
 inviteGroup.add(textSprite);
 
-// 5. 光圈
+// 5. 光圈（marker 表面）
 const flashRing = new THREE.Mesh(
-  new THREE.RingGeometry(0.1, 0.12, 48),
+  new THREE.RingGeometry(3, 4, 48),
   new THREE.MeshBasicMaterial({color:0xffffff, transparent:true, opacity:0, side:THREE.DoubleSide})
 );
-flashRing.rotation.x = -Math.PI/2; flashRing.position.y=0.01;
+flashRing.rotation.x = -Math.PI/2; flashRing.position.y=1;
 inviteGroup.add(flashRing);
+
+// 用 NFT marker 的物理尺寸把内容移到 marker 几何中心（官方公式）
+window.addEventListener('arjs-nft-init-data', (e)=>{
+  const d = e.detail;
+  if(d && d.width && d.dpi){
+    // 像素→毫米，再除2移到中心
+    const cx = (d.width / d.dpi * 2.54 * 10) / 2.0;
+    const cy = (d.height / d.dpi * 2.54 * 10) / 2.0;
+    inviteGroup.position.set(cx, 0, -cy);
+    LOG(`nft-init-data: 内容移到marker中心 (${cx.toFixed(1)},0,${(-cy).toFixed(1)})mm`);
+  }
+});
 
 // ---------- 动画状态机 ----------
 let phase = 'idle';
@@ -131,14 +147,14 @@ function updateAnimation(dt){
     const pos=particleGeo.attributes.position.array;
     for(let i=0;i<PARTICLE_COUNT;i++){
       pos[i*3] = particleStartPos[i*3] + pVel[i*3] * t;
-      pos[i*3+1] = particleStartPos[i*3+1] + pVel[i*3+1]*t - 0.5*t*t;
+      pos[i*3+1] = particleStartPos[i*3+1] + pVel[i*3+1]*t - 20*t*t;  // 重力(mm单位)
       pos[i*3+2] = particleStartPos[i*3+2] + pVel[i*3+2] * t;
     }
     particleGeo.attributes.position.needsUpdate = true;
     if(t>1.0){ phase='text'; phaseTime=0; document.body.dataset.phase='text'; }
   } else if(phase==='text'){
     textSprite.material.opacity = Math.min(1, t/0.8);
-    textSprite.position.y = 2.0 - Math.max(0, (0.8-t)/0.8)*0.5;
+    textSprite.position.y = 60 - Math.max(0, (0.8-t)/0.8)*15;  // mm单位，从75落到60
     if(t>1.0){ phase='hold'; phaseTime=0; document.body.dataset.phase='hold'; enterBtn.classList.add('show'); }
   } else if(phase==='hold'){
     planet.rotation.y += dt*0.5;
@@ -313,7 +329,10 @@ function startDemo(){
   mode='demo'; game.setMode('mouse');
   permission.classList.add('hidden'); panel.style.display='none';
   scanHint.style.display='none';
-  inviteGroup.position.set(0,0,-4);
+  // demo 模式下 camera 固定在原点看 -Z，内容放前方（mm单位）
+  camera.position.set(0, 30, 150);  // 站在 marker 前方 150mm 看
+  camera.lookAt(0, 30, 0);
+  inviteGroup.position.set(0, 0, 0);
   game.start(); animate();
   startSequence();
   showToast('演示模式：邀请函动画', 2000);
