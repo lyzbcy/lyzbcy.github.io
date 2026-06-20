@@ -103,22 +103,30 @@ document.getElementById('start').onclick = async ()=>{
   L('对准弹珠台图，看彩色立方体在不在图上。用右侧按钮切换模式/尺寸，告诉我哪个能看到。');
 
   let found=0, nf=0;
+  // ★ 屏幕中央大字状态指示，不依赖日志框就能看到识别状态
+  const statusEl = document.createElement('div');
+  statusEl.style.cssText = 'position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:50;font:bold 28px sans-serif;color:#fff;text-shadow:0 2px 8px #000;pointer-events:none;text-align:center';
+  document.body.appendChild(statusEl);
   (function animate(){
     requestAnimationFrame(animate);
+    let tracking = false;
     if(source && source.ready!==false && ctx && ctx.arController){
       try{ ctx.update(source.domElement); }catch(e){}
-      if(camera.visible) found++; else nf++;
-      scene.visible = camera.visible;
-      // 不旋转 testObj（matrixAutoUpdate=false，旋转要手动更新matrix，先保持静止便于观察）
+      tracking = camera.visible;
+      if(tracking) found++; else nf++;
+      scene.visible = tracking;
     }
+    // 大字状态：未识别时提示怎么拿图，识别时显示"★已识别 看立方体"
+    statusEl.textContent = tracking ? '★ 已识别！看图上的彩色立方体' : '未识别\n把弹珠台图放正、距20-40cm、光线充足';
+    statusEl.style.color = tracking ? '#4f4' : '#fff';
     if(renderer){
       renderer.render(scene, camera);
       renderer.autoClear = false;
       renderer.clearDepth();
-      renderer.render(window.__overlayScene, window.__overlayCam);  // 对照立方体用独立相机渲染
+      renderer.render(window.__overlayScene, window.__overlayCam);
     }
   })();
-  setInterval(()=>{ if(found+nf>0) L(`[统计] found=${found} notFound=${nf} camera.visible=${camera.visible} 立方体40mm@z=-50`); found=0; nf=0; }, 3000);
+  setInterval(()=>{ if(found+nf>0) L(`[统计] found=${found} notFound=${nf} camera.visible=${camera.visible}`); found=0; nf=0; }, 3000);
 };
 
 function rebuildControls(){
