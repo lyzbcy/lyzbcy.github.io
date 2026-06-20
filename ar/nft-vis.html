@@ -58,13 +58,19 @@ document.getElementById('start').onclick = async ()=>{
   document.body.appendChild(renderer.domElement);
   scene.add(new THREE.AmbientLight(0xffffff, 1.0));
 
-  // ★ 一个醒目的测试立方体：每个面不同颜色，方便从任何角度看清
+  // ★ 完全照搬官方 nft.html 结构：
+  //   - cameraTransformMatrix：marker 控制 camera
+  //   - 内容(root)加到 scene，matrixAutoUpdate=false（固定在世界原点）
+  //   - 内容尺寸用毫米级（NFT 坐标系是毫米）：marker 物理约 180mm 宽
+  // 一个醒目的测试立方体，6面不同颜色，单位用毫米
   function makeFaceColor(c){ return new THREE.MeshStandardMaterial({color:c, emissive:c, emissiveIntensity:0.3}); }
   const cubeMats = [0xff0000,0x00ff00,0x0000ff,0xffff00,0xff00ff,0x00ffff].map(makeFaceColor);
-  testObj = new THREE.Mesh(new THREE.BoxGeometry(1,1,1), cubeMats);
-  testObj.scale.setScalar(curScale);  // 初始尺寸
+  // BoxGeometry(40,40,40) = 40mm 边长立方体（约 marker 的 1/4），官方 Flamingo 用 z=-100
+  testObj = new THREE.Mesh(new THREE.BoxGeometry(40,40,40), cubeMats);
+  testObj.position.set(0, 0, -50);   // 相机前方50mm（官方是-100，我们小一点）
   scene.add(testObj);
-  L(`测试立方体已添加（6面色块）尺寸×${curScale}`);
+  testObj.matrixAutoUpdate = false;  // ★ 官方关键：固定世界坐标，不被相机变换影响
+  L(`测试立方体(40mm)已加到scene，z=-50mm，matrixAutoUpdate=false`);
 
   // ★ 对照组：一个"永远显示、不跟marker走"的固定立方体，放在相机正前方
   // 用独立的普通 PerspectiveCamera 渲染（不复用 AR camera，因为 AR 投影矩阵坐标系特殊）
@@ -103,7 +109,7 @@ document.getElementById('start').onclick = async ()=>{
       try{ ctx.update(source.domElement); }catch(e){}
       if(camera.visible) found++; else nf++;
       scene.visible = camera.visible;
-      testObj.rotation.y += 0.03;  // 慢慢转，动的东西更容易看到
+      // 不旋转 testObj（matrixAutoUpdate=false，旋转要手动更新matrix，先保持静止便于观察）
     }
     if(renderer){
       renderer.render(scene, camera);
@@ -112,18 +118,16 @@ document.getElementById('start').onclick = async ()=>{
       renderer.render(window.__overlayScene, window.__overlayCam);  // 对照立方体用独立相机渲染
     }
   })();
-  setInterval(()=>{ if(found+nf>0) L(`[统计] found=${found} notFound=${nf} camera.visible=${camera.visible} 模式=${curMode} 尺寸×${curScale}`); found=0; nf=0; }, 3000);
+  setInterval(()=>{ if(found+nf>0) L(`[统计] found=${found} notFound=${nf} camera.visible=${camera.visible} 立方体40mm@z=-50`); found=0; nf=0; }, 3000);
 };
 
 function rebuildControls(){
-  if(controls){ /* 旧的不太好 dispose，直接重建 controls 指向新对象 */ }
   const BASE = location.origin + '/ar/data/invite';
-  const mode = curMode==='cameraTransform' ? 'cameraTransformMatrix' : 'modelViewMatrix';
-  const target = curMode==='cameraTransform' ? camera : testObj;
-  controls = new ArMarkerControls(ctx, target, {
-    type:'nft', descriptorsUrl:BASE+'/invite', changeMatrixMode:mode
+  // 固定用官方的 cameraTransformMatrix，marker 控制 camera
+  controls = new ArMarkerControls(ctx, camera, {
+    type:'nft', descriptorsUrl:BASE+'/invite', changeMatrixMode:'cameraTransformMatrix'
   });
-  L(`切换 → 模式=${mode} 目标=${curMode==='cameraTransform'?'camera(相机)':'testObj(立方体)'}`);
+  L(`ArMarkerControls(cameraTransformMatrix) marker控制camera`);
 }
 
 document.getElementById('ctl').addEventListener('click', e=>{
