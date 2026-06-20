@@ -1,0 +1,22 @@
+const { chromium } = require('playwright');
+(async () => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+  const errs=[];
+  page.on('pageerror',e=>errs.push(e.message));
+  page.on('console',m=>{if(m.type()==='error')errs.push(m.text())});
+  await page.goto('http://127.0.0.1:5174/world/ar/invite.html',{waitUntil:'domcontentloaded',timeout:20000});
+  await page.waitForTimeout(1500);
+  const hasHowTo = await page.evaluate(()=>document.querySelector('#permission ol')?.children.length);
+  const dlBtns = await page.evaluate(()=>[...document.querySelectorAll('a[download]')].length);
+  const dlHref = await page.evaluate(()=>document.querySelector('a[download]')?.getAttribute('href'));
+  const dlName = await page.evaluate(()=>document.querySelector('a[download]')?.getAttribute('download'));
+  console.log('怎么玩步骤数:', hasHowTo);
+  console.log('下载按钮数:', dlBtns, '| href:', dlHref, '| 文件名:', dlName);
+  const realErrs=errs.filter(e=>!/GPU stall|favicon|Could not load/i.test(e));
+  console.log('errors:', realErrs.length);
+  await browser.close();
+  let pass = hasHowTo===4 && dlBtns===2 && realErrs.length===0;
+  console.log(pass?'\n=== INVITE3 PASSED ===':'\n=== INVITE3 CHECK ===');
+  process.exit(pass?0:1);
+})();
