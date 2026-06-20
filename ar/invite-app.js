@@ -294,6 +294,11 @@ addEventListener('resize', onResize);
 
 // ---------- 动画主循环 ----------
 let updateErrCount = 0;
+// 屏幕状态指示（临时诊断：看清正式页到底有没有识别到 marker）
+const statusEl = document.createElement('div');
+statusEl.style.cssText = 'position:fixed;left:50%;top:14%;transform:translateX(-50%);z-index:50;font:bold 16px sans-serif;color:#fff;text-shadow:0 2px 6px #000;pointer-events:none;text-align:center;background:rgba(0,0,0,.5);padding:6px 12px;border-radius:8px';
+statusEl.textContent = '准备中…';
+document.body.appendChild(statusEl);
 
 function animate(){
   requestAnimationFrame(animate);
@@ -305,9 +310,12 @@ function animate(){
       catch(e){ updateErrCount++; if(updateErrCount<=3) LOG('update() 抛错', e.message); }
     }
     // cameraTransformMatrix 模式下，marker 识别时 ArMarkerControls 会设 camera.visible=true
-    // （官方 nft.html 就是 scene.visible = camera.visible）。
     scene.visible = camera.visible;
     const tracked = camera.visible;
+    // 状态指示
+    const sr = arToolkitSource ? arToolkitSource.ready : '?';
+    statusEl.textContent = `src.ready=${sr} | ${tracked ? '★已识别' : '未识别'} | 把弹珠台图放正·距20-40cm`;
+    statusEl.style.color = tracked ? '#6f6' : '#fff';
     if(tracked && !lastTracked){
       lastTracked=true; game.mark('tracking','true');
       LOG('★ 首次识别成功！开始播放动画');
