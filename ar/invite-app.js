@@ -3,6 +3,7 @@
 // 技术：three 0.169 + AR.js ar-threex（ESM importmap）。
 // 兜底：NFT 识别不到时 demo 模式手动播放动画。
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { ArToolkitSource, ArToolkitContext, ArMarkerControls } from 'threex';
 import {showToast, injectCameraSelector} from './shared/fairy-ui.js';
 import {BaseGame} from './shared/game-state.js';
@@ -61,12 +62,16 @@ const dir = new THREE.DirectionalLight(0xfff0d0, 1.0); dir.position.set(1,2,2); 
 
 // ---------- 邀请函 3D 内容组 ----------
 // markerRoot 被 AR.js 写入姿态矩阵；内容组使用毫米单位（NFT 坐标系是毫米，marker 约 188mm 宽）。
-const markerRoot = new THREE.Group();
+const markerRoot = new THREE.Group(); // raw AR.js tracking root，只接收识别矩阵
 markerRoot.visible = false;
 scene.add(markerRoot);
 
+const stableRoot = new THREE.Group(); // 展示 root：复制并平滑 markerRoot，降低抖动
+stableRoot.visible = false;
+scene.add(stableRoot);
+
 const inviteGroup = new THREE.Group();
-markerRoot.add(inviteGroup);
+stableRoot.add(inviteGroup);
 
 const surface = new THREE.Mesh(
   new THREE.CircleGeometry(56, 64),
@@ -74,8 +79,47 @@ const surface = new THREE.Mesh(
 );
 surface.rotation.x = -Math.PI / 2;
 surface.position.y = -2;
-surface.visible = false; // 第三轮：灰色大圆盘会造成整屏发雾，正式/验证都先关闭
+surface.visible = false; // 灰色大圆盘会造成整屏发雾，正式/验证都关闭
 inviteGroup.add(surface);
+
+const mascotRoot = new THREE.Group();
+mascotRoot.position.set(0, 0, 48);
+inviteGroup.add(mascotRoot);
+let mascotMixer = null;
+let mascotReady = false;
+const MODEL_URL = 'https://cdn.jsdelivr.net/npm/three@0.169.0/examples/models/gltf/Flamingo.glb';
+new GLTFLoader().load(MODEL_URL, (gltf)=>{
+  const model = gltf.scene;
+  const box = new THREE.Box3().setFromObject(model);
+  const size = new THREE.Vector3();
+  const center = new THREE.Vector3();
+  box.getSize(size);
+  box.getCenter(center);
+  model.position.sub(center);
+  const maxDim = Math.max(size.x, size.y, size.z) || 1;
+  model.scale.setScalar(74 / maxDim);
+  model.rotation.set(Math.PI / 2, 0, -Math.PI / 8);
+  model.traverse((obj)=>{
+    if(obj.isMesh){
+      obj.renderOrder = 1005;
+      obj.frustumCulled = false;
+      if(obj.material){
+        obj.material.depthTest = false;
+        obj.material.depthWrite = false;
+        obj.material.needsUpdate = true;
+      }
+    }
+  });
+  mascotRoot.add(model);
+  if(gltf.animations?.length){ mascotMixer = new THREE.AnimationMixer(model); mascotMixer.clipAction(gltf.animations[0]).play(); }
+  mascotReady = true;
+  planet.visible = false;
+  LOG('免费 GLB 模型加载成功', MODEL_URL);
+}, undefined, (err)=>{
+  mascotReady = false;
+  planet.visible = true;
+  LOG('GLB 模型加载失败，回退程序星球', err?.message || err);
+});
 
 // 可见性锚点：多轴、多平面、大尺寸。只要 markerRoot 的模型矩阵有效，
 // 至少会有一部分出现在画面里，用来把“已识别但看不见”的风险降到最低。
@@ -121,7 +165,7 @@ visibilityAnchor.traverse((obj)=>{
   if(obj.material){ obj.material.depthTest = false; obj.material.depthWrite = false; }
   obj.renderOrder = Math.max(obj.renderOrder || 0, 999);
 });
-visibilityAnchor.visible = true;
+visibilityAnchor.visible = DEBUG_AR;
 inviteGroup.add(visibilityAnchor);
 
 // 1. 程序生成星球（半径 25mm，约 marker 的 1/7，从图中央浮起）
@@ -222,7 +266,7 @@ function startSequence(){
   phase='flash'; phaseTime=0;
   document.body.dataset.phase='flash';
   enterBtn.classList.remove('show');
-  visibilityAnchor.visible = true;
+  visibilityAnchor.visible = DEBUG_AR;
   visibilityAnchor.scale.setScalar(1);
   visibilityAnchor.traverse((obj)=>{ if(obj.material){ obj.material.opacity = obj.material.opacity ?? 1; } });
   planet.scale.setScalar(0.001);
@@ -279,6 +323,12 @@ enterBtn.onclick = ()=>{ window.location.href='/world/'; };
 // ---------- AR.js NFT ----------
 let arToolkitSource=null, arToolkitContext=null, arControls=null;
 let mode='boot', lastTracked=false;
+const TRACKING_GRACE_MS = 650;
+let lastTrackedAt = 0;
+let stableHasPose = false;
+const rawPos = new THREE.Vector3();
+const rawQuat = new THREE.Quaternion();
+const rawScale = new THREE.Vector3();
 
 // 正式触发图：pinball 弹珠台图（NFT 描述符已下载到本地 data/invite/）
 // ★ 根因修复：必须用完整绝对URL！AR.js NFT 是 Blob 内联 Worker（createObjectURL），
@@ -420,6 +470,7 @@ function animate(){
   const dt = 0.016;
   frameNo++;
   if(frameNo % 30 === 0) forceFullBleed();
+  if(mascotMixer) mascotMixer.update(dt);
   if(mode==='camera' && arToolkitContext){
     // 官方写法：arToolkitSource 未 ready 就跳过（避免喂空帧）
     if(arToolkitSource && arToolkitSource.ready!==false){
@@ -427,7 +478,26 @@ function animate(){
       catch(e){ updateErrCount++; if(updateErrCount<=3) LOG('update() 抛错', e.message); }
     }
     const tracked = markerRoot.visible;
-    document.body.dataset.tracking = tracked ? 'true' : 'false';
+    const now = performance.now();
+    if(tracked){
+      lastTrackedAt = now;
+      markerRoot.updateMatrixWorld(true);
+      markerRoot.matrix.decompose(rawPos, rawQuat, rawScale);
+      if(!stableHasPose){
+        stableRoot.position.copy(rawPos);
+        stableRoot.quaternion.copy(rawQuat);
+        stableRoot.scale.copy(rawScale);
+        stableHasPose = true;
+      }else{
+        stableRoot.position.lerp(rawPos, 0.22);
+        stableRoot.quaternion.slerp(rawQuat, 0.18);
+        stableRoot.scale.lerp(rawScale, 0.22);
+      }
+      stableRoot.visible = true;
+    }else{
+      stableRoot.visible = stableHasPose && (now - lastTrackedAt < TRACKING_GRACE_MS);
+    }
+    document.body.dataset.tracking = (tracked || stableRoot.visible) ? 'true' : 'false';
     const sr = arToolkitSource ? arToolkitSource.ready : '?';
     statusEl.textContent = DEBUG_AR
       ? `src.ready=${sr} | ${tracked ? '★已识别' : '未识别'} | markerRoot`
@@ -445,7 +515,7 @@ function animate(){
     }
     if(phase!=='idle') updateAnimation(dt);
   } else if(mode==='demo'){
-    markerRoot.visible = true;
+    stableRoot.visible = true;
     if(phase!=='idle') updateAnimation(dt);
   }
   renderer.render(scene, camera);
@@ -460,8 +530,9 @@ function startDemo(){
   // demo 模式下 camera 固定在原点看 -Z，内容放前方（mm单位）
   camera.position.set(0, 42, 190);  // 站在 marker 前方 190mm 看
   camera.lookAt(0, 30, 0);
-  markerRoot.position.set(0, 0, 0);
-  markerRoot.visible = true;
+  stableRoot.position.set(0, 0, 0);
+  stableRoot.visible = true;
+  stableHasPose = true;
   inviteGroup.position.set(0, 0, 0);
   game.start(); animate();
   startSequence();
