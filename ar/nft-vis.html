@@ -66,6 +66,27 @@ document.getElementById('start').onclick = async ()=>{
   scene.add(testObj);
   L(`测试立方体已添加（6面色块）尺寸×${curScale}`);
 
+  // ★ 对照组：一个"永远显示、不跟marker走"的固定立方体，放在相机正前方
+  // 用独立的普通 PerspectiveCamera 渲染（不复用 AR camera，因为 AR 投影矩阵坐标系特殊）
+  // 如果连这个都看不见 → 渲染层（canvas/可见性）问题
+  // 如果这个能看见、testObj看不见 → AR 投影坐标系问题
+  const overlayScene = new THREE.Scene();
+  const overlayCam = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 100);
+  overlayCam.position.set(0,0,0);
+  overlayScene.add(new THREE.AmbientLight(0xffffff, 1.0));
+  const bgCube = new THREE.Mesh(
+    new THREE.BoxGeometry(1,1,1),
+    new THREE.MeshStandardMaterial({color:0xff00ff, emissive:0xff00ff, emissiveIntensity:0.5})
+  );
+  bgCube.position.set(0, 0, -3);   // 固定在相机前方3单位
+  overlayScene.add(bgCube);
+  window.__overlayScene = overlayScene;
+  window.__overlayCam = overlayCam;
+  window.__bgCube = bgCube;
+  window.__camera = camera;
+  window.__THREE = THREE;
+  L('对照立方体已添加（紫红色，固定在overlayCam前方，独立普通相机渲染）');
+
   const BASE = location.origin + '/ar/data/invite';
   source = new ArToolkitSource({sourceType:'webcam', sourceWidth:480, sourceHeight:640});
   source.init(()=>L('✓ Source ready'), e=>L('✗ Source fail: '+e));
@@ -84,7 +105,12 @@ document.getElementById('start').onclick = async ()=>{
       scene.visible = camera.visible;
       testObj.rotation.y += 0.03;  // 慢慢转，动的东西更容易看到
     }
-    if(renderer) renderer.render(scene, camera);
+    if(renderer){
+      renderer.render(scene, camera);
+      renderer.autoClear = false;
+      renderer.clearDepth();
+      renderer.render(window.__overlayScene, window.__overlayCam);  // 对照立方体用独立相机渲染
+    }
   })();
   setInterval(()=>{ if(found+nf>0) L(`[统计] found=${found} notFound=${nf} camera.visible=${camera.visible} 模式=${curMode} 尺寸×${curScale}`); found=0; nf=0; }, 3000);
 };
