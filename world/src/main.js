@@ -5,13 +5,15 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 
 const ClockClass = THREE.Clock;
-import { createTerrain, SPHERE_RADIUS } from './world/terrain.js';
+import { createTerrain, SPHERE_RADIUS, getSpherePosition } from './world/terrain.js';
 import { createWater } from './world/water.js';
 import { createSky, createFireflies, SUN_DIRECTION } from './world/sky.js';
 import { createDecorations } from './world/decorations.js';
 import { createTower } from './building/tower.js';
+import { createArcadeBuilding } from './building/arcade.js';
 import { createLandmarks } from './building/landmarks.js';
 import { createAllNPCs } from './npc/npc-factory.js';
+import { updateNPC3DIdle } from './npc/npc-3d-builder.js';
 import { createNPCScenery } from './npc/npc-scenery.js';
 import { NPCLife } from './npc/npc-life.js';
 import { NPCDialog } from './npc/npc-dialog.js';
@@ -150,6 +152,11 @@ const { group: tower, screenData: towerScreens } = createTower(noise2D, posts);
 scene.add(tower);
 updateLoadProgress(65);
 
+// Arcade building
+const { group: arcadeBuilding, interactable: arcadeDoor } = createArcadeBuilding(noise2D);
+scene.add(arcadeBuilding);
+updateLoadProgress(70);
+
 // Landmarks
 const landmarks = createLandmarks(noise2D);
 scene.add(landmarks);
@@ -171,6 +178,25 @@ scene.add(npcScenery);
 
 // --- Player controls ---
 const controls = new PlayerControls(camera, noise2D, canvas);
+const arcadeSpawn = getSpherePosition(Math.PI * 0.42, 19.0, noise2D);
+if (new URLSearchParams(window.location.search).get('spawn') === 'arcade') {
+  controls.position.copy(arcadeSpawn.position).addScaledVector(arcadeSpawn.normal, controls.playerHeight);
+  controls.yaw = Math.PI * 0.9;
+}
+controls.setColliders([
+  { centerDir: tower.position.clone().normalize(), radius: 3.9 },
+  { centerDir: arcadeBuilding.position.clone().normalize(), radius: 4.9 },
+  ...landmarks.children.map((landmark) => ({
+    centerDir: landmark.position.clone().normalize(),
+    radius: 2.7
+  }))
+]);
+const debugJumpEl = ['127.0.0.1', 'localhost'].includes(window.location.hostname)
+  ? document.body.appendChild(Object.assign(document.createElement('div'), {
+      id: 'world-debug-jump',
+      hidden: true
+    }))
+  : null;
 
 // --- Article Viewer ---
 ArticleViewer.injectStyles();
@@ -185,9 +211,12 @@ const npcLife = new NPCLife(npcs, camera, noise2D);
 // --- Interaction ---
 const allInteractables = [
   ...towerScreens,
+  arcadeDoor,
   ...npcs.userData.interactables
 ];
-const interaction = new InteractionManager(camera, canvas, allInteractables, dialog);
+const interaction = new InteractionManager(camera, canvas, allInteractables, dialog, {
+  onInteract: (data) => beginArcadeTransition(data.destination)
+});
 
 // --- Collectibles ---
 const collectibles = new CollectibleSystem(scene, noise2D, camera);
@@ -197,6 +226,24 @@ const minimap = new Minimap(npcs, landmarks);
 
 let worldEntered = Boolean(window.__WORLD_STATE?.entered);
 let worldPaused = false;
+let arcadeTransitioning = false;
+
+if (worldEntered) {
+  collectibles.showUI();
+  minimap.show();
+}
+
+function beginArcadeTransition(destination) {
+  if (arcadeTransitioning || !destination) return;
+  arcadeTransitioning = true;
+  worldPaused = true;
+  if (document.pointerLockElement) {
+    document.exitPointerLock();
+  }
+  window.dispatchEvent(new CustomEvent('world:arcade-enter', {
+    detail: { destination }
+  }));
+}
 
 window.addEventListener('world:enter', () => {
   worldEntered = true;
@@ -336,6 +383,10 @@ function animate() {
 
   if (worldEntered && !dialog.isOpen && !worldPaused) {
     controls.update(delta);
+    if (debugJumpEl) {
+      debugJumpEl.dataset.jumpHeight = controls.jumpHeight.toFixed(3);
+      debugJumpEl.dataset.cameraY = camera.position.y.toFixed(3);
+    }
     interaction.update();
     collectibles.update(delta, elapsed);
     minimap.update(camera, controls);
@@ -349,6 +400,12 @@ function animate() {
   npcLife.setDialogOpen(dialog.isOpen || worldPaused);
   if (worldEntered) {
     npcLife.update(delta, elapsed);
+    // 更新 3D NPC 的 idle 动画（浮动+转头）
+    const list = npcs.userData.interactables || [];
+    for(let i=0;i<list.length;i++){
+      const npc3d = list[i].getObjectByName('npc-3d');
+      if(npc3d) updateNPC3DIdle(npc3d, elapsed, i);
+    }
   }
   animateNPCs(delta);
   animateFireflies(elapsed);

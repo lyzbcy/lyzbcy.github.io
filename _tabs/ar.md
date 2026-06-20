@@ -55,6 +55,22 @@ order: 7
 .ar-card.fitness { background: linear-gradient(135deg, rgba(67,233,123,0.15), rgba(56,249,215,0.1)); }
 .ar-card.fitness:hover { border-color: rgba(67,233,123,0.5); }
 
+.ar-card.rescue::before { background: linear-gradient(135deg, #ffdf8c, #7bd5ff, #b99df2); }
+.ar-card.rescue { background: linear-gradient(135deg, rgba(255,223,140,0.2), rgba(123,213,255,0.12), rgba(185,157,242,0.12)); }
+.ar-card.rescue:hover { border-color: rgba(255,223,140,0.62); }
+.ar-card.featured {
+  grid-column: 1 / -1;
+  min-height: 260px;
+  border-color: rgba(255,223,140,0.32);
+}
+.ar-card.featured .ar-title {
+  font-size: 1.8rem;
+}
+.ar-card.featured .ar-desc {
+  max-width: 760px;
+  font-size: 1rem;
+}
+
 .ar-icon {
   font-size: 3rem;
   margin-bottom: 16px;
@@ -115,31 +131,38 @@ order: 7
 </div>
 
 <div class="ar-grid">
+  <a href="{{ '/ar/star-rescue.html' | relative_url }}" class="ar-card rescue featured">
+    <span class="ar-icon">🌟</span>
+    <div class="ar-title">星愿救援局</div>
+    <div class="ar-desc">主打原创 AR 游戏：摄像头识别手指，把现实画面变成救援现场。玩家用手指救回发光星星、躲开污染云、冲击连击评级，完整覆盖“实物、虚拟物体、交互方式、手机/平板端实现”的作业要求。</div>
+    <span class="ar-badge">Featured · Hand AI · AR Game</span>
+  </a>
+
   <a href="{{ '/ar/face-deform.html' | relative_url }}" class="ar-card face">
     <span class="ar-icon">🫠</span>
-    <div class="ar-title">捏脸 AR</div>
-    <div class="ar-desc">实时人脸追踪与形变，拖拽屏幕即可捏脸。基于 468 个面部关键点的精准网格渲染。</div>
+    <div class="ar-title">幻镜变形屋</div>
+    <div class="ar-desc">实时人脸追踪与童话镜屋形变，展示基于面部关键点的可控虚实叠加。</div>
     <span class="ar-badge">Face Mesh</span>
   </a>
 
   <a href="{{ '/ar/hand-flower.html' | relative_url }}" class="ar-card flower">
     <span class="ar-icon">🌸</span>
-    <div class="ar-title">手势生花</div>
-    <div class="ar-desc">手指掠过之处绽放花海。实时手部追踪，食指指尖生成 3D 花朵，营造梦幻花海效果。</div>
+    <div class="ar-title">掌心花园</div>
+    <div class="ar-desc">用手势在身体区域唤出水彩花园，偏治愈和美术展示。</div>
     <span class="ar-badge">Hands Tracking</span>
   </a>
 
   <a href="{{ '/ar/gesture-game.html' | relative_url }}" class="ar-card gesture">
     <span class="ar-icon">✋</span>
-    <div class="ar-title">手势魔法</div>
-    <div class="ar-desc">用手势释放粒子魔法！拳头爆炸、张开手掌释放星尘、食指指向发射光束。</div>
+    <div class="ar-title">咒语试炼机</div>
+    <div class="ar-desc">用手指组合触发不同咒语，把手势识别包装成可演示的魔法试炼。</div>
     <span class="ar-badge">Gesture Recognition</span>
   </a>
 
   <a href="{{ '/ar/fitness-coach.html' | relative_url }}" class="ar-card fitness">
     <span class="ar-icon">🏋️</span>
-    <div class="ar-title">AI 健身教练</div>
-    <div class="ar-desc">视觉识别你的运动姿态，实时计算关节角度，判定动作是否标准，给出健身指导。</div>
+    <div class="ar-title">动作教练台</div>
+    <div class="ar-desc">视觉识别运动姿态，实时计算关节角度，强调“解决常见痛点”的实用型 AR。</div>
     <span class="ar-badge">Pose Detection</span>
   </a>
 </div>

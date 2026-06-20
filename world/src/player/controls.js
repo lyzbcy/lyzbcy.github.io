@@ -17,13 +17,19 @@ export class PlayerControls {
     this.mouseSpeed = 0.002;
 
     // Movement state
-    this.keys = { w: false, a: false, s: false, d: false, shift: false };
+    this.keys = { w: false, a: false, s: false, d: false, shift: false, space: false };
     this.position = new THREE.Vector3(0, SPHERE_RADIUS + 2, 8); // Start near north pole
     this.yaw = 0;
     this.pitch = 0;
 
     // Player height above terrain
     this.playerHeight = 1.8;
+    this.jumpHeight = 0;
+    this.verticalVelocity = 0;
+    this.jumpSpeed = 7.4;
+    this.gravity = 18;
+    this.jumpQueued = false;
+    this.colliders = [];
 
     // Touch joystick state
     this.joystickActive = false;
@@ -41,11 +47,17 @@ export class PlayerControls {
     document.addEventListener('keydown', (e) => {
       const key = e.key.toLowerCase();
       if (key === 'shift') this.keys.shift = true;
+      if (e.code === 'Space') {
+        e.preventDefault();
+        this.keys.space = true;
+        this.jumpQueued = true;
+      }
       if (key in this.keys) this.keys[key] = true;
     });
     document.addEventListener('keyup', (e) => {
       const key = e.key.toLowerCase();
       if (key === 'shift') this.keys.shift = false;
+      if (e.code === 'Space') this.keys.space = false;
       if (key in this.keys) this.keys[key] = false;
     });
   }
@@ -129,10 +141,12 @@ export class PlayerControls {
     const zone = document.getElementById('joystick-zone');
     const base = document.getElementById('joystick-base');
     const thumb = document.getElementById('joystick-thumb');
+    const jumpBtn = document.getElementById('jump-btn');
 
     if ('ontouchstart' in window) {
       zone.style.display = 'block';
-      document.getElementById('hud').textContent = '左侧摇杆移动 · 右侧滑动转视角 · 点击 NPC 或屏幕交互';
+      if (jumpBtn) jumpBtn.style.display = 'flex';
+      document.getElementById('hud').textContent = '左侧摇杆移动 · 右侧滑动转视角 · 跳跃 · 点击 NPC 或屏幕交互';
     }
 
     let joystickCenter = { x: 0, y: 0 };
@@ -193,6 +207,19 @@ export class PlayerControls {
     this.domElement.addEventListener('touchend', () => {
       lastTouch = null;
     }, { passive: true });
+
+    if (jumpBtn) {
+      const queueJump = (e) => {
+        e.preventDefault();
+        this.jumpQueued = true;
+      };
+      jumpBtn.addEventListener('touchstart', queueJump, { passive: false });
+      jumpBtn.addEventListener('click', queueJump);
+    }
+  }
+
+  setColliders(colliders) {
+    this.colliders = colliders || [];
   }
 
   update(deltaTime) {
@@ -232,11 +259,25 @@ export class PlayerControls {
     }
 
     // Re-project position to sphere surface
-    const currentNormal = this.position.clone().normalize();
+    let currentNormal = this.position.clone().normalize();
+    currentNormal = this._resolveCollisions(currentNormal);
     const terrainRadius = getTerrainHeightAtPosition(
       this.noise2D, currentNormal.x, currentNormal.y, currentNormal.z
     );
-    const surfaceRadius = terrainRadius + this.playerHeight;
+    const isGrounded = this.jumpHeight <= 0.001 && this.verticalVelocity <= 0;
+    if (this.jumpQueued && isGrounded) {
+      this.verticalVelocity = this.jumpSpeed;
+    }
+    this.jumpQueued = false;
+
+    this.verticalVelocity -= this.gravity * deltaTime;
+    this.jumpHeight += this.verticalVelocity * deltaTime;
+    if (this.jumpHeight <= 0) {
+      this.jumpHeight = 0;
+      this.verticalVelocity = 0;
+    }
+
+    const surfaceRadius = terrainRadius + this.playerHeight + this.jumpHeight;
     this.position.copy(currentNormal.multiplyScalar(surfaceRadius));
 
     // Update camera
@@ -261,5 +302,39 @@ export class PlayerControls {
 
     this.camera.lookAt(lookTarget);
     this.camera.up.copy(normalAtPlayer);
+  }
+
+  _resolveCollisions(direction) {
+    if (this.jumpHeight > 0.42) return direction;
+
+    const resolved = direction.clone().normalize();
+    for (let i = 0; i < 3; i++) {
+      let moved = false;
+      this.colliders.forEach((collider) => {
+        const center = collider.centerDir;
+        if (!center) return;
+        const dot = THREE.MathUtils.clamp(resolved.dot(center), -1, 1);
+        const minAngle = collider.radius / SPHERE_RADIUS;
+        const angle = Math.acos(dot);
+        if (angle >= minAngle) return;
+
+        let away = resolved.clone().sub(center.clone().multiplyScalar(dot));
+        if (away.lengthSq() < 0.00001) {
+          away = new THREE.Vector3().crossVectors(center, new THREE.Vector3(0, 1, 0));
+          if (away.lengthSq() < 0.00001) {
+            away = new THREE.Vector3().crossVectors(center, new THREE.Vector3(1, 0, 0));
+          }
+        }
+
+        away.normalize();
+        resolved.copy(center)
+          .multiplyScalar(Math.cos(minAngle))
+          .add(away.multiplyScalar(Math.sin(minAngle)))
+          .normalize();
+        moved = true;
+      });
+      if (!moved) break;
+    }
+    return resolved;
   }
 }

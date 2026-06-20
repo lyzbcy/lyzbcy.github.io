@@ -3,6 +3,7 @@ import { placeOnSphere } from '../world/terrain.js';
 import { NPC_DATA } from './npc-data.js';
 import { withLife } from './npc-life-data.js';
 import { generateNPCSprite } from './npc-sprites.js';
+import { buildNPC3D } from './npc-3d-builder.js';
 
 // Merge life data (personality, schedule, home, face) onto each NPC
 const NPC_DATA_WITH_LIFE = withLife(NPC_DATA);
@@ -80,7 +81,22 @@ export function createAllNPCs(noise2D, posts) {
 function createSingleNPC(config) {
   const group = new THREE.Group();
 
-  const spriteMat = new THREE.SpriteMaterial({
+  // 3D 化：除星星布丁/周三涵（保留原2D精灵+表情包）外，其余用程序生成3D独特体型
+  const keep2D = (config.name==='星星布丁' || config.name==='周三涵' || config.face==='image');
+  let used3D = false;
+  if(!keep2D && config.accessory && config.accessory!=='none' && config.accessory!=='heart'){
+    try{
+      const npc3d = buildNPC3D(config);
+      npc3d.name = 'npc-3d';
+      npc3d.position.y = 0;
+      npc3d.userData.is3D = true;
+      npc3d.userData.baseY = 0;
+      group.add(npc3d);
+      used3D = true;
+    }catch(e){ console.warn('[npc] 3D build failed, fallback 2D:', config.name, e); }
+  }
+
+  const spriteMat = used3D ? new THREE.SpriteMaterial({transparent:true, opacity:0}) : new THREE.SpriteMaterial({
     map: null,
     transparent: true,
     depthWrite: false,
@@ -88,13 +104,14 @@ function createSingleNPC(config) {
   });
 
   const sprite = new THREE.Sprite(spriteMat);
-  sprite.scale.set(3.5, 3.5, 1);
+  sprite.scale.set(used3D ? 0.1 : 3.5, used3D ? 0.1 : 3.5, 1);
   sprite.position.y = 1.5;
   sprite.name = 'npc-sprite';
   group.add(sprite);
 
-  // Load the face texture: real sticker for main characters, procedural for others
-  if (config.face === 'image' && config.faceImage) {
+  // Load the face texture（3D模式跳过，用占位 sprite）
+  if(!used3D){
+    if (config.face === 'image' && config.faceImage) {
     const loader = new THREE.TextureLoader();
     loader.load(
       config.faceImage,
@@ -108,6 +125,7 @@ function createSingleNPC(config) {
     sprite.material.map = generateNPCSprite(config);
     sprite.material.needsUpdate = true;
   }
+  } // end if(!used3D)
 
   // === Fairy-tale base props (warm, not neon) ===
   const propColor = new THREE.Color(config.color);

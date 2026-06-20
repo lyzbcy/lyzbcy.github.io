@@ -1,0 +1,21 @@
+const { chromium } = require('playwright');
+(async () => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+  const errs=[];
+  page.on('pageerror',e=>errs.push(e.message));
+  page.on('console',m=>{if(m.type()==='error')errs.push(m.text())});
+  await page.goto('http://127.0.0.1:5176/world/ar/signbridge.html',{waitUntil:'domcontentloaded',timeout:20000});
+  await page.waitForTimeout(1200);
+  await page.click('#demo2');
+  await page.waitForTimeout(3500);
+  const recognized = await page.evaluate(()=>document.body.dataset.recognized);
+  console.log('演示识别词:', recognized);
+  await page.screenshot({path:'zeen-tools/signbridge-demo.png'});
+  const realErrs=errs.filter(e=>!/GPU stall|favicon|Could not load/i.test(e));
+  console.log('errors:', realErrs.length);
+  await browser.close();
+  let pass = realErrs.length===0;
+  console.log(pass?'\n=== SIGNBRIDGE PASSED ===':'\n=== SIGNBRIDGE CHECK ===');
+  process.exit(pass?0:1);
+})();

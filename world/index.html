@@ -487,6 +487,136 @@
       position: absolute; top: 50%; left: 50%;
       transform: translate(-50%, -50%);
     }
+    #jump-btn {
+      position: fixed;
+      right: 24px;
+      bottom: 48px;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.9);
+      backdrop-filter: blur(10px);
+      align-items: center;
+      justify-content: center;
+      font-size: 0.92rem;
+      letter-spacing: 0.08em;
+      display: none;
+      z-index: 20;
+      user-select: none;
+    }
+    #arcade-transition {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 50% 30%, rgba(255, 222, 165, 0.22), transparent 28%),
+        radial-gradient(circle at 18% 18%, rgba(255, 185, 204, 0.18), transparent 18%),
+        radial-gradient(circle at 82% 78%, rgba(132, 215, 255, 0.18), transparent 22%),
+        rgba(14, 10, 18, 0.88);
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      transition: opacity 0.45s ease;
+      pointer-events: none;
+    }
+    #arcade-transition.visible {
+      display: flex;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .arcade-loader {
+      width: min(88vw, 520px);
+      padding: 28px 28px 24px;
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(255,247,233,0.93), rgba(250,236,206,0.92));
+      border: 1px solid rgba(227, 190, 123, 0.58);
+      box-shadow: 0 28px 70px rgba(52, 28, 14, 0.28);
+      color: #704521;
+      text-align: center;
+    }
+    .arcade-loader-hero {
+      position: relative;
+      height: 124px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .arcade-loader-hero::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 14px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(176, 129, 73, 0.18);
+    }
+    .arcade-loader-emoji {
+      position: absolute;
+      left: 24px;
+      bottom: 24px;
+      font-size: 3.4rem;
+      animation: loaderWalk 3.4s ease-in-out infinite;
+      filter: drop-shadow(0 12px 12px rgba(108, 66, 24, 0.18));
+    }
+    .arcade-loader-bubble {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.68);
+      border: 1px solid rgba(196, 146, 76, 0.3);
+      color: #8a5b30;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+    .arcade-loader h2 {
+      font-size: 1.55rem;
+      margin-bottom: 8px;
+      font-family: 'Georgia', 'Microsoft YaHei', serif;
+    }
+    .arcade-loader p {
+      color: rgba(112, 69, 33, 0.82);
+      line-height: 1.8;
+      font-size: 0.94rem;
+    }
+    .arcade-loader-bar {
+      height: 8px;
+      margin: 18px 0 10px;
+      border-radius: 999px;
+      background: rgba(150, 100, 40, 0.12);
+      overflow: hidden;
+    }
+    .arcade-loader-bar span {
+      display: block;
+      width: 34%;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #f4b8c4, #f2c978, #84d7ff);
+      animation: loaderBar 1.35s ease-in-out infinite;
+    }
+    .arcade-loader-foot {
+      letter-spacing: 0.14em;
+      font-size: 0.72rem;
+      color: rgba(138, 91, 48, 0.72);
+    }
+    @keyframes loaderWalk {
+      0% { transform: translateX(0) rotate(-6deg); }
+      25% { transform: translateX(110px) rotate(4deg); }
+      50% { transform: translateX(230px) rotate(-5deg); }
+      75% { transform: translateX(330px) rotate(5deg); }
+      100% { transform: translateX(0) rotate(-6deg); }
+    }
+    @keyframes loaderBar {
+      0% { transform: translateX(-115%); }
+      100% { transform: translateX(320%); }
+    }
 
     #dialog-overlay {
       position: fixed; inset: 0; z-index: 50;
@@ -763,10 +893,10 @@
       <div class="key-icon">S</div>
       <div class="key-icon">D</div>
     </div>
-    <div>移动探索 · 鼠标转动视角 · Shift冲刺 · 点击交互</div>
+    <div>移动探索 · 鼠标转动视角 · Shift冲刺 · Space跳跃 · 点击交互</div>
   </div>
 
-  <div id="hud">WASD 移动 · Shift 冲刺 · 鼠标转动视角 · 点击 NPC 或建筑屏幕交互</div>
+  <div id="hud">WASD 移动 · Shift 冲刺 · Space 跳跃 · 鼠标转动视角 · 点击 NPC 或建筑屏幕交互</div>
 
   <!-- Mobile joystick -->
   <div id="joystick-zone">
@@ -774,6 +904,7 @@
       <div id="joystick-thumb"></div>
     </div>
   </div>
+  <div id="jump-btn">跳跃</div>
 
   <!-- Dialog overlay -->
   <div id="dialog-overlay">
@@ -789,6 +920,19 @@
     </div>
   </div>
 
+  <div id="arcade-transition" aria-hidden="true">
+    <div class="arcade-loader">
+      <div class="arcade-loader-hero">
+        <div class="arcade-loader-emoji">૮ ˶ᵔ ᵕ ᵔ˶ ა</div>
+      </div>
+      <div class="arcade-loader-bubble" id="arcade-loader-bubble">游戏厅开门中，先把星星灯一盏一盏点亮。</div>
+      <h2>童话游戏厅</h2>
+      <p>正在带你进入新的 AR 房间，街机会比主世界更热闹一点，也更适合展示这次作业真正的重点。</p>
+      <div class="arcade-loader-bar"><span></span></div>
+      <div class="arcade-loader-foot">ARCADE TRANSITION</div>
+    </div>
+  </div>
+
   <script type="module" src="/src/main.js"></script>
   <script>
     // Start screen logic
@@ -798,7 +942,19 @@
     const controlsHint = document.getElementById('controls-hint');
     const loadingScreen = document.getElementById('loading');
     const introShell = document.getElementById('intro-shell');
-    window.__WORLD_STATE = { entered: false };
+    const arcadeTransition = document.getElementById('arcade-transition');
+    const arcadeBubble = document.getElementById('arcade-loader-bubble');
+    const params = new URLSearchParams(window.location.search);
+    const autoEnterWorld = params.get('spawn') === 'arcade';
+    window.__WORLD_STATE = { entered: autoEnterWorld };
+    const arcadeThoughts = [
+      '游戏厅开门中，先把星星灯一盏一盏点亮。',
+      '里面的街机在预热啦，希望一会儿别让我丢脸。',
+      '等一下要看到更厉害的 AR 作品了，先深呼吸一下。',
+      '可爱一点，再可爱一点，老师应该会喜欢这个进场。'
+    ];
+    let arcadeThoughtIndex = 0;
+    let arcadeThoughtTimer = null;
 
     // Observe loading progress changes
     const loadBar = document.getElementById('load-bar');
@@ -813,6 +969,12 @@
       }
     });
     observer.observe(loadBar, { attributes: true, attributeFilter: ['style'] });
+
+    if (autoEnterWorld) {
+      loadingScreen.classList.add('hidden');
+      loadingScreen.style.display = 'none';
+      hud.classList.add('visible');
+    }
 
     // Intro parallax
     window.addEventListener('pointermove', (event) => {
@@ -841,6 +1003,24 @@
           canvas.requestPointerLock();
         }
       }, 1200);
+    });
+
+    window.addEventListener('world:arcade-enter', (event) => {
+      const destination = event.detail?.destination || './arcade.html';
+      arcadeTransition.classList.add('visible');
+      arcadeBubble.textContent = arcadeThoughts[arcadeThoughtIndex % arcadeThoughts.length];
+      arcadeThoughtIndex += 1;
+
+      if (arcadeThoughtTimer) clearInterval(arcadeThoughtTimer);
+      arcadeThoughtTimer = setInterval(() => {
+        arcadeBubble.textContent = arcadeThoughts[arcadeThoughtIndex % arcadeThoughts.length];
+        arcadeThoughtIndex += 1;
+      }, 1200);
+
+      setTimeout(() => {
+        clearInterval(arcadeThoughtTimer);
+        window.location.href = destination;
+      }, 2800);
     });
   </script>
 </body>

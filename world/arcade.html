@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>童话游戏厅</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #10151d;
+      color: #f8f3e8;
+      font-family: "Microsoft YaHei", sans-serif;
+    }
+    #arcade-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    #crosshair {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      z-index: 10;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.55);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      box-shadow: 0 0 18px rgba(132, 215, 255, 0.18);
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    #crosshair.active {
+      border-color: #f2c978;
+      transform: translate(-50%, -50%) scale(1.45);
+      box-shadow: 0 0 22px rgba(242, 201, 120, 0.42);
+    }
+    #hud {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      z-index: 12;
+      transform: translateX(-50%);
+      padding: 11px 15px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(14, 18, 26, 0.62);
+      backdrop-filter: blur(12px);
+      color: rgba(248, 243, 232, 0.86);
+      font-size: 13px;
+      pointer-events: none;
+      text-align: center;
+      max-width: calc(100vw - 28px);
+      line-height: 1.6;
+    }
+    #machine-panel {
+      position: fixed;
+      left: 50%;
+      bottom: 78px;
+      z-index: 14;
+      width: min(460px, calc(100vw - 28px));
+      padding: 16px 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(232, 201, 138, 0.42);
+      background: linear-gradient(180deg, rgba(255, 247, 232, 0.96), rgba(244, 226, 191, 0.93));
+      box-shadow: 0 22px 52px rgba(30, 18, 10, 0.24);
+      color: #5d381e;
+      transform: translateX(-50%) translateY(16px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+    #ar-window {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      background:
+        radial-gradient(circle at 50% 12%, rgba(255, 226, 166, 0.18), transparent 28%),
+        rgba(13, 16, 23, 0.74);
+      backdrop-filter: blur(10px);
+    }
+    #ar-window.visible {
+      display: flex;
+    }
+    .ar-shell {
+      width: min(980px, 96vw);
+      height: min(720px, 88vh);
+      display: grid;
+      grid-template-rows: auto 1fr;
+      overflow: hidden;
+      border-radius: 26px;
+      border: 1px solid rgba(232, 201, 138, 0.45);
+      background: linear-gradient(180deg, rgba(255, 247, 232, 0.97), rgba(244, 226, 191, 0.95));
+      box-shadow: 0 28px 72px rgba(0, 0, 0, 0.32);
+    }
+    .ar-titlebar {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px 12px 20px;
+      color: #5d381e;
+      border-bottom: 1px solid rgba(163, 115, 58, 0.22);
+    }
+    #ar-title {
+      font-family: Georgia, "Microsoft YaHei", serif;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+    #ar-close {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(163, 115, 58, 0.25);
+      background: rgba(255,255,255,0.62);
+      color: #6b4426;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+    #ar-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #111820;
+    }
+    #machine-panel.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+      pointer-events: auto;
+    }
+    #machine-panel h1 {
+      font-family: Georgia, "Microsoft YaHei", serif;
+      font-size: 1.18rem;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+    #machine-panel p {
+      color: rgba(93, 56, 30, 0.78);
+      font-size: 0.9rem;
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+    .panel-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .panel-actions a,
+    .panel-actions button {
+      min-height: 42px;
+      border-radius: 999px;
+      border: none;
+      padding: 0 16px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .panel-actions a {
+      flex: 1;
+      color: #fdf8ec;
+      background: linear-gradient(180deg, #28445e, #162a3d);
+      box-shadow: 0 10px 18px rgba(22, 42, 61, 0.22);
+    }
+    .panel-actions button {
+      color: #6b4426;
+      background: rgba(255,255,255,0.64);
+      border: 1px solid rgba(163, 115, 58, 0.26);
+    }
+    #back-link {
+      position: fixed;
+      left: 18px;
+      top: 18px;
+      z-index: 16;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(14, 18, 26, 0.55);
+      backdrop-filter: blur(12px);
+      color: rgba(248, 243, 232, 0.88);
+      text-decoration: none;
+      font-size: 13px;
+    }
+    #joystick-zone {
+      position: fixed;
+      left: 24px;
+      bottom: 24px;
+      z-index: 18;
+      width: 116px;
+      height: 116px;
+      display: none;
+    }
+    #joystick-base {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.22);
+      backdrop-filter: blur(8px);
+      position: relative;
+    }
+    #joystick-thumb {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.42);
+      transform: translate(-50%, -50%);
+    }
+    @media (max-width: 720px) {
+      #hud {
+        left: 14px;
+        right: 14px;
+        bottom: 12px;
+        transform: none;
+        border-radius: 18px;
+      }
+      #machine-panel {
+        bottom: 86px;
+      }
+      .panel-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="arcade-canvas"></canvas>
+  <div id="crosshair"></div>
+  <a id="back-link" href="./index.html?spawn=arcade">返回门口</a>
+  <div id="hud">WASD 移动 · Shift 加速 · Space 跳跃 · 鼠标转向 · 对准街机点击进入 AR · 身后金色门返回</div>
+  <section id="machine-panel" aria-live="polite">
+    <h1 id="machine-title"></h1>
+    <p id="machine-desc"></p>
+    <div class="panel-actions">
+      <a id="machine-link" href="#">进入 AR</a>
+      <button id="panel-close" type="button">收起</button>
+    </div>
+  </section>
+  <section id="ar-window" aria-modal="true" role="dialog">
+    <div class="ar-shell">
+      <div class="ar-titlebar">
+        <div id="ar-title">AR 街机</div>
+        <button id="ar-close" type="button" aria-label="关闭 AR 窗口">×</button>
+      </div>
+      <iframe id="ar-frame" title="AR 街机窗口" allow="camera; microphone; fullscreen; autoplay"></iframe>
+    </div>
+  </section>
+  <div id="joystick-zone">
+    <div id="joystick-base">
+      <div id="joystick-thumb"></div>
+    </div>
+  </div>
+  <script type="module" src="/src/arcade/main.js"></script>
+</body>
+</html>

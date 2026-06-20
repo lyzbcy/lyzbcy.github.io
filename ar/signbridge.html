@@ -1,0 +1,67 @@
+---
+layout: none
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>AR 手语桥</title>
+<link rel="stylesheet" href="./shared/arcade-shell.css">
+<style>
+  #current-word{position:fixed;left:50%;top:30%;transform:translate(-50%,-50%);z-index:7;text-align:center;pointer-events:none;opacity:0;transition:opacity .3s}
+  #current-word.show{opacity:1}
+  #current-word .big{font-family:Georgia,"Microsoft YaHei",serif;font-size:clamp(3rem,10vw,5.5rem);color:#ffdf8c;text-shadow:0 0 30px rgba(255,223,140,.7),0 4px 12px rgba(0,0,0,.5);line-height:1}
+  #current-word .conf{font-size:.9rem;color:rgba(255,247,232,.7);margin-top:8px}
+  #sentence-box{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:8;width:min(720px,90vw);padding:16px 20px;border-radius:22px;background:rgba(255,247,232,.94);color:#593a20;border:1px solid rgba(232,201,138,.5);box-shadow:0 18px 46px rgba(0,0,0,.22)}
+  #sentence-box .label{font-size:.74rem;color:rgba(89,58,32,.6);letter-spacing:.1em;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center}
+  #sentence-box .text{font-size:1.4rem;line-height:1.6;font-family:Georgia,"Microsoft YaHei",serif;min-height:1.6em}
+  #sentence-box .text.empty{color:rgba(89,58,32,.3)}
+  #sentence-actions{display:flex;gap:8px}
+  #sentence-actions button{font-size:.72rem;padding:4px 10px;border-radius:999px;background:rgba(232,201,138,.3);border:1px solid rgba(232,201,138,.5);color:#593a20;cursor:pointer}
+  #word-hint{position:fixed;right:18px;bottom:200px;z-index:8;max-width:200px;max-height:35vh;overflow-y:auto;padding:10px;border-radius:14px;background:rgba(16,22,30,.6);backdrop-filter:blur(10px);color:rgba(255,247,232,.7);font-size:.72rem;line-height:1.7}
+</style>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+</head>
+<body data-ar-mode="boot" data-recognized="" data-sentence-length="0">
+<video id="video" autoplay playsinline muted></video>
+<canvas id="scene"></canvas>
+<div id="veil"></div>
+<div id="topbar">
+  <section id="brand">
+    <h1>AR 手语桥</h1>
+    <p>实物：你的双手 · 虚拟物体：手势词卡片、句子区 · 交互：做手势识别成词，拼句朗读。解决：听障人士沟通障碍（公益无障碍）。</p>
+  </section>
+  <section id="score">
+    <div class="stat"><strong id="word-count">0</strong><span>已识别词</span></div>
+  </section>
+</div>
+<div id="current-word"><div class="big"></div><div class="conf"></div></div>
+<div id="sentence-box">
+  <div class="label"><span>识别结果（做手势会自动加入）</span><span id="sentence-actions"><button id="speak-btn">朗读</button><button id="copy-btn">复制</button><button id="clear-btn">清空</button></span></div>
+  <div class="text empty" id="sentence">还没有识别的词，做出手势试试</div>
+</div>
+<div id="word-hint">可识别：爱/帮助/家/朋友/我/你/好/加油/谢谢/是/漂亮/吃饭/学习/对不起/否/再见</div>
+<section id="panel">
+  <p id="brief">开启摄像头，做手势会被识别成词并加入句子。点"朗读"用语音读出句子。面向听障沟通的公益无障碍项目（基于 MediaPipe 手部关键点的启发式手势分类）。</p>
+  <div id="actions">
+    <button class="primary" id="camera">开启摄像头</button>
+    <button class="ghost" id="demo">无摄像头演示</button>
+    <a class="ghost" href="/ar/" onclick="if(window.parent!==window){event.preventDefault();parent.postMessage({type:'ar:close'},'*')}">返回展区</a>
+  </div>
+</section>
+<div id="permission">
+  <div class="perm-card">
+    <h2>AR 手语桥</h2>
+    <p>用摄像头识别你的双手手势（MediaPipe 21 关键点），识别成常用手势词并拼成句子，还能语音朗读。面向听障沟通的公益无障碍项目。多摄像头可在下方选择。</p>
+    <div id="actions">
+      <button class="primary" id="cam2">开启摄像头</button>
+      <button class="ghost" id="demo2">无摄像头演示</button>
+    </div>
+  </div>
+</div>
+<script type="module" src="./signbridge-app.js"></script>
+</body>
+</html>

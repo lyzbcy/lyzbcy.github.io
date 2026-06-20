@@ -4,11 +4,12 @@ import * as THREE from 'three';
  * Interaction system using raycaster for NPC/screen clicking
  */
 export class InteractionManager {
-  constructor(camera, domElement, interactables, dialog) {
+  constructor(camera, domElement, interactables, dialog, options = {}) {
     this.camera = camera;
     this.domElement = domElement;
     this.interactables = interactables;
     this.dialog = dialog;
+    this.onInteract = options.onInteract || null;
     this.raycaster = new THREE.Raycaster();
     this.raycaster.far = 15; // Increased for spherical world
     this.crosshair = document.getElementById('crosshair');
@@ -41,7 +42,9 @@ export class InteractionManager {
       const hit = intersects[0].object;
       const data = hit.userData.type ? hit.userData : hit.userData._parentData;
 
-      if (data && (data.type === 'npc' || data.type === 'screen')) {
+      if (data?.type === 'arcade' && this.onInteract) {
+        this.onInteract(data);
+      } else if (data && (data.type === 'npc' || data.type === 'screen')) {
         this.dialog.show(data);
       }
     }
@@ -61,7 +64,9 @@ export class InteractionManager {
       if (this.interactPill && data) {
         const label = data.type === 'npc'
           ? `和 ${data.name} 对话`
-          : `查看 ${data.label}`;
+          : data.type === 'arcade'
+            ? `进入 ${data.label}`
+            : `查看 ${data.label}`;
         this.interactPill.textContent = `${label} · 点击交互`;
         this.interactPill.classList.add('visible');
       }

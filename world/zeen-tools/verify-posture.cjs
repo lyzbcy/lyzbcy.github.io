@@ -1,0 +1,28 @@
+const { chromium } = require('playwright');
+(async () => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+  const errs=[];
+  page.on('pageerror',e=>errs.push(e.message));
+  page.on('console',m=>{if(m.type()==='error')errs.push(m.text())});
+  await page.goto('http://127.0.0.1:5176/world/ar/posture.html',{waitUntil:'domcontentloaded',timeout:20000});
+  await page.waitForTimeout(1200);
+  const initMode = await page.evaluate(()=>document.body.dataset.mode);
+  console.log('初始模式:', initMode);
+  await page.click('#demo2');
+  await page.waitForTimeout(1500);
+  const mode = await page.evaluate(()=>document.body.dataset.arMode);
+  const score = await page.evaluate(()=>document.body.dataset.postureScore);
+  console.log('演示模式:', mode, '| 评分:', score);
+  await page.click('#mode-fitness');
+  await page.waitForTimeout(300);
+  const afterMode = await page.evaluate(()=>document.body.dataset.mode);
+  console.log('切健身后:', afterMode);
+  await page.screenshot({path:'zeen-tools/posture-demo.png'});
+  const realErrs=errs.filter(e=>!/GPU stall|favicon|Could not load/i.test(e));
+  console.log('errors:', realErrs.length);
+  await browser.close();
+  let pass = initMode==='office' && mode==='mouse' && afterMode==='fitness' && realErrs.length===0;
+  console.log(pass?'\n=== POSTURE PASSED ===':'\n=== POSTURE CHECK ===');
+  process.exit(pass?0:1);
+})();
