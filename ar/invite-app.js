@@ -148,15 +148,35 @@ let mode='boot', lastTracked=false;
 
 // 正式触发图：pinball 弹珠台图（NFT 描述符已下载到本地 data/invite/）
 const NFT_URL = './data/invite/invite';
+// 摄像头标定参数：必须自托管！ar.js 3.x 没有发布到 npm，原 npm 路径全部 404，
+// 会导致 loadCamera() 抛错、init() 回调永不触发、tracking 永远不工作。
+const CAMERA_PARA_URL = './data/invite/camera_para.dat';
+// 调试埋点：手机上没控制台，所以每条 LOG 同时进历史 → 显示到屏幕浮层，方便截图反馈
+const dbgLog = [];
+function LOG(...a){
+  console.log('%c[AR-INVITE]', 'color:#e8920c;font-weight:bold', ...a);
+  const msg = a.map(x => {
+    if(x instanceof Error) return x.message;
+    if(typeof x === 'object') { try { return JSON.stringify(x); } catch(_) { return String(x); } }
+    return String(x);
+  }).join(' ');
+  dbgLog.push(msg);
+  if(dbgLog.length > 60) dbgLog.shift();
+}
+window.__arInviteLog = () => dbgLog.join('\n');
 
 async function startCamera(){
+  LOG('startCamera 被点击');
   try{
     game.setCameraAttempted('true');
     // 用用户在 permission 卡选择的摄像头（默认后置，对准邀请函图）
     const cardEl = document.querySelector('#permission .perm-card');
     const sel = (cardEl && cardEl.__camSelector) ? cardEl.__camSelector.getSel() : {facingMode:'environment'};
+    LOG('请求摄像头 sel=', sel);
     const stream = await getUserCameraStream(sel);
+    LOG('摄像头流获取成功');
     video.srcObject = stream; await video.play();
+    LOG('video.play() 成功');
     game.setCameraReady('true'); game.setMode('camera'); mode='camera';
     permission.classList.add('hidden'); panel.style.display='none';
     initAR();
@@ -164,24 +184,59 @@ async function startCamera(){
     game.start();
   }catch(e){
     game.setError(e); game.setMode('fallback');
+    LOG('startCamera 捕获异常 ✗', e);
     showToast('摄像头不可用，进入演示模式', 2000);
     startDemo();
   }
 }
 
 function initAR(){
-  arToolkitSource = new ArToolkitSource({sourceElement:video});
-  arToolkitSource.init(()=>{ onResize(); }, ()=>onResize());
-  arToolkitContext = new ArToolkitContext({
-    detectionMode:'mono',
-    cameraParametersUrl:'https://cdn.jsdelivr.net/npm/ar.js@3.4.5/data/data/camera_para.dat',
-    canvasWidth:480, canvasHeight:640
-  });
-  arToolkitContext.init(()=>onResize());
-  arControls = new ArMarkerControls(arToolkitContext, inviteGroup, {
-    type:'nft', descriptorsUrl:NFT_URL, changeMatrixMode:'cameraTransformMatrix'
-  });
-  animate();
+  LOG('initAR 开始');
+  try{
+    arToolkitSource = new ArToolkitSource({sourceElement:video});
+    arToolkitSource.init(
+      ()=>{ LOG('ArToolkitSource.init 成功'); onResize(); },
+      (e)=>{ LOG('ArToolkitSource.init 失败', e); onResize(); }
+    );
+    LOG('ArToolkitContext 创建中，cameraPara=', CAMERA_PARA_URL);
+    arToolkitContext = new ArToolkitContext({
+      detectionMode:'mono',
+      cameraParametersUrl: CAMERA_PARA_URL,
+      canvasWidth:480, canvasHeight:640
+    });
+    // init() 是异步的（内部 await loadCamera），失败时回调永不触发 —— 这正是
+    // "图片对准了但模型不出现" 的典型症状。这里抓回调错误 + 返回值（部分版本 init 返回 Promise）。
+    let initRet;
+    try{
+      initRet = arToolkitContext.init(
+        ()=>{ LOG('ArToolkitContext.init 成功 ✓ arController=', !!(arToolkitContext.arController)); onResize(); },
+        (err)=>{ LOG('ArToolkitContext.init 回调 err=', err); }
+      );
+    }catch(e){
+      LOG('ArToolkitContext.init 同步抛错 ✗', e);
+      throw e;
+    }
+    if(initRet && typeof initRet.then === 'function'){
+      initRet.then(()=>LOG('ArToolkitContext.init Promise resolve ✓'))
+             .catch(err=>LOG('ArToolkitContext.init Promise REJECT ✗', err));
+    } else {
+      LOG('ArToolkitContext.init() 未返回 Promise（走回调模式）');
+    }
+    try{
+      arControls = new ArMarkerControls(arToolkitContext, inviteGroup, {
+        type:'nft', descriptorsUrl:NFT_URL, changeMatrixMode:'cameraTransformMatrix'
+      });
+      LOG('ArMarkerControls(NFT) 创建成功 descriptorsUrl=', NFT_URL);
+    }catch(e){
+      LOG('ArMarkerControls 构造抛错 ✗', e);
+      throw e;
+    }
+    LOG('initAR 完成，启动 animate 循环');
+    animate();
+  }catch(e){
+    LOG('initAR 顶层抛错 ✗', e);
+    game.setError(e);
+  }
 }
 
 function onResize(){
@@ -193,22 +248,47 @@ function onResize(){
 }
 addEventListener('resize', onResize);
 
+// ---------- 可视化调试浮层（手机上没控制台，必须把状态显示到屏幕上）----------
+const dbg = document.createElement('div');
+dbg.id = 'ar-debug';
+dbg.style.cssText = 'position:fixed;left:6px;top:6px;z-index:99;font:11px/1.4 monospace;background:rgba(0,0,0,.72);color:#9f9;padding:6px 8px;border-radius:6px;max-width:62vw;pointer-events:none;white-space:pre-wrap;display:none';
+document.body.appendChild(dbg);
+function dbgShow(text){ dbg.style.display = 'block'; dbg.textContent = text; }
+
+let trackFrames = 0;
+let updateErrCount = 0;
+
 function animate(){
   requestAnimationFrame(animate);
   const dt = 0.016;
   if(mode==='camera' && arToolkitContext){
+    trackFrames++;
+    const arCtrl = arToolkitContext.arController;
     if(arToolkitSource && arToolkitSource.ready!==false){
-      try{ arToolkitContext.update(arToolkitSource.domElement); }catch(e){}
+      try{ arToolkitContext.update(arToolkitSource.domElement); }
+      catch(e){ updateErrCount++; if(updateErrCount<=3) LOG('update() 抛错', e.message); }
     }
     scene.visible = camera.visible;
     const tracked = camera.visible;
     if(tracked && !lastTracked){
       lastTracked=true; game.mark('tracking','true');
+      LOG('★ 首次识别成功！开始播放动画');
       if(phase==='idle') startSequence();
     } else if(!tracked && lastTracked){
       lastTracked=false; game.mark('tracking','false');
     }
     if(phase!=='idle') updateAnimation(dt);
+    // 每秒刷新一次调试浮层（避免刷屏）
+    if(trackFrames % 30 === 0){
+      dbgShow(
+        `mode: ${mode}\n` +
+        `arController: ${arCtrl ? '✓已建' : '✗未建(loading)'}\n` +
+        `tracking: ${tracked ? '★识别中' : '未识别'}\n` +
+        `frames: ${trackFrames}  updateErr: ${updateErrCount}\n` +
+        `phase: ${phase}\n` +
+        `--- 最近日志 ---\n` + dbgLog.slice(-4).join('\n')
+      );
+    }
   } else if(mode==='demo'){
     scene.visible = true;
     camera.visible = true;
