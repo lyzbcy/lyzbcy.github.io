@@ -34,6 +34,7 @@
   <p id="brief">开启摄像头，对准「捞鱼世界邀请函」图（可打印或显示在另一手机上）。3D 星球会从图中浮起、光环旋转、粒子绽放。识别不到可点"演示"手动播放。iOS 请用 Safari，微信内打开请点右上角用系统浏览器。</p>
   <div id="actions">
     <button class="primary" id="camera">开启摄像头</button>
+    <a class="ghost" href="./invite-image.png" download="捞鱼世界邀请函.png" style="text-decoration:none">下载邀请函图</a>
     <button class="ghost" id="demo">演示动画</button>
     <a class="ghost" href="/ar/" onclick="if(window.parent!==window){event.preventDefault();parent.postMessage({type:'ar:close'},'*')}">返回展区</a>
   </div>
@@ -41,9 +42,19 @@
 <div id="permission">
   <div class="perm-card">
     <h2>AR 邀请函</h2>
-    <p>用摄像头识别「捞鱼世界邀请函」图（AR.js 图像追踪 NFT），3D 星球从图中浮起的奇幻体验。识别不到可用演示模式。iOS 请用 Safari。</p>
+    <div style="text-align:left;background:rgba(232,201,138,.15);border-radius:14px;padding:12px 14px;margin-bottom:14px">
+      <div style="font-family:Georgia,serif;font-size:.95rem;color:#593a20;margin-bottom:6px">怎么玩</div>
+      <ol style="font-size:.82rem;line-height:1.8;color:rgba(89,58,32,.85);padding-left:18px;margin:0">
+        <li>点下方<b>下载邀请函图</b>，打印出来或显示在另一台手机上</li>
+        <li>开启摄像头，把摄像头对准这张邀请函图</li>
+        <li>3D 星球会从图中浮起、光环旋转、粒子绽放</li>
+        <li>识别不到？点<b>演示动画</b>也能看完整效果</li>
+      </ol>
+      <div style="font-size:.72rem;color:rgba(89,58,32,.6);margin-top:8px">提示：iOS 请用 Safari，微信内打开请点右上角「···」用系统浏览器</div>
+    </div>
     <div id="actions">
       <button class="primary" id="cam2">开启摄像头</button>
+      <a class="ghost" href="./invite-image.png" download="捞鱼世界邀请函.png" style="text-decoration:none">下载邀请函图</a>
       <button class="ghost" id="demo2">演示动画</button>
     </div>
   </div>
