@@ -34,46 +34,50 @@ function L(msg){
   console.log(msg);
 }
 
-// ★ 关键：拦截 window.Worker，wrap 它的所有消息（NFT 检测的底层真相）
+// ★ 关键：拦截 window.Worker，监听它的所有消息（NFT 检测的底层真相）
+// 用 addEventListener('message') 而非覆写 onmessage —— 后者会被 ar-threex 的赋值覆盖，
+// 而且之前的 defineProperty 写法可能破坏 onmessage 流程，导致"看不到"回消息（假象）。
 let workerMsgs = [];
 const _OrigWorker = window.Worker;
 window.Worker = class NFTSpy extends _OrigWorker {
   constructor(a, b){
     super(a, b);
     L('★ Worker 被创建（NFT 引擎启动）');
-    // wrap onmessage 的 setter
-    let _userHandler = null;
     const self = this;
-    Object.defineProperty(self, 'onmessage', {
-      get(){ return _userHandler; },
-      set(fn){
-        _userHandler = function(ev){
-          if(ev && ev.data){
-            const t = ev.data.type;
-            if(['endLoading','loaded','found','markerInfos','not found','error'].includes(t) || typeof t === 'string'){
-              workerMsgs.push(t);
-              if(workerMsgs.length>500) workerMsgs.shift();
-              if(t !== 'found' && t !== 'not found'){  // found/not found 太频繁，只记一次
-                L(`◀ Worker→主线程 msg.type="${t}" ${t==='markerInfos'?'(描述符元数据，=描述符加载成功)':''} ${t==='endLoading'?'(=NFT加载完成,触发arjs-nft-loaded)':''}`);
-              }
-            }
-          }
-          if(fn) return fn.call(this, ev);
-        };
+    // 监听 Worker 发来的所有消息（capture，完全独立于 onmessage）
+    self.addEventListener('message', function(ev){
+      if(ev && ev.data){
+        const t = ev.data.type;
+        workerMsgs.push(t);
+        if(workerMsgs.length>500) workerMsgs.shift();
+        if(t !== 'found' && t !== 'not found'){
+          L(`◀ Worker→主线程 msg.type="${t}" ${t==='markerInfos'?'(描述符元数据=加载成功)':''} ${t==='endLoading'?'(=NFT加载完成)':''} ${t==='loaded'?'(投影矩阵)':''}`);
+        }
       }
+    }, true);
+    // 监听 Worker 出错（脚本错误、消息反序列化失败等）
+    self.addEventListener('error', function(ev){
+      L(`✗ Worker.error: ${ev.message} filename=${ev.filename}:${ev.lineno} (Worker内部JS抛错)`);
     });
-    // wrap postMessage
+    self.addEventListener('messageerror', function(ev){
+      L(`✗ Worker.messageerror: 消息反序列化失败 (可能跨域/数据格式问题) data=${JSON.stringify(ev.data).substr(0,200)}`);
+    });
+    // 监听 unhandledrejection（Worker内 Promise reject 没被catch）
+    self.addEventListener('rejectionhandled', e=>L('Worker rejectionhandled'));
+    // wrap postMessage（不改原逻辑，只记录）
     const _pm = self.postMessage.bind(self);
     self.postMessage = function(msg, transfer){
       if(msg && msg.type){
-        if(msg.type==='init') L(`▶ 主线程→Worker msg.type="init" (启动NFT: 加载camera_para+描述符)`);
-        else if(msg.type==='process') { /* 太频繁，不记 */ }
+        if(msg.type==='init') L(`▶ 主线程→Worker msg.type="init" pw=${msg.pw} ph=${msg.ph} marker=${msg.marker} param=${msg.param}`);
+        else if(msg.type==='process') { /* 每帧，不记 */ }
         else L(`▶ 主线程→Worker msg.type="${msg.type}"`);
       }
       return _pm(msg, transfer);
     };
   }
 };
+// 捕获全局未处理的 Promise rejection（Worker 内 fetch 失败如果逃逸到这里）
+window.addEventListener('unhandledrejection', e=>L(`✗ 全局 unhandledrejection: ${e.reason && (e.reason.message||e.reason)}`));
 
 // 监听 NFT 事件
 window.addEventListener('arjs-nft-loaded', ()=>L('★ EVENT arjs-nft-loaded (=NFT描述符全部加载完成，检测可开始)'));
