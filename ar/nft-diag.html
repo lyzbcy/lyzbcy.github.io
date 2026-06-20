@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>NFT 诊断</title>
+<style>
+  body{margin:0;background:#111820;color:#9f9;font:12px/1.5 monospace;overflow:hidden}
+  #log{position:fixed;left:0;top:0;width:100%;height:100%;overflow:auto;padding:6px;box-sizing:border-box;white-space:pre-wrap;background:rgba(0,0,0,.85)}
+  #start{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);padding:14px 28px;font-size:1rem;background:#e8920c;color:#fff;border:none;border-radius:999px;z-index:10}
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js",
+  "threex": "https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@master/three.js/build/ar-threex.mjs"
+}}
+</script>
+</head>
+<body>
+<div id="log">点下方按钮开始诊断…</div>
+<button id="start">开启摄像头诊断</button>
+<script type="module">
+import * as THREE from 'three';
+import { ArToolkitSource, ArToolkitContext, ArMarkerControls } from 'threex';
+
+const logEl = document.getElementById('log');
+const lines = [];
+function L(msg){
+  const t = new Date().toISOString().substr(11,12);
+  lines.push(`[${t}] ${msg}`);
+  if(lines.length>200) lines.shift();
+  logEl.textContent = lines.join('\n');
+  logEl.scrollTop = logEl.scrollHeight;
+  console.log(msg);
+}
+
+// ★ 关键：拦截 window.Worker，wrap 它的所有消息（NFT 检测的底层真相）
+let workerMsgs = [];
+const _OrigWorker = window.Worker;
+window.Worker = class NFTSpy extends _OrigWorker {
+  constructor(a, b){
+    super(a, b);
+    L('★ Worker 被创建（NFT 引擎启动）');
+    // wrap onmessage 的 setter
+    let _userHandler = null;
+    const self = this;
+    Object.defineProperty(self, 'onmessage', {
+      get(){ return _userHandler; },
+      set(fn){
+        _userHandler = function(ev){
+          if(ev && ev.data){
+            const t = ev.data.type;
+            if(['endLoading','loaded','found','markerInfos','not found','error'].includes(t) || typeof t === 'string'){
+              workerMsgs.push(t);
+              if(workerMsgs.length>500) workerMsgs.shift();
+              if(t !== 'found' && t !== 'not found'){  // found/not found 太频繁，只记一次
+                L(`◀ Worker→主线程 msg.type="${t}" ${t==='markerInfos'?'(描述符元数据，=描述符加载成功)':''} ${t==='endLoading'?'(=NFT加载完成,触发arjs-nft-loaded)':''}`);
+              }
+            }
+          }
+          if(fn) return fn.call(this, ev);
+        };
+      }
+    });
+    // wrap postMessage
+    const _pm = self.postMessage.bind(self);
+    self.postMessage = function(msg, transfer){
+      if(msg && msg.type){
+        if(msg.type==='init') L(`▶ 主线程→Worker msg.type="init" (启动NFT: 加载camera_para+描述符)`);
+        else if(msg.type==='process') { /* 太频繁，不记 */ }
+        else L(`▶ 主线程→Worker msg.type="${msg.type}"`);
+      }
+      return _pm(msg, transfer);
+    };
+  }
+};
+
+// 监听 NFT 事件
+window.addEventListener('arjs-nft-loaded', ()=>L('★ EVENT arjs-nft-loaded (=NFT描述符全部加载完成，检测可开始)'));
+window.addEventListener('arjs-nft-init-data', e=>L(`★ EVENT arjs-nft-init-data detail=${JSON.stringify(e.detail)}`));
+// ★ 关键：arjs-video-loaded 是 NFT worker init 的前置条件！没它，描述符永不加载
+window.addEventListener('arjs-video-loaded', e=>L(`★ EVENT arjs-video-loaded (NFT worker init的前置条件！component=${e.detail&&e.detail.component?e.detail.component.tagName+'#'+e.detail.component.id:'?'})`));
+
+// 拦截网络请求看描述符加载
+const _xhr = XMLHttpRequest.prototype.open;
+XMLHttpRequest.prototype.open = function(method, url){
+  if(/invite|camera_para|\.fset|\.iset/i.test(url)){
+    this.addEventListener('load', ()=>L(`NET ${this.status} ${url} (${this.response?this.response.byteLength||this.response.length:0} bytes)`));
+    this.addEventListener('error', ()=>L(`NET ✗失败 ${url}`));
+  }
+  return _xhr.apply(this, arguments);
+};
+
+document.getElementById('start').onclick = async ()=>{
+  L('=== 开始 NFT 诊断 ===');
+  L('three版本: ' + THREE.REVISION);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(0.8*180/Math.PI, 640/480);
+  scene.add(camera);
+  const renderer = new THREE.WebGLRenderer({alpha:true});
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.domElement.style.position='fixed'; renderer.domElement.style.inset='0'; renderer.domElement.style.zIndex='-1';
+  document.body.appendChild(renderer.domElement);
+
+  L('创建 ArToolkitSource (webcam)...');
+  const source = new ArToolkitSource({sourceType:'webcam', sourceWidth:480, sourceHeight:640});
+  source.init(
+    ()=>L('✓ ArToolkitSource.init 成功 ready=' + source.ready + ' domElement=' + (source.domElement?source.domElement.tagName+'#'+source.domElement.id:'null')),
+    (e)=>L('✗ ArToolkitSource.init 失败: ' + (e&&e.message||e))
+  );
+
+  L('创建 ArToolkitContext...');
+  const ctx = new ArToolkitContext({
+    detectionMode:'mono',
+    cameraParametersUrl:'./data/invite/camera_para.dat',
+    canvasWidth:480, canvasHeight:640
+  });
+  ctx.init(()=>{
+    L('✓ ArToolkitContext.init 成功');
+    camera.projectionMatrix.copy(ctx.getProjectionMatrix());
+    L('✓ 已 copy 投影矩阵');
+  });
+
+  L('创建 ArMarkerControls (NFT, descriptorsUrl=./data/invite/invite)...');
+  try{
+    const controls = new ArMarkerControls(ctx, camera, {
+      type:'nft', descriptorsUrl:'./data/invite/invite', changeMatrixMode:'cameraTransformMatrix'
+    });
+    L('✓ ArMarkerControls 创建成功（NFT Worker 应已启动，等 endLoading）');
+    window.__controls = controls;
+  }catch(e){ L('✗ ArMarkerControls 抛错: ' + e.message); }
+
+  // animate 循环，记录 found/not found 计数
+  let foundCount=0, notFoundCount=0, frames=0;
+  function animate(){
+    requestAnimationFrame(animate);
+    if(source.ready !== false && ctx.arController){
+      try{ ctx.update(source.domElement); }catch(e){ L('update 抛错: '+e.message); }
+      frames++;
+      if(ctx.arController.showObject) foundCount++; else notFoundCount++;
+      // 每3秒报告一次检测统计 + arjs-video 实况
+      if(frames % 90 === 0){
+        const v = document.getElementById('arjs-video');
+        const vinfo = v ? `arjs-video: ${v.clientWidth}x${v.clientHeight} videoW=${v.videoWidth} readyState=${v.readyState}` : 'arjs-video: 不存在';
+        L(`[检测统计] frames=${frames} found=${foundCount} notFound=${notFoundCount} workerMsgTypes=${[...new Set(workerMsgs)].join(',')||'无'} | ${vinfo}`);
+      }
+    }
+    renderer.render(scene, camera);
+  }
+  animate();
+  L('=== 诊断已启动，请把摄像头对准弹珠台图，观察 [检测统计] 的 found 是否 >0 ===');
+};
+</script>
+</body>
+</html>
