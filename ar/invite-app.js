@@ -33,8 +33,14 @@ renderer.domElement.style.width='100%'; renderer.domElement.style.height='100%';
 document.body.appendChild(renderer.domElement);
 
 const DEBUG_AR = new URLSearchParams(location.search).has('debug');
+function getARViewportSize(){
+  const w = Math.max(640, Math.round(innerWidth));
+  const h = Math.max(480, Math.round(innerHeight));
+  return {w, h};
+}
 function forceFullBleed(){
-  const els = [arToolkitSource?.domElement, document.getElementById('arjs-video'), renderer.domElement].filter(Boolean);
+  const allVideos = Array.from(document.querySelectorAll('video')).filter(el => el.id !== 'video');
+  const els = [arToolkitSource?.domElement, document.getElementById('arjs-video'), ...allVideos, renderer.domElement].filter(Boolean);
   for(const el of els){
     el.style.position = 'fixed';
     el.style.left = '0';
@@ -324,7 +330,8 @@ function initAR(){
     const deviceId = getSelectedDeviceId();
     // ArToolkitSource 只认 sourceType:image/video/webcam，sourceElement 是无效参数。
     // 让 AR.js 自己创建 video 并 getUserMedia，传 deviceId 指定摄像头。
-    const sourceParams = {sourceType:'webcam', sourceWidth:480, sourceHeight:640, deviceId};
+    const vp = getARViewportSize();
+    const sourceParams = {sourceType:'webcam', sourceWidth:vp.w, sourceHeight:vp.h, displayWidth:vp.w, displayHeight:vp.h, deviceId};
     if(deviceId === null) delete sourceParams.deviceId;  // null 会让 {exact:null} 失败
     arToolkitSource = new ArToolkitSource(sourceParams);
     arToolkitSource.init(
@@ -336,7 +343,7 @@ function initAR(){
     arToolkitContext = new ArToolkitContext({
       detectionMode:'mono',
       cameraParametersUrl: CAMERA_PARA_URL,
-      canvasWidth:480, canvasHeight:640
+      canvasWidth:getARViewportSize().w, canvasHeight:getARViewportSize().h
     });
     let initRet;
     try{
@@ -383,10 +390,9 @@ function initAR(){
 function onResize(){
   if(arToolkitSource && arToolkitSource.domElement){
     try{
-      arToolkitSource.onResizeElement();
-      arToolkitSource.copyElementSizeTo(renderer.domElement);
-      // canvasElement 在 init 成功回调刚触发时可能尚未设置（异步），需守卫，否则
-      // copyElementSizeTo(undefined) → 内部 A.style 报错 "Cannot read 'style' of undefined"
+      // 不再 copyElementSizeTo(renderer.domElement)：它会把 Three canvas 压成 AR.js source 尺寸，
+      // 在 iframe/桌面窗口里造成下半屏黑区。只保留 arController 内部 canvas 同步。
+      if(arToolkitSource.onResizeElement) arToolkitSource.onResizeElement();
       if(arToolkitContext && arToolkitContext.arController && arToolkitContext.canvasElement){
         arToolkitSource.copyElementSizeTo(arToolkitContext.canvasElement);
       }

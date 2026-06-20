@@ -14,7 +14,8 @@
      必须覆盖 arcade-shell.css 的 video{transform:scaleX(-1);opacity:.72}（那套样式
      是给我们手动管理的 #video 用的，会镜像翻转+降透明度），否则 AR.js 的 video
      被镜像/半透明/遮挡 → 黑屏。这里让它全屏、不翻转、不透明、在 canvas 之下。 */
-  #arjs-video{
+  #arjs-video,.arjs-video,body>video:not(#video){
+    display:block !important;
     position:fixed !important;
     inset:0 !important;
     width:100vw !important;
