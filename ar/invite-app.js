@@ -223,8 +223,13 @@ function initAR(){
       LOG('ArToolkitContext.init() 未返回 Promise（走回调模式）');
     }
     try{
+      // modelViewMatrix：marker 被识别时，inviteGroup.matrix = (相机看marker的变换)，
+      // 于是 3D 内容直接"贴"在识别图上 —— 这是 AR.js NFT 官方所有示例的标准用法。
+      // （之前用 cameraTransformMatrix 是错的：那种模式下 marker 控制的是 camera
+      //  而非内容，需要内容固定在世界原点并配合特殊投影矩阵，我们没满足，导致
+      //  内容被渲染到屏幕外/相机背后 —— 也就是"识别到了但看不见模型"。）
       arControls = new ArMarkerControls(arToolkitContext, inviteGroup, {
-        type:'nft', descriptorsUrl:NFT_URL, changeMatrixMode:'cameraTransformMatrix'
+        type:'nft', descriptorsUrl:NFT_URL, changeMatrixMode:'modelViewMatrix'
       });
       LOG('ArMarkerControls(NFT) 创建成功 descriptorsUrl=', NFT_URL);
     }catch(e){
@@ -268,8 +273,10 @@ function animate(){
       try{ arToolkitContext.update(arToolkitSource.domElement); }
       catch(e){ updateErrCount++; if(updateErrCount<=3) LOG('update() 抛错', e.message); }
     }
-    scene.visible = camera.visible;
-    const tracked = camera.visible;
+    // modelViewMatrix 模式下，marker 是否被识别反映在 arControls.object3d.visible
+    // （camera.visible 在此模式下不反映追踪状态，之前用它导致状态"卡 true"）。
+    const tracked = !!(arControls && arControls.object3d && arControls.object3d.visible);
+    scene.visible = true;  // 场景始终渲染；内容由 marker 矩阵决定是否贴在图上
     if(tracked && !lastTracked){
       lastTracked=true; game.mark('tracking','true');
       LOG('★ 首次识别成功！开始播放动画');
@@ -280,10 +287,12 @@ function animate(){
     if(phase!=='idle') updateAnimation(dt);
     // 每秒刷新一次调试浮层（避免刷屏）
     if(trackFrames % 30 === 0){
+      const gp = inviteGroup.position;
       dbgShow(
         `mode: ${mode}\n` +
         `arController: ${arCtrl ? '✓已建' : '✗未建(loading)'}\n` +
-        `tracking: ${tracked ? '★识别中' : '未识别'}\n` +
+        `marker.visible: ${tracked ? '★识别中' : '未识别'}\n` +
+        `inviteGroup.pos: ${gp.x.toFixed(2)},${gp.y.toFixed(2)},${gp.z.toFixed(2)}\n` +
         `frames: ${trackFrames}  updateErr: ${updateErrCount}\n` +
         `phase: ${phase}\n` +
         `--- 最近日志 ---\n` + dbgLog.slice(-4).join('\n')
