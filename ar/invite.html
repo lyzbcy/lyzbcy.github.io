@@ -6,7 +6,7 @@
 <title>AR 邀请函</title>
 <link rel="stylesheet" href="./shared/arcade-shell.css">
 <style>
-  #enter-btn-ar{position:fixed;left:50%;bottom:120px;transform:translateX(-50%);z-index:10;padding:14px 32px;border-radius:999px;background:linear-gradient(180deg,#f2c978,#e8920c);color:#593a20;border:none;font-size:1.05rem;font-weight:600;cursor:pointer;box-shadow:0 12px 28px rgba(232,146,12,.4);display:none;animation:pulse 1.5s ease-in-out infinite}
+  #enter-btn-ar{position:fixed;left:50%;bottom:34px;transform:translateX(-50%);z-index:10;padding:14px 32px;border-radius:999px;background:linear-gradient(180deg,#f2c978,#e8920c);color:#593a20;border:none;font-size:1.05rem;font-weight:600;cursor:pointer;box-shadow:0 12px 28px rgba(232,146,12,.4);display:none;animation:pulse 1.5s ease-in-out infinite}
   #enter-btn-ar.show{display:block}
   @keyframes pulse{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.06)}}
   #scan-hint{position:fixed;left:50%;top:62%;transform:translate(-50%,-50%);z-index:7;text-align:center;color:#ffdf8c;font-size:1rem;text-shadow:0 2px 8px rgba(0,0,0,.5);pointer-events:none;opacity:.85}
@@ -15,13 +15,22 @@
      是给我们手动管理的 #video 用的，会镜像翻转+降透明度），否则 AR.js 的 video
      被镜像/半透明/遮挡 → 黑屏。这里让它全屏、不翻转、不透明、在 canvas 之下。 */
   #arjs-video{
+    position:fixed !important;
+    inset:0 !important;
+    width:100vw !important;
+    height:100vh !important;
+    max-width:none !important;
+    max-height:none !important;
     transform:none !important;
     opacity:1 !important;
     object-fit:cover !important;
     z-index:0 !important;
   }
   /* renderer canvas 透明覆盖在 video 之上，3D 内容画在 canvas */
-  canvas{z-index:1 !important}
+  canvas{position:fixed !important;inset:0 !important;width:100vw !important;height:100vh !important;max-width:none !important;max-height:none !important;z-index:1 !important}
+  body[data-tracking="true"] #topbar{opacity:.16;transform:translateY(-10px);transition:opacity .35s ease,transform .35s ease}
+  body[data-tracking="true"] #scan-hint{opacity:0 !important}
+  body[data-tracking="true"] #brand{pointer-events:none}
   /* 我们的旧 #video 已废弃（display:none），这里显式确认它不参与 */
   #video{display:none}
 </style>

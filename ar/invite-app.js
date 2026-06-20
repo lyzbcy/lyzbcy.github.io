@@ -32,6 +32,24 @@ renderer.domElement.style.position='fixed'; renderer.domElement.style.inset='0';
 renderer.domElement.style.width='100%'; renderer.domElement.style.height='100%';
 document.body.appendChild(renderer.domElement);
 
+const DEBUG_AR = new URLSearchParams(location.search).has('debug');
+function forceFullBleed(){
+  const els = [arToolkitSource?.domElement, document.getElementById('arjs-video'), renderer.domElement].filter(Boolean);
+  for(const el of els){
+    el.style.position = 'fixed';
+    el.style.left = '0';
+    el.style.top = '0';
+    el.style.width = '100vw';
+    el.style.height = '100vh';
+    el.style.maxWidth = 'none';
+    el.style.maxHeight = 'none';
+    el.style.objectFit = 'cover';
+  }
+  renderer.domElement.style.inset = '0';
+  renderer.domElement.style.zIndex = '1';
+  renderer.setSize(innerWidth, innerHeight, false);
+}
+
 scene.add(new THREE.AmbientLight(0xffffff, 0.9));
 const dir = new THREE.DirectionalLight(0xfff0d0, 1.0); dir.position.set(1,2,2); scene.add(dir);
 
@@ -51,6 +69,31 @@ const surface = new THREE.Mesh(
 surface.rotation.x = -Math.PI / 2;
 surface.position.y = -2;
 inviteGroup.add(surface);
+
+// 可见性锚点：多轴、多平面、大尺寸。只要 markerRoot 的模型矩阵有效，
+// 至少会有一部分出现在画面里，用来把“已识别但看不见”的风险降到最低。
+const visibilityAnchor = new THREE.Group();
+const anchorCore = new THREE.Mesh(
+  new THREE.SphereGeometry(18, 24, 16),
+  new THREE.MeshStandardMaterial({color:0xfff0b8, emissive:0xffb84d, emissiveIntensity:1.1, roughness:0.38})
+);
+visibilityAnchor.add(anchorCore);
+const anchorMat = new THREE.MeshBasicMaterial({color:0xffdf8c, transparent:true, opacity:0.72, side:THREE.DoubleSide});
+for(const rot of [[0,0,0], [Math.PI/2,0,0], [0,Math.PI/2,0]]){
+  const halo = new THREE.Mesh(new THREE.TorusGeometry(42, 1.4, 12, 72), anchorMat.clone());
+  halo.rotation.set(...rot);
+  visibilityAnchor.add(halo);
+}
+const spikeMat = new THREE.MeshStandardMaterial({color:0x7bd5ff, emissive:0x2bbcff, emissiveIntensity:0.9, roughness:0.35});
+const spikeY = new THREE.Mesh(new THREE.ConeGeometry(8, 46, 24), spikeMat);
+spikeY.position.y = 38;
+visibilityAnchor.add(spikeY);
+const spikeZ = new THREE.Mesh(new THREE.ConeGeometry(8, 46, 24), spikeMat.clone());
+spikeZ.rotation.x = Math.PI / 2;
+spikeZ.position.z = 38;
+visibilityAnchor.add(spikeZ);
+visibilityAnchor.visible = true;
+inviteGroup.add(visibilityAnchor);
 
 // 1. 程序生成星球（半径 25mm，约 marker 的 1/7，从图中央浮起）
 function makePlanetTexture(){
@@ -132,8 +175,10 @@ window.addEventListener('arjs-nft-init-data', (e)=>{
     // 像素→毫米，再除2移到中心
     const cx = (d.width / d.dpi * 2.54 * 10) / 2.0;
     const cy = (d.height / d.dpi * 2.54 * 10) / 2.0;
-    inviteGroup.position.set(cx, 0, -cy);
-    LOG(`nft-init-data: 内容移到marker中心 (${cx.toFixed(1)},0,${(-cy).toFixed(1)})mm`);
+    // markerRoot 模式下先不再强行偏移到图像中心：上一版偏移可能把内容推离视锥。
+    // 保留尺寸日志，后续若需要精确贴图再用它调 x/y 平面。
+    inviteGroup.position.set(0, 0, 0);
+    LOG(`nft-init-data: marker物理尺寸约 ${(cx*2).toFixed(1)}mm × ${(cy*2).toFixed(1)}mm；内容固定在markerRoot原点`);
   }
 });
 
@@ -145,6 +190,9 @@ const particleStartPos = pPos.slice();
 function startSequence(){
   phase='flash'; phaseTime=0;
   document.body.dataset.phase='flash';
+  enterBtn.classList.remove('show');
+  visibilityAnchor.visible = true;
+  visibilityAnchor.scale.setScalar(1);
   planet.scale.setScalar(0.001);
   ring.scale.setScalar(0.001);
   crown.scale.setScalar(0.001);
@@ -188,6 +236,8 @@ function updateAnimation(dt){
     planet.rotation.y += dt*0.5;
     ring.rotation.z += dt*0.8;
     crown.rotation.y -= dt*0.65;
+    visibilityAnchor.rotation.y += dt*0.55;
+    visibilityAnchor.rotation.z += dt*0.25;
     textSprite.position.y = 60 + Math.sin(performance.now()*0.002)*2.5;
   }
 }
@@ -255,7 +305,7 @@ function initAR(){
     if(deviceId === null) delete sourceParams.deviceId;  // null 会让 {exact:null} 失败
     arToolkitSource = new ArToolkitSource(sourceParams);
     arToolkitSource.init(
-      ()=>{ LOG('ArToolkitSource.init 成功 ready=', arToolkitSource.ready); onResize(); },
+      ()=>{ LOG('ArToolkitSource.init 成功 ready=', arToolkitSource.ready); onResize(); forceFullBleed(); },
       (e)=>{ LOG('ArToolkitSource.init 失败 ✗', e && e.message); }
     );
 
@@ -276,6 +326,7 @@ function initAR(){
             LOG('已 copy AR 投影矩阵到 camera.projectionMatrix');
           }
           onResize();
+          forceFullBleed();
         },
         (err)=>{ LOG('ArToolkitContext.init 回调 err=', err); }
       );
@@ -318,21 +369,25 @@ function onResize(){
       }
     }catch(e){ LOG('onResize 内部异常（可忽略，AR.js 异步初始化中）', e.message); }
   }
-  renderer.setSize(innerWidth, innerHeight);
+  renderer.setSize(innerWidth, innerHeight, false);
+  forceFullBleed();
 }
 addEventListener('resize', onResize);
 
 // ---------- 动画主循环 ----------
 let updateErrCount = 0;
+let frameNo = 0;
 // 屏幕状态指示（临时诊断：看清正式页到底有没有识别到 marker）
 const statusEl = document.createElement('div');
-statusEl.style.cssText = 'position:fixed;left:50%;top:14%;transform:translateX(-50%);z-index:50;font:bold 16px sans-serif;color:#fff;text-shadow:0 2px 6px #000;pointer-events:none;text-align:center;background:rgba(0,0,0,.5);padding:6px 12px;border-radius:8px;display:none';
-statusEl.textContent = '准备中…';
+statusEl.style.cssText = 'position:fixed;left:50%;top:16%;transform:translateX(-50%);z-index:50;font:700 15px Georgia,\"Microsoft YaHei\",serif;color:#fff7e8;text-shadow:0 2px 8px rgba(65,38,12,.55);pointer-events:none;text-align:center;background:linear-gradient(180deg,rgba(255,247,232,.9),rgba(242,201,120,.82));color:#593a20;border:1px solid rgba(255,223,140,.7);box-shadow:0 12px 28px rgba(0,0,0,.18);padding:8px 14px;border-radius:999px;display:none';
+statusEl.textContent = '等待魔法图案点亮…';
 document.body.appendChild(statusEl);
 
 function animate(){
   requestAnimationFrame(animate);
   const dt = 0.016;
+  frameNo++;
+  if(frameNo % 30 === 0) forceFullBleed();
   if(mode==='camera' && arToolkitContext){
     // 官方写法：arToolkitSource 未 ready 就跳过（避免喂空帧）
     if(arToolkitSource && arToolkitSource.ready!==false){
@@ -340,16 +395,21 @@ function animate(){
       catch(e){ updateErrCount++; if(updateErrCount<=3) LOG('update() 抛错', e.message); }
     }
     const tracked = markerRoot.visible;
-    // 状态指示
+    document.body.dataset.tracking = tracked ? 'true' : 'false';
     const sr = arToolkitSource ? arToolkitSource.ready : '?';
-    statusEl.textContent = `src.ready=${sr} | ${tracked ? '★已识别' : '未识别'} | 把弹珠台图放正·距20-40cm`;
-    statusEl.style.color = tracked ? '#6f6' : '#fff';
+    statusEl.textContent = DEBUG_AR
+      ? `src.ready=${sr} | ${tracked ? '★已识别' : '未识别'} | markerRoot`
+      : (tracked ? '✨ 魔法图案已点亮，星球正在浮起' : '把弹珠台图放正 · 距离 20–40cm');
+    statusEl.style.opacity = tracked ? '0.92' : '0.82';
     if(tracked && !lastTracked){
       lastTracked=true; game.mark('tracking','true');
+      scanHint.style.opacity = '0';
       LOG('★ 首次识别成功！开始播放动画');
       if(phase==='idle') startSequence();
     } else if(!tracked && lastTracked){
       lastTracked=false; game.mark('tracking','false');
+      scanHint.style.opacity = '0.85';
+      enterBtn.classList.remove('show');
     }
     if(phase!=='idle') updateAnimation(dt);
   } else if(mode==='demo'){
