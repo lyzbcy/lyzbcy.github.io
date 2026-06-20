@@ -10,6 +10,20 @@
   #enter-btn-ar.show{display:block}
   @keyframes pulse{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.06)}}
   #scan-hint{position:fixed;left:50%;top:62%;transform:translate(-50%,-50%);z-index:7;text-align:center;color:#ffdf8c;font-size:1rem;text-shadow:0 2px 8px rgba(0,0,0,.5);pointer-events:none;opacity:.85}
+  /* AR.js 用 sourceType:'webcam' 时会创建自己的 #arjs-video。
+     必须覆盖 arcade-shell.css 的 video{transform:scaleX(-1);opacity:.72}（那套样式
+     是给我们手动管理的 #video 用的，会镜像翻转+降透明度），否则 AR.js 的 video
+     被镜像/半透明/遮挡 → 黑屏。这里让它全屏、不翻转、不透明、在 canvas 之下。 */
+  #arjs-video{
+    transform:none !important;
+    opacity:1 !important;
+    object-fit:cover !important;
+    z-index:0 !important;
+  }
+  /* renderer canvas 透明覆盖在 video 之上，3D 内容画在 canvas */
+  canvas{z-index:1 !important}
+  /* 我们的旧 #video 已废弃（display:none），这里显式确认它不参与 */
+  #video{display:none}
 </style>
 <script type="importmap">
 { "imports": {

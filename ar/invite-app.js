@@ -258,8 +258,15 @@ function initAR(){
 
 function onResize(){
   if(arToolkitSource && arToolkitSource.domElement){
-    arToolkitSource.onResizeElement(); arToolkitSource.copyElementSizeTo(renderer.domElement);
-    if(arToolkitContext && arToolkitContext.arController){ arToolkitSource.copyElementSizeTo(arToolkitContext.canvasElement); }
+    try{
+      arToolkitSource.onResizeElement();
+      arToolkitSource.copyElementSizeTo(renderer.domElement);
+      // canvasElement 在 init 成功回调刚触发时可能尚未设置（异步），需守卫，否则
+      // copyElementSizeTo(undefined) → 内部 A.style 报错 "Cannot read 'style' of undefined"
+      if(arToolkitContext && arToolkitContext.arController && arToolkitContext.canvasElement){
+        arToolkitSource.copyElementSizeTo(arToolkitContext.canvasElement);
+      }
+    }catch(e){ LOG('onResize 内部异常（可忽略，AR.js 异步初始化中）', e.message); }
   }
   renderer.setSize(innerWidth, innerHeight);
 }
