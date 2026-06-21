@@ -126,8 +126,12 @@ function placeAndScale(model, targetSize, rMin, rMax){
   box.getSize(size); box.getCenter(center);
   const maxDim = Math.max(size.x, size.y, size.z) || 1;
   model.scale.setScalar(targetSize / maxDim);
-  // 居中到底部（让模型站在地面上）：减去中心后下移半个高度
-  model.position.sub(center);
+  // FBX 从 Unity 导出上下颠倒（树根朝上），绕 X 轴翻 180° 让树冠朝上
+  model.rotation.x = Math.PI;
+  // 居中：减去中心。翻转后用 box 重新算居中
+  const box2 = new THREE.Box3().setFromObject(model);
+  const c2 = new THREE.Vector3(); box2.getCenter(c2);
+  model.position.sub(c2);
   // 圆周随机散布
   const ang = Math.random() * Math.PI * 2;
   const r = rMin + Math.random() * (rMax - rMin);
@@ -315,10 +319,9 @@ window.addEventListener('arjs-nft-init-data', (e)=>{
     // 像素→毫米，再除2移到中心
     const cx = (d.width / d.dpi * 2.54 * 10) / 2.0;
     const cy = (d.height / d.dpi * 2.54 * 10) / 2.0;
-    // 居中：之前用 cx*1.55 / -cy*1.65 的大系数把场景推到了右下角，
-    // 现在直接用半宽半高居中（cx,cy 已是半值）。
-    inviteGroup.position.set(cx, cy, 0);
-    LOG(`nft-init-data: 居中 marker物理尺寸约 ${(cx*2).toFixed(1)}mm × ${(cy*2).toFixed(1)}mm；内容定位 (${cx.toFixed(1)}, ${cy.toFixed(1)}, 0)`);
+    // 居中：内容定位在 marker 几何中心（0,0,0 即可，因为 NFT 坐标原点就在 marker 中心）
+    inviteGroup.position.set(0, 0, 0);
+    LOG(`nft-init-data: marker尺寸 ${(cx*2).toFixed(1)}×${(cy*2).toFixed(1)}mm，内容居中 (0,0,0)`);
   }
 });
 
