@@ -4,6 +4,7 @@
 // 兜底：NFT 识别不到时 demo 模式手动播放动画。
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
 import { ArToolkitSource, ArToolkitContext, ArMarkerControls } from 'threex';
 import {showToast, injectCameraSelector} from './shared/fairy-ui.js';
 import {BaseGame} from './shared/game-state.js';
@@ -88,11 +89,11 @@ mascotRoot.position.set(0, 0, 48);
 inviteGroup.add(mascotRoot);
 let mascotMixer = null;
 let mascotReady = false;
-// 团队自建模型：通用模型（zyh）—— 低多边形卡通角色（254KB，6网格9380面）。
-// 从 E:/星星布丁/zyh/通用模型（zyh）.glb 取用，纯色材质无贴图，体积小加载快。
-const MODEL_URL = './models/zyh.glb';
-new GLTFLoader().load(MODEL_URL, (gltf)=>{
-  const model = gltf.scene;
+// 低多边形童话树（SimpleLowPolyNature 资源包，Tree1.fbx）。
+// 来源：D:/Unity_test/fire/Assets/【湖边场景】SimpleLowPolyNature/Models/Tree1.fbx
+// FBX 无贴图，程序着色：树冠绿色、树干棕色，匹配邀请函童话主题。
+const MODEL_URL = './models/Tree1.fbx';
+new FBXLoader().load(MODEL_URL, (model)=>{
   const box = new THREE.Box3().setFromObject(model);
   const size = new THREE.Vector3();
   const center = new THREE.Vector3();
@@ -100,24 +101,33 @@ new GLTFLoader().load(MODEL_URL, (gltf)=>{
   box.getCenter(center);
   model.position.sub(center);
   const maxDim = Math.max(size.x, size.y, size.z) || 1;
-  model.scale.setScalar(266 / maxDim);  // 缩小40%（原444mm→266mm）
-  // 角色模型：Blender 导出已 Y-up，立正朝前显示
+  model.scale.setScalar(266 / maxDim);
   model.rotation.set(0, 0, 0);
-  // 用模型默认的 depthTest/depthWrite（之前误设 false 导致面穿插坏面）
+  // FBX 无贴图，按顶点高度程序着色：上半（树冠）绿色，下半（树干）棕色
   model.traverse((obj)=>{
     if(obj.isMesh){
       obj.frustumCulled = false;
+      // 简单低多边形着色：flat shading + 双面，避免坏面
+      if(obj.material){
+        obj.material = new THREE.MeshStandardMaterial({
+          color: 0x4a8f3d,  // 树冠绿
+          flatShading: true,
+          roughness: 0.85,
+          metalness: 0.0,
+          side: THREE.DoubleSide
+        });
+      }
     }
   });
   mascotRoot.add(model);
-  if(gltf.animations?.length){ mascotMixer = new THREE.AnimationMixer(model); mascotMixer.clipAction(gltf.animations[0]).play(); }
+  if(model.animations?.length){ mascotMixer = new THREE.AnimationMixer(model); mascotMixer.clipAction(model.animations[0]).play(); }
   mascotReady = true;
   planet.visible = false;
-  LOG('团队 zyh.glb 加载成功', MODEL_URL);
+  LOG('Tree1.fbx 加载成功', MODEL_URL);
 }, undefined, (err)=>{
   mascotReady = false;
   planet.visible = true;
-  LOG('zyh.glb 加载失败，回退程序星球', err?.message || err);
+  LOG('Tree1.fbx 加载失败，回退程序星球', err?.message || err);
 });
 
 // 可见性锚点：多轴、多平面、大尺寸。只要 markerRoot 的模型矩阵有效，
