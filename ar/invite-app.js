@@ -85,7 +85,11 @@ surface.visible = false; // 灰色大圆盘会造成整屏发雾，正式/验证
 inviteGroup.add(surface);
 
 const mascotRoot = new THREE.Group();
-mascotRoot.position.set(0, 0, 48);
+mascotRoot.position.set(0, 0, 0);
+// FBX 从 Unity 导出，树模型上下颠倒（根朝上）。
+// 真机AR验证：rotation.x/z 翻转都会带来正反问题，scale 负值翻转最干净。
+// scale.y=-1 翻 Y（让树冠朝上），DoubleSide 已开不会坏面。
+mascotRoot.scale.set(1, -1, 1);
 inviteGroup.add(mascotRoot);
 let mascotMixer = null;
 let mascotReady = false;
@@ -120,21 +124,28 @@ function paintModel(model, color){
     }
   });
 }
+// 扇区均布计数器：每个模型分配固定角度扇区，避免纯随机导致全部挤在一起
+let _scatterIdx = 0;
+let _scatterTotal = 0;
+FOREST_SPEC.forEach(s => _scatterTotal += s.count);
+
 function placeAndScale(model, targetSize, rMin, rMax){
   const box = new THREE.Box3().setFromObject(model);
   const size = new THREE.Vector3(), center = new THREE.Vector3();
   box.getSize(size); box.getCenter(center);
   const maxDim = Math.max(size.x, size.y, size.z) || 1;
   model.scale.setScalar(targetSize / maxDim);
-  // FBX 从 Unity 导出上下颠倒（树根朝上）。绕 Z 轴翻 180° 让树冠朝上，
-  // 同时保持正面朝向用户（绕X翻会导致背面朝用户，即"正反反了"）。
-  model.rotation.z = Math.PI;
-  // 居中：减去中心。翻转后用 box 重新算居中
+  // 上下翻转由 mascotRoot.scale.y=-1 统一处理，这里不再单独旋转模型
+  // 居中：减去几何中心
   const box2 = new THREE.Box3().setFromObject(model);
   const c2 = new THREE.Vector3(); box2.getCenter(c2);
   model.position.sub(c2);
-  // 圆周随机散布
-  const ang = Math.random() * Math.PI * 2;
+  // 扇区均布：每个模型分配固定角度扇区 + 少量抖动，保证视觉均匀散布
+  const sectorAngle = (Math.PI * 2) / _scatterTotal;
+  const baseAngle = _scatterIdx * sectorAngle;
+  const jitter = (Math.random() - 0.5) * sectorAngle * 0.4;
+  const ang = baseAngle + jitter;
+  _scatterIdx++;
   const r = rMin + Math.random() * (rMax - rMin);
   model.position.x += Math.cos(ang) * r;
   model.position.z += Math.sin(ang) * r;
@@ -314,15 +325,16 @@ flashRing.rotation.x = -Math.PI/2; flashRing.position.y=1;
 inviteGroup.add(flashRing);
 
 // 用 NFT marker 的物理尺寸把内容移到 marker 几何中心（官方公式）
+// ★ NFT marker 原点在角点（左上），不是中心！必须把内容移到 width/2, height/2 才居中。
+// 之前 position(0,0,0) 导致内容堆在 marker 角点 = 屏幕右下角。
 window.addEventListener('arjs-nft-init-data', (e)=>{
   const d = e.detail;
   if(d && d.width && d.dpi){
-    // 像素→毫米，再除2移到中心
-    const cx = (d.width / d.dpi * 2.54 * 10) / 2.0;
-    const cy = (d.height / d.dpi * 2.54 * 10) / 2.0;
-    // 居中：内容定位在 marker 几何中心（0,0,0 即可，因为 NFT 坐标原点就在 marker 中心）
-    inviteGroup.position.set(0, 0, 0);
-    LOG(`nft-init-data: marker尺寸 ${(cx*2).toFixed(1)}×${(cy*2).toFixed(1)}mm，内容居中 (0,0,0)`);
+    // 像素→毫米，移到 marker 几何中心（官方 nft.html 同款公式）
+    const halfW = (d.width / d.dpi * 2.54 * 10) / 2.0;
+    const halfH = (d.height / d.dpi * 2.54 * 10) / 2.0;
+    inviteGroup.position.set(halfW, halfH, 0);
+    LOG(`nft-init-data: marker ${d.width}×${d.height}px @${d.dpi}dpi，居中 (${halfW.toFixed(1)},${halfH.toFixed(1)},0)`);
   }
 });
 
@@ -341,9 +353,9 @@ function startSequence(){
   planet.scale.setScalar(0.001);
   ring.scale.setScalar(0.001);
   crown.scale.setScalar(0.001);
-  mascotRoot.scale.setScalar(0.001);
+  mascotRoot.scale.set(0.001, -0.001, 0.001);  // Y 保持负值（翻转上下）
   mascotRoot.rotation.set(0,0,0);
-  mascotRoot.position.set(0, 0, 48);
+  mascotRoot.position.set(0, 0, 0);
   textSprite.material.opacity = 0;
   particles.material.opacity = 0;
   showToast('★ 捞鱼世界邀请你', 2000);
@@ -360,9 +372,9 @@ function updateAnimation(dt){
     const s = 1 - Math.pow(1-p, 3);
     planet.scale.setScalar(s);
     crown.scale.setScalar(s);
-    // house 模型随 rise 缩放进场（从 0 长到 1），并轻微上浮
-    mascotRoot.scale.setScalar(s);
-    mascotRoot.position.set(0, (1-s)*-15, 48);
+    // 森林场景随 rise 缩放进场（从 0 长到 1），Y 保持负值翻转上下
+    mascotRoot.scale.set(s, -s, s);
+    mascotRoot.position.set(0, (1-s)*-15, 0);
     planet.rotation.y = t * 2;
     crown.rotation.y = -t * 1.6;
     if(t>1.0){ phase='ring'; phaseTime=0; document.body.dataset.phase='ring'; }
@@ -506,11 +518,12 @@ function initAR(){
     }
 
     // modelViewMatrix：markerRoot 被识别图驱动，内容作为 markerRoot 子物体稳定贴在触发图上。
+    // minConfidence 降低到 0.1（默认0.6），让识别更宽松（光线/角度差时也能触发）
     try{
       arControls = new ArMarkerControls(arToolkitContext, markerRoot, {
-        type:'nft', descriptorsUrl:NFT_URL, changeMatrixMode:'modelViewMatrix'
+        type:'nft', descriptorsUrl:NFT_URL, changeMatrixMode:'modelViewMatrix', minConfidence:0.1
       });
-      LOG('ArMarkerControls(NFT) 创建成功 descriptorsUrl=', NFT_URL);
+      LOG('ArMarkerControls(NFT) 创建成功 descriptorsUrl=', NFT_URL, 'minConfidence=0.1');
     }catch(e){
       LOG('ArMarkerControls 构造抛错 ✗', e);
       throw e;
@@ -621,9 +634,9 @@ function startDemo(){
   scanHint.style.display = 'none';
   statusEl.style.display = 'none';
   fallbackBar.classList.remove('show');
-  // demo 模式下 camera 固定在原点看 -Z，内容放前方（mm单位）
-  camera.position.set(0, 42, 190);  // 站在 marker 前方 190mm 看
-  camera.lookAt(0, 30, 0);
+  // demo 模式下 camera 拉远抬高，俯瞰森林全景（森林散布直径~190mm，需足够距离）
+  camera.position.set(0, 200, 340);
+  camera.lookAt(0, 10, 0);
   stableRoot.position.set(0, 0, 0);
   stableRoot.visible = true;
   stableHasPose = true;
