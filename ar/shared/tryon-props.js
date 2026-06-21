@@ -3,6 +3,7 @@
 // 每款 make() 返回 { group: THREE.Group, anchor: {leftEye,rightEye,top,leftEar,rightEar,scale} }
 // anchor 指明该配饰贴合用的 face mesh landmark 索引（FaceLandmarker 468 点）
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 const METAL = ()=>new THREE.MeshStandardMaterial({color:0xd4a017, metalness:0.9, roughness:0.2});
 const DARKMETAL = ()=>new THREE.MeshStandardMaterial({color:0x3a3a3a, metalness:0.7, roughness:0.3});
@@ -121,6 +122,73 @@ function earringHoop(){
   return { group:g, anchor:{leftEar:234,rightEar:454,scale:1} };
 }
 
+// ---------- 网红款（截图传播性强，走 top anchor 验证头部 6DoF 追踪）----------
+// 毕业帽：方形帽顶 + 流苏。贴合头顶，跟着点头/偏头转动。
+function hatGraduation(){
+  const g=new THREE.Group();
+  const black=new THREE.MeshStandardMaterial({color:0x1a1a1a, roughness:0.6, flatShading:true});
+  const cap=new THREE.Mesh(new THREE.CylinderGeometry(0.085,0.1,0.05,20), black); cap.position.y=0.015; g.add(cap);
+  const board=new THREE.Mesh(new THREE.BoxGeometry(0.2,0.012,0.2), black); board.position.y=0.045; g.add(board);
+  // 金色流苏：从帽顶中心垂下一根细线 + 末端球
+  const gold=new THREE.MeshStandardMaterial({color:0xffdf6b, metalness:0.7, roughness:0.25, emissive:0x553d00, emissiveIntensity:0.3});
+  const cord=new THREE.Mesh(new THREE.CylinderGeometry(0.003,0.003,0.09,8), gold);
+  cord.position.set(0.08,0.0,0.08); cord.rotation.z=0.3; g.add(cord);
+  const tassel=new THREE.Mesh(new THREE.SphereGeometry(0.015,12,12), gold); tassel.position.set(0.11,-0.045,0.08); g.add(tassel);
+  const button=new THREE.Mesh(new THREE.CylinderGeometry(0.012,0.012,0.012,12), gold); button.position.y=0.052; g.add(button);
+  return { group:g, anchor:{top:10,scale:1.25} };
+}
+// 兔耳：两片粉色长耳，从头顶竖起。点头时耳朵会跟着前倾。
+function hatBunnyEars(){
+  const g=new THREE.Group();
+  const pink=new THREE.MeshStandardMaterial({color:0xff9ec4, roughness:0.5, flatShading:true});
+  const inner=new THREE.MeshStandardMaterial({color:0xffd6e6, roughness:0.6});
+  for(const sx of [-1,1]){
+    const ear=new THREE.Mesh(new THREE.CapsuleGeometry(0.022,0.12,6,12), pink);
+    ear.position.set(sx*0.045,0.12,0); ear.rotation.z=sx*0.18; g.add(ear);
+    const core=new THREE.Mesh(new THREE.CapsuleGeometry(0.013,0.08,4,8), inner);
+    core.position.set(sx*0.045,0.12,0.005); core.rotation.z=sx*0.18; g.add(core);
+  }
+  return { group:g, anchor:{top:10,scale:1.15} };
+}
+
+// ---------- 外部 GLB 配饰（团队自建模型）----------
+// 小人偶头饰：用团队人物模型（character.glb，从 Unity 工程 fbx 转换而来）。
+// make() 立即返回带占位球的 group（保证 UI 不卡），异步加载 glb 成功后替换。
+// 人物"站"在头顶上方，所以内部要把模型上移并整体缩小。
+function propCharacter(){
+  const g=new THREE.Group();
+  // 占位：金色小球，加载期间用户也能看到东西
+  const placeholder=new THREE.Mesh(
+    new THREE.SphereGeometry(0.03,16,16),
+    new THREE.MeshStandardMaterial({color:0xffdf8c, metalness:0.7, roughness:0.2, emissive:0x553d00, emissiveIntensity:0.3})
+  );
+  placeholder.position.y=0.08;
+  g.add(placeholder);
+  // 异步加载真实模型
+  const loader=new GLTFLoader();
+  loader.load('./models/character.glb', (gltf)=>{
+    const model=gltf.scene;
+    // 归一化到约 0.16 高（头饰尺寸，比真实人物小很多）
+    const box=new THREE.Box3().setFromObject(model);
+    const size=new THREE.Vector3();
+    box.getSize(size);
+    const maxDim=Math.max(size.x,size.y,size.z)||1;
+    model.scale.setScalar(0.16/maxDim);
+    // 居中并上移，让人物"站"在锚点上方
+    const center=new THREE.Vector3();
+    box.getCenter(center);
+    model.position.sub(center.multiplyScalar(model.scale.x));
+    model.position.y += 0.08;
+    // 人物面朝前方（与佩戴者同向）
+    model.rotation.y = Math.PI;
+    g.remove(placeholder);
+    g.add(model);
+  }, undefined, ()=>{
+    // 加载失败保留占位球（不崩溃）
+  });
+  return { group:g, anchor:{top:10,scale:1.4} };
+}
+
 export const TRYON_PROPS=[
   {name:'圆框眼镜', make:glassesRound, part:'glasses'},
   {name:'方框眼镜', make:glassesSquare, part:'glasses'},
@@ -131,6 +199,9 @@ export const TRYON_PROPS=[
   {name:'棒球帽',   make:hatCap,  part:'hat'},
   {name:'贝雷帽',   make:hatBeret, part:'hat'},
   {name:'礼帽',     make:hatTop,  part:'hat'},
+  {name:'毕业帽',   make:hatGraduation, part:'hat'},
+  {name:'兔耳',     make:hatBunnyEars, part:'hat'},
+  {name:'小人偶',   make:propCharacter, part:'hat'},
   {name:'金耳钉',   make:earringStud, part:'earring'},
   {name:'红坠耳环', make:earringDrop, part:'earring'},
   {name:'金圈耳环', make:earringHoop, part:'earring'},

@@ -27,7 +27,10 @@ export async function createFaceLandmarker(){
   return FaceLandmarker.createFromOptions(fs, {
     baseOptions:{modelAssetPath:FACE_MODEL, delegate:"GPU"},
     runningMode:"VIDEO", numFaces:1,
-    outputFaceBlendshapes:true, outputFacialTransformationMatrixes:false
+    // 头部位姿矩阵：试戴间用它做 6DoF 头部追踪（俯仰/偏航/翻滚），
+    // 让眼镜/帽子能跟着点头、摇头、歪头转动。之前设 false 导致
+    // tryon-app.js 读到的 facialTransformationMatrixes 永远为空，配饰只能平移。
+    outputFaceBlendshapes:true, outputFacialTransformationMatrixes:true
   });
 }
 export async function createPoseLandmarker(){

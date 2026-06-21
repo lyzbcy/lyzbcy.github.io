@@ -1022,6 +1022,100 @@
         window.location.href = destination;
       }, 2800);
     });
+
+    /* ===== Loading 表情包走动 + 心声 ===== */
+    (function() {
+      const sticker Thoughts = [
+        { emoji: '🌱', text: '小草正在努力生长...' },
+        { emoji: '⭐', text: '星星在组装中...' },
+        { emoji: '🏠', text: 'NPC在家里打扮...' },
+        { emoji: '🌊', text: '水面正在荡漾...' },
+        { emoji: '✨', text: '魔法粒子加载中...' },
+        { emoji: '🌙', text: '月亮正在升起...' },
+        { emoji: '🌳', text: '树根正在扎根...' },
+        { emoji: '🍄', text: '蘑菇在偷偷冒头...' }
+      ];
+
+      const overlay = document.createElement('div');
+      overlay.id = 'loading-stickers';
+      overlay.style.cssText = 'position:fixed;inset:0;z-index:101;pointer-events:none;overflow:hidden;';
+      document.body.appendChild(overlay);
+
+      const loading = document.getElementById('loading');
+      const observer = new MutationObserver(() => {
+        if (loading.classList.contains('hidden')) {
+          overlay.remove();
+          observer.disconnect();
+        }
+      });
+      observer.observe(loading, { attributes: true });
+
+      function spawnStickerWalker() {
+        if (loading.classList.contains('hidden')) return;
+        const thought = sticker Thoughts[Math.floor(Math.random() * sticker Thoughts.length)];
+        const el = document.createElement('div');
+        el.style.cssText = `
+          position:absolute;
+          bottom:${15 + Math.random() * 25}%;
+          font-size:${20 + Math.random() * 16}px;
+          opacity:0;
+          transition:opacity 0.6s;
+          white-space:nowrap;
+        `;
+        const fromLeft = Math.random() > 0.5;
+        el.style.left = fromLeft ? '-60px' : '100%';
+        const direction = fromLeft ? 1 : -1;
+
+        const emojiSpan = document.createElement('span');
+        emojiSpan.textContent = thought.emoji;
+        emojiSpan.style.cssText = 'display:inline-block;animation:stickerBounce 0.5s ease-in-out infinite alternate;';
+
+        const thoughtSpan = document.createElement('span');
+        thoughtSpan.textContent = thought.text;
+        thoughtSpan.style.cssText = `
+          font-size:11px;color:rgba(237,244,248,0.55);
+          margin-left:8px;letter-spacing:0.05em;
+          font-family:'Microsoft YaHei',sans-serif;
+        `;
+
+        el.appendChild(emojiSpan);
+        el.appendChild(thoughtSpan);
+        overlay.appendChild(el);
+
+        requestAnimationFrame(() => { el.style.opacity = '0.7'; });
+
+        const duration = 6000 + Math.random() * 4000;
+        const start = performance.now();
+        function walk(now) {
+          const t = (now - start) / duration;
+          if (t >= 1 || !overlay.parentNode) { el.remove(); return; }
+          const startX = fromLeft ? -60 : window.innerWidth;
+          const endX = fromLeft ? window.innerWidth + 60 : -60;
+          el.style.left = (startX + (endX - startX) * t) + 'px';
+          requestAnimationFrame(walk);
+        }
+        requestAnimationFrame(walk);
+      }
+
+      // Spawn walkers periodically while loading
+      const spawnInterval = setInterval(() => {
+        if (loading.classList.contains('hidden')) {
+          clearInterval(spawnInterval);
+          return;
+        }
+        spawnStickerWalker();
+      }, 1500 + Math.random() * 1000);
+
+      // First few immediately
+      setTimeout(spawnStickerWalker, 300);
+      setTimeout(spawnStickerWalker, 800);
+      setTimeout(spawnStickerWalker, 1400);
+
+      // Add bounce animation keyframe
+      const style = document.createElement('style');
+      style.textContent = '@keyframes stickerBounce{from{transform:translateY(0)}to{transform:translateY(-6px)}}';
+      document.head.appendChild(style);
+    })();
   </script>
 </body>
 </html>

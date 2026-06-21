@@ -126,10 +126,25 @@ function loop(){
 }
 
 // 用 face mesh landmark 把配饰贴合到脸上（landmark 归一化0..1，video 镜像需 x 翻转）
+// 平移/缩放/翻滚(z)：用 landmark 在正交相机屏幕坐标算（稳定、贴合脸部位置）
+// 俯仰(x)/偏航(y)：用 facialTransformationMatrixes 的真实头部 6DoF 位姿
+//   matrix.data 是 4×4 列主序，平移在第 4 列、旋转在前 3×3。
+//   对正交相机来说 matrix 的平移分量无意义（我们用 landmark 平移），只取旋转分量。
 function positionPropByFace(lm, transformMatrix){
   if(!currentProp) return;
   propContainer.visible = true;
   const a = currentProp.anchor;
+  // 默认姿态（无 transformMatrix 时的兜底）
+  let pitchX = 0, yawY = 0;
+  if(transformMatrix && transformMatrix[0]){
+    const m = transformMatrix[0].data;  // 列主序 4x4
+    if(m && m.length >= 16){
+      // 安全提取欧拉角（钳制防 NaN）：
+      // pitch(x, 俯仰) = asin(-m[9])；yaw(y, 偏航) = atan2(m[1], m[5])
+      pitchX = Math.asin(Math.max(-1, Math.min(1, -m[9])));
+      yawY = Math.atan2(m[1], m[5]);
+    }
+  }
   if(a.leftEye !== undefined){
     const le = lm[a.leftEye], re = lm[a.rightEye];
     const cx = ((1-le.x) + (1-re.x))/2 * 2 - 1;
@@ -137,26 +152,24 @@ function positionPropByFace(lm, transformMatrix){
     const eyeDist = Math.hypot((1-le.x)-(1-re.x), le.y-re.y);
     propContainer.position.set(cx, cy, 0);
     propContainer.scale.setScalar(eyeDist / 0.12 * a.scale * 2.5);
-    propContainer.rotation.z = Math.atan2(re.y-le.y, (1-re.x)-(1-le.x));
-    if(transformMatrix && transformMatrix[0]){
-      const m = transformMatrix[0].data;
-      propContainer.rotation.x = Math.asin(Math.max(-1,Math.min(1, -m[9]))) * 0.5;
-      propContainer.rotation.y = Math.atan2(m[1], m[5]) * 0.5;
-    }
+    // z 翻滚：双眼连线角度（屏幕内旋转）
+    const rollZ = Math.atan2(re.y-le.y, (1-re.x)-(1-le.x));
+    // x/y 轻量映射到 ±0.5rad，避免大幅头部转动时配饰飞出
+    propContainer.rotation.set(pitchX*0.6, yawY*0.6, rollZ);
   } else if(a.top !== undefined){
     const top = lm[a.top];
     const cx = (1-top.x)*2-1, cy = -top.y*2+1;
     propContainer.position.set(cx, cy+0.05, 0);
     const headW = Math.hypot(lm[234].x-lm[454].x, lm[234].y-lm[454].y);
     propContainer.scale.setScalar(headW/0.15 * a.scale * 2.5);
-    propContainer.rotation.set(0,0,0);
+    propContainer.rotation.set(pitchX*0.5, yawY*0.5, 0);
   } else if(a.leftEar !== undefined){
     const le = lm[a.leftEar], re = lm[a.rightEar];
     const cx = ((1-le.x)+(1-re.x))/2*2-1, cy = -(le.y+re.y)/2*2+1;
     propContainer.position.set(cx, cy-0.05, 0);
     const headW = Math.hypot(le.x-re.x, le.y-re.y);
     propContainer.scale.setScalar(headW/0.18 * a.scale * 2.5);
-    propContainer.rotation.set(0,0,0);
+    propContainer.rotation.set(0, yawY*0.4, 0);
   }
 }
 

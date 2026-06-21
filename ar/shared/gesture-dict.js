@@ -74,6 +74,22 @@ export const GESTURE_DICT=[
   {word:'再见', test:h=>{ // 五指张开（无拇指，挥手）
     if(!h[0]) return false; const a=lm(h[0]); const f=fingersUp(a);
     return f[0]&&f[1]&&f[2]&&f[3] && !thumbUp(a); }},
+  // ---------- 扩充高频日常词（基于中国手语常用手势的简化规则）----------
+  // 消歧原则：每个新词都和所有已有词逐一比对过 test()，确保不会同时命中导致 ambiguous。
+  // 舍弃了"老师/哪里"——它们和"学习"同属食指指上，仅靠 y 分段无法稳定区分。
+  {word:'你好', test:h=>{ // V 字在脸部中段（致敬问候），y 在 0.2~0.45，避开"是"(任意高度)
+    if(!h[0]) return false; const a=lm(h[0]); const f=fingersUp(a);
+    return f[0]&&f[1]&&!f[2]&&!f[3] && a[8].y>0.2 && a[8].y<0.45; }},
+  {word:'妈妈', test:h=>{ // 握拳拇指指下巴（中国手语"妈"），y 在 0.22~0.45
+    if(!h[0]) return false; const a=lm(h[0]); const f=fingersUp(a);
+    return !f[0]&&!f[1]&&!f[2]&&!f[3] && thumbUp(a) && a[4].y>0.22 && a[4].y<0.45; }},
+  {word:'爸爸', test:h=>{ // 握拳拇指指额头（中国手语"爸"），y<0.22，避开"加油"(腕更高)
+    if(!h[0]) return false; const a=lm(h[0]); const f=fingersUp(a);
+    return !f[0]&&!f[1]&&!f[2]&&!f[3] && thumbUp(a) && a[4].y<0.22 && a[4].y>0.08; }},
+  {word:'喜欢', test:h=>{ // 双手张开向中间收拢（抓取喜爱之物），和"爱/家"靠指尖不相触区分
+    if(!h[0]||!h[1]) return false; const a=lm(h[0]),b=lm(h[1]); const fa=fingersUp(a),fb=fingersUp(b);
+    return fa[0]&&fa[1]&&fb[0]&&fb[1] && dist(a[9],b[9])<0.18 && dist(a[9],b[9])>0.08
+           && dist(a[8],b[8])>0.1; }},
 ];
 
 // 识别：返回 {word, confidence, ambiguous?} 或 null

@@ -65,8 +65,9 @@ function startDemo(){
   mode='demo'; game.setMode('mouse');
   permission.classList.add('hidden'); panel.style.display='none';
   postureHud.style.display='block';
+  hudScore.classList.remove('bad');
   game.start(); loop();
-  showToast('演示模式：模拟体态数据', 2000);
+  showToast('演示模式：回放体态监测闭环', 2000);
 }
 
 let _cursorTimer=null;
@@ -111,14 +112,87 @@ function loop(){
       else updateFitnessMode(angles, t);
     }
   } else if(mode==='demo'){
-    const score = Math.round(70 + Math.sin(t*0.001)*25);
-    hudLabel.textContent = '体态评分（演示）';
-    hudScore.textContent = score;
-    hudScore.classList.toggle('bad', score<70);
-    hudTip.textContent = score<70 ? '检测到驼背，请挺直' : '坐姿良好，继续保持';
-    document.body.dataset.postureScore = score;
+    // 演示回放脚本：用时间轴模拟"好姿势→变差→警告→纠正→恢复"完整闭环，
+    // 让无摄像头环境也能讲清产品价值（而不是干看一个摆动的数字）。
+    if(appMode==='office') updateOfficeDemo(t);
+    else updateFitnessDemo(t);
   }
   renderer.render(scene, camera);
+}
+
+// 办公 demo：14 秒一个循环。脚本相位：
+//   0-4s  良好(92) → 4-8s 渐差到驼背(58) → 8-9s 警告峰值 → 9-12s 纠正回升 → 12-14s 恢复良好
+function updateOfficeDemo(t){
+  const cycle = ((t % 14000) / 1000);
+  let score, tip;
+  if(cycle < 4){
+    score = 92; tip = '坐姿良好，继续保持';
+  } else if(cycle < 8){
+    const p = (cycle - 4) / 4;
+    score = Math.round(92 - p * 34);  // 92 → 58
+    tip = '检测到逐渐驼背…';
+  } else if(cycle < 9){
+    score = 55; tip = '⚠ 头前倾+驼背，请挺直背部、收下巴';
+  } else if(cycle < 12){
+    const p = (cycle - 9) / 3;
+    score = Math.round(55 + p * 37);  // 55 → 92
+    tip = '正在纠正…继续保持';
+  } else {
+    score = 94; tip = '★ 已纠正，坐姿良好';
+  }
+  hudLabel.textContent = '体态评分（演示）';
+  hudScore.textContent = score;
+  hudScore.classList.toggle('bad', score < 70);
+  hudTip.textContent = tip;
+  repsStat.textContent = score;
+  document.body.dataset.postureScore = score;
+  // demo 也画一个示意骨骼（静态良好姿态），让画面不空
+  drawDemoSkeleton(cycle);
+}
+
+// 健身 demo：每 2.5 秒完成一次深蹲/俯卧撑/弯举计数，演示 FSM 工作原理
+function updateFitnessDemo(t){
+  const period = fitnessAction === 'curl' ? 2000 : 2500;
+  const phase = (t % period) / period;  // 0..1
+  // 每 period 完成一次，fsm.count 累加
+  const totalReps = Math.floor(t / period);
+  if(fsm.count !== totalReps){
+    fsm.count = totalReps;
+    repsStat.textContent = fsm.count;
+    document.body.dataset.reps = fsm.count;
+    showToast('动作标准 +1（共' + fsm.count + '次）', 1000);
+  }
+  hudLabel.textContent = fitnessAction==='squat'?'深蹲（演示）':fitnessAction==='pushup'?'俯卧撑（演示）':'弯举（演示）';
+  hudScore.textContent = fsm.count;
+  hudScore.classList.remove('bad');
+  // 用 phase 给动作进度提示
+  if(phase < 0.4) hudTip.textContent = '下放阶段…';
+  else if(phase < 0.6) hudTip.textContent = '到达最低点，准备发力';
+  else hudTip.textContent = '发力上举…动作标准';
+}
+
+// demo 示意骨骼：画一个简化的良好姿态骨架，随 cycle 微动表示"在监测"
+function drawDemoSkeleton(cycle){
+  // 归一化的示意 landmark（正面站立良好姿态）
+  const demoPose = [
+    null,null,null,null,null,null,null,
+    {x:0.46,y:0.12},{x:0.54,y:0.12},  // 7,8 耳
+    null,null,
+    {x:0.40,y:0.30},{x:0.60,y:0.30},  // 11,12 肩
+    {x:0.38,y:0.48},{x:0.62,y:0.48},  // 13,14 肘
+    {x:0.37,y:0.62},{x:0.63,y:0.62},  // 15,16 腕
+    null,null,null,null,null,null,
+    {x:0.44,y:0.62},{x:0.56,y:0.62},  // 23,24 髋
+    {x:0.43,y:0.80},{x:0.57,y:0.80},  // 25,26 膝
+    {x:0.43,y:0.95},{x:0.57,y:0.95}   // 27,28 踝
+  ];
+  // 驼背相位(4-9s)时头前倾：耳和肩 x 整体前移
+  if(cycle >= 4 && cycle < 9){
+    const fwd = Math.min(1, (cycle - 4) / 4) * 0.04;
+    demoPose[7].x += fwd; demoPose[8].x += fwd;
+  }
+  const bad = (cycle >= 4 && cycle < 9) ? new Set([7,8,11,12]) : new Set();
+  drawSkeleton(demoPose, bad);
 }
 
 function updateOfficeMode(angles, pose, t){

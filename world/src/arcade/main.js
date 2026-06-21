@@ -114,11 +114,12 @@ function buildRoom() {
   const sun = new THREE.DirectionalLight(0xffe7c5, 1.35);
   sun.position.set(3, 8, 5);
   sun.castShadow = true;
-  sun.shadow.mapSize.set(1024, 1024);
+  sun.shadow.mapSize.set(4096, 4096);
   sun.shadow.camera.left = -14;
   sun.shadow.camera.right = 14;
   sun.shadow.camera.top = 14;
   sun.shadow.camera.bottom = -14;
+  sun.shadow.normalBias = 0.02;
   scene.add(sun);
 
   const floorMat = new THREE.MeshStandardMaterial({ color: 0xc08a55, roughness: 0.82 });
@@ -223,9 +224,51 @@ function createMachine(data, index) {
   labelMesh.position.set(0, 2.64, 0.59);
   group.add(labelMesh);
 
-  const light = new THREE.PointLight(data.accent, 0.9, 5.2, 2);
+  const light = new THREE.PointLight(data.accent, 1.4, 6.5, 2);
   light.position.set(0, 2.0, 0.8);
   group.add(light);
+
+  // Glowing floor halo under machine
+  const haloGeo = new THREE.RingGeometry(0.9, 1.3, 32);
+  const haloMat = new THREE.MeshBasicMaterial({
+    color: data.accent,
+    transparent: true,
+    opacity: 0.3,
+    side: THREE.DoubleSide,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
+  const halo = new THREE.Mesh(haloGeo, haloMat);
+  halo.rotation.x = -Math.PI / 2;
+  halo.position.y = 0.02;
+  group.add(halo);
+  group.userData.halo = halo;
+
+  // Marquee glow strip on top
+  const marqueeGeo = new THREE.BoxGeometry(1.7, 0.08, 1.05);
+  const marqueeMat = new THREE.MeshStandardMaterial({
+    color: data.accent,
+    emissive: data.accent,
+    emissiveIntensity: 1.8,
+    roughness: 0.3
+  });
+  const marquee = new THREE.Mesh(marqueeGeo, marqueeMat);
+  marquee.position.y = 2.92;
+  group.add(marquee);
+
+  // Decorative side LED strips
+  for (let side = -1; side <= 1; side += 2) {
+    const ledGeo = new THREE.BoxGeometry(0.04, 2.2, 1.0);
+    const ledMat = new THREE.MeshStandardMaterial({
+      color: data.accent,
+      emissive: data.accent,
+      emissiveIntensity: 0.6,
+      roughness: 0.4
+    });
+    const led = new THREE.Mesh(ledGeo, ledMat);
+    led.position.set(side * 0.79, 1.3, 0);
+    group.add(led);
+  }
 
   scene.add(group);
   return group;
@@ -593,6 +636,13 @@ function animate() {
     updateSelection(time);
     arcadeVisitors.update(delta, time);
   }
+  // Pulse machine halos
+  machineMeshes.forEach((m, i) => {
+    if (m.userData.halo) {
+      m.userData.halo.material.opacity = 0.2 + Math.sin(time * 1.5 + i * 0.8) * 0.15;
+      m.userData.halo.scale.setScalar(1 + Math.sin(time * 1.2 + i) * 0.05);
+    }
+  });
   renderer.render(scene, camera);
 }
 

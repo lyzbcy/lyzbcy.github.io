@@ -3,12 +3,15 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+import { SSAOPass } from 'three/addons/postprocessing/SSAOPass.js';
+import { FXAAShader } from 'three/addons/shaders/FXAAShader.js';
 
 const ClockClass = THREE.Clock;
 import { createTerrain, SPHERE_RADIUS, getSpherePosition } from './world/terrain.js';
 import { createWater } from './world/water.js';
 import { createSky, createFireflies, SUN_DIRECTION } from './world/sky.js';
 import { createDecorations } from './world/decorations.js';
+import { createGrass } from './world/grass.js';
 import { createTower } from './building/tower.js';
 import { createArcadeBuilding } from './building/arcade.js';
 import { createLandmarks } from './building/landmarks.js';
@@ -48,10 +51,18 @@ const camera = new THREE.PerspectiveCamera(
   70, window.innerWidth / window.innerHeight, 0.1, 500
 );
 
-// --- Post-processing ---
+// --- Post-processing --- //
 const composer = new EffectComposer(renderer);
 const renderPass = new RenderPass(scene, camera);
 composer.addPass(renderPass);
+
+// SSAO — ambient occlusion for depth and contact shadows
+const ssaoPass = new SSAOPass(scene, camera, window.innerWidth, window.innerHeight);
+ssaoPass.kernelRadius = 16;
+ssaoPass.minDistance = 0.005;
+ssaoPass.maxDistance = 0.1;
+ssaoPass.output = SSAOPass.OUTPUT.Default;
+composer.addPass(ssaoPass);
 
 // Bloom for glow effects — gentle in daylight, only for sun/screens
 const bloomPass = new UnrealBloomPass(
@@ -62,30 +73,49 @@ const bloomPass = new UnrealBloomPass(
 );
 composer.addPass(bloomPass);
 
-// Vignette shader — very subtle in daylight
-const vignetteShader = {
+// Color grading + Vignette (combined for performance)
+const colorGradeShader = {
   uniforms: {
     tDiffuse: { value: null },
-    offset: { value: 1.0 },
-    darkness: { value: 0.45 }
+    brightness: { value: 0.02 },
+    contrast: { value: 1.08 },
+    saturation: { value: 1.12 },
+    vignetteIntensity: { value: 0.28 },
+    vignetteRoundness: { value: 0.8 }
   },
   vertexShader: `varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
   fragmentShader: `
     uniform sampler2D tDiffuse;
-    uniform float offset;
-    uniform float darkness;
+    uniform float brightness, contrast, saturation;
+    uniform float vignetteIntensity, vignetteRoundness;
     varying vec2 vUv;
     void main() {
-      vec4 texel = texture2D(tDiffuse, vUv);
-      vec2 uv = (vUv - vec2(0.5)) * vec2(offset);
-      float vig = clamp(1.0 - dot(uv, uv), 0.0, 1.0);
-      texel.rgb *= mix(1.0, vig, darkness);
-      gl_FragColor = texel;
+      vec4 color = texture2D(tDiffuse, vUv);
+      // Brightness & contrast
+      color.rgb += brightness;
+      color.rgb = (color.rgb - 0.5) * contrast + 0.5;
+      // Saturation
+      float gray = dot(color.rgb, vec3(0.299, 0.587, 0.114));
+      color.rgb = mix(vec3(gray), color.rgb, saturation);
+      // Vignette
+      vec2 uv = vUv * 2.0 - 1.0;
+      float vig = 1.0 - dot(uv * vignetteRoundness, uv * vignetteRoundness);
+      vig = clamp(pow(vig, 1.5), 0.0, 1.0);
+      color.rgb *= mix(1.0 - vignetteIntensity, 1.0, vig);
+      gl_FragColor = color;
     }
   `
 };
-const vignettePass = new ShaderPass(vignetteShader);
-composer.addPass(vignettePass);
+const colorGradePass = new ShaderPass(colorGradeShader);
+composer.addPass(colorGradePass);
+
+// FXAA anti-aliasing (final pass — clean edges)
+const fxaaPass = new ShaderPass(FXAAShader);
+fxaaPass.material.uniforms['resolution'].value.set(
+  1 / window.innerWidth,
+  1 / window.innerHeight
+);
+composer.addPass(fxaaPass);
 
 // --- Loading progress ---
 let loadProgress = 0;
@@ -105,8 +135,8 @@ scene.add(hemiLight);
 const sunLight = new THREE.DirectionalLight(0xfff2d8, 1.5);
 sunLight.position.copy(SUN_DIRECTION).multiplyScalar(50);
 sunLight.castShadow = true;
-sunLight.shadow.mapSize.width = 2048;
-sunLight.shadow.mapSize.height = 2048;
+sunLight.shadow.mapSize.width = 4096;
+sunLight.shadow.mapSize.height = 4096;
 sunLight.shadow.camera.near = 0.5;
 sunLight.shadow.camera.far = 140;
 sunLight.shadow.camera.left = -45;
@@ -126,6 +156,10 @@ scene.add(skyFill);
 const ambientFill = new THREE.AmbientLight(0xfff0e0, 0.25);
 scene.add(ambientFill);
 
+// PMREM generator for procedural environment maps (PBR reflections)
+const pmremGenerator = new THREE.PMREMGenerator(renderer);
+pmremGenerator.compileEquirectangularShader();
+
 updateLoadProgress(20);
 
 // Terrain
@@ -141,6 +175,29 @@ updateLoadProgress(40);
 // Sky
 const { mesh: sky, material: skyMat } = createSky();
 scene.add(sky);
+
+// Generate environment map from the sky shader for PBR reflections
+if (skyMat.map) {
+  const envRT = pmremGenerator.fromEquirectangular(skyMat.map);
+  scene.environment = envRT.texture;
+} else {
+  // Fallback: create a gradient env map from scene fog color
+  const envCanvas = document.createElement('canvas');
+  envCanvas.width = 512; envCanvas.height = 256;
+  const ctx = envCanvas.getContext('2d');
+  const grad = ctx.createLinearGradient(0, 0, 0, 256);
+  grad.addColorStop(0, '#7eb8d4');
+  grad.addColorStop(0.5, '#c8dde4');
+  grad.addColorStop(1, '#c8b48a');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 512, 256);
+  const envTex = new THREE.CanvasTexture(envCanvas);
+  envTex.mapping = THREE.EquirectangularReflectionMapping;
+  const envRT = pmremGenerator.fromEquirectangular(envTex);
+  scene.environment = envRT.texture;
+  envTex.dispose();
+}
+pmremGenerator.dispose();
 
 // Ambient particles (fireflies → cosmic dust)
 const { points: fireflies, phases: fireflyPhases } = createFireflies();
@@ -166,6 +223,11 @@ updateLoadProgress(75);
 const decorations = createDecorations(noise2D);
 scene.add(decorations);
 updateLoadProgress(85);
+
+// Grass — instanced blades + glow paths + dandelion spores
+const grassField = createGrass(noise2D);
+scene.add(grassField);
+updateLoadProgress(88);
 
 // NPCs
 const npcs = createAllNPCs(noise2D, posts);
@@ -274,6 +336,11 @@ window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
   composer.setSize(window.innerWidth, window.innerHeight);
   bloomPass.resolution.set(window.innerWidth, window.innerHeight);
+  // SSAO resize
+  const w = window.innerWidth, h = window.innerHeight;
+  ssaoPass.setSize(w, h);
+  // FXAA resize
+  fxaaPass.material.uniforms['resolution'].value.set(1 / w, 1 / h);
 });
 
 // --- Adaptive DPR ---
@@ -358,6 +425,36 @@ function animateLandmarks(time) {
   });
 }
 
+// Animate glow path dots and dandelion spores
+function animateGrass(time) {
+  grassField.traverse(child => {
+    if (child.name === 'glow-paths') {
+      child.children.forEach(dot => {
+        const phase = dot.userData.phase || 0;
+        const pulse = Math.sin(time * 1.5 + phase) * 0.3 + 0.7;
+        if (dot.material) {
+          dot.material.emissiveIntensity = 0.6 + pulse * 0.8;
+        }
+        if (dot.userData.baseY !== undefined) {
+          dot.position.y = dot.userData.baseY + Math.sin(time * 0.8 + phase) * 0.06;
+        }
+      });
+    }
+    if (child.name === 'dandelion-spores' && child.isPoints) {
+      const positions = child.geometry.attributes.position;
+      const phases = child.userData.phases || [];
+      for (let i = 0; i < positions.count; i++) {
+        const py = positions.getY(i);
+        const px = positions.getX(i);
+        positions.setY(i, py + Math.sin(time * 0.3 + phases[i]) * 0.004);
+        positions.setX(i, px + Math.cos(time * 0.2 + phases[i]) * 0.003);
+      }
+      positions.needsUpdate = true;
+      child.material.opacity = 0.35 + Math.sin(time * 0.5) * 0.15;
+    }
+  });
+}
+
 function updateIntroCamera(elapsed) {
   const orbitRadius = 38;
   const orbitHeight = 20 + Math.sin(elapsed * 0.3) * 2.5;
@@ -411,6 +508,7 @@ function animate() {
   animateFireflies(elapsed);
   animateTower(elapsed);
   animateLandmarks(elapsed);
+  animateGrass(elapsed);
   adaptDPR();
 
   // Render with post-processing

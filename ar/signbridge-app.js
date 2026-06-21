@@ -148,14 +148,41 @@ function loop(){
     if(r){
       if(r.word===pendingWord){ pendingCount++; }
       else { pendingWord=r.word; pendingCount=1; }
+      // 过程反馈：第一次看到候选就轻量提示，让用户知道手势被"看到"了
+      if(pendingCount===1){
+        showPendingHint(r.word, r.confidence);
+      }
       if(pendingCount>=2){
         showCurrentWord(r.word, r.confidence);
         if(r.confidence>=0.6) addToSentence(r.word);
         pendingCount=0; pendingWord=null;
+        clearPendingHint();
       }
-    } else { pendingWord=null; pendingCount=0; }
+    } else { pendingWord=null; pendingCount=0; clearPendingHint(); }
   }
   renderer.render(scene, camera);
+}
+
+// 识别中候选提示（轻量、半透明，区别于已确认的大字）
+let pendingEl = null;
+function ensurePendingEl(){
+  if(pendingEl) return pendingEl;
+  pendingEl = document.createElement('div');
+  pendingEl.id = 'pending-word';
+  pendingEl.style.cssText = 'position:fixed;left:50%;top:46%;transform:translate(-50%,-50%);z-index:6;text-align:center;pointer-events:none;opacity:0;transition:opacity .2s';
+  pendingEl.innerHTML = '<div style="font-family:Georgia,Microsoft YaHei,serif;font-size:1.8rem;color:rgba(255,223,140,.55)">…</div><div style="font-size:.72rem;color:rgba(255,247,232,.45);margin-top:4px">保持手势确认</div>';
+  document.body.appendChild(pendingEl);
+  return pendingEl;
+}
+function showPendingHint(word, conf){
+  const el = ensurePendingEl();
+  el.querySelector('div').textContent = word + ' ?';
+  el.style.opacity = '1';
+  document.body.dataset.pending = word;
+}
+function clearPendingHint(){
+  if(pendingEl) pendingEl.style.opacity = '0';
+  delete document.body.dataset.pending;
 }
 
 document.getElementById('camera').onclick = startCamera;
