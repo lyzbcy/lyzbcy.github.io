@@ -315,12 +315,10 @@ window.addEventListener('arjs-nft-init-data', (e)=>{
     // 像素→毫米，再除2移到中心
     const cx = (d.width / d.dpi * 2.54 * 10) / 2.0;
     const cy = (d.height / d.dpi * 2.54 * 10) / 2.0;
-    // 第二轮真机截图证明：markerRoot 原点在触发图左侧/边缘附近。
-    // 在 modelViewMatrix 模式下，NFT 图面更接近 x/y 平面；向 +x、-y 移到图像中心。
-    const ox = cx * 1.55;
-    const oy = -cy * 1.65;
-    inviteGroup.position.set(ox, oy, 0);
-    LOG(`nft-init-data: marker物理尺寸约 ${(cx*2).toFixed(1)}mm × ${(cy*2).toFixed(1)}mm；内容右上微调 x=${ox.toFixed(1)}, y=${oy.toFixed(1)}`);
+    // 居中：之前用 cx*1.55 / -cy*1.65 的大系数把场景推到了右下角，
+    // 现在直接用半宽半高居中（cx,cy 已是半值）。
+    inviteGroup.position.set(cx, cy, 0);
+    LOG(`nft-init-data: 居中 marker物理尺寸约 ${(cx*2).toFixed(1)}mm × ${(cy*2).toFixed(1)}mm；内容定位 (${cx.toFixed(1)}, ${cy.toFixed(1)}, 0)`);
   }
 });
 
