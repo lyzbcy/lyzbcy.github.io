@@ -100,18 +100,13 @@ new GLTFLoader().load(MODEL_URL, (gltf)=>{
   box.getCenter(center);
   model.position.sub(center);
   const maxDim = Math.max(size.x, size.y, size.z) || 1;
-  model.scale.setScalar(444 / maxDim);  // 放大6倍（原 74mm → 444mm，约 marker 的 2.4 倍）
+  model.scale.setScalar(266 / maxDim);  // 缩小40%（原444mm→266mm）
   // 角色模型：Blender 导出已 Y-up，立正朝前显示
   model.rotation.set(0, 0, 0);
+  // 用模型默认的 depthTest/depthWrite（之前误设 false 导致面穿插坏面）
   model.traverse((obj)=>{
     if(obj.isMesh){
-      obj.renderOrder = 1005;
       obj.frustumCulled = false;
-      if(obj.material){
-        obj.material.depthTest = false;
-        obj.material.depthWrite = false;
-        obj.material.needsUpdate = true;
-      }
     }
   });
   mascotRoot.add(model);
