@@ -101,7 +101,7 @@ new GLTFLoader().load(MODEL_URL, (gltf)=>{
   box.getCenter(center);
   model.position.sub(center);
   const maxDim = Math.max(size.x, size.y, size.z) || 1;
-  model.scale.setScalar(74 / maxDim);
+  model.scale.setScalar(444 / maxDim);  // 放大6倍（原 74mm → 444mm，约 marker 的 2.4 倍）
   // house 是建筑，立正显示（glTF 导出时已 Y-up，无需像火烈鸟那样躺倒旋转）
   model.rotation.set(0, 0, 0);
   model.traverse((obj)=>{
