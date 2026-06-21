@@ -88,10 +88,9 @@ mascotRoot.position.set(0, 0, 48);
 inviteGroup.add(mascotRoot);
 let mascotMixer = null;
 let mascotReady = false;
-// 团队自建模型：从 Unity 工程的 house.fbx 转换而来（Blender 减面+贴图嵌入）。
-// 替换原来的 Flamingo.glb（火烈鸟与邀请函主题不搭）。
-// 本地相对路径，离线也能加载，不依赖 CDN。
-const MODEL_URL = './models/house.glb';
+// 团队自建模型：通用模型（zyh）—— 低多边形卡通角色（254KB，6网格9380面）。
+// 从 E:/星星布丁/zyh/通用模型（zyh）.glb 取用，纯色材质无贴图，体积小加载快。
+const MODEL_URL = './models/zyh.glb';
 new GLTFLoader().load(MODEL_URL, (gltf)=>{
   const model = gltf.scene;
   const box = new THREE.Box3().setFromObject(model);
@@ -102,7 +101,7 @@ new GLTFLoader().load(MODEL_URL, (gltf)=>{
   model.position.sub(center);
   const maxDim = Math.max(size.x, size.y, size.z) || 1;
   model.scale.setScalar(444 / maxDim);  // 放大6倍（原 74mm → 444mm，约 marker 的 2.4 倍）
-  // house 是建筑，立正显示（glTF 导出时已 Y-up，无需像火烈鸟那样躺倒旋转）
+  // 角色模型：Blender 导出已 Y-up，立正朝前显示
   model.rotation.set(0, 0, 0);
   model.traverse((obj)=>{
     if(obj.isMesh){
@@ -119,11 +118,11 @@ new GLTFLoader().load(MODEL_URL, (gltf)=>{
   if(gltf.animations?.length){ mascotMixer = new THREE.AnimationMixer(model); mascotMixer.clipAction(gltf.animations[0]).play(); }
   mascotReady = true;
   planet.visible = false;
-  LOG('团队 house.glb 加载成功', MODEL_URL);
+  LOG('团队 zyh.glb 加载成功', MODEL_URL);
 }, undefined, (err)=>{
   mascotReady = false;
   planet.visible = true;
-  LOG('house.glb 加载失败，回退程序星球', err?.message || err);
+  LOG('zyh.glb 加载失败，回退程序星球', err?.message || err);
 });
 
 // 可见性锚点：多轴、多平面、大尺寸。只要 markerRoot 的模型矩阵有效，
