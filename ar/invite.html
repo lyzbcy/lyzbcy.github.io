@@ -34,6 +34,16 @@
   body[data-tracking="true"] #brand{pointer-events:none}
   /* 我们的旧 #video 已废弃（display:none），这里显式确认它不参与 */
   #video{display:none}
+  /* 识别兜底条：识别 8 秒无果时浮现，避免演示冷场 */
+  #fallback-bar{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);z-index:11;
+    display:flex;align-items:center;gap:10px;padding:10px 10px 10px 16px;border-radius:999px;
+    background:rgba(255,247,232,.96);color:#593a20;border:1px solid rgba(232,201,138,.6);
+    box-shadow:0 14px 34px rgba(0,0,0,.22);opacity:0;pointer-events:none;
+    transition:opacity .3s ease,transform .3s ease;font-size:.85rem;max-width:90vw}
+  #fallback-bar.show{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+  #fallback-bar button{flex:0 0 auto;padding:8px 16px;border-radius:999px;border:none;cursor:pointer;font:inherit;font-weight:600}
+  #fallback-bar .fb-yes{background:linear-gradient(180deg,#f2c978,#e8920c);color:#fff}
+  #fallback-bar .fb-no{background:rgba(89,58,32,.08);color:#6b4426}
 </style>
 <script type="importmap">
 { "imports": {
@@ -53,6 +63,11 @@
   </section>
 </div>
 <div id="scan-hint">对准弹珠台触发图，星球会从中浮起</div>
+<div id="fallback-bar">
+  <span>还没识别到？环境/光线可能影响 NFT</span>
+  <button class="fb-yes" id="fb-yes">看演示动画</button>
+  <button class="fb-no" id="fb-no">继续等</button>
+</div>
 <button id="enter-btn-ar">进入捞鱼世界 →</button>
 <section id="panel">
   <p id="brief">开启摄像头，对准弹珠台触发图（点上方下载，可打印或显示在另一手机上）。3D 星球会从图中浮起、光环旋转、粒子绽放。识别不到可点"演示"手动播放。iOS 请用 Safari，微信内打开请点右上角用系统浏览器。</p>

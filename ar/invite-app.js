@@ -15,6 +15,7 @@ const permission = document.getElementById('permission');
 const panel = document.getElementById('panel');
 const scanHint = document.getElementById('scan-hint');
 const enterBtn = document.getElementById('enter-btn-ar');
+const fallbackBar = document.getElementById('fallback-bar');
 
 // ---------- Three.js 场景 ----------
 // 使用更稳的 marker-root 结构：
@@ -87,7 +88,10 @@ mascotRoot.position.set(0, 0, 48);
 inviteGroup.add(mascotRoot);
 let mascotMixer = null;
 let mascotReady = false;
-const MODEL_URL = 'https://cdn.jsdelivr.net/npm/three@0.169.0/examples/models/gltf/Flamingo.glb';
+// 团队自建模型：从 Unity 工程的 house.fbx 转换而来（Blender 减面+贴图嵌入）。
+// 替换原来的 Flamingo.glb（火烈鸟与邀请函主题不搭）。
+// 本地相对路径，离线也能加载，不依赖 CDN。
+const MODEL_URL = './models/house.glb';
 new GLTFLoader().load(MODEL_URL, (gltf)=>{
   const model = gltf.scene;
   const box = new THREE.Box3().setFromObject(model);
@@ -98,7 +102,8 @@ new GLTFLoader().load(MODEL_URL, (gltf)=>{
   model.position.sub(center);
   const maxDim = Math.max(size.x, size.y, size.z) || 1;
   model.scale.setScalar(74 / maxDim);
-  model.rotation.set(Math.PI / 2, 0, -Math.PI / 8);
+  // house 是建筑，立正显示（glTF 导出时已 Y-up，无需像火烈鸟那样躺倒旋转）
+  model.rotation.set(0, 0, 0);
   model.traverse((obj)=>{
     if(obj.isMesh){
       obj.renderOrder = 1005;
@@ -114,11 +119,11 @@ new GLTFLoader().load(MODEL_URL, (gltf)=>{
   if(gltf.animations?.length){ mascotMixer = new THREE.AnimationMixer(model); mascotMixer.clipAction(gltf.animations[0]).play(); }
   mascotReady = true;
   planet.visible = false;
-  LOG('免费 GLB 模型加载成功', MODEL_URL);
+  LOG('团队 house.glb 加载成功', MODEL_URL);
 }, undefined, (err)=>{
   mascotReady = false;
   planet.visible = true;
-  LOG('GLB 模型加载失败，回退程序星球', err?.message || err);
+  LOG('house.glb 加载失败，回退程序星球', err?.message || err);
 });
 
 // 可见性锚点：多轴、多平面、大尺寸。只要 markerRoot 的模型矩阵有效，
@@ -185,6 +190,33 @@ const planet = new THREE.Mesh(
 );
 planet.position.set(0, 0, 42); planet.renderOrder = 1001; planet.scale.setScalar(0.001);
 inviteGroup.add(planet);
+
+// GLB 加载失败时的兜底“微型童话星球”：给球体加小屋/塔/旗子，避免只剩廉价贴图球。
+const fallbackDecor = new THREE.Group();
+fallbackDecor.renderOrder = 1004;
+const decorMats = {
+  wall: new THREE.MeshBasicMaterial({color:0xffe3a8, depthTest:false, depthWrite:false}),
+  roof: new THREE.MeshBasicMaterial({color:0xe85d75, depthTest:false, depthWrite:false}),
+  flag: new THREE.MeshBasicMaterial({color:0x7bd5ff, depthTest:false, depthWrite:false}),
+  tree: new THREE.MeshBasicMaterial({color:0x77c66e, depthTest:false, depthWrite:false})
+};
+function addTower(x,z,h=18){
+  const tower = new THREE.Mesh(new THREE.CylinderGeometry(3.2, 3.8, h, 10), decorMats.wall);
+  tower.position.set(x, 18 + h/2, z); tower.renderOrder = 1004; fallbackDecor.add(tower);
+  const roof = new THREE.Mesh(new THREE.ConeGeometry(5.2, 9, 12), decorMats.roof);
+  roof.position.set(x, 18 + h + 5, z); roof.renderOrder = 1005; fallbackDecor.add(roof);
+}
+addTower(-9, 3, 18); addTower(8, -3, 14);
+const flagPole = new THREE.Mesh(new THREE.CylinderGeometry(0.7,0.7,24,6), decorMats.flag);
+flagPole.position.set(0, 48, 0); flagPole.renderOrder = 1005; fallbackDecor.add(flagPole);
+const flag = new THREE.Mesh(new THREE.ConeGeometry(5, 10, 3), decorMats.flag);
+flag.rotation.z = -Math.PI/2; flag.position.set(6, 56, 0); flag.renderOrder = 1006; fallbackDecor.add(flag);
+for(const [x,z] of [[-17,-8],[16,8]]){
+  const tree = new THREE.Mesh(new THREE.ConeGeometry(5, 13, 10), decorMats.tree);
+  tree.position.set(x, 23, z); tree.renderOrder = 1004; fallbackDecor.add(tree);
+}
+fallbackDecor.scale.setScalar(0.9);
+planet.add(fallbackDecor);
 
 const crown = new THREE.Group();
 for(let i=0;i<7;i++){
@@ -272,6 +304,9 @@ function startSequence(){
   planet.scale.setScalar(0.001);
   ring.scale.setScalar(0.001);
   crown.scale.setScalar(0.001);
+  mascotRoot.scale.setScalar(0.001);
+  mascotRoot.rotation.set(0,0,0);
+  mascotRoot.position.set(0, 0, 48);
   textSprite.material.opacity = 0;
   particles.material.opacity = 0;
   showToast('★ 捞鱼世界邀请你', 2000);
@@ -288,6 +323,9 @@ function updateAnimation(dt){
     const s = 1 - Math.pow(1-p, 3);
     planet.scale.setScalar(s);
     crown.scale.setScalar(s);
+    // house 模型随 rise 缩放进场（从 0 长到 1），并轻微上浮
+    mascotRoot.scale.setScalar(s);
+    mascotRoot.position.set(0, (1-s)*-15, 48);
     planet.rotation.y = t * 2;
     crown.rotation.y = -t * 1.6;
     if(t>1.0){ phase='ring'; phaseTime=0; document.body.dataset.phase='ring'; }
@@ -312,6 +350,8 @@ function updateAnimation(dt){
     planet.rotation.y += dt*0.5;
     ring.rotation.z += dt*0.8;
     crown.rotation.y -= dt*0.65;
+    // house 缓慢自转（没动画的静态建筑，给它一点生气）
+    mascotRoot.rotation.y += dt*0.35;
     visibilityAnchor.rotation.y += dt*0.55;
     visibilityAnchor.rotation.z += dt*0.25;
     textSprite.position.y = -44 + Math.sin(performance.now()*0.002)*2.2;
@@ -323,8 +363,11 @@ enterBtn.onclick = ()=>{ window.location.href='/world/'; };
 // ---------- AR.js NFT ----------
 let arToolkitSource=null, arToolkitContext=null, arControls=null;
 let mode='boot', lastTracked=false;
-const TRACKING_GRACE_MS = 650;
+const TRACKING_GRACE_MS = 3000;
+const FALLBACK_HINT_MS = 8000;  // 识别 8 秒无果 → 弹兜底条，避免演示冷场
 let lastTrackedAt = 0;
+let cameraStartAt = 0;
+let fallbackShown = false;
 let stableHasPose = false;
 const rawPos = new THREE.Vector3();
 const rawQuat = new THREE.Quaternion();
@@ -364,6 +407,9 @@ async function startCamera(){
   // 不再自己 getUserMedia！交给 ArToolkitSource(sourceType:'webcam') 全权管理，
   // 否则两路 getUserMedia 会冲突（之前就是这里导致 NFT 永不识别）。
   // 用户选的摄像头通过 deviceId 传给 AR.js（{exact:deviceId}）。
+  cameraStartAt = performance.now();
+  fallbackShown = false;
+  fallbackBar.classList.remove('show');
   initAR();
   showToast('对准邀请函图，星球会浮起', 2500);
   game.start();
@@ -489,9 +535,9 @@ function animate(){
         stableRoot.scale.copy(rawScale);
         stableHasPose = true;
       }else{
-        stableRoot.position.lerp(rawPos, 0.22);
-        stableRoot.quaternion.slerp(rawQuat, 0.18);
-        stableRoot.scale.lerp(rawScale, 0.22);
+        stableRoot.position.lerp(rawPos, 0.075);
+        stableRoot.quaternion.slerp(rawQuat, 0.06);
+        stableRoot.scale.lerp(rawScale, 0.075);
       }
       stableRoot.visible = true;
     }else{
@@ -501,17 +547,27 @@ function animate(){
     const sr = arToolkitSource ? arToolkitSource.ready : '?';
     statusEl.textContent = DEBUG_AR
       ? `src.ready=${sr} | ${tracked ? '★已识别' : '未识别'} | markerRoot`
-      : (tracked ? '✨ 魔法图案已点亮，星球正在浮起' : '把弹珠台图放正 · 距离 20–40cm');
+      : (tracked ? '✨ 魔法图案已点亮，模型正在浮起' : (stableRoot.visible ? '✨ 魔法锁定中，慢慢移动手机' : '把弹珠台图放正 · 距离 20–40cm'));
     statusEl.style.opacity = tracked ? '0.82' : '0.78';
     if(tracked && !lastTracked){
       lastTracked=true; game.mark('tracking','true');
       scanHint.style.opacity = '0';
+      // 已识别：隐藏兜底条（如果出现过）
+      fallbackBar.classList.remove('show');
       LOG('★ 首次识别成功！开始播放动画');
       if(phase==='idle') startSequence();
-    } else if(!tracked && lastTracked){
+    } else if(!tracked && lastTracked && !stableRoot.visible){
       lastTracked=false; game.mark('tracking','false');
       scanHint.style.opacity = '0.85';
       enterBtn.classList.remove('show');
+    }
+    // 兜底：从开摄像头算起，8 秒内仍未识别过一次 → 弹兜底条，引导看演示
+    // （NFT 对光线/打印质量敏感，演示场景不该干等）
+    if(!fallbackShown && cameraStartAt && !lastTracked &&
+       (now - cameraStartAt) > FALLBACK_HINT_MS){
+      fallbackShown = true;
+      fallbackBar.classList.add('show');
+      LOG('识别超时，弹兜底条引导演示');
     }
     if(phase!=='idle') updateAnimation(dt);
   } else if(mode==='demo'){
@@ -525,8 +581,9 @@ function animate(){
 function startDemo(){
   mode='demo'; game.setMode('mouse');
   permission.classList.add('hidden'); panel.style.display='none';
-  scanHint.style.display='none';
+  scanHint.style.display = 'none';
   statusEl.style.display = 'none';
+  fallbackBar.classList.remove('show');
   // demo 模式下 camera 固定在原点看 -Z，内容放前方（mm单位）
   camera.position.set(0, 42, 190);  // 站在 marker 前方 190mm 看
   camera.lookAt(0, 30, 0);
@@ -543,5 +600,8 @@ document.getElementById('camera').onclick = startCamera;
 document.getElementById('cam2').onclick = startCamera;
 document.getElementById('demo').onclick = startDemo;
 document.getElementById('demo2').onclick = startDemo;
+// 兜底条：点"看演示动画"直接进 demo；点"继续等"收起条再等 8 秒
+document.getElementById('fb-yes').onclick = ()=>{ fallbackBar.classList.remove('show'); startDemo(); };
+document.getElementById('fb-no').onclick = ()=>{ fallbackBar.classList.remove('show'); cameraStartAt = performance.now(); fallbackShown = false; };
 // 页面加载时往 permission 卡注入摄像头选择器（应对多摄像头，默认后置对准邀请函图）
 (async ()=>{ try{ const c=document.querySelector('#permission .perm-card'); if(c) c.__camSelector=await injectCameraSelector(c,'environment'); }catch(e){} })();
