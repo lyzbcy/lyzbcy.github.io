@@ -126,8 +126,9 @@ function placeAndScale(model, targetSize, rMin, rMax){
   box.getSize(size); box.getCenter(center);
   const maxDim = Math.max(size.x, size.y, size.z) || 1;
   model.scale.setScalar(targetSize / maxDim);
-  // FBX 从 Unity 导出上下颠倒（树根朝上），绕 X 轴翻 180° 让树冠朝上
-  model.rotation.x = Math.PI;
+  // FBX 从 Unity 导出上下颠倒（树根朝上）。绕 Z 轴翻 180° 让树冠朝上，
+  // 同时保持正面朝向用户（绕X翻会导致背面朝用户，即"正反反了"）。
+  model.rotation.z = Math.PI;
   // 居中：减去中心。翻转后用 box 重新算居中
   const box2 = new THREE.Box3().setFromObject(model);
   const c2 = new THREE.Vector3(); box2.getCenter(c2);
