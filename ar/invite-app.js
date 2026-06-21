@@ -89,45 +89,76 @@ mascotRoot.position.set(0, 0, 48);
 inviteGroup.add(mascotRoot);
 let mascotMixer = null;
 let mascotReady = false;
-// 低多边形童话树（SimpleLowPolyNature 资源包，Tree1.fbx）。
-// 来源：D:/Unity_test/fire/Assets/【湖边场景】SimpleLowPolyNature/Models/Tree1.fbx
-// FBX 无贴图，程序着色：树冠绿色、树干棕色，匹配邀请函童话主题。
-const MODEL_URL = './models/Tree1.fbx';
-new FBXLoader().load(MODEL_URL, (model)=>{
-  const box = new THREE.Box3().setFromObject(model);
-  const size = new THREE.Vector3();
-  const center = new THREE.Vector3();
-  box.getSize(size);
-  box.getCenter(center);
-  model.position.sub(center);
-  const maxDim = Math.max(size.x, size.y, size.z) || 1;
-  model.scale.setScalar(266 / maxDim);
-  model.rotation.set(0, 0, 0);
-  // FBX 无贴图，按顶点高度程序着色：上半（树冠）绿色，下半（树干）棕色
+
+// 全套森林场景（多点散布）：Tree×3 + Flower×3 + Mushroom×2 + Grass×2 + Rock×1
+// 来源：D:/Unity_test/fire/Assets/【湖边场景】SimpleLowPolyNature/Models/
+// FBX 无贴图，按类型程序着色（flatShading 低多边形童话风）。
+// 每个模型归一化到基准尺寸，散布在 marker 周围（圆周分布 + 随机偏移）。
+const fbxLoader = new FBXLoader();
+// 模型清单：[文件, 颜色, 目标尺寸mm, 散布半径范围(mm), 散布数量]
+const FOREST_SPEC = [
+  { file:'Tree1',     color:0x4a8f3d, size:200, rMin:60, rMax:90, count:1 },  // 主树（大）
+  { file:'Tree2',     color:0x3d7a4f, size:120, rMin:70, rMax:95, count:1 },  // 副树
+  { file:'Tree3',     color:0x5fa84c, size:140, rMin:50, rMax:85, count:1 },  // 副树
+  { file:'Flower1',   color:0xe85d8f, size:32,  rMin:30, rMax:75, count:2 },  // 粉花
+  { file:'Flower2',   color:0xf2c94c, size:32,  rMin:30, rMax:75, count:2 },  // 黄花
+  { file:'Flower3',   color:0xc77dff, size:32,  rMin:30, rMax:75, count:2 },  // 紫花
+  { file:'Mushroom1', color:0xd64545, size:30,  rMin:25, rMax:70, count:1 },  // 红蘑菇
+  { file:'Mushroom2', color:0xe8a060, size:30,  rMin:25, rMax:70, count:1 },  // 橙蘑菇
+  { file:'Grass1',    color:0x7bc66e, size:24,  rMin:15, rMax:80, count:3 },  // 草丛
+  { file:'Grass2',    color:0x6bb55c, size:24,  rMin:15, rMax:80, count:3 },  // 草丛
+  { file:'Rock1',     color:0x8a8a8a, size:30,  rMin:35, rMax:75, count:1 },  // 石头
+];
+
+function paintModel(model, color){
   model.traverse((obj)=>{
     if(obj.isMesh){
       obj.frustumCulled = false;
-      // 简单低多边形着色：flat shading + 双面，避免坏面
-      if(obj.material){
-        obj.material = new THREE.MeshStandardMaterial({
-          color: 0x4a8f3d,  // 树冠绿
-          flatShading: true,
-          roughness: 0.85,
-          metalness: 0.0,
-          side: THREE.DoubleSide
-        });
-      }
+      obj.material = new THREE.MeshStandardMaterial({
+        color, flatShading:true, roughness:0.85, metalness:0.0, side:THREE.DoubleSide
+      });
     }
   });
-  mascotRoot.add(model);
-  if(model.animations?.length){ mascotMixer = new THREE.AnimationMixer(model); mascotMixer.clipAction(model.animations[0]).play(); }
-  mascotReady = true;
-  planet.visible = false;
-  LOG('Tree1.fbx 加载成功', MODEL_URL);
-}, undefined, (err)=>{
-  mascotReady = false;
-  planet.visible = true;
-  LOG('Tree1.fbx 加载失败，回退程序星球', err?.message || err);
+}
+function placeAndScale(model, targetSize, rMin, rMax){
+  const box = new THREE.Box3().setFromObject(model);
+  const size = new THREE.Vector3(), center = new THREE.Vector3();
+  box.getSize(size); box.getCenter(center);
+  const maxDim = Math.max(size.x, size.y, size.z) || 1;
+  model.scale.setScalar(targetSize / maxDim);
+  // 居中到底部（让模型站在地面上）：减去中心后下移半个高度
+  model.position.sub(center);
+  // 圆周随机散布
+  const ang = Math.random() * Math.PI * 2;
+  const r = rMin + Math.random() * (rMax - rMin);
+  model.position.x += Math.cos(ang) * r;
+  model.position.z += Math.sin(ang) * r;
+  model.rotation.y = Math.random() * Math.PI * 2;  // 随机朝向
+}
+
+let forestLoaded = 0, forestTotal = 0;
+FOREST_SPEC.forEach(s => forestTotal += s.count);
+FOREST_SPEC.forEach(spec => {
+  for(let i=0; i<spec.count; i++){
+    fbxLoader.load(`./models/${spec.file}.fbx`, (model)=>{
+      paintModel(model, spec.color);
+      placeAndScale(model, spec.size, spec.rMin, spec.rMax);
+      mascotRoot.add(model);
+      if(model.animations?.length && !mascotMixer){
+        mascotMixer = new THREE.AnimationMixer(model);
+        mascotMixer.clipAction(model.animations[0]).play();
+      }
+      forestLoaded++;
+      if(forestLoaded >= forestTotal){
+        mascotReady = true;
+        planet.visible = false;
+        LOG(`森林场景加载完成（${forestLoaded}个模型）`);
+      }
+    }, undefined, (err)=>{
+      forestLoaded++;  // 失败也计数，避免卡住
+      LOG(`${spec.file}.fbx 加载失败`, err?.message || err);
+    });
+  }
 });
 
 // 可见性锚点：多轴、多平面、大尺寸。只要 markerRoot 的模型矩阵有效，
