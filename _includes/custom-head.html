@@ -54,3 +54,8 @@
 <!-- GitHub-style Alerts -->
 <link rel="stylesheet" href="{{ '/assets/css/github-alerts.css' | relative_url }}">
 <script defer src="{{ '/assets/js/github-alerts.js' | relative_url }}"></script>
+
+{% if page.layout == 'home' %}
+<!-- World entrance banner (home page only) -->
+<script defer src="{{ '/assets/lib-custom/world-banner.js' | relative_url }}"></script>
+{% endif %}
