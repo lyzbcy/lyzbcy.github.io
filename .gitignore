@@ -28,3 +28,6 @@ assets/js/dist
 !assets/js/dist/
 assets/js/dist/*
 !assets/js/dist/sw.min.js
+
+# 加密文章密码柜（绝不提交，丢失则无法修改对应文章）
+_data/encryption_secrets.yml
