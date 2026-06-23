@@ -41,7 +41,9 @@ module EncryptContent
       'iv'         => iv.unpack1('H*'),
       'salt'       => salt.unpack1('H*'),
       'iterations' => ITERATIONS,
-      'verify'     => OpenSSL::Digest::SHA256.hexdigest(key)
+      # verify = PBKDF2 原始派生的 32 字节 hex
+      # （JS 端 deriveBits(256) 拿到同样的 32 字节，转 hex 直接比对，两端天然一致）
+      'verify'     => key.unpack1('H*')
     }
   end
 
@@ -72,6 +74,7 @@ end
 Liquid::Template.register_tag('encrypted', EncryptedBlock)
 
 # 2) :post_render hook：把所有占位符加密并替换
+#    同时清理 post.content（搜索索引 post-summary.html 读它），防止明文泄露到 search.json
 Jekyll::Hooks.register :posts, :post_render do |post|
   next unless post.data['encrypted'] == true
 
@@ -85,6 +88,11 @@ Jekyll::Hooks.register :posts, :post_render do |post|
     enc = EncryptContent.encrypt(plaintext, pwd)
     EncryptContent.render_container(enc)
   end
-
   post.output = new_output
+
+  # post.content 同样含占位符（Liquid Block 输出的），清空为提示，
+  # 避免 search.json / search 索引读到明文
+  if post.content && post.content.include?('<!--ENC_START-->')
+    post.content = post.content.gsub(EncryptContent::PLACEHOLDER_RE, '[此内容已加密，请输入密码查看]')
+  end
 end

@@ -218,6 +218,9 @@ exclude:
   - "*.config.js"
   - "package*.json"
   - world
+  - "nul"
+  - "start.bat"
+  - "start.ps1"
 
 jekyll-archives:
   enabled: [categories, tags]

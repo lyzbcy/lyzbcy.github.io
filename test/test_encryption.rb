@@ -12,7 +12,7 @@ def encrypt(plaintext, pwd, iterations = 300_000)
   cipher.iv = iv
   ct = cipher.update(plaintext) + cipher.final
   tag = cipher.auth_tag
-  verify = OpenSSL::Digest::SHA256.hexdigest(key)
+  verify = key.unpack1('H*')  # PBKDF2 原始 32 字节 hex（与插件一致）
   { ciphertext: (ct + tag).unpack1('H*'), iv: iv.unpack1('H*'),
     salt: salt.unpack1('H*'), iterations: iterations, verify: verify }
 end
@@ -22,7 +22,7 @@ class TestEncryption < Minitest::Test
     r = encrypt('hello', 'pass')
     %w[ciphertext iv salt iterations verify].each { |k| refute_nil r[k.to_sym] }
     assert_equal 300_000, r[:iterations]
-    assert_equal 64, r[:verify].length   # SHA-256 hex = 64 chars
+    assert_equal 64, r[:verify].length   # PBKDF2 32 字节 = 64 hex chars
     assert_equal 32, r[:salt].length     # 16 bytes = 32 hex chars
     assert_equal 24, r[:iv].length       # 12 bytes = 24 hex chars
   end
