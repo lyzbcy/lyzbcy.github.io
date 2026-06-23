@@ -64,11 +64,15 @@ module EncryptContent
   end
 end
 
-# 1) Liquid Block：捕获明文，用占位符包裹（渲染期仍为明文，post_render 加密）
+# 1) Liquid Block：捕获内容，先 markdown→HTML（kramdown），再用占位符包裹
+#    注意：super 返回的是 markdown 原文（Liquid 只处理了 {% %} 标签），
+#    必须用 kramdown 转成 HTML，否则浏览器解密后拿到的是 ## 这种裸 markdown
 class EncryptedBlock < Liquid::Block
   def render(context)
-    inner = super # 已是 Liquid 渲染后的 HTML 片段
-    "<!--ENC_START-->#{inner}<!--ENC_END-->"
+    inner = super
+    # markdown（含内嵌HTML）→ HTML，与 Jekyll 正文渲染一致
+    html = Kramdown::Document.new(inner, input: 'GFM').to_html
+    "<!--ENC_START-->#{html}<!--ENC_END-->"
   end
 end
 Liquid::Template.register_tag('encrypted', EncryptedBlock)
