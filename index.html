@@ -1,380 +1,459 @@
+---
+layout: none
+---
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>捞鱼的入口</title>
-  <script>
-    (function () {
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-          navigator.serviceWorker.getRegistrations().then(function (registrations) {
-            registrations.forEach(function (registration) {
-              registration.unregister().catch(function () {});
-            });
-          });
-        });
-      }
-
-      if ('caches' in window) {
-        window.addEventListener('load', function () {
-          caches.keys().then(function (keys) {
-            keys.forEach(function (key) {
-              caches.delete(key);
-            });
-          });
-        });
-      }
-    })();
-  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>捞鱼的笔记</title>
+  <meta name="description" content="会记录一些比较有趣的经验">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-deep: #06111c;
-      --bg-mid: #0b1f33;
-      --panel: rgba(9, 20, 33, 0.68);
-      --line: rgba(133, 213, 255, 0.18);
-      --text-main: #eff6fb;
-      --text-soft: rgba(239, 246, 251, 0.72);
-      --text-faint: rgba(239, 246, 251, 0.42);
-      --accent: #8cdcff;
-      --warm: #f0c97e;
+      --bg: #0f0f12;
+      --bg-warm: #12110f;
+      --fg: #f0ebe3;
+      --fg-muted: #8a857d;
+      --accent: #c9a87c;
+      --accent-dim: rgba(201, 168, 124, 0.15);
     }
 
-    * { box-sizing: border-box; }
-    html, body {
-      margin: 0;
-      min-height: 100%;
-      background:
-        radial-gradient(circle at 50% 22%, rgba(92, 174, 229, 0.16), transparent 28%),
-        radial-gradient(circle at 82% 18%, rgba(240, 201, 126, 0.12), transparent 20%),
-        linear-gradient(180deg, #050d16 0%, #08131f 48%, #050b12 100%);
-      color: var(--text-main);
-      font-family: "Microsoft YaHei", sans-serif;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans SC', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
       overflow: hidden;
+      min-height: 100vh;
     }
 
-    body::before {
-      content: "";
+    /* 3D Canvas */
+    #canvas {
       position: fixed;
-      inset: 0;
-      background-image:
-        radial-gradient(1px 1px at 12% 18%, rgba(255,255,255,0.35), transparent),
-        radial-gradient(1.5px 1.5px at 72% 30%, rgba(255,255,255,0.28), transparent),
-        radial-gradient(1px 1px at 38% 72%, rgba(255,255,255,0.18), transparent),
-        radial-gradient(1px 1px at 86% 68%, rgba(255,255,255,0.24), transparent),
-        radial-gradient(1.5px 1.5px at 48% 10%, rgba(255,255,255,0.32), transparent);
-      animation: drift-stars 8s ease-in-out infinite alternate;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+    }
+
+    /* Game Start Screen */
+    .game-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 60px 80px;
+      opacity: 1;
+      transition: opacity 0.8s ease-out;
+    }
+
+    .game-screen.hidden {
+      opacity: 0;
       pointer-events: none;
     }
 
-    .shell {
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: minmax(320px, 1fr) minmax(260px, 420px);
-      gap: 32px;
-      align-items: center;
-      width: min(1120px, calc(100vw - 48px));
-      margin: 0 auto;
-      padding: 48px 0;
+    .content {
+      max-width: 440px;
+      text-align: left;
     }
 
-    .copy {
-      max-width: 560px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(140, 220, 255, 0.06);
-      color: var(--text-soft);
-      font-size: 12px;
-      letter-spacing: 0.22em;
+    .subtitle {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--fg-muted);
+      letter-spacing: 0.2em;
       text-transform: uppercase;
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: fadeSlideUp 0.8s ease-out 0.2s forwards;
     }
 
-    .eyebrow::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 16px rgba(140, 220, 255, 0.65);
+    .title {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 600;
+      color: var(--fg);
+      line-height: 1.2;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeSlideUp 0.8s ease-out 0.4s forwards;
     }
 
-    h1 {
-      margin: 18px 0 14px;
-      font-size: clamp(3rem, 7vw, 5.8rem);
-      line-height: 0.96;
-      letter-spacing: 0.04em;
-      background: linear-gradient(135deg, #f8fbff 0%, #c1ebff 48%, #fff2d7 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .description {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--fg-muted);
+      line-height: 1.8;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeSlideUp 0.8s ease-out 0.6s forwards;
     }
 
-    .summary {
-      max-width: 34ch;
-      color: var(--text-soft);
-      font-size: 1rem;
-      line-height: 1.9;
-      margin: 0;
-    }
-
-    .actions {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-top: 28px;
-    }
-
-    .primary,
-    .secondary {
+    .start-btn {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      min-width: 156px;
-      padding: 14px 22px;
-      border-radius: 999px;
+      gap: 12px;
+      padding: 14px 28px;
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      opacity: 0;
+      animation: fadeSlideUp 0.8s ease-out 0.8s forwards;
+    }
+
+    .start-btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+      padding-left: 36px;
+      padding-right: 36px;
+    }
+
+    .start-btn svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.3s ease;
+    }
+
+    .start-btn:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* Version indicator */
+    .version {
+      position: fixed;
+      bottom: 40px;
+      left: 80px;
+      font-size: 0.75rem;
+      color: var(--fg-muted);
+      opacity: 0.4;
+      letter-spacing: 0.1em;
+      z-index: 10;
+    }
+
+    /* Animations */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .game-screen {
+        padding: 40px 24px;
+        justify-content: center;
+      }
+      .content { text-align: center; max-width: 100%; }
+      .version { left: 24px; bottom: 24px; }
+    }
+
+    /* Blog Content Layer */
+    .blog-content {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 20;
+      background: var(--bg-warm);
+      overflow-y: auto;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease-out;
+    }
+
+    .blog-content.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .blog-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .blog-header {
+      text-align: center;
+      margin-bottom: 60px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .blog-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      border: 2px solid var(--accent-dim);
+    }
+
+    .blog-title {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 1.8rem;
+      color: var(--fg);
+      margin-bottom: 8px;
+    }
+
+    .blog-tagline {
+      font-size: 0.9rem;
+      color: var(--fg-muted);
+    }
+
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+
+    .nav-item {
+      display: block;
+      padding: 24px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
       text-decoration: none;
-      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
-      backdrop-filter: blur(12px);
+      color: var(--fg);
+      transition: all 0.3s ease;
     }
 
-    .primary {
-      background: rgba(140, 220, 255, 0.12);
-      border: 1px solid rgba(140, 220, 255, 0.28);
-      color: var(--text-main);
-    }
-
-    .secondary {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(240, 201, 126, 0.22);
-      color: var(--text-soft);
-    }
-
-    .primary:hover,
-    .secondary:hover {
+    .nav-item:hover {
+      background: var(--accent-dim);
+      border-color: var(--accent);
       transform: translateY(-2px);
     }
 
-    .meta {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-top: 22px;
-      color: var(--text-faint);
-      font-size: 0.86rem;
+    .nav-item-title {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 6px;
     }
 
-    .meta span {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .meta span::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: rgba(140, 220, 255, 0.7);
-    }
-
-    .visual {
-      position: relative;
-      height: min(70vh, 640px);
-      min-height: 420px;
-      border-radius: 32px;
-      border: 1px solid rgba(255,255,255,0.05);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.04), transparent 24%),
-        linear-gradient(180deg, rgba(8, 18, 30, 0.05), rgba(8, 18, 30, 0.64) 46%, rgba(8, 18, 30, 0));
-      overflow: hidden;
-      box-shadow: inset 0 0 80px rgba(140, 220, 255, 0.04);
-    }
-
-    .visual::before,
-    .visual::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 48%;
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    .visual::before {
-      width: 290px;
-      height: 290px;
-      border: 1px solid rgba(140, 220, 255, 0.14);
-      box-shadow:
-        inset 0 0 50px rgba(140, 220, 255, 0.05),
-        0 0 100px rgba(50, 91, 130, 0.22);
-      animation: drift-orbit 7s ease-in-out infinite;
-    }
-
-    .visual::after {
-      width: 88px;
-      height: 88px;
-      border-radius: 28px;
-      background: linear-gradient(180deg, rgba(140, 220, 255, 0.18), rgba(14, 37, 60, 0.86));
-      box-shadow: inset 0 0 24px rgba(140, 220, 255, 0.12);
-      animation: pulse-core 4s ease-in-out infinite;
-    }
-
-    .orbit,
-    .orbit-alt {
-      position: absolute;
-      left: 50%;
-      top: 48%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      border: 1px solid rgba(140, 220, 255, 0.16);
-    }
-
-    .orbit {
-      width: 170px;
-      height: 170px;
-      animation: spin 12s linear infinite;
-    }
-
-    .orbit-alt {
-      width: 260px;
-      height: 260px;
-      border-color: rgba(255,255,255,0.1);
-      animation: spin-reverse 16s linear infinite;
-    }
-
-    .orbit::before,
-    .orbit-alt::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 50%;
-      width: 10px;
-      height: 10px;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 16px rgba(140, 220, 255, 0.72);
-    }
-
-    .spec {
-      position: absolute;
-      left: 18px;
-      bottom: 20px;
-      padding: 14px 16px;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.06);
-      background: var(--panel);
-      color: var(--text-soft);
-      line-height: 1.8;
-      font-size: 0.84rem;
-      backdrop-filter: blur(14px);
-    }
-
-    .rail {
-      position: absolute;
-      top: 14%;
-      right: 10px;
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      color: rgba(239, 246, 251, 0.34);
-      letter-spacing: 0.24em;
-      font-size: 0.74rem;
-    }
-
-    @keyframes drift-stars {
-      from { opacity: 0.7; }
-      to { opacity: 1; }
-    }
-
-    @keyframes drift-orbit {
-      0%, 100% { transform: translate(-50%, -50%) translateY(0); }
-      50% { transform: translate(-50%, -50%) translateY(-10px); }
-    }
-
-    @keyframes pulse-core {
-      0%, 100% { filter: brightness(0.94); }
-      50% { filter: brightness(1.16); }
-    }
-
-    @keyframes spin {
-      from { transform: translate(-50%, -50%) rotate(0deg); }
-      to { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-
-    @keyframes spin-reverse {
-      from { transform: translate(-50%, -50%) rotate(360deg); }
-      to { transform: translate(-50%, -50%) rotate(0deg); }
-    }
-
-    @media (max-width: 900px) {
-      .shell {
-        grid-template-columns: 1fr;
-        gap: 24px;
-        padding: 32px 0;
-      }
-
-      .visual {
-        height: 320px;
-        min-height: 320px;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .shell {
-        width: min(100vw - 28px, 1120px);
-      }
-
-      .summary {
-        max-width: none;
-      }
-
-      .actions {
-        flex-direction: column;
-      }
-
-      .primary,
-      .secondary {
-        width: 100%;
-      }
+    .nav-item-desc {
+      font-size: 0.85rem;
+      color: var(--fg-muted);
     }
   </style>
 </head>
 <body>
-  <main class="shell">
-    <section class="copy">
-      <div class="eyebrow">World Entrance</div>
-      <h1>捞鱼的世界</h1>
-      <p class="summary">从这里进入一颗可漫游的个人网站星球，或者直接回到熟悉的传统博客阅读方式。</p>
-      <div class="actions">
-        <a class="primary" href="/world/">进入世界</a>
-        <a class="secondary" href="/archives/">传统网页版</a>
-      </div>
-      <div class="meta">
-        <span>主塔浏览文章</span>
-        <span>NPC 对应专栏</span>
-        <span>世界内继续阅读</span>
-      </div>
-    </section>
 
-    <aside class="visual" aria-hidden="true">
-      <div class="rail">DISPLAY TOWER · NPC ROUTE · PERSONAL WORLD</div>
-      <div class="orbit"></div>
-      <div class="orbit-alt"></div>
-      <div class="spec">
-        世界入口在这里开始<br />
-        沉浸探索与传统阅读并存<br />
-        两条路径都可以继续走下去
+  <canvas id="canvas"></canvas>
+
+  <!-- Game Start Screen - text on right side -->
+  <div class="game-screen" id="gameScreen">
+    <div class="content">
+      <p class="subtitle">Personal Notes</p>
+      <h1 class="title">捞鱼的笔记</h1>
+      <p class="description">
+        会记录一些比较有趣的经验<br>
+        关于技术、生活、以及那些值得记住的瞬间
+      </p>
+      <button class="start-btn" id="startBtn">
+        开始探索
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+    </div>
+    <p class="version">v1.0 · 2026</p>
+  </div>
+
+  <!-- Blog Content -->
+  <div class="blog-content" id="blogContent">
+    <div class="blog-container">
+      <div class="blog-header">
+        <img src="/assets/image%20library/icon%20library/lyzbcy.png" alt="avatar" class="blog-avatar">
+        <h1 class="blog-title">捞鱼的笔记</h1>
+        <p class="blog-tagline">会记录一些比较有趣的经验</p>
       </div>
-    </aside>
-  </main>
+      <div class="nav-grid">
+        <a href="/posts/" class="nav-item">
+          <div class="nav-item-title">博客文章</div>
+          <div class="nav-item-desc">技术笔记与生活记录</div>
+        </a>
+        <a href="/about/" class="nav-item">
+          <div class="nav-item-title">关于我</div>
+          <div class="nav-item-desc">个人简介与联系方式</div>
+        </a>
+        <a href="/categories/" class="nav-item">
+          <div class="nav-item-title">分类</div>
+          <div class="nav-item-desc">文章分类浏览</div>
+        </a>
+        <a href="/tags/" class="nav-item">
+          <div class="nav-item-title">标签</div>
+          <div class="nav-item-desc">标签云与热门话题</div>
+        </a>
+      </div>
+      <p style="text-align: center; color: var(--fg-muted); font-size: 0.8rem; opacity: 0.5;">
+        Powered by Jekyll · Three.js<br>
+        © 2026 捞鱼
+      </p>
+    </div>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+    // ─── Setup ───
+    const canvas = document.getElementById('canvas');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.set(0, 1.6, 1.8);
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.0;
+
+    // ─── Lights - neutral, not yellow ───
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
+
+    const keyLight = new THREE.DirectionalLight(0xffffff, 1.0);
+    keyLight.position.set(2, 4, 3);
+    scene.add(keyLight);
+
+    const fillLight = new THREE.DirectionalLight(0xe8e0f0, 0.4);
+    fillLight.position.set(-3, 2, 2);
+    scene.add(fillLight);
+
+    const rimLight = new THREE.DirectionalLight(0xd0d8e8, 0.3);
+    rimLight.position.set(-1, 3, -3);
+    scene.add(rimLight);
+
+    // ─── Controls ───
+    const controls = new OrbitControls(camera, canvas);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.enablePan = false;
+    controls.minDistance = 1;
+    controls.maxDistance = 5;
+    controls.target.set(0, 1.5, 0);
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 0.5;
+
+    // ─── Load FBX Model ───
+    let model = null;
+    const loader = new FBXLoader();
+
+    loader.load(
+      '/assets/models/zyh.fbx',
+      (fbx) => {
+        model = fbx;
+
+        // Scale so the face fills half the screen
+        const box = new THREE.Box3().setFromObject(model);
+        const size = box.getSize(new THREE.Vector3());
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const scale = 4.0 / maxDim;
+        model.scale.setScalar(scale);
+
+        // Center and position for face close-up on the RIGHT side
+        box.setFromObject(model);
+        const newCenter = box.getCenter(new THREE.Vector3());
+        model.position.sub(newCenter);
+        // Shift model to the right so face is on right half
+        model.position.x = 1.2;
+        model.position.y = 0.2;
+        // Try facing camera - test +90 deg
+        model.rotation.y = Math.PI / 2;
+
+        // Neutral materials, double-sided rendering
+        model.traverse((child) => {
+          if (child.isMesh && child.material) {
+            child.material.side = THREE.DoubleSide;
+          }
+        });
+
+        scene.add(model);
+      },
+      undefined,
+      (error) => {
+        console.warn('FBX load failed:', error);
+      }
+    );
+
+    // ─── Subtle Particles ───
+    const particleCount = 50;
+    const particleGeometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+
+    for (let i = 0; i < particleCount; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 20;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 15;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 8 - 3;
+    }
+
+    particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+    const particleMaterial = new THREE.PointsMaterial({
+      color: '#8a857d',
+      size: 0.02,
+      transparent: true,
+      opacity: 0.15,
+    });
+
+    const particles = new THREE.Points(particleGeometry, particleMaterial);
+    scene.add(particles);
+
+    // ─── Animation ───
+    let time = 0;
+
+    function animate() {
+      requestAnimationFrame(animate);
+      time += 0.01;
+
+      // Model gentle breathing/floating
+      if (model) {
+        model.position.y = 0.2 + Math.sin(time * 0.6) * 0.05;
+      }
+
+      particles.rotation.y += 0.0001;
+      controls.update();
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // ─── Transition ───
+    const startBtn = document.getElementById('startBtn');
+    const gameScreen = document.getElementById('gameScreen');
+    const blogContent = document.getElementById('blogContent');
+
+    startBtn.addEventListener('click', () => {
+      gameScreen.classList.add('hidden');
+      setTimeout(() => {
+        blogContent.classList.add('visible');
+      }, 400);
+    });
+
+    // ─── Resize ───
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
 </body>
 </html>
