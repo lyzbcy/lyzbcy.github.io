@@ -1,142 +1,135 @@
 /**
- * Encrypted Post Password Protection Script
- * 粉白恋爱风格 - Q弹动画效果
- * 
- * 工作原理：密码遮罩层（position: fixed）盖在预渲染的内容上方
- * 输入正确密码后，遮罩层淡出消失，内容自然可见
+ * Encrypted Post —— 真加密解密脚本（AES-GCM + PBKDF2，Web Crypto API）
+ *
+ * 工作原理：
+ * - 页面 HTML 里只有密文（存于 <script class="enc-payload" type="application/json">）
+ * - 密码不在 JS 里。用户输入后，PBKDF2 派生密钥 → 先验 hash → AES-GCM 解密 → innerHTML
+ * - 兼容两套入口：theme-romance 用 #password-overlay/#password-input；
+ *   上饶攻略类用 #partial-overlay/#partial-password-input
+ *
+ * 安全特性：
+ * - F12 看不到明文（HTML 里只有密文 JSON）
+ * - JS 里没有任何明文密码
+ * - 输错密码：PBKDF2 派生的 verify hash 对不上，不解密，只提示
  */
-
-(function() {
+(function () {
   'use strict';
 
-  /**
-   * 检查密码
-   */
-  window.checkPassword = function() {
-    var correctPassword = window.CORRECT_PASSWORD || '180628';
+  // ---------- 工具：hex <-> bytes / utf8 ----------
+  function hexToBytes(hex) {
+    var bytes = new Uint8Array(hex.length / 2);
+    for (var i = 0; i < bytes.length; i++) {
+      bytes[i] = parseInt(hex.substr(i * 2, 2), 16);
+    }
+    return bytes;
+  }
+  function bytesToHex(bytes) {
+    var s = '';
+    for (var i = 0; i < bytes.length; i++) s += ('00' + bytes[i].toString(16)).slice(-2);
+    return s;
+  }
+  var encoder = new TextEncoder();
+  function strToBuf(s) { return encoder.encode(s); }
 
-    var input = document.getElementById('password-input');
-    var errorMessage = document.getElementById('error-message');
-    var overlay = document.getElementById('password-overlay');
-    
-    if (!input || !overlay) {
-      console.error('找不到必要的DOM元素');
+  // ---------- 取密文 payload ----------
+  // 支持两种容器选择器：新版 .enc-payload；兼容旧版 #enc-payload
+  function getPayload() {
+    var node = document.querySelector('script.enc-payload') ||
+               document.getElementById('enc-payload');
+    if (!node) return null;
+    try { return JSON.parse(node.textContent); } catch (e) { return null; }
+  }
+
+  // ---------- PBKDF2 派生：返回 aesKey + verifyHex ----------
+  async function derive(pwd, saltBytes, iterations) {
+    var keyMaterial = await crypto.subtle.importKey(
+      'raw', strToBuf(pwd), 'PBKDF2', false, ['deriveKey', 'deriveBits']
+    );
+    var params = { name: 'PBKDF2', salt: saltBytes, iterations: iterations, hash: 'SHA-256' };
+    var aesKey = await crypto.subtle.deriveKey(
+      params, keyMaterial, { name: 'AES-GCM', length: 256 }, false, ['decrypt']
+    );
+    var verifyBuf = await crypto.subtle.deriveBits(params, keyMaterial, 256);
+    return { aesKey: aesKey, verifyHex: bytesToHex(new Uint8Array(verifyBuf)) };
+  }
+
+  // ---------- 解密一篇 ----------
+  async function decryptPayload(payload, pwd) {
+    var salt = hexToBytes(payload.salt);
+    var derived = await derive(pwd, salt, payload.iterations);
+
+    if (derived.verifyHex !== payload.verify) {
+      return { ok: false, reason: 'password' };
+    }
+    try {
+      var buf = await crypto.subtle.decrypt(
+        { name: 'AES-GCM', iv: hexToBytes(payload.iv) },
+        derived.aesKey,
+        hexToBytes(payload.ciphertext)  // 含末尾 16B auth_tag
+      );
+      return { ok: true, html: new TextDecoder('utf-8').decode(buf) };
+    } catch (e) {
+      return { ok: false, reason: 'decrypt' };
+    }
+  }
+
+  // ---------- 渲染解密结果 ----------
+  function renderDecrypted(html, target) {
+    target.innerHTML = html;
+    target.style.display = 'block';
+    setTimeout(function () { target.classList.add('visible'); }, 50);
+  }
+
+  // ---------- 主入口 ----------
+  window.checkPassword = async function () {
+    var overlay = document.getElementById('password-overlay') ||
+                  document.getElementById('partial-overlay');
+    var input = document.getElementById('password-input') ||
+                document.getElementById('partial-password-input');
+    var errEl = document.getElementById('error-message') ||
+               document.getElementById('partial-error-message');
+    var target = document.getElementById('protected-content') ||
+                 document.getElementById('partial-protected-content');
+
+    if (!input || !target) return;
+    var pwd = input.value.trim();
+    if (!pwd) { showError(errEl, input, '请输入密码哦～ 💕'); return; }
+
+    var payload = getPayload();
+    if (!payload) { showError(errEl, input, '密文加载异常 😢'); return; }
+
+    var result = await decryptPayload(payload, pwd);
+    if (!result.ok) {
+      showError(errEl, input, '密码不对哦，再想想～ 🤔');
       return;
     }
-    
-    var enteredPassword = input.value.trim();
-    
-    if (!enteredPassword) {
-      showError('请输入密码哦～ 💕');
-      shakeInput(input);
-      return;
-    }
-    
-    if (enteredPassword === correctPassword) {
-      // 密码正确！隐藏遮罩层
-      unlockContent(overlay);
-      
-      // 保存解锁状态到 sessionStorage
-      try {
-        sessionStorage.setItem('post_unlocked_' + window.location.pathname, 'true');
-      } catch (e) {}
-    } else {
-      // 密码错误
-      showError('密码不对哦，再想想～ 🤔');
-      input.value = '';
-      input.focus();
-      
-      shakeInput(input);
-      if (errorMessage) {
-        errorMessage.classList.add('shake');
-        setTimeout(function() {
-          errorMessage.classList.remove('shake');
-        }, 500);
-      }
+    renderDecrypted(result.html, target);
+    try { sessionStorage.setItem('post_unlocked_' + location.pathname, 'true'); } catch (e) {}
+    if (overlay) {
+      overlay.classList.add('success');
+      setTimeout(function () { overlay.style.display = 'none'; document.body.style.overflow = ''; }, 600);
     }
   };
 
-  /**
-   * 显示错误消息
-   */
-  function showError(message) {
-    var errorMessage = document.getElementById('error-message');
-    if (errorMessage) {
-      errorMessage.textContent = message;
-    }
+  function showError(errEl, input, msg) {
+    if (errEl) errEl.textContent = msg;
+    if (input) { input.value = ''; input.focus(); }
   }
 
-  /**
-   * 输入框摇晃效果
-   */
-  function shakeInput(input) {
-    input.style.animation = 'none';
-    input.offsetHeight;
-    input.style.animation = 'cuteShake 0.5s ease-in-out';
-  }
-
-  /**
-   * 解锁内容 - 仅隐藏遮罩层（内容已预渲染在下方）
-   */
-  function unlockContent(overlay) {
-    overlay.classList.add('success');
-    
-    setTimeout(function() {
-      overlay.style.display = 'none';
-      document.body.style.overflow = '';
-      
-      // 兼容旧模式：如果 protected-content 被隐藏，显示它
-      var content = document.getElementById('protected-content');
-      if (content) {
-        content.style.display = 'block';
-        setTimeout(function() {
-          content.classList.add('visible');
-        }, 50);
-      }
-    }, 600);
-  }
-
-  /**
-   * 页面加载初始化
-   */
-  document.addEventListener('DOMContentLoaded', function() {
-    var overlay = document.getElementById('password-overlay');
-    var input = document.getElementById('password-input');
-    
+  // ---------- 初始化 ----------
+  document.addEventListener('DOMContentLoaded', function () {
+    var overlay = document.getElementById('password-overlay') ||
+                  document.getElementById('partial-overlay');
     if (!overlay) return;
-    
-    // 遮罩层激活时禁止滚动，防止用户滚动看到内容
     document.body.style.overflow = 'hidden';
-    
-    // 检查是否已在此会话中解锁
-    try {
-      var isUnlocked = sessionStorage.getItem('post_unlocked_' + window.location.pathname);
-      if (isUnlocked === 'true') {
-        overlay.style.display = 'none';
-        document.body.style.overflow = '';
-        // 兼容旧模式
-        var content = document.getElementById('protected-content');
-        if (content) {
-          content.style.display = 'block';
-          content.classList.add('visible');
-        }
-        return;
-      }
-    } catch (e) {}
-    
-    // 聚焦密码输入框
+
+    var input = document.getElementById('password-input') ||
+                document.getElementById('partial-password-input');
     if (input) {
-      setTimeout(function() {
-        input.focus();
-      }, 800);
-      
-      input.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          window.checkPassword();
-        }
+      setTimeout(function () { input.focus(); }, 800);
+      input.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); window.checkPassword(); }
       });
     }
   });
-
 })();

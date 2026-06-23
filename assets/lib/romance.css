@@ -1,0 +1,121 @@
+/* Romance theme: pink starry background and gentle falling elements */
+body.romace-post{} /* keep typo guard no-op */
+body.romance-post {
+  --romance-bg: #fff6fa;
+  --romance-accent: #ff7aa2;
+  --romance-accent-2: #ffd1e1;
+  --romance-star: rgba(255, 170, 200, 0.6);
+  --romance-star-2: rgba(255, 200, 220, 0.5);
+  --romance-star-3: rgba(255, 230, 240, 0.4);
+  /* Pink-white alternating stripes + sprinkled stars */
+  background:
+    radial-gradient(2px 2px at 20% 30%, var(--romance-star), transparent 40%),
+    radial-gradient(2px 2px at 70% 20%, var(--romance-star-2), transparent 40%),
+    radial-gradient(2px 2px at 40% 80%, var(--romance-star-3), transparent 40%),
+    repeating-linear-gradient(
+      180deg,
+      #fff7fb 0px,
+      #fff7fb 120px,
+      #ffe6f1 120px,
+      #ffe6f1 240px
+    );
+}
+
+/* Subtle overlay shimmer of stars */
+body.romance-post::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1px 1px at 10% 10%, rgba(255, 182, 193, 0.6), transparent 60%),
+    radial-gradient(1px 1px at 90% 30%, rgba(255, 182, 193, 0.5), transparent 60%),
+    radial-gradient(1px 1px at 30% 60%, rgba(255, 182, 193, 0.5), transparent 60%),
+    radial-gradient(1px 1px at 60% 40%, rgba(255, 182, 193, 0.4), transparent 60%);
+  animation: romanceTwinkle 6s ease-in-out infinite alternate;
+  opacity: 0.6;
+}
+
+@keyframes romanceTwinkle {
+  0% { opacity: 0.35; }
+  100% { opacity: 0.7; }
+}
+
+/* Falling container */
+.romance-fall-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 999;
+}
+
+.romance-fall {
+  position: absolute;
+  top: -5vh;
+  will-change: transform, opacity;
+  opacity: 0.9;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.06));
+}
+
+.romance-fall.heart::before,
+.romance-fall.star::before {
+  content: "";
+  display: block;
+}
+
+/* Heart shape using CSS */
+.romance-fall.heart {
+  width: 12px;
+  height: 12px;
+  transform: rotate(45deg);
+  background: var(--romance-accent);
+  border-radius: 2px;
+}
+.romance-fall.heart::before,
+.romance-fall.heart::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: var(--romance-accent);
+  border-radius: 50%;
+}
+.romance-fall.heart::before {
+  left: -6px;
+  top: 0;
+}
+.romance-fall.heart::after {
+  top: -6px;
+  left: 0;
+}
+
+/* Star using clip-path */
+.romance-fall.star {
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(180deg, #ffc0d3, #ff9fbf);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+/* Gentle highlight on headings/links inside romance posts */
+body.romance-post .post-content h2,
+body.romance-post .post-content h3 {
+  color: #e05b88;
+  text-shadow: 0 1px 0 rgba(255, 240, 246, 0.8);
+}
+
+body.romance-post a {
+  color: #e5528a;
+}
+
+/* Reduce contrast of code blocks slightly to blend with soft theme */
+body.romance-post pre,
+body.romance-post code {
+  background-color: rgba(255, 235, 245, 0.65);
+}
+
+

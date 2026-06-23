@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>手势魔法 - 手指艺术滤镜</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#06060f;font-family:-apple-system,"SF Pro Text","Helvetica Neue",sans-serif;color:#fff}
+video{display:none}
+canvas{position:fixed;top:0;left:0;width:100%;height:100%}
+#header{position:fixed;top:0;left:0;right:0;padding:20px;display:flex;align-items:center;gap:12px;z-index:10}
+#back-btn{background:rgba(255,255,255,.1);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.2);color:#fff;padding:8px 16px;border-radius:20px;cursor:pointer;font-size:.9rem;text-decoration:none;transition:background .3s}
+#back-btn:hover{background:rgba(255,255,255,.2)}
+#title{font-size:1.2rem;font-weight:700;background:linear-gradient(135deg,#4facfe,#00f2fe);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+#status{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);backdrop-filter:blur(20px);padding:12px 24px;border-radius:30px;font-size:.9rem;opacity:0;transition:opacity .5s;z-index:10;white-space:nowrap}
+#status.show{opacity:1}
+#hint{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:10;font-size:.7rem;opacity:.35;text-align:center;max-width:440px;line-height:1.7}
+#effects{position:fixed;top:70px;left:20px;z-index:10;font-size:.8rem;line-height:2.2;opacity:.65}
+.eff{display:flex;align-items:center;gap:6px;transition:opacity .3s}.eff.off{opacity:.25}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+#combo{position:fixed;top:20px;right:20px;z-index:10;font-size:.85rem;opacity:.5;text-align:right}
+#loading{position:fixed;inset:0;background:#06060f;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:100;transition:opacity .6s}
+#loading.hidden{opacity:0;pointer-events:none}
+.spinner{width:48px;height:48px;border:3px solid rgba(255,255,255,.08);border-top-color:#4facfe;border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#loading p{margin-top:16px;font-size:.9rem;opacity:.6}
+#perm{position:fixed;inset:0;background:#06060f;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:99;text-align:center;padding:20px}
+#perm h2{font-size:1.5rem;margin-bottom:8px}
+#perm p{opacity:.6;max-width:300px}
+#perm button{background:linear-gradient(135deg,#4facfe,#00f2fe);border:none;color:#0a0a1e;padding:14px 32px;border-radius:30px;font-size:1rem;font-weight:600;cursor:pointer;margin-top:20px}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+</head>
+<body>
+<div id="loading"><div class="spinner"></div><p>加载 AI 视觉模型...</p></div>
+<div id="perm"><h2>需要摄像头权限</h2><p>手势魔法需要摄像头实时追踪手部与人体。</p><button onclick="startCam()">开启摄像头</button></div>
+<video id="video" autoplay playsinline muted></video>
+<div id="header"><a id="back-btn" href="/ar/">← 返回</a><div id="title">手势魔法 · 棱镜滤镜</div></div>
+<div id="effects">
+  <div class="eff off" id="eff-0"><span class="dot" style="background:#ff6b9d"></span>拇指+食指 · 棱镜</div>
+  <div class="eff off" id="eff-1"><span class="dot" style="background:#a8e6ff"></span>食指+中指 · 霜冻</div>
+  <div class="eff off" id="eff-2"><span class="dot" style="background:#ffd700"></span>拇指+小指 · 琉璃</div>
+</div>
+<div id="combo"></div>
+<div id="status">张开手指即可在身体上绘制棱镜滤镜</div>
+<div id="hint">张开相邻手指构成平面 → 滤镜仅在身体上生效<br>双手同时操作可叠加不同滤镜效果</div>
+
+<script type="module">
+// ==================== Fragment Shader ====================
+const FRAG = `
+precision highp float;
+uniform sampler2D uVideo, uBody;
+uniform float uTime, uRes;
+uniform vec4 uPC[5];
+uniform float uPA[5];
+varying vec2 vUv;
+
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float hash2(vec2 p){return fract(sin(dot(p,vec2(269.5,183.3)))*43758.5453);}
+
+float noise(vec2 p){
+  vec2 i=floor(p),f=fract(p);
+  f=f*f*(3.0-2.0*f);
+  return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),
+             mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);
+}
+
+float fbm(vec2 p){
+  float v=0.0,a=0.5;
+  for(int i=0;i<4;i++){v+=a*noise(p);p*=2.1;a*=0.5;}
+  return v;
+}
+
+float cross2(vec2 a,vec2 b,vec2 p){
+  return (b.x-a.x)*(p.y-a.y)-(b.y-a.y)*(p.x-a.x);
+}
+
+float inQ2(vec2 p,vec4 q){
+  vec2 a=vec2(q.x,q.y),b=vec2(q.z,q.y),c=vec2(q.z,q.w),d=vec2(q.x,q.w);
+  float ab=cross2(a,b,p),bc=cross2(b,c,p),cd=cross2(c,d,p),da=cross2(d,a,p);
+  return (ab>=0.0&&bc>=0.0&&cd>=0.0&&da>=0.0)||(ab<=0.0&&bc<=0.0&&cd<=0.0&&da<=0.0)?1.0:0.0;
+}
+
+float dSeg(vec2 p,vec2 a,vec2 b){
+  vec2 pa=p-a,ba=b-a;
+  return length(pa-ba*clamp(dot(pa,ba)/dot(ba,ba),0.0,1.0));
+}
+
+float eDist(vec2 p,vec4 q){
+  return min(min(dSeg(p,vec2(q.x,q.y),vec2(q.z,q.y)),
+                dSeg(p,vec2(q.z,q.y),vec2(q.z,q.w))),
+             min(dSeg(p,vec2(q.z,q.w),vec2(q.x,q.w)),
+                dSeg(p,vec2(q.x,q.w),vec2(q.x,q.y))));
+}
+
+// ---- Prismatic (RGB chromatic aberration + iridescence) ----
+vec3 fxPrism(vec2 uv,float t){
+  float off=0.012+0.006*sin(t*1.5);
+  vec2 dir=normalize(uv-vec2(0.5,0.5))*off;
+  float r=texture2D(uVideo,uv+dir).r;
+  float g=texture2D(uVideo,uv).g;
+  float b=texture2D(uVideo,uv-dir).b;
+  vec3 col=vec3(r,g,b);
+  float angle=atan(uv.y-0.5,uv.x-0.5);
+  col+=0.15*vec3(
+    sin(angle*3.0+t*2.0)*0.5+0.5,
+    sin(angle*3.0+t*2.0+2.094)*0.5+0.5,
+    sin(angle*3.0+t*2.0+4.189)*0.5+0.5
+  );
+  return col;
+}
+
+// ---- Frost (frosted glass + ice crystals) ----
+vec3 fxFrost(vec2 uv,float t){
+  vec2 bld=vec2(0.008+0.004*sin(t*0.7),0.006+0.003*cos(t*0.9));
+  vec3 bl=vec3(0.0);
+  for(int i=0;i<8;i++){
+    float a=float(i)*0.7854;
+    vec2 o=vec2(cos(a),sin(a))*bld;
+    bl+=texture2D(uVideo,uv+o).rgb;
+  }
+  bl/=8.0;
+  float cry=hash(floor(uv*80.0));
+  float spk=smoothstep(0.92,0.97,cry)*0.3;
+  bl+=vec3(spk)*vec3(0.7,0.85,1.0);
+  bl=mix(bl,vec3(dot(bl,vec3(0.3,0.59,0.11))),0.3);
+  bl+=vec3(0.03,0.06,0.1);
+  float streak=noise(uv*vec2(20.0,60.0)+t*0.3)*0.1;
+  bl+=vec3(streak)*vec3(0.5,0.7,1.0);
+  return bl;
+}
+
+// ---- Stained Glass (voronoi color blocks + gold edges) ----
+vec3 fxGlass(vec2 uv,float t){
+  vec2 gu=uv*8.0;
+  vec2 gi=floor(gu),gf=fract(gu);
+  float md=8.0,md2=8.0;
+  vec2 seed=vec2(0.0);
+  for(int x=-1;x<=1;x++)for(int y=-1;y<=1;y++){
+    vec2 nb=vec2(float(x),float(y));
+    vec2 pt=nb+vec2(hash(gi+nb),hash2(gi+nb));
+    float d=length(gf-pt);
+    if(d<md){md2=md;md=d;seed=gi+nb;}
+    else if(d<md2)md2=d;
+  }
+  float edge=md2-md;
+  float h=hash(seed*1.731);
+  vec3 col;
+  if(h<0.2) col=vec3(0.75,0.12,0.18);
+  else if(h<0.4) col=vec3(0.12,0.35,0.75);
+  else if(h<0.6) col=vec3(0.75,0.55,0.1);
+  else if(h<0.8) col=vec3(0.12,0.6,0.25);
+  else col=vec3(0.55,0.12,0.65);
+  vec3 vid=texture2D(uVideo,uv).rgb;
+  float lum=dot(vid,vec3(0.3,0.59,0.11));
+  col*=0.5+0.5*lum;
+  col=mix(col,vec3(1.0,0.84,0.0)*0.9,smoothstep(0.12,0.0,edge));
+  col.a=0.75;
+  return col;
+}
+
+void main(){
+  vec2 uv=vec2(1.0-vUv.x,vUv.y);
+  vec3 vid=texture2D(uVideo,uv).rgb;
+  float body=texture2D(uBody,uv).r;
+  vec3 col=vid;
+  float totalFx=0.0;
+  int hitCount=0;
+
+  for(int i=0;i<5;i++){
+    float act=uPA[i];
+    if(act<0.02)continue;
+    float iq=inQ2(vUv,uPC[i]);
+    if(iq<0.5)continue;
+    hitCount++;
+
+    float sm=smoothstep(0.0,0.05,eDist(vUv,uPC[i]));
+    float a=act*sm;
+    vec3 ef=vid;
+
+    if(i==0) ef=fxPrism(vUv,uTime);
+    else if(i==1) ef=fxFrost(vUv,uTime);
+    else if(i==2) ef=fxGlass(vUv,uTime);
+
+    float mask=smoothstep(0.25,0.55,body);
+    float blend=a*mask*0.85;
+    col=mix(col,ef,blend);
+    totalFx+=blend;
+
+    float ed=eDist(vUv,uPC[i]);
+    float bd=abs(body-0.5);
+    float eg=exp(-ed*30.0)*exp(-bd*8.0)*act;
+    float rip=sin(ed*80.0-uTime*4.0)*0.5+0.5;
+    vec3 gc=i==0?vec3(1.0,0.42,0.62):
+             i==1?vec3(0.66,0.9,1.0):
+             vec3(1.0,0.84,0.0);
+    col+=gc*eg*rip*0.4;
+  }
+
+  // Multi-plane overlap boost
+  if(hitCount>=2){
+    col+=vec3(0.05,0.08,0.15)*smoothstep(0.2,0.8,totalFx);
+  }
+
+  // Cool tone grade
+  col=mix(col,col*vec3(0.95,0.98,1.05),step(0.01,totalFx));
+  gl_FragColor=vec4(col,1.0);
+}`;
+
+// ==================== Three.js ====================
+const video=document.getElementById('video');
+const loading=document.getElementById('loading');
+const statusEl=document.getElementById('status');
+const comboEl=document.getElementById('combo');
+const scene=new THREE.Scene();
+const cam=new THREE.Camera();
+const ren=new THREE.WebGLRenderer({antialias:false});
+ren.setSize(innerWidth,innerHeight);
+ren.setPixelRatio(Math.min(devicePixelRatio,2));
+document.body.appendChild(ren.domElement);
+
+const pU={value:Array.from({length:5},()=>new THREE.Vector4(0,0,0,0))};
+const pA={value:new Float32Array(5)};
+
+const mat=new THREE.ShaderMaterial({
+  depthTest:false,depthWrite:false,
+  uniforms:{
+    uVideo:{value:null},uBody:{value:null},
+    uTime:{value:0},uRes:{value:innerWidth/innerHeight},
+    uPC:pU,uPA:pA
+  },
+  vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.0,1.0);}',
+  fragmentShader:FRAG
+});
+scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2,2),mat));
+
+const vTex=new THREE.Texture(video);
+vTex.minFilter=THREE.LinearFilter;vTex.magFilter=THREE.LinearFilter;
+mat.uniforms.uVideo.value=vTex;
+
+const MS=256,mData=new Uint8Array(MS*MS);
+const bTex=new THREE.DataTexture(mData,MS,MS,THREE.RedFormat,THREE.UnsignedByteType);
+bTex.minFilter=THREE.LinearFilter;bTex.magFilter=THREE.LinearFilter;
+bTex.needsUpdate=true;
+mat.uniforms.uBody.value=bTex;
+
+// ==================== MediaPipe ====================
+const{HandLandmarker,ImageSegmenter,FilesetResolver}=
+  await import("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.18/vision_bundle.mjs");
+
+const fs=await FilesetResolver.forVisionTasks(
+  "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.18/wasm");
+
+showStatus('加载手部追踪模型...');
+const HL=await HandLandmarker.createFromOptions(fs,{
+  baseOptions:{
+    modelAssetPath:"https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task",
+    delegate:"GPU"},
+  runningMode:"VIDEO",numHands:2,
+  minHandDetectionConfidence:0.5,minHandPresenceConfidence:0.5,minTrackingConfidence:0.5
+});
+
+showStatus('加载人体分割模型...');
+const SG=await ImageSegmenter.createFromOptions(fs,{
+  baseOptions:{
+    modelAssetPath:"https://storage.googleapis.com/mediapipe-models/image_segmenter/selfie_segmenter/float16/latest/selfie_segmenter.tflite",
+    delegate:"GPU"},
+  runningMode:"VIDEO",outputCategoryMask:false,outputConfidenceMasks:true
+});
+
+SG.setOptions({runningMode:"VIDEO",
+  resultCallback:(r)=>{
+    if(r.categoryMask){
+      const d=r.categoryMask.getAsFloat32Array();
+      const w=r.categoryMask.width||MS,h=r.categoryMask.height||MS;
+      for(let i=0;i<mData.length;i++){
+        const sx=i%MS,sy=(i/MS)|0;
+        const ox=Math.min((sx/MS*w)|0,w-1);
+        const oy=Math.min((sy/MS*h)|0,h-1);
+        mData[i]=Math.max(0,Math.min(255,(d[oy*w+ox]*255)|0));
+      }
+      bTex.needsUpdate=true;
+    }
+    r.close();
+  }
+});
+
+async function initCam(){
+  try{
+    const s=await navigator.mediaDevices.getUserMedia({
+      video:{width:{ideal:1280},height:{ideal:720},facingMode:'user'}});
+    video.srcObject=s;
+    await video.play();
+    loading.classList.add('hidden');
+    showStatus('张开手指即可在身体上绘制棱镜滤镜');
+    setTimeout(()=>statusEl.classList.remove('show'),3000);
+    requestAnimationFrame(loop);
+  }catch(e){
+    loading.classList.add('hidden');
+    document.getElementById('perm').style.display='flex';
+  }
+}
+
+// ==================== Finger Logic ====================
+const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+const dist3=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y,a.z-b.z);
+const lerp=(a,b,t)=>a+(b-a)*t;
+
+function isExt(lm,f){
+  const T=[[4,3,2],[8,6,5],[12,10,9],[16,14,13],[20,18,17]][f];
+  return dist3(lm[T[0]],lm[0])>dist3(lm[T[1]],lm[0])*1.15
+    && dist3(lm[T[0]],lm[0])>dist3(lm[T[2]],lm[0])*1.05;
+}
+
+function spread(lm,f1,f2){
+  const t1=[4,8,12,16,20][f1],t2=[4,8,12,16,20][f2];
+  return dist(lm[t1],lm[t2]);
+}
+
+// Planes: [fingerA, fingerB, effectIndex, name]
+const PP=[[0,1,0,'棱镜'],[1,2,1,'霜冻'],[0,4,2,'琉璃']];
+const planes=PP.map(p=>({
+  f1:p[0],f2:p[1],ei:p[2],name:p[3],
+  corners:new THREE.Vector4(0,0,0,0),
+  target:0,smooth:0
+}));
+
+function computeP(pl,lm){
+  const t1=[4,8,12,16,20][pl.f1],t2=[4,8,12,16,20][pl.f2];
+  const p1=lm[t1],p2=lm[t2];
+  const dx=p2.x-p1.x,dy=p2.y-p1.y;
+  const len=Math.hypot(dx,dy);
+  if(len<0.001)return;
+  const nx=dx/len,ny=dy/len,px=-ny,py=nx;
+  const w=len*0.7;
+  pl.corners.set(p1.x-px*w,p1.y-py*w,p2.x+px*w,p2.y+py*w);
+}
+
+function activateP(pl,lm){
+  const e1=isExt(lm,pl.f1),e2=isExt(lm,pl.f2);
+  if(!e1||!e2){pl.target=0;return;}
+  pl.target=spread(lm,pl.f1,pl.f2)>0.06?1:0;
+}
+
+function smoothP(pl){
+  const s=pl.target>pl.smooth?0.12:0.06;
+  pl.smooth=lerp(pl.smooth,pl.target,s);
+  if(pl.smooth<0.005)pl.smooth=0;
+}
+
+// ==================== Loop ====================
+let lt=-1,fc=0;
+
+function loop(ts){
+  requestAnimationFrame(loop);
+  if(video.readyState<2)return;
+  if(lt<0)lt=ts;
+  lt=ts;fc++;
+
+  mat.uniforms.uTime.value=ts*0.001;
+  vTex.needsUpdate=true;
+
+  const t=performance.now();
+  const hr=HL.detectForVideo(video,t);
+
+  for(const pl of planes)pl.target=0;
+
+  if(hr.landmarks){
+    for(const lm of hr.landmarks){
+      for(const pl of planes){
+        activateP(pl,lm);
+        if(pl.target>0)computeP(pl,lm);
+      }
+    }
+  }
+
+  let activeCount=0;
+  const activeNames=[];
+  for(let i=0;i<planes.length;i++){
+    smoothP(planes[i]);
+    pU.value[i].copy(planes[i].corners);
+    pA.value[i]=planes[i].smooth;
+    if(planes[i].smooth<0.005)pU.value[i].set(0,0,0,0);
+    if(planes[i].smooth>0.1){activeCount++;activeNames.push(planes[i].name);}
+  }
+
+  if(fc%2===0){
+    try{SG.segmentAsync(video,t);}catch(e){}
+  }
+
+  ren.render(scene,cam);
+
+  // UI
+  for(let i=0;i<planes.length;i++){
+    const on=planes[i].smooth>0.1;
+    document.getElementById('eff-'+PP[i][2]).className='eff'+(on?'':' off');
+  }
+  comboEl.textContent=activeCount>=2?'叠加: '+activeNames.join(' × '):'';
+  if(activeCount>0&&statusEl.classList.contains('show'))statusEl.classList.remove('show');
+}
+
+function showStatus(t){statusEl.textContent=t;statusEl.classList.add('show');}
+window.startCam=initCam;
+
+window.addEventListener('resize',()=>{
+  ren.setSize(innerWidth,innerHeight);
+  mat.uniforms.uRes.value=innerWidth/innerHeight;
+});
+
+initCam();
+</script>
+</body>
+</html>
