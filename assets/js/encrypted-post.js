@@ -75,6 +75,8 @@
 
   // ---------- 渲染解密结果 ----------
   function renderDecrypted(html, target) {
+    // 加上 Chirpy 的 .content 类，让标题/表格/列表等正文样式生效
+    target.classList.add('content');
     target.innerHTML = html;
     target.style.display = 'block';
     setTimeout(function () { target.classList.add('visible'); }, 50);
