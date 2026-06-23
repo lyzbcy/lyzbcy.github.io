@@ -221,6 +221,10 @@ exclude:
   - "nul"
   - "start.bat"
   - "start.ps1"
+  - "test"
+  - "docs"
+  - "TECHNICAL_README.md"
+  - "本地运行指南.md"
 
 jekyll-archives:
   enabled: [categories, tags]
