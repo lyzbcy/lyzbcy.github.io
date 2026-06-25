@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>🕹️ AR游戏厅 | World Game Arcade</title>
+<title>🕹️ AR游戏厅 v5.0 | World Game Arcade</title>
 <style>
 :root {
   --neon-pink: #ff2d95;
@@ -11,10 +11,15 @@
   --neon-yellow: #ffe600;
   --neon-purple: #b44dff;
   --neon-green: #39ff14;
-  --bg-deep: #0a0a0f;
-  --bg-panel: #111122;
+  --neon-orange: #ff6b35;
+  --neon-blue: #448aff;
+  --neon-gold: #ffb300;
+  --bg-deep: #06060f;
+  --bg-panel: #0d0d24;
+  --bg-card: #111133;
   --text: #e0e0f0;
-  --scanline-opacity: 0.03;
+  --bezel-dark: #1a1a2e;
+  --bezel-mid: #252545;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{
@@ -24,89 +29,298 @@ body{
   overflow-x:hidden;
   min-height:100vh;
 }
-/* ── Scanlines overlay ── */
+
+/* ══════════════════ GLOBAL CRT SCANLINES ══════════════════ */
 body::after{
   content:'';
-  position:fixed;inset:0;pointer-events:none;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.06) 2px,rgba(0,0,0,.06) 4px);
-  z-index:999;
+  position:fixed;inset:0;pointer-events:none;z-index:999;
+  background:repeating-linear-gradient(0deg,
+    transparent,transparent 2px,
+    rgba(0,0,0,.025) 2px,rgba(0,0,0,.025) 4px);
 }
+
 /* ── AR Background ── */
 #ar-bg{
   position:fixed;inset:0;z-index:0;overflow:hidden;
 }
-#ar-bg video{
-  width:100%;height:100%;object-fit:cover;
-  filter:brightness(0.35) saturate(1.5) hue-rotate(15deg);
-}
+#ar-bg video{width:100%;height:100%;object-fit:cover;filter:brightness(0.3) saturate(1.4) hue-rotate(15deg);}
 #ar-bg .fallback{
   position:absolute;inset:0;
-  background:radial-gradient(ellipse at 30% 50%,rgba(180,77,255,.08) 0%,transparent 60%),
-             radial-gradient(ellipse at 70% 30%,rgba(0,255,255,.06) 0%,transparent 50%);
+  background:
+    radial-gradient(ellipse at 30% 50%,rgba(180,77,255,.06) 0%,transparent 60%),
+    radial-gradient(ellipse at 70% 30%,rgba(0,255,255,.04) 0%,transparent 50%),
+    radial-gradient(ellipse at 50% 80%,rgba(255,45,149,.03) 0%,transparent 50%);
 }
 #ar-bg canvas{position:absolute;inset:0}
-/* ── Loading Screen ── */
+
+/* ══════════════════════ LOADING SCREEN v5.0 ══════════════════════ */
 #loading-screen{
-  position:fixed;inset:0;z-index:1000;
+  position:fixed;inset:0;z-index:1001;
   background:var(--bg-deep);
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
-  transition:opacity .6s,visibility .6s;
+  transition:opacity .8s,visibility .8s;
 }
-#loading-screen.hidden{
-  opacity:0;visibility:hidden;pointer-events:none;
+#loading-screen.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+
+/* ── Sticker Rain Storm v5.0 ── */
+.loading-stickers{
+  position:absolute;inset:0;overflow:hidden;pointer-events:none;
 }
+.sticker-rain{
+  position:absolute;
+  font-size:28px;
+  animation:stickerFall var(--fall-dur) linear infinite;
+  animation-delay:var(--fall-delay);
+  opacity:0;
+  filter:drop-shadow(0 0 6px currentColor);
+  left:var(--start-x);
+}
+@keyframes stickerFall{
+  0%{opacity:0;transform:translateY(-60px) rotate(0deg) scale(.6)}
+  5%{opacity:.85}
+  10%{opacity:.5}
+  95%{opacity:.3}
+  100%{opacity:0;transform:translateY(105vh) rotate(var(--spin)) scale(.3)}
+}
+.sticker-float{
+  position:absolute;
+  font-size:36px;
+  opacity:0;
+  animation:floatSticker 5s ease-in-out infinite;
+  filter:drop-shadow(0 0 10px currentColor);
+}
+@keyframes floatSticker{
+  0%{opacity:0;transform:translateY(0) rotate(0deg) scale(.4)}
+  12%{opacity:.9;transform:translateY(-35px) rotate(12deg) scale(1.15)}
+  25%{opacity:.7;transform:translateY(-70px) rotate(-8deg) scale(1)}
+  50%{opacity:.45;transform:translateY(-100px) rotate(18deg) scale(.85)}
+  75%{opacity:.2;transform:translateY(-140px) rotate(-12deg) scale(.7)}
+  100%{opacity:0;transform:translateY(-200px) rotate(25deg) scale(.35)}
+}
+/* ── Sticker Combo Burst ── */
+.sticker-burst{
+  position:absolute;pointer-events:none;
+  animation:burstOut 1.8s ease-out forwards;
+  font-size:24px;
+  filter:drop-shadow(0 0 8px currentColor);
+}
+@keyframes burstOut{
+  0%{opacity:1;transform:translate(0,0) scale(0) rotate(0deg)}
+  30%{opacity:1;transform:translate(var(--bx),var(--by)) scale(1.8) rotate(180deg)}
+  100%{opacity:0;transform:translate(calc(var(--bx)*2.5),calc(var(--by)*2.5)) scale(.3) rotate(720deg)}
+}
+
+/* ══ Sticker Pack Gacha ══ */
+.gacha-container{
+  position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.gacha-label{
+  font-size:10px;letter-spacing:.2em;color:var(--neon-yellow);
+  font-family:'Courier New',monospace;opacity:.6;
+  text-align:center;
+}
+.gacha-display{
+  width:100px;height:100px;
+  border:2px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  background:rgba(255,255,255,.02);
+  display:flex;align-items:center;justify-content:center;
+  font-size:52px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:inset 0 0 20px rgba(0,0,0,.3);
+}
+.gacha-display .gacha-item{
+  animation:gachaSpin .35s ease-in-out;
+}
+@keyframes gachaSpin{
+  0%{transform:rotateY(180deg) scale(.3);opacity:0}
+  60%{transform:rotateY(0) scale(1.2);opacity:1}
+  100%{transform:rotateY(0) scale(1);opacity:1}
+}
+.gacha-pack-name{
+  font-size:11px;color:var(--neon-cyan);opacity:.7;
+  font-family:'Courier New',monospace;letter-spacing:.08em;
+}
+
+.loading-content{
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;
+  align-items:center;gap:18px;
+}
+
+/* ── Main Emoji Bounce Squad ── */
 .loading-emoji-row{
-  display:flex;gap:20px;margin-bottom:40px;
+  display:flex;gap:22px;
 }
 .loading-emoji{
-  width:70px;height:70px;
-  font-size:52px;
+  width:72px;height:72px;
+  font-size:48px;
   display:flex;align-items:center;justify-content:center;
-  animation:bounceEmoji .6s ease-in-out infinite;
-  filter:drop-shadow(0 0 12px currentColor);
-}
-.loading-emoji:nth-child(1){animation-delay:0s;color:var(--neon-pink)}
-.loading-emoji:nth-child(2){animation-delay:.1s;color:var(--neon-cyan)}
-.loading-emoji:nth-child(3){animation-delay:.2s;color:var(--neon-yellow)}
-.loading-emoji:nth-child(4){animation-delay:.3s;color:var(--neon-purple)}
-.loading-emoji:nth-child(5){animation-delay:.4s;color:var(--neon-green)}
-@keyframes bounceEmoji{
-  0%,100%{transform:translateY(0) scale(1)}
-  30%{transform:translateY(-25px) scale(1.15)}
-  50%{transform:translateY(0) scale(.9)}
-  70%{transform:translateY(-12px) scale(1.05)}
-}
-.loading-bar-wrap{
-  width:320px;height:6px;
-  background:rgba(255,255,255,.1);
-  border-radius:3px;overflow:hidden;
+  animation:bounceEmoji .65s ease-in-out infinite;
+  filter:drop-shadow(0 0 18px currentColor);
   position:relative;
 }
-.loading-bar-fill{
-  height:100%;
-  background:linear-gradient(90deg,var(--neon-pink),var(--neon-cyan),var(--neon-yellow));
-  border-radius:3px;
-  width:0%;
-  transition:width .3s ease-out;
-  box-shadow:0 0 20px var(--neon-cyan);
+.loading-emoji::after{
+  content:'';
+  position:absolute;bottom:-4px;left:20%;width:60%;height:4px;
+  background:currentColor;
+  border-radius:50%;
+  filter:blur(4px);
+  animation:shadowPulse .65s ease-in-out infinite;
 }
-.loading-text{
-  margin-top:18px;
-  font-size:14px;letter-spacing:.15em;
+@keyframes shadowPulse{
+  0%,100%{transform:scaleX(1);opacity:.4}
+  30%{transform:scaleX(.5);opacity:.1}
+  60%{transform:scaleX(.8);opacity:.3}
+}
+.loading-emoji:nth-child(1){animation-delay:0s;color:var(--neon-pink)}
+.loading-emoji:nth-child(2){animation-delay:.08s;color:var(--neon-cyan)}
+.loading-emoji:nth-child(3){animation-delay:.16s;color:var(--neon-yellow)}
+.loading-emoji:nth-child(4){animation-delay:.24s;color:var(--neon-purple)}
+.loading-emoji:nth-child(5){animation-delay:.32s;color:var(--neon-green)}
+.loading-emoji:nth-child(6){animation-delay:.4s;color:var(--neon-orange)}
+.loading-emoji:nth-child(7){animation-delay:.12s;color:var(--neon-blue)}
+@keyframes bounceEmoji{
+  0%,100%{transform:translateY(0) scale(1)}
+  25%{transform:translateY(-34px) scale(1.25)}
+  50%{transform:translateY(0) scale(.82)}
+  75%{transform:translateY(-16px) scale(1.1)}
+}
+
+/* ── Expression Gallery ── */
+.loading-expressions{
+  display:flex;gap:16px;margin-top:-8px;
+}
+.expr{
+  font-size:28px;
+  animation:exprPop .75s ease-in-out infinite;
+  opacity:.6;
+  transition:all .3s;
+}
+.expr:nth-child(1){animation-delay:0s}
+.expr:nth-child(2){animation-delay:.12s}
+.expr:nth-child(3){animation-delay:.24s}
+.expr:nth-child(4){animation-delay:.36s}
+.expr:nth-child(5){animation-delay:.48s}
+.expr:nth-child(6){animation-delay:.6s}
+@keyframes exprPop{
+  0%,100%{transform:scale(1);opacity:.4}
+  45%{transform:scale(1.6);opacity:1}
+  70%{transform:scale(.9);opacity:.7}
+}
+
+/* ── Sticker Gallery Grid ── */
+.loading-sticker-gallery{
+  display:flex;gap:8px;margin-top:-4px;
+}
+.gallery-slot{
+  width:44px;height:44px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;
+  animation:slotFlip .6s ease-in-out;
+  transition:all .2s;
+}
+.gallery-slot.active{
+  border-color:var(--neon-cyan);
+  background:rgba(0,255,255,.06);
+  box-shadow:0 0 12px rgba(0,255,255,.2);
+  animation:slotPop .5s ease-out;
+}
+@keyframes slotFlip{
+  0%{transform:rotateY(90deg) scale(.5)}
+  100%{transform:rotateY(0) scale(1)}
+}
+@keyframes slotPop{
+  0%{transform:scale(.5)}
+  60%{transform:scale(1.2)}
+  100%{transform:scale(1)}
+}
+
+/* ── Progress Bar ── */
+.loading-bar-outer{
+  width:380px;height:10px;
+  background:rgba(255,255,255,.05);
+  border-radius:5px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+  position:relative;
+  box-shadow:inset 0 1px 3px rgba(0,0,0,.3);
+}
+.loading-bar-inner{
+  height:100%;
+  background:linear-gradient(90deg,var(--neon-pink),var(--neon-cyan),var(--neon-yellow),var(--neon-purple),var(--neon-green),var(--neon-orange));
+  background-size:250% 100%;
+  border-radius:5px;
+  width:0%;
+  transition:width .35s ease-out;
+  animation:barShimmer 2s linear infinite;
+  box-shadow:0 0 24px var(--neon-cyan),inset 0 0 8px rgba(255,255,255,.25);
+  position:relative;
+}
+@keyframes barShimmer{
+  0%{background-position:250% 0}
+  100%{background-position:-250% 0}
+}
+.loading-bar-inner::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.12) 45%,rgba(255,255,255,.2) 50%,rgba(255,255,255,.12) 55%,transparent 100%);
+  animation:barGlint 1.5s ease-in-out infinite;
+}
+@keyframes barGlint{
+  0%{transform:translateX(-100%)}
+  100%{transform:translateX(100%)}
+}
+
+/* Rider sticker on bar */
+.loading-sticker-pop{
+  position:absolute;top:-44px;font-size:28px;
+  animation:stickerRide 2s ease-in-out infinite;
+  filter:drop-shadow(0 0 8px var(--neon-yellow));
+  pointer-events:none;
+}
+@keyframes stickerRide{
+  0%{transform:translateX(-30px) translateY(0) rotate(-15deg)}
+  25%{transform:translateX(0) translateY(-10px) rotate(0deg)}
+  50%{transform:translateX(30px) translateY(0) rotate(15deg)}
+  75%{transform:translateX(0) translateY(-10px) rotate(5deg)}
+  100%{transform:translateX(-30px) translateY(0) rotate(-15deg)}
+}
+
+/* Status text */
+.loading-status{
+  font-size:13px;letter-spacing:.18em;
   color:var(--neon-cyan);
   font-family:'Courier New',monospace;
   animation:flicker 2s infinite;
+  text-align:center;
+  text-shadow:0 0 10px rgba(0,255,255,.3);
 }
 @keyframes flicker{
   0%,100%{opacity:1}
-  92%{opacity:1}
-  93%{opacity:.3}
-  94%{opacity:1}
-  96%{opacity:.5}
-  97%{opacity:1}
+  91%{opacity:1}
+  92%{opacity:.15}
+  93%{opacity:1}
+  95%{opacity:.3}
+  96%{opacity:1}
 }
-/* ── Main Lobby ── */
+
+/* Milestone Fireworks */
+.loading-firework{
+  position:absolute;pointer-events:none;
+  font-size:20px;
+  animation:fireworkBurst 1.4s ease-out forwards;
+}
+@keyframes fireworkBurst{
+  0%{opacity:1;transform:translate(var(--fx),var(--fy)) scale(0)}
+  20%{opacity:1;transform:translate(var(--fx),var(--fy)) scale(1.5)}
+  100%{opacity:0;transform:translate(var(--fx),calc(var(--fy)-50px)) scale(.2)}
+}
+
+/* ══════════════════════ MAIN LOBBY ══════════════════════ */
 #lobby{
   position:relative;z-index:1;
   min-height:100vh;padding:40px 20px 80px;
@@ -114,129 +328,446 @@ body::after{
   transition:opacity .8s,transform .8s;
 }
 #lobby.visible{opacity:1;transform:translateY(0)}
-/* ── Header ── */
+
+/* Floor reflection */
+#lobby::before{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:200px;
+  background:linear-gradient(0deg,rgba(0,255,255,.02) 0%,transparent 100%);
+  pointer-events:none;
+  z-index:0;
+}
+
+/* Header */
 .header{
-  text-align:center;margin-bottom:50px;
-  position:relative;
+  text-align:center;margin-bottom:44px;position:relative;z-index:1;
 }
 .header h1{
   font-size:clamp(28px,6vw,56px);
-  font-weight:900;
-  letter-spacing:.05em;
-  background:linear-gradient(180deg,var(--neon-cyan) 0%,var(--neon-purple) 50%,var(--neon-pink) 100%);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+  font-weight:900;letter-spacing:.05em;
+  background:linear-gradient(180deg,var(--neon-cyan) 0%,var(--neon-purple) 40%,var(--neon-pink) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   background-clip:text;
-  filter:drop-shadow(0 0 30px rgba(0,255,255,.4));
-  margin-bottom:8px;
+  filter:drop-shadow(0 0 40px rgba(0,255,255,.5));
+  margin-bottom:6px;
 }
 .header .subtitle{
-  font-size:14px;letter-spacing:.3em;
-  color:var(--neon-cyan);
-  opacity:.7;
+  font-size:14px;letter-spacing:.35em;
+  color:var(--neon-cyan);opacity:.7;
   font-family:'Courier New',monospace;
 }
 .neon-line{
-  width:200px;height:2px;
-  margin:16px auto;
+  width:260px;height:2px;
+  margin:18px auto;
   background:var(--neon-pink);
-  box-shadow:0 0 15px var(--neon-pink),0 0 30px var(--neon-pink);
+  box-shadow:0 0 20px var(--neon-pink),0 0 40px var(--neon-pink),0 0 80px rgba(255,45,149,.3);
   border-radius:1px;
+  animation:linePulse 2s ease-in-out infinite;
 }
+@keyframes linePulse{
+  0%,100%{box-shadow:0 0 20px var(--neon-pink),0 0 40px var(--neon-pink),0 0 80px rgba(255,45,149,.3)}
+  50%{box-shadow:0 0 30px var(--neon-purple),0 0 60px var(--neon-purple),0 0 100px rgba(180,77,255,.35)}
+}
+
+/* ── Section Divider ── */
+.section-title{
+  text-align:center;margin:48px 0 28px;position:relative;z-index:1;
+}
+.section-title h2{
+  font-size:18px;letter-spacing:.25em;
+  color:var(--neon-cyan);opacity:.5;
+  font-family:'Courier New',monospace;
+  display:flex;align-items:center;justify-content:center;gap:16px;
+}
+.section-title h2::before,.section-title h2::after{
+  content:'';width:60px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--neon-cyan));
+}
+.section-title h2::after{background:linear-gradient(90deg,var(--neon-cyan),transparent)}
+
 /* ── Game Grid ── */
 .game-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:24px;
-  max-width:1200px;margin:0 auto;
+  grid-template-columns:repeat(auto-fit,minmax(310px,1fr));
+  gap:32px;
+  max-width:1400px;margin:0 auto;
+  position:relative;z-index:1;
 }
-/* ── Game Cabinet Card ── */
+
+/* ══════════════════════ ENHANCED CABINET v5.0 ══════════════════════ */
 .game-cabinet{
   position:relative;
-  background:var(--bg-panel);
-  border:2px solid rgba(255,255,255,.08);
-  border-radius:16px;
-  overflow:hidden;
+  background:linear-gradient(180deg,var(--bg-card) 0%,#08081a 100%);
+  border:3px solid rgba(255,255,255,.07);
+  border-radius:18px;
+  overflow:visible;
   cursor:pointer;
-  transition:all .3s ease;
+  transition:all .4s cubic-bezier(.4,0,.2,1);
   aspect-ratio:4/5;
   display:flex;flex-direction:column;
 }
 .game-cabinet:hover{
-  transform:translateY(-6px);
-  border-color:var(--neon-cyan);
-  box-shadow:0 8px 40px rgba(0,255,255,.15),0 0 80px rgba(0,255,255,.05);
+  transform:translateY(-10px) scale(1.03);
+  border-color:var(--accent,var(--neon-cyan));
+  box-shadow:
+    0 16px 80px var(--glow-shadow,rgba(0,255,255,.2)),
+    0 0 120px var(--glow-shadow-deep,rgba(0,255,255,.06)),
+    inset 0 0 50px var(--glow-inset,rgba(0,255,255,.04));
 }
 .game-cabinet:hover .cabinet-glow{opacity:1}
-.cabinet-glow{
-  position:absolute;inset:-2px;border-radius:18px;
-  background:linear-gradient(135deg,var(--neon-cyan),var(--neon-purple),var(--neon-pink));
-  opacity:0;transition:opacity .3s;
-  z-index:-1;filter:blur(12px);
+.game-cabinet:hover .cabinet-bezel{filter:brightness(1.15)}
+.game-cabinet:hover .game-preview{animation:float .55s ease-in-out infinite}
+.game-cabinet:hover .cabinet-side-left,
+.game-cabinet:hover .cabinet-side-right{opacity:.4}
+
+/* ── Side Panel Art v5.0 ── */
+.cabinet-side-left,
+.cabinet-side-right{
+  position:absolute;top:8%;bottom:12%;width:16px;
+  opacity:.1;transition:opacity .4s;pointer-events:none;
+  z-index:0;overflow:hidden;
 }
-.cabinet-screen{
-  flex:1;
-  background:var(--bg-deep);
-  position:relative;overflow:hidden;
-  border-bottom:3px solid rgba(255,255,255,.06);
-  display:flex;align-items:center;justify-content:center;
+.cabinet-side-left{
+  left:-16px;border-radius:14px 0 0 14px;
+  background:linear-gradient(180deg,var(--neon-pink),var(--neon-purple),var(--neon-cyan));
+  box-shadow:-3px 0 12px rgba(255,45,149,.15);
 }
-.cabinet-screen .game-preview{
-  font-size:80px;
-  animation:float 3s ease-in-out infinite;
-  filter:drop-shadow(0 0 20px currentColor);
+.cabinet-side-right{
+  right:-16px;border-radius:0 14px 14px 0;
+  background:linear-gradient(180deg,var(--neon-cyan),var(--neon-purple),var(--neon-pink));
+  box-shadow:3px 0 12px rgba(0,255,255,.15);
 }
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-12px)}
-}
-.cabinet-screen::before{
+/* Side panel deco lines */
+.cabinet-side-left::after,.cabinet-side-right::after{
   content:'';position:absolute;inset:0;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);
+  background:repeating-linear-gradient(0deg,
+    transparent,transparent 12px,
+    rgba(255,255,255,.06) 12px,rgba(255,255,255,.06) 13px);
+}
+
+/* ── T-Molding Edge ── */
+.cabinet-tmold{
+  position:absolute;inset:-3px;border-radius:21px;
+  border:1px solid rgba(255,255,255,.06);
+  pointer-events:none;z-index:-1;
+  transition:all .4s;
+}
+.game-cabinet:hover .cabinet-tmold{border-color:rgba(255,255,255,.12)}
+
+/* Glow border */
+.cabinet-glow{
+  position:absolute;inset:-3px;border-radius:21px;
+  background:linear-gradient(135deg,var(--neon-cyan),var(--neon-purple),var(--neon-pink),var(--neon-cyan));
+  background-size:300% 300%;
+  opacity:0;transition:opacity .4s;
+  z-index:-1;filter:blur(18px);
+  animation:cabinetGlowRotate 3s linear infinite;
+}
+@keyframes cabinetGlowRotate{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* ══ Marquee Header Sign ══ */
+.cabinet-marquee-header{
+  margin:0 12px;padding:6px 0;
+  background:linear-gradient(135deg,rgba(0,0,0,.6),rgba(17,17,51,.4));
+  border:1px solid rgba(255,255,255,.06);
+  border-bottom:none;
+  border-radius:8px 8px 0 0;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.cabinet-marquee-header .marquee-text{
+  font-size:10px;font-weight:800;letter-spacing:.2em;
+  font-family:'Courier New',monospace;
+  color:var(--neon-yellow);
+  text-shadow:0 0 12px var(--neon-yellow);
+  animation:marqueeFlicker 3s infinite;
+}
+@keyframes marqueeFlicker{
+  0%,100%{opacity:1}
+  48%{opacity:.7}
+  49%{opacity:.3}
+  50%{opacity:1}
+}
+.marquee-bulbs{
+  position:absolute;top:1px;left:4px;right:4px;
+  display:flex;justify-content:space-between;
   pointer-events:none;
 }
+.marquee-bulb{
+  width:3px;height:3px;border-radius:50%;
+  background:var(--neon-yellow);
+  box-shadow:0 0 4px var(--neon-yellow);
+  animation:bulbFlash 1.5s ease-in-out infinite;
+}
+.marquee-bulb:nth-child(odd){animation-delay:.75s}
+@keyframes bulbFlash{
+  0%,100%{opacity:1;box-shadow:0 0 4px var(--neon-yellow)}
+  50%{opacity:.2;box-shadow:0 0 1px var(--neon-yellow)}
+}
+
+/* ── Cabinet Bezel / CRT Frame ── */
+.cabinet-bezel{
+  position:relative;
+  margin:0 12px;
+  border-radius:0 0 10px 10px;
+  overflow:hidden;
+  flex:1;
+  background:var(--bg-deep);
+  border:2px solid rgba(255,255,255,.06);
+  border-top:none;
+  transition:filter .3s;
+}
+.cabinet-bezel::before{
+  content:'';position:absolute;inset:0;z-index:3;pointer-events:none;
+  border-radius:0 0 10px 10px;
+  box-shadow:
+    inset 0 0 80px rgba(0,0,0,.55),
+    inset 0 0 25px rgba(0,0,0,.35);
+}
+.cabinet-bezel::after{
+  content:'';position:absolute;inset:0;z-index:4;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 50% 45%,rgba(0,255,255,.012) 0%,transparent 55%),
+    radial-gradient(ellipse at 30% 30%,rgba(255,45,149,.006) 0%,transparent 40%),
+    radial-gradient(ellipse at 70% 60%,rgba(180,77,255,.008) 0%,transparent 40%);
+}
+.cabinet-screen-reflection{
+  position:absolute;top:-20%;left:-10%;right:-10%;bottom:0;
+  z-index:5;pointer-events:none;opacity:.05;
+  background:linear-gradient(135deg,
+    rgba(255,255,255,.15) 0%,rgba(255,255,255,.05) 25%,
+    transparent 40%,transparent 60%,
+    rgba(255,255,255,.02) 80%,rgba(255,255,255,.08) 100%);
+}
+.cabinet-scanlines{
+  position:absolute;inset:0;z-index:4;pointer-events:none;
+  background:repeating-linear-gradient(0deg,
+    transparent,transparent 2px,
+    rgba(0,0,0,.04) 2px,rgba(0,0,0,.04) 4px);
+}
+.cabinet-screen{
+  position:relative;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  background:
+    radial-gradient(ellipse at center,rgba(0,255,255,.03) 0%,transparent 60%),
+    repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.04) 2px,rgba(0,0,0,.04) 4px);
+}
+.cabinet-screen .game-preview{
+  font-size:90px;
+  animation:float 4s ease-in-out infinite;
+  filter:drop-shadow(0 0 25px currentColor) drop-shadow(0 0 50px currentColor);
+  transition:all .3s;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0) scale(1)}
+  30%{transform:translateY(-18px) scale(1.1)}
+  60%{transform:translateY(-6px) scale(.94)}
+}
+
+/* ── Neon Marquee Strip ── */
+.cabinet-marquee-wrap{
+  position:relative;margin:0 12px;
+}
+.cabinet-marquee{
+  background:linear-gradient(90deg,var(--neon-cyan),var(--neon-purple),var(--neon-pink),var(--neon-yellow),var(--neon-cyan));
+  background-size:200% 100%;
+  height:4px;opacity:.7;
+  animation:marqueeFlow 4s linear infinite;
+  border-radius:2px;
+}
+@keyframes marqueeFlow{
+  0%{background-position:200% 0}
+  100%{background-position:-200% 0}
+}
+.cabinet-marquee-glow{
+  position:absolute;inset:-4px -4px;
+  background:inherit;background-size:inherit;
+  filter:blur(8px);opacity:.3;
+  animation:marqueeFlow 4s linear infinite;
+}
+
+/* ── Control Panel Area v5.0 ── */
+.cabinet-controls{
+  padding:12px 18px 8px;
+  display:flex;justify-content:space-between;align-items:center;
+  background:linear-gradient(180deg,rgba(255,255,255,.02) 0%,transparent 100%);
+  border-top:1px solid rgba(255,255,255,.04);
+  position:relative;
+}
+/* Speaker Grill */
+.speaker-grill{
+  position:absolute;bottom:4px;left:50%;transform:translateX(-50%);
+  display:flex;gap:3px;
+  pointer-events:none;
+}
+.speaker-slot{
+  width:2px;height:14px;
+  background:rgba(255,255,255,.04);
+  border-radius:1px;
+}
+.joystick-area{
+  display:flex;align-items:center;gap:10px;
+}
+.joystick-ring{
+  width:32px;height:32px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  background:radial-gradient(circle at 40% 40%,rgba(255,255,255,.06),transparent);
+}
+.joystick-stick{
+  width:12px;height:12px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.4),rgba(255,255,255,.1));
+  animation:stickWobble 3s ease-in-out infinite;
+}
+@keyframes stickWobble{
+  0%,100%{transform:translate(0,0)}
+  20%{transform:translate(-2px,1px)}
+  45%{transform:translate(2px,-1px)}
+  70%{transform:translate(1px,2px)}
+}
+.buttons-area{display:flex;gap:8px}
+.cabinet-btn{
+  width:22px;height:22px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.18);
+  background:radial-gradient(circle at 40% 35%,rgba(255,255,255,.1),rgba(255,255,255,.02));
+  position:relative;
+  transition:all .3s;
+}
+.cabinet-btn:hover{box-shadow:0 0 12px currentColor;transform:scale(1.1)}
+.cabinet-btn.a{border-color:rgba(255,45,149,.45);color:rgba(255,45,149,.7)}
+.cabinet-btn.b{border-color:rgba(0,255,255,.45);color:rgba(0,255,255,.7)}
+.cabinet-btn.c{border-color:rgba(255,230,0,.45);color:rgba(255,230,0,.7)}
+
+/* ── Coin Slot ── */
+.coin-slot-area{
+  position:absolute;bottom:8px;right:16px;
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  z-index:3;
+}
+.coin-slot-frame{
+  width:14px;height:24px;
+  background:linear-gradient(180deg,rgba(0,0,0,.7),rgba(0,0,0,.4));
+  border:2px solid rgba(255,255,255,.08);
+  border-radius:3px;
+  position:relative;overflow:hidden;
+}
+.coin-slot-inner{
+  position:absolute;top:0;left:1px;right:1px;bottom:0;
+  background:linear-gradient(180deg,transparent 30%,rgba(255,230,0,.03) 50%,transparent 70%);
+}
+.coin-insert{
+  position:absolute;top:-8px;left:50%;transform:translateX(-50%);
+  font-size:10px;
+  animation:coinDrop 3s ease-in infinite;
+  pointer-events:none;
+}
+@keyframes coinDrop{
+  0%{opacity:0;transform:translateX(-50%) translateY(-8px) rotate(0deg)}
+  10%{opacity:1;transform:translateX(-50%) translateY(0) rotate(90deg)}
+  20%{opacity:1;transform:translateX(-50%) translateY(14px) rotate(270deg)}
+  25%{opacity:0;transform:translateX(-50%) translateY(20px) rotate(360deg)}
+  100%{opacity:0}
+}
+.coin-label{
+  font-size:7px;letter-spacing:.12em;
+  color:rgba(255,255,255,.18);
+  font-family:'Courier New',monospace;
+}
+
+/* ── Label Area ── */
 .cabinet-label{
-  padding:16px 20px;
+  padding:10px 20px 16px;
   text-align:center;
+  border-top:1px solid rgba(255,255,255,.03);
+  position:relative;
 }
 .cabinet-label .game-name{
-  font-size:18px;font-weight:700;color:var(--text);
-  margin-bottom:4px;
+  font-size:21px;font-weight:800;color:var(--text);
+  margin-bottom:4px;letter-spacing:.05em;
 }
 .cabinet-label .game-tag{
-  font-size:11px;font-family:'Courier New',monospace;
-  letter-spacing:.15em;
-  color:var(--neon-cyan);opacity:.7;
+  font-size:10px;font-family:'Courier New',monospace;
+  letter-spacing:.22em;
+  color:var(--neon-cyan);opacity:.55;
 }
+
+/* ══ Insert Card Area ══ */
+.cabinet-insert{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:4px;
+  pointer-events:none;z-index:2;
+}
+.insert-slot{
+  width:40px;height:4px;
+  background:rgba(0,0,0,.5);
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:1px;
+}
+.insert-label{
+  font-size:6px;letter-spacing:.15em;
+  color:rgba(255,255,255,.1);
+  font-family:'Courier New',monospace;
+}
+
+/* ── Status LED ── */
 .cabinet-status{
-  position:absolute;top:12px;right:12px;
+  position:absolute;top:14px;right:14px;z-index:6;
   width:10px;height:10px;border-radius:50%;
   background:var(--neon-green);
-  box-shadow:0 0 10px var(--neon-green);
-  animation:pulse 2s infinite;
+  box-shadow:0 0 12px var(--neon-green),0 0 24px var(--neon-green);
+  animation:ledPulse 2s infinite;
 }
 .cabinet-status.soon{
   background:var(--neon-yellow);
-  box-shadow:0 0 10px var(--neon-yellow);
+  box-shadow:0 0 12px var(--neon-yellow),0 0 24px var(--neon-yellow);
 }
-@keyframes pulse{
+.cabinet-status.soon::after{
+  content:'SOON';
+  position:absolute;right:18px;top:-1px;
+  font-size:8px;letter-spacing:.15em;
+  color:var(--neon-yellow);
+  font-family:'Courier New',monospace;opacity:.6;white-space:nowrap;
+}
+@keyframes ledPulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.25;transform:scale(.75)}
+}
+
+/* ── Hot Badge ── */
+.cabinet-badge{
+  position:absolute;top:14px;left:14px;z-index:6;
+  background:var(--neon-pink);
+  color:#fff;
+  font-size:9px;font-weight:800;
+  padding:3px 9px;border-radius:10px;
+  letter-spacing:.1em;
+  animation:badgeFlash 2s ease-in-out infinite;
+  box-shadow:0 0 14px var(--neon-pink);
+}
+@keyframes badgeFlash{
   0%,100%{opacity:1}
-  50%{opacity:.4}
+  50%{opacity:.5}
 }
-/* ── Marquee / Ticker ── */
+
+/* ── Ticker ── */
 .ticker-wrap{
-  max-width:1200px;margin:40px auto 0;
+  max-width:1400px;margin:48px auto 0;
   overflow:hidden;
-  border-top:1px solid rgba(255,255,255,.06);
-  border-bottom:1px solid rgba(255,255,255,.06);
-  padding:12px 0;
+  border-top:1px solid rgba(255,255,255,.05);
+  border-bottom:1px solid rgba(255,255,255,.05);
+  padding:14px 0;position:relative;z-index:1;
 }
 .ticker{
-  display:flex;gap:60px;
-  animation:tickerScroll 20s linear infinite;
+  display:flex;gap:80px;
+  animation:tickerScroll 28s linear infinite;
   font-family:'Courier New',monospace;
-  font-size:13px;letter-spacing:.1em;
-  color:var(--neon-cyan);opacity:.6;
+  font-size:12px;letter-spacing:.1em;
+  color:var(--neon-cyan);opacity:.45;
   white-space:nowrap;
 }
 @keyframes tickerScroll{
@@ -245,72 +776,87 @@ body::after{
 }
 .ticker span{white-space:nowrap}
 .ticker .highlight{color:var(--neon-pink);opacity:1}
+
 /* ── Footer ── */
 .footer{
   text-align:center;margin-top:50px;
-  font-size:12px;letter-spacing:.15em;
-  color:rgba(255,255,255,.2);
+  font-size:11px;letter-spacing:.15em;
+  color:rgba(255,255,255,.15);
   font-family:'Courier New',monospace;
+  position:relative;z-index:1;
 }
+
 /* ── Game Modal ── */
 .game-modal{
   position:fixed;inset:0;z-index:500;
-  background:rgba(0,0,0,.9);
+  background:rgba(0,0,0,.94);
+  backdrop-filter:blur(8px);
   display:flex;align-items:center;justify-content:center;
   opacity:0;visibility:hidden;
   transition:opacity .3s,visibility .3s;
 }
-.game-modal.open{
-  opacity:1;visibility:visible;
-}
+.game-modal.open{opacity:1;visibility:visible}
 .modal-content{
   background:var(--bg-panel);
   border:2px solid rgba(255,255,255,.1);
-  border-radius:16px;
-  padding:40px;
-  max-width:600px;width:90%;
+  border-radius:20px;
+  padding:44px 40px;
+  max-width:580px;width:90%;
   text-align:center;
   position:relative;
+  box-shadow:0 0 100px rgba(0,255,255,.1);
 }
 .modal-content h2{
-  font-size:28px;margin-bottom:12px;
-  color:var(--neon-cyan);
+  font-size:32px;margin-bottom:14px;
+  background:linear-gradient(135deg,var(--neon-cyan),var(--neon-purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
 }
 .modal-content p{
-  color:rgba(255,255,255,.6);
-  margin-bottom:24px;line-height:1.6;
+  color:rgba(255,255,255,.55);
+  margin-bottom:28px;line-height:1.7;font-size:15px;
 }
 .modal-close{
-  position:absolute;top:16px;right:20px;
-  background:none;border:none;
-  color:var(--text);font-size:24px;
-  cursor:pointer;opacity:.5;
-  transition:opacity .2s;
+  position:absolute;top:16px;right:22px;
+  background:none;border:none;color:var(--text);
+  font-size:22px;cursor:pointer;opacity:.4;
+  transition:all .2s;
 }
-.modal-close:hover{opacity:1}
+.modal-close:hover{opacity:1;color:var(--neon-pink)}
 .btn-play{
   display:inline-block;
-  padding:14px 40px;
+  padding:16px 48px;
   background:transparent;
   border:2px solid var(--neon-pink);
   color:var(--neon-pink);
-  font-size:16px;font-weight:700;
+  font-size:17px;font-weight:700;
   letter-spacing:.1em;
-  border-radius:30px;
+  border-radius:32px;
   cursor:pointer;
   transition:all .3s;
   text-decoration:none;
+  font-family:inherit;
 }
 .btn-play:hover{
   background:var(--neon-pink);
   color:var(--bg-deep);
-  box-shadow:0 0 30px rgba(255,45,149,.4);
+  box-shadow:0 0 50px rgba(255,45,149,.5),0 0 100px rgba(255,45,149,.2);
+  transform:scale(1.06);
 }
+
 /* ── Responsive ── */
 @media(max-width:600px){
-  .game-grid{grid-template-columns:1fr;gap:16px}
-  .header h1{font-size:32px}
-  .loading-emoji{width:50px;height:50px;font-size:36px}
+  .game-grid{grid-template-columns:1fr;gap:22px}
+  .header h1{font-size:30px}
+  .loading-emoji{width:52px;height:52px;font-size:36px}
+  .loading-emoji-row{gap:10px}
+  .loading-bar-outer{width:260px}
+  .cabinet-screen .game-preview{font-size:58px}
+  .sticker-rain{font-size:20px}
+  .loading-sticker-gallery{gap:4px}
+  .gallery-slot{width:34px;height:34px;font-size:18px}
+  .cabinet-side-left,.cabinet-side-right{width:10px}
+  .gacha-display{width:70px;height:70px;font-size:36px}
 }
 </style>
 </head>
@@ -323,129 +869,703 @@ body::after{
   <canvas id="particles-canvas"></canvas>
 </div>
 
-<!-- Loading Screen with Emoji -->
+<!-- ══════════════════════ LOADING SCREEN v5.0 ══════════════════════ -->
 <div id="loading-screen">
-  <div class="loading-emoji-row">
-    <div class="loading-emoji">🎮</div>
-    <div class="loading-emoji">🕹️</div>
-    <div class="loading-emoji">👾</div>
-    <div class="loading-emoji">🦞</div>
-    <div class="loading-emoji">💎</div>
+  <div class="loading-stickers" id="loading-stickers"></div>
+  <div class="loading-content">
+    <!-- Emoji Bounce Squad -->
+    <div class="loading-emoji-row" id="loading-emoji-row">
+      <div class="loading-emoji">🎮</div>
+      <div class="loading-emoji">🦞</div>
+      <div class="loading-emoji">🕹️</div>
+      <div class="loading-emoji">👾</div>
+      <div class="loading-emoji">💎</div>
+      <div class="loading-emoji">🎯</div>
+      <div class="loading-emoji">⚡</div>
+    </div>
+
+    <!-- Expression Gallery -->
+    <div class="loading-expressions" id="loading-expressions">
+      <div class="expr">😎</div>
+      <div class="expr">🤩</div>
+      <div class="expr">🔥</div>
+      <div class="expr">✨</div>
+      <div class="expr">💪</div>
+      <div class="expr">🎉</div>
+    </div>
+
+    <!-- Sticker Pack Gacha -->
+    <div class="gacha-container" id="gacha-container">
+      <div class="gacha-label">🎰 STICKER PACK GACHA</div>
+      <div class="gacha-display" id="gacha-display">
+        <div class="gacha-item" id="gacha-item">🦞</div>
+      </div>
+      <div class="gacha-pack-name" id="gacha-pack-name">捞捞乐限定包</div>
+    </div>
+
+    <!-- Sticker Mini-Gallery -->
+    <div class="loading-sticker-gallery" id="loading-gallery">
+      <div class="gallery-slot">🦞</div>
+      <div class="gallery-slot">🎮</div>
+      <div class="gallery-slot">👾</div>
+      <div class="gallery-slot">💎</div>
+      <div class="gallery-slot">🕹️</div>
+      <div class="gallery-slot">🎯</div>
+      <div class="gallery-slot">🐲</div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="loading-bar-outer" id="loading-bar-outer">
+      <div class="loading-bar-inner" id="loading-bar"></div>
+      <div class="loading-sticker-pop" id="loading-sticker-pop">🦞</div>
+    </div>
+
+    <!-- Status -->
+    <div class="loading-status" id="loading-status">INITIALIZING ARCADE v5.0...</div>
   </div>
-  <div class="loading-bar-wrap">
-    <div class="loading-bar-fill" id="loading-bar"></div>
-  </div>
-  <div class="loading-text" id="loading-text">INITIALIZING ARCADE...</div>
 </div>
 
-<!-- Main Lobby -->
+<!-- ══════════════════════ MAIN LOBBY ══════════════════════ -->
 <div id="lobby">
   <div class="header">
-    <h1>🕹️ AR 游戏厅</h1>
+    <h1>🕹️ AR 游戏厅 v5.0</h1>
     <p class="subtitle">WORLD GAME ARCADE · 世界游戏</p>
     <div class="neon-line"></div>
   </div>
-  
-  <div class="game-grid" id="game-grid">
+
+  <!-- ═══════ 经典街机 ═══════ -->
+  <div class="section-title"><h2>🕹️ 经典街机 CLASSIC ARCADE</h2></div>
+  <div class="game-grid" id="classic-grid">
+
     <!-- Game 1: 表情消消乐 -->
-    <div class="game-cabinet" data-game="emoji-match" onclick="openGame('emoji-match')">
+    <div class="game-cabinet" data-game="emoji-match" onclick="openGame('emoji-match')" style="--accent:var(--neon-yellow);--glow-shadow:rgba(255,230,0,.25);--glow-shadow-deep:rgba(255,230,0,.08);--glow-inset:rgba(255,230,0,.05)">
       <div class="cabinet-glow"></div>
+      <div class="cabinet-tmold"></div>
+      <div class="cabinet-side-left"></div>
+      <div class="cabinet-side-right"></div>
+      <div class="cabinet-marquee-header">
+        <div class="marquee-bulbs">
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+        </div>
+        <div class="marquee-text">EMOJI MATCH</div>
+      </div>
       <div class="cabinet-status"></div>
-      <div class="cabinet-screen">
-        <div class="game-preview" style="color:var(--neon-yellow)">😎</div>
+      <div class="cabinet-badge">HOT</div>
+      <div class="cabinet-bezel">
+        <div class="cabinet-scanlines"></div>
+        <div class="cabinet-screen-reflection"></div>
+        <div class="cabinet-screen">
+          <div class="game-preview" style="color:var(--neon-yellow)">😎</div>
+        </div>
+      </div>
+      <div class="cabinet-marquee-wrap">
+        <div class="cabinet-marquee-glow"></div>
+        <div class="cabinet-marquee"></div>
+      </div>
+      <div class="cabinet-controls">
+        <div class="joystick-area">
+          <div class="joystick-ring"><div class="joystick-stick"></div></div>
+          <span style="font-size:10px;opacity:.25;font-family:'Courier New',monospace">P1</span>
+        </div>
+        <div class="speaker-grill">
+          <div class="speaker-slot"></div><div class="speaker-slot"></div><div class="speaker-slot"></div>
+          <div class="speaker-slot"></div><div class="speaker-slot"></div>
+        </div>
+        <div class="buttons-area">
+          <div class="cabinet-btn a"></div>
+          <div class="cabinet-btn b"></div>
+          <div class="cabinet-btn c"></div>
+        </div>
       </div>
       <div class="cabinet-label">
         <div class="game-name">表情消消乐</div>
         <div class="game-tag">EMOJI MATCH · PUZZLE</div>
+        <div class="cabinet-insert">
+          <span class="insert-label">CARD</span>
+          <div class="insert-slot"></div>
+        </div>
+      </div>
+      <div class="coin-slot-area">
+        <div class="coin-slot-frame">
+          <div class="coin-slot-inner"></div>
+          <div class="coin-insert">🪙</div>
+        </div>
+        <div class="coin-label">COIN</div>
       </div>
     </div>
-    
+
     <!-- Game 2: 街机打砖块 -->
-    <div class="game-cabinet" data-game="arcade-breakout" onclick="openGame('arcade-breakout')">
+    <div class="game-cabinet" data-game="arcade-breakout" onclick="openGame('arcade-breakout')" style="--accent:var(--neon-cyan);--glow-shadow:rgba(0,255,255,.25);--glow-shadow-deep:rgba(0,255,255,.08);--glow-inset:rgba(0,255,255,.05)">
       <div class="cabinet-glow"></div>
+      <div class="cabinet-tmold"></div>
+      <div class="cabinet-side-left"></div>
+      <div class="cabinet-side-right"></div>
+      <div class="cabinet-marquee-header">
+        <div class="marquee-bulbs">
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+        </div>
+        <div class="marquee-text">BREAKOUT</div>
+      </div>
       <div class="cabinet-status"></div>
-      <div class="cabinet-screen">
-        <div class="game-preview" style="color:var(--neon-cyan)">🧱</div>
+      <div class="cabinet-bezel">
+        <div class="cabinet-scanlines"></div>
+        <div class="cabinet-screen-reflection"></div>
+        <div class="cabinet-screen">
+          <div class="game-preview" style="color:var(--neon-cyan)">🧱</div>
+        </div>
+      </div>
+      <div class="cabinet-marquee-wrap">
+        <div class="cabinet-marquee-glow"></div>
+        <div class="cabinet-marquee"></div>
+      </div>
+      <div class="cabinet-controls">
+        <div class="joystick-area">
+          <div class="joystick-ring"><div class="joystick-stick"></div></div>
+          <span style="font-size:10px;opacity:.25;font-family:'Courier New',monospace">P1</span>
+        </div>
+        <div class="speaker-grill">
+          <div class="speaker-slot"></div><div class="speaker-slot"></div><div class="speaker-slot"></div>
+          <div class="speaker-slot"></div><div class="speaker-slot"></div>
+        </div>
+        <div class="buttons-area">
+          <div class="cabinet-btn a"></div>
+          <div class="cabinet-btn b"></div>
+          <div class="cabinet-btn c"></div>
+        </div>
       </div>
       <div class="cabinet-label">
         <div class="game-name">街机打砖块</div>
         <div class="game-tag">ARCADE BREAKOUT · RETRO</div>
+        <div class="cabinet-insert">
+          <span class="insert-label">CARD</span>
+          <div class="insert-slot"></div>
+        </div>
+      </div>
+      <div class="coin-slot-area">
+        <div class="coin-slot-frame">
+          <div class="coin-slot-inner"></div>
+          <div class="coin-insert" style="animation-delay:1.2s">🪙</div>
+        </div>
+        <div class="coin-label">COIN</div>
       </div>
     </div>
-    
-    <!-- Game 3: AR抓娃娃 -->
-    <div class="game-cabinet" data-game="ar-claw" onclick="openGame('ar-claw')">
+
+    <!-- Game 3: 霓虹贪吃蛇 -->
+    <div class="game-cabinet" data-game="neon-snake" onclick="openGame('neon-snake')" style="--accent:var(--neon-green);--glow-shadow:rgba(57,255,20,.25);--glow-shadow-deep:rgba(57,255,20,.08);--glow-inset:rgba(57,255,20,.05)">
       <div class="cabinet-glow"></div>
-      <div class="cabinet-status soon"></div>
-      <div class="cabinet-screen">
-        <div class="game-preview" style="color:var(--neon-pink)">🦞</div>
+      <div class="cabinet-tmold"></div>
+      <div class="cabinet-side-left"></div>
+      <div class="cabinet-side-right"></div>
+      <div class="cabinet-marquee-header">
+        <div class="marquee-bulbs">
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+        </div>
+        <div class="marquee-text">NEON SNAKE</div>
       </div>
-      <div class="cabinet-label">
-        <div class="game-name">AR 捞捞乐</div>
-        <div class="game-tag">AR CLAW · 抓娃娃</div>
-      </div>
-    </div>
-    
-    <!-- Game 4: 霓虹贪吃蛇 -->
-    <div class="game-cabinet" data-game="neon-snake" onclick="openGame('neon-snake')">
-      <div class="cabinet-glow"></div>
       <div class="cabinet-status"></div>
-      <div class="cabinet-screen">
-        <div class="game-preview" style="color:var(--neon-green)">🐍</div>
+      <div class="cabinet-badge">HOT</div>
+      <div class="cabinet-bezel">
+        <div class="cabinet-scanlines"></div>
+        <div class="cabinet-screen-reflection"></div>
+        <div class="cabinet-screen">
+          <div class="game-preview" style="color:var(--neon-green)">🐍</div>
+        </div>
+      </div>
+      <div class="cabinet-marquee-wrap">
+        <div class="cabinet-marquee-glow"></div>
+        <div class="cabinet-marquee"></div>
+      </div>
+      <div class="cabinet-controls">
+        <div class="joystick-area">
+          <div class="joystick-ring"><div class="joystick-stick"></div></div>
+          <span style="font-size:10px;opacity:.25;font-family:'Courier New',monospace">P1</span>
+        </div>
+        <div class="speaker-grill">
+          <div class="speaker-slot"></div><div class="speaker-slot"></div><div class="speaker-slot"></div>
+          <div class="speaker-slot"></div><div class="speaker-slot"></div>
+        </div>
+        <div class="buttons-area">
+          <div class="cabinet-btn a"></div>
+          <div class="cabinet-btn b"></div>
+          <div class="cabinet-btn c"></div>
+        </div>
       </div>
       <div class="cabinet-label">
         <div class="game-name">霓虹贪吃蛇</div>
         <div class="game-tag">NEON SNAKE · CLASSIC</div>
+        <div class="cabinet-insert">
+          <span class="insert-label">CARD</span>
+          <div class="insert-slot"></div>
+        </div>
+      </div>
+      <div class="coin-slot-area">
+        <div class="coin-slot-frame">
+          <div class="coin-slot-inner"></div>
+          <div class="coin-insert" style="animation-delay:1.8s">🪙</div>
+        </div>
+        <div class="coin-label">COIN</div>
       </div>
     </div>
-    
-    <!-- Game 5: 太空射击 -->
-    <div class="game-cabinet" data-game="space-shooter" onclick="openGame('space-shooter')">
+
+    <!-- Game 4: 太空射击 -->
+    <div class="game-cabinet" data-game="space-shooter" onclick="openGame('space-shooter')" style="--accent:var(--neon-purple);--glow-shadow:rgba(180,77,255,.25);--glow-shadow-deep:rgba(180,77,255,.08);--glow-inset:rgba(180,77,255,.05)">
       <div class="cabinet-glow"></div>
+      <div class="cabinet-tmold"></div>
+      <div class="cabinet-side-left"></div>
+      <div class="cabinet-side-right"></div>
+      <div class="cabinet-marquee-header">
+        <div class="marquee-bulbs">
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+        </div>
+        <div class="marquee-text">SPACE SHOOTER</div>
+      </div>
       <div class="cabinet-status soon"></div>
-      <div class="cabinet-screen">
-        <div class="game-preview" style="color:var(--neon-purple)">🚀</div>
+      <div class="cabinet-bezel">
+        <div class="cabinet-scanlines"></div>
+        <div class="cabinet-screen-reflection"></div>
+        <div class="cabinet-screen">
+          <div class="game-preview" style="color:var(--neon-purple)">🚀</div>
+        </div>
+      </div>
+      <div class="cabinet-marquee-wrap">
+        <div class="cabinet-marquee-glow"></div>
+        <div class="cabinet-marquee"></div>
+      </div>
+      <div class="cabinet-controls">
+        <div class="joystick-area">
+          <div class="joystick-ring"><div class="joystick-stick"></div></div>
+          <span style="font-size:10px;opacity:.25;font-family:'Courier New',monospace">P1</span>
+        </div>
+        <div class="speaker-grill">
+          <div class="speaker-slot"></div><div class="speaker-slot"></div><div class="speaker-slot"></div>
+          <div class="speaker-slot"></div><div class="speaker-slot"></div>
+        </div>
+        <div class="buttons-area">
+          <div class="cabinet-btn a"></div>
+          <div class="cabinet-btn b"></div>
+          <div class="cabinet-btn c"></div>
+        </div>
       </div>
       <div class="cabinet-label">
         <div class="game-name">太空射击</div>
         <div class="game-tag">SPACE SHOOTER · ACTION</div>
+        <div class="cabinet-insert">
+          <span class="insert-label">CARD</span>
+          <div class="insert-slot"></div>
+        </div>
+      </div>
+      <div class="coin-slot-area">
+        <div class="coin-slot-frame">
+          <div class="coin-slot-inner"></div>
+          <div class="coin-insert" style="animation-delay:2.4s">🪙</div>
+        </div>
+        <div class="coin-label">COIN</div>
       </div>
     </div>
-    
-    <!-- Game 6: 记忆翻牌 -->
-    <div class="game-cabinet" data-game="memory-flip" onclick="openGame('memory-flip')">
+
+    <!-- Game 5: 记忆翻牌 -->
+    <div class="game-cabinet" data-game="memory-flip" onclick="openGame('memory-flip')" style="--accent:var(--neon-gold);--glow-shadow:rgba(255,179,0,.25);--glow-shadow-deep:rgba(255,179,0,.08);--glow-inset:rgba(255,179,0,.05)">
       <div class="cabinet-glow"></div>
+      <div class="cabinet-tmold"></div>
+      <div class="cabinet-side-left"></div>
+      <div class="cabinet-side-right"></div>
+      <div class="cabinet-marquee-header">
+        <div class="marquee-bulbs">
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+        </div>
+        <div class="marquee-text">MEMORY FLIP</div>
+      </div>
       <div class="cabinet-status"></div>
-      <div class="cabinet-screen">
-        <div class="game-preview" style="color:var(--neon-yellow)">🃏</div>
+      <div class="cabinet-bezel">
+        <div class="cabinet-scanlines"></div>
+        <div class="cabinet-screen-reflection"></div>
+        <div class="cabinet-screen">
+          <div class="game-preview" style="color:var(--neon-gold)">🃏</div>
+        </div>
+      </div>
+      <div class="cabinet-marquee-wrap">
+        <div class="cabinet-marquee-glow"></div>
+        <div class="cabinet-marquee"></div>
+      </div>
+      <div class="cabinet-controls">
+        <div class="joystick-area">
+          <div class="joystick-ring"><div class="joystick-stick"></div></div>
+          <span style="font-size:10px;opacity:.25;font-family:'Courier New',monospace">P1</span>
+        </div>
+        <div class="speaker-grill">
+          <div class="speaker-slot"></div><div class="speaker-slot"></div><div class="speaker-slot"></div>
+          <div class="speaker-slot"></div><div class="speaker-slot"></div>
+        </div>
+        <div class="buttons-area">
+          <div class="cabinet-btn a"></div>
+          <div class="cabinet-btn b"></div>
+          <div class="cabinet-btn c"></div>
+        </div>
       </div>
       <div class="cabinet-label">
         <div class="game-name">记忆翻牌</div>
         <div class="game-tag">MEMORY FLIP · BRAIN</div>
+        <div class="cabinet-insert">
+          <span class="insert-label">CARD</span>
+          <div class="insert-slot"></div>
+        </div>
+      </div>
+      <div class="coin-slot-area">
+        <div class="coin-slot-frame">
+          <div class="coin-slot-inner"></div>
+          <div class="coin-insert" style="animation-delay:3s">🪙</div>
+        </div>
+        <div class="coin-label">COIN</div>
       </div>
     </div>
   </div>
-  
-  <!-- Ticker -->
-  <div class="ticker-wrap">
-    <div class="ticker">
-      <span>★ <span class="highlight">NEW!</span> 表情消消乐上线</span>
-      <span>★ 霓虹贪吃蛇高分挑战中</span>
-      <span>★ AR捞捞乐即将开放</span>
-      <span>★ 街机打砖块破纪录者：🦞周三涵</span>
-      <span>★ 太空射击 COMING SOON</span>
-      <span>★ 每周排行榜更新</span>
-      <span>★ <span class="highlight">NEW!</span> 表情消消乐上线</span>
-      <span>★ 霓虹贪吃蛇高分挑战中</span>
-      <span>★ AR捞捞乐即将开放</span>
-      <span>★ 街机打砖块破纪录者：🦞周三涵</span>
-      <span>★ 太空射击 COMING SOON</span>
-      <span>★ 每周排行榜更新</span>
+
+  <!-- ═══════ AR增强现实 ═══════ -->
+  <div class="section-title"><h2>📷 AR 增强现实 AUGMENTED REALITY</h2></div>
+  <div class="game-grid" id="ar-grid">
+
+    <!-- Game AR-1: AR 捞捞乐 -->
+    <div class="game-cabinet" data-game="ar-claw" onclick="openGame('ar-claw')" style="--accent:var(--neon-pink);--glow-shadow:rgba(255,45,149,.25);--glow-shadow-deep:rgba(255,45,149,.08);--glow-inset:rgba(255,45,149,.05)">
+      <div class="cabinet-glow"></div>
+      <div class="cabinet-tmold"></div>
+      <div class="cabinet-side-left"></div>
+      <div class="cabinet-side-right"></div>
+      <div class="cabinet-marquee-header">
+        <div class="marquee-bulbs">
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+        </div>
+        <div class="marquee-text">AR CLAW</div>
+      </div>
+      <div class="cabinet-status"></div>
+      <div class="cabinet-badge">NEW</div>
+      <div class="cabinet-bezel">
+        <div class="cabinet-scanlines"></div>
+        <div class="cabinet-screen-reflection"></div>
+        <div class="cabinet-screen">
+          <div class="game-preview" style="color:var(--neon-pink)">🦞</div>
+        </div>
+      </div>
+      <div class="cabinet-marquee-wrap">
+        <div class="cabinet-marquee-glow"></div>
+        <div class="cabinet-marquee"></div>
+      </div>
+      <div class="cabinet-controls">
+        <div class="joystick-area">
+          <div class="joystick-ring"><div class="joystick-stick"></div></div>
+          <span style="font-size:10px;opacity:.25;font-family:'Courier New',monospace">P1</span>
+        </div>
+        <div class="speaker-grill">
+          <div class="speaker-slot"></div><div class="speaker-slot"></div><div class="speaker-slot"></div>
+          <div class="speaker-slot"></div><div class="speaker-slot"></div>
+        </div>
+        <div class="buttons-area">
+          <div class="cabinet-btn a"></div>
+          <div class="cabinet-btn b"></div>
+          <div class="cabinet-btn c"></div>
+        </div>
+      </div>
+      <div class="cabinet-label">
+        <div class="game-name">AR 捞捞乐</div>
+        <div class="game-tag">AR CLAW · 体感抓娃娃 🦞</div>
+        <div class="cabinet-insert">
+          <span class="insert-label">CARD</span>
+          <div class="insert-slot"></div>
+        </div>
+      </div>
+      <div class="coin-slot-area">
+        <div class="coin-slot-frame">
+          <div class="coin-slot-inner"></div>
+          <div class="coin-insert" style="animation-delay:0.6s">🪙</div>
+        </div>
+        <div class="coin-label">COIN</div>
+      </div>
+    </div>
+
+    <!-- Game AR-2: 手势魔法 -->
+    <div class="game-cabinet" data-game="gesture-magic" onclick="openGame('gesture-magic')" style="--accent:var(--neon-blue);--glow-shadow:rgba(68,138,255,.25);--glow-shadow-deep:rgba(68,138,255,.08);--glow-inset:rgba(68,138,255,.05)">
+      <div class="cabinet-glow"></div>
+      <div class="cabinet-tmold"></div>
+      <div class="cabinet-side-left"></div>
+      <div class="cabinet-side-right"></div>
+      <div class="cabinet-marquee-header">
+        <div class="marquee-bulbs">
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+        </div>
+        <div class="marquee-text">GESTURE MAGIC</div>
+      </div>
+      <div class="cabinet-status"></div>
+      <div class="cabinet-badge">NEW</div>
+      <div class="cabinet-bezel">
+        <div class="cabinet-scanlines"></div>
+        <div class="cabinet-screen-reflection"></div>
+        <div class="cabinet-screen">
+          <div class="game-preview" style="color:var(--neon-blue)">✋</div>
+        </div>
+      </div>
+      <div class="cabinet-marquee-wrap">
+        <div class="cabinet-marquee-glow"></div>
+        <div class="cabinet-marquee"></div>
+      </div>
+      <div class="cabinet-controls">
+        <div class="joystick-area">
+          <div class="joystick-ring"><div class="joystick-stick"></div></div>
+          <span style="font-size:10px;opacity:.25;font-family:'Courier New',monospace">P1</span>
+        </div>
+        <div class="speaker-grill">
+          <div class="speaker-slot"></div><div class="speaker-slot"></div><div class="speaker-slot"></div>
+          <div class="speaker-slot"></div><div class="speaker-slot"></div>
+        </div>
+        <div class="buttons-area">
+          <div class="cabinet-btn a"></div>
+          <div class="cabinet-btn b"></div>
+          <div class="cabinet-btn c"></div>
+        </div>
+      </div>
+      <div class="cabinet-label">
+        <div class="game-name">手势魔法 ✋</div>
+        <div class="game-tag">GESTURE MAGIC · 棱镜滤镜</div>
+        <div class="cabinet-insert">
+          <span class="insert-label">CARD</span>
+          <div class="insert-slot"></div>
+        </div>
+      </div>
+      <div class="coin-slot-area">
+        <div class="coin-slot-frame">
+          <div class="coin-slot-inner"></div>
+          <div class="coin-insert" style="animation-delay:0.3s">🪙</div>
+        </div>
+        <div class="coin-label">COIN</div>
+      </div>
+    </div>
+
+    <!-- Game AR-3: 面部变形 -->
+    <div class="game-cabinet" data-game="face-deform" onclick="openGame('face-deform')" style="--accent:var(--neon-orange);--glow-shadow:rgba(255,107,53,.25);--glow-shadow-deep:rgba(255,107,53,.08);--glow-inset:rgba(255,107,53,.05)">
+      <div class="cabinet-glow"></div>
+      <div class="cabinet-tmold"></div>
+      <div class="cabinet-side-left"></div>
+      <div class="cabinet-side-right"></div>
+      <div class="cabinet-marquee-header">
+        <div class="marquee-bulbs">
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+        </div>
+        <div class="marquee-text">FACE WARP</div>
+      </div>
+      <div class="cabinet-status"></div>
+      <div class="cabinet-badge">NEW</div>
+      <div class="cabinet-bezel">
+        <div class="cabinet-scanlines"></div>
+        <div class="cabinet-screen-reflection"></div>
+        <div class="cabinet-screen">
+          <div class="game-preview" style="color:var(--neon-orange)">👹</div>
+        </div>
+      </div>
+      <div class="cabinet-marquee-wrap">
+        <div class="cabinet-marquee-glow"></div>
+        <div class="cabinet-marquee"></div>
+      </div>
+      <div class="cabinet-controls">
+        <div class="joystick-area">
+          <div class="joystick-ring"><div class="joystick-stick"></div></div>
+          <span style="font-size:10px;opacity:.25;font-family:'Courier New',monospace">P1</span>
+        </div>
+        <div class="speaker-grill">
+          <div class="speaker-slot"></div><div class="speaker-slot"></div><div class="speaker-slot"></div>
+          <div class="speaker-slot"></div><div class="speaker-slot"></div>
+        </div>
+        <div class="buttons-area">
+          <div class="cabinet-btn a"></div>
+          <div class="cabinet-btn b"></div>
+          <div class="cabinet-btn c"></div>
+        </div>
+      </div>
+      <div class="cabinet-label">
+        <div class="game-name">面部变形 👹</div>
+        <div class="game-tag">FACE DEFORM · 哈哈镜</div>
+        <div class="cabinet-insert">
+          <span class="insert-label">CARD</span>
+          <div class="insert-slot"></div>
+        </div>
+      </div>
+      <div class="coin-slot-area">
+        <div class="coin-slot-frame">
+          <div class="coin-slot-inner"></div>
+          <div class="coin-insert" style="animation-delay:0.9s">🪙</div>
+        </div>
+        <div class="coin-label">COIN</div>
+      </div>
+    </div>
+
+    <!-- Game AR-4: AR健身教练 -->
+    <div class="game-cabinet" data-game="fitness-coach" onclick="openGame('fitness-coach')" style="--accent:var(--neon-green);--glow-shadow:rgba(57,255,20,.25);--glow-shadow-deep:rgba(57,255,20,.08);--glow-inset:rgba(57,255,20,.05)">
+      <div class="cabinet-glow"></div>
+      <div class="cabinet-tmold"></div>
+      <div class="cabinet-side-left"></div>
+      <div class="cabinet-side-right"></div>
+      <div class="cabinet-marquee-header">
+        <div class="marquee-bulbs">
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+        </div>
+        <div class="marquee-text">FITNESS COACH</div>
+      </div>
+      <div class="cabinet-status"></div>
+      <div class="cabinet-badge">NEW</div>
+      <div class="cabinet-bezel">
+        <div class="cabinet-scanlines"></div>
+        <div class="cabinet-screen-reflection"></div>
+        <div class="cabinet-screen">
+          <div class="game-preview" style="color:var(--neon-green)">💪</div>
+        </div>
+      </div>
+      <div class="cabinet-marquee-wrap">
+        <div class="cabinet-marquee-glow"></div>
+        <div class="cabinet-marquee"></div>
+      </div>
+      <div class="cabinet-controls">
+        <div class="joystick-area">
+          <div class="joystick-ring"><div class="joystick-stick"></div></div>
+          <span style="font-size:10px;opacity:.25;font-family:'Courier New',monospace">P1</span>
+        </div>
+        <div class="speaker-grill">
+          <div class="speaker-slot"></div><div class="speaker-slot"></div><div class="speaker-slot"></div>
+          <div class="speaker-slot"></div><div class="speaker-slot"></div>
+        </div>
+        <div class="buttons-area">
+          <div class="cabinet-btn a"></div>
+          <div class="cabinet-btn b"></div>
+          <div class="cabinet-btn c"></div>
+        </div>
+      </div>
+      <div class="cabinet-label">
+        <div class="game-name">健身教练 💪</div>
+        <div class="game-tag">FITNESS COACH · 运动辅助</div>
+        <div class="cabinet-insert">
+          <span class="insert-label">CARD</span>
+          <div class="insert-slot"></div>
+        </div>
+      </div>
+      <div class="coin-slot-area">
+        <div class="coin-slot-frame">
+          <div class="coin-slot-inner"></div>
+          <div class="coin-insert" style="animation-delay:1.5s">🪙</div>
+        </div>
+        <div class="coin-label">COIN</div>
+      </div>
+    </div>
+
+    <!-- Game AR-5: 手花绽放 -->
+    <div class="game-cabinet" data-game="hand-flower" onclick="openGame('hand-flower')" style="--accent:var(--neon-purple);--glow-shadow:rgba(180,77,255,.25);--glow-shadow-deep:rgba(180,77,255,.08);--glow-inset:rgba(180,77,255,.05)">
+      <div class="cabinet-glow"></div>
+      <div class="cabinet-tmold"></div>
+      <div class="cabinet-side-left"></div>
+      <div class="cabinet-side-right"></div>
+      <div class="cabinet-marquee-header">
+        <div class="marquee-bulbs">
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+          <div class="marquee-bulb"></div><div class="marquee-bulb"></div><div class="marquee-bulb"></div>
+        </div>
+        <div class="marquee-text">HAND FLOWER</div>
+      </div>
+      <div class="cabinet-status"></div>
+      <div class="cabinet-badge">NEW</div>
+      <div class="cabinet-bezel">
+        <div class="cabinet-scanlines"></div>
+        <div class="cabinet-screen-reflection"></div>
+        <div class="cabinet-screen">
+          <div class="game-preview" style="color:var(--neon-purple)">🌸</div>
+        </div>
+      </div>
+      <div class="cabinet-marquee-wrap">
+        <div class="cabinet-marquee-glow"></div>
+        <div class="cabinet-marquee"></div>
+      </div>
+      <div class="cabinet-controls">
+        <div class="joystick-area">
+          <div class="joystick-ring"><div class="joystick-stick"></div></div>
+          <span style="font-size:10px;opacity:.25;font-family:'Courier New',monospace">P1</span>
+        </div>
+        <div class="speaker-grill">
+          <div class="speaker-slot"></div><div class="speaker-slot"></div><div class="speaker-slot"></div>
+          <div class="speaker-slot"></div><div class="speaker-slot"></div>
+        </div>
+        <div class="buttons-area">
+          <div class="cabinet-btn a"></div>
+          <div class="cabinet-btn b"></div>
+          <div class="cabinet-btn c"></div>
+        </div>
+      </div>
+      <div class="cabinet-label">
+        <div class="game-name">手花绽放 🌸</div>
+        <div class="game-tag">HAND FLOWER · 魔法花瓣</div>
+        <div class="cabinet-insert">
+          <span class="insert-label">CARD</span>
+          <div class="insert-slot"></div>
+        </div>
+      </div>
+      <div class="coin-slot-area">
+        <div class="coin-slot-frame">
+          <div class="coin-slot-inner"></div>
+          <div class="coin-insert" style="animation-delay:2.1s">🪙</div>
+        </div>
+        <div class="coin-label">COIN</div>
+      </div>
     </div>
   </div>
-  
+
+  <!-- Ticker -->
+  <div class="ticker-wrap">
+    <div class="ticker" id="ticker-content">
+      <span>★ <span class="highlight">NEW!</span> AR游戏大迁移完成 · 5款AR游戏入驻 🦞</span>
+      <span>★ 街机美术全面升级 v5.0</span>
+      <span>★ Loading动画表情包大赏 🎉 🎰</span>
+      <span>★ 手势魔法棱镜滤镜上线</span>
+      <span>★ 面部变形哈哈镜已就绪</span>
+      <span>★ AR健身教练运动辅助中</span>
+      <span>★ 手花绽放魔法花瓣飘落</span>
+      <span>★ 霓虹贪吃蛇破纪录者：🦞周三涵</span>
+      <span>★ 太空射击 COMING SOON</span>
+      <span>★ <span class="highlight">NEW!</span> AR游戏大迁移完成 · 5款AR游戏入驻 🦞</span>
+      <span>★ 街机美术全面升级 v5.0</span>
+      <span>★ Loading动画表情包大赏 🎉 🎰</span>
+      <span>★ 手势魔法棱镜滤镜上线</span>
+      <span>★ 面部变形哈哈镜已就绪</span>
+      <span>★ AR健身教练运动辅助中</span>
+      <span>★ 手花绽放魔法花瓣飘落</span>
+      <span>★ 霓虹贪吃蛇破纪录者：🦞周三涵</span>
+      <span>★ 太空射击 COMING SOON</span>
+    </div>
+  </div>
+
   <div class="footer">
-    WORLD GAME ARCADE v2.0 · © 2026 捞鱼游戏厅 · POWERED BY 周三涵 🦞
+    WORLD GAME ARCADE v5.0 · © 2026 捞鱼游戏厅 · POWERED BY 周三涵 🦞 · AR GAMES MIGRATED
   </div>
 </div>
 
@@ -461,39 +1581,215 @@ body::after{
 
 <script>
 // ═══════════════════════════════════════
-// Loading Animation
+// LOADING ANIMATION SYSTEM v5.0
 // ═══════════════════════════════════════
 const loadingBar = document.getElementById('loading-bar');
-const loadingText = document.getElementById('loading-text');
+const loadingStatus = document.getElementById('loading-status');
 const loadingScreen = document.getElementById('loading-screen');
 const lobby = document.getElementById('lobby');
+const stickerPop = document.getElementById('loading-sticker-pop');
+const stickersContainer = document.getElementById('loading-stickers');
+const loadingGallery = document.getElementById('loading-gallery');
 
-const loadingPhrases = [
-  'INITIALIZING ARCADE...',
-  'LOADING EMOJI ASSETS... 🎮',
-  'CALIBRATING AR CAMERA... 📷',
-  'RENDERING NEON EFFECTS... ✨',
-  'TUNING GAME CABINETS... 🕹️',
-  'ALMOST READY... 👾',
-  'WELCOME TO ARCADE! 🦞'
+// ══ Sticker Rain System v5.0 (More Categories) ══
+const rainStickers = [
+  // Gaming
+  '🎮','👾','🕹️','🎯','💎','🎲','🎰','🎪','🃏','🎨',
+  // Animals
+  '🦞','🦊','🐱','🐲','🐉','🦀','🐙','🦄','🐸','🐼',
+  // Emojis
+  '🔥','✨','💫','🌟','💥','🎉','🎊','🎁','🏆','💿',
+  // Random
+  '🌈','🎭','📀','💡','⚡','🧩','🔮','🎵','🎶','👑'
+];
+const neonColorPool = ['var(--neon-pink)','var(--neon-cyan)','var(--neon-yellow)','var(--neon-purple)','var(--neon-green)','var(--neon-orange)','var(--neon-blue)','var(--neon-gold)'];
+
+function spawnStickerRain(){
+  const el = document.createElement('div');
+  el.className = 'sticker-rain';
+  el.textContent = rainStickers[Math.floor(Math.random()*rainStickers.length)];
+  el.style.setProperty('--start-x', Math.random()*95 + '%');
+  el.style.setProperty('--fall-dur', (4+Math.random()*6) + 's');
+  el.style.setProperty('--fall-delay', Math.random()*3 + 's');
+  el.style.setProperty('--spin', (Math.random()*720-360) + 'deg');
+  el.style.color = neonColorPool[Math.floor(Math.random()*neonColorPool.length)];
+  el.style.fontSize = (16+Math.random()*28) + 'px';
+  stickersContainer.appendChild(el);
+  setTimeout(() => el.remove(), 12000);
+}
+
+setInterval(spawnStickerRain, 200);
+for(let i=0;i<25;i++) setTimeout(()=>spawnStickerRain(), i*120);
+
+// ══ Floating Background Stickers ══
+function spawnFloatingSticker(){
+  const el = document.createElement('div');
+  el.className = 'sticker-float';
+  el.textContent = rainStickers[Math.floor(Math.random()*rainStickers.length)];
+  el.style.left = Math.random()*90 + '%';
+  el.style.bottom = '0px';
+  el.style.animationDuration = (4 + Math.random()*6) + 's';
+  el.style.animationDelay = Math.random()*2 + 's';
+  el.style.color = neonColorPool[Math.floor(Math.random()*neonColorPool.length)];
+  stickersContainer.appendChild(el);
+  setTimeout(() => el.remove(), 11000);
+}
+setInterval(spawnFloatingSticker, 400);
+for(let i=0;i<14;i++) setTimeout(spawnFloatingSticker, i*200);
+
+// ══ Sticker Combo Burst ══
+function spawnComboBurst(x, y){
+  const burstEmojis = ['🎉','✨','💥','🔥','🌟','💫','🎊','🦞'];
+  for(let i=0;i<6;i++){
+    const el = document.createElement('div');
+    el.className = 'sticker-burst';
+    el.textContent = burstEmojis[i % burstEmojis.length];
+    el.style.position = 'absolute';
+    el.style.left = x + '%';
+    el.style.top = y + '%';
+    el.style.fontSize = (18+Math.random()*18) + 'px';
+    el.style.color = neonColorPool[Math.floor(Math.random()*neonColorPool.length)];
+    const angle = (Math.PI*2/6)*i;
+    const dist = 30+Math.random()*50;
+    el.style.setProperty('--bx', Math.cos(angle)*dist + 'px');
+    el.style.setProperty('--by', Math.sin(angle)*dist + 'px');
+    loadingScreen.appendChild(el);
+    setTimeout(() => el.remove(), 2000);
+  }
+}
+
+// ══ Sticker Pack Gacha ══
+const gachaItem = document.getElementById('gacha-item');
+const gachaPackName = document.getElementById('gacha-pack-name');
+const gachaPacks = [
+  {emoji:'🦞',name:'捞捞乐限定包'},
+  {emoji:'🐱',name:'萌宠大集合'},
+  {emoji:'🎮',name:'经典街机包'},
+  {emoji:'👾',name:'外星入侵包'},
+  {emoji:'🔥',name:'火焰传说包'},
+  {emoji:'🌟',name:'星光璀璨包'},
+  {emoji:'🦊',name:'狡猾狐狸包'},
+  {emoji:'🐲',name:'东方龙神包'},
+  {emoji:'💎',name:'宝石水晶包'},
+  {emoji:'🎪',name:'嘉年华包'},
 ];
 
-let progress = 0;
-function updateLoading() {
-  progress += Math.random() * 15 + 5;
-  if (progress > 100) progress = 100;
-  loadingBar.style.width = progress + '%';
-  
-  const phraseIdx = Math.min(Math.floor(progress / 15), loadingPhrases.length - 1);
-  loadingText.textContent = loadingPhrases[phraseIdx];
-  
-  if (progress >= 100) {
+function spinGacha(){
+  const pack = gachaPacks[Math.floor(Math.random()*gachaPacks.length)];
+  // Reset
+  gachaItem.style.animation = 'none';
+  gachaItem.offsetHeight;
+  gachaItem.style.animation = 'gachaSpin .35s ease-in-out';
+  gachaItem.textContent = pack.emoji;
+  gachaPackName.textContent = pack.name;
+  // Flash effect
+  const display = document.getElementById('gacha-display');
+  display.style.boxShadow = 'inset 0 0 30px rgba(255,230,0,.2), 0 0 20px rgba(255,230,0,.15)';
+  setTimeout(() => { display.style.boxShadow = 'inset 0 0 20px rgba(0,0,0,.3)'; }, 400);
+}
+setInterval(spinGacha, 2500);
+spinGacha();
+
+// ══ Sticker Gallery Shuffle = ══
+const gallerySlots = document.querySelectorAll('.gallery-slot');
+const galleryStickers = ['🦞','🎮','👾','💎','🕹️','🎯','🐲','🦊','🐱','🌟','🔥','🎪','🎰','🎲','🎨','🦀','🎭','🏆','💿','📀'];
+
+function shuffleGallery(){
+  gallerySlots.forEach((slot,i) => {
     setTimeout(() => {
+      const newSticker = galleryStickers[Math.floor(Math.random()*galleryStickers.length)];
+      slot.style.animation = 'none';
+      slot.offsetHeight;
+      slot.style.animation = 'slotFlip .6s ease-in-out';
+      slot.textContent = newSticker;
+      slot.classList.add('active');
+      setTimeout(() => slot.classList.remove('active'), 500);
+    }, i*80);
+  });
+}
+setInterval(shuffleGallery, 1500);
+shuffleGallery();
+
+// ══ Progress Update = ══
+const riderStickers = ['🦞','🎮','👾','💎','🎯','🕹️','🤖','🐲','🦊','🐱','🔥','💿','🦄','🐼','🎪'];
+
+const loadingPhrases = [
+  'INITIALIZING ARCADE v5.0...',
+  'LOADING EMOJI ASSETS... 🎮',
+  'CALIBRATING NEON DISPLAY... ✨',
+  'RENDERING CRT SCANLINES... 📺',
+  'TUNING GAME CABINETS... 🕹️',
+  'HANGING SIDE ART PANELS... 🎨',
+  'MIGRATING AR GAMES... 📷',
+  'LOADING 🦞 周三涵 PROFILE...',
+  'POPULATING STICKER GALLERY... 🖼️',
+  'SPAWNING STICKER RAIN... 🌧️',
+  'ROLLING GACHA MACHINE... 🎰',
+  'LIGHTING MARQUEE BULBS... 💡',
+  'INSTALLING SPEAKER GRILLS... 🔊',
+  'SUSPENDING DISBELIEF... 🌈',
+  'ALMOST READY... 👾',
+  'WELCOME TO ARCADE v5.0! 🦞'
+];
+
+const milestones = [25, 50, 75, 100];
+let milestoneFired = {};
+
+function spawnFirework(x, y){
+  const emojis = ['🎉','✨','💥','🌟','🎊','🔥','💫','🎆','🦞'];
+  for(let i=0;i<10;i++){
+    const el = document.createElement('div');
+    el.className = 'loading-firework';
+    el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    el.style.position = 'absolute';
+    el.style.left = x + '%';
+    el.style.top = y + '%';
+    const angle = (Math.PI*2/10)*i;
+    const dist = 40+Math.random()*60;
+    el.style.setProperty('--fx', Math.cos(angle)*dist + 'px');
+    el.style.setProperty('--fy', Math.sin(angle)*dist + 'px');
+    el.style.fontSize = (14+Math.random()*16) + 'px';
+    el.style.color = neonColorPool[Math.floor(Math.random()*neonColorPool.length)];
+    loadingScreen.appendChild(el);
+    setTimeout(() => el.remove(), 1600);
+  }
+  // Also trigger combo burst
+  spawnComboBurst(x, y);
+}
+
+let progress = 0;
+function updateLoading(){
+  progress += Math.random()*10 + 5;
+  if(progress > 100) progress = 100;
+  loadingBar.style.width = progress + '%';
+
+  milestones.forEach(m => {
+    if(progress >= m && !milestoneFired[m]){
+      milestoneFired[m] = true;
+      spawnFirework(20+Math.random()*60, 25+Math.random()*30);
+      if(m === 100){
+        setTimeout(() => spawnFirework(25, 20), 150);
+        setTimeout(() => spawnFirework(75, 30), 300);
+        setTimeout(() => spawnFirework(50, 15), 450);
+        setTimeout(() => spawnFirework(40, 40), 600);
+      }
+    }
+  });
+
+  const ri = Math.floor(progress/8) % riderStickers.length;
+  stickerPop.textContent = riderStickers[ri];
+  stickerPop.style.left = Math.min(progress, 95) + '%';
+
+  const phraseIdx = Math.min(Math.floor(progress / 6.5), loadingPhrases.length - 1);
+  loadingStatus.textContent = loadingPhrases[phraseIdx];
+
+  if(progress >= 100){
+    setTimeout(()=>{
       loadingScreen.classList.add('hidden');
-      setTimeout(() => lobby.classList.add('visible'), 200);
-    }, 400);
+      setTimeout(()=>lobby.classList.add('visible'), 200);
+    }, 600);
   } else {
-    setTimeout(updateLoading, 200 + Math.random() * 300);
+    setTimeout(updateLoading, 160 + Math.random()*220);
   }
 }
 updateLoading();
@@ -505,73 +1801,54 @@ const arVideo = document.getElementById('ar-video');
 const particlesCanvas = document.getElementById('particles-canvas');
 const pctx = particlesCanvas.getContext('2d');
 
-// Try webcam
-if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-  navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } } })
-    .then(stream => {
-      arVideo.srcObject = stream;
-      arVideo.style.display = 'block';
-    })
-    .catch(() => {
-      arVideo.style.display = 'none';
-    });
-} else {
-  arVideo.style.display = 'none';
-}
+if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
+  navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:640},height:{ideal:480}}})
+    .then(stream=>{arVideo.srcObject=stream;arVideo.style.display='block'})
+    .catch(()=>{arVideo.style.display='none'});
+}else{arVideo.style.display='none'}
 
-// Particle system
-function resizeParticles() {
-  particlesCanvas.width = window.innerWidth;
-  particlesCanvas.height = window.innerHeight;
+function resizeParticles(){
+  particlesCanvas.width=window.innerWidth;
+  particlesCanvas.height=window.innerHeight;
 }
 resizeParticles();
-window.addEventListener('resize', resizeParticles);
+window.addEventListener('resize',resizeParticles);
 
-const particles = [];
-for (let i = 0; i < 60; i++) {
+const particles=[];
+for(let i=0;i<120;i++){
   particles.push({
-    x: Math.random() * window.innerWidth,
-    y: Math.random() * window.innerHeight,
-    r: Math.random() * 2 + 1,
-    speedX: (Math.random() - 0.5) * 0.5,
-    speedY: (Math.random() - 0.5) * 0.5,
-    hue: [300, 180, 50, 270, 120][Math.floor(Math.random() * 5)],
-    alpha: Math.random() * 0.6 + 0.1
+    x:Math.random()*window.innerWidth,
+    y:Math.random()*window.innerHeight,
+    r:Math.random()*2+1,
+    speedX:(Math.random()-.5)*.35,
+    speedY:(Math.random()-.5)*.35,
+    hue:[300,180,50,270,120,22,210,40][Math.floor(Math.random()*8)],
+    alpha:Math.random()*.5+.1
   });
 }
 
-function animateParticles() {
-  pctx.clearRect(0, 0, particlesCanvas.width, particlesCanvas.height);
-  
-  particles.forEach(p => {
-    p.x += p.speedX;
-    p.y += p.speedY;
-    
-    if (p.x < 0) p.x = particlesCanvas.width;
-    if (p.x > particlesCanvas.width) p.x = 0;
-    if (p.y < 0) p.y = particlesCanvas.height;
-    if (p.y > particlesCanvas.height) p.y = 0;
-    
+function animateParticles(){
+  pctx.clearRect(0,0,particlesCanvas.width,particlesCanvas.height);
+  particles.forEach(p=>{
+    p.x+=p.speedX;p.y+=p.speedY;
+    if(p.x<0)p.x=particlesCanvas.width;
+    if(p.x>particlesCanvas.width)p.x=0;
+    if(p.y<0)p.y=particlesCanvas.height;
+    if(p.y>particlesCanvas.height)p.y=0;
     pctx.beginPath();
-    pctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    pctx.fillStyle = `hsla(${p.hue}, 100%, 70%, ${p.alpha})`;
+    pctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    pctx.fillStyle=`hsla(${p.hue},100%,70%,${p.alpha})`;
     pctx.fill();
-    
-    // Connect nearby particles
-    particles.forEach(p2 => {
-      const dx = p.x - p2.x;
-      const dy = p.y - p2.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 120) {
-        pctx.beginPath();
-        pctx.moveTo(p.x, p.y);
-        pctx.lineTo(p2.x, p2.y);
-        pctx.strokeStyle = `hsla(${p.hue}, 100%, 70%, ${0.08 * (1 - dist / 120)})`;
+    particles.forEach(p2=>{
+      const dx=p.x-p2.x,dy=p.y-p2.y;
+      const dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<130){
+        pctx.beginPath();pctx.moveTo(p.x,p.y);pctx.lineTo(p2.x,p2.y);
+        pctx.strokeStyle=`hsla(${p.hue},100%,70%,${.05*(1-dist/130)})`;
         pctx.stroke();
       }
     });
   });
-  
   requestAnimationFrame(animateParticles);
 }
 animateParticles();
@@ -579,131 +1856,144 @@ animateParticles();
 // ═══════════════════════════════════════
 // Game Data & Modal
 // ═══════════════════════════════════════
-const games = {
-  'emoji-match': {
-    title: '😎 表情消消乐',
-    desc: '翻转卡片，找到匹配的表情对！锻炼记忆力，收集各种可爱表情包。支持4×4简单模式和4×6困难模式。',
-    playable: true,
-    url: 'emoji-match.html'
+const games={
+  'emoji-match':{
+    title:'😎 表情消消乐',
+    desc:'翻转卡片，找到匹配的表情对！锻炼记忆力，收集各种可爱表情包。支持4×4简单模式和4×6困难模式。',
+    playable:true, url:'emoji-match.html'
   },
-  'arcade-breakout': {
-    title: '🧱 街机打砖块',
-    desc: '经典打砖块游戏，霓虹风格重生！用挡板反弹小球，消除所有砖块即可过关。支持键盘、触屏和手机按钮操控。',
-    playable: true,
-    url: 'arcade-breakout.html'
+  'arcade-breakout':{
+    title:'🧱 街机打砖块',
+    desc:'经典打砖块游戏，霓虹风格重生！用挡板反弹小球，消除所有砖块即可过关。支持键盘、触屏和手机按钮操控。霓虹粒子特效 + 连击系统！',
+    playable:true, url:'arcade-breakout.html'
   },
-  'ar-claw': {
-    title: '🦞 AR 捞捞乐',
-    desc: 'AR增强现实抓娃娃机！通过摄像头识别手势，隔空操控爪子抓取可爱公仔。支持🦞周三涵限定皮肤！',
-    playable: false,
-    url: null
+  'neon-snake':{
+    title:'🐍 霓虹贪吃蛇',
+    desc:'赛博朋克风格贪吃蛇！在霓虹网格中穿梭，吃掉发光食物变长。支持方向键、WASD和触屏滑动操控。',
+    playable:true, url:'neon-snake.html'
   },
-  'neon-snake': {
-    title: '🐍 霓虹贪吃蛇',
-    desc: '赛博朋克风格贪吃蛇！在霓虹网格中穿梭，吃掉发光食物变长。支持方向键、WASD和触屏滑动操控。',
-    playable: true,
-    url: 'neon-snake.html'
+  'space-shooter':{
+    title:'🚀 太空射击',
+    desc:'驾驶飞船在太空中消灭外星入侵者！收集能量道具升级武器，挑战Boss关卡。经典纵版射击玩法。霓虹子弹特效 + 爆炸粒子！',
+    playable:false, url:null
   },
-  'space-shooter': {
-    title: '🚀 太空射击',
-    desc: '驾驶飞船在太空中消灭外星入侵者！收集能量道具升级武器，挑战Boss关卡。经典纵版射击玩法。',
-    playable: false,
-    url: null
+  'memory-flip':{
+    title:'🃏 记忆翻牌',
+    desc:'记住卡片位置，一次性翻出所有配对！多种主题卡牌：水果、动物、表情包。难度递增，锻炼你的记忆极限。',
+    playable:true, url:'emoji-match.html'
   },
-  'memory-flip': {
-    title: '🃏 记忆翻牌',
-    desc: '记住卡片位置，一次性翻出所有配对！多种主题卡牌：水果、动物、表情包。难度递增，锻炼你的记忆极限。',
-    playable: true,
-    url: 'emoji-match.html'
+  'ar-claw':{
+    title:'🦞 AR 捞捞乐',
+    desc:'AR增强现实抓娃娃机！打开摄像头隔空操控爪子抓取可爱公仔。支持体感追踪模式：你的面部移动控制爪子位置！🦞周三涵限定皮肤！',
+    playable:true, url:'ar-claw-machine.html'
+  },
+  'gesture-magic':{
+    title:'✋ 手势魔法',
+    desc:'张开手指即可在身体上绘制棱镜滤镜！AI视觉追踪手部与人体，拇指+食指=棱镜效果，食指+中指=霜冻，拇指+小指=琉璃！双手叠加更炫酷！',
+    playable:true, url:'ar/gesture-game.html'
+  },
+  'face-deform':{
+    title:'👹 面部变形',
+    desc:'实时面部变形哈哈镜！摄像头捕捉人脸后进行各种趣味变形效果。多种变形模式切换，让你的表情更加夸张有趣！',
+    playable:true, url:'ar/face-deform.html'
+  },
+  'fitness-coach':{
+    title:'💪 AR 健身教练',
+    desc:'AI健身教练实时追踪你的动作！检测深蹲、俯卧撑等运动姿势，提供计数和姿势纠正。让健身变得更有趣更科学！',
+    playable:true, url:'ar/fitness-coach.html'
+  },
+  'hand-flower':{
+    title:'🌸 手花绽放',
+    desc:'手掌张开即绽放魔法花瓣！AI追踪手部姿态，手指张开的瞬间触发花瓣飘散效果。多种花型切换，超梦幻治愈系AR体验！',
+    playable:true, url:'ar/hand-flower.html'
   }
 };
 
-function openGame(gameId) {
-  const game = games[gameId];
-  if (!game) return;
-  
-  document.getElementById('modal-title').textContent = game.title;
-  document.getElementById('modal-desc').textContent = game.desc;
-  
-  const playBtn = document.getElementById('modal-play-btn');
-  if (game.playable) {
-    playBtn.textContent = '▶ 开始游戏';
-    playBtn.style.display = 'inline-block';
-    playBtn.onclick = () => launchGame(gameId);
-  } else {
-    playBtn.textContent = '🔜 即将开放';
-    playBtn.style.display = 'inline-block';
-    playBtn.style.opacity = '0.5';
-    playBtn.style.cursor = 'not-allowed';
-    playBtn.onclick = null;
+function openGame(gameId){
+  const game=games[gameId];
+  if(!game)return;
+  document.getElementById('modal-title').textContent=game.title;
+  document.getElementById('modal-desc').textContent=game.desc;
+  const playBtn=document.getElementById('modal-play-btn');
+  if(game.playable){
+    playBtn.textContent='▶ 开始游戏';
+    playBtn.style.display='inline-block';
+    playBtn.style.opacity='1';
+    playBtn.style.cursor='pointer';
+    playBtn.onclick=()=>launchGame(gameId);
+  }else{
+    playBtn.textContent='🔜 即将开放';
+    playBtn.style.display='inline-block';
+    playBtn.style.opacity='.5';
+    playBtn.style.cursor='not-allowed';
+    playBtn.onclick=null;
   }
-  
   document.getElementById('game-modal').classList.add('open');
 }
 
-function closeModal() {
+function closeModal(){
   document.getElementById('game-modal').classList.remove('open');
 }
 
-function launchGame(gameId) {
-  const game = games[gameId];
-  if (game.url) {
-    window.location.href = game.url;
-  } else {
-    closeModal();
-    showToast(`🔜 ${game.title} 即将开放，敬请期待！`);
-  }
+function launchGame(gameId){
+  const game=games[gameId];
+  if(game.url){window.location.href=game.url}
+  else{closeModal();showToast(`🔜 ${game.title} 即将开放，敬请期待！`)}
 }
 
-// ═══════════════════════════════════════
-// Toast Notification
-// ═══════════════════════════════════════
-function showToast(msg) {
-  const toast = document.createElement('div');
-  toast.textContent = msg;
-  toast.style.cssText = `
+function showToast(msg){
+  const toast=document.createElement('div');
+  toast.textContent=msg;
+  toast.style.cssText=`
     position:fixed;bottom:30px;left:50%;transform:translateX(-50%);
     background:var(--bg-panel);color:var(--neon-cyan);
     border:1px solid var(--neon-cyan);
     padding:14px 28px;border-radius:30px;
     font-size:15px;letter-spacing:.05em;
     z-index:2000;
-    animation:fadeUp .4s ease-out, fadeDown .4s ease-in 2.5s forwards;
+    animation:fadeUp .4s ease-out,fadeDown .4s ease-in 2.2s forwards;
     box-shadow:0 0 20px rgba(0,255,255,.2);
   `;
   document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 3000);
+  setTimeout(()=>toast.remove(),2800);
 }
 
-// Add toast keyframes
-const toastStyle = document.createElement('style');
-toastStyle.textContent = `
+const toastStyle=document.createElement('style');
+toastStyle.textContent=`
   @keyframes fadeUp{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
   @keyframes fadeDown{from{opacity:1;transform:translateX(-50%) translateY(0)}to{opacity:0;transform:translateX(-50%) translateY(20px)}}
 `;
 document.head.appendChild(toastStyle);
 
-// ═══════════════════════════════════════
 // Keyboard shortcuts
-// ═══════════════════════════════════════
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeModal();
-  if (e.key === 'l' || e.key === 'L') {
-    // Reload lobby visual
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='Escape')closeModal();
+  if(e.key==='l'||e.key==='L'){
     lobby.classList.remove('visible');
-    setTimeout(() => lobby.classList.add('visible'), 100);
+    setTimeout(()=>lobby.classList.add('visible'),100);
   }
 });
 
-// ═══════════════════════════════════════
-// Click outside modal to close
-// ═══════════════════════════════════════
-document.getElementById('game-modal').addEventListener('click', function(e) {
-  if (e.target === this) closeModal();
+document.getElementById('game-modal').addEventListener('click',function(e){
+  if(e.target===this)closeModal();
 });
 
-console.log('🕹️ AR Game Lobby v2.0 initialized!');
-console.log('🦞 周三涵 says: Welcome to the Arcade!');
+// ── Cabinet hover: trigger marquee glow ──
+document.querySelectorAll('.game-cabinet').forEach(cab => {
+  cab.addEventListener('mouseenter', () => {
+    const glow = cab.querySelector('.cabinet-glow');
+    if(glow) glow.style.opacity = '1';
+  });
+  cab.addEventListener('mouseleave', () => {
+    const glow = cab.querySelector('.cabinet-glow');
+    if(glow) glow.style.opacity = '0';
+  });
+});
+
+console.log('🕹️ AR Game Lobby v5.0 initialized!');
+console.log('🦞 周三涵: AR Game Migration + Loading Sticker Gacha + Arcade Art v5.0 Upgrade Complete!');
+console.log('📷 AR Games: 捞捞乐 · 手势魔法 · 面部变形 · 健身教练 · 手花绽放');
+console.log('🎨 Marquee Headers · Speaker Grills · T-Molding · Gacha Machine · Combo Bursts · Per-Cabinet Theming!');
 </script>
 </body>
 </html>
