@@ -1,0 +1,623 @@
+/* ========================================
+   无锡出片特训地图 · study-map 样式
+   嵌入加密文章正文流，自包含，局部变量
+   风格：研究报告 × 学习App，遵循 study-map 视觉规则
+   （不用阴影/渐变/毛玻璃，用纯色+边框+圆角）
+   ======================================== */
+
+.trip-study {
+  /* 局部配色变量（study-map 官方色板）*/
+  --ts-cream: #FAF6EB;
+  --ts-paper: #F3EDDD;
+  --ts-forest: #1E3A24;
+  --ts-ink: #1A2018;
+  --ts-sky: #BCD8EE;
+  --ts-sage: #AFCDA8;
+  --ts-marker: #F5E08A;
+  --ts-brick: #B5482A;
+  --ts-correct: #2F7D46;
+  --ts-wrong: #B5482A;
+  --ts-radius: 14px;
+  --ts-radius-sm: 8px;
+
+  margin: 2.5rem 0;
+  padding: 1.5rem;
+  background: var(--ts-cream);
+  border: 1px solid #E6DFCB;
+  border-radius: 18px;
+  font-family: -apple-system, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  color: var(--ts-ink);
+  line-height: 1.65;
+}
+
+.trip-study * { box-sizing: border-box; }
+
+.trip-study h2,
+.trip-study h3,
+.trip-study h4 {
+  font-family: "PingFang SC", "Noto Sans SC", -apple-system, sans-serif;
+  font-weight: 800;
+  color: var(--ts-forest);
+  margin: 0 0 0.6rem;
+  line-height: 1.3;
+}
+
+/* ---------- 头部 hero ---------- */
+.ts-hero {
+  text-align: center;
+  padding: 1.2rem 0.5rem 1.4rem;
+  border-bottom: 2px dashed #E0D8C0;
+  margin-bottom: 1.5rem;
+}
+.ts-hero .ts-kicker {
+  display: inline-block;
+  background: var(--ts-marker);
+  color: var(--ts-forest);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 0.2rem 0.8rem;
+  border-radius: 999px;
+  margin-bottom: 0.6rem;
+}
+.ts-hero h2 {
+  font-size: 1.6rem;
+  margin-bottom: 0.3rem;
+}
+.ts-hero .ts-sub {
+  color: #6b6552;
+  font-size: 0.9rem;
+}
+
+/* ---------- 双栏布局 ---------- */
+.ts-layout {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 1.8rem;
+  align-items: start;
+}
+
+/* 左栏 sticky */
+.ts-side {
+  position: sticky;
+  top: 1rem;
+  background: var(--ts-forest);
+  color: #F3EDDD;
+  border-radius: var(--ts-radius);
+  padding: 1.1rem 1rem;
+}
+.ts-side .ts-side-title {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 800;
+  margin: 0 0 0.2rem;
+}
+.ts-side .ts-side-date {
+  color: rgba(243, 237, 221, 0.65);
+  font-size: 0.78rem;
+  margin-bottom: 0.9rem;
+}
+
+/* 进度条 */
+.ts-prog {
+  margin-bottom: 1rem;
+}
+.ts-prog .ts-prog-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: rgba(243, 237, 221, 0.8);
+  margin-bottom: 0.35rem;
+}
+.ts-prog-track {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  overflow: hidden;
+}
+#barFill {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--ts-sage);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+/* 导航锚点 */
+.ts-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.ts-nav a {
+  display: block;
+  color: rgba(243, 237, 221, 0.82);
+  text-decoration: none;
+  font-size: 0.82rem;
+  padding: 0.32rem 0.5rem;
+  border-radius: 6px;
+  border-left: 3px solid transparent;
+  transition: background 0.15s, color 0.15s;
+}
+.ts-nav a:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-left-color: var(--ts-sage);
+}
+
+/* ---------- 右栏主区（严格单列纵向）---------- */
+.ts-main { min-width: 0; }
+
+.ts-sec {
+  margin-bottom: 2rem;
+  scroll-margin-top: 1rem;
+}
+.ts-sec > h3 {
+  font-size: 1.15rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--ts-sky);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.ts-sec > h3 .ts-sec-id {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.7rem;
+  height: 1.7rem;
+  background: var(--ts-forest);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 0.85rem;
+}
+
+/* ---------- 学习目标 ---------- */
+.ts-goal {
+  background: #fff;
+  border: 1px solid #E6DFCB;
+  border-left: 4px solid var(--ts-sage);
+  border-radius: var(--ts-radius-sm);
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.9rem;
+}
+.ts-goal strong { color: var(--ts-forest); }
+
+/* ---------- 背景包概念卡 ---------- */
+.ts-bg {
+  background: var(--ts-paper);
+  border: 1px solid #E0D8C0;
+  border-radius: var(--ts-radius-sm);
+  padding: 0.9rem 1rem;
+  margin-bottom: 0.7rem;
+}
+.ts-bg .ts-bg-tag {
+  display: inline-block;
+  background: var(--ts-sky);
+  color: var(--ts-forest);
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 0.12rem 0.55rem;
+  border-radius: 999px;
+  margin-bottom: 0.4rem;
+}
+.ts-bg h4 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+.ts-bg p { margin: 0.3rem 0; font-size: 0.88rem; color: #3d3a2e; }
+.ts-bg .ts-bg-note {
+  font-size: 0.8rem;
+  color: #7a7460;
+  border-top: 1px dashed #D8CFB8;
+  padding-top: 0.4rem;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* ---------- 景点大卡（知识+机位）---------- */
+.ts-spot {
+  background: #fff;
+  border: 1px solid #E6DFCB;
+  border-radius: var(--ts-radius);
+  padding: 1.1rem 1.2rem;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+.ts-spot-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.7rem;
+}
+.ts-spot-head h4 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+.ts-spot-day {
+  background: #ffd9ec;
+  color: #b0356f;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.12rem 0.6rem;
+  border-radius: 999px;
+}
+.ts-spot-know {
+  background: var(--ts-paper);
+  border-radius: var(--ts-radius-sm);
+  padding: 0.7rem 0.9rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.86rem;
+  color: #4a4636;
+}
+.ts-spot-know strong { color: var(--ts-brick); }
+
+/* 机位清单（纵向单列）*/
+.ts-spot-shots-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--ts-forest);
+  margin: 0.6rem 0 0.4rem;
+  letter-spacing: 0.5px;
+}
+.ts-shot {
+  border: 1px solid #ECE5D2;
+  border-radius: var(--ts-radius-sm);
+  padding: 0.7rem 0.9rem;
+  margin-bottom: 0.5rem;
+  background: #FBF9F1;
+}
+.ts-shot .ts-shot-top {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.3rem;
+}
+.ts-shot .ts-shot-no {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  background: var(--ts-marker);
+  color: var(--ts-forest);
+  border-radius: 50%;
+  font-size: 0.72rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.ts-shot .ts-shot-what {
+  font-weight: 700;
+  color: var(--ts-ink);
+  font-size: 0.9rem;
+}
+.ts-shot .ts-equip-tag {
+  display: inline-block;
+  background: var(--ts-sky);
+  color: var(--ts-forest);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  margin: 0.1rem 0.15rem 0.1rem 0;
+}
+.ts-shot .ts-equip-tag.r50 { background: #FCD9CE; }
+.ts-shot .ts-equip-tag.pocket { background: #D7E8F8; }
+.ts-shot .ts-equip-tag.iphone { background: #D4ECD0; }
+.ts-shot .ts-equip-tag.ccd { background: #EADCF4; }
+.ts-shot p {
+  margin: 0.25rem 0;
+  font-size: 0.84rem;
+  color: #55513f;
+}
+.ts-shot .ts-shot-line {
+  font-size: 0.82rem;
+  background: #fff8e0;
+  border-left: 3px solid var(--ts-marker);
+  padding: 0.35rem 0.6rem;
+  border-radius: 0 6px 6px 0;
+  margin-top: 0.35rem;
+  color: #6b5d20;
+}
+.ts-shot .ts-shot-line::before {
+  content: "💬 当场台词：";
+  font-weight: 700;
+}
+
+/* ---------- 设备速查表 ---------- */
+.ts-equip-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  background: #fff;
+  border-radius: var(--ts-radius-sm);
+  overflow: hidden;
+  border: 1px solid #E6DFCB;
+}
+.ts-equip-table th,
+.ts-equip-table td {
+  border: 1px solid #ECE5D2;
+  padding: 0.5rem 0.6rem;
+  text-align: left;
+  vertical-align: top;
+}
+.ts-equip-table thead th {
+  background: var(--ts-forest);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+.ts-equip-table tbody tr:nth-child(even) { background: var(--ts-paper); }
+.ts-equip-table .ts-equip-row-h {
+  font-weight: 700;
+  color: var(--ts-brick);
+  background: #FBF4E8 !important;
+}
+
+/* ---------- 人像速成要点 ---------- */
+.ts-tip {
+  background: #fff;
+  border: 1px solid #E6DFCB;
+  border-left: 4px solid var(--ts-marker);
+  border-radius: var(--ts-radius-sm);
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.6rem;
+}
+.ts-tip h4 { font-size: 0.98rem; margin-bottom: 0.3rem; }
+.ts-tip ul { margin: 0.3rem 0 0; padding-left: 1.2rem; }
+.ts-tip li { font-size: 0.86rem; margin-bottom: 0.25rem; color: #4a4636; }
+.ts-tip li strong { color: var(--ts-brick); }
+
+/* ---------- 闯关题 ---------- */
+.trip-study .task {
+  background: #fff;
+  border: 1px solid #E6DFCB;
+  border-radius: var(--ts-radius-sm);
+  padding: 1rem;
+  margin-bottom: 0.9rem;
+}
+.trip-study .task .q {
+  font-weight: 700;
+  color: var(--ts-ink);
+  margin-bottom: 0.7rem;
+  font-size: 0.92rem;
+}
+.trip-study .task .q .ts-q-id {
+  display: inline-block;
+  background: var(--ts-forest);
+  color: #fff;
+  font-size: 0.72rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  margin-right: 0.4rem;
+  font-weight: 800;
+}
+.trip-study .opts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.7rem;
+}
+.trip-study .opt {
+  text-align: left;
+  background: var(--ts-paper);
+  border: 1px solid #DDD4BB;
+  border-radius: var(--ts-radius-sm);
+  padding: 0.55rem 0.8rem;
+  font-size: 0.88rem;
+  color: var(--ts-ink);
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.12s, border-color 0.12s;
+}
+.trip-study .opt:hover { background: #ECE3CC; }
+.trip-study .opt.selected {
+  background: var(--ts-sky);
+  border-color: var(--ts-forest);
+  font-weight: 600;
+}
+.trip-study .check {
+  background: var(--ts-forest);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.45rem 1.3rem;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+.trip-study .check:hover { background: #2a5230; }
+
+/* 反馈区（默认可见，不用 display:none）*/
+.trip-study .feedback {
+  margin-top: 0.7rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--ts-radius-sm);
+  font-size: 0.85rem;
+  background: #F0EDE2;
+  color: #6b6552;
+  border: 1px dashed #CCC2A6;
+}
+.trip-study .feedback.ok {
+  background: #E4F2E7;
+  color: var(--ts-correct);
+  border: 1px solid #Bfe0c8;
+}
+.trip-study .feedback.no {
+  background: #F8E4DC;
+  color: var(--ts-wrong);
+  border: 1px solid #ECC4B4;
+}
+.trip-study .feedback .src {
+  display: block;
+  margin-top: 0.35rem;
+  padding-top: 0.35rem;
+  border-top: 1px dashed currentColor;
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+/* 答题表情贴图 */
+.trip-study .fb-stamp {
+  display: inline-block;
+  vertical-align: -0.4em;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 0.25rem;
+}
+
+/* ---------- 错题回流 ---------- */
+.ts-wrong {
+  background: #fff;
+  border: 1px solid #E6DFCB;
+  border-radius: var(--ts-radius-sm);
+  padding: 0.9rem 1rem;
+}
+.ts-wrong h4 { font-size: 0.95rem; margin-bottom: 0.5rem; }
+#wrongBox {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#wrongBox li {
+  background: #F8E4DC;
+  border-left: 3px solid var(--ts-wrong);
+  padding: 0.45rem 0.7rem;
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 0.4rem;
+  font-size: 0.84rem;
+  color: #7a3a28;
+}
+
+/* ---------- 误解卡 ---------- */
+.ts-miscon {
+  background: #FFF6EC;
+  border: 1px solid #F0D9B8;
+  border-left: 4px solid var(--ts-brick);
+  border-radius: var(--ts-radius-sm);
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.6rem;
+}
+.ts-miscon .ts-miscon-x {
+  text-decoration: line-through;
+  color: var(--ts-wrong);
+  font-weight: 700;
+}
+.ts-miscon .ts-miscon-ok {
+  color: var(--ts-correct);
+  font-weight: 700;
+}
+.ts-miscon p { margin: 0.25rem 0; font-size: 0.86rem; }
+
+/* ---------- 出片速记卡 ---------- */
+.ts-cheat {
+  background: var(--ts-forest);
+  color: #F3EDDD;
+  border-radius: var(--ts-radius);
+  padding: 1.1rem 1.2rem;
+}
+.ts-cheat h4 { color: var(--ts-marker); font-size: 1.05rem; margin-bottom: 0.6rem; }
+.ts-cheat .ts-cheat-line {
+  display: block;
+  padding: 0.4rem 0;
+  border-bottom: 1px dashed rgba(243, 237, 221, 0.2);
+  font-size: 0.86rem;
+}
+.ts-cheat .ts-cheat-line:last-child { border-bottom: none; }
+.ts-cheat .ts-cheat-line b { color: var(--ts-sage); }
+
+/* ---------- 学习报告 ---------- */
+.ts-report-wrap {
+  background: #fff;
+  border: 1px solid #E6DFCB;
+  border-radius: var(--ts-radius-sm);
+  padding: 1rem;
+}
+.ts-report-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.7rem;
+}
+.ts-report-head img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 2px solid var(--ts-marker);
+  flex-shrink: 0;
+}
+.ts-report-head h4 { margin: 0; font-size: 1rem; }
+.ts-report-head span { font-size: 0.78rem; color: #888; }
+#report {
+  width: 100%;
+  min-height: 9rem;
+  background: var(--ts-paper);
+  border: 1px solid #DDD4BB;
+  border-radius: var(--ts-radius-sm);
+  padding: 0.7rem;
+  font-family: "Roboto Mono", "JetBrains Mono", monospace, monospace;
+  font-size: 0.82rem;
+  color: var(--ts-ink);
+  resize: vertical;
+}
+.ts-report-btns {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+  flex-wrap: wrap;
+}
+.ts-report-btns button {
+  border: none;
+  border-radius: 999px;
+  padding: 0.45rem 1.1rem;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+#genReport { background: var(--ts-brick); color: #fff; }
+#genReport:hover { background: #93381f; }
+#copyReport { background: var(--ts-paper); color: var(--ts-forest); border: 1px solid #DDD4BB; }
+
+/* ---------- 页脚署名 ---------- */
+.ts-author {
+  margin-top: 1.8rem;
+  padding-top: 1rem;
+  border-top: 2px dashed #E0D8C0;
+  text-align: center;
+  font-size: 0.82rem;
+  color: #8a8460;
+}
+.ts-author a {
+  color: var(--ts-brick);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* ---------- 移动端：侧边栏移到顶部不 sticky ---------- */
+@media (max-width: 768px) {
+  .ts-layout {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  .ts-side {
+    position: static;
+  }
+  .ts-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+  .ts-nav a {
+    font-size: 0.76rem;
+    padding: 0.25rem 0.5rem;
+  }
+  .ts-hero h2 { font-size: 1.35rem; }
+}

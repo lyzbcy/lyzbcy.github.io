@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>🦞 AR 捞捞乐 v2.0 | 体感抓娃娃</title>
+<style>
+:root{
+  --neon-pink:#ff2d95;--neon-cyan:#0ff;--neon-yellow:#ffe600;
+  --neon-green:#39ff14;--neon-purple:#b44dff;--neon-orange:#ff6b35;
+  --bg:#06060f;--panel:#0d0d24;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;color:#fff}
+
+/* CRT scanlines */
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:99;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);
+}
+
+/* Webcam background */
+#cam-bg{
+  position:fixed;inset:0;z-index:0;
+  background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+}
+#cam-video{
+  width:100%;height:100%;object-fit:cover;
+  filter:brightness(0.22) saturate(1.6) hue-rotate(15deg) blur(1px);
+}
+#cam-overlay{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,transparent 25%,rgba(6,6,15,.88) 100%);
+}
+
+/* Hidden canvas for motion detection */
+#motion-canvas{
+  position:absolute;top:0;left:0;width:160px;height:120px;
+  visibility:hidden;
+}
+
+/* Game Canvas */
+#game-canvas{
+  position:fixed;inset:0;z-index:1;
+  cursor:crosshair;
+}
+
+/* UI Layer */
+#ui-layer{
+  position:fixed;inset:0;z-index:10;pointer-events:none;
+}
+#ui-layer>*{pointer-events:auto}
+
+/* Top bar */
+.top-bar{
+  position:absolute;top:0;left:0;right:0;
+  padding:16px 20px;
+  display:flex;justify-content:space-between;align-items:center;
+  background:linear-gradient(180deg,rgba(0,0,0,.75) 0%,transparent 100%);
+}
+.back-btn{
+  background:var(--panel);border:1px solid rgba(255,255,255,.15);
+  color:var(--neon-cyan);padding:8px 16px;border-radius:20px;
+  cursor:pointer;font-size:13px;letter-spacing:.05em;
+  transition:all .3s;text-decoration:none;
+  z-index:20;
+}
+.back-btn:hover{border-color:var(--neon-cyan);box-shadow:0 0 20px rgba(0,255,255,.2)}
+
+.score-display{
+  font-size:20px;font-weight:900;
+  color:var(--neon-yellow);
+  text-shadow:0 0 20px var(--neon-yellow);
+  letter-spacing:.05em;
+}
+.score-display small{font-size:11px;opacity:.5;display:block;text-align:center;letter-spacing:.1em}
+
+/* Mode indicator */
+.mode-indicator{
+  position:absolute;top:36px;left:50%;transform:translateX(-50%);
+  font-size:11px;letter-spacing:.15em;
+  color:var(--neon-cyan);opacity:.6;
+  font-family:'Courier New',monospace;
+  background:rgba(0,0,0,.4);
+  padding:4px 16px;border-radius:12px;
+  border:1px solid rgba(0,255,255,.15);
+  animation:modeBlink 3s infinite;
+}
+@keyframes modeBlink{0%,100%{opacity:.6}50%{opacity:1}}
+
+/* Prize area */
+.prizes-label{
+  position:absolute;top:90px;right:20px;
+  font-size:12px;letter-spacing:.2em;
+  color:var(--neon-cyan);opacity:.6;
+  font-family:'Courier New',monospace;
+  text-align:right;
+}
+.prizes-row{
+  position:absolute;top:116px;right:20px;
+  display:flex;flex-wrap:wrap;gap:6px;
+  max-width:210px;justify-content:flex-end;
+}
+.prize-icon{
+  width:40px;height:40px;
+  border-radius:10px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;
+  transition:all .3s;
+  position:relative;
+}
+.prize-icon.earned{
+  background:rgba(0,255,255,.08);
+  border-color:var(--neon-cyan);
+  box-shadow:0 0 14px rgba(0,255,255,.2);
+  animation:prizePop .5s ease-out;
+}
+@keyframes prizePop{
+  0%{transform:scale(0)}
+  60%{transform:scale(1.35)}
+  100%{transform:scale(1)}
+}
+.prize-icon.locked{opacity:.2}
+.prize-icon .rare-star{
+  position:absolute;top:-4px;right:-4px;
+  font-size:10px;
+}
+
+/* Bottom controls */
+.bottom-controls{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:16px 20px 26px;
+  display:flex;justify-content:center;gap:12px;
+  background:linear-gradient(0deg,rgba(0,0,0,.75) 0%,transparent 100%);
+}
+.ctrl-btn{
+  padding:12px 24px;border-radius:25px;
+  font-size:14px;font-weight:700;letter-spacing:.08em;
+  cursor:pointer;transition:all .3s;
+  font-family:inherit;
+  background:transparent;
+  border:2px solid var(--neon-cyan);
+  color:var(--neon-cyan);
+}
+.ctrl-btn:hover{
+  background:var(--neon-cyan);color:var(--bg);
+  box-shadow:0 0 30px rgba(0,255,255,.4);
+}
+.ctrl-btn.grab{
+  border-color:var(--neon-pink);color:var(--neon-pink);
+  padding:12px 36px;font-size:17px;
+}
+.ctrl-btn.grab:hover{
+  background:var(--neon-pink);color:var(--bg);
+  box-shadow:0 0 30px rgba(255,45,149,.4);
+}
+.ctrl-btn.mode-toggle{
+  border-color:var(--neon-purple);color:var(--neon-purple);
+  font-size:12px;padding:8px 16px;
+}
+.ctrl-btn.mode-toggle:hover{
+  background:var(--neon-purple);color:var(--bg);
+}
+
+/* Instruction */
+.instruction{
+  position:absolute;bottom:90px;left:50%;transform:translateX(-50%);
+  font-size:12px;letter-spacing:.08em;
+  color:rgba(255,255,255,.28);
+  text-align:center;
+  font-family:'Courier New',monospace;
+}
+
+/* Mobile joystick */
+#mobile-joy{
+  position:fixed;bottom:130px;left:20px;z-index:15;
+  width:100px;height:100px;
+  display:none;
+}
+#mobile-joy canvas{width:100%;height:100%}
+
+/* Result popup */
+.result-popup{
+  position:fixed;inset:0;z-index:50;
+  background:rgba(0,0,0,.88);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;
+  transition:all .4s;
+}
+.result-popup.show{opacity:1;visibility:visible}
+.result-card{
+  background:var(--panel);
+  border:2px solid var(--neon-cyan);
+  border-radius:20px;
+  padding:38px 42px;text-align:center;
+  box-shadow:0 0 80px rgba(0,255,255,.15);
+  max-width:400px;width:90%;
+  position:relative;
+  overflow:hidden;
+}
+.result-card::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 0%,rgba(0,255,255,.04) 0%,transparent 50%);
+}
+.result-card h2{
+  font-size:30px;margin-bottom:8px;
+  background:linear-gradient(135deg,var(--neon-cyan),var(--neon-purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  position:relative;
+}
+.result-card .prize-display{
+  font-size:72px;margin:16px 0;
+  animation:float 2s ease-in-out infinite;
+  filter:drop-shadow(0 0 24px var(--neon-yellow));
+}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+}
+.result-card .result-score{
+  font-size:26px;color:var(--neon-yellow);
+  margin-bottom:6px;
+}
+.result-card .result-label{
+  font-size:14px;color:rgba(255,255,255,.4);
+  margin-bottom:24px;
+  font-family:'Courier New',monospace;
+}
+.result-card button{
+  padding:14px 44px;border-radius:25px;
+  border:2px solid var(--neon-pink);color:var(--neon-pink);
+  background:transparent;font-size:16px;font-weight:700;
+  cursor:pointer;transition:all .3s;font-family:inherit;
+  letter-spacing:.05em;
+}
+.result-card button:hover{
+  background:var(--neon-pink);color:var(--bg);
+  box-shadow:0 0 30px rgba(255,45,149,.4);
+}
+.result-card .result-photo{
+  margin-top:16px;
+  padding:8px 20px;border-radius:20px;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(0,0,0,.3);
+  color:rgba(255,255,255,.4);
+  font-size:12px;cursor:pointer;
+  transition:all .3s;
+}
+.result-card .result-photo:hover{
+  border-color:var(--neon-cyan);
+  color:var(--neon-cyan);
+}
+
+/* Toast */
+.toast-msg{
+  position:fixed;top:80px;left:50%;transform:translateX(-50%);
+  background:var(--panel);color:var(--neon-cyan);
+  border:1px solid var(--neon-cyan);
+  padding:10px 24px;border-radius:20px;
+  font-size:14px;letter-spacing:.05em;
+  z-index:60;pointer-events:none;
+  animation:toastAnim 2.2s ease forwards;
+  box-shadow:0 0 20px rgba(0,255,255,.15);
+  white-space:nowrap;
+}
+@keyframes toastAnim{
+  0%{opacity:0;transform:translateX(-50%) translateY(-10px)}
+  15%{opacity:1;transform:translateX(-50%) translateY(0)}
+  70%{opacity:1}
+  100%{opacity:0;transform:translateX(-50%) translateY(-20px)}
+}
+
+/* AR Overlay effects */
+.ar-scan-ring{
+  position:fixed;pointer-events:none;z-index:5;
+  border:2px solid rgba(0,255,255,.3);
+  border-radius:50%;
+  animation:scanPulse 2s ease-out forwards;
+  box-shadow:0 0 10px rgba(0,255,255,.2),inset 0 0 10px rgba(0,255,255,.05);
+}
+@keyframes scanPulse{
+  0%{width:20px;height:20px;opacity:1;transform:translate(-50%,-50%) scale(0)}
+  100%{width:200px;height:200px;opacity:0;transform:translate(-50%,-50%) scale(1)}
+}
+
+/* Motion dot indicator */
+.motion-dot{
+  position:fixed;pointer-events:none;z-index:8;
+  width:16px;height:16px;border-radius:50%;
+  background:rgba(0,255,255,.5);
+  box-shadow:0 0 16px rgba(0,255,255,.6);
+  transform:translate(-50%,-50%);
+  animation:motionDotFade 1.5s ease-out forwards;
+}
+@keyframes motionDotFade{
+  0%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1.5)}
+}
+
+/* Responsive */
+@media(max-width:600px){
+  .prizes-row{max-width:150px;top:100px}
+  .prize-icon{width:34px;height:34px;font-size:20px}
+  .ctrl-btn{padding:10px 18px;font-size:12px}
+  .ctrl-btn.grab{padding:10px 28px;font-size:15px}
+  #mobile-joy{display:block}
+  .instruction{bottom:200px}
+  .mode-indicator{font-size:10px;top:30px}
+}
+@media(hover:none){
+  #mobile-joy{display:block}
+}
+</style>
+</head>
+<body>
+
+<!-- Webcam Background -->
+<div id="cam-bg">
+  <video id="cam-video" autoplay muted playsinline></video>
+  <canvas id="motion-canvas" width="160" height="120"></canvas>
+  <div id="cam-overlay"></div>
+</div>
+
+<!-- Game Canvas -->
+<canvas id="game-canvas"></canvas>
+
+<!-- UI Layer -->
+<div id="ui-layer">
+  <div class="top-bar">
+    <a href="ar-game-lobby.html" class="back-btn">← 返回大厅</a>
+    <div class="score-display">
+      🪙 <span id="score">0</span>
+      <small>捞捞币</small>
+    </div>
+  </div>
+
+  <div class="mode-indicator" id="mode-indicator">🖱️ 鼠标模式</div>
+
+  <div class="prizes-label">🎁 战利品</div>
+  <div class="prizes-row" id="prizes-row">
+    <div class="prize-icon locked" data-prize="🦞"><span class="rare-star">⭐</span>🦞</div>
+    <div class="prize-icon locked" data-prize="🐱">🐱</div>
+    <div class="prize-icon locked" data-prize="🐶">🐶</div>
+    <div class="prize-icon locked" data-prize="🐼">🐼</div>
+    <div class="prize-icon locked" data-prize="🦊">🦊</div>
+    <div class="prize-icon locked" data-prize="🐰">🐰</div>
+    <div class="prize-icon locked" data-prize="🐨">🐨</div>
+    <div class="prize-icon locked" data-prize="🦄"><span class="rare-star">⭐</span>🦄</div>
+    <div class="prize-icon locked" data-prize="🐙">🐙</div>
+    <div class="prize-icon locked" data-prize="💎"><span class="rare-star">⭐</span>💎</div>
+    <div class="prize-icon locked" data-prize="👑"><span class="rare-star">⭐</span>👑</div>
+    <div class="prize-icon locked" data-prize="🎁">🎁</div>
+  </div>
+
+  <div class="instruction" id="instruction">
+    🖱️ 鼠标移动 / 面部追踪控制爪子 · 点击或空格抓取
+  </div>
+
+  <div class="bottom-controls">
+    <button class="ctrl-btn mode-toggle" id="mode-btn" onclick="toggleMode()">🎥 体感模式</button>
+    <button class="ctrl-btn" onclick="restartGame()">🔄 重新开始</button>
+    <button class="ctrl-btn grab" id="grab-btn" onclick="grab()">🦞 捞！</button>
+  </div>
+</div>
+
+<!-- Mobile Joystick -->
+<div id="mobile-joy"><canvas id="joy-canvas"></canvas></div>
+
+<!-- Result Popup -->
+<div class="result-popup" id="result-popup">
+  <div class="result-card">
+    <h2 id="result-title">🎉 捞到了！</h2>
+    <div class="prize-display" id="result-prize">🦞</div>
+    <div class="result-score" id="result-score">+100 捞捞币</div>
+    <div class="result-label" id="result-label">周三涵限定皮肤</div>
+    <button onclick="closeResult()">🕹️ 继续抓</button>
+    <div class="result-photo" onclick="takeSnapshot()">📸 AR快照截图</div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════
+// GAME CONFIG
+// ═══════════════════════════════════════
+const canvas = document.getElementById('game-canvas');
+const ctx = canvas.getContext('2d');
+const camVideo = document.getElementById('cam-video');
+const motionCanvas = document.getElementById('motion-canvas');
+const mctx = motionCanvas.getContext('2d', {willReadFrequently:true});
+
+// Motion tracking mode
+let trackingMode = 'mouse'; // 'mouse' | 'motion'
+let motionEnabled = false;
+let motionX = 0, motionY = 0;
+let motionStable = {x:0, y:0};
+let lastFrameData = null;
+
+// Prize pool
+const prizes = [
+  {emoji:'🦞',name:'周三涵限定',score:300,rare:true,color:'#ff2d95'},
+  {emoji:'🐱',name:'可爱猫咪',score:100,color:'#ff6b35'},
+  {emoji:'🐶',name:'忠诚小狗',score:100,color:'#ffe600'},
+  {emoji:'🐼',name:'胖达熊猫',score:150,color:'#0ff'},
+  {emoji:'🦊',name:'狡猾狐狸',score:120,color:'#ff6b35'},
+  {emoji:'🐰',name:'月兔',score:110,color:'#39ff14'},
+  {emoji:'🐨',name:'树袋熊',score:130,color:'#b44dff'},
+  {emoji:'🦄',name:'独角兽',score:200,rare:true,color:'#ff2d95'},
+  {emoji:'🐙',name:'章鱼哥',score:140,color:'#0ff'},
+  {emoji:'💎',name:'钻石',score:250,rare:true,color:'#ffe600'},
+  {emoji:'⭐',name:'星星',score:80,color:'#ffe600'},
+  {emoji:'🎮',name:'游戏手柄',score:90,color:'#39ff14'},
+  {emoji:'🎁',name:'神秘礼物',score:180,color:'#b44dff'},
+  {emoji:'👑',name:'皇冠',score:500,rare:true,color:'#ffe600'},
+];
+
+let toys = [];
+let clawX = 0, clawY = 0;
+let clawTargetX = 0, clawTargetY = 0;
+let score = 0;
+let collected = [];
+let gameIdle = true;
+let grabCount = 10;
+let animPhase = 0;
+let confetti = [];
+let shakeAmount = 0;
+let arRipples = [];
+
+// Claw animation states
+const CLAW_IDLE = 'idle';
+const CLAW_MOVING_DOWN = 'movingDown';
+const CLAW_GRABBING = 'grabbing';
+const CLAW_MOVING_UP = 'movingUp';
+const CLAW_TO_DROP = 'toDrop';
+const CLAW_DROPPING = 'dropping';
+let clawState = CLAW_IDLE;
+let clawAnimTimer = 0;
+let clawDownProgress = 0;
+let grabbedToy = null;
+
+// ═══════════════════════════════════════
+// Canvas Setup
+// ═══════════════════════════════════════
+function resizeCanvas(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  spawnToys();
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+function spawnToys(){
+  toys = [];
+  const margin = 80;
+  const playW = canvas.width - margin*2;
+  const playH = canvas.height * 0.5;
+  const playY = canvas.height * 0.18;
+
+  // Ensure rare prizes appear
+  const mustSpawn = ['🦞','🦄','💎','👑'];
+  const spawnedRares = [];
+
+  for(let i=0;i<20;i++){
+    let p;
+    if(i < mustSpawn.length){
+      p = prizes.find(pr => pr.emoji === mustSpawn[i]);
+    } else {
+      p = prizes[Math.floor(Math.random()*prizes.length)];
+    }
+    toys.push({
+      x: margin + Math.random()*playW,
+      y: playY + Math.random()*playH,
+      r: 28 + Math.random()*18,
+      emoji: p.emoji,
+      name: p.name,
+      score: p.score,
+      rare: p.rare||false,
+      color: p.color,
+      vx: (Math.random()-.5)*.35,
+      vy: (Math.random()-.5)*.25,
+      wobble: Math.random()*Math.PI*2,
+      wobbleSpeed: .008 + Math.random()*.018,
+    });
+  }
+}
+
+// ═══════════════════════════════════════
+// Webcam & Motion Detection
+// ═══════════════════════════════════════
+async function startCam(){
+  try{
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video:{facingMode:'user',width:{ideal:640},height:{ideal:480}}
+    });
+    camVideo.srcObject = stream;
+    await camVideo.play();
+    motionEnabled = true;
+    requestAnimationFrame(detectMotion);
+  }catch(e){
+    motionEnabled = false;
+    camVideo.style.display = 'none';
+    document.getElementById('mode-btn').style.display = 'none';
+  }
+}
+startCam();
+
+function detectMotion(){
+  if(!motionEnabled || trackingMode !== 'motion' || !camVideo.readyState) {
+    if(motionEnabled) requestAnimationFrame(detectMotion);
+    return;
+  }
+
+  try{
+    mctx.drawImage(camVideo, 0, 0, 160, 120);
+    const currentFrame = mctx.getImageData(0, 0, 160, 120);
+
+    if(lastFrameData){
+      let totalMotionX = 0, totalMotionY = 0;
+      let motionPixels = 0;
+
+      // Sample every 4th pixel for performance
+      for(let y=0;y<120;y+=4){
+        for(let x=0;x<160;x+=4){
+          const idx = (y*160 + x)*4;
+          const diff = Math.abs(currentFrame.data[idx] - lastFrameData.data[idx]) +
+                      Math.abs(currentFrame.data[idx+1] - lastFrameData.data[idx+1]) +
+                      Math.abs(currentFrame.data[idx+2] - lastFrameData.data[idx+2]);
+
+          if(diff > 40){
+            totalMotionX += x;
+            totalMotionY += y;
+            motionPixels++;
+          }
+        }
+      }
+
+      if(motionPixels > 20){
+        const avgX = totalMotionX / motionPixels;
+        const avgY = totalMotionY / motionPixels;
+
+        // Map motion canvas coords to game canvas coords
+        motionX = (avgX / 160) * canvas.width;
+        motionY = (avgY / 120) * canvas.height;
+
+        // Smooth motion
+        motionStable.x += (motionX - motionStable.x) * 0.15;
+        motionStable.y += (motionY - motionStable.y) * 0.15;
+
+        // Apply to claw target
+        clawTargetX = motionStable.x;
+        clawTargetY = motionStable.y;
+
+        // Show AR ripple occasionally
+        if(Math.random() < .3){
+          arRipples.push({x:motionStable.x, y:motionStable.y, r:5, life:1});
+        }
+      }
+    }
+
+    lastFrameData = currentFrame;
+  }catch(e){}
+
+  requestAnimationFrame(detectMotion);
+}
+
+function toggleMode(){
+  if(!motionEnabled){
+    showToast('⚠️ 摄像头不可用，无法切换体感模式');
+    return;
+  }
+  if(trackingMode === 'mouse'){
+    trackingMode = 'motion';
+    document.getElementById('mode-btn').textContent = '🖱️ 鼠标模式';
+    document.getElementById('mode-indicator').textContent = '🎥 体感追踪 · 面部移动控制';
+    document.getElementById('instruction').textContent = '🎥 在摄像头前移动 · 点击或空格抓取';
+    showToast('🎥 已切换体感模式 · 面部移动控制爪子');
+    lastFrameData = null; // Reset motion tracking
+  } else {
+    trackingMode = 'mouse';
+    document.getElementById('mode-btn').textContent = '🎥 体感模式';
+    document.getElementById('mode-indicator').textContent = '🖱️ 鼠标模式';
+    document.getElementById('instruction').textContent = '🖱️ 鼠标移动控制爪子位置 · 点击或按空格抓取';
+    showToast('🖱️ 已切换鼠标模式');
+  }
+}
+
+// ═══════════════════════════════════════
+// Input Handling (Mouse Mode)
+// ═══════════════════════════════════════
+let mouseX = canvas.width/2, mouseY = canvas.height/2;
+canvas.addEventListener('mousemove',e=>{
+  if(trackingMode !== 'mouse') return;
+  mouseX = e.clientX; mouseY = e.clientY;
+  if(clawState===CLAW_IDLE){
+    clawTargetX = mouseX; clawTargetY = mouseY;
+  }
+});
+canvas.addEventListener('touchmove',e=>{
+  if(trackingMode !== 'mouse') return;
+  e.preventDefault();
+  mouseX = e.touches[0].clientX; mouseY = e.touches[0].clientY;
+  if(clawState===CLAW_IDLE){
+    clawTargetX = mouseX; clawTargetY = mouseY;
+  }
+},{passive:false});
+canvas.addEventListener('click',e=>{
+  if(clawState===CLAW_IDLE) grab();
+});
+canvas.addEventListener('touchstart',e=>{
+  if(clawState===CLAW_IDLE) grab();
+});
+
+document.addEventListener('keydown',e=>{
+  if(e.code==='Space'){
+    e.preventDefault();
+    if(clawState===CLAW_IDLE) grab();
+  }
+  if(e.code==='KeyM'){
+    toggleMode();
+  }
+});
+
+// Mobile joystick
+const joyCanvas = document.getElementById('joy-canvas');
+const joyCtx = joyCanvas.getContext('2d');
+let joyActive = false;
+let joyCenter = {x:50,y:50};
+let joyPos = {x:50,y:50};
+
+function drawJoy(){
+  joyCanvas.width = 100; joyCanvas.height = 100;
+  joyCtx.clearRect(0,0,100,100);
+
+  joyCtx.beginPath();
+  joyCtx.arc(50,50,45,0,Math.PI*2);
+  joyCtx.fillStyle='rgba(255,255,255,.04)';
+  joyCtx.fill();
+  joyCtx.strokeStyle='rgba(255,255,255,.12)';
+  joyCtx.lineWidth=2;
+  joyCtx.stroke();
+
+  joyCtx.beginPath();
+  joyCtx.arc(joyPos.x,joyPos.y,18,0,Math.PI*2);
+  joyCtx.fillStyle='rgba(0,255,255,.15)';
+  joyCtx.fill();
+  joyCtx.strokeStyle='rgba(0,255,255,.35)';
+  joyCtx.stroke();
+
+  if(joyActive && trackingMode==='mouse'){
+    const dx = joyPos.x-joyCenter.x;
+    const dy = joyPos.y-joyCenter.y;
+    if(Math.abs(dx)>2||Math.abs(dy)>2){
+      clawTargetX = canvas.width/2 + dx*8;
+      clawTargetY = canvas.height/2 + dy*6;
+    }
+  }
+}
+joyCanvas.addEventListener('pointerdown',e=>{joyActive=true;joyCenter={x:50,y:50}});
+joyCanvas.addEventListener('pointermove',e=>{
+  if(!joyActive)return;
+  const rect=joyCanvas.getBoundingClientRect();
+  const sx=(e.clientX-rect.left)/rect.width*100;
+  const sy=(e.clientY-rect.top)/rect.height*100;
+  const dx=sx-joyCenter.x,dy=sy-joyCenter.y;
+  const dist=Math.hypot(dx,dy);
+  const maxR=40;
+  joyPos.x=dist>maxR?joyCenter.x+dx/dist*maxR:sx;
+  joyPos.y=dist>maxR?joyCenter.y+dy/dist*maxR:sy;
+});
+joyCanvas.addEventListener('pointerup',()=>{joyActive=false;joyPos={x:50,y:50}});
+setInterval(drawJoy,50);
+
+// ═══════════════════════════════════════
+// Grab Logic
+// ═══════════════════════════════════════
+function grab(){
+  if(clawState!==CLAW_IDLE||grabCount<=0)return;
+  grabCount--;
+  clawState = CLAW_MOVING_DOWN;
+  clawAnimTimer = 0;
+  clawDownProgress = 0;
+  grabbedToy = null;
+  shakeAmount = 4;
+  gameIdle = false;
+  document.getElementById('grab-btn').style.opacity='.5';
+  document.getElementById('instruction').textContent='🔽 爪子下降中...';
+
+  // AR scan effect at claw position
+  const ring = document.createElement('div');
+  ring.className = 'ar-scan-ring';
+  ring.style.left = clawX + 'px';
+  ring.style.top = clawY + 'px';
+  document.body.appendChild(ring);
+  setTimeout(() => ring.remove(), 2200);
+}
+
+function spawnConfetti(x,y,color){
+  for(let i=0;i<16;i++){
+    confetti.push({
+      x,y,
+      vx:(Math.random()-.5)*7,
+      vy:-(Math.random()*8+3),
+      life:1,decay:.012+Math.random()*.022,
+      color,size:4+Math.random()*8
+    });
+  }
+}
+
+function closeResult(){
+  document.getElementById('result-popup').classList.remove('show');
+  clawState = CLAW_IDLE;
+  gameIdle = true;
+  grabbedToy = null;
+  document.getElementById('grab-btn').style.opacity='1';
+  document.getElementById('instruction').textContent = trackingMode==='motion'
+    ? '🎥 在摄像头前移动 · 点击或空格抓取'
+    : '🖱️ 鼠标移动控制爪子位置 · 点击或按空格抓取';
+  if(grabCount<=0){
+    showToast('🪙 用完了！按重新开始再来一局');
+  }
+}
+
+function showToast(msg){
+  const t=document.createElement('div');
+  t.className='toast-msg';t.textContent=msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),2400);
+}
+
+function takeSnapshot(){
+  // Create snapshot from canvas
+  const snapCanvas = document.createElement('canvas');
+  snapCanvas.width = canvas.width;
+  snapCanvas.height = canvas.height;
+  const snapCtx = snapCanvas.getContext('2d');
+
+  // Draw webcam bg
+  if(camVideo.readyState >= 2){
+    snapCtx.drawImage(camVideo, 0, 0, snapCanvas.width, snapCanvas.height);
+    snapCtx.fillStyle = 'rgba(0,0,0,.5)';
+    snapCtx.fillRect(0,0,snapCanvas.width,snapCanvas.height);
+  }
+  snapCtx.drawImage(canvas, 0, 0);
+
+  const link = document.createElement('a');
+  link.download = `ar-claw-${Date.now()}.png`;
+  link.href = snapCanvas.toDataURL('image/png');
+  link.click();
+  showToast('📸 AR快照已保存！');
+}
+
+function restartGame(){
+  score=0;collected=[];grabCount=10;
+  document.getElementById('score').textContent='0';
+  document.querySelectorAll('.prize-icon').forEach(el=>{
+    el.classList.remove('earned');el.classList.add('locked');
+  });
+  spawnToys();
+  clawState=CLAW_IDLE;gameIdle=true;
+  document.getElementById('grab-btn').style.opacity='1';
+  document.getElementById('instruction').textContent = trackingMode==='motion'
+    ? '🎥 在摄像头前移动 · 点击或空格抓取'
+    : '🖱️ 鼠标移动控制爪子位置 · 点击或按空格抓取';
+  showToast('🔄 新的一局！');
+}
+
+function updatePrizesUI(){
+  document.querySelectorAll('.prize-icon').forEach(el=>{
+    const p=el.dataset.prize;
+    if(collected.includes(p)){el.classList.add('earned');el.classList.remove('locked');}
+  });
+}
+
+// ═══════════════════════════════════════
+// Game Loop
+// ═══════════════════════════════════════
+function update(dt){
+  dt = Math.min(dt, 50);
+  animPhase += dt*0.001;
+
+  // Smooth claw movement (faster in motion mode)
+  const smoothing = trackingMode==='motion'?0.25:0.15;
+  clawX += (clawTargetX-clawX)*smoothing;
+  clawY += (clawTargetY-clawY)*smoothing;
+
+  // Shake decay
+  shakeAmount *= 0.88;
+
+  // Update AR ripples
+  arRipples.forEach(r => { r.r += 2; r.life -= .025 });
+  arRipples = arRipples.filter(r => r.life > 0);
+
+  // Update claw state machine
+  switch(clawState){
+    case CLAW_MOVING_DOWN:
+      clawAnimTimer += dt;
+      clawDownProgress = Math.min(clawAnimTimer/750, 1);
+      clawTargetX += (Math.sin(clawAnimTimer*0.018)*2.5)*Math.min(clawDownProgress*2,1);
+      if(clawDownProgress>=1){
+        for(const toy of toys){
+          const dist = Math.hypot(toy.x-clawX, toy.y-clawY);
+          if(dist < toy.r+18+Math.random()*8){
+            grabbedToy = toy;
+            break;
+          }
+        }
+        clawState = CLAW_GRABBING;
+        clawAnimTimer = 0;
+        document.getElementById('instruction').textContent = grabbedToy?'🦞 抓到了！':'😢 没抓到...';
+      }
+      break;
+
+    case CLAW_GRABBING:
+      clawAnimTimer += dt;
+      if(clawAnimTimer>450){
+        clawState = CLAW_MOVING_UP;
+        clawAnimTimer = 0;
+        document.getElementById('instruction').textContent='🔼 爪子收回中...';
+      }
+      break;
+
+    case CLAW_MOVING_UP:
+      clawAnimTimer += dt;
+      clawDownProgress = Math.max(1-(clawAnimTimer/550), 0);
+      if(clawDownProgress<=0){
+        if(grabbedToy){
+          clawState = CLAW_TO_DROP;
+          clawAnimTimer = 0;
+          document.getElementById('instruction').textContent='📍 移到掉落区...';
+        }else{
+          finishGrab(false);
+        }
+      }
+      break;
+
+    case CLAW_TO_DROP:
+      const dropX = canvas.width/2;
+      const dropY = 90;
+      clawTargetX = dropX;
+      clawTargetY = dropY;
+      if(Math.hypot(clawX-dropX, clawY-dropY)<15){
+        clawState = CLAW_DROPPING;
+        clawAnimTimer = 0;
+      }
+      break;
+
+    case CLAW_DROPPING:
+      clawAnimTimer += dt;
+      if(clawAnimTimer>350){
+        finishGrab(true);
+      }
+      break;
+  }
+
+  // Update toys
+  toys.forEach(t=>{
+    if(t===grabbedToy&&(clawState===CLAW_GRABBING||clawState===CLAW_MOVING_UP))return;
+    t.wobble += t.wobbleSpeed;
+    t.x += t.vx + Math.sin(t.wobble)*.3;
+    t.y += t.vy + Math.cos(t.wobble*.7)*.2;
+    if(t.x<80||t.x>canvas.width-80)t.vx*=-1;
+    if(t.y<canvas.height*.1||t.y>canvas.height*.6)t.vy*=-1;
+  });
+
+  // Confetti
+  confetti.forEach(c=>{
+    c.x+=c.vx;c.y+=c.vy;c.vy+=.15;c.life-=c.decay;
+  });
+  confetti = confetti.filter(c=>c.life>0);
+}
+
+function finishGrab(success){
+  if(success && grabbedToy){
+    const toy = grabbedToy;
+    const prizeEmoji = toy.emoji;
+    score += toy.score;
+    if(!collected.includes(prizeEmoji))collected.push(prizeEmoji);
+    document.getElementById('score').textContent = score;
+    updatePrizesUI();
+    spawnConfetti(canvas.width/2, 100, toy.color);
+
+    // Remove from field, spawn replacement
+    toys = toys.filter(t=>t!==toy);
+    if(toys.length<17){
+      const p = prizes[Math.floor(Math.random()*prizes.length)];
+      toys.push({
+        x:80+Math.random()*(canvas.width-160),
+        y:canvas.height*.18+Math.random()*canvas.height*.45,
+        r:28+Math.random()*16,
+        emoji:p.emoji,name:p.name,score:p.score,rare:p.rare||false,color:p.color,
+        vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.25,
+        wobble:Math.random()*Math.PI*2,wobbleSpeed:.008+Math.random()*.018
+      });
+    }
+
+    // Show result
+    document.getElementById('result-prize').textContent = prizeEmoji;
+    document.getElementById('result-score').textContent = `+${toy.score} 捞捞币`;
+    document.getElementById('result-label').textContent = toy.rare?`⭐ ${toy.name} · 稀有掉落！`:`${toy.name}`;
+    document.getElementById('result-title').textContent = toy.rare?'💎 稀有掉落！':'🎉 捞到了！';
+    document.getElementById('result-popup').classList.add('show');
+  }else{
+    clawState = CLAW_IDLE;
+    gameIdle = true;
+    grabbedToy = null;
+    document.getElementById('grab-btn').style.opacity='1';
+    document.getElementById('instruction').textContent = grabCount>0
+      ? (trackingMode==='motion'?'🎥 在摄像头前移动 · 点击或空格抓取':'🖱️ 鼠标移动控制爪子位置 · 点击或按空格抓取')
+      : '🪙 次数用完！按重新开始';
+    if(!grabbedToy&&grabCount>0) showToast('😢 没抓到...调整位置再试试！');
+  }
+}
+
+// ═══════════════════════════════════════
+// Render
+// ═══════════════════════════════════════
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  const s = shakeAmount;
+
+  // Glass overlay
+  const glassGrad = ctx.createLinearGradient(0,0,canvas.width,canvas.height);
+  glassGrad.addColorStop(0,'rgba(0,255,255,.015)');
+  glassGrad.addColorStop(.3,'rgba(255,45,149,.01)');
+  glassGrad.addColorStop(.7,'rgba(180,77,255,.015)');
+  glassGrad.addColorStop(1,'rgba(0,255,255,.015)');
+  ctx.fillStyle=glassGrad;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  // Machine border
+  const borderGrad = ctx.createLinearGradient(0,0,canvas.width,0);
+  borderGrad.addColorStop(0,'rgba(0,255,255,.12)');
+  borderGrad.addColorStop(.5,'rgba(180,77,255,.12)');
+  borderGrad.addColorStop(1,'rgba(255,45,149,.12)');
+  ctx.strokeStyle=borderGrad;
+  ctx.lineWidth=4;
+  const bx=30,by=30,bw=canvas.width-60,bh=canvas.height-60;
+  ctx.beginPath();ctx.roundRect(bx,by,bw,bh,20);ctx.stroke();
+
+  ctx.strokeStyle='rgba(255,255,255,.03)';
+  ctx.lineWidth=1;
+  ctx.beginPath();ctx.roundRect(bx+12,by+12,bw-24,bh-24,14);ctx.stroke();
+
+  // Top rail
+  ctx.fillStyle='rgba(255,255,255,.025)';
+  ctx.fillRect(60,60,canvas.width-120,4);
+  ctx.strokeStyle='rgba(0,255,255,.08)';
+  ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(60,62);ctx.lineTo(canvas.width-60,62);ctx.stroke();
+
+  // Draw AR ripples
+  arRipples.forEach(r => {
+    ctx.strokeStyle = `rgba(0,255,255,${r.life*.3})`;
+    ctx.lineWidth = 2;
+    ctx.beginPath();ctx.arc(r.x,r.y,r.r,0,Math.PI*2);ctx.stroke();
+  });
+
+  // Draw toys with glow
+  toys.forEach(t=>{
+    const glow = ctx.createRadialGradient(t.x+s*2,t.y,t.r*.2,t.x+s*2,t.y,t.r*2);
+    glow.addColorStop(0,t.color+'55');
+    glow.addColorStop(1,'transparent');
+    ctx.fillStyle=glow;
+    ctx.beginPath();ctx.arc(t.x+s*2,t.y,t.r*2,0,Math.PI*2);ctx.fill();
+
+    // Shadow
+    ctx.fillStyle='rgba(0,0,0,.35)';
+    ctx.beginPath();ctx.arc(t.x+s*2,t.y+3,t.r,0,Math.PI*2);ctx.fill();
+
+    // Emoji
+    ctx.font=`${t.r*1.15}px serif`;
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(t.emoji, t.x+s*2, t.y+t.r*.12);
+
+    // Rare indicator
+    if(t.rare){
+      ctx.font=`${t.r*.45}px serif`;
+      ctx.fillStyle='rgba(255,230,0,.85)';
+      ctx.fillText('⭐',t.x+s*2+t.r*.55,t.y-t.r*.65);
+    }
+  });
+
+  // Draw grabbed toy on claw
+  if(grabbedToy&&(clawState===CLAW_MOVING_UP||clawState===CLAW_TO_DROP||clawState===CLAW_DROPPING)){
+    const tx = clawX+s*2;
+    const ty = (clawState===CLAW_DROPPING?clawY+18:clawY+42+clawDownProgress*28)+s;
+    ctx.font='52px serif';
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(grabbedToy.emoji, tx, ty);
+
+    // Shake lines
+    if(clawState===CLAW_MOVING_UP){
+      ctx.strokeStyle='rgba(255,255,255,.25)';
+      ctx.lineWidth=2;
+      ctx.beginPath();ctx.moveTo(tx-18,ty);ctx.lineTo(tx+18,ty);
+      ctx.moveTo(tx,ty-18);ctx.lineTo(tx,ty+18);
+      ctx.stroke();
+    }
+  }
+
+  // Draw claw
+  drawClaw();
+
+  // Confetti
+  confetti.forEach(c=>{
+    ctx.font=`${c.size}px serif`;
+    ctx.fillStyle=`hsla(330,80%,60%,${c.life})`;
+    ctx.fillText('✨',c.x,c.y);
+  });
+
+  // Remaining grabs display
+  ctx.font='14px "Courier New",monospace';
+  ctx.fillStyle='rgba(255,255,255,.28)';
+  ctx.textAlign='center';
+  ctx.fillText(`🪙 × ${grabCount}`,canvas.width/2,canvas.height-14);
+
+  // Motion tracking hint
+  if(trackingMode==='motion' && clawState===CLAW_IDLE){
+    ctx.font='12px "Courier New",monospace';
+    ctx.fillStyle='rgba(0,255,255,.2)';
+    ctx.fillText('🎥 体感追踪已激活',canvas.width/2,canvas.height*.75);
+  }
+}
+
+function drawClaw(){
+  const sx = clawX+shakeAmount*2;
+  const sy = 62;
+  const cy = clawDownProgress*(canvas.height*.55) + 62;
+
+  ctx.save();
+
+  // Cable
+  const cableGrad = ctx.createLinearGradient(sx,0,sx,cy);
+  cableGrad.addColorStop(0,'rgba(255,255,255,.06)');
+  cableGrad.addColorStop(.5,'rgba(0,255,255,.25)');
+  cableGrad.addColorStop(1,'rgba(0,255,255,.45)');
+  ctx.strokeStyle=cableGrad;
+  ctx.lineWidth=2;
+  ctx.setLineDash([4,4]);
+  ctx.beginPath();ctx.moveTo(sx,60);ctx.lineTo(sx,cy);ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Claw hub
+  const clawY = cy;
+  ctx.beginPath();ctx.arc(sx,clawY,11,0,Math.PI*2);
+  ctx.fillStyle='rgba(0,255,255,.12)';
+  ctx.fill();
+  ctx.strokeStyle='rgba(0,255,255,.35)';
+  ctx.lineWidth=2;
+  ctx.stroke();
+
+  // Hub inner dot
+  ctx.beginPath();ctx.arc(sx,clawY,4,0,Math.PI*2);
+  ctx.fillStyle='rgba(0,255,255,.3)';
+  ctx.fill();
+
+  // Claw arms
+  const armSpread = clawState===CLAW_GRABBING?0.18:0.72;
+  const armLength = 38;
+  for(let i=0;i<4;i++){
+    const angle = (Math.PI*2/4)*i - Math.PI/2;
+    const ax = sx + Math.cos(angle+armSpread)*armLength;
+    const ay = clawY + Math.sin(angle+armSpread)*armLength;
+
+    ctx.strokeStyle='rgba(0,255,255,.5)';
+    ctx.lineWidth=3;
+    ctx.beginPath();
+    ctx.moveTo(sx+Math.cos(angle)*13, clawY+Math.sin(angle)*13);
+    ctx.lineTo(ax,ay);
+    ctx.stroke();
+
+    // Claw tip
+    ctx.beginPath();ctx.arc(ax,ay,5,0,Math.PI*2);
+    ctx.fillStyle='rgba(0,255,255,.75)';
+    ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,.4)';
+    ctx.lineWidth=1;
+    ctx.stroke();
+  }
+
+  // Grab flash
+  if(clawState===CLAW_GRABBING){
+    const flashAlpha = Math.sin(clawAnimTimer*0.025)*.35+.25;
+    const flashGrad = ctx.createRadialGradient(sx,clawY,5,sx,clawY,45);
+    flashGrad.addColorStop(0,`rgba(255,255,255,${flashAlpha})`);
+    flashGrad.addColorStop(1,'transparent');
+    ctx.fillStyle=flashGrad;
+    ctx.beginPath();ctx.arc(sx,clawY,45,0,Math.PI*2);ctx.fill();
+  }
+
+  // Target reticle when idle
+  if(clawState===CLAW_IDLE){
+    ctx.strokeStyle='rgba(0,255,255,.15)';
+    ctx.lineWidth=1;
+    ctx.setLineDash([2,8]);
+    ctx.beginPath();ctx.arc(sx,cy,32,0,Math.PI*2);ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Crosshair dot
+    ctx.fillStyle='rgba(0,255,255,.2)';
+    ctx.beginPath();ctx.arc(sx,cy,3,0,Math.PI*2);ctx.fill();
+  }
+
+  ctx.restore();
+}
+
+// ═══════════════════════════════════════
+// Main Loop
+// ═══════════════════════════════════════
+let lastTime = performance.now();
+function gameLoop(now){
+  const dt = now-lastTime;
+  lastTime = now;
+  update(dt);
+  draw();
+  requestAnimationFrame(gameLoop);
+}
+requestAnimationFrame(gameLoop);
+
+// Result popup close
+document.getElementById('result-popup').addEventListener('click',function(e){
+  if(e.target===this)closeResult();
+});
+
+console.log('🦞 AR 捞捞乐 v2.0 initialized!');
+console.log('🎥 Motion tracking mode: face movement controls claw!');
+console.log('📸 AR snapshot feature added!');
+console.log('🦞 周三涵限定皮肤 · 体感抓娃娃!');
+</script>
+</body>
+</html>
