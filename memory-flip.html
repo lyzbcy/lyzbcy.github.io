@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>🃏 记忆翻牌 | Memory Flip</title>
+<style>
+:root {
+  --neon-pink:#ff2d95;--neon-cyan:#0ff;--neon-yellow:#ffe600;
+  --neon-purple:#b44dff;--neon-green:#39ff14;--neon-gold:#ffb300;
+  --bg-deep:#06060f;--bg-panel:#0d0d24;--bg-card:#111133;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg-deep);font-family:'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;color:#fff}
+
+/* Loading */
+#loading-screen{
+  position:fixed;inset:0;z-index:200;
+  background:var(--bg-deep);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  transition:opacity .6s,visibility .6s;
+}
+#loading-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
+
+.sticker-rain{position:absolute;font-size:24px;animation:fall var(--fd) linear infinite;animation-delay:var(--dl);opacity:0;left:var(--sx);filter:drop-shadow(0 0 6px currentColor)}
+@keyframes fall{0%{opacity:0;transform:translateY(-40px) rotate(0deg)}5%{opacity:.8}10%{opacity:.5}95%{opacity:.2}100%{opacity:0;transform:translateY(105vh) rotate(var(--sp))}}
+
+.loading-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:20px}
+.loading-emojis{display:flex;gap:14px}
+.loading-emoji{font-size:70px;animation:bounceEmoji .6s ease-in-out infinite;filter:drop-shadow(0 0 18px currentColor)}
+.loading-emoji:nth-child(1){animation-delay:0s;color:var(--neon-gold)}
+.loading-emoji:nth-child(2){animation-delay:.06s;color:var(--neon-pink)}
+.loading-emoji:nth-child(3){animation-delay:.12s;color:var(--neon-cyan)}
+.loading-emoji:nth-child(4){animation-delay:.18s;color:var(--neon-purple)}
+.loading-emoji:nth-child(5){animation-delay:.24s;color:var(--neon-green)}
+.loading-emoji:nth-child(6){animation-delay:.3s;color:var(--neon-yellow)}
+@keyframes bounceEmoji{0%,100%{transform:translateY(0)}25%{transform:translateY(-24px) scale(1.15)}50%{transform:translateY(0) scale(.85)}75%{transform:translateY(-10px)}}
+
+.load-bar-outer{width:320px;height:8px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+.load-bar-inner{height:100%;width:0%;background:linear-gradient(90deg,var(--neon-gold),var(--neon-pink),var(--neon-purple));background-size:200% 100%;border-radius:4px;transition:width .3s;box-shadow:0 0 20px var(--neon-gold);animation:barShimmer 2s linear infinite}
+@keyframes barShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+.load-status{font-size:13px;letter-spacing:.18em;color:var(--neon-gold);font-family:'Courier New',monospace;text-shadow:0 0 10px rgba(255,179,0,.3);animation:flicker 2s infinite}
+@keyframes flicker{0%,100%{opacity:1}92%{opacity:.15}93%{opacity:1}}
+
+/* Game */
+#game-container{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;background:radial-gradient(ellipse at center,rgba(255,179,0,.03) 0%,transparent 60%),radial-gradient(ellipse at 30% 50%,rgba(180,77,255,.03) 0%,transparent 50%),radial-gradient(ellipse at 70% 30%,rgba(0,255,255,.02) 0%,transparent 50%),var(--bg-deep)}
+
+#header{display:flex;gap:40px;margin-bottom:20px;font-family:'Courier New',monospace;align-items:center}
+.stat{text-align:center}
+.stat-label{font-size:10px;letter-spacing:.2em;opacity:.5}
+.stat-value{font-size:26px;font-weight:800;color:var(--neon-gold);text-shadow:0 0 15px rgba(255,179,0,.4)}
+.stat-value.moves{color:var(--neon-cyan)}
+.stat-value.matches{color:var(--neon-green)}
+
+#board{display:grid;gap:12px;max-width:580px;width:100%;perspective:1000px}
+.card{aspect-ratio:1;background:linear-gradient(135deg,var(--bg-card),#181840);border:2px solid rgba(255,255,255,.08);border-radius:14px;cursor:pointer;position:relative;transition:all .3s;transform-style:preserve-3d}
+.card:hover{border-color:rgba(255,230,0,.2);box-shadow:0 0 20px rgba(255,179,0,.1)}
+.card.flipped{transform:rotateY(180deg)}
+.card.matched{transform:rotateY(180deg);border-color:var(--neon-green);box-shadow:0 0 20px rgba(57,255,20,.2);pointer-events:none}
+.card.matched .card-front{border-color:rgba(57,255,20,.3)}
+.card.wrong{border-color:var(--neon-pink)!important;box-shadow:0 0 15px rgba(255,45,149,.3)!important;animation:shake .4s ease-in-out}
+@keyframes shake{0%,100%{transform:rotateY(180deg) translateX(0)}20%{transform:rotateY(180deg) translateX(-6px)}40%{transform:rotateY(180deg) translateX(6px)}60%{transform:rotateY(180deg) translateX(-4px)}80%{transform:rotateY(180deg) translateX(4px)}}
+
+.card-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.card.flipped .card-inner,.card.matched .card-inner{transform:rotateY(180deg)}
+
+.card-back,.card-front{position:absolute;inset:0;border-radius:12px;backface-visibility:hidden;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.card-back{
+  background:linear-gradient(135deg,#1a1a40,#252565);
+  border:2px solid rgba(255,255,255,.06);
+}
+.card-back::before{
+  content:'❓';
+  font-size:clamp(24px,5vw,42px);
+  opacity:.3;
+  animation:questionPulse 2s ease-in-out infinite;
+}
+@keyframes questionPulse{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.6;transform:scale(1.1)}}
+.card-front{
+  background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
+  border:2px solid rgba(255,255,255,.08);
+  transform:rotateY(180deg);
+  font-size:clamp(32px,6vw,56px);
+}
+.card-front .emoji{filter:drop-shadow(0 0 8px currentColor)}
+
+#difficulty-bar{display:flex;gap:10px;margin-bottom:24px}
+.diff-btn{
+  padding:8px 20px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);color:rgba(255,255,255,.5);border-radius:20px;cursor:pointer;font-size:13px;transition:all .3s;font-family:inherit;letter-spacing:.05em;
+}
+.diff-btn:hover{border-color:var(--neon-gold);color:var(--neon-gold)}
+.diff-btn.active{border-color:var(--neon-gold);background:rgba(255,179,0,.1);color:var(--neon-gold);box-shadow:0 0 15px rgba(255,179,0,.15)}
+
+#win-overlay{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;background:rgba(2,2,14,.85);flex-direction:column;gap:16px}
+#win-overlay.visible{display:flex}
+#win-overlay h2{font-size:42px;background:linear-gradient(135deg,var(--neon-gold),var(--neon-yellow));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+#win-overlay .win-stats{font-size:18px;color:var(--neon-cyan);margin-bottom:8px}
+#win-overlay button{
+  padding:14px 36px;border:2px solid var(--neon-gold);background:transparent;color:var(--neon-gold);font-size:18px;border-radius:30px;cursor:pointer;transition:all .3s;font-family:inherit;letter-spacing:.1em
+}
+#win-overlay button:hover{background:var(--neon-gold);color:var(--bg-deep);box-shadow:0 0 30px rgba(255,179,0,.4)}
+
+#back-btn{position:fixed;top:16px;left:16px;z-index:10;color:rgba(255,255,255,.6);text-decoration:none;font-size:13px;padding:8px 16px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);transition:all .2s}
+#back-btn:hover{color:#fff;background:rgba(255,255,255,.12)}
+
+@media(max-width:500px){
+  #board{gap:8px}
+  .card{border-radius:10px}
+  #header{gap:20px}
+  .stat-value{font-size:20px}
+  #win-overlay h2{font-size:28px}
+  .loading-emoji{font-size:44px}
+  .load-bar-outer{width:240px}
+}
+</style>
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div id="loading-screen">
+  <div class="loading-content">
+    <div class="loading-emojis">
+      <div class="loading-emoji">🃏</div>
+      <div class="loading-emoji">🧠</div>
+      <div class="loading-emoji">🦞</div>
+      <div class="loading-emoji">💎</div>
+      <div class="loading-emoji">🎯</div>
+      <div class="loading-emoji">✨</div>
+    </div>
+    <div class="load-bar-outer"><div class="load-bar-inner" id="load-bar"></div></div>
+    <div class="load-status" id="load-status">SHUFFLING CARDS...</div>
+  </div>
+</div>
+
+<a id="back-btn" href="ar-game-lobby.html">← 返回游戏厅</a>
+<div id="game-container">
+  <div id="difficulty-bar">
+    <button class="diff-btn active" onclick="setDifficulty('easy')">🍏 简单 4×3</button>
+    <button class="diff-btn" onclick="setDifficulty('medium')">🍊 中等 4×4</button>
+    <button class="diff-btn" onclick="setDifficulty('hard')">🌶️ 困难 6×4</button>
+  </div>
+  <div id="header">
+    <div class="stat"><div class="stat-label">MOVES</div><div class="stat-value moves" id="moves-display">0</div></div>
+    <div class="stat"><div class="stat-label">MATCHES</div><div class="stat-value matches" id="matches-display">0/6</div></div>
+    <div class="stat"><div class="stat-label">STREAK</div><div class="stat-value" id="streak-display">🔥 0</div></div>
+  </div>
+  <div id="board"></div>
+</div>
+
+<div id="win-overlay">
+  <h2>🎉 恭喜完成!</h2>
+  <div class="win-stats" id="win-stats"></div>
+  <button onclick="restartGame()">🔄 再来一局</button>
+  <button onclick="window.location='ar-game-lobby.html'">🏠 返回游戏厅</button>
+</div>
+
+<script>
+// Loading
+(function(){
+  const bar=document.getElementById('load-bar');
+  const status=document.getElementById('load-status');
+  const screen=document.getElementById('loading-screen');
+  const phrases=['SHUFFLING CARDS...','MEMORIZING PATTERNS...','PREPARING DECK...','ARRANGING EMBLEMS...','TUNING NEURAL PATHWAYS...','LOADING 🦞 MEMORY BANKS...','CALIBRATING BRAIN POWER...','READY TO FLIP!'];
+  let p=0;
+  function tick(){p+=Math.random()*12+6;if(p>100)p=100;bar.style.width=p+'%';status.textContent=phrases[Math.min(Math.floor(p/13),phrases.length-1)];
+    if(p<100)setTimeout(tick,120+Math.random()*200);else setTimeout(()=>{screen.classList.add('hidden');initGame()},400)}
+  tick();
+
+  const stickers=['🃏','🧠','🦞','💎','🎯','✨','🌟','🎨','🎪','🔥','💫','🎮','👑','🦊','🐱'];
+  const colors=['var(--neon-gold)','var(--neon-pink)','var(--neon-cyan)','var(--neon-purple)','var(--neon-green)','var(--neon-yellow)'];
+  const container=document.getElementById('loading-screen');
+  setInterval(()=>{
+    const e=document.createElement('div');e.className='sticker-rain';
+    e.textContent=stickers[Math.floor(Math.random()*stickers.length)];
+    e.style.setProperty('--sx',Math.random()*95+'%');e.style.setProperty('--fd',(4+Math.random()*6)+'s');
+    e.style.setProperty('--dl',Math.random()*2+'s');e.style.setProperty('--sp',(Math.random()*720-360)+'deg');
+    e.style.color=colors[Math.floor(Math.random()*colors.length)];e.style.fontSize=(16+Math.random()*20)+'px';
+    container.appendChild(e);setTimeout(()=>e.remove(),10000)},200);
+  for(let i=0;i<18;i++)setTimeout(()=>{const e=document.createElement('div');e.className='sticker-rain';
+    e.textContent=stickers[Math.floor(Math.random()*stickers.length)];
+    e.style.setProperty('--sx',Math.random()*95+'%');e.style.setProperty('--fd',(4+Math.random()*6)+'s');
+    e.style.setProperty('--dl',-Math.random()*3+'s');e.style.setProperty('--sp',(Math.random()*720-360)+'deg');
+    e.style.color=colors[Math.floor(Math.random()*colors.length)];e.style.fontSize=(16+Math.random()*20)+'px';
+    container.appendChild(e);setTimeout(()=>e.remove(),10000)},i*80);
+})();
+
+const emojiSets={
+  animals:['🐱','🐶','🐰','🦊','🐼','🐨','🐙','🦞','🐸','🐲','🦄','🐳'],
+  food:['🍕','🍔','🍦','🍩','🍓','🍇','🥑','🍣','🎂','🧁','🍿','🍭'],
+  gaming:['🎮','👾','🕹️','🎯','💎','🎲','🎰','🎪','🎨','🏆','⚡','🌟'],
+  emotions:['😎','🤩','🔥','💪','😊','🥳','😇','🤗','😜','🫠','😤','🥶']
+};
+
+let currentDifficulty='easy',cards=[],flippedCards=[],moves=0,matches=0,streak=0,locked=false,totalPairs;
+
+function initGame(){setDifficulty('easy')}
+
+function getEmojiSet(){
+  const allEmojis=[];
+  Object.values(emojiSets).forEach(arr=>allEmojis.push(...arr));
+  return allEmojis;
+}
+
+function setDifficulty(d){
+  currentDifficulty=d;
+  document.querySelectorAll('.diff-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`.diff-btn[onclick*="${d}"]`).classList.add('active');
+
+  let cols,rows;
+  switch(d){case'easy':cols=4;rows=3;break;case'medium':cols=4;rows=4;break;case'hard':cols=6;rows=4;break}
+
+  totalPairs=(cols*rows)/2;
+  const board=document.getElementById('board');
+  board.style.gridTemplateColumns=`repeat(${cols},1fr)`;
+
+  const allEmojis=getEmojiSet();
+  const shuffled=allEmojis.sort(()=>Math.random()-.5);
+  const selected=shuffled.slice(0,totalPairs);
+
+  cards=[...selected,...selected].sort(()=>Math.random()-.5);
+  moves=0;matches=0;streak=0;flippedCards=[];locked=false;
+  document.getElementById('win-overlay').classList.remove('visible');
+  renderBoard();
+  updateStats();
+}
+
+function renderBoard(){
+  const board=document.getElementById('board');
+  board.innerHTML='';
+  cards.forEach((emoji,i)=>{
+    const card=document.createElement('div');
+    card.className='card';
+    card.dataset.index=i;
+    card.innerHTML=`<div class="card-inner"><div class="card-back"></div><div class="card-front"><span class="emoji">${emoji}</span></div></div>`;
+    card.addEventListener('click',()=>flipCard(i,card));
+    board.appendChild(card);
+  });
+}
+
+function flipCard(index,cardEl){
+  if(locked||cardEl.classList.contains('flipped')||cardEl.classList.contains('matched'))return;
+  if(flippedCards.length>=2)return;
+
+  cardEl.classList.add('flipped');
+  flippedCards.push({index,cardEl,emoji:cards[index]});
+
+  if(flippedCards.length===2){
+    moves++;updateStats();
+    if(flippedCards[0].emoji===flippedCards[1].emoji&&flippedCards[0].index!==flippedCards[1].index){
+      // Match!
+      streak++;
+      matches++;
+      locked=true;
+      setTimeout(()=>{
+        flippedCards.forEach(f=>f.cardEl.classList.add('matched'));
+        flippedCards=[];locked=false;
+        updateStats();
+        // Win check
+        if(matches===totalPairs){
+          setTimeout(()=>{document.getElementById('win-overlay').classList.add('visible');
+            document.getElementById('win-stats').textContent=`${moves} 步完成 | 最大连击: ${streak} | 难度: ${currentDifficulty==='easy'?'简单':currentDifficulty==='medium'?'中等':'困难'}`},400)
+        }
+      },400);
+    }else{
+      // No match
+      streak=0;locked=true;
+      flippedCards.forEach(f=>f.cardEl.classList.add('wrong'));
+      setTimeout(()=>{
+        flippedCards.forEach(f=>{f.cardEl.classList.remove('flipped','wrong')});
+        flippedCards=[];locked=false;
+        updateStats();
+      },800);
+    }
+  }
+}
+
+function updateStats(){
+  document.getElementById('moves-display').textContent=moves;
+  document.getElementById('matches-display').textContent=`${matches}/${totalPairs}`;
+  document.getElementById('streak-display').textContent=streak>0?`🔥 ${streak}`:'-';
+}
+
+function restartGame(){setDifficulty(currentDifficulty)}
+</script>
+</body>
+</html>

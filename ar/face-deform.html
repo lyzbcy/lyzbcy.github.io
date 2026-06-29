@@ -6,8 +6,9 @@ layout: none
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>捏脸 AR - AR 体验工坊</title>
+<title>👹 面部变形 | Face Warp AR</title>
 <style>
+:root{--neon-pink:#ff2d95;--neon-cyan:#0ff;--neon-yellow:#ffe600;--neon-purple:#b44dff;--neon-green:#39ff14;--neon-orange:#ff6b35}
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a14; font-family: -apple-system, "SF Pro Text", sans-serif; color: #fff; }
 video { display: none; }
@@ -16,29 +17,55 @@ video { display: none; }
 #header { position: fixed; top: 0; left: 0; right: 0; padding: 20px; display: flex; align-items: center; gap: 12px; z-index: 10; }
 #back-btn { background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 0.9rem; text-decoration: none; transition: all 0.3s; }
 #back-btn:hover { background: rgba(255,255,255,0.2); }
-#title { font-size: 1.2rem; font-weight: 700; }
+#title { font-size: 1.2rem; font-weight: 700; background:linear-gradient(135deg,var(--neon-orange),var(--neon-pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent }
 #status { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.6); backdrop-filter: blur(20px); padding: 12px 24px; border-radius: 30px; font-size: 0.9rem; opacity: 0; transition: opacity 0.5s; z-index: 10; }
 #status.show { opacity: 1; }
 #controls { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 10; }
 .ctrl-btn { background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 10px 20px; border-radius: 25px; cursor: pointer; font-size: 0.85rem; transition: all 0.3s; }
 .ctrl-btn:hover { background: rgba(255,255,255,0.25); }
-.ctrl-btn.active { background: rgba(102,126,234,0.5); border-color: rgba(102,126,234,0.8); }
-#loading { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0a0a14; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100; transition: opacity 0.5s; }
+.ctrl-btn.active { background: rgba(255,107,53,0.5); border-color: rgba(255,107,53,0.8); }
+#loading { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0a0a14; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100; transition: opacity 0.6s; }
 #loading.hidden { opacity: 0; pointer-events: none; }
-.loader { width: 48px; height: 48px; border: 3px solid rgba(255,255,255,0.1); border-top-color: #667eea; border-radius: 50%; animation: spin 1s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
-#loading p { margin-top: 16px; font-size: 0.9rem; opacity: 0.7; }
+.sticker-rain{position:absolute;font-size:22px;animation:fall var(--fd) linear infinite;animation-delay:var(--dl);opacity:0;left:var(--sx);filter:drop-shadow(0 0 6px currentColor);pointer-events:none}
+@keyframes fall{0%{opacity:0;transform:translateY(-40px) rotate(0deg)}5%{opacity:.8}10%{opacity:.5}95%{opacity:.2}100%{opacity:0;transform:translateY(105vh) rotate(var(--sp))}}
+.loading-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:16px}
+.loading-emojis{display:flex;gap:12px}
+.loading-emoji{font-size:52px;animation:bounceEmoji .6s ease-in-out infinite;filter:drop-shadow(0 0 14px currentColor)}
+.loading-emoji:nth-child(1){animation-delay:0s;color:var(--neon-orange)}
+.loading-emoji:nth-child(2){animation-delay:.06s;color:var(--neon-pink)}
+.loading-emoji:nth-child(3){animation-delay:.12s;color:var(--neon-yellow)}
+.loading-emoji:nth-child(4){animation-delay:.18s;color:var(--neon-purple)}
+.loading-emoji:nth-child(5){animation-delay:.24s;color:var(--neon-cyan)}
+.loading-emoji:nth-child(6){animation-delay:.3s;color:var(--neon-green)}
+@keyframes bounceEmoji{0%,100%{transform:translateY(0)}25%{transform:translateY(-22px) scale(1.12)}50%{transform:translateY(0) scale(.85)}75%{transform:translateY(-8px)}}
+.load-bar-outer{width:280px;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;border:1px solid rgba(255,255,255,.06)}
+.load-bar-inner{height:100%;width:0%;background:linear-gradient(90deg,var(--neon-orange),var(--neon-pink),var(--neon-purple));background-size:200% 100%;border-radius:3px;box-shadow:0 0 16px var(--neon-orange);animation:barShimmer 2s linear infinite}
+@keyframes barShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+#loading p{margin-top:6px;font-size:.85rem;opacity:.65;font-family:'Courier New',monospace;letter-spacing:.1em;color:var(--neon-orange);text-shadow:0 0 8px rgba(255,107,53,.3)}
 #perm { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0a0a14; display: none; flex-direction: column; align-items: center; justify-content: center; z-index: 99; text-align: center; padding: 20px; }
 #perm h2 { margin-bottom: 12px; }
 #perm p { opacity: 0.6; margin-bottom: 24px; max-width: 400px; }
-#perm button { background: linear-gradient(135deg, #667eea, #764ba2); border: none; color: #fff; padding: 14px 32px; border-radius: 30px; font-size: 1rem; cursor: pointer; }
+#perm button { background: linear-gradient(135deg, var(--neon-orange), var(--neon-pink)); border: none; color: #fff; padding: 14px 32px; border-radius: 30px; font-size: 1rem; cursor: pointer; }
 #hand-indicator { position: fixed; top: 20px; right: 20px; z-index: 10; display: flex; gap: 8px; align-items: center; font-size: 0.8rem; opacity: 0.6; }
 #hand-indicator .dot { width: 8px; height: 8px; border-radius: 50%; background: #ff4444; transition: background 0.3s; }
 #hand-indicator .dot.active { background: #44ff44; }
 </style>
 </head>
 <body>
-<div id="loading"><div class="loader"></div><p>加载面部 + 手部模型...</p></div>
+<div id="loading">
+  <div class="loading-content">
+    <div class="loading-emojis">
+      <div class="loading-emoji">👹</div>
+      <div class="loading-emoji">🤪</div>
+      <div class="loading-emoji">🦞</div>
+      <div class="loading-emoji">😜</div>
+      <div class="loading-emoji">🎭</div>
+      <div class="loading-emoji">🫠</div>
+    </div>
+    <div class="load-bar-outer"><div class="load-bar-inner" id="load-bar"></div></div>
+    <p id="load-text">加载面部 + 手部模型...</p>
+  </div>
+</div>
 <div id="perm">
   <h2>需要摄像头权限</h2>
   <p>捏脸 AR 需要访问摄像头。用手在脸前推动即可形变面部。</p>
@@ -48,7 +75,7 @@ video { display: none; }
 <canvas id="gl-canvas"></canvas>
 <canvas id="overlay-canvas"></canvas>
 <div id="header">
-  <a id="back-btn" href="/ar/">← 返回</a>
+  <a id="back-btn" href="/ar-game-lobby.html">← 返回游戏厅</a>
   <div id="title">捏脸 AR</div>
 </div>
 <div id="hand-indicator">
@@ -179,6 +206,40 @@ let showMesh = false;
 let faceLandmarker = null, handLandmarker = null;
 let lastFaceResults = null;
 let prevHandPositions = []; // 上一帧手部位置 [{x, y, idx}]
+
+// ====== 表情包Loading ======
+(function stickerLoading(){
+  const stickers=['👹','🤪','🦞','😜','🎭','🫠','👾','🎮','💎','🔥','✨','🌟','🦊','🐱','🎯'];
+  const colors=['var(--neon-orange)','var(--neon-pink)','var(--neon-yellow)','var(--neon-purple)','var(--neon-cyan)','var(--neon-green)'];
+  const container=document.getElementById('loading');
+  setInterval(()=>{
+    const e=document.createElement('div');e.className='sticker-rain';
+    e.textContent=stickers[Math.floor(Math.random()*stickers.length)];
+    e.style.setProperty('--sx',Math.random()*95+'%');e.style.setProperty('--fd',(5+Math.random()*7)+'s');
+    e.style.setProperty('--dl',Math.random()*2+'s');e.style.setProperty('--sp',(Math.random()*720-360)+'deg');
+    e.style.color=colors[Math.floor(Math.random()*colors.length)];e.style.fontSize=(14+Math.random()*18)+'px';
+    container.appendChild(e);setTimeout(()=>e.remove(),12000);
+  },300);
+  for(let i=0;i<15;i++)setTimeout(()=>{
+    const e=document.createElement('div');e.className='sticker-rain';
+    e.textContent=stickers[Math.floor(Math.random()*stickers.length)];
+    e.style.setProperty('--sx',Math.random()*95+'%');e.style.setProperty('--fd',(5+Math.random()*7)+'s');
+    e.style.setProperty('--dl',-Math.random()*3+'s');e.style.setProperty('--sp',(Math.random()*720-360)+'deg');
+    e.style.color=colors[Math.floor(Math.random()*colors.length)];e.style.fontSize=(14+Math.random()*18)+'px';
+    container.appendChild(e);setTimeout(()=>e.remove(),12000);
+  },i*100);
+})();
+
+// Progress simulation
+(function loadProgress(){
+  const bar=document.getElementById('load-bar');
+  const txt=document.getElementById('load-text');
+  const phrases=['加载面部 + 手部模型...','下载 AI 视觉模型...','校准形变算法...','预热 GPU 渲染...','准备 🦞 控制器...'];
+  let p=0;
+  function tick(){p+=Math.random()*8+4;if(p>100)p=100;bar.style.width=p+'%';txt.textContent=phrases[Math.min(Math.floor(p/22),phrases.length-1)];
+    if(p<100)setTimeout(tick,120+Math.random()*180)}
+  tick();
+})();
 
 async function init() {
   try {

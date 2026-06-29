@@ -299,6 +299,30 @@ body::after{
   text-align:center;
   text-shadow:0 0 10px rgba(0,255,255,.3);
 }
+/* Sticker counter */
+.sticker-counter{
+  font-size:10px;letter-spacing:.2em;
+  color:var(--neon-pink);
+  font-family:'Courier New',monospace;
+  opacity:.55;
+  background:rgba(255,45,149,.06);
+  border:1px solid rgba(255,45,149,.12);
+  padding:4px 12px;
+  border-radius:999px;
+  transition:all .3s;
+}
+.sticker-mood-tracker{
+  font-size:9px;letter-spacing:.15em;
+  color:var(--neon-purple);
+  font-family:'Courier New',monospace;opacity:.4;
+  animation:moodCycle 6s infinite;
+}
+@keyframes moodCycle{
+  0%,100%{color:var(--neon-purple);opacity:.4}
+  25%{color:var(--neon-cyan);opacity:.55}
+  50%{color:var(--neon-pink);opacity:.5}
+  75%{color:var(--neon-yellow);opacity:.55}
+}
 @keyframes flicker{
   0%,100%{opacity:1}
   91%{opacity:1}
@@ -428,14 +452,27 @@ body::after{
 }
 .cabinet-side-left{
   left:-16px;border-radius:14px 0 0 14px;
-  background:linear-gradient(180deg,var(--neon-pink),var(--neon-purple),var(--neon-cyan));
-  box-shadow:-3px 0 12px rgba(255,45,149,.15);
 }
 .cabinet-side-right{
   right:-16px;border-radius:0 14px 14px 0;
-  background:linear-gradient(180deg,var(--neon-cyan),var(--neon-purple),var(--neon-pink));
-  box-shadow:3px 0 12px rgba(0,255,255,.15);
 }
+/* Per-cabinet side art themes */
+.cabinet[data-theme="yellow"] .cabinet-side-left{background:linear-gradient(180deg,var(--neon-yellow),var(--neon-orange),var(--neon-pink));box-shadow:-3px 0 12px rgba(255,230,0,.15)}
+.cabinet[data-theme="yellow"] .cabinet-side-right{background:linear-gradient(180deg,var(--neon-pink),var(--neon-orange),var(--neon-yellow));box-shadow:3px 0 12px rgba(255,230,0,.15)}
+.cabinet[data-theme="cyan"] .cabinet-side-left{background:linear-gradient(180deg,var(--neon-cyan),var(--neon-blue),var(--neon-purple));box-shadow:-3px 0 12px rgba(0,255,255,.15)}
+.cabinet[data-theme="cyan"] .cabinet-side-right{background:linear-gradient(180deg,var(--neon-purple),var(--neon-blue),var(--neon-cyan));box-shadow:3px 0 12px rgba(0,255,255,.15)}
+.cabinet[data-theme="green"] .cabinet-side-left{background:linear-gradient(180deg,var(--neon-green),var(--neon-cyan),var(--neon-green));box-shadow:-3px 0 12px rgba(57,255,20,.15)}
+.cabinet[data-theme="green"] .cabinet-side-right{background:linear-gradient(180deg,var(--neon-green),var(--neon-cyan),var(--neon-green));box-shadow:3px 0 12px rgba(57,255,20,.15)}
+.cabinet[data-theme="purple"] .cabinet-side-left{background:linear-gradient(180deg,var(--neon-purple),var(--neon-pink),var(--neon-cyan));box-shadow:-3px 0 12px rgba(180,77,255,.15)}
+.cabinet[data-theme="purple"] .cabinet-side-right{background:linear-gradient(180deg,var(--neon-cyan),var(--neon-pink),var(--neon-purple));box-shadow:3px 0 12px rgba(180,77,255,.15)}
+.cabinet[data-theme="gold"] .cabinet-side-left{background:linear-gradient(180deg,var(--neon-gold),var(--neon-yellow),var(--neon-gold));box-shadow:-3px 0 12px rgba(255,179,0,.15)}
+.cabinet[data-theme="gold"] .cabinet-side-right{background:linear-gradient(180deg,var(--neon-gold),var(--neon-yellow),var(--neon-gold));box-shadow:3px 0 12px rgba(255,179,0,.15)}
+.cabinet[data-theme="pink"] .cabinet-side-left{background:linear-gradient(180deg,var(--neon-pink),var(--neon-purple),var(--neon-cyan));box-shadow:-3px 0 12px rgba(255,45,149,.15)}
+.cabinet[data-theme="pink"] .cabinet-side-right{background:linear-gradient(180deg,var(--neon-cyan),var(--neon-purple),var(--neon-pink));box-shadow:3px 0 12px rgba(255,45,149,.15)}
+.cabinet[data-theme="blue"] .cabinet-side-left{background:linear-gradient(180deg,var(--neon-blue),var(--neon-cyan),var(--neon-purple));box-shadow:-3px 0 12px rgba(68,138,255,.15)}
+.cabinet[data-theme="blue"] .cabinet-side-right{background:linear-gradient(180deg,var(--neon-purple),var(--neon-cyan),var(--neon-blue));box-shadow:3px 0 12px rgba(68,138,255,.15)}
+.cabinet[data-theme="orange"] .cabinet-side-left{background:linear-gradient(180deg,var(--neon-orange),var(--neon-pink),var(--neon-yellow));box-shadow:-3px 0 12px rgba(255,107,53,.15)}
+.cabinet[data-theme="orange"] .cabinet-side-right{background:linear-gradient(180deg,var(--neon-yellow),var(--neon-pink),var(--neon-orange));box-shadow:3px 0 12px rgba(255,107,53,.15)}
 /* Side panel deco lines */
 .cabinet-side-left::after,.cabinet-side-right::after{
   content:'';position:absolute;inset:0;
@@ -922,6 +959,8 @@ body::after{
 
     <!-- Status -->
     <div class="loading-status" id="loading-status">INITIALIZING ARCADE v5.0...</div>
+    <div class="sticker-counter" id="sticker-counter">🎴 贴纸收集: 0</div>
+    <div class="sticker-mood-tracker" id="sticker-mood-tracker">💬 表情包雷达扫描中...</div>
   </div>
 </div>
 
@@ -934,11 +973,11 @@ body::after{
   </div>
 
   <!-- ═══════ 经典街机 ═══════ -->
-  <div class="section-title"><h2>🕹️ 经典街机 CLASSIC ARCADE</h2></div>
+  <div class="section-title"><h2>🕹️ 经典街机 CLASSIC ARCADE · 5款</h2></div>
   <div class="game-grid" id="classic-grid">
 
     <!-- Game 1: 表情消消乐 -->
-    <div class="game-cabinet" data-game="emoji-match" onclick="openGame('emoji-match')" style="--accent:var(--neon-yellow);--glow-shadow:rgba(255,230,0,.25);--glow-shadow-deep:rgba(255,230,0,.08);--glow-inset:rgba(255,230,0,.05)">
+    <div class="game-cabinet cabinet" data-theme="yellow" data-game="emoji-match" onclick="openGame('emoji-match')" style="--accent:var(--neon-yellow);--glow-shadow:rgba(255,230,0,.25);--glow-shadow-deep:rgba(255,230,0,.08);--glow-inset:rgba(255,230,0,.05)">
       <div class="cabinet-glow"></div>
       <div class="cabinet-tmold"></div>
       <div class="cabinet-side-left"></div>
@@ -998,7 +1037,7 @@ body::after{
     </div>
 
     <!-- Game 2: 街机打砖块 -->
-    <div class="game-cabinet" data-game="arcade-breakout" onclick="openGame('arcade-breakout')" style="--accent:var(--neon-cyan);--glow-shadow:rgba(0,255,255,.25);--glow-shadow-deep:rgba(0,255,255,.08);--glow-inset:rgba(0,255,255,.05)">
+    <div class="game-cabinet cabinet" data-theme="cyan" data-game="arcade-breakout" onclick="openGame('arcade-breakout')" style="--accent:var(--neon-cyan);--glow-shadow:rgba(0,255,255,.25);--glow-shadow-deep:rgba(0,255,255,.08);--glow-inset:rgba(0,255,255,.05)">
       <div class="cabinet-glow"></div>
       <div class="cabinet-tmold"></div>
       <div class="cabinet-side-left"></div>
@@ -1057,7 +1096,7 @@ body::after{
     </div>
 
     <!-- Game 3: 霓虹贪吃蛇 -->
-    <div class="game-cabinet" data-game="neon-snake" onclick="openGame('neon-snake')" style="--accent:var(--neon-green);--glow-shadow:rgba(57,255,20,.25);--glow-shadow-deep:rgba(57,255,20,.08);--glow-inset:rgba(57,255,20,.05)">
+    <div class="game-cabinet cabinet" data-theme="green" data-game="neon-snake" onclick="openGame('neon-snake')" style="--accent:var(--neon-green);--glow-shadow:rgba(57,255,20,.25);--glow-shadow-deep:rgba(57,255,20,.08);--glow-inset:rgba(57,255,20,.05)">
       <div class="cabinet-glow"></div>
       <div class="cabinet-tmold"></div>
       <div class="cabinet-side-left"></div>
@@ -1117,7 +1156,7 @@ body::after{
     </div>
 
     <!-- Game 4: 太空射击 -->
-    <div class="game-cabinet" data-game="space-shooter" onclick="openGame('space-shooter')" style="--accent:var(--neon-purple);--glow-shadow:rgba(180,77,255,.25);--glow-shadow-deep:rgba(180,77,255,.08);--glow-inset:rgba(180,77,255,.05)">
+    <div class="game-cabinet cabinet" data-theme="purple" data-game="space-shooter" onclick="openGame('space-shooter')" style="--accent:var(--neon-purple);--glow-shadow:rgba(180,77,255,.25);--glow-shadow-deep:rgba(180,77,255,.08);--glow-inset:rgba(180,77,255,.05)">
       <div class="cabinet-glow"></div>
       <div class="cabinet-tmold"></div>
       <div class="cabinet-side-left"></div>
@@ -1131,7 +1170,8 @@ body::after{
         </div>
         <div class="marquee-text">SPACE SHOOTER</div>
       </div>
-      <div class="cabinet-status soon"></div>
+      <div class="cabinet-status"></div>
+      <div class="cabinet-badge">HOT</div>
       <div class="cabinet-bezel">
         <div class="cabinet-scanlines"></div>
         <div class="cabinet-screen-reflection"></div>
@@ -1160,7 +1200,7 @@ body::after{
       </div>
       <div class="cabinet-label">
         <div class="game-name">太空射击</div>
-        <div class="game-tag">SPACE SHOOTER · ACTION</div>
+        <div class="game-tag">SPACE SHOOTER · ACTION 🚀</div>
         <div class="cabinet-insert">
           <span class="insert-label">CARD</span>
           <div class="insert-slot"></div>
@@ -1176,7 +1216,7 @@ body::after{
     </div>
 
     <!-- Game 5: 记忆翻牌 -->
-    <div class="game-cabinet" data-game="memory-flip" onclick="openGame('memory-flip')" style="--accent:var(--neon-gold);--glow-shadow:rgba(255,179,0,.25);--glow-shadow-deep:rgba(255,179,0,.08);--glow-inset:rgba(255,179,0,.05)">
+    <div class="game-cabinet cabinet" data-theme="gold" data-game="memory-flip" onclick="openGame('memory-flip')" style="--accent:var(--neon-gold);--glow-shadow:rgba(255,179,0,.25);--glow-shadow-deep:rgba(255,179,0,.08);--glow-inset:rgba(255,179,0,.05)">
       <div class="cabinet-glow"></div>
       <div class="cabinet-tmold"></div>
       <div class="cabinet-side-left"></div>
@@ -1240,7 +1280,7 @@ body::after{
   <div class="game-grid" id="ar-grid">
 
     <!-- Game AR-1: AR 捞捞乐 -->
-    <div class="game-cabinet" data-game="ar-claw" onclick="openGame('ar-claw')" style="--accent:var(--neon-pink);--glow-shadow:rgba(255,45,149,.25);--glow-shadow-deep:rgba(255,45,149,.08);--glow-inset:rgba(255,45,149,.05)">
+    <div class="game-cabinet cabinet" data-theme="pink" data-game="ar-claw" onclick="openGame('ar-claw')" style="--accent:var(--neon-pink);--glow-shadow:rgba(255,45,149,.25);--glow-shadow-deep:rgba(255,45,149,.08);--glow-inset:rgba(255,45,149,.05)">
       <div class="cabinet-glow"></div>
       <div class="cabinet-tmold"></div>
       <div class="cabinet-side-left"></div>
@@ -1300,7 +1340,7 @@ body::after{
     </div>
 
     <!-- Game AR-2: 手势魔法 -->
-    <div class="game-cabinet" data-game="gesture-magic" onclick="openGame('gesture-magic')" style="--accent:var(--neon-blue);--glow-shadow:rgba(68,138,255,.25);--glow-shadow-deep:rgba(68,138,255,.08);--glow-inset:rgba(68,138,255,.05)">
+    <div class="game-cabinet cabinet" data-theme="blue" data-game="gesture-magic" onclick="openGame('gesture-magic')" style="--accent:var(--neon-blue);--glow-shadow:rgba(68,138,255,.25);--glow-shadow-deep:rgba(68,138,255,.08);--glow-inset:rgba(68,138,255,.05)">
       <div class="cabinet-glow"></div>
       <div class="cabinet-tmold"></div>
       <div class="cabinet-side-left"></div>
@@ -1360,7 +1400,7 @@ body::after{
     </div>
 
     <!-- Game AR-3: 面部变形 -->
-    <div class="game-cabinet" data-game="face-deform" onclick="openGame('face-deform')" style="--accent:var(--neon-orange);--glow-shadow:rgba(255,107,53,.25);--glow-shadow-deep:rgba(255,107,53,.08);--glow-inset:rgba(255,107,53,.05)">
+    <div class="game-cabinet cabinet" data-theme="orange" data-game="face-deform" onclick="openGame('face-deform')" style="--accent:var(--neon-orange);--glow-shadow:rgba(255,107,53,.25);--glow-shadow-deep:rgba(255,107,53,.08);--glow-inset:rgba(255,107,53,.05)">
       <div class="cabinet-glow"></div>
       <div class="cabinet-tmold"></div>
       <div class="cabinet-side-left"></div>
@@ -1420,7 +1460,7 @@ body::after{
     </div>
 
     <!-- Game AR-4: AR健身教练 -->
-    <div class="game-cabinet" data-game="fitness-coach" onclick="openGame('fitness-coach')" style="--accent:var(--neon-green);--glow-shadow:rgba(57,255,20,.25);--glow-shadow-deep:rgba(57,255,20,.08);--glow-inset:rgba(57,255,20,.05)">
+    <div class="game-cabinet cabinet" data-theme="green" data-game="fitness-coach" onclick="openGame('fitness-coach')" style="--accent:var(--neon-green);--glow-shadow:rgba(57,255,20,.25);--glow-shadow-deep:rgba(57,255,20,.08);--glow-inset:rgba(57,255,20,.05)">
       <div class="cabinet-glow"></div>
       <div class="cabinet-tmold"></div>
       <div class="cabinet-side-left"></div>
@@ -1480,7 +1520,7 @@ body::after{
     </div>
 
     <!-- Game AR-5: 手花绽放 -->
-    <div class="game-cabinet" data-game="hand-flower" onclick="openGame('hand-flower')" style="--accent:var(--neon-purple);--glow-shadow:rgba(180,77,255,.25);--glow-shadow-deep:rgba(180,77,255,.08);--glow-inset:rgba(180,77,255,.05)">
+    <div class="game-cabinet cabinet" data-theme="purple" data-game="hand-flower" onclick="openGame('hand-flower')" style="--accent:var(--neon-purple);--glow-shadow:rgba(180,77,255,.25);--glow-shadow-deep:rgba(180,77,255,.08);--glow-inset:rgba(180,77,255,.05)">
       <div class="cabinet-glow"></div>
       <div class="cabinet-tmold"></div>
       <div class="cabinet-side-left"></div>
@@ -1543,29 +1583,31 @@ body::after{
   <!-- Ticker -->
   <div class="ticker-wrap">
     <div class="ticker" id="ticker-content">
-      <span>★ <span class="highlight">NEW!</span> AR游戏大迁移完成 · 5款AR游戏入驻 🦞</span>
-      <span>★ 街机美术全面升级 v5.0</span>
+      <span>★ <span class="highlight">NEW!</span> 太空射击 + 记忆翻牌现已开放 🚀🃏</span>
+      <span>★ AR游戏大迁移完成 · 5款AR游戏入驻 🦞</span>
+      <span>★ 街机美术全面升级 v5.0 · 10款主题侧板</span>
       <span>★ Loading动画表情包大赏 🎉 🎰</span>
       <span>★ 手势魔法棱镜滤镜上线</span>
       <span>★ 面部变形哈哈镜已就绪</span>
       <span>★ AR健身教练运动辅助中</span>
       <span>★ 手花绽放魔法花瓣飘落</span>
       <span>★ 霓虹贪吃蛇破纪录者：🦞周三涵</span>
-      <span>★ 太空射击 COMING SOON</span>
-      <span>★ <span class="highlight">NEW!</span> AR游戏大迁移完成 · 5款AR游戏入驻 🦞</span>
-      <span>★ 街机美术全面升级 v5.0</span>
+      <span>★ 全部10款游戏可玩 🎮✨</span>
+      <span>★ <span class="highlight">NEW!</span> 太空射击 + 记忆翻牌现已开放 🚀🃏</span>
+      <span>★ AR游戏大迁移完成 · 5款AR游戏入驻 🦞</span>
+      <span>★ 街机美术全面升级 v5.0 · 10款主题侧板</span>
       <span>★ Loading动画表情包大赏 🎉 🎰</span>
       <span>★ 手势魔法棱镜滤镜上线</span>
       <span>★ 面部变形哈哈镜已就绪</span>
       <span>★ AR健身教练运动辅助中</span>
       <span>★ 手花绽放魔法花瓣飘落</span>
       <span>★ 霓虹贪吃蛇破纪录者：🦞周三涵</span>
-      <span>★ 太空射击 COMING SOON</span>
+      <span>★ 全部10款游戏可玩 🎮✨</span>
     </div>
   </div>
 
   <div class="footer">
-    WORLD GAME ARCADE v5.0 · © 2026 捞鱼游戏厅 · POWERED BY 周三涵 🦞 · AR GAMES MIGRATED
+    WORLD GAME ARCADE v5.5 · © 2026 捞鱼游戏厅 · POWERED BY 周三涵 🦞 · AR GAMES MIGRATED · 表情包雷达已激活
   </div>
 </div>
 
@@ -1591,16 +1633,18 @@ const stickerPop = document.getElementById('loading-sticker-pop');
 const stickersContainer = document.getElementById('loading-stickers');
 const loadingGallery = document.getElementById('loading-gallery');
 
-// ══ Sticker Rain System v5.0 (More Categories) ══
+// ══ Sticker Rain System v5.1 (Even More Categories) ══
 const rainStickers = [
   // Gaming
-  '🎮','👾','🕹️','🎯','💎','🎲','🎰','🎪','🃏','🎨',
+  '🎮','👾','🕹️','🎯','💎','🎲','🎰','🎪','🃏','🎨','🎳','🎱','🧿','🎻',
   // Animals
-  '🦞','🦊','🐱','🐲','🐉','🦀','🐙','🦄','🐸','🐼',
+  '🦞','🦊','🐱','🐲','🐉','🦀','🐙','🦄','🐸','🐼','🐰','🐨','🦋','🐬','🦜','🐢','🦩',
   // Emojis
-  '🔥','✨','💫','🌟','💥','🎉','🎊','🎁','🏆','💿',
+  '🔥','✨','💫','🌟','💥','🎉','🎊','🎁','🏆','💿','💝','💖','💘','🎆','🎇','🌠',
   // Random
-  '🌈','🎭','📀','💡','⚡','🧩','🔮','🎵','🎶','👑'
+  '🌈','🎭','📀','💡','⚡','🧩','🔮','🎵','🎶','👑','🍀','🌸','🌺','🍬','🍭','💠','🎐',
+  // LaoLaoLe exclusive
+  '🦞','🦞','🦞','🎮','👾','💎','⚡','🔥','✨','🌟','🎯','🎪','🐲','🦊','🐱'
 ];
 const neonColorPool = ['var(--neon-pink)','var(--neon-cyan)','var(--neon-yellow)','var(--neon-purple)','var(--neon-green)','var(--neon-orange)','var(--neon-blue)','var(--neon-gold)'];
 
@@ -1615,7 +1659,13 @@ function spawnStickerRain(){
   el.style.color = neonColorPool[Math.floor(Math.random()*neonColorPool.length)];
   el.style.fontSize = (16+Math.random()*28) + 'px';
   stickersContainer.appendChild(el);
+  stickerCount++; updateStickerCounter();
   setTimeout(() => el.remove(), 12000);
+}
+let stickerCount=0;
+function updateStickerCounter(){
+  const counter=document.getElementById('sticker-counter');
+  if(counter)counter.textContent=`🎴 贴纸收集: ${stickerCount}`;
 }
 
 setInterval(spawnStickerRain, 200);
@@ -1711,7 +1761,7 @@ setInterval(shuffleGallery, 1500);
 shuffleGallery();
 
 // ══ Progress Update = ══
-const riderStickers = ['🦞','🎮','👾','💎','🎯','🕹️','🤖','🐲','🦊','🐱','🔥','💿','🦄','🐼','🎪'];
+const riderStickers = ['🦞','🎮','👾','💎','🎯','🕹️','🤖','🐲','🦊','🐱','🔥','💿','🦄','🐼','🎪','🌟','🦀','🍬','💝','🎆','✨'];
 
 const loadingPhrases = [
   'INITIALIZING ARCADE v5.0...',
@@ -1734,6 +1784,17 @@ const loadingPhrases = [
 
 const milestones = [25, 50, 75, 100];
 let milestoneFired = {};
+
+// Mood tracker cycling for sticker radar
+const moodPhrases = [
+  '💬 表情包雷达扫描中...','🐱 检测到猫猫贴纸能量!','🌟 星光贴纸正在接近!','🦞 捞捞乐限定卡包激活!',
+  '🔥 火热贴纸潮来袭!','🎪 嘉年华贴纸派对!','💎 稀有贴纸探测中...','🎯 击中贴纸目标!',
+  '🌈 彩虹贴纸瀑布!','🐲 龙神贴纸觉醒!','🎆 烟花贴纸齐放!','💝 爱心贴纸暴击!'
+];
+const moodTrackerEl = document.getElementById('sticker-mood-tracker');
+setInterval(() => {
+  if(moodTrackerEl) moodTrackerEl.textContent = moodPhrases[Math.floor(Math.random()*moodPhrases.length)];
+}, 5500);
 
 function spawnFirework(x, y){
   const emojis = ['🎉','✨','💥','🌟','🎊','🔥','💫','🎆','🦞'];
@@ -1874,13 +1935,13 @@ const games={
   },
   'space-shooter':{
     title:'🚀 太空射击',
-    desc:'驾驶飞船在太空中消灭外星入侵者！收集能量道具升级武器，挑战Boss关卡。经典纵版射击玩法。霓虹子弹特效 + 爆炸粒子！',
-    playable:false, url:null
+    desc:'驾驶飞船在太空中消灭外星入侵者！收集💚回血 💎护盾，连击系统越打越爽！Boss会召唤小兵，难度递增。霓虹子弹特效 + 爆炸粒子！支持键盘WASD+空格和触屏！',
+    playable:true, url:'space-shooter.html'
   },
   'memory-flip':{
     title:'🃏 记忆翻牌',
-    desc:'记住卡片位置，一次性翻出所有配对！多种主题卡牌：水果、动物、表情包。难度递增，锻炼你的记忆极限。',
-    playable:true, url:'emoji-match.html'
+    desc:'翻开卡片找到配对！4种emoji主题：动物🐱、食物🍕、游戏🎮、表情😎。三种难度：简单4×3、中等4×4、困难6×4。连击系统+步数统计！',
+    playable:true, url:'memory-flip.html'
   },
   'ar-claw':{
     title:'🦞 AR 捞捞乐',

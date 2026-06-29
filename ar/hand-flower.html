@@ -22,11 +22,19 @@ canvas{position:fixed;top:0;left:0;width:100%;height:100%}
 #effects{position:fixed;top:70px;left:20px;z-index:10;font-size:.8rem;line-height:2.2;opacity:.65}
 .eff{display:flex;align-items:center;gap:6px;transition:opacity .3s}.eff.off{opacity:.25}
 .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-#loading{position:fixed;inset:0;background:#0a0a0f;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:100;transition:opacity .6s}
+:root{--neon-pink:#ff2d95;--neon-cyan:#0ff;--neon-yellow:#ffe600;--neon-purple:#b44dff;--neon-green:#39ff14;--neon-orange:#ff6b35}
+#loading{position:fixed;inset:0;background:#0a0a0f;display:flex;align-items:center;justify-content:center;z-index:100;transition:opacity .6s}
 #loading.hidden{opacity:0;pointer-events:none}
-.spinner{width:48px;height:48px;border:3px solid rgba(255,255,255,.08);border-top-color:#f093fb;border-radius:50%;animation:spin 1s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-#loading p{margin-top:16px;font-size:.9rem;opacity:.6}
+#loading p{margin-top:0;font-size:.9rem;opacity:.6}
+.sticker-rain{position:absolute;font-size:22px;animation:fall var(--fd) linear infinite;animation-delay:var(--dl);opacity:0;left:var(--sx);filter:drop-shadow(0 0 6px currentColor);pointer-events:none}
+@keyframes fall{0%{opacity:0;transform:translateY(-40px) rotate(0deg)}5%{opacity:.8}10%{opacity:.5}95%{opacity:.2}100%{opacity:0;transform:translateY(105vh) rotate(var(--sp))}}
+.loading-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:16px}
+.loading-emojis{display:flex;gap:12px}
+.loading-emoji{font-size:52px;animation:bounceEmoji .6s ease-in-out infinite;filter:drop-shadow(0 0 14px currentColor)}
+@keyframes bounceEmoji{0%,100%{transform:translateY(0)}25%{transform:translateY(-22px) scale(1.12)}50%{transform:translateY(0) scale(.85)}75%{transform:translateY(-8px)}}
+.load-bar-outer{width:280px;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;border:1px solid rgba(255,255,255,.06)}
+.load-bar-inner{height:100%;width:0%;background-size:200% 100%;border-radius:3px;box-shadow:0 0 16px var(--neon-orange);animation:barShimmer 2s linear infinite}
+@keyframes barShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 #perm{position:fixed;inset:0;background:#0a0a0f;display:none;flex-direction:column;align-items:center;justify-content:center;z-index:99;text-align:center;padding:20px}
 #perm h2{font-size:1.5rem;margin-bottom:8px}
 #perm p{opacity:.6;max-width:300px}
@@ -35,10 +43,23 @@ canvas{position:fixed;top:0;left:0;width:100%;height:100%}
 <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 </head>
 <body>
-<div id="loading"><div class="spinner"></div><p>加载 AI 视觉模型...</p></div>
+<div id="loading">
+  <div class="loading-content">
+    <div class="loading-emojis">
+      <div class="loading-emoji" style="animation-delay:0s;color:var(--neon-pink)">🌸</div>
+      <div class="loading-emoji" style="animation-delay:0.1s;color:var(--neon-purple)">🌺</div>
+      <div class="loading-emoji" style="animation-delay:0.2s;color:var(--neon-cyan)">🦞</div>
+      <div class="loading-emoji" style="animation-delay:0.3s;color:var(--neon-yellow)">🌷</div>
+      <div class="loading-emoji" style="animation-delay:0.4s;color:var(--neon-green)">💮</div>
+      <div class="loading-emoji" style="animation-delay:0.5s;color:var(--neon-pink)">✨</div>
+    </div>
+    <div class="load-bar-outer"><div class="load-bar-inner" id="load-bar" style="background:linear-gradient(90deg,var(--neon-pink),var(--neon-purple),var(--neon-cyan),var(--neon-yellow),var(--neon-green))"></div></div>
+    <p id="load-text" style="font-family:'Courier New',monospace;letter-spacing:.1em;opacity:.65">加载花瓣魔法...</p>
+  </div>
+</div>
 <div id="perm"><h2>需要摄像头权限</h2><p>手指艺术滤镜需要摄像头实时追踪手部与人体。</p><button onclick="startCam()">开启摄像头</button></div>
 <video id="video" autoplay playsinline muted></video>
-<div id="header"><a id="back-btn" href="/ar/">← 返回</a><div id="title">手势生花 · 艺术滤镜</div></div>
+<div id="header"><a id="back-btn" href="ar-game-lobby.html">← 返回</a><div id="title">手势生花 · 艺术滤镜</div></div>
 <div id="effects">
   <div class="eff off" id="eff-0"><span class="dot" style="background:#f8cdda"></span>拇指+食指 · 水彩</div>
   <div class="eff off" id="eff-1"><span class="dot" style="background:#4a3728"></span>中指+无名指 · 墨韵</div>
@@ -47,6 +68,38 @@ canvas{position:fixed;top:0;left:0;width:100%;height:100%}
 <div id="hint">张开相邻手指构成平面 → 滤镜仅在身体上生效<br>手指间距控制平面大小 · 效果随手指运动实时变化</div>
 
 <script type="module">
+// Sticker rain + loading bar
+(function stickerLoading(){
+  const stickers=['🌸','🌺','🦞','🌷','💮','✨','🎨'];
+  const colors=['var(--neon-pink)','var(--neon-purple)','var(--neon-cyan)','var(--neon-yellow)','var(--neon-green)'];
+  const container=document.getElementById('loading');
+  setInterval(()=>{
+    const e=document.createElement('div');e.className='sticker-rain';
+    e.textContent=stickers[Math.floor(Math.random()*stickers.length)];
+    e.style.setProperty('--sx',Math.random()*95+'%');e.style.setProperty('--fd',(5+Math.random()*7)+'s');
+    e.style.setProperty('--dl',Math.random()*2+'s');e.style.setProperty('--sp',(Math.random()*720-360)+'deg');
+    e.style.color=colors[Math.floor(Math.random()*colors.length)];e.style.fontSize=(14+Math.random()*18)+'px';
+    container.appendChild(e);setTimeout(()=>e.remove(),12000);
+  },300);
+  for(let i=0;i<15;i++)setTimeout(()=>{
+    const e=document.createElement('div');e.className='sticker-rain';
+    e.textContent=stickers[Math.floor(Math.random()*stickers.length)];
+    e.style.setProperty('--sx',Math.random()*95+'%');e.style.setProperty('--fd',(5+Math.random()*7)+'s');
+    e.style.setProperty('--dl',-Math.random()*3+'s');e.style.setProperty('--sp',(Math.random()*720-360)+'deg');
+    e.style.color=colors[Math.floor(Math.random()*colors.length)];e.style.fontSize=(14+Math.random()*18)+'px';
+    container.appendChild(e);setTimeout(()=>e.remove(),12000);
+  },i*100);
+})();
+(function loadProgress(){
+  const bar=document.getElementById('load-bar');
+  const txt=document.getElementById('load-text');
+  const phrases=['加载花瓣魔法...','下载 AI 视觉模型...','校准手部追踪...','培育魔法花园...','准备 🦞 绽放...'];
+  let p=0;
+  function tick(){p+=Math.random()*8+4;if(p>100)p=100;bar.style.width=p+'%';txt.textContent=phrases[Math.min(Math.floor(p/22),phrases.length-1)];
+    if(p<100)setTimeout(tick,120+Math.random()*180)}
+  tick();
+})();
+
 // ==================== Fragment Shader ====================
 const FRAG = `
 precision highp float;
