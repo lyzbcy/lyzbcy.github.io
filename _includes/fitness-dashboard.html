@@ -1,0 +1,234 @@
+{%- assign d = site.data.fitness -%}
+{%- if d == nil or d.overview == nil -%}
+<div style="text-align:center;padding:3rem;color:var(--text-muted-color)">
+  暂无数据。请运行 <code>tools/generate_fitness_data.py</code> 生成数据文件。
+</div>
+{%- else -%}
+{%- assign ov = d.overview -%}
+{%- assign prs = d.personal_records -%}
+{%- assign muscle = d.muscle_balance -%}
+{%- assign trend = d.volume_trend -%}
+{%- assign exercises = d.exercises -%}
+{%- assign sessions = d.sessions -%}
+
+<style>
+.fitness-dash {
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 0.92rem;
+}
+.fitness-dash .section-title {
+  font-size: 1.25rem; font-weight: 700;
+  margin: 2rem 0 1rem; padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--tag-bg);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.fitness-dash .stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem; margin-bottom: 1.5rem;
+}
+.fitness-dash .stat-card {
+  background: var(--card-bg); border-radius: 10px;
+  padding: 1rem; text-align: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.fitness-dash .stat-num { font-size: 1.6rem; font-weight: 800; color: #e74c3c; }
+.fitness-dash .stat-label { color: var(--text-muted-color); margin-top: 0.25rem; font-size: 0.8rem; }
+.fitness-dash .pr-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.6rem;
+}
+.fitness-dash .pr-item {
+  display: flex; align-items: center; gap: 0.6rem;
+  background: var(--card-bg); border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.fitness-dash .pr-rank {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 700; flex-shrink: 0;
+}
+.fitness-dash .pr-info { flex: 1; min-width: 0; }
+.fitness-dash .pr-exercise { font-weight: 600; }
+.fitness-dash .pr-detail { font-size: 0.8rem; color: var(--text-muted-color); }
+.fitness-dash .pr-volume { font-weight: 700; color: #e74c3c; font-size: 0.85rem; white-space: nowrap; }
+.fitness-dash .session-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+.fitness-dash .session-table th {
+  text-align: left; padding: 0.55rem 0.6rem; border-bottom: 2px solid var(--tag-bg);
+  color: var(--text-muted-color); font-weight: 600; font-size: 0.8rem; white-space: nowrap;
+}
+.fitness-dash .session-table td { padding: 0.55rem 0.6rem; border-bottom: 1px solid var(--main-border-color); }
+.split-badge {
+  display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; font-weight: 600;
+}
+.split-push { background: #fde8e8; color: #c0392b; }
+.split-pull { background: #dbeafe; color: #1d4ed8; }
+.split-legs { background: #d1fae5; color: #065f46; }
+.muscle-bar-wrap { display: flex; align-items: center; margin-bottom: 0.5rem; gap: 0.5rem; }
+.muscle-bar-label { width: 75px; text-align: right; font-size: 0.8rem; color: var(--text-muted-color); flex-shrink: 0; }
+.muscle-bar-track {
+  flex: 1; height: 20px; background: var(--tag-bg); border-radius: 10px; overflow: hidden;
+}
+.muscle-bar-fill {
+  height: 100%; border-radius: 10px;
+  background: linear-gradient(90deg, #e74c3c, #f39c12, #2ecc71, #3498db, #9b59b6);
+  background-size: 400% 100%;
+}
+.muscle-bar-val { width: 65px; font-size: 0.78rem; font-weight: 600; white-space: nowrap; }
+.trend-notes {
+  font-size: 0.82rem; color: var(--text-muted-color); margin-top: 0.5rem; line-height: 1.6;
+}
+.ex-table {
+  width: 100%; border-collapse: collapse; font-size: 0.86rem;
+}
+.ex-table th {
+  text-align: left; padding: 0.45rem 0.5rem; border-bottom: 2px solid var(--tag-bg);
+  color: var(--text-muted-color); font-weight: 600; font-size: 0.78rem; white-space: nowrap;
+}
+.ex-table td { padding: 0.45rem 0.5rem; border-bottom: 1px solid var(--main-border-color); }
+.fitness-dash .highlight { color: #e74c3c; font-weight: 700; }
+.fitness-dash .muted { color: var(--text-muted-color); font-size: 0.8rem; }
+@media (max-width: 600px) { .fitness-dash .session-table { font-size: 0.78rem; } }
+</style>
+
+<div class="fitness-dash">
+
+<!-- ── 概览 ── -->
+<div class="section-title"><span>📊</span> 训练概览</div>
+<div class="stat-grid">
+  <div class="stat-card">
+    <div class="stat-num">{{ ov.total_sessions }}</div>
+    <div class="stat-label">总训练次数</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">{{ ov.avg_sessions_per_week }}</div>
+    <div class="stat-label">周均频率</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">{{ ov.total_sessions_recent_4w }}</div>
+    <div class="stat-label">近4周训练</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">{{ ov.total_sets }}</div>
+    <div class="stat-label">总训练组数</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">{{ ov.total_volume | divided_by: 1000.0 | round: 1 }}k</div>
+    <div class="stat-label">总容量 (kg)</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">{{ ov.date_range.first }}</div>
+    <div class="stat-label">开始记录</div>
+  </div>
+</div>
+{%- if ov.preferences.adjustmentNote -%}
+<div class="trend-notes">⚠️ {{ ov.preferences.currentStatus }} — {{ ov.preferences.adjustmentNote }}</div>
+{%- endif -%}
+
+<!-- ── 个人记录 Top 15 ── -->
+<div class="section-title"><span>🏆</span> 个人记录 Top 15</div>
+<div class="pr-list">
+{%- assign sorted_prs = prs | sort: "volume" | reverse -%}
+{%- assign max_pr_vol = sorted_prs[0].volume | plus: 0 -%}
+{%- for pr in sorted_prs limit: 15 -%}
+  {%- assign vol_pct = pr.volume | times: 100.0 | divided_by: max_pr_vol | round: 0 -%}
+  <div class="pr-item">
+    <div class="pr-rank">{{ forloop.index }}</div>
+    <div class="pr-info">
+      <div class="pr-exercise">{{ pr.exercise }}</div>
+      <div class="pr-detail">{{ pr.weight }}kg × {{ pr.reps }}{% if pr.note != "" and pr.note %} · {{ pr.note }}{% endif %}</div>
+    </div>
+    <div class="pr-volume">{{ pr.volume }}kg</div>
+  </div>
+{%- endfor -%}
+</div>
+
+<!-- ── 肌肉训练量分布 ── -->
+<div class="section-title"><span>⚖️</span> 肌肉训练量分布</div>
+{%- assign max_muscle = muscle[0].total_volume | plus: 0 -%}
+{%- for m in muscle -%}
+  {%- assign m_pct = m.total_volume | times: 100.0 | divided_by: max_muscle | round: 0 -%}
+  <div class="muscle-bar-wrap">
+    <div class="muscle-bar-label">{{ m.label }}</div>
+    <div class="muscle-bar-track">
+      <div class="muscle-bar-fill" style="width:{{ m_pct }}%"></div>
+    </div>
+    <div class="muscle-bar-val">{{ m.total_volume | divided_by: 1000.0 | round: 1 }}k kg</div>
+  </div>
+{%- endfor -%}
+
+<!-- ── 训练记录 ── -->
+<div class="section-title"><span>📅</span> 训练记录</div>
+<div style="overflow-x:auto;">
+<table class="session-table">
+<thead><tr>
+  <th>日期</th><th>类型</th><th>动作数</th><th>组数</th><th>容量</th><th>时长</th><th>备注</th>
+</tr></thead>
+<tbody>
+{%- for s in sessions -%}
+  <tr>
+    <td>{{ s.date }}</td>
+    <td><span class="split-badge split-{{ s.split }}">{{ s.split_label }}</span></td>
+    <td>{{ s.exercises | size }}</td>
+    <td>{{ s.total_sets }}</td>
+    <td class="highlight">{{ s.total_volume | divided_by: 1000.0 | round: 1 }}k</td>
+    <td>{% if s.duration_min %}{{ s.duration_min }}'{% else %}-{% endif %}</td>
+    <td class="muted">{{ s.note }}</td>
+  </tr>
+{%- endfor -%}
+</tbody>
+</table>
+</div>
+
+<!-- ── 周容量趋势 ── -->
+<div class="section-title"><span>📈</span> 周训练量趋势（近12周）</div>
+<div style="overflow-x:auto;">
+<table class="ex-table">
+<thead><tr><th>周</th><th>容量 (kg)</th><th>组数</th></tr></thead>
+<tbody>
+{%- assign trend_count = trend | size -%}
+{%- assign start_idx = trend_count | minus: 12 -%}
+{%- if start_idx < 0 -%}{%- assign start_idx = 0 -%}{%- endif -%}
+{%- for w in trend offset: start_idx -%}
+  <tr>
+    <td>{{ w.week }}</td>
+    <td class="highlight">{{ w.volume | divided_by: 1000.0 | round: 1 }}k</td>
+    <td>{{ w.sessions }}</td>
+  </tr>
+{%- endfor -%}
+</tbody>
+</table>
+</div>
+
+<!-- ── 动作索引 ── -->
+<div class="section-title"><span>🏋️</span> 动作索引</div>
+<div style="overflow-x:auto;">
+<table class="ex-table">
+<thead><tr>
+  <th>动作</th><th>总组数</th><th>最大重量</th><th>最高次数</th><th>总容量</th><th>最近训练</th>
+</tr></thead>
+<tbody>
+{%- for ex in exercises -%}
+  <tr>
+    <td style="font-weight:600">{{ ex.name }}</td>
+    <td>{{ ex.total_sets }}</td>
+    <td>{{ ex.max_weight }}kg</td>
+    <td>{{ ex.max_reps }}次</td>
+    <td>{{ ex.total_volume | divided_by: 1000.0 | round: 1 }}k</td>
+    <td class="muted">{{ ex.last_date }}</td>
+  </tr>
+{%- endfor -%}
+</tbody>
+</table>
+</div>
+
+<div class="trend-notes" style="text-align:center;margin-top:2rem;">
+  ⏱️ 数据生成时间：{{ d.generated_at }}
+</div>
+
+</div>
+{%- endif -%}
