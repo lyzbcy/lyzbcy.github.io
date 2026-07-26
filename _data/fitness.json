@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-07-25T16:06:14.688801",
+  "generated_at": "2026-07-26T18:25:00.362710",
   "overview": {
-    "total_sessions": 18,
-    "total_sessions_recent_4w": 8,
-    "avg_sessions_per_week": 2.3,
-    "total_sets": 182,
-    "total_volume": 58818.0,
+    "total_sessions": 19,
+    "total_sessions_recent_4w": 9,
+    "avg_sessions_per_week": 2.4,
+    "total_sets": 195,
+    "total_volume": 62292.0,
     "date_range": {
       "first": "2026-05-31",
-      "last": "2026-07-25"
+      "last": "2026-07-26"
     },
     "preferences": {
       "warmupSets": 2,
@@ -21,22 +21,39 @@
   },
   "sessions": [
     {
+      "date": "2026-07-26",
+      "split": "push",
+      "split_label": "推日",
+      "total_sets": 13,
+      "total_volume": 3474,
+      "exercises": [
+        "分动式卧推",
+        "绳索侧平举",
+        "直杆下压",
+        "坐姿哑铃推肩",
+        "坐姿推胸",
+        "面拉"
+      ],
+      "duration_min": 68,
+      "note": "推日，饭后缓启动"
+    },
+    {
       "date": "2026-07-25",
       "split": "legs",
       "split_label": "腿日",
       "total_sets": 16,
       "total_volume": 7095,
       "exercises": [
-        "倒蹬机",
-        "坐姿髋内收",
-        "史密斯臀桥",
-        "坐姿腿弯举",
         "轨道俯身划船器",
-        "引体向上",
-        "绳索侧平举",
-        "宽距引体向上",
+        "史密斯臀桥",
         "高位下拉",
-        "器械悬垂举腿"
+        "倒蹬机",
+        "绳索侧平举",
+        "引体向上",
+        "宽距引体向上",
+        "器械悬垂举腿",
+        "坐姿髋内收",
+        "坐姿腿弯举"
       ],
       "duration_min": 105,
       "note": "腿日开练"
@@ -61,12 +78,12 @@
       "total_sets": 14,
       "total_volume": 3963.0,
       "exercises": [
-        "面拉",
         "绳索下压",
-        "坐姿推胸",
-        "固定胸飞鸟下胸",
         "分动式卧推",
-        "坐姿哑铃推肩"
+        "坐姿哑铃推肩",
+        "坐姿推胸",
+        "面拉",
+        "固定胸飞鸟下胸"
       ],
       "duration_min": 76,
       "note": "推日开练"
@@ -78,8 +95,8 @@
       "total_sets": 3,
       "total_volume": 1050,
       "exercises": [
-        "史密斯卧推",
-        "宽距引体向上"
+        "宽距引体向上",
+        "史密斯卧推"
       ],
       "duration_min": 14,
       "note": "推日开练，胸前先激活背"
@@ -91,12 +108,12 @@
       "total_sets": 10,
       "total_volume": 3525,
       "exercises": [
-        "坐姿髋内收",
-        "坐姿腿弯举",
+        "坐姿髋外展",
         "卷腹",
         "反向哈克深蹲",
-        "坐姿髋外展",
-        "器械悬垂举腿"
+        "器械悬垂举腿",
+        "坐姿髋内收",
+        "坐姿腿弯举"
       ],
       "duration_min": 32,
       "note": "腿日，反向哈克为主"
@@ -108,12 +125,12 @@
       "total_sets": 13,
       "total_volume": 3528.0,
       "exercises": [
-        "杠铃卧推",
-        "器械牧师凳弯举",
-        "宽距引体向上",
         "坐姿划船",
-        "分体式高位下拉",
-        "窄距对握引体向上"
+        "器械牧师凳弯举",
+        "杠铃卧推",
+        "宽距引体向上",
+        "窄距对握引体向上",
+        "分体式高位下拉"
       ],
       "duration_min": 32,
       "note": "拉日速训，午休时间"
@@ -125,14 +142,14 @@
       "total_sets": 14,
       "total_volume": 3628,
       "exercises": [
-        "坐姿器械飞鸟",
-        "卷腹",
-        "坐姿器械推肩",
-        "坐姿推胸",
         "分动式卧推",
+        "卷腹",
         "高位下拉",
-        "器械悬垂举腿",
-        "宽距引体向上"
+        "坐姿推胸",
+        "坐姿器械飞鸟",
+        "坐姿器械推肩",
+        "宽距引体向上",
+        "器械悬垂举腿"
       ],
       "duration_min": 58,
       "note": "练胸日，带背激活动作"
@@ -145,9 +162,9 @@
       "total_volume": 3540,
       "exercises": [
         "分体式跪姿腿弯举",
-        "坐姿腿弯举",
         "器械悬垂举腿",
-        "正向哈克深蹲"
+        "正向哈克深蹲",
+        "坐姿腿弯举"
       ],
       "duration_min": null,
       "note": "腿日1h20min+游泳，病后恢复期"
@@ -159,10 +176,10 @@
       "total_sets": 7,
       "total_volume": 2039,
       "exercises": [
-        "分体式高位下拉",
-        "窄距对握引体向上",
+        "宽距引体向上",
         "器械牧师凳弯举",
-        "宽距引体向上"
+        "窄距对握引体向上",
+        "分体式高位下拉"
       ],
       "duration_min": 34,
       "note": "生病中（周一着凉，嗓子痛/有痰/鼻涕），午休速训"
@@ -174,11 +191,11 @@
       "total_sets": 17,
       "total_volume": 5122,
       "exercises": [
-        "坐姿器械飞鸟",
-        "史密斯卧推",
-        "绳索下压",
         "蝴蝶机夹胸",
+        "绳索下压",
+        "史密斯卧推",
         "坐姿哑铃推肩",
+        "坐姿器械飞鸟",
         "器械悬垂举腿"
       ],
       "duration_min": 47,
@@ -191,12 +208,12 @@
       "total_sets": 11,
       "total_volume": 3710,
       "exercises": [
-        "坐姿髋内收",
-        "史密斯臀桥",
-        "坐姿腿弯举",
-        "正向哈克深蹲",
         "坐姿髋外展",
-        "器械悬垂举腿"
+        "史密斯臀桥",
+        "正向哈克深蹲",
+        "器械悬垂举腿",
+        "坐姿髋内收",
+        "坐姿腿弯举"
       ],
       "duration_min": 61,
       "note": "练腿日，时间长榨透"
@@ -208,9 +225,9 @@
       "total_sets": 7,
       "total_volume": 1870,
       "exercises": [
-        "坐姿划船",
+        "宽距引体向上",
         "杠铃弯举",
-        "宽距引体向上"
+        "坐姿划船"
       ],
       "duration_min": null,
       "note": "短时拉日速训，1点前收工"
@@ -222,8 +239,8 @@
       "total_sets": 10,
       "total_volume": 5004,
       "exercises": [
-        "固定胸飞鸟",
         "坐姿器械飞鸟",
+        "固定胸飞鸟",
         "史密斯卧推"
       ],
       "duration_min": 46,
@@ -236,8 +253,8 @@
       "total_sets": 4,
       "total_volume": 2160,
       "exercises": [
-        "坐姿划船",
-        "宽距引体向上"
+        "宽距引体向上",
+        "坐姿划船"
       ],
       "duration_min": null,
       "note": "练背+二头，先在寝室拉引体"
@@ -249,9 +266,9 @@
       "total_sets": 9,
       "total_volume": 1925.0,
       "exercises": [
+        "宽距引体向上",
         "坐姿器械卷腹",
-        "坐姿腿屈伸",
-        "宽距引体向上"
+        "坐姿腿屈伸"
       ],
       "duration_min": 40,
       "note": "练腿+腹+引体"
@@ -263,11 +280,11 @@
       "total_sets": 12,
       "total_volume": 3469,
       "exercises": [
-        "反向山羊挺身静态支撑",
-        "龙门架下压",
         "史密斯卧推",
+        "龙门架下压",
+        "坐姿器械推肩",
         "站姿器械飞鸟",
-        "坐姿器械推肩"
+        "反向山羊挺身静态支撑"
       ],
       "duration_min": 38,
       "note": "练胸+肩中束+肩前束+三头"
@@ -279,9 +296,9 @@
       "total_sets": 8,
       "total_volume": 1595,
       "exercises": [
+        "宽距引体向上",
         "悍马分动式高位下拉",
-        "牧师椅二头弯举",
-        "宽距引体向上"
+        "牧师椅二头弯举"
       ],
       "duration_min": 31,
       "note": "练背+二头+肩后束"
@@ -293,10 +310,10 @@
       "total_sets": 12,
       "total_volume": 4695.0,
       "exercises": [
-        "固定胸飞鸟下胸",
-        "分动式卧推",
+        "坐姿器械飞鸟",
         "坐姿哑铃推肩",
-        "坐姿器械飞鸟"
+        "固定胸飞鸟下胸",
+        "分动式卧推"
       ],
       "duration_min": 43,
       "note": "练胸+肩中束+肩前束+腹"
@@ -400,14 +417,6 @@
       "volume": 550
     },
     {
-      "exercise": "坐姿推胸",
-      "muscle_group": "chest",
-      "weight": 54,
-      "reps": 10,
-      "note": "极限",
-      "volume": 540
-    },
-    {
       "exercise": "坐姿髋内收",
       "muscle_group": "legs",
       "weight": 40,
@@ -421,6 +430,14 @@
       "weight": 60,
       "reps": 7,
       "note": "极限",
+      "volume": 420
+    },
+    {
+      "exercise": "绳索下压",
+      "muscle_group": "arms",
+      "weight": 60,
+      "reps": 7,
+      "note": "新PR！2026-07-26 龙门架直杆",
       "volume": 420
     },
     {
@@ -453,6 +470,14 @@
       "weight": 80,
       "reps": 3,
       "note": "极限冲击",
+      "volume": 240
+    },
+    {
+      "exercise": "坐姿推胸",
+      "muscle_group": "chest",
+      "weight": 60,
+      "reps": 4,
+      "note": "新PR！2026-07-26 极限重量突破",
       "volume": 240
     },
     {
@@ -532,7 +557,7 @@
     {
       "group": "chest",
       "label": "胸",
-      "total_volume": 16253.0
+      "total_volume": 17883.0
     },
     {
       "group": "quads",
@@ -540,14 +565,14 @@
       "total_volume": 9445.0
     },
     {
+      "group": "lateral_delt",
+      "label": "肩中束",
+      "total_volume": 6903.0
+    },
+    {
       "group": "mid_back",
       "label": "中背",
       "total_volume": 6735.0
-    },
-    {
-      "group": "lateral_delt",
-      "label": "肩中束",
-      "total_volume": 6543.0
     },
     {
       "group": "lats",
@@ -560,9 +585,19 @@
       "total_volume": 4100.0
     },
     {
+      "group": "triceps",
+      "label": "肱三头肌",
+      "total_volume": 2420.0
+    },
+    {
       "group": "core",
       "label": "核心",
       "total_volume": 2065.0
+    },
+    {
+      "group": "shoulders",
+      "label": "肩前束",
+      "total_volume": 2010.0
     },
     {
       "group": "inner_thigh",
@@ -570,19 +605,9 @@
       "total_volume": 1835.0
     },
     {
-      "group": "shoulders",
-      "label": "肩前束",
-      "total_volume": 1790.0
-    },
-    {
       "group": "glutes",
       "label": "臀",
       "total_volume": 1500.0
-    },
-    {
-      "group": "triceps",
-      "label": "肱三头肌",
-      "total_volume": 1480.0
     },
     {
       "group": "back",
@@ -597,7 +622,7 @@
     {
       "group": "rear_delt",
       "label": "肩后束",
-      "total_volume": 315.0
+      "total_volume": 639.0
     }
   ],
   "volume_trend": [
@@ -643,8 +668,8 @@
     },
     {
       "week": "2026-W30",
-      "volume": 7995.0,
-      "sessions": 20
+      "volume": 11469.0,
+      "sessions": 33
     }
   ],
   "exercises": [
@@ -679,6 +704,16 @@
       "total_volume": 1155.0
     },
     {
+      "name": "分动式卧推",
+      "total_sets": 12,
+      "max_weight": 60,
+      "max_reps": 13,
+      "last_date": "2026-07-26",
+      "last_weight": 60,
+      "last_reps": 10,
+      "total_volume": 3560.0
+    },
+    {
       "name": "坐姿器械飞鸟",
       "total_sets": 11,
       "max_weight": 47,
@@ -689,6 +724,16 @@
       "total_volume": 4444.0
     },
     {
+      "name": "坐姿哑铃推肩",
+      "total_sets": 11,
+      "max_weight": 20,
+      "max_reps": 12,
+      "last_date": "2026-07-26",
+      "last_weight": 15,
+      "last_reps": 10,
+      "total_volume": 1320.0
+    },
+    {
       "name": "坐姿腿弯举",
       "total_sets": 10,
       "max_weight": 50,
@@ -697,26 +742,6 @@
       "last_weight": 50,
       "last_reps": 20,
       "total_volume": 3990.0
-    },
-    {
-      "name": "分动式卧推",
-      "total_sets": 9,
-      "max_weight": 60,
-      "max_reps": 13,
-      "last_date": "2026-07-19",
-      "last_weight": 50,
-      "last_reps": 10,
-      "total_volume": 2520.0
-    },
-    {
-      "name": "坐姿哑铃推肩",
-      "total_sets": 9,
-      "max_weight": 20,
-      "max_reps": 12,
-      "last_date": "2026-07-19",
-      "last_weight": 20,
-      "last_reps": 12,
-      "total_volume": 1100.0
     },
     {
       "name": "坐姿划船",
@@ -737,6 +762,16 @@
       "last_weight": 30,
       "last_reps": 12,
       "total_volume": 3075.0
+    },
+    {
+      "name": "坐姿推胸",
+      "total_sets": 7,
+      "max_weight": 60,
+      "max_reps": 12,
+      "last_date": "2026-07-26",
+      "last_weight": 60,
+      "last_reps": 7,
+      "total_volume": 2225.0
     },
     {
       "name": "坐姿器械推肩",
@@ -769,14 +804,14 @@
       "total_volume": 4220.0
     },
     {
-      "name": "坐姿推胸",
+      "name": "绳索侧平举",
       "total_sets": 5,
-      "max_weight": 40,
-      "max_reps": 12,
-      "last_date": "2026-07-19",
-      "last_weight": 35,
-      "last_reps": 12,
-      "total_volume": 1635.0
+      "max_weight": 15,
+      "max_reps": 20,
+      "last_date": "2026-07-26",
+      "last_weight": 15,
+      "last_reps": 15,
+      "total_volume": 575.0
     },
     {
       "name": "站姿器械飞鸟",
@@ -969,6 +1004,16 @@
       "total_volume": 1600.0
     },
     {
+      "name": "面拉",
+      "total_sets": 2,
+      "max_weight": 27,
+      "max_reps": 15,
+      "last_date": "2026-07-26",
+      "last_weight": 27,
+      "last_reps": 12,
+      "total_volume": 639.0
+    },
+    {
       "name": "器械T杠划船",
       "total_sets": 2,
       "max_weight": 50,
@@ -979,14 +1024,14 @@
       "total_volume": 900.0
     },
     {
-      "name": "绳索侧平举",
+      "name": "直杆下压",
       "total_sets": 2,
-      "max_weight": 15,
-      "max_reps": 20,
-      "last_date": "2026-07-25",
-      "last_weight": 15,
-      "last_reps": 20,
-      "total_volume": 215.0
+      "max_weight": 60,
+      "max_reps": 13,
+      "last_date": "2026-07-26",
+      "last_weight": 60,
+      "last_reps": 13,
+      "total_volume": 940.0
     },
     {
       "name": "反向山羊挺身静态支撑",
@@ -1027,16 +1072,6 @@
       "last_weight": 40,
       "last_reps": 4,
       "total_volume": 160.0
-    },
-    {
-      "name": "面拉",
-      "total_sets": 1,
-      "max_weight": 21,
-      "max_reps": 15,
-      "last_date": "2026-07-19",
-      "last_weight": 21,
-      "last_reps": 15,
-      "total_volume": 315.0
     },
     {
       "name": "轨道俯身划船器",
