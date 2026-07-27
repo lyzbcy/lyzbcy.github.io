@@ -3,7 +3,7 @@
 
 import json
 import os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from collections import defaultdict
 
 WORKSPACE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -23,6 +23,8 @@ def parse_date(s):
 def main():
     # 加载数据
     records = load_jsonl(os.path.join(WORKSPACE, "fitness", "records.jsonl"))
+    # 防御：跳过缺 date 字段的脏记录（增量手写 JSONL 可能偶发漏字段）
+    records = [r for r in records if r.get("date")]
     with open(os.path.join(WORKSPACE, "fitness", "config.json")) as f:
         config = json.load(f)
     with open(os.path.join(WORKSPACE, "fitness", "exercises.json")) as f:
@@ -131,10 +133,15 @@ def main():
             "total_volume": round(muscle_volume[mg], 1)
         })
     muscle_balance.sort(key=lambda x: x["total_volume"], reverse=True)
-    # 派生：各肌群占总训练量的百分比（看板堆叠条直接用，避免 Liquid 循环计算）
+    # 派生、各肌群占总训练量的百分比（看板堆叠条直接用，避免 Liquid 循环计算）
     total_muscle_volume = sum(m["total_volume"] for m in muscle_balance)
     for m in muscle_balance:
         m["percentage"] = round(m["total_volume"] * 100.0 / total_muscle_volume, 1) if total_muscle_volume > 0 else 0
+    # 修正浮点累积误差（14 项 round 后可能和=99.9）：把误差吸收进最大那一项
+    if muscle_balance:
+        pct_sum = round(sum(m["percentage"] for m in muscle_balance), 1)
+        if pct_sum != 100.0:
+            muscle_balance[0]["percentage"] = round(muscle_balance[0]["percentage"] + (100.0 - pct_sum), 1)
 
     # 训练量趋势（周汇总）
     weekly_volume = defaultdict(float)
@@ -199,7 +206,7 @@ def main():
 
     # ── 输出 ──
     output = {
-        "generated_at": datetime.now().isoformat(),
+        "generated_at": datetime.now(timezone(timedelta(hours=8))).isoformat(),
         "overview": {
             "total_sessions": session_count,
             "total_sessions_recent_4w": recent_count,
