@@ -21,12 +21,23 @@ module EncryptContent
 
   module_function
 
+  # 取密码柜哈希：优先从环境变量（CI/Actions 用 Secret 注入），其次从 site.data（本地文件）
+  # 这样密码柜文件永不进 git，但 CI 仍能构建加密文章。
+  def load_secrets(site)
+    env_yaml = ENV['JEKYLL_ENCRYPTION_SECRETS']&.strip
+    return YAML.safe_load(env_yaml) || {} unless env_yaml.nil? || env_yaml.empty?
+
+    site.data['encryption_secrets'] || {}
+  end
+
   # 从密码柜取密码
   def fetch_password(site, ref)
-    secrets = site.data['encryption_secrets']
-    raise "加密文章缺少密码柜：请创建 _data/encryption_secrets.yml" if secrets.nil?
+    secrets = load_secrets(site)
+    if secrets.nil? || secrets.empty?
+      raise "加密文章缺少密码柜：请创建 _data/encryption_secrets.yml，或在 CI 中设置 JEKYLL_ENCRYPTION_SECRETS 环境变量"
+    end
     pwd = secrets[ref]
-    raise "密码柜无 '#{ref}' 键（_data/encryption_secrets.yml）" if pwd.nil?
+    raise "密码柜无 '#{ref}' 键（_data/encryption_secrets.yml 或 JEKYLL_ENCRYPTION_SECRETS）" if pwd.nil?
     pwd.to_s
   end
 

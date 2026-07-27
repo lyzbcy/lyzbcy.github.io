@@ -1,0 +1,93 @@
+name: "Build and Deploy"
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - .gitignore
+      - README.md
+      - LICENSE
+      - CHANGELOG.md
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: write   # 需要 push _site 到 gh-pages
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3
+          bundler-cache: true
+
+      - name: Build site
+        run: bundle exec jekyll b -d "_site"
+        env:
+          JEKYLL_ENV: "production"
+          # 密码柜通过 Secret 注入为环境变量（不进 git）
+          JEKYLL_ENCRYPTION_SECRETS: ${{ secrets.ENCRYPTION_SECRETS_YML }}
+
+      - name: Check build output
+        run: |
+          echo "=== _site 文件数 ==="
+          find _site -type f | wc -l
+          echo "=== 关键产物存在性 ==="
+          for f in _posts/* _site/index.html; do
+            [ -e "$f" ] && echo "✅ $f" || echo "❌ 缺失: $f"
+          done
+
+      - name: Upload site artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: _site
+          retention-days: 1
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout gh-pages
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: gh-pages
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Download site artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: _site-new
+
+      - name: Deploy to gh-pages
+        run: |
+          # 清空 gh-pages（保留 .git），用新构建产物替换
+          find . -mindepth 1 -maxdepth 1 ! -name '.git' ! -name '_site-new' -exec rm -rf {} +
+          cp -a _site-new/. .
+          rm -rf _site-new
+          touch .nojekyll
+          git add -A
+          git commit -m "deploy: $(date -u '+%Y-%m-%d %H:%M') build of ${GITHUB_SHA::7}" || echo "Nothing to commit"
+          git push origin gh-pages
