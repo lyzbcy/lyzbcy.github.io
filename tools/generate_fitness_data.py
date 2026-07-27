@@ -131,6 +131,10 @@ def main():
             "total_volume": round(muscle_volume[mg], 1)
         })
     muscle_balance.sort(key=lambda x: x["total_volume"], reverse=True)
+    # 派生：各肌群占总训练量的百分比（看板堆叠条直接用，避免 Liquid 循环计算）
+    total_muscle_volume = sum(m["total_volume"] for m in muscle_balance)
+    for m in muscle_balance:
+        m["percentage"] = round(m["total_volume"] * 100.0 / total_muscle_volume, 1) if total_muscle_volume > 0 else 0
 
     # 训练量趋势（周汇总）
     weekly_volume = defaultdict(float)
@@ -143,13 +147,22 @@ def main():
         weekly_sessions[week_key] += 1
 
     volume_trend = []
+    # 派生：标记本周（看板柱状图高亮用）
+    today_iso = datetime.now().isocalendar()
+    current_week_key = (today_iso[0], today_iso[1])
     for wk in sorted(weekly_volume.keys()):
         year, week = wk
         volume_trend.append({
             "week": f"{year}-W{week:02d}",
             "volume": round(weekly_volume[wk], 1),
-            "sessions": weekly_sessions[wk]
+            "sessions": weekly_sessions[wk],
+            "is_current": wk == current_week_key,
+            "is_latest": False  # 循环后回填最后一个为 True
         })
+
+    # 回填：最后一个有数据的周标记为 is_latest（看板高亮最新数据用）
+    if volume_trend:
+        volume_trend[-1]["is_latest"] = True
 
     # 最喜欢的动作（按频次）
     exercise_freq = defaultdict(int)
@@ -197,7 +210,10 @@ def main():
                 "first": all_dates[0] if all_dates else None,
                 "last": all_dates[-1] if all_dates else None
             },
-            "preferences": config.get("preferences", {})
+            "preferences": config.get("preferences", {}),
+            # 派生：看板 KPI 卡直接用（避免 Liquid size 过滤器链）
+            "muscle_groups_count": len(muscle_volume),
+            "exercises_count": len(exercise_metrics)
         },
         "sessions": session_summaries,
         "personal_records": prs,
