@@ -2,29 +2,57 @@
 layout: home
 # Index page - Chirpy blog home (restored)
 # World-entry banner is injected at top by assets/lib-custom/world-banner.js
+# 首页留言板（评论区）由下方脚本动态注入
 ---
 
-<div class="row">
-  <div class="col-12 mt-5 pt-4">
-    <h2 class="text-center mb-4">💬 留言板</h2>
-    <p class="text-center text-muted mb-4">欢迎在这里和我交流 — 想法、建议、或者随便聊聊</p>
-    <div class="giscus"></div>
-  </div>
-</div>
+<!-- 留言板：在 DOMContentLoaded 时注入到 #board 容器顶部 -->
+<div id="home-giscus-mount" style="display:none;"></div>
+<script>
+(function () {
+  function loadGiscus() {
+    var mount = document.getElementById("home-giscus-mount");
+    if (!mount || mount.dataset.loaded) return;
+    mount.dataset.loaded = "1";
+    mount.style.display = "block";
+    mount.style.cssText = "max-width:820px;margin:48px auto 32px;padding:0 16px;";
 
-<script src="https://giscus.app/client.js"
-        data-repo="lyzbcy/lyzbcy.github.io"
-        data-repo-id="R_kgDOQMgcsQ"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOQMgcsc4DCIAs"
-        data-mapping="specific"
-        data-term="首页留言板"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        data-lang="zh-CN"
-        crossorigin="anonymous"
-        async>
+    var h = document.createElement("h2");
+    h.textContent = "💬 留言板";
+    h.style.cssText = "text-align:center;margin-bottom:8px;";
+    var p = document.createElement("p");
+    p.textContent = "欢迎在这里和我交流 — 想法、建议、或者随便聊聊";
+    p.style.cssText = "text-align:center;color:#6b7280;margin-bottom:24px;";
+    var box = document.createElement("div");
+    box.className = "giscus";
+    mount.appendChild(h);
+    mount.appendChild(p);
+    mount.appendChild(box);
+
+    var s = document.createElement("script");
+    s.src = "https://giscus.app/client.js";
+    ["data-repo|lyzbcy/lyzbcy.github.io",
+     "data-repo-id|R_kgDOQMgcsQ",
+     "data-category|Announcements",
+     "data-category-id|DIC_kwDOQMgcsc4DCIAs",
+     "data-mapping|specific",
+     "data-term|首页留言板",
+     "data-strict|0",
+     "data-reactions-enabled|1",
+     "data-emit-metadata|0",
+     "data-input-position|bottom",
+     "data-theme|preferred_color_scheme",
+     "data-lang|zh-CN"].forEach(function (pair) {
+      var kv = pair.split("|");
+      s.setAttribute(kv[0], kv[1]);
+    });
+    s.setAttribute("crossorigin", "anonymous");
+    s.async = true;
+    mount.appendChild(s);
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", loadGiscus);
+  } else {
+    loadGiscus();
+  }
+})();
 </script>
