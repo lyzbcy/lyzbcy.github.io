@@ -20,6 +20,40 @@ def load_jsonl(path):
 def parse_date(s):
     return datetime.fromisoformat(s).date() if isinstance(s, str) else s
 
+def get_fun_comparison(volume_kg):
+    """将训练量转换为生动的参照物描述。
+    按总重量从高到低匹配，优先选择数量在 1-20 之间的参照物（最直观）。"""
+    refs = [
+        (150000, "头蓝鲸 🐋"),
+        (80000,  "架空客A320 ✈️"),
+        (40000,  "辆重型卡车 🚛"),
+        (12000,  "辆中型巴士 🚌"),
+        (6000,   "头成年非洲象 🐘"),
+        (1500,   "辆家用小轿车 🚗"),
+        (600,    "架三角钢琴 🎹"),
+        (200,    "辆重型摩托车 🏍️"),
+    ]
+    # 优先选数量在 1-20 之间的，然后按重量从大到小选
+    candidates = []
+    for weight, desc in refs:
+        count = volume_kg / weight
+        if 1 <= count <= 20:
+            candidates.append((count, weight, desc))
+    if not candidates:
+        # 没在1-20区间的，取最接近1的那个
+        best = min(refs, key=lambda r: abs(volume_kg / r[0] - 1))
+        count = volume_kg / best[0]
+        candidates = [(count, best[0], best[1])]
+    # 按数量从小到大排列（越少越震撼："举起了一架飞机" > "举起了15辆摩托车"）
+    candidates.sort(key=lambda x: x[0])
+    count, weight, desc = candidates[0]
+    if count <= 1.2:
+        return f"相当于举起了一{desc}"
+    elif count < 10:
+        return f"相当于举起了 {count:.1f} {desc}"
+    else:
+        return f"相当于举起了 {count:.0f} {desc}"
+
 def main():
     # 加载数据
     records = load_jsonl(os.path.join(WORKSPACE, "fitness", "records.jsonl"))
@@ -220,7 +254,8 @@ def main():
             "preferences": config.get("preferences", {}),
             # 派生：看板 KPI 卡直接用（避免 Liquid size 过滤器链）
             "muscle_groups_count": len(muscle_volume),
-            "exercises_count": len(exercise_metrics)
+            "exercises_count": len(exercise_metrics),
+            "fun_fact": get_fun_comparison(round(sum(s.get("weight", 0) * s.get("reps", 0) for s in sets), 1))
         },
         "sessions": session_summaries,
         "personal_records": prs,
