@@ -1,63 +1,63 @@
 {
-  "generated_at": "2026-07-29T10:18:14.367333+08:00",
+  "generated_at": "2026-07-29T16:16:08.986691+08:00",
   "overview": {
-    "total_play": 135483,
+    "total_play": 135530,
     "total_works": 28,
     "total_comments": 441,
     "play_delta": 0,
     "comment_delta": 0,
-    "avg_completion_rate_5s": 0.0044,
-    "avg_bounce_rate_2s": 0.0032,
+    "avg_completion_rate_5s": 0.4403,
+    "avg_bounce_rate_2s": 0.3166,
     "best_work": {
       "title": "坏消息",
       "tags": [],
-      "play_count": 45562
+      "play_count": 45566
     },
     "last_updated": "2026-07-29",
     "snapshot_count": 1
   },
   "top_works": [
     {
-      "id": 120,
+      "id": 176,
       "title": "坏消息",
       "tags": [],
       "desc_full": "坏消息\nqoder每天200次免费额度好像没了 \n好消息\n美团好像有一个免费的ai工具开放了（支持claude，GLM5.2，gpt）\n我先来试试😋",
       "publish_time": "2026-06-23 13:26:06",
-      "play_count": 45562,
-      "avg_play_duration": 7.34,
-      "completion_rate_5s": 0.0043,
-      "bounce_rate_2s": 0.0036,
+      "play_count": 45566,
+      "avg_play_duration": 7.35,
+      "completion_rate_5s": 0.4281,
+      "bounce_rate_2s": 0.3583,
       "comments": 56,
-      "engagement_score": 0.5003
+      "engagement_score": 0.5349
     },
     {
-      "id": 118,
+      "id": 174,
       "title": "一键写实验报告.skill skill虽好切勿贪杯",
       "tags": [],
       "desc_full": "一键写实验报告.skill skill虽好切勿贪杯\n禁止直接一句话让主播的skill生成实验报告然后转成pdf就直接交了（虽然可以做到） \n建议人类在工作中起到指导、掌舵、了解基本全貌的作用，这样才是会用ai",
       "publish_time": "2026-06-30 00:36:02",
-      "play_count": 14007,
-      "avg_play_duration": 8.04,
-      "completion_rate_5s": 0.0038,
-      "bounce_rate_2s": 0.003,
+      "play_count": 14009,
+      "avg_play_duration": 8.05,
+      "completion_rate_5s": 0.3811,
+      "bounce_rate_2s": 0.3021,
       "comments": 17,
-      "engagement_score": 0.5004
+      "engagement_score": 0.5395
     },
     {
-      "id": 134,
+      "id": 190,
       "title": "仅供辅助作用 自己学还是最重要的 详细使用说明：",
       "tags": [],
       "desc_full": "仅供辅助作用 自己学还是最重要的 详细使用说明：\n最好是用cursor，claude code，codex等编辑器，openclaw也可以，网页版的ai使用起来可能比较吃力。\n————————————\n【编辑器推荐prompt：】\n请查看并拉取github上\"lyzbcy/experiment-report-skill\"，并把这个skill放入合适的skill文件夹下，下次当我提到\"写实验报告\"相关词时，会自动调用这个skill。\n————————————\n【网页版ai推荐prompt：】\n请先访问（这里填仓库链接 我不能写出来 会被判定为引导到别的平台），根据这个skill的要求，完成我的实验报告，我的具体实验报告题目如下：xxx\n————————————\n仓库：lyzbcy/experiment-report-skill",
       "publish_time": "2026-05-17 21:28:15",
       "play_count": 12088,
       "avg_play_duration": 8.55,
-      "completion_rate_5s": 0.0047,
-      "bounce_rate_2s": 0.003,
+      "completion_rate_5s": 0.4747,
+      "bounce_rate_2s": 0.3048,
       "comments": 75,
-      "engagement_score": 0.5009
+      "engagement_score": 0.585
     },
     {
-      "id": 131,
+      "id": 187,
       "title": "codex一周重置两次周额度 简直太美味了！愿令牌流动",
       "tags": [
         "程序猿日常",
@@ -66,28 +66,28 @@
       ],
       "desc_full": "codex一周重置两次周额度 简直太美味了！愿令牌流动 #程序猿日常 #codex #vibecoding",
       "publish_time": "2026-06-04 13:45:09",
-      "play_count": 11773,
+      "play_count": 11775,
       "avg_play_duration": 21.34,
-      "completion_rate_5s": 0.0056,
-      "bounce_rate_2s": 0.0026,
+      "completion_rate_5s": 0.562,
+      "bounce_rate_2s": 0.2627,
       "comments": 75,
-      "engagement_score": 0.5015
+      "engagement_score": 0.6497
     },
     {
-      "id": 124,
+      "id": 180,
       "title": "GLM 5.2还是不错的 尤其是在长链路任务重比较出色，可以长时间运作。感觉思…",
       "tags": [],
       "desc_full": "GLM 5.2还是不错的 尤其是在长链路任务重比较出色，可以长时间运作。感觉思考时间会相对来说比较久，难道是用思考时间换回答质量莫。不到1T的模型快要和8T的gpt5.5能掰手腕还是特别让我震惊的。而且5.2开源，国产模型应该会有更多自由开发者投入进去，非常期待啊！可惜不能支持多模态。",
       "publish_time": "2026-06-15 20:50:28",
       "play_count": 8775,
       "avg_play_duration": 7.59,
-      "completion_rate_5s": 0.0042,
-      "bounce_rate_2s": 0.0031,
+      "completion_rate_5s": 0.4173,
+      "bounce_rate_2s": 0.3125,
       "comments": 22,
-      "engagement_score": 0.5006
+      "engagement_score": 0.5524
     },
     {
-      "id": 130,
+      "id": 186,
       "title": "免费的那还说啥了",
       "tags": [
         "vibecoding",
@@ -98,13 +98,13 @@
       "publish_time": "2026-06-04 23:54:57",
       "play_count": 7642,
       "avg_play_duration": 13.3,
-      "completion_rate_5s": 0.0049,
-      "bounce_rate_2s": 0.0024,
+      "completion_rate_5s": 0.4925,
+      "bounce_rate_2s": 0.2434,
       "comments": 9,
-      "engagement_score": 0.5012
+      "engagement_score": 0.6245
     },
     {
-      "id": 123,
+      "id": 179,
       "title": "vibecoding大赏|全自动微信表情包制作并发布~ 目前已经对这个skil…",
       "tags": [
         "vibecoding大赏"
@@ -113,39 +113,39 @@
       "publish_time": "2026-06-15 23:46:27",
       "play_count": 6465,
       "avg_play_duration": 8.23,
-      "completion_rate_5s": 0.0044,
-      "bounce_rate_2s": 0.0022,
+      "completion_rate_5s": 0.444,
+      "bounce_rate_2s": 0.2225,
       "comments": 13,
-      "engagement_score": 0.5011
+      "engagement_score": 0.6108
     },
     {
-      "id": 117,
+      "id": 173,
       "title": "什么？一键制作微信表情包都来了 微信表情包一键制作&发布的skill的后续来啦~",
       "tags": [],
       "desc_full": "什么？一键制作微信表情包都来了 微信表情包一键制作&发布的skill的后续来啦~\n目前已经做了近60弹了\n打算先沉淀沉淀，打磨一下质量（我完全没监工的四十几弹质量太差了 表情都开始吐舌头扮鬼脸了）\n期待这个系列与你的下次见面~",
       "publish_time": "2026-07-02 00:12:25",
       "play_count": 4877,
-      "avg_play_duration": 11.88,
-      "completion_rate_5s": 0.0034,
-      "bounce_rate_2s": 0.0033,
+      "avg_play_duration": 11.89,
+      "completion_rate_5s": 0.34,
+      "bounce_rate_2s": 0.3339,
       "comments": 13,
-      "engagement_score": 0.5
+      "engagement_score": 0.503
     },
     {
-      "id": 114,
+      "id": 170,
       "title": "codex放开五小时额度",
       "tags": [],
       "desc_full": "codex放开五小时额度\ncodex为了5.6测试已经重置了好多好多次了\n感谢奥特曼",
       "publish_time": "2026-07-13 13:10:27",
-      "play_count": 4682,
+      "play_count": 4685,
       "avg_play_duration": 8.61,
-      "completion_rate_5s": 0.0042,
-      "bounce_rate_2s": 0.003,
+      "completion_rate_5s": 0.4188,
+      "bounce_rate_2s": 0.3037,
       "comments": 19,
-      "engagement_score": 0.5006
+      "engagement_score": 0.5575
     },
     {
-      "id": 129,
+      "id": 185,
       "title": "如何节省token|快问快答",
       "tags": [
         "苏州话",
@@ -155,17 +155,17 @@
       "desc_full": "如何节省token|快问快答 #苏州话 #快问快答 #ai",
       "publish_time": "2026-06-06 17:56:15",
       "play_count": 3726,
-      "avg_play_duration": 12.62,
-      "completion_rate_5s": 0.0051,
-      "bounce_rate_2s": 0.0031,
+      "avg_play_duration": 12.63,
+      "completion_rate_5s": 0.5091,
+      "bounce_rate_2s": 0.3076,
       "comments": 6,
-      "engagement_score": 0.501
+      "engagement_score": 0.6008
     }
   ],
   "trend": [
     {
       "date": "2026-07-29",
-      "play": 135483,
+      "play": 135530,
       "works": 28,
       "comments": 441
     }
