@@ -9,7 +9,9 @@ theme: jekyll-theme-chirpy
 lang: zh-CN
 
 # Change to your timezone › https://zones.arilyn.cc
-timezone:
+timezone: Asia/Shanghai
+# 发布未来日期的文章（Cron 凌晨 02:00 触发时，文章日期可能比 UTC 构建时间晚几小时，导致被 Jekyll 当未来文章跳过 → 看板 404）
+future: true
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
