@@ -1,117 +1,179 @@
 {
-  "generated_at": "2026-07-29T01:42:13.970586+08:00",
+  "generated_at": "2026-07-29T08:49:21.829492+08:00",
   "overview": {
     "total_play": 19239,
     "total_works": 10,
     "total_comments": 0,
     "play_delta": 0,
     "comment_delta": 0,
+    "avg_completion_rate_5s": 0.4339,
+    "avg_bounce_rate_2s": 0.3174,
     "best_work": {
-      "title": "仅供辅助作用 自己学还是最重要的 详细使用说明：\n最好是用cursor，claude code，codex等编辑器，openclaw也可以，网页版的ai使用起来可能比较吃力。\n————————————\n【编辑器推荐prompt：】\n请查看并拉取github上\"lyzbcy/experiment-report-skill\"，并把这个skill放入合适的skill文件夹下，下次当我提到\"写实验报告\"相关词时，会自动调用这个skill。\n————————————\n【网页版ai推荐prompt：】\n请先访问（这里填仓库链接 我不能写出来 会被判定为引导到别的平台），根据这个skill的要求，完成我的实验报告，我的具体实验报告题目如下：xxx\n————————————\n仓库：lyzbcy/experiment-report-skill",
+      "title": "仅供辅助作用 自己学还是最重要的 详细使用说明：",
+      "tags": [],
       "play_count": 12026
     },
-    "last_updated": "2026-07-29"
+    "last_updated": "2026-07-29",
+    "snapshot_count": 1
   },
   "top_works": [
     {
       "id": "7640851945976057103",
-      "title": "仅供辅助作用 自己学还是最重要的 详细使用说明：\n最好是用cursor，claude code，codex等编辑器，openclaw也可以，网页版的ai使用起来可能比较吃力。\n————————————\n【编辑器推荐prompt：】\n请查看并拉取github上\"lyzbcy/experiment-report-skill\"，并把这个skill放入合适的skill文件夹下，下次当我提到\"写实验报告\"相关词时，会自动调用这个skill。\n————————————\n【网页版ai推荐prompt：】\n请先访问（这里填仓库链接 我不能写出来 会被判定为引导到别的平台），根据这个skill的要求，完成我的实验报告，我的具体实验报告题目如下：xxx\n————————————\n仓库：lyzbcy/experiment-report-skill",
-      "create_time": "",
+      "title": "仅供辅助作用 自己学还是最重要的 详细使用说明：",
+      "tags": [],
+      "desc_full": "仅供辅助作用 自己学还是最重要的 详细使用说明：\n最好是用cursor，claude code，codex等编辑器，openclaw也可以，网页版的ai使用起来可能比较吃力。\n————————————\n【编辑器推荐prompt：】\n请查看并拉取github上\"lyzbcy/experiment-report-skill\"，并把这个skill放入合适的skill文件夹下，下次当我提到\"写实验报告\"相关词时，会自动调用这个skill。\n————————————\n【网页版ai推荐prompt：】\n请先访问（这里填仓库链接 我不能写出来 会被判定为引导到别的平台），根据这个skill的要求，完成我的实验报告，我的具体实验报告题目如下：xxx\n————————————\n仓库：lyzbcy/experiment-report-skill",
+      "publish_time": "2026-05-17 21:28",
       "play_count": 12026,
       "avg_play_duration": 8.56,
       "completion_rate_5s": 0.4753,
       "bounce_rate_2s": 0.3038,
-      "comments": 0
+      "comments": 0,
+      "engagement_score": 0.5857
     },
     {
       "id": "7647412189208333602",
-      "title": "codex一周重置两次周额度 简直太美味了！愿令牌流动 #程序猿日常 #codex #vibecoding",
-      "create_time": "",
+      "title": "codex一周重置两次周额度 简直太美味了！愿令牌流动",
+      "tags": [
+        "程序猿日常",
+        "codex",
+        "vibecoding"
+      ],
+      "desc_full": "codex一周重置两次周额度 简直太美味了！愿令牌流动 #程序猿日常 #codex #vibecoding",
+      "publish_time": "2026-06-04 13:45",
       "play_count": 3773,
       "avg_play_duration": 10.65,
       "completion_rate_5s": 0.3845,
       "bounce_rate_2s": 0.3524,
-      "comments": 0
+      "comments": 0,
+      "engagement_score": 0.5161
     },
     {
       "id": "7647009504671976756",
-      "title": "vibe coding大赏|当我打开老电脑上一个奇怪的exe #vibecoding大赏 #ai新星计划 @抖音科技",
-      "create_time": "",
+      "title": "vibe coding大赏|当我打开老电脑上一个奇怪的exe   @抖音科技",
+      "tags": [
+        "vibecoding大赏",
+        "ai新星计划"
+      ],
+      "desc_full": "vibe coding大赏|当我打开老电脑上一个奇怪的exe #vibecoding大赏 #ai新星计划 @抖音科技",
+      "publish_time": "2026-06-03 11:42",
       "play_count": 2002,
       "avg_play_duration": 5.62,
       "completion_rate_5s": 0.3759,
       "bounce_rate_2s": 0.2464,
-      "comments": 0
+      "comments": 0,
+      "engagement_score": 0.5648
     },
     {
       "id": "7635650633454544099",
-      "title": "",
-      "create_time": "",
+      "title": "无文案作品",
+      "tags": [],
+      "desc_full": "",
+      "publish_time": "2026-05-03 21:04",
       "play_count": 370,
       "avg_play_duration": 6.19,
       "completion_rate_5s": 0.3103,
       "bounce_rate_2s": 0.4439,
-      "comments": 0
+      "comments": 0,
+      "engagement_score": 0.4332
     },
     {
       "id": "7635319351553314624",
       "title": "啊 晕倒",
-      "create_time": "",
+      "tags": [],
+      "desc_full": "啊 晕倒",
+      "publish_time": "2026-05-02 23:38",
       "play_count": 368,
       "avg_play_duration": 5.96,
       "completion_rate_5s": 0.2506,
       "bounce_rate_2s": 0.4052,
-      "comments": 0
+      "comments": 0,
+      "engagement_score": 0.4227
     },
     {
       "id": "7635919866449569408",
-      "title": "#一涵宝宝 #喜欢一涵宝宝 #嘿嘿",
-      "create_time": "",
+      "title": "无文案作品",
+      "tags": [
+        "一涵宝宝",
+        "喜欢一涵宝宝",
+        "嘿嘿"
+      ],
+      "desc_full": "#一涵宝宝 #喜欢一涵宝宝 #嘿嘿",
+      "publish_time": "2026-05-04 14:28",
       "play_count": 178,
       "avg_play_duration": 9.67,
       "completion_rate_5s": 0.3894,
       "bounce_rate_2s": 0.4071,
-      "comments": 0
+      "comments": 0,
+      "engagement_score": 0.4911
     },
     {
       "id": "7639025643561200719",
-      "title": "最近在和美丽的小姐闯荡游戏江湖！#推荐治愈经营游戏 #生活碎片 #游戏还能这么玩",
-      "create_time": "",
+      "title": "最近在和美丽的小姐闯荡游戏江湖！",
+      "tags": [
+        "推荐治愈经营游戏",
+        "生活碎片",
+        "游戏还能这么玩"
+      ],
+      "desc_full": "最近在和美丽的小姐闯荡游戏江湖！#推荐治愈经营游戏 #生活碎片 #游戏还能这么玩",
+      "publish_time": "2026-05-12 23:20",
       "play_count": 177,
       "avg_play_duration": 5.68,
       "completion_rate_5s": 0.1468,
       "bounce_rate_2s": 0.5505,
-      "comments": 0
+      "comments": 0,
+      "engagement_score": 0.2982
     },
     {
       "id": "7637093200749923627",
-      "title": "我们喜欢恰恰恰恰恰 #最喜欢的星星布丁 #星星布丁 #情侣 #新吃法 #这也能开播",
-      "create_time": "",
+      "title": "我们喜欢恰恰恰恰恰",
+      "tags": [
+        "最喜欢的星星布丁",
+        "星星布丁",
+        "情侣",
+        "新吃法",
+        "这也能开播"
+      ],
+      "desc_full": "我们喜欢恰恰恰恰恰 #最喜欢的星星布丁 #星星布丁 #情侣 #新吃法 #这也能开播",
+      "publish_time": "2026-05-07 18:22",
       "play_count": 173,
       "avg_play_duration": 5.86,
       "completion_rate_5s": 0.3024,
       "bounce_rate_2s": 0.4976,
-      "comments": 0
+      "comments": 0,
+      "engagement_score": 0.4024
     },
     {
       "id": "7645977923631074586",
-      "title": "vibecoding大赏┃每天写两篇小说 我是怎么做到的 #vibecoding大赏 #ai新星计划",
-      "create_time": "",
+      "title": "vibecoding大赏┃每天写两篇小说 我是怎么做到的",
+      "tags": [
+        "vibecoding大赏",
+        "ai新星计划"
+      ],
+      "desc_full": "vibecoding大赏┃每天写两篇小说 我是怎么做到的 #vibecoding大赏 #ai新星计划",
+      "publish_time": "2026-05-31 16:59",
       "play_count": 167,
       "avg_play_duration": 15.56,
       "completion_rate_5s": 0.4286,
       "bounce_rate_2s": 0.3514,
-      "comments": 0
+      "comments": 0,
+      "engagement_score": 0.5386
     },
     {
       "id": "7647569277175745807",
-      "title": "免费的那还说啥了 #vibecoding #qoder #codex",
-      "create_time": "",
+      "title": "免费的那还说啥了",
+      "tags": [
+        "vibecoding",
+        "qoder",
+        "codex"
+      ],
+      "desc_full": "免费的那还说啥了 #vibecoding #qoder #codex",
+      "publish_time": "2026-06-04 23:54",
       "play_count": 5,
       "avg_play_duration": 14.33,
       "completion_rate_5s": 0.5,
       "bounce_rate_2s": 0.3333,
-      "comments": 0
+      "comments": 0,
+      "engagement_score": 0.5834
     }
   ],
   "trend": [
