@@ -78,10 +78,16 @@
 .douyin-board .dy-progress > span { display: block; height: 100%; background: linear-gradient(90deg, var(--dy-green), #059669); }
 .douyin-board .dy-progress.warn > span { background: linear-gradient(90deg, #f59e0b, #d97706); }
 .douyin-board .dy-progress.bad > span { background: linear-gradient(90deg, var(--dy-red), #dc2626); }
-.douyin-board .dy-quality { font-weight: 700; }
-.douyin-board .dy-quality.good { color: var(--dy-green); }
-.douyin-board .dy-quality.mid { color: #f59e0b; }
-.douyin-board .dy-quality.bad { color: var(--dy-red); }
+.douyin-board .dy-quality { display: inline-block; min-width: 30px; text-align: center; font-weight: 700; font-size: 12px; padding: 2px 7px; border-radius: 6px; line-height: 1.4; }
+/* 质量分：浅底 + 彩色文字 + 彩色边框（推流指标） */
+.douyin-board .dy-quality.good { color: #059669; background: #d1fae5; }
+.douyin-board .dy-quality.mid { color: #d97706; background: #fef3c7; }
+.douyin-board .dy-quality.bad { color: #dc2626; background: #fee2e2; }
+/* 价值分：实心彩底 + 白字（长期价值，用 .dy-value-score 区分） */
+.douyin-board .dy-value-score { display: inline-block; min-width: 30px; text-align: center; font-weight: 700; font-size: 12px; padding: 2px 7px; border-radius: 6px; line-height: 1.4; color: #fff; }
+.douyin-board .dy-value-score.good { background: var(--dy-green); }
+.douyin-board .dy-value-score.mid { background: #10b981; }
+.douyin-board .dy-value-score.bad { background: #9ca3af; }
 
 /* 可排序表头 */
 .douyin-board .dy-sort-th { cursor: pointer; user-select: none; white-space: nowrap; transition: color 0.15s; }
@@ -297,9 +303,9 @@
         <td>
           {% assign v = w.value_score | default: 0 %}
           {% assign v_pct = v | times: 100 | round: 0 %}
-          {% if v_pct >= 60 %}<span class="dy-quality good" style="background:var(--dy-green);" title="收藏/评论/关注价值">{{ v_pct }}</span>
-          {% elsif v_pct >= 40 %}<span class="dy-quality mid" style="background:var(--dy-green);" title="收藏/评论/关注价值">{{ v_pct }}</span>
-          {% else %}<span class="dy-quality bad" style="background:#d1d5db;color:#fff;" title="收藏/评论/关注价值">{{ v_pct }}</span>{% endif %}
+          {% if v_pct >= 60 %}<span class="dy-value-score good" title="收藏/评论/关注价值（越高越值得做）">{{ v_pct }}</span>
+          {% elsif v_pct >= 40 %}<span class="dy-value-score mid" title="收藏/评论/关注价值">{{ v_pct }}</span>
+          {% else %}<span class="dy-value-score bad" title="收藏/评论/关注价值">{{ v_pct }}</span>{% endif %}
         </td>
       </tr>
       {% endfor %}
