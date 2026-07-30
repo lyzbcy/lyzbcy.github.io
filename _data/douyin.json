@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-30T15:10:20.804740+08:00",
+  "generated_at": "2026-07-30T17:49:59.652475+08:00",
   "overview": {
     "total_play": 135600,
     "total_works": 27,
-    "total_comments": 442,
+    "total_comments": 443,
     "play_delta": 1075,
-    "comment_delta": 442,
+    "comment_delta": 443,
     "avg_completion_rate_5s": 0.4227,
     "avg_bounce_rate_2s": 0.3166,
     "best_work": {
@@ -18,7 +18,7 @@
   },
   "top_works": [
     {
-      "id": 452,
+      "id": 479,
       "item_id": "7654457925264768162",
       "title": "坏消息",
       "tags": [],
@@ -42,7 +42,7 @@
       "value_sufficient": true
     },
     {
-      "id": 454,
+      "id": 481,
       "item_id": "7656857045957676338",
       "title": "一键写实验报告.skill skill虽好切勿贪杯",
       "tags": [],
@@ -55,18 +55,18 @@
       "comments": 17,
       "likes": 167,
       "shares": 7,
-      "favorites": 99,
+      "favorites": 101,
       "danmaku": 0,
       "profile_visits": 173,
       "follower_gain": 17,
       "cover": "/img/douyin-covers/7656857045957676338.jpg",
       "engagement_score": 0.5395,
-      "quality_score": 0.2253,
-      "value_score": 0.5492,
+      "quality_score": 0.226,
+      "value_score": 0.5511,
       "value_sufficient": true
     },
     {
-      "id": 440,
+      "id": 467,
       "item_id": "7640851945976057103",
       "title": "仅供辅助作用 自己学还是最重要的 详细使用说明：",
       "tags": [],
@@ -90,7 +90,7 @@
       "value_sufficient": true
     },
     {
-      "id": 443,
+      "id": 470,
       "item_id": "7647412189208333602",
       "title": "codex一周重置两次周额度 简直太美味了！愿令牌流动",
       "tags": [
@@ -118,7 +118,7 @@
       "value_sufficient": true
     },
     {
-      "id": 448,
+      "id": 475,
       "item_id": "7651603719582158130",
       "title": "GLM 5.2还是不错的 尤其是在长链路任务重比较出色，可以长时间运作。感觉思…",
       "tags": [],
@@ -142,7 +142,7 @@
       "value_sufficient": true
     },
     {
-      "id": 444,
+      "id": 471,
       "item_id": "7647569277175745807",
       "title": "免费的那还说啥了",
       "tags": [
@@ -170,7 +170,7 @@
       "value_sufficient": true
     },
     {
-      "id": 449,
+      "id": 476,
       "item_id": "7651649039531822345",
       "title": "vibecoding大赏|全自动微信表情包制作并发布~ 目前已经对这个skil…",
       "tags": [
@@ -196,7 +196,7 @@
       "value_sufficient": true
     },
     {
-      "id": 455,
+      "id": 482,
       "item_id": "7657593115926072639",
       "title": "什么？一键制作微信表情包都来了 微信表情包一键制作&发布的skill的后续来啦~",
       "tags": [],
@@ -220,7 +220,7 @@
       "value_sufficient": true
     },
     {
-      "id": 458,
+      "id": 485,
       "item_id": "7661875597287217103",
       "title": "codex放开五小时额度",
       "tags": [],
@@ -244,7 +244,7 @@
       "value_sufficient": true
     },
     {
-      "id": 445,
+      "id": 472,
       "item_id": "7648219070755556643",
       "title": "如何节省token|快问快答",
       "tags": [
@@ -274,7 +274,7 @@
   ],
   "all_works": [
     {
-      "id": 452,
+      "id": 479,
       "item_id": "7654457925264768162",
       "title": "坏消息",
       "tags": [],
@@ -298,7 +298,7 @@
       "value_sufficient": true
     },
     {
-      "id": 454,
+      "id": 481,
       "item_id": "7656857045957676338",
       "title": "一键写实验报告.skill skill虽好切勿贪杯",
       "tags": [],
@@ -311,18 +311,18 @@
       "comments": 17,
       "likes": 167,
       "shares": 7,
-      "favorites": 99,
+      "favorites": 101,
       "danmaku": 0,
       "profile_visits": 173,
       "follower_gain": 17,
       "cover": "/img/douyin-covers/7656857045957676338.jpg",
       "engagement_score": 0.5395,
-      "quality_score": 0.2253,
-      "value_score": 0.5492,
+      "quality_score": 0.226,
+      "value_score": 0.5511,
       "value_sufficient": true
     },
     {
-      "id": 440,
+      "id": 467,
       "item_id": "7640851945976057103",
       "title": "仅供辅助作用 自己学还是最重要的 详细使用说明：",
       "tags": [],
@@ -346,7 +346,7 @@
       "value_sufficient": true
     },
     {
-      "id": 443,
+      "id": 470,
       "item_id": "7647412189208333602",
       "title": "codex一周重置两次周额度 简直太美味了！愿令牌流动",
       "tags": [
@@ -374,7 +374,7 @@
       "value_sufficient": true
     },
     {
-      "id": 448,
+      "id": 475,
       "item_id": "7651603719582158130",
       "title": "GLM 5.2还是不错的 尤其是在长链路任务重比较出色，可以长时间运作。感觉思…",
       "tags": [],
@@ -398,7 +398,7 @@
       "value_sufficient": true
     },
     {
-      "id": 444,
+      "id": 471,
       "item_id": "7647569277175745807",
       "title": "免费的那还说啥了",
       "tags": [
@@ -426,7 +426,7 @@
       "value_sufficient": true
     },
     {
-      "id": 449,
+      "id": 476,
       "item_id": "7651649039531822345",
       "title": "vibecoding大赏|全自动微信表情包制作并发布~ 目前已经对这个skil…",
       "tags": [
@@ -452,7 +452,7 @@
       "value_sufficient": true
     },
     {
-      "id": 455,
+      "id": 482,
       "item_id": "7657593115926072639",
       "title": "什么？一键制作微信表情包都来了 微信表情包一键制作&发布的skill的后续来啦~",
       "tags": [],
@@ -476,7 +476,7 @@
       "value_sufficient": true
     },
     {
-      "id": 458,
+      "id": 485,
       "item_id": "7661875597287217103",
       "title": "codex放开五小时额度",
       "tags": [],
@@ -500,7 +500,7 @@
       "value_sufficient": true
     },
     {
-      "id": 445,
+      "id": 472,
       "item_id": "7648219070755556643",
       "title": "如何节省token|快问快答",
       "tags": [
@@ -528,7 +528,7 @@
       "value_sufficient": true
     },
     {
-      "id": 447,
+      "id": 474,
       "item_id": "7650851403698988352",
       "title": "尝尝GLM 5.2。GLM 5.1之前说对标Sonnet 4.6，现在GLM …",
       "tags": [],
@@ -552,7 +552,7 @@
       "value_sufficient": true
     },
     {
-      "id": 456,
+      "id": 483,
       "item_id": "7659050048805801252",
       "title": "操作你 @vivikiki",
       "tags": [],
@@ -576,7 +576,7 @@
       "value_sufficient": true
     },
     {
-      "id": 442,
+      "id": 469,
       "item_id": "7647009504671976756",
       "title": "vibe coding大赏|当我打开老电脑上一个奇怪的exe   @抖音科技",
       "tags": [
@@ -603,7 +603,7 @@
       "value_sufficient": true
     },
     {
-      "id": 460,
+      "id": 487,
       "item_id": "7667383612505647842",
       "title": "自用的健身ai好物分享～",
       "tags": [],
@@ -627,7 +627,7 @@
       "value_sufficient": true
     },
     {
-      "id": 450,
+      "id": 477,
       "item_id": "7652546926793035058",
       "title": "两天花费3000元|智谱新模型体验日报 最近智谱5.2出来了，大家很看好这个模…",
       "tags": [],
@@ -651,7 +651,7 @@
       "value_sufficient": true
     },
     {
-      "id": 451,
+      "id": 478,
       "item_id": "7653173464018324786",
       "title": "vibecoding大赏 | 顶层设计是很有必要的 绝大多数的编程任务，ai都…",
       "tags": [],
@@ -675,7 +675,7 @@
       "value_sufficient": true
     },
     {
-      "id": 459,
+      "id": 486,
       "item_id": "7665715266957656162",
       "title": "秋招妙妙工具制作中",
       "tags": [
@@ -701,7 +701,7 @@
       "value_sufficient": true
     },
     {
-      "id": 435,
+      "id": 462,
       "item_id": "7635319351553314624",
       "title": "啊 晕倒",
       "tags": [],
@@ -725,7 +725,7 @@
       "value_sufficient": false
     },
     {
-      "id": 436,
+      "id": 463,
       "item_id": "7635650633454544099",
       "title": "作品7635650633454544099",
       "tags": [],
@@ -749,7 +749,7 @@
       "value_sufficient": false
     },
     {
-      "id": 446,
+      "id": 473,
       "item_id": "7648362834698489122",
       "title": "仅为日常分享",
       "tags": [
@@ -776,7 +776,7 @@
       "value_sufficient": false
     },
     {
-      "id": 457,
+      "id": 484,
       "item_id": "7659079404672322858",
       "title": "AI项目周报 | 睡觉也能学习的项目预热中 不好意思搁了这么久",
       "tags": [],
@@ -800,7 +800,7 @@
       "value_sufficient": false
     },
     {
-      "id": 441,
+      "id": 468,
       "item_id": "7645977923631074586",
       "title": "vibecoding大赏┃每天写两篇小说 我是怎么做到的",
       "tags": [
@@ -827,7 +827,7 @@
       "value_sufficient": false
     },
     {
-      "id": 437,
+      "id": 464,
       "item_id": "7635919866449569408",
       "title": "无文案作品",
       "tags": [
@@ -855,7 +855,7 @@
       "value_sufficient": false
     },
     {
-      "id": 439,
+      "id": 466,
       "item_id": "7639025643561200719",
       "title": "最近在和美丽的小姐闯荡游戏江湖！",
       "tags": [
@@ -883,7 +883,7 @@
       "value_sufficient": false
     },
     {
-      "id": 438,
+      "id": 465,
       "item_id": "7637093200749923627",
       "title": "我们喜欢恰恰恰恰恰",
       "tags": [
@@ -913,7 +913,7 @@
       "value_sufficient": false
     },
     {
-      "id": 453,
+      "id": 480,
       "item_id": "7654764685053234787",
       "title": "作品7654764685053234787",
       "tags": [],
@@ -937,7 +937,7 @@
       "value_sufficient": false
     },
     {
-      "id": 461,
+      "id": 488,
       "item_id": "7667968699497127266",
       "title": "江南大学校外商业圈美食宿舍排行～",
       "tags": [],
@@ -947,17 +947,17 @@
       "avg_play_duration": 6.07,
       "completion_rate_5s": 0.2069,
       "bounce_rate_2s": 0.4138,
-      "comments": 13,
-      "likes": 60,
-      "shares": 44,
-      "favorites": 37,
+      "comments": 14,
+      "likes": 66,
+      "shares": 52,
+      "favorites": 42,
       "danmaku": 0,
       "profile_visits": 1,
       "follower_gain": 3,
-      "cover": "",
+      "cover": "/img/douyin-covers/7667968699497127266.jpg",
       "engagement_score": 0.3966,
       "quality_score": 0.5493,
-      "value_score": 0.9366,
+      "value_score": 0.9389,
       "value_sufficient": false
     }
   ],
@@ -972,7 +972,7 @@
       "date": "2026-07-30",
       "play": 135600,
       "works": 27,
-      "comments": 442
+      "comments": 443
     }
   ],
   "all_snapshots": [
