@@ -23,7 +23,8 @@
       description: '鲜香味道一开盖就扑鼻，细细小小的面条在汤里极度吸味，整碗就是简单却不平庸的快乐。',
       pros: ['海鲜汤底够鲜，香气非常顶', '细面条吸汁，口感柔韧'],
       cons: [],
-      note: '喜欢喝汤的可以多泡一会，让汤更浓。'
+      note: '喜欢喝汤的可以多泡一会，让汤更浓。',
+      bgImage: imageBasePath + encodeURIComponent('海鲜拉面-汤达人.png')
     },
     {
       name: '安徽板面-卤香牛肉板面【今麦郎】',
@@ -33,7 +34,8 @@
       description: '宽面条超级带劲，卤香牛肉味越嚼越香，完全属于“吃一口顿悟板面真谛”的类型。',
       pros: ['宽面筋道，入口有嚼劲', '卤香味浓郁，越吃越香'],
       cons: [],
-      note: '汤多泡一会口感更均衡。'
+      note: '汤多泡一会口感更均衡。',
+      bgImage: imageBasePath + encodeURIComponent('安徽板面-今麦郎.jpeg'),
     },
     {
       name: '番茄肉酱风味拌面【茄皇】',
@@ -43,7 +45,8 @@
       description: '番茄香气饱满又不腻，拌面酱料直接拉满满足感，番茄党闭眼冲的级别。',
       pros: ['番茄味扎实，不是空口号', '作为拌面酱多但不腻'],
       cons: [],
-      note: '酱多的话记得留一点面汤调开，口感更丝滑。'
+      note: '酱多的话记得留一点面汤调开，口感更丝滑。',
+      bgImage: imageBasePath + encodeURIComponent('番茄肉酱拌面-茄皇.jpeg')
     },
     {
       name: '海鲜风味【合味道】',
@@ -53,7 +56,8 @@
       description: '杯面小巧，但海鲜味确实够鲜。唯一缺点就是份量迷你，大杯也撑不起胃。',
       pros: ['海鲜味足，鲜味稳定发挥', '开盖方便，杯面随时吃'],
       cons: ['份量偏少，大杯也吃不饱', '面容易有点坨'],
-      note: '当作下午茶或夜宵小点最合适。'
+      note: '当作下午茶或夜宵小点最合适。',
+      bgImage: imageBasePath + encodeURIComponent('海鲜风味-合味道.jpeg'),
     },
     {
       name: '刀削宽面-红烧牛肉面【今麦郎】',
@@ -63,7 +67,8 @@
       description: '刀削感的宽面在速食里难得，面身宽厚更入味，红烧牛肉味稳稳当当。',
       pros: ['面体宽厚且入味', '红烧牛肉味扎实不跑偏'],
       cons: [],
-      note: '泡完后建议再焖一分钟，让刀削口感更软弹。'
+      note: '泡完后建议再焖一分钟，让刀削口感更软弹。',
+      bgImage: imageBasePath + encodeURIComponent('刀削宽面红烧牛肉-今麦郎.jpeg'),
     },
     {
       name: '辣牛肉汤面【汤达人】',
@@ -73,7 +78,8 @@
       description: '入口是微辣带点酸甜，吃完再喝汤会回到微辣，让人记住的火辣余韵超级鲜明。',
       pros: ['辣味层次丰富，先柔后烈', '酸甜平衡，把辣度托得很顺'],
       cons: [],
-      note: '想体验辣味的后劲，最后一定要喝汤。'
+      note: '想体验辣味的后劲，最后一定要喝汤。',
+      bgImage: imageBasePath + encodeURIComponent('辣牛肉汤面-汤达人.jpg')
     },
     {
       name: '金汤肥牛面【康师傅】',
@@ -83,7 +89,8 @@
       description: '酸甜微辣全都沾一点，但没有明显短板，厚面饼配金汤就是稳健代表。',
       pros: ['面饼厚实耐泡', '汤底酸甜辣均衡，无明显缺点'],
       cons: [],
-      note: ''
+      note: '',
+      bgImage: imageBasePath + encodeURIComponent('金汤肥牛面-康师傅.jpeg'),
     },
     {
       name: '老坛酸菜牛肉面【统一】',
@@ -93,7 +100,8 @@
       description: '无需多言的老坛酸菜味，酸爽和牛肉香的平衡就是速食界的白月光。',
       pros: ['酸菜脆爽，味道经典', '香气层次熟悉又不过时'],
       cons: [],
-      note: '泡面界永远的安全选项。'
+      note: '泡面界永远的安全选项。',
+      bgImage: imageBasePath + encodeURIComponent('老坛酸菜牛肉面-统一.png'),
     },
     {
       name: '鲜虾鱼板面【康师傅】',
@@ -103,7 +111,8 @@
       description: '海鲜感不如海鲜系列鲜，但胜在份量足，吃完特别满足。',
       pros: ['量大实惠，吃完很满足', '搭配鱼板增加口感'],
       cons: ['鲜味不算突出'],
-      note: ''
+      note: '',
+      bgImage: imageBasePath + encodeURIComponent('鲜虾鱼板面-康师傅.webp'),
     },
     {
       name: '双萝卜牛腩面【康师傅】',
@@ -113,7 +122,8 @@
       description: '闻起来是卤味，吃着不算重口，脆脆萝卜像随机奖励，但也容易吃腻。',
       pros: ['萝卜脆感很惊喜', '卤香味舒服不过头'],
       cons: ['容易吃腻，风格偏单一'],
-      note: ''
+      note: '',
+      bgImage: imageBasePath + encodeURIComponent('双萝卜牛腩面-康师傅.webp'),
     },
     {
       name: '韩式土豆排骨风味【嗦粉】',
@@ -123,7 +133,8 @@
       description: '粉面混合体很有劲，味道像妙脆角磨成粉撒进去，怪好吃的零食风。',
       pros: ['面粉混合口感很特别', '味道像零食一样上头'],
       cons: ['想要传统排骨味的人可能不适应'],
-      note: ''
+      note: '',
+      bgImage: imageBasePath + encodeURIComponent('韩式土豆排骨-嗦粉.jpeg'),
     },
     {
       name: '藤椒拌面【康师傅】',
@@ -133,17 +144,19 @@
       description: '针对拌面做了油水平衡，但藤椒存在感太弱，整体平平无奇。',
       pros: ['口味调得很平衡，不油腻'],
       cons: ['藤椒香太弱，记忆点不足'],
-      note: ''
+      note: '',
+      bgImage: imageBasePath + encodeURIComponent('藤椒拌面-康师傅.jpg'),
     },
     {
-      name: '粉面菜蛋-港式肥汁【千里薯】',
+      name: '粉面菜蛋-港式肥汁【杨掌柜】',
       tier: '人上人',
       tierLabel: '人上人 · 4❤️港式重口',
       rating: 3,
       description: '风味很港式，辣度对我来说有点重，属于偶尔想念港味时的选择。',
       pros: ['港式风味到位', '粉面混搭口感丰富'],
       cons: ['对不吃辣的人来说偏重口'],
-      note: ''
+      note: '',
+      bgImage: imageBasePath + encodeURIComponent('粉面菜蛋港式肥汁-千里薯.jpeg'),
     },
     {
       name: '老坛泡椒牛肉面【统一】',
@@ -153,7 +166,8 @@
       description: '想模仿老坛酸菜但没超越，泡椒味有点抢戏，还没酸菜吃，整体中规中矩。',
       pros: ['泡椒爱好者会喜欢微辣酸的味道'],
       cons: ['泡椒喧宾夺主，缺了酸菜的灵魂'],
-      note: ''
+      note: '',
+      bgImage: imageBasePath + encodeURIComponent('老坛泡椒牛肉面-统一.webp'),
     },
     {
       name: '羊肉汤面【白象】',
@@ -163,7 +177,8 @@
       description: '感觉像对标康师傅香辣牛肉面，羊肉汤底增加一点新鲜感。',
       pros: ['羊汤味带来新鲜体验'],
       cons: ['整体风味似曾相识'],
-      note: ''
+      note: '',
+      bgImage: imageBasePath + encodeURIComponent('羊肉汤面-白象.jpeg'),
     },
     {
       name: '罗宋汤面【汤达人】',
@@ -173,7 +188,8 @@
       description: '酸酸甜甜，除此之外没有太多亮点，属于温和型面。',
       pros: ['口味清爽，不压胃'],
       cons: ['缺乏特色，记忆点不多'],
-      note: ''
+      note: '',
+      bgImage: imageBasePath + encodeURIComponent('罗宋汤面-汤达人.jpeg')
     },
     {
       name: '红烧牛肉面【康师傅】',
@@ -183,7 +199,8 @@
       description: '经典守门员，表现稳定但熟悉到缺乏惊喜。',
       pros: ['稳定发挥的经典味', '随处可买，安全感满满'],
       cons: ['太熟悉，惊喜感为零'],
-      note: ''
+      note: '',
+      bgImage: imageBasePath + encodeURIComponent('红烧牛肉面-康师傅.png'),
     },
     {
       name: '海鲜浓汤面【白象】',
@@ -193,7 +210,8 @@
       description: '细扁面条配海鲜味，吃起来像泡水版波力渔趣，趣味多过惊喜。',
       pros: ['面条细扁，吸汤快'],
       cons: ['味型像零食泡水，层次不足'],
-      note: ''
+      note: '',
+      bgImage: imageBasePath + encodeURIComponent('海鲜浓汤面-白象.png'),
     },
     {
       name: '赤豚骨浓汤风味【合味道】',
@@ -203,7 +221,8 @@
       description: '味道偏淡，完全靠合味道的情怀分撑着才能留在3❤️。',
       pros: ['汤底顺口不油'],
       cons: ['味道太淡，存在感弱'],
-      note: ''
+      note: '',
+      bgImage: imageBasePath + encodeURIComponent('赤豚骨浓汤-合味道.jpg'),
     },
     {
       name: '兰州牛肉面【阿宽】',
@@ -213,7 +232,8 @@
       description: '比真正兰州拉面更淡且嚼劲不足，本身没错，只是我不爱。',
       pros: ['味道温和，容易入口'],
       cons: ['嚼劲与原版相比差一截'],
-      note: ''
+      note: '',
+      bgImage: imageBasePath + encodeURIComponent('兰州牛肉面-阿宽.png'),
     },
     {
       name: '老母鸡汤面【白象】',
@@ -223,7 +243,8 @@
       description: '明明潜力满分却一直差那一下，不够鲜导致吃完心里空落落。',
       pros: ['汤头顺口，基础扎实'],
       cons: ['鲜味不足，不上不下'],
-      note: ''
+      note: '',
+      bgImage: imageBasePath + encodeURIComponent('老母鸡汤面-白象.png'),
     },
     {
       name: '番茄面【统一】',
@@ -233,7 +254,8 @@
       description: '番茄味很一般，除了番茄就没别的特色，吃完印象模糊。',
       pros: ['番茄味道稳定，不会翻车'],
       cons: ['缺乏亮点，味型单薄'],
-      note: ''
+      note: '',
+      bgImage: imageBasePath + encodeURIComponent('番茄面-统一.jpeg'),
     },
     {
       name: '番茄炖牛腩【杨掌柜】',
@@ -243,7 +265,8 @@
       description: '有股塑料味，卤蛋也像没洗干净的茶叶蛋，整体违和。',
       pros: [],
       cons: ['番茄味假，卤蛋口感怪'],
-      note: ''
+      note: '',
+      bgImage: imageBasePath + encodeURIComponent('番茄炖牛腩-杨掌柜.jpeg'),
     },
     {
       name: '番茄鸡蛋面【康师傅】',
@@ -253,7 +276,8 @@
       description: '汤还不错，但面本身没什么特色，喝汤>吃面。',
       pros: ['汤底顺口'],
       cons: ['面条没有记忆点'],
-      note: ''
+      note: '',
+      bgImage: imageBasePath + encodeURIComponent('番茄鸡蛋面-康师傅.jpeg'),
     },
     {
       name: '经典番茄肉酱意大利面【怡芽】',
@@ -263,7 +287,8 @@
       description: '低脂高蛋白的宣传确实亮眼，但即使在减脂期也不会拿它当正餐，因为味道比起茄皇版本明显逊色。',
       pros: ['低脂高蛋白，营养标签友好', '意面形态方便控制分量'],
       cons: ['番茄酱不如茄皇浓郁好吃', '整体口味偏寡，饱腹满足感低'],
-      note: '更适合偶尔换口味的小食，而非真正用来填饱肚子。'
+      note: '更适合偶尔换口味的小食，而非真正用来填饱肚子。',
+      bgImage: imageBasePath + encodeURIComponent('番茄肉酱意面-怡芽.jpg'),
     },
     {
       name: '香菜面',
@@ -273,7 +298,8 @@
       description: '香菜味浓烈到连香菜控都受不了，属于直接送进史册的程度。',
       pros: [],
       cons: ['香菜味太夸张，难以下咽'],
-      note: ''
+      note: '',
+      bgImage: imageBasePath + encodeURIComponent('香菜面.jpeg'),
     },
     {
       name: '蒜香猪骨汤面【白象】',
@@ -283,7 +309,8 @@
       description: '蒜香搭配猪骨汤呈现出怪异味道，像是在报复社会。',
       pros: [],
       cons: ['蒜香与猪骨味混在一起非常怪'],
-      note: ''
+      note: '',
+      bgImage: imageBasePath + encodeURIComponent('蒜香猪骨汤面-白象.webp'),
     }
   ];
 
