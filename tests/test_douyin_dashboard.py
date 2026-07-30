@@ -3,13 +3,15 @@ import unittest
 
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-POST = ROOT / "_posts" / "2026-07-29-抖音数据看板.md"
+# 看板的 HTML/Liquid/CSS/JS 实现已从 markdown 文章抽到 _includes（避免被
+# jekyll 二次 markdown 转换吞噬），所以这些实现细节断言改为检查 include 文件。
+INCLUDE = ROOT / "_includes" / "douyin-board.html"
 
 
 class DashboardSourceTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.source = POST.read_text(encoding="utf-8")
+        cls.source = INCLUDE.read_text(encoding="utf-8")
 
     def test_untrusted_work_text_is_escaped(self):
         self.assertIn("w.desc_full | default: w.title | escape", self.source)
