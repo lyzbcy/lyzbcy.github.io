@@ -42,11 +42,14 @@
       var cover = document.getElementById('dy-detail-cover');
       if (d.cover) { cover.src = d.cover; cover.alt = d.title || ''; cover.style.display = ''; } else { cover.style.display = 'none'; }
       document.getElementById('dy-d-play').textContent = d.play || '-';
+      document.getElementById('dy-d-likes').textContent = d.likes || '0';
+      document.getElementById('dy-d-favorites').textContent = d.favorites || '0';
+      document.getElementById('dy-d-comments').textContent = d.comments || '0';
+      document.getElementById('dy-d-shares').textContent = d.shares || '0';
+      document.getElementById('dy-d-follow').textContent = '+' + (d.follow || '0');
       document.getElementById('dy-d-comp').textContent = (d.comp || '-') + (d.comp ? '%' : '');
-      document.getElementById('dy-d-bounce').textContent = (d.bounce || '-') + (d.bounce ? '%' : '');
-      document.getElementById('dy-d-dur').textContent = d.dur ? d.dur + 's' : '-';
-      document.getElementById('dy-d-pub').textContent = d.pub || '-';
-      document.getElementById('dy-d-score').textContent = d.score || '-';
+      document.getElementById('dy-d-quality').textContent = d.quality || '-';
+      document.getElementById('dy-d-value').textContent = d.value || '-';
       panel.hidden = false;
       panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
@@ -153,7 +156,8 @@
       var d = row.dataset;
       if (key === 'play') return parseInt(d.play, 10) || 0;
       if (key === 'comp') return parseFloat(d.comp) || 0;
-      if (key === 'score') return parseInt(d.score, 10) || 0;
+      if (key === 'quality') return parseInt(d.quality, 10) || 0;
+      if (key === 'value') return parseInt(d.value, 10) || 0;
       if (key === 'pub') {
         // publish_time 正常为 "YYYY-MM-DD HH:MM" 零填充格式，字典序即时间序。
         // 但数据来自自动抓取，为兼容非零填充（如 2026-6-3 9:05），优先用时间戳排序；
