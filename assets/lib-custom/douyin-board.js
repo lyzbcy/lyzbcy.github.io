@@ -40,7 +40,7 @@
       document.getElementById('dy-detail-title').textContent = d.title || '-';
       document.getElementById('dy-detail-desc').textContent = d.desc || '-';
       var cover = document.getElementById('dy-detail-cover');
-      if (d.cover) { cover.src = d.cover; cover.alt = d.title || ''; cover.style.display = ''; } else { cover.style.display = 'none'; }
+      if (d.cover) { cover.style.backgroundImage = 'url(' + d.cover + ')'; cover.style.display = ''; } else { cover.style.display = 'none'; }
       document.getElementById('dy-d-play').textContent = d.play || '-';
       document.getElementById('dy-d-likes').textContent = d.likes || '0';
       document.getElementById('dy-d-favorites').textContent = d.favorites || '0';
