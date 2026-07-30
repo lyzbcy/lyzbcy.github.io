@@ -256,13 +256,13 @@
   <table class="dy-table dy-analyze-table">
     <thead>
       <tr>
-        <th><input type="checkbox" id="dy-head-cb" aria-label="全选"></th><th>#</th><th>作品</th><th class="dy-sort-th" data-sort-key="pub" role="button" tabindex="0" aria-label="按发布时间排序">发布 <span class="dy-sort-arrow">↕</span></th><th class="dy-sort-th dy-sort-active" data-sort-key="play" role="button" tabindex="0" aria-label="按播放量排序">播放 <span class="dy-sort-arrow">↓</span></th><th class="dy-sort-th" data-sort-key="comp" role="button" tabindex="0" aria-label="按完播率排序">完播率(5s) <span class="dy-sort-arrow">↕</span></th><th class="dy-sort-th" data-sort-key="score" role="button" tabindex="0" aria-label="按质量分排序">质量分 <span class="dy-sort-arrow">↕</span></th>
+        <th><input type="checkbox" id="dy-head-cb" aria-label="全选"></th><th>#</th><th>作品</th><th class="dy-sort-th" data-sort-key="pub" role="button" tabindex="0" aria-label="按发布时间排序">发布 <span class="dy-sort-arrow">↕</span></th><th class="dy-sort-th dy-sort-active" data-sort-key="play" role="button" tabindex="0" aria-label="按播放量排序">播放 <span class="dy-sort-arrow">↓</span></th><th class="dy-sort-th" data-sort-key="comp" role="button" tabindex="0" aria-label="按完播率排序">完播率(5s) <span class="dy-sort-arrow">↕</span></th><th class="dy-sort-th" data-sort-key="quality" role="button" tabindex="0" aria-label="按质量分排序">质量分 <span class="dy-sort-arrow">↕</span></th><th class="dy-sort-th" data-sort-key="value" role="button" tabindex="0" aria-label="按价值分排序">价值分 <span class="dy-sort-arrow">↕</span></th>
       </tr>
     </thead>
     <tbody id="dy-works-tbody">
       {% assign all_sorted = site.data.douyin.all_works | default: site.data.douyin.top_works %}
       {% for w in all_sorted %}
-      <tr class="dy-work-row" data-item-id="{{ w.item_id | default: forloop.index }}" data-play="{{ w.play_count }}" data-comp="{{ w.completion_rate_5s | times: 100 | round: 1 }}" data-bounce="{{ w.bounce_rate_2s | times: 100 | round: 1 }}" data-title="{{ w.title | escape }}" data-cover="{{ w.cover | default: '' }}" data-pub="{{ w.publish_time | default: '' }}" data-dur="{{ w.avg_play_duration | default: 0 | round: 1 }}" data-desc="{{ w.desc_full | default: w.title | escape }}" data-score="{{ w.engagement_score | default: 0 | times: 100 | round: 0 }}">
+      <tr class="dy-work-row" data-item-id="{{ w.item_id | default: forloop.index }}" data-play="{{ w.play_count }}" data-comp="{{ w.completion_rate_5s | times: 100 | round: 1 }}" data-bounce="{{ w.bounce_rate_2s | times: 100 | round: 1 }}" data-title="{{ w.title | escape }}" data-cover="{{ w.cover | default: '' }}" data-pub="{{ w.publish_time | default: '' }}" data-dur="{{ w.avg_play_duration | default: 0 | round: 1 }}" data-desc="{{ w.desc_full | default: w.title | escape }}" data-quality="{{ w.quality_score | default: 0 | times: 100 | round: 0 }}" data-value="{{ w.value_score | default: 0 | times: 100 | round: 0 }}" data-likes="{{ w.likes | default: 0 }}" data-favorites="{{ w.favorites | default: 0 }}" data-comments="{{ w.comments | default: 0 }}" data-shares="{{ w.shares | default: 0 }}" data-follow="{{ w.follower_gain | default: 0 }}">
         <td><input type="checkbox" class="dy-sel-cb" data-item-id="{{ w.item_id | default: forloop.index }}" aria-label="选择 {{ w.title | escape }}"></td>
         <td>
           {% if forloop.index == 1 %}<span class="dy-rank r1">1</span>
@@ -285,12 +285,21 @@
             {{ comp_pct }}%
           {% else %}-{% endif %}
         </td>
+        {% comment %}质量分（对齐抖音推流：留存门控+互动加权）{% endcomment %}
         <td>
-          {% assign score = w.engagement_score | default: 0 %}
-          {% assign score_pct = score | times: 100 | round: 0 %}
-          {% if score_pct >= 60 %}<span class="dy-quality good">{{ score_pct }}</span>
-          {% elsif score_pct >= 45 %}<span class="dy-quality mid">{{ score_pct }}</span>
-          {% else %}<span class="dy-quality bad">{{ score_pct }}</span>{% endif %}
+          {% assign q = w.quality_score | default: 0 %}
+          {% assign q_pct = q | times: 100 | round: 0 %}
+          {% if q_pct >= 50 %}<span class="dy-quality good" title="对齐抖音推流逻辑">{{ q_pct }}</span>
+          {% elsif q_pct >= 30 %}<span class="dy-quality mid" title="对齐抖音推流逻辑">{{ q_pct }}</span>
+          {% else %}<span class="dy-quality bad" title="对齐抖音推流逻辑">{{ q_pct }}</span>{% endif %}
+        </td>
+        {% comment %}价值分（长期价值：收藏/评论/关注导向，与播放量无关）{% endcomment %}
+        <td>
+          {% assign v = w.value_score | default: 0 %}
+          {% assign v_pct = v | times: 100 | round: 0 %}
+          {% if v_pct >= 60 %}<span class="dy-quality good" style="background:var(--dy-green);" title="收藏/评论/关注价值">{{ v_pct }}</span>
+          {% elsif v_pct >= 40 %}<span class="dy-quality mid" style="background:var(--dy-green);" title="收藏/评论/关注价值">{{ v_pct }}</span>
+          {% else %}<span class="dy-quality bad" style="background:#d1d5db;color:#fff;" title="收藏/评论/关注价值">{{ v_pct }}</span>{% endif %}
         </td>
       </tr>
       {% endfor %}
@@ -307,11 +316,14 @@
       <p id="dy-detail-desc" style="color:var(--dy-gray);font-size:12px;margin:4px 0 10px;"></p>
       <div class="dy-detail-grid">
         <div class="dy-detail-stat"><span class="dy-label">播放量</span><strong id="dy-d-play"></strong></div>
+        <div class="dy-detail-stat"><span class="dy-label">👍 点赞</span><strong id="dy-d-likes"></strong></div>
+        <div class="dy-detail-stat"><span class="dy-label">⭐ 收藏</span><strong id="dy-d-favorites"></strong></div>
+        <div class="dy-detail-stat"><span class="dy-label">💬 评论</span><strong id="dy-d-comments"></strong></div>
+        <div class="dy-detail-stat"><span class="dy-label">🔗 转发</span><strong id="dy-d-shares"></strong></div>
+        <div class="dy-detail-stat"><span class="dy-label">➕ 涨粉</span><strong id="dy-d-follow"></strong></div>
         <div class="dy-detail-stat"><span class="dy-label">5s完播率</span><strong id="dy-d-comp"></strong></div>
-        <div class="dy-detail-stat"><span class="dy-label">2s跳出率</span><strong id="dy-d-bounce"></strong></div>
-        <div class="dy-detail-stat"><span class="dy-label">平均播放</span><strong id="dy-d-dur"></strong></div>
-        <div class="dy-detail-stat"><span class="dy-label">发布时间</span><strong id="dy-d-pub"></strong></div>
-        <div class="dy-detail-stat"><span class="dy-label">质量分</span><strong id="dy-d-score"></strong></div>
+        <div class="dy-detail-stat"><span class="dy-label">质量分(推流)</span><strong id="dy-d-quality" style="color:var(--dy-red);"></strong></div>
+        <div class="dy-detail-stat"><span class="dy-label">价值分(收藏)</span><strong id="dy-d-value" style="color:var(--dy-green);"></strong></div>
       </div>
     </div>
     <button type="button" id="dy-detail-close" class="dy-detail-close" aria-label="关闭">×</button>
