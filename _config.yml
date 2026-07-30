@@ -198,15 +198,15 @@ defaults:
 sass:
   style: compressed
 
-compress_html:
-  clippings: all
-  comments: all
-  endings: all
-  profile: false
-  blanklines: false
-  ignore:
-    envs: [development]
-    selectors: ['script']
+# compress_html:  # 临时禁用以判别 detail-panel 丢失根因
+#   clippings: all
+#   comments: all
+#   endings: all
+#   profile: false
+#   blanklines: false
+#   ignore:
+#     envs: [development]
+#     selectors: ['script']
 
 exclude:
   - "*.gem"
