@@ -45,7 +45,7 @@
       tierLabel: '顶级 · 5❤️',
       rating: 4,
       description: '可以',
-      // bgImage 待补图: 牛肉面-茄皇
+      bgImage: imageBasePath + encodeURIComponent('牛肉面-茄皇.jpeg'),
     },
     {
       name: '海鲜风味【合味道】',
@@ -93,7 +93,7 @@
       tierLabel: '人上人 · 4❤️',
       rating: 3,
       description: '挺好吃的 我愿意经常吃 然后包装很有意思 把汤包和油包分开 这样还挺健康的',
-      // bgImage 待补图: 酸酸辣辣豚骨汤面-今麦郎一桶半
+      bgImage: imageBasePath + encodeURIComponent('酸酸辣辣豚骨汤面-今麦郎一桶半.jpg'),
     },
     {
       name: '鲜虾鱼板面【康师傅】',
@@ -173,7 +173,7 @@
       tierLabel: 'NPC · 3❤️',
       rating: 2,
       description: '低脂高蛋白 比同品牌的番茄肉酱好吃一丢丢 但也是属于减脂期我也不会大量吃的口味',
-      // bgImage 待补图: 铁板黑椒牛肉意面-怡芽
+      bgImage: imageBasePath + encodeURIComponent('铁板黑椒牛肉意面-怡芽.jpg'),
     },
     {
       name: '经典番茄肉酱意大利面【怡芽】',
