@@ -18,298 +18,241 @@
     {
       name: '海鲜拉面【汤达人】',
       tier: '夯',
-      tierLabel: '夯 · 6❤️鲜香代表',
+      tierLabel: '夯 · 6❤️',
       rating: 5,
-      description: '鲜香味道一开盖就扑鼻，细细小小的面条在汤里极度吸味，整碗就是简单却不平庸的快乐。',
-      pros: ['海鲜汤底够鲜，香气非常顶', '细面条吸汁，口感柔韧'],
-      cons: [],
-      note: '喜欢喝汤的可以多泡一会，让汤更浓。',
-      bgImage: imageBasePath + encodeURIComponent('海鲜拉面-汤达人.png')
+      description: '鲜香扑鼻、细小面条，极大满足',
+      bgImage: imageBasePath + encodeURIComponent('海鲜拉面-汤达人.png'),
     },
     {
       name: '安徽板面-卤香牛肉板面【今麦郎】',
       tier: '夯',
-      tierLabel: '夯 · 6❤️宽面王者',
+      tierLabel: '夯 · 6❤️',
       rating: 5,
-      description: '宽面条超级带劲，卤香牛肉味越嚼越香，完全属于“吃一口顿悟板面真谛”的类型。',
-      pros: ['宽面筋道，入口有嚼劲', '卤香味浓郁，越吃越香'],
-      cons: [],
-      note: '汤多泡一会口感更均衡。',
+      description: '宽面这个美味 这个劲道',
       bgImage: imageBasePath + encodeURIComponent('安徽板面-今麦郎.jpeg'),
     },
     {
       name: '番茄肉酱风味拌面【茄皇】',
       tier: '夯',
-      tierLabel: '夯 · 6❤️番茄拌面',
+      tierLabel: '夯 · 6❤️',
       rating: 5,
-      description: '番茄香气饱满又不腻，拌面酱料直接拉满满足感，番茄党闭眼冲的级别。',
-      pros: ['番茄味扎实，不是空口号', '作为拌面酱多但不腻'],
-      cons: [],
-      note: '酱多的话记得留一点面汤调开，口感更丝滑。',
-      bgImage: imageBasePath + encodeURIComponent('番茄肉酱拌面-茄皇.jpeg')
+      description: '番茄味不错 作为拌面 有酱但不腻',
+      bgImage: imageBasePath + encodeURIComponent('番茄肉酱拌面-茄皇.jpeg'),
+    },
+    {
+      name: '牛肉面【茄皇】',
+      tier: '顶级',
+      tierLabel: '顶级 · 5❤️',
+      rating: 4,
+      description: '可以',
+      // bgImage 待补图: 牛肉面-茄皇
     },
     {
       name: '海鲜风味【合味道】',
       tier: '顶级',
-      tierLabel: '顶级 · 5❤️鲜甜速食杯',
+      tierLabel: '顶级 · 5❤️',
       rating: 4,
-      description: '杯面小巧，但海鲜味确实够鲜。唯一缺点就是份量迷你，大杯也撑不起胃。',
-      pros: ['海鲜味足，鲜味稳定发挥', '开盖方便，杯面随时吃'],
-      cons: ['份量偏少，大杯也吃不饱', '面容易有点坨'],
-      note: '当作下午茶或夜宵小点最合适。',
+      description: '鲜得嘞 但是量好少 就算是大杯也吃不饱。而且面有一点坨',
       bgImage: imageBasePath + encodeURIComponent('海鲜风味-合味道.jpeg'),
     },
     {
       name: '刀削宽面-红烧牛肉面【今麦郎】',
       tier: '顶级',
-      tierLabel: '顶级 · 5❤️刀削口感',
+      tierLabel: '顶级 · 5❤️',
       rating: 4,
-      description: '刀削感的宽面在速食里难得，面身宽厚更入味，红烧牛肉味稳稳当当。',
-      pros: ['面体宽厚且入味', '红烧牛肉味扎实不跑偏'],
-      cons: [],
-      note: '泡完后建议再焖一分钟，让刀削口感更软弹。',
+      description: '宽宽的面 形象捏 好吃捏 宽面也比较入味',
       bgImage: imageBasePath + encodeURIComponent('刀削宽面红烧牛肉-今麦郎.jpeg'),
     },
     {
       name: '辣牛肉汤面【汤达人】',
       tier: '顶级',
-      tierLabel: '顶级 · 5❤️多段辣味',
+      tierLabel: '顶级 · 5❤️',
       rating: 4,
-      description: '入口是微辣带点酸甜，吃完再喝汤会回到微辣，让人记住的火辣余韵超级鲜明。',
-      pros: ['辣味层次丰富，先柔后烈', '酸甜平衡，把辣度托得很顺'],
-      cons: [],
-      note: '想体验辣味的后劲，最后一定要喝汤。',
-      bgImage: imageBasePath + encodeURIComponent('辣牛肉汤面-汤达人.jpg')
+      description: '喝汤之前只是微微辣。微微辣+酸甜，口味很丰富。吃完后喝汤又能变成微辣，留下火辣辣的印象。',
+      bgImage: imageBasePath + encodeURIComponent('辣牛肉汤面-汤达人.jpg'),
     },
     {
       name: '金汤肥牛面【康师傅】',
       tier: '顶级',
-      tierLabel: '顶级 · 5❤️全能型',
+      tierLabel: '顶级 · 5❤️',
       rating: 4,
-      description: '酸甜微辣全都沾一点，但没有明显短板，厚面饼配金汤就是稳健代表。',
-      pros: ['面饼厚实耐泡', '汤底酸甜辣均衡，无明显缺点'],
-      cons: [],
-      note: '',
+      description: '面饼挺厚，微酸微甜微微辣，最大的优点就是没什么明显缺点',
       bgImage: imageBasePath + encodeURIComponent('金汤肥牛面-康师傅.jpeg'),
     },
     {
       name: '老坛酸菜牛肉面【统一】',
       tier: '顶级',
-      tierLabel: '顶级 · 5❤️经典常青',
+      tierLabel: '顶级 · 5❤️',
       rating: 4,
-      description: '无需多言的老坛酸菜味，酸爽和牛肉香的平衡就是速食界的白月光。',
-      pros: ['酸菜脆爽，味道经典', '香气层次熟悉又不过时'],
-      cons: [],
-      note: '泡面界永远的安全选项。',
+      description: '经典无需多言',
       bgImage: imageBasePath + encodeURIComponent('老坛酸菜牛肉面-统一.png'),
+    },
+    {
+      name: '酸酸辣辣豚骨汤面【今麦郎一桶半】',
+      tier: '人上人',
+      tierLabel: '人上人 · 4❤️',
+      rating: 3,
+      description: '挺好吃的 我愿意经常吃 然后包装很有意思 把汤包和油包分开 这样还挺健康的',
+      // bgImage 待补图: 酸酸辣辣豚骨汤面-今麦郎一桶半
     },
     {
       name: '鲜虾鱼板面【康师傅】',
       tier: '人上人',
-      tierLabel: '人上人 · 4❤️大份量',
+      tierLabel: '人上人 · 4❤️',
       rating: 3,
-      description: '海鲜感不如海鲜系列鲜，但胜在份量足，吃完特别满足。',
-      pros: ['量大实惠，吃完很满足', '搭配鱼板增加口感'],
-      cons: ['鲜味不算突出'],
-      note: '',
+      description: '不如海鲜系列鲜 但是你耐不住他量大啊 很满足嘻嘻嘻',
       bgImage: imageBasePath + encodeURIComponent('鲜虾鱼板面-康师傅.webp'),
     },
     {
       name: '双萝卜牛腩面【康师傅】',
       tier: '人上人',
-      tierLabel: '人上人 · 4❤️双萝卜彩蛋',
+      tierLabel: '人上人 · 4❤️',
       rating: 3,
-      description: '闻起来是卤味，吃着不算重口，脆脆萝卜像随机奖励，但也容易吃腻。',
-      pros: ['萝卜脆感很惊喜', '卤香味舒服不过头'],
-      cons: ['容易吃腻，风格偏单一'],
-      note: '',
+      description: '闻着有卤味 吃着却不重 蛮好 还有脆脆的双萝卜作为随机奖励。但是感觉容易吃腻 跟红烧牛肉面一样',
       bgImage: imageBasePath + encodeURIComponent('双萝卜牛腩面-康师傅.webp'),
     },
     {
       name: '韩式土豆排骨风味【嗦粉】',
       tier: '人上人',
-      tierLabel: '人上人 · 4❤️零食感拌粉',
+      tierLabel: '人上人 · 4❤️',
       rating: 3,
-      description: '粉面混合体很有劲，味道像妙脆角磨成粉撒进去，怪好吃的零食风。',
-      pros: ['面粉混合口感很特别', '味道像零食一样上头'],
-      cons: ['想要传统排骨味的人可能不适应'],
-      note: '',
+      description: '面&粉混合物挺有劲道。这个味道简直像是把妙脆角磨成粉加里面一样。竟然不难吃，还挺有味道（我不想说挺有韵味 因为零食和韵味感觉很不协调）',
       bgImage: imageBasePath + encodeURIComponent('韩式土豆排骨-嗦粉.jpeg'),
     },
     {
       name: '藤椒拌面【康师傅】',
       tier: '人上人',
-      tierLabel: '人上人 · 4❤️平衡型拌面',
+      tierLabel: '人上人 · 4❤️',
       rating: 3,
-      description: '针对拌面做了油水平衡，但藤椒存在感太弱，整体平平无奇。',
-      pros: ['口味调得很平衡，不油腻'],
-      cons: ['藤椒香太弱，记忆点不足'],
-      note: '',
+      description: '相比于红烧牛肉面的拌面吃法，口味上针对拌面做了平衡性调整，但是藤椒在这个面里的点缀微乎其微，平平无奇',
       bgImage: imageBasePath + encodeURIComponent('藤椒拌面-康师傅.jpg'),
     },
     {
-      name: '粉面菜蛋-港式肥汁【杨掌柜】',
+      name: '粉面菜蛋-港式肥汁【千里薯】',
       tier: '人上人',
-      tierLabel: '人上人 · 4❤️港式重口',
+      tierLabel: '人上人 · 4❤️',
       rating: 3,
-      description: '风味很港式，辣度对我来说有点重，属于偶尔想念港味时的选择。',
-      pros: ['港式风味到位', '粉面混搭口感丰富'],
-      cons: ['对不吃辣的人来说偏重口'],
-      note: '',
+      description: '很港式，对我来说有点太辣了，略微有点重口',
       bgImage: imageBasePath + encodeURIComponent('粉面菜蛋港式肥汁-千里薯.jpeg'),
     },
     {
       name: '老坛泡椒牛肉面【统一】',
       tier: '人上人',
-      tierLabel: '人上人 · 4❤️泡椒限定',
+      tierLabel: '人上人 · 4❤️',
       rating: 3,
-      description: '想模仿老坛酸菜但没超越，泡椒味有点抢戏，还没酸菜吃，整体中规中矩。',
-      pros: ['泡椒爱好者会喜欢微辣酸的味道'],
-      cons: ['泡椒喧宾夺主，缺了酸菜的灵魂'],
-      note: '',
+      description: '模仿老坛酸菜，但只有模仿 没有超越。泡椒味有点喧宾夺主，而且没有酸菜吃',
       bgImage: imageBasePath + encodeURIComponent('老坛泡椒牛肉面-统一.webp'),
     },
     {
       name: '羊肉汤面【白象】',
       tier: '人上人',
-      tierLabel: '人上人 · 4❤️羊汤对标',
+      tierLabel: '人上人 · 4❤️',
       rating: 3,
-      description: '感觉像对标康师傅香辣牛肉面，羊肉汤底增加一点新鲜感。',
-      pros: ['羊汤味带来新鲜体验'],
-      cons: ['整体风味似曾相识'],
-      note: '',
+      description: '感觉像是对标康师傅的香辣牛肉面',
       bgImage: imageBasePath + encodeURIComponent('羊肉汤面-白象.jpeg'),
     },
     {
       name: '罗宋汤面【汤达人】',
       tier: '人上人',
-      tierLabel: '人上人 · 4❤️酸甜轻量',
+      tierLabel: '人上人 · 4❤️',
       rating: 3,
-      description: '酸酸甜甜，除此之外没有太多亮点，属于温和型面。',
-      pros: ['口味清爽，不压胃'],
-      cons: ['缺乏特色，记忆点不多'],
-      note: '',
-      bgImage: imageBasePath + encodeURIComponent('罗宋汤面-汤达人.jpeg')
+      description: '酸酸甜甜，然后...没了... 没什么特点啊',
+      bgImage: imageBasePath + encodeURIComponent('罗宋汤面-汤达人.jpeg'),
     },
     {
       name: '红烧牛肉面【康师傅】',
       tier: '人上人',
-      tierLabel: '人上人 · 4❤️守门员',
+      tierLabel: '人上人 · 4❤️',
       rating: 3,
-      description: '经典守门员，表现稳定但熟悉到缺乏惊喜。',
-      pros: ['稳定发挥的经典味', '随处可买，安全感满满'],
-      cons: ['太熟悉，惊喜感为零'],
-      note: '',
+      description: '4❤️守门员',
       bgImage: imageBasePath + encodeURIComponent('红烧牛肉面-康师傅.png'),
+    },
+    {
+      name: '铁板黑椒牛肉意大利面【怡芽】',
+      tier: 'NPC',
+      tierLabel: 'NPC · 3❤️',
+      rating: 2,
+      description: '低脂高蛋白 比同品牌的番茄肉酱好吃一丢丢 但也是属于减脂期我也不会大量吃的口味',
+      // bgImage 待补图: 铁板黑椒牛肉意面-怡芽
+    },
+    {
+      name: '经典番茄肉酱意大利面【怡芽】',
+      tier: 'NPC',
+      tierLabel: 'NPC · 3❤️',
+      rating: 2,
+      description: '低脂高蛋白 这的确值得表扬 但就算是减脂期我也不会大量选择这个填饱肚子 因为不够好吃。感觉有点对标番茄肉酱风味拌面【茄皇】，但是它番茄酱没人家茄皇好吃',
+      bgImage: imageBasePath + encodeURIComponent('番茄肉酱意面-怡芽.jpg'),
     },
     {
       name: '海鲜浓汤面【白象】',
       tier: 'NPC',
-      tierLabel: 'NPC · 3❤️波力渔趣既视感',
+      tierLabel: 'NPC · 3❤️',
       rating: 2,
-      description: '细扁面条配海鲜味，吃起来像泡水版波力渔趣，趣味多过惊喜。',
-      pros: ['面条细扁，吸汤快'],
-      cons: ['味型像零食泡水，层次不足'],
-      note: '',
+      description: '细细扁扁的面条+海鲜味……这不就是泡水的波力渔趣嘛',
       bgImage: imageBasePath + encodeURIComponent('海鲜浓汤面-白象.png'),
     },
     {
       name: '赤豚骨浓汤风味【合味道】',
       tier: 'NPC',
-      tierLabel: 'NPC · 3❤️合味道情怀',
+      tierLabel: 'NPC · 3❤️',
       rating: 2,
-      description: '味道偏淡，完全靠合味道的情怀分撑着才能留在3❤️。',
-      pros: ['汤底顺口不油'],
-      cons: ['味道太淡，存在感弱'],
-      note: '',
+      description: '不是哥们，怎么没味儿啊 看在合味道的份上才能留在3❤️ 其他牌子就扔💩里了',
       bgImage: imageBasePath + encodeURIComponent('赤豚骨浓汤-合味道.jpg'),
     },
     {
       name: '兰州牛肉面【阿宽】',
       tier: 'NPC',
-      tierLabel: 'NPC · 3❤️淡化版兰州',
+      tierLabel: 'NPC · 3❤️',
       rating: 2,
-      description: '比真正兰州拉面更淡且嚼劲不足，本身没错，只是我不爱。',
-      pros: ['味道温和，容易入口'],
-      cons: ['嚼劲与原版相比差一截'],
-      note: '',
+      description: '比兰州拉面口味稍微淡一点，面稍微没那么有嚼劲一点。你没错，错的是我们。我不喜欢吃兰州拉面…',
       bgImage: imageBasePath + encodeURIComponent('兰州牛肉面-阿宽.png'),
     },
     {
       name: '老母鸡汤面【白象】',
       tier: 'NPC',
-      tierLabel: 'NPC · 3❤️差临门一脚',
+      tierLabel: 'NPC · 3❤️',
       rating: 2,
-      description: '明明潜力满分却一直差那一下，不够鲜导致吃完心里空落落。',
-      pros: ['汤头顺口，基础扎实'],
-      cons: ['鲜味不足，不上不下'],
-      note: '',
+      description: '给我一种他明明能考100分，故意考80分的感觉，一直就差临门一脚的快感。故弄玄虚，吃得我很不爽。（就是不够鲜）',
       bgImage: imageBasePath + encodeURIComponent('老母鸡汤面-白象.png'),
     },
     {
       name: '番茄面【统一】',
       tier: 'NPC',
-      tierLabel: 'NPC · 3❤️只有番茄味',
+      tierLabel: 'NPC · 3❤️',
       rating: 2,
-      description: '番茄味很一般，除了番茄就没别的特色，吃完印象模糊。',
-      pros: ['番茄味道稳定，不会翻车'],
-      cons: ['缺乏亮点，味型单薄'],
-      note: '',
+      description: '吃的时候番茄味很一般，除了番茄没什么特点',
       bgImage: imageBasePath + encodeURIComponent('番茄面-统一.jpeg'),
     },
     {
       name: '番茄炖牛腩【杨掌柜】',
       tier: 'NPC',
-      tierLabel: 'NPC · 3❤️塑料番茄',
+      tierLabel: 'NPC · 3❤️',
       rating: 2,
-      description: '有股塑料味，卤蛋也像没洗干净的茶叶蛋，整体违和。',
-      pros: [],
-      cons: ['番茄味假，卤蛋口感怪'],
-      note: '',
+      description: '一股塑料味，卤蛋只有微微臭臭蛋，王皓说想洗了抹布没通风味',
       bgImage: imageBasePath + encodeURIComponent('番茄炖牛腩-杨掌柜.jpeg'),
     },
     {
       name: '番茄鸡蛋面【康师傅】',
       tier: 'NPC',
-      tierLabel: 'NPC · 3❤️汤好喝面平庸',
+      tierLabel: 'NPC · 3❤️',
       rating: 2,
-      description: '汤还不错，但面本身没什么特色，喝汤>吃面。',
-      pros: ['汤底顺口'],
-      cons: ['面条没有记忆点'],
-      note: '',
+      description: '汤好喝，面没有特色',
       bgImage: imageBasePath + encodeURIComponent('番茄鸡蛋面-康师傅.jpeg'),
-    },
-    {
-      name: '经典番茄肉酱意大利面【怡芽】',
-      tier: 'NPC',
-      tierLabel: 'NPC · 3❤️低脂番茄酱',
-      rating: 2,
-      description: '低脂高蛋白的宣传确实亮眼，但即使在减脂期也不会拿它当正餐，因为味道比起茄皇版本明显逊色。',
-      pros: ['低脂高蛋白，营养标签友好', '意面形态方便控制分量'],
-      cons: ['番茄酱不如茄皇浓郁好吃', '整体口味偏寡，饱腹满足感低'],
-      note: '更适合偶尔换口味的小食，而非真正用来填饱肚子。',
-      bgImage: imageBasePath + encodeURIComponent('番茄肉酱意面-怡芽.jpg'),
     },
     {
       name: '香菜面',
       tier: '拉完了',
-      tierLabel: '拉完了 · 史级香菜轰炸',
+      tierLabel: '拉完了 · 史',
       rating: 1,
-      description: '香菜味浓烈到连香菜控都受不了，属于直接送进史册的程度。',
-      pros: [],
-      cons: ['香菜味太夸张，难以下咽'],
-      note: '',
+      description: '香菜味浓郁得我这个喜欢吃香菜的人都要呕的水平',
       bgImage: imageBasePath + encodeURIComponent('香菜面.jpeg'),
     },
     {
       name: '蒜香猪骨汤面【白象】',
       tier: '拉完了',
-      tierLabel: '拉完了 · 史级蒜味',
+      tierLabel: '拉完了 · 史',
       rating: 1,
-      description: '蒜香搭配猪骨汤呈现出怪异味道，像是在报复社会。',
-      pros: [],
-      cons: ['蒜香与猪骨味混在一起非常怪'],
-      note: '',
+      description: '？ 呕 这个怪怪的味道是想干什么 报复社会吗',
       bgImage: imageBasePath + encodeURIComponent('蒜香猪骨汤面-白象.webp'),
     }
   ];
@@ -332,53 +275,18 @@
 
   function generateModalContent(data) {
     const tierStyle = tierColors[data.tier] || tierColors['NPC'];
-    let html = `
+    return `
       <div style="margin-bottom: 24px;">
         <div style="display: inline-block; background: ${tierStyle.gradient}; color: ${tierStyle.textColor}; padding: 6px 16px; border-radius: 20px; font-size: 0.85em; font-weight: 600; letter-spacing: 0.5px; box-shadow: 0 2px 8px ${tierStyle.shadow};">
           评分：${data.tierLabel}
         </div>
       </div>
       <p style="font-size: 1.05em; line-height: 1.9; margin-bottom: 20px;">${data.description}</p>
-    `;
-
-    if (data.pros && data.pros.length > 0) {
-      html += `
-        <div style="background: linear-gradient(135deg, rgba(255, 177, 66, 0.1) 0%, rgba(255, 138, 120, 0.08) 100%); padding: 20px; border-radius: 16px; margin: 20px 0; border: 1px solid rgba(255, 177, 66, 0.2);">
-          <p style="margin: 0 0 12px 0; font-weight: 600; color: #1D1D1F; font-size: 1em;">✨ 亮点</p>
-          <ul style="margin: 0; padding-left: 24px;">
-            ${data.pros.map(pro => `<li>${pro}</li>`).join('')}
-          </ul>
-        </div>
-      `;
-    }
-
-    if (data.cons && data.cons.length > 0) {
-      html += `
-        <div style="background: linear-gradient(135deg, rgba(250, 112, 154, 0.1) 0%, rgba(252, 243, 207, 0.1) 100%); padding: 20px; border-radius: 16px; margin: 20px 0; border: 1px solid rgba(250, 112, 154, 0.15);">
-          <p style="margin: 0 0 12px 0; font-weight: 600; color: #1D1D1F; font-size: 1em;">⚠️ 踩雷点</p>
-          <ul style="margin: 0; padding-left: 24px;">
-            ${data.cons.map(con => `<li>${con}</li>`).join('')}
-          </ul>
-        </div>
-      `;
-    }
-
-    if (data.note) {
-      html += `
-        <div style="background: rgba(0, 0, 0, 0.03); padding: 16px; border-radius: 12px; margin: 20px 0; border-left: 3px solid #ffb142;">
-          <p style="margin: 0; font-size: 0.9em; color: #424245;"><strong>私藏吃法：</strong>${data.note}</p>
-        </div>
-      `;
-    }
-
-    html += `
       <div style="margin-top: 24px; text-align: center;">
         <div style="font-size: 1.2em; letter-spacing: 2px;">${getRatingStars(data.rating)}</div>
         <p style="margin-top: 8px; font-size: 0.9em; color: #8A8A8A;">复购指数</p>
       </div>
     `;
-
-    return html;
   }
 
   function generateContentSectionHTML() {
