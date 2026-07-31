@@ -289,6 +289,78 @@
     `;
   }
 
+  // giscus 评论：每款面一个独立 discussion，复用 _config.yml 的 giscus 配置
+  const GISCUS_CONFIG = {
+    repo: 'lyzbcy/lyzbcy.github.io',
+    repoId: 'R_kgDOQMgcsQ',
+    category: 'Announcements',
+    categoryId: 'DIC_kwDOQMgcsc4DCIAs',
+  };
+  let giscusInjected = false;   // client.js 是否已注入（全页面只注入一次）
+  let giscusCurrentTerm = null; // 当前显示的 term
+
+  function loadGiscusForNoodle(data) {
+    const term = '方便面排名-' + data.name;
+    // 评论区容器 .noodle-comments 在 modal HTML 里持久存在（不随泡面切换重建），
+    // giscus client.js 首次执行后渲染的 iframe 也持久保留，切换泡面只用 postMessage 改 term。
+    const giscusWrap = modalBody.querySelector('.noodle-comments');
+    if (!giscusWrap) return;
+
+    // 首次：注入 client.js（giscus 会找 .noodle-comments 里的 .giscus 挂载 iframe）
+    if (!giscusInjected) {
+      giscusInjected = true;
+      giscusCurrentTerm = term;
+      const s = document.createElement('script');
+      s.src = 'https://giscus.app/client.js';
+      const attrs = [
+        ['data-repo', GISCUS_CONFIG.repo],
+        ['data-repo-id', GISCUS_CONFIG.repoId],
+        ['data-category', GISCUS_CONFIG.category],
+        ['data-category-id', GISCUS_CONFIG.categoryId],
+        ['data-mapping', 'specific'],
+        ['data-term', term],
+        ['data-strict', '0'],
+        ['data-reactions-enabled', '1'],
+        ['data-emit-metadata', '0'],
+        ['data-input-position', 'top'],
+        ['data-theme', 'preferred_color_scheme'],
+        ['data-lang', 'zh-CN'],
+      ];
+      attrs.forEach(([k, v]) => s.setAttribute(k, v));
+      s.setAttribute('crossorigin', 'anonymous');
+      s.async = true;
+      giscusWrap.appendChild(s);
+      return;
+    }
+
+    // 已注入过：用官方 postMessage setConfig 切换到新 term
+    if (giscusCurrentTerm === term) return;
+    giscusCurrentTerm = term;
+
+    function switchTerm() {
+      const iframe = giscusWrap.querySelector('iframe.giscus-frame, .giscus iframe, iframe');
+      if (iframe && iframe.contentWindow) {
+        iframe.contentWindow.postMessage(
+          { giscus: { setConfig: { term: term } } },
+          'https://giscus.app'
+        );
+      }
+    }
+    const iframe = giscusWrap.querySelector('iframe');
+    if (iframe) {
+      switchTerm();
+    } else {
+      let tries = 0;
+      const timer = setInterval(() => {
+        if (giscusWrap.querySelector('iframe') || ++tries > 30) {
+          clearInterval(timer);
+          switchTerm();
+        }
+      }, 100);
+    }
+  }
+
+
   function generateContentSectionHTML() {
     let html = '<h2>口味详细笔记</h2>';
     tierOrder.forEach(tier => {
@@ -353,7 +425,16 @@
       }
 
       modalTitle.textContent = data.name;
-      modalBody.innerHTML = generateModalContent(data);
+      // 详情内容写入独立的内容区（#modalContent），不覆盖评论区 .noodle-comments
+      const contentArea = document.getElementById('modalContent');
+      if (contentArea) {
+        contentArea.innerHTML = generateModalContent(data);
+      } else {
+        modalBody.innerHTML = generateModalContent(data);
+      }
+
+      // 加载该款面的独立评论区
+      loadGiscusForNoodle(data);
 
       modal.style.display = 'flex';
       modal.style.opacity = '0';
