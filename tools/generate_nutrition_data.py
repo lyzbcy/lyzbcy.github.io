@@ -408,7 +408,7 @@ def main():
     bodyfat = get_bodyfat_history(NUTRITION_DIR)
 
     # 5. 汇总每日摘要
-    summaries = aggregate_daily_summaries(daily_data, calorie_burn, goals or {})
+    summaries = aggregate_daily_summaries(daily_data, calorie_burn, goals)
     stats = compute_stats(summaries, goals, calorie_burn)
 
     # 6. 近 14 天趋势
@@ -439,7 +439,7 @@ def main():
     # 10. 组装输出
     output = {
         "generated_at": datetime.now(timezone(timedelta(hours=8))).isoformat(),
-        "goals": goals or {"calories": 1800, "water": 2000, "protein": 120},
+        "goals": goals,
         "overview": stats,
         "weight": {
             "latest": latest_weight,
