@@ -54,6 +54,86 @@ def get_fun_comparison(volume_kg):
     else:
         return f"相当于举起了 {count:.0f} {desc}"
 
+def get_nutrition_snapshot(workspace):
+    """
+    从营养数据中读取最近 7 天的摘要，供健身看板联动显示。
+    返回 null 如果没有营养数据。
+    """
+    nutrition_dir = os.path.join(workspace, "nutrition")
+    if not os.path.isdir(nutrition_dir):
+        return None
+
+    today = datetime.now().date()
+    recent = []
+
+    for fname in os.listdir(nutrition_dir):
+        if not fname.endswith(".json") or not fname.startswith("20"):
+            continue
+        try:
+            date_str = fname.replace(".json", "")
+            d = datetime.fromisoformat(date_str).date()
+            if (today - d).days > 6:
+                continue
+            fpath = os.path.join(nutrition_dir, fname)
+            with open(fpath) as f:
+                data = json.load(f)
+            summary = data.get("summary", {})
+            total_cal = summary.get("totalCalories", 0)
+            total_protein = summary.get("totalProtein", 0)
+            if total_cal > 0 or total_protein > 0:
+                recent.append({
+                    "date": date_str,
+                    "calories": total_cal,
+                    "protein": total_protein
+                })
+        except:
+            pass
+
+    if not recent:
+        # 再捞 config 看目标
+        config_path = os.path.join(nutrition_dir, "config.json")
+        targets = None
+        if os.path.exists(config_path):
+            try:
+                with open(config_path) as f:
+                    cfg = json.load(f)
+                targets = {
+                    "calories": cfg.get("dailyCalorieTarget", 1800),
+                    "protein": cfg.get("proteinTarget", 120)
+                }
+            except:
+                pass
+        if targets:
+            return {"targets": targets, "recent": []}
+        return None
+
+    # 平均
+    avg_cal = round(sum(r["calories"] for r in recent) / len(recent))
+    avg_protein = round(sum(r["protein"] for r in recent) / len(recent))
+
+    # 目标
+    config_path = os.path.join(nutrition_dir, "config.json")
+    targets = None
+    if os.path.exists(config_path):
+        try:
+            with open(config_path) as f:
+                cfg = json.load(f)
+            targets = {
+                "calories": cfg.get("dailyCalorieTarget", 1800),
+                "protein": cfg.get("proteinTarget", 120)
+            }
+        except:
+            pass
+
+    return {
+        "avg_calories": avg_cal,
+        "avg_protein": avg_protein,
+        "days": len(recent),
+        "targets": targets,
+        "recent": sorted(recent, key=lambda x: x["date"])
+    }
+
+
 def main():
     # 加载数据
     records = load_jsonl(os.path.join(WORKSPACE, "fitness", "records.jsonl"))
@@ -238,6 +318,9 @@ def main():
             "total_volume": round(exercise_volume[ex], 1)
         })
 
+    # ── 营养联动 ──
+    nutrition_link = get_nutrition_snapshot(WORKSPACE)
+
     # ── 输出 ──
     output = {
         "generated_at": datetime.now(timezone(timedelta(hours=8))).isoformat(),
@@ -261,7 +344,8 @@ def main():
         "personal_records": prs,
         "muscle_balance": muscle_balance,
         "volume_trend": volume_trend,
-        "exercises": exercise_metrics
+        "exercises": exercise_metrics,
+        "nutrition_link": nutrition_link
     }
 
     out_path = os.path.join(WORKSPACE, "lyzbcy.github.io", "_data", "fitness.json")

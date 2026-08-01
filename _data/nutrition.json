@@ -1,0 +1,72 @@
+{
+  "generated_at": "2026-08-01T23:09:03.525070+08:00",
+  "goals": {
+    "calories": 1800,
+    "water": 2000,
+    "protein": 120
+  },
+  "overview": {
+    "recorded_days": 1,
+    "date_range": {
+      "first": "2026-04-29",
+      "last": "2026-04-29"
+    },
+    "avg_calories": 1253,
+    "avg_protein": 41,
+    "avg_water": 1600,
+    "avg_carbs": 82,
+    "avg_fat": 71,
+    "total_training_calories": 3465,
+    "training_days": 17,
+    "compliance": {
+      "calorie": 0,
+      "protein": 0,
+      "water": 100
+    },
+    "has_incomplete": false,
+    "incomplete_note": ""
+  },
+  "weight": {
+    "latest": null,
+    "change": 0,
+    "history": []
+  },
+  "bodyfat": {
+    "history": []
+  },
+  "macros": {
+    "carbs_pct": 0,
+    "protein_pct": 0,
+    "fat_pct": 0,
+    "total_cal": 0
+  },
+  "trend": [],
+  "summaries": [
+    {
+      "date": "2026-04-29",
+      "total_calories": 1253,
+      "total_carbs": 82,
+      "total_protein": 41,
+      "total_fat": 71,
+      "total_water": 1600,
+      "net_calories": 1253,
+      "meal_count": 3,
+      "water_entries": 3,
+      "supplements": {
+        "count": 0,
+        "has_creatine": false,
+        "has_protein": false
+      },
+      "calorie_pct": 69.6,
+      "protein_pct": 34.2,
+      "water_pct": 80.0,
+      "has_data": true
+    }
+  ],
+  "status": {
+    "has_today": false,
+    "has_yesterday": false,
+    "today": "2026-08-01",
+    "is_active": false
+  }
+}
