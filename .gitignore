@@ -31,3 +31,8 @@ assets/js/dist/*
 
 # 加密文章密码柜（绝不提交，丢失则无法修改对应文章）
 _data/encryption_secrets.yml
+
+# 本地修复脚本产生的备份与缓存（不应进版本库）
+*.bak
+*.bak-*
+__pycache__/
