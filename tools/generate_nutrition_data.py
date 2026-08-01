@@ -130,8 +130,24 @@ def load_daily_nutrition(nutrition_dir):
         return {}, {}
 
     daily_data = {}
-    goals = None
 
+    # goals 来源优先级：config.json > 任意日期文件里的 goal > 默认值
+    # （之前是"碰运气取第一个遍历到的文件"，依赖 listdir 顺序，不稳定）
+    goals_from_config = None
+    config_path = os.path.join(nutrition_dir, "config.json")
+    if os.path.exists(config_path):
+        try:
+            with open(config_path) as f:
+                config = json.load(f)
+            goals_from_config = {
+                "calories": config.get("dailyCalorieTarget", 1800),
+                "water": config.get("dailyWaterGoal", 2000),
+                "protein": config.get("proteinTarget", 120)
+            }
+        except Exception:
+            pass
+
+    goals_from_day = None
     for fname in os.listdir(nutrition_dir):
         if fname.endswith(".json") and fname.startswith("20"):
             fpath = os.path.join(nutrition_dir, fname)
@@ -140,25 +156,12 @@ def load_daily_nutrition(nutrition_dir):
                     data = json.load(f)
                 date_str = data.get("date", fname.replace(".json", ""))
                 daily_data[date_str] = data
-                if goals is None:
-                    goals = data.get("goal", None)
-            except:
+                if goals_from_day is None:
+                    goals_from_day = data.get("goal", None)
+            except Exception:
                 continue
 
-    # 如果 nutrition 数据里没有 goal，从 config 读
-    if goals is None:
-        config_path = os.path.join(nutrition_dir, "config.json")
-        if os.path.exists(config_path):
-            try:
-                with open(config_path) as f:
-                    config = json.load(f)
-                goals = {
-                    "calories": config.get("dailyCalorieTarget", 1800),
-                    "water": config.get("dailyWaterGoal", 2000),
-                    "protein": config.get("proteinTarget", 120)
-                }
-            except:
-                goals = {"calories": 1800, "water": 2000, "protein": 120}
+    goals = goals_from_config or goals_from_day or {"calories": 1800, "water": 2000, "protein": 120}
 
     return daily_data, goals
 
@@ -181,14 +184,23 @@ def aggregate_daily_summaries(daily_data, calorie_burn, goals):
         total_fat = summary.get("totalFat", 0)
         total_water = summary.get("totalWater", 0)
 
-        # 总热量（如果有 meals 数据但 summary 不完整，从 meals 重新算）
-        if total_calories == 0 and "meals" in data:
-            for meal in data["meals"]:
-                total_calories += meal.get("totalCalories", 0)
-                total_carbs += meal.get("totalCarbs", 0)
-                total_protein += meal.get("totalProtein", 0)
-                total_fat += meal.get("totalFat", 0)
-            # 从 water 记录重算
+        # 任一宏量指标缺失时，从 meals 逐项重新累加（避免部分缺失被忽略）
+        if (total_calories == 0 or total_carbs == 0 or total_protein == 0 or total_fat == 0) and "meals" in data:
+            recalc_cal = sum(m.get("totalCalories", 0) for m in data["meals"])
+            recalc_carbs = sum(m.get("totalCarbs", 0) for m in data["meals"])
+            recalc_prot = sum(m.get("totalProtein", 0) for m in data["meals"])
+            recalc_fat = sum(m.get("totalFat", 0) for m in data["meals"])
+            # 只在原值为 0 时用回算值填补，保留已有的非零值
+            if total_calories == 0:
+                total_calories = recalc_cal
+            if total_carbs == 0:
+                total_carbs = recalc_carbs
+            if total_protein == 0:
+                total_protein = recalc_prot
+            if total_fat == 0:
+                total_fat = recalc_fat
+        # 饮水量缺失时从 water 记录重算
+        if total_water == 0:
             total_water = sum(w.get("volume", 0) for w in data.get("water", []))
 
         # 补充剂统计
@@ -289,11 +301,12 @@ def compute_stats(summaries, goals, calorie_burn):
     if calorie_days:
         calorie_comply = sum(1 for s in calorie_days if s["total_calories"] >= goals["calories"] * 0.8)
         protein_comply = sum(1 for s in calorie_days if s["total_protein"] >= goals["protein"] * 0.8)
-        water_comply = sum(1 for s in days_with_data if s["total_water"] >= goals["water"] * 0.8)
+        # water 达标率用真正有饮水记录的天数做分母，与 avg_water 口径一致
+        water_comply = sum(1 for s in water_days if s["total_water"] >= goals["water"] * 0.8)
         compliance = {
             "calorie": round(calorie_comply * 100.0 / len(calorie_days)),
             "protein": round(protein_comply * 100.0 / len(calorie_days)),
-            "water": round(water_comply * 100.0 / len(days_with_data))
+            "water": round(water_comply * 100.0 / len(water_days)) if water_days else 0
         }
     else:
         compliance = {"calorie": 0, "protein": 0, "water": 0}
@@ -315,9 +328,7 @@ def compute_stats(summaries, goals, calorie_burn):
         "avg_fat": avg_fat,
         "total_training_calories": total_training_calories,
         "training_days": training_days,
-        "compliance": compliance,
-        "has_incomplete": False,  # 将在下面设置
-        "incomplete_note": ""
+        "compliance": compliance
     }
 
 

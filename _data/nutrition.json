@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-02T00:02:22.946181+08:00",
+  "generated_at": "2026-08-02T00:03:33.603444+08:00",
   "goals": {
     "calories": 1800,
     "water": 2000,
@@ -22,9 +22,7 @@
       "calorie": 0,
       "protein": 0,
       "water": 100
-    },
-    "has_incomplete": false,
-    "incomplete_note": ""
+    }
   },
   "weight": {
     "latest": null,
