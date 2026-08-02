@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-02T19:21:59.420386+08:00",
+  "generated_at": "2026-08-02T19:25:26.550814+08:00",
   "goals": {
     "calories": 1800,
     "water": 2000,
@@ -16,7 +16,7 @@
     "avg_water": 1465,
     "avg_carbs": 87,
     "avg_fat": 56,
-    "total_training_calories": 3605,
+    "total_training_calories": 3640,
     "training_days": 18,
     "compliance": {
       "calorie": 0,
@@ -56,7 +56,7 @@
       "carbs": 91.3,
       "fat": 41.0,
       "water": 1330,
-      "net_calories": 765,
+      "net_calories": 730,
       "has_fitness": true
     }
   ],
@@ -88,7 +88,7 @@
       "total_protein": 42.8,
       "total_fat": 41.0,
       "total_water": 1330,
-      "net_calories": 765,
+      "net_calories": 730,
       "meal_count": 2,
       "water_entries": 4,
       "supplements": {
@@ -101,10 +101,10 @@
       "water_pct": 66.5,
       "has_data": true,
       "fitness": {
-        "total_volume": 3768.0,
-        "sets": 8,
-        "estimated_min": 20,
-        "calories_burned": 140
+        "total_volume": 5600.0,
+        "sets": 10,
+        "estimated_min": 25,
+        "calories_burned": 175
       }
     }
   ],
@@ -408,11 +408,11 @@
     "date": "2026-08-02",
     "nutrition_score": 20,
     "nutrition_detail": "热量 905/1750 kcal (6/20); 蛋白 42.8/150g (4/15); 饮水 1330/2000ml (10/15)",
-    "exercise_score": 29,
-    "exercise_detail": "训练量 3768kg (19/20); 组数 8 (10/10)",
+    "exercise_score": 30,
+    "exercise_detail": "训练量 5600kg (20/20); 组数 10 (10/10)",
     "bonus_score": 10,
     "bonus_detail": "数据完整性 (10/10); 无体脂数据 (0/10)",
-    "total_score": 59,
+    "total_score": 60,
     "grade": "😐 B",
     "calories_in": 905,
     "calories_target": 1750,
@@ -420,9 +420,9 @@
     "protein_target": 150,
     "water_in": 1330,
     "water_target": 2000,
-    "training_sets": 8,
-    "training_volume": 3768.0,
-    "training_cal": 140,
+    "training_sets": 10,
+    "training_volume": 5600.0,
+    "training_cal": 175,
     "bodyfat_pct": null,
     "is_training_day": true
   }
