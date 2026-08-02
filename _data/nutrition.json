@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-02T18:33:02.335581+08:00",
+  "generated_at": "2026-08-02T19:01:07.105784+08:00",
   "goals": {
     "calories": 1800,
     "water": 2000,
@@ -11,13 +11,13 @@
       "first": "2026-04-29",
       "last": "2026-08-02"
     },
-    "avg_calories": 1253,
-    "avg_protein": 41,
-    "avg_water": 1290,
-    "avg_carbs": 82,
-    "avg_fat": 71,
-    "total_training_calories": 3465,
-    "training_days": 17,
+    "avg_calories": 1079,
+    "avg_protein": 42,
+    "avg_water": 1465,
+    "avg_carbs": 87,
+    "avg_fat": 56,
+    "total_training_calories": 3605,
+    "training_days": 18,
     "compliance": {
       "calorie": 0,
       "protein": 0,
@@ -25,29 +25,39 @@
     }
   },
   "weight": {
-    "latest": null,
+    "latest": {
+      "date": "2026-08-02",
+      "weight": 75.0,
+      "unit": "kg"
+    },
     "change": 0,
-    "history": []
+    "history": [
+      {
+        "date": "2026-08-02",
+        "weight": 75.0,
+        "unit": "kg"
+      }
+    ]
   },
   "bodyfat": {
     "history": []
   },
   "macros": {
-    "carbs_pct": 0,
-    "protein_pct": 0,
-    "fat_pct": 0,
-    "total_cal": 0
+    "carbs_pct": 40,
+    "protein_pct": 19,
+    "fat_pct": 41,
+    "total_cal": 905
   },
   "trend": [
     {
       "date": "2026-08-02",
-      "calories": 0,
-      "protein": 0,
-      "carbs": 0,
-      "fat": 0,
-      "water": 980,
-      "net_calories": 0,
-      "has_fitness": false
+      "calories": 905,
+      "protein": 42.8,
+      "carbs": 91.3,
+      "fat": 41.0,
+      "water": 1330,
+      "net_calories": 765,
+      "has_fitness": true
     }
   ],
   "summaries": [
@@ -73,23 +83,29 @@
     },
     {
       "date": "2026-08-02",
-      "total_calories": 0,
-      "total_carbs": 0,
-      "total_protein": 0,
-      "total_fat": 0,
-      "total_water": 980,
-      "net_calories": 0,
-      "meal_count": 0,
-      "water_entries": 3,
+      "total_calories": 905,
+      "total_carbs": 91.3,
+      "total_protein": 42.8,
+      "total_fat": 41.0,
+      "total_water": 1330,
+      "net_calories": 765,
+      "meal_count": 2,
+      "water_entries": 4,
       "supplements": {
         "count": 0,
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 0,
-      "protein_pct": 0,
-      "water_pct": 49.0,
-      "has_data": true
+      "calorie_pct": 50.3,
+      "protein_pct": 35.7,
+      "water_pct": 66.5,
+      "has_data": true,
+      "fitness": {
+        "total_volume": 3768.0,
+        "sets": 8,
+        "estimated_min": 20,
+        "calories_burned": 140
+      }
     }
   ],
   "food_library": [
@@ -100,6 +116,15 @@
       "carbs": 41.3,
       "protein": 10.1,
       "fat": 3.4,
+      "category": "主食"
+    },
+    {
+      "name": "小米饭",
+      "unit": "100g",
+      "calories": 116.0,
+      "carbs": 25.0,
+      "protein": 2.5,
+      "fat": 0.7,
       "category": "主食"
     },
     {
@@ -220,6 +245,15 @@
       "category": "肉类"
     },
     {
+      "name": "红烧肉",
+      "unit": "100g",
+      "calories": 349.0,
+      "carbs": 5.0,
+      "protein": 7.0,
+      "fat": 34.0,
+      "category": "肉类"
+    },
+    {
       "name": "鸡胸肉",
       "unit": "100g",
       "calories": 133.0,
@@ -238,12 +272,39 @@
       "category": "肉类"
     },
     {
+      "name": "鸭舌头",
+      "unit": "100g",
+      "calories": 220.0,
+      "carbs": 1.0,
+      "protein": 18.0,
+      "fat": 16.0,
+      "category": "肉类"
+    },
+    {
+      "name": "炒时蔬",
+      "unit": "100g",
+      "calories": 60.0,
+      "carbs": 5.0,
+      "protein": 2.0,
+      "fat": 3.0,
+      "category": "蔬菜"
+    },
+    {
       "name": "番茄",
       "unit": "100g",
       "calories": 18.0,
       "carbs": 3.9,
       "protein": 0.9,
       "fat": 0.2,
+      "category": "蔬菜"
+    },
+    {
+      "name": "素鲍鱼",
+      "unit": "100g",
+      "calories": 85.0,
+      "carbs": 10.0,
+      "protein": 8.0,
+      "fat": 1.5,
       "category": "蔬菜"
     },
     {
