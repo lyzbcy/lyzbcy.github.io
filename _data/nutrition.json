@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-03T00:02:39.677006+08:00",
+  "generated_at": "2026-08-03T00:18:09.706071+08:00",
   "goals": {
     "calories": 1670,
     "water": 2000,
@@ -55,11 +55,6 @@
   },
   "bodyfat": {
     "history": [
-      {
-        "date": "2026-08-02",
-        "bodyfat_pct": 25.4,
-        "note": "早起空腹 | 11公式交叉验证 | LBM 6法均值"
-      },
       {
         "date": "2026-08-03",
         "bodyfat_pct": 21.9,
@@ -162,9 +157,9 @@
       "nutrition_detail": "热量 0/1670 kcal (0/20); 蛋白 0/150g (0/15); 饮水 0/2000ml (0/15)",
       "exercise_score": 0,
       "exercise_detail": "今日无训练 (0/20); 组数 0 (0/10)",
-      "bonus_score": 10,
-      "bonus_detail": "数据完整性 (0/10); 体脂趋势 -3.5% (10/10)",
-      "total_score": 10,
+      "bonus_score": 3,
+      "bonus_detail": "数据完整性 (0/10); 体脂 21.9%（历史不足2次）(3/10)",
+      "total_score": 3,
       "grade": "💀 D",
       "calories_in": 0,
       "calories_target": 1670,
@@ -188,9 +183,16 @@
         "grade": "😊 A",
         "nutrition": "热量 1458/1972 kcal (10/20); 蛋白 58.1/150g (6/15); 饮水 1680/2000ml (13/15)",
         "exercise": "训练量 8120kg (20/20); 组数 14 (10/10)"
+      },
+      {
+        "date": "2026-08-03",
+        "score": 3,
+        "grade": "💀 D",
+        "nutrition": "热量 0/1670 kcal (0/20); 蛋白 0/150g (0/15); 饮水 0/2000ml (0/15)",
+        "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
       }
     ],
-    "exported_at": "2026-08-03T00:02:39.671028"
+    "exported_at": "2026-08-03T00:18:09.696339"
   },
   "food_library": {
     "items": [
