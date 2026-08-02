@@ -113,11 +113,31 @@ def get_bodyfat_history(nutrition_dir):
                 config = json.load(f)
             if "bodyfatHistory" in config:
                 for entry in config["bodyfatHistory"]:
-                    bodyfat_records.append({
+                    bf = {
                         "date": entry["date"],
-                        "bodyfat_pct": entry["bodyfat_pct"],
+                        "bodyfat_pct": entry.get("bodyfat_pct", entry.get("bodyfat_consensus", 0)),
+                        "bodyfat_consensus": entry.get("bodyfat_consensus"),
                         "note": entry.get("note", "")
-                    })
+                    }
+                    # 维度数据（非身高）
+                    if "neck" in entry:
+                        bf["neck"] = entry["neck"]
+                    if "waist" in entry:
+                        bf["waist"] = entry["waist"]
+                    if "hip" in entry:
+                        bf["hip"] = entry["hip"]
+                    if "weight" in entry:
+                        bf["weight"] = entry["weight"]
+                    if "bmi" in entry:
+                        bf["bmi"] = entry["bmi"]
+                    if "whr" in entry:
+                        bf["whr"] = entry["whr"]
+                    if "whtr" in entry:
+                        bf["whtr"] = entry["whtr"]
+                    # 多公式详情
+                    if "formulas" in entry:
+                        bf["formulas"] = entry["formulas"]
+                    bodyfat_records.append(bf)
         except:
             pass
 

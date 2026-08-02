@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-02T20:18:42.645042+08:00",
+  "generated_at": "2026-08-02T21:50:36.050434+08:00",
   "goals": {
     "calories": 1800,
     "water": 2000,
@@ -11,15 +11,15 @@
       "first": "2026-04-29",
       "last": "2026-08-02"
     },
-    "avg_calories": 1324,
-    "avg_protein": 57,
-    "avg_water": 1640,
-    "avg_carbs": 117,
-    "avg_fat": 60,
+    "avg_calories": 1569,
+    "avg_protein": 72,
+    "avg_water": 1690,
+    "avg_carbs": 147,
+    "avg_fat": 65,
     "total_training_calories": 3710,
     "training_days": 18,
     "compliance": {
-      "calorie": 0,
+      "calorie": 50,
       "protein": 0,
       "water": 100
     }
@@ -40,23 +40,49 @@
     ]
   },
   "bodyfat": {
-    "history": []
+    "history": [
+      {
+        "date": "2026-08-02",
+        "bodyfat_pct": 25.4,
+        "bodyfat_consensus": 21.0,
+        "note": "早起空腹 | 11公式交叉验证",
+        "neck": 37.5,
+        "waist": 86.3,
+        "hip": 97.5,
+        "weight": 75.0,
+        "bmi": 25.4,
+        "whr": 0.885,
+        "whtr": 0.502,
+        "formulas": {
+          "navy": 25.4,
+          "rfm": 24.1,
+          "deurenberg": 19.1,
+          "deurenberg_asian": 20.6,
+          "gallagher": 19.5,
+          "ymca": 17.6,
+          "lean": 19.3,
+          "cunbae": 18.7,
+          "lee_whr": 18.9,
+          "consensus": 20.7
+        }
+      }
+    ]
   },
   "macros": {
-    "carbs_pct": 45,
-    "protein_pct": 22,
-    "fat_pct": 33,
-    "total_cal": 1346
+    "carbs_pct": 47,
+    "protein_pct": 23,
+    "fat_pct": 30,
+    "total_cal": 1787
   },
   "trend": [
     {
       "date": "2026-08-02",
-      "calories": 1395,
-      "protein": 72.8,
-      "carbs": 151.3,
-      "fat": 50.0,
-      "water": 1680,
-      "net_calories": 1150,
+      "calories": 1885,
+      "protein": 102.8,
+      "carbs": 211.3,
+      "fat": 59.0,
+      "water": 1780,
+      "net_calories": 1640,
       "has_fitness": true
     }
   ],
@@ -83,22 +109,22 @@
     },
     {
       "date": "2026-08-02",
-      "total_calories": 1395,
-      "total_carbs": 151.3,
-      "total_protein": 72.8,
-      "total_fat": 50.0,
-      "total_water": 1680,
-      "net_calories": 1150,
-      "meal_count": 4,
-      "water_entries": 5,
+      "total_calories": 1885,
+      "total_carbs": 211.3,
+      "total_protein": 102.8,
+      "total_fat": 59.0,
+      "total_water": 1780,
+      "net_calories": 1640,
+      "meal_count": 5,
+      "water_entries": 6,
       "supplements": {
         "count": 0,
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 77.5,
-      "protein_pct": 48.5,
-      "water_pct": 84.0,
+      "calorie_pct": 104.7,
+      "protein_pct": 68.5,
+      "water_pct": 89.0,
       "has_data": true,
       "fitness": {
         "total_volume": 8120.0,
@@ -125,15 +151,6 @@
       "carbs": 25.0,
       "protein": 2.5,
       "fat": 0.7,
-      "category": "主食"
-    },
-    {
-      "name": "烤黑椒鸡腿肉拌饭",
-      "unit": "1份",
-      "calories": 490.0,
-      "carbs": 60.0,
-      "protein": 30.0,
-      "fat": 9.0,
       "category": "主食"
     },
     {
@@ -206,6 +223,15 @@
       "carbs": 39.0,
       "protein": 22.0,
       "fat": 14.0,
+      "category": "快餐"
+    },
+    {
+      "name": "烤黑椒鸡腿肉拌饭",
+      "unit": "1份（含全份红酱）",
+      "calories": 490.0,
+      "carbs": 60.0,
+      "protein": 30.0,
+      "fat": 9.0,
       "category": "快餐"
     },
     {
@@ -415,24 +441,24 @@
   },
   "health_score": {
     "date": "2026-08-02",
-    "nutrition_score": 32,
-    "nutrition_detail": "热量 1395/1750 kcal (12/20); 蛋白 72.8/150g (7/15); 饮水 1680/2000ml (13/15)",
+    "nutrition_score": 40,
+    "nutrition_detail": "热量 1885/1750 kcal (17/20); 蛋白 102.8/150g (10/15); 饮水 1780/2000ml (13/15)",
     "exercise_score": 30,
     "exercise_detail": "训练量 8120kg (20/20); 组数 14 (10/10)",
-    "bonus_score": 10,
-    "bonus_detail": "数据完整性 (10/10); 无体脂数据 (0/10)",
-    "total_score": 72,
+    "bonus_score": 13,
+    "bonus_detail": "数据完整性 (10/10); 体脂 25.4%（历史不足2次）(3/10)",
+    "total_score": 83,
     "grade": "😊 A",
-    "calories_in": 1395,
+    "calories_in": 1885,
     "calories_target": 1750,
-    "protein_in": 72.8,
+    "protein_in": 102.8,
     "protein_target": 150,
-    "water_in": 1680,
+    "water_in": 1780,
     "water_target": 2000,
     "training_sets": 14,
     "training_volume": 8120.0,
     "training_cal": 245,
-    "bodyfat_pct": null,
+    "bodyfat_pct": 25.4,
     "is_training_day": true
   }
 }
