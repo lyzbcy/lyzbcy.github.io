@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-08-02T21:50:36.050434+08:00",
+  "generated_at": "2026-08-02T21:52:13.315418+08:00",
   "goals": {
     "calories": 1800,
     "water": 2000,
-    "protein": 150
+    "protein": 120
   },
   "overview": {
     "recorded_days": 2,
@@ -20,7 +20,7 @@
     "training_days": 18,
     "compliance": {
       "calorie": 50,
-      "protein": 0,
+      "protein": 50,
       "water": 100
     }
   },
@@ -40,33 +40,7 @@
     ]
   },
   "bodyfat": {
-    "history": [
-      {
-        "date": "2026-08-02",
-        "bodyfat_pct": 25.4,
-        "bodyfat_consensus": 21.0,
-        "note": "早起空腹 | 11公式交叉验证",
-        "neck": 37.5,
-        "waist": 86.3,
-        "hip": 97.5,
-        "weight": 75.0,
-        "bmi": 25.4,
-        "whr": 0.885,
-        "whtr": 0.502,
-        "formulas": {
-          "navy": 25.4,
-          "rfm": 24.1,
-          "deurenberg": 19.1,
-          "deurenberg_asian": 20.6,
-          "gallagher": 19.5,
-          "ymca": 17.6,
-          "lean": 19.3,
-          "cunbae": 18.7,
-          "lee_whr": 18.9,
-          "consensus": 20.7
-        }
-      }
-    ]
+    "history": []
   },
   "macros": {
     "carbs_pct": 47,
@@ -103,7 +77,7 @@
         "has_protein": false
       },
       "calorie_pct": 69.6,
-      "protein_pct": 27.3,
+      "protein_pct": 34.2,
       "water_pct": 80.0,
       "has_data": true
     },
@@ -123,7 +97,7 @@
         "has_protein": false
       },
       "calorie_pct": 104.7,
-      "protein_pct": 68.5,
+      "protein_pct": 85.7,
       "water_pct": 89.0,
       "has_data": true,
       "fitness": {
@@ -439,26 +413,5 @@
     "today": "2026-08-02",
     "is_active": true
   },
-  "health_score": {
-    "date": "2026-08-02",
-    "nutrition_score": 40,
-    "nutrition_detail": "热量 1885/1750 kcal (17/20); 蛋白 102.8/150g (10/15); 饮水 1780/2000ml (13/15)",
-    "exercise_score": 30,
-    "exercise_detail": "训练量 8120kg (20/20); 组数 14 (10/10)",
-    "bonus_score": 13,
-    "bonus_detail": "数据完整性 (10/10); 体脂 25.4%（历史不足2次）(3/10)",
-    "total_score": 83,
-    "grade": "😊 A",
-    "calories_in": 1885,
-    "calories_target": 1750,
-    "protein_in": 102.8,
-    "protein_target": 150,
-    "water_in": 1780,
-    "water_target": 2000,
-    "training_sets": 14,
-    "training_volume": 8120.0,
-    "training_cal": 245,
-    "bodyfat_pct": 25.4,
-    "is_training_day": true
-  }
+  "health_score": null
 }

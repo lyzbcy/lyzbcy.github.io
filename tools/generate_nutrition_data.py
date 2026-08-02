@@ -137,6 +137,13 @@ def get_bodyfat_history(nutrition_dir):
                     # 多公式详情
                     if "formulas" in entry:
                         bf["formulas"] = entry["formulas"]
+                    # LBM / FFMI
+                    if "lbm" in entry:
+                        bf["lbm"] = entry["lbm"]
+                    if "lbm_formulas" in entry:
+                        bf["lbm_formulas"] = entry["lbm_formulas"]
+                    if "ffmi" in entry:
+                        bf["ffmi"] = entry["ffmi"]
                     bodyfat_records.append(bf)
         except:
             pass
