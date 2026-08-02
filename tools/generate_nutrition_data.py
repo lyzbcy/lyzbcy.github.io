@@ -6,14 +6,25 @@
   - nutrition/YYYY-MM-DD.json    # 每日饮食记录
   - nutrition/config.json        # 目标配置
   - fitness/records.jsonl        # 体重记录 + 训练消耗联动
+  - skills/.../data/food.db      # 食物营养库（含累计统计）
+  - skills/.../scripts/health_score.py  # 今日健康得分
 
 产出:
   - lyzbcy.github.io/_data/nutrition.json
+
+v2 改造（2026-08）:
+  - 训练消耗统一走 body_composition.compute_training_burn（MET×真实时长，解决三公式打架）
+  - 热量目标改为动态（Mifflin BMR × 训练日/休息日），替代写死的 1800
+  - 接入 health_score（看板顶部展示今日健康得分）
+  - 接入 food_library（看板底部展示食物库 + 累计消费统计）
+  - 低于 BMR 时标注 below_bmr（看板提示"建议多吃"）
 """
 
 import json
 import os
 import sys
+import sqlite3
+import subprocess
 from datetime import datetime, timedelta, timezone
 from collections import defaultdict
 
@@ -22,14 +33,26 @@ NUTRITION_DIR = os.path.join(WORKSPACE, "nutrition")
 FITNESS_DIR = os.path.join(WORKSPACE, "fitness")
 OUTPUT_DIR = os.path.join(WORKSPACE, "lyzbcy.github.io", "_data")
 
+# ▼ v2: 让 body_composition 可被 import（它和 health_score 同 skill scripts 目录）
+NUTRITION_SKILL_DIR = "/home/openclaw-shared/skills/lyzbcy-nutrition-tracker"
+NUTRITION_SCRIPTS = os.path.join(NUTRITION_SKILL_DIR, "scripts")
+FOOD_DB_PATH = os.path.join(NUTRITION_SKILL_DIR, "data", "food.db")
+HEALTH_SCORE_SCRIPT = os.path.join(NUTRITION_SCRIPTS, "health_score.py")
+if os.path.isdir(NUTRITION_SCRIPTS) and NUTRITION_SCRIPTS not in sys.path:
+    sys.path.insert(0, NUTRITION_SCRIPTS)
+try:
+    import body_composition as bc
+except Exception:
+    bc = None  # 测试环境可能没有，退化到旧逻辑
+
 def parse_date(s):
     return datetime.fromisoformat(s).date() if isinstance(s, str) else s
 
-def estimate_calorie_burn(records_jsonl_path):
+def estimate_calorie_burn(records_jsonl_path, exercises_data=None, weight_kg=None):
     """
-    从健身记录中估算每日训练消耗。
-    基于训练量（weight × reps）和动作的 MET 值粗略估算。
-    简化版：中强度力量训练 ~ 6 METs，高强度 ~ 8 METs
+    每日训练消耗 — v2 统一走 body_composition.compute_training_burn。
+    用真实 endTime 时长 + 动作类型 MET，解决旧版"组数×系数"与 health_score.py 不一致的问题。
+    若 bc 模块不可用（测试环境），退化到旧逻辑。
     """
     if not os.path.exists(records_jsonl_path):
         return {}
@@ -42,31 +65,45 @@ def estimate_calorie_burn(records_jsonl_path):
                 continue
             try:
                 r = json.loads(line)
-            except:
+            except Exception:
                 continue
             if r.get("action") == "set" and r.get("date"):
                 sets_by_date[r["date"]].append(r)
 
     daily_burn = {}
     for date_str, sets in sets_by_date.items():
-        total_volume = sum(s.get("weight", 0) * s.get("reps", 0) for s in sets)
-        # 粗略估算：每 1000kg 训练量 ≈ 50-80 kcal 消耗（含 EPOC）
-        # 基础代谢约 5 kcal/min，训练 45-60 min
         set_count = len(sets)
-        if set_count < 5:
-            continue  # 热身/少量，不计入
+        total_volume = sum((s.get("weight", 0) or 0) * (s.get("reps", 0) or 0) for s in sets)
 
-        # 训练时长估算：每组 ~2min（含休息）
-        estimated_min = set_count * 2.5
-        # 中等强度力量训练：~7 kcal/min
-        cal_burn = round(estimated_min * 7)
-
-        daily_burn[date_str] = {
-            "total_volume": round(total_volume, 1),
-            "sets": set_count,
-            "estimated_min": round(estimated_min),
-            "calories_burned": cal_burn
-        }
+        if bc is not None and weight_kg:
+            # ▼ v2 统一算法
+            r = bc.compute_training_burn(sets, weight_kg, exercises_data)
+            daily_burn[date_str] = {
+                "total_volume": r["volume"],
+                "sets": r["sets"],
+                "estimated_min": r["duration_min"],     # 真实训练时长
+                "active_min": r["active_min"],          # 纯动作时长（参考）
+                "calories_burned": r["calories_burned"],
+                "calories_net": r["calories_net"],      # 净额外消耗（供饮食净热量）
+                "by_type": r["by_type"],
+                "method": r["method"],
+            }
+        else:
+            # 退化：旧逻辑（<5组跳过）
+            if set_count < 5:
+                continue
+            estimated_min = set_count * 2.5
+            cal_burn = round(estimated_min * 7)
+            daily_burn[date_str] = {
+                "total_volume": round(total_volume, 1),
+                "sets": set_count,
+                "estimated_min": round(estimated_min),
+                "active_min": round(estimated_min),  # legacy 无区分，保持一致
+                "calories_burned": cal_burn,
+                "calories_net": cal_burn,             # legacy 不区分净消耗
+                "by_type": {},                        # legacy 不分动作类型
+                "method": "legacy-sets",
+            }
 
     return daily_burn
 
@@ -113,38 +150,11 @@ def get_bodyfat_history(nutrition_dir):
                 config = json.load(f)
             if "bodyfatHistory" in config:
                 for entry in config["bodyfatHistory"]:
-                    bf = {
+                    bodyfat_records.append({
                         "date": entry["date"],
-                        "bodyfat_pct": entry.get("bodyfat_pct", entry.get("bodyfat_consensus", 0)),
-                        "bodyfat_consensus": entry.get("bodyfat_consensus"),
+                        "bodyfat_pct": entry["bodyfat_pct"],
                         "note": entry.get("note", "")
-                    }
-                    # 维度数据（非身高）
-                    if "neck" in entry:
-                        bf["neck"] = entry["neck"]
-                    if "waist" in entry:
-                        bf["waist"] = entry["waist"]
-                    if "hip" in entry:
-                        bf["hip"] = entry["hip"]
-                    if "weight" in entry:
-                        bf["weight"] = entry["weight"]
-                    if "bmi" in entry:
-                        bf["bmi"] = entry["bmi"]
-                    if "whr" in entry:
-                        bf["whr"] = entry["whr"]
-                    if "whtr" in entry:
-                        bf["whtr"] = entry["whtr"]
-                    # 多公式详情
-                    if "formulas" in entry:
-                        bf["formulas"] = entry["formulas"]
-                    # LBM / FFMI
-                    if "lbm" in entry:
-                        bf["lbm"] = entry["lbm"]
-                    if "lbm_formulas" in entry:
-                        bf["lbm_formulas"] = entry["lbm_formulas"]
-                    if "ffmi" in entry:
-                        bf["ffmi"] = entry["ffmi"]
-                    bodyfat_records.append(bf)
+                    })
         except:
             pass
 
@@ -420,19 +430,163 @@ def get_recent_trend(summaries, days=14):
     return trend
 
 
+def _load_exercises():
+    """加载 fitness/exercises.json（动作类型/估时，喂给统一训练消耗算法）"""
+    p = os.path.join(FITNESS_DIR, "exercises.json")
+    if os.path.exists(p):
+        try:
+            with open(p, encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return None
+    return None
+
+
+def _compute_dynamic_goals(cfg, latest_weight, bodyfat_pct, today_is_training, age=21):
+    """
+    v2 动态热量目标：基于 Mifflin BMR 算训练日/休息日目标。
+    替代写死的 1800。若 bc 不可用则退化到 config 静态值。
+    返回 (goals_dict, meta_dict)。goals_dict 兼容旧字段名 {calories, water, protein}。
+    """
+    static_cal = cfg.get("dailyCalorieTarget", 1800)
+    static_water = cfg.get("dailyWaterGoal", 2000)
+    static_prot = cfg.get("proteinTarget", 150)
+    base_goals = {"calories": static_cal, "water": static_water, "protein": static_prot}
+
+    if bc is None or not latest_weight:
+        return base_goals, {"dynamic": False, "reason": "no body_composition or weight"}
+
+    height = cfg.get("height") or 172.0
+    try:
+        height = float(height)
+    except (TypeError, ValueError):
+        height = 172.0
+
+    bmr_info = bc.compute_bmr(latest_weight, height, age, bodyfat_pct=bodyfat_pct)
+    bmr = bmr_info["primary"]
+
+    target = bc.compute_calorie_target(bmr, today_is_training)
+    # 训练日吃回一部分训练消耗已体现在 activity factor，这里不再额外加
+    goals = {
+        "calories": target["target"],
+        "water": static_water,
+        "protein": static_prot,
+    }
+    meta = {
+        "dynamic": True,
+        "bmr": bmr,
+        "bmr_formulas": bmr_info["formulas"],
+        "tdee": target["tdee"],
+        "bmr_floor": target["bmr_floor"],
+        "below_bmr": target["below_bmr"],
+        "is_training_day": today_is_training,
+        "deficit": target["deficit"],
+    }
+    return goals, meta
+
+
+def _load_health_score():
+    """调 health_score.py export 拿今日健康得分 + 14天历史"""
+    if not os.path.exists(HEALTH_SCORE_SCRIPT):
+        return None
+    try:
+        r = subprocess.run(
+            ["python3", HEALTH_SCORE_SCRIPT, "export"],
+            capture_output=True, text=True, timeout=30
+        )
+        if r.returncode == 0 and r.stdout.strip():
+            return json.loads(r.stdout)
+    except Exception:
+        pass
+    return None
+
+
+def _load_food_library():
+    """v2: 读 food.db 产出食物库（含累计统计 + source），供看板底部展示"""
+    if not os.path.exists(FOOD_DB_PATH):
+        return None
+    try:
+        conn = sqlite3.connect(FOOD_DB_PATH)
+        conn.row_factory = sqlite3.Row
+        c = conn.cursor()
+        c.execute("SELECT name, brand, per_unit, calories, carbs, protein, fat, "
+                  "category, ref_price, total_servings, total_grams, source "
+                  "FROM foods ORDER BY category, total_servings DESC, name")
+        rows = c.fetchall()
+        conn.close()
+        items = []
+        total_servings_all = 0.0
+        for r in rows:
+            srv = r["total_servings"] or 0
+            total_servings_all += srv
+            items.append({
+                "name": r["name"], "brand": r["brand"], "per_unit": r["per_unit"],
+                "calories": r["calories"], "carbs": r["carbs"], "protein": r["protein"],
+                "fat": r["fat"], "category": r["category"], "ref_price": r["ref_price"],
+                "total_servings": round(srv, 1),
+                "total_grams": round(r["total_grams"] or 0, 0),
+                "source": r["source"] or "预置",
+            })
+        # 按分类汇总
+        by_category = {}
+        for it in items:
+            cat = it["category"]
+            by_category.setdefault(cat, {"count": 0, "servings": 0})
+            by_category[cat]["count"] += 1
+            by_category[cat]["servings"] += it["total_servings"]
+        return {
+            "items": items,
+            "total_foods": len(items),
+            "total_servings": round(total_servings_all, 1),
+            "by_category": {k: {"count": v["count"], "servings": round(v["servings"], 1)}
+                            for k, v in by_category.items()},
+        }
+    except Exception as e:
+        print(f"⚠️ food_library 加载失败: {e}", file=sys.stderr)
+        return None
+
+
 def main():
     # 1. 加载营养数据
     daily_data, goals = load_daily_nutrition(NUTRITION_DIR)
+    cfg_path = os.path.join(NUTRITION_DIR, "config.json")
+    cfg = {}
+    if os.path.exists(cfg_path):
+        try:
+            with open(cfg_path, encoding="utf-8") as f:
+                cfg = json.load(f)
+        except Exception:
+            pass
 
-    # 2. 健身消耗联动
+    # 2. 健身消耗联动（v2 统一算法：需 exercises.json + 最新体重）
     records_path = os.path.join(FITNESS_DIR, "records.jsonl")
-    calorie_burn = estimate_calorie_burn(records_path)
-
-    # 3. 体重历史
+    exercises_data = _load_exercises()
     bodyweight = get_bodyweight_history(records_path)
+    latest_weight_val = bodyweight[-1]["weight"] if bodyweight else None
+    today_str = datetime.now().strftime("%Y-%m-%d")
+    # 判断今天是否训练日：与 health_score.py 对齐——当天 set 记录 >= 3 才算训练日
+    today_set_count = 0
+    if os.path.exists(records_path):
+        with open(records_path) as f:
+            for line in f:
+                try:
+                    r = json.loads(line.strip())
+                    if r.get("date") == today_str and r.get("action") == "set":
+                        today_set_count += 1
+                except Exception:
+                    continue
+    today_is_training = today_set_count >= 3
 
-    # 4. 体脂历史
+    calorie_burn = estimate_calorie_burn(records_path, exercises_data, latest_weight_val)
+
+    # 3. 体脂历史
     bodyfat = get_bodyfat_history(NUTRITION_DIR)
+    latest_bodyfat_pct = bodyfat[-1]["bodyfat_pct"] if bodyfat else None
+
+    # 4. ▼ v2 动态热量目标
+    goals, goals_meta = _compute_dynamic_goals(
+        cfg, latest_weight_val, latest_bodyfat_pct, today_is_training
+    )
 
     # 5. 汇总每日摘要
     summaries = aggregate_daily_summaries(daily_data, calorie_burn, goals)
@@ -444,9 +598,7 @@ def main():
     # 7. 宏量营养素近 7 天分布
     macros_dist = compute_macros_comparison(summaries, goals)
 
-    # 8. 查找最近体重
-    latest_weight = bodyweight[-1] if bodyweight else None
-    # 计算减脂进度
+    # 8. 计算减脂进度
     if bodyweight and len(bodyweight) >= 2:
         first_w = bodyweight[0]["weight"]
         last_w = bodyweight[-1]["weight"]
@@ -455,7 +607,6 @@ def main():
         weight_change = 0
 
     # 9. 检查数据完整性
-    today_str = datetime.now().strftime("%Y-%m-%d")
     has_today = any(s["date"] == today_str and s["has_data"] for s in summaries)
     has_yesterday = any(
         s["date"] == (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
@@ -463,26 +614,18 @@ def main():
         for s in summaries
     )
 
-    # 10. 食物库（从 food.db 读取）
-    food_library = []
-    try:
-        food_db_path = os.path.join(WORKSPACE, "skills", "lyzbcy-nutrition-tracker", "data", "food.db")
-        if os.path.exists(food_db_path):
-            import sqlite3 as _sql
-            _conn = _sql.connect(food_db_path)
-            _c = _conn.cursor()
-            _c.execute("SELECT name, per_unit, calories, carbs, protein, fat, category FROM foods ORDER BY category, name")
-            food_library = [{"name": r[0], "unit": r[1], "calories": r[2], "carbs": r[3],
-                            "protein": r[4], "fat": r[5], "category": r[6]} for r in _c.fetchall()]
-            _conn.close()
-    except Exception:
-        pass  # 食物库不可用不影响主流程
+    # 10. ▼ v2 接入健康得分
+    health_score = _load_health_score()
 
+    # 11. ▼ v2 接入食物库
+    food_library = _load_food_library()
 
-    # 11. 组装输出
+    # 12. 组装输出
+    latest_weight = bodyweight[-1] if bodyweight else None
     output = {
         "generated_at": datetime.now(timezone(timedelta(hours=8))).isoformat(),
         "goals": goals,
+        "goals_meta": goals_meta,
         "overview": stats,
         "weight": {
             "latest": latest_weight,
@@ -495,24 +638,16 @@ def main():
         "macros": macros_dist,
         "trend": trend,
         "summaries": summaries,
-        "food_library": food_library,
         "status": {
             "has_today": has_today,
             "has_yesterday": has_yesterday,
             "today": today_str,
-            "is_active": has_today or has_yesterday
-        }
+            "is_active": has_today or has_yesterday,
+            "is_training_day": today_is_training,
+        },
+        "health_score": health_score,       # ▼ v2
+        "food_library": food_library,       # ▼ v2
     }
-
-    # 健康得分联动
-    try:
-        sys.path.insert(0, os.path.join(WORKSPACE, "skills", "lyzbcy-nutrition-tracker", "scripts"))
-        from health_score import compute_score, save_score
-        _hs = compute_score(datetime.now().strftime("%Y-%m-%d"))
-        save_score(_hs)
-        output["health_score"] = _hs
-    except Exception:
-        output["health_score"] = None
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     out_path = os.path.join(OUTPUT_DIR, "nutrition.json")
@@ -528,6 +663,14 @@ def main():
     if bodyfat:
         latest_bf = bodyfat[-1]
         print(f"   体脂: {latest_bf['bodyfat_pct']}% ({latest_bf['date']})")
+    if goals_meta.get("dynamic"):
+        print(f"   🎯 动态目标: {goals['calories']} kcal "
+              f"(BMR {goals_meta['bmr']} | {'训练日' if goals_meta['is_training_day'] else '休息日'}"
+              f"{' ⚠️低于基础代谢' if goals_meta.get('below_bmr') else ''})")
+    if health_score:
+        print(f"   📊 健康得分: {health_score['today']['total_score']}/100 {health_score['today']['grade']}")
+    if food_library:
+        print(f"   🥗 食物库: {food_library['total_foods']} 种 | 累计 {food_library['total_servings']} 份")
 
 
 if __name__ == "__main__":

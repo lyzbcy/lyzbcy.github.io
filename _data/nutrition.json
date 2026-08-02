@@ -1,9 +1,23 @@
 {
-  "generated_at": "2026-08-02T22:05:01.788770+08:00",
+  "generated_at": "2026-08-02T22:39:07.632773+08:00",
   "goals": {
-    "calories": 1800,
+    "calories": 1972,
     "water": 2000,
-    "protein": 120
+    "protein": 150
+  },
+  "goals_meta": {
+    "dynamic": true,
+    "bmr": 1725,
+    "bmr_formulas": {
+      "mifflin": 1725,
+      "harris": 1799,
+      "katch": 1579
+    },
+    "tdee": 2372,
+    "bmr_floor": 1725,
+    "below_bmr": false,
+    "is_training_day": true,
+    "deficit": 400
   },
   "overview": {
     "recorded_days": 2,
@@ -16,11 +30,11 @@
     "avg_water": 1690,
     "avg_carbs": 147,
     "avg_fat": 65,
-    "total_training_calories": 3710,
-    "training_days": 18,
+    "total_training_calories": 5407,
+    "training_days": 21,
     "compliance": {
       "calorie": 50,
-      "protein": 50,
+      "protein": 0,
       "water": 100
     }
   },
@@ -40,7 +54,13 @@
     ]
   },
   "bodyfat": {
-    "history": []
+    "history": [
+      {
+        "date": "2026-08-02",
+        "bodyfat_pct": 25.4,
+        "note": "早起空腹 | 11公式交叉验证 | LBM 6法均值"
+      }
+    ]
   },
   "macros": {
     "carbs_pct": 47,
@@ -56,7 +76,7 @@
       "carbs": 211.3,
       "fat": 59.0,
       "water": 1780,
-      "net_calories": 1640,
+      "net_calories": 1486,
       "has_fitness": true
     }
   ],
@@ -76,8 +96,8 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 69.6,
-      "protein_pct": 34.2,
+      "calorie_pct": 63.5,
+      "protein_pct": 27.3,
       "water_pct": 80.0,
       "has_data": true
     },
@@ -88,7 +108,7 @@
       "total_protein": 102.8,
       "total_fat": 59.0,
       "total_water": 1780,
-      "net_calories": 1640,
+      "net_calories": 1486,
       "meal_count": 5,
       "water_entries": 6,
       "supplements": {
@@ -96,322 +116,581 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 104.7,
-      "protein_pct": 85.7,
+      "calorie_pct": 95.6,
+      "protein_pct": 68.5,
       "water_pct": 89.0,
       "has_data": true,
       "fitness": {
         "total_volume": 8120.0,
         "sets": 14,
-        "estimated_min": 35,
-        "calories_burned": 245
+        "estimated_min": 67.2,
+        "active_min": 8.2,
+        "calories_burned": 399,
+        "calories_net": 298,
+        "by_type": {
+          "compound": {
+            "sets": 7,
+            "min": 33.6,
+            "cal": 252
+          },
+          "isolation": {
+            "sets": 7,
+            "min": 33.6,
+            "cal": 147
+          }
+        },
+        "method": "MET-endTime"
       }
-    }
-  ],
-  "food_library": [
-    {
-      "name": "全麦面包",
-      "unit": "100g",
-      "calories": 246.0,
-      "carbs": 41.3,
-      "protein": 10.1,
-      "fat": 3.4,
-      "category": "主食"
-    },
-    {
-      "name": "小米饭",
-      "unit": "100g",
-      "calories": 116.0,
-      "carbs": 25.0,
-      "protein": 2.5,
-      "fat": 0.7,
-      "category": "主食"
-    },
-    {
-      "name": "白米饭",
-      "unit": "100g",
-      "calories": 116.0,
-      "carbs": 25.9,
-      "protein": 2.6,
-      "fat": 0.3,
-      "category": "主食"
-    },
-    {
-      "name": "面条（煮）",
-      "unit": "100g",
-      "calories": 110.0,
-      "carbs": 24.3,
-      "protein": 4.5,
-      "fat": 0.7,
-      "category": "主食"
-    },
-    {
-      "name": "馒头",
-      "unit": "100g",
-      "calories": 223.0,
-      "carbs": 44.2,
-      "protein": 7.0,
-      "fat": 1.1,
-      "category": "主食"
-    },
-    {
-      "name": "牛奶（全脂）",
-      "unit": "100ml",
-      "calories": 65.0,
-      "carbs": 4.9,
-      "protein": 3.0,
-      "fat": 3.5,
-      "category": "乳制品"
-    },
-    {
-      "name": "蛋白粉（乳清）",
-      "unit": "30g",
-      "calories": 120.0,
-      "carbs": 1.5,
-      "protein": 24.0,
-      "fat": 1.0,
-      "category": "乳制品"
-    },
-    {
-      "name": "酸奶（原味）",
-      "unit": "100g",
-      "calories": 72.0,
-      "carbs": 9.3,
-      "protein": 2.5,
-      "fat": 2.7,
-      "category": "乳制品"
-    },
-    {
-      "name": "方便面",
-      "unit": "1袋约120g",
-      "calories": 460.0,
-      "carbs": 57.0,
-      "protein": 10.0,
-      "fat": 21.0,
-      "category": "快餐"
-    },
-    {
-      "name": "汉堡（鸡肉）",
-      "unit": "1个",
-      "calories": 380.0,
-      "carbs": 39.0,
-      "protein": 22.0,
-      "fat": 14.0,
-      "category": "快餐"
-    },
-    {
-      "name": "烤黑椒鸡腿肉拌饭",
-      "unit": "1份（含全份红酱）",
-      "calories": 490.0,
-      "carbs": 60.0,
-      "protein": 30.0,
-      "fat": 9.0,
-      "category": "快餐"
-    },
-    {
-      "name": "苹果",
-      "unit": "1个约200g",
-      "calories": 104.0,
-      "carbs": 27.6,
-      "protein": 0.5,
-      "fat": 0.3,
-      "category": "水果"
-    },
-    {
-      "name": "香蕉",
-      "unit": "1根约120g",
-      "calories": 105.0,
-      "carbs": 27.0,
-      "protein": 1.3,
-      "fat": 0.4,
-      "category": "水果"
-    },
-    {
-      "name": "三文鱼",
-      "unit": "100g",
-      "calories": 208.0,
-      "carbs": 0.0,
-      "protein": 20.4,
-      "fat": 13.6,
-      "category": "肉类"
-    },
-    {
-      "name": "牛肉（瘦肉）",
-      "unit": "100g",
-      "calories": 125.0,
-      "carbs": 0.2,
-      "protein": 20.2,
-      "fat": 4.2,
-      "category": "肉类"
-    },
-    {
-      "name": "猪肉（五花）",
-      "unit": "100g",
-      "calories": 395.0,
-      "carbs": 0.0,
-      "protein": 13.2,
-      "fat": 37.0,
-      "category": "肉类"
-    },
-    {
-      "name": "红烧肉",
-      "unit": "100g",
-      "calories": 349.0,
-      "carbs": 5.0,
-      "protein": 7.0,
-      "fat": 34.0,
-      "category": "肉类"
-    },
-    {
-      "name": "鸡胸肉",
-      "unit": "100g",
-      "calories": 133.0,
-      "carbs": 0.0,
-      "protein": 31.0,
-      "fat": 1.2,
-      "category": "肉类"
-    },
-    {
-      "name": "鸡蛋",
-      "unit": "1个约50g",
-      "calories": 70.0,
-      "carbs": 0.6,
-      "protein": 6.5,
-      "fat": 4.8,
-      "category": "肉类"
-    },
-    {
-      "name": "鸭舌头",
-      "unit": "100g",
-      "calories": 220.0,
-      "carbs": 1.0,
-      "protein": 18.0,
-      "fat": 16.0,
-      "category": "肉类"
-    },
-    {
-      "name": "炒时蔬",
-      "unit": "100g",
-      "calories": 60.0,
-      "carbs": 5.0,
-      "protein": 2.0,
-      "fat": 3.0,
-      "category": "蔬菜"
-    },
-    {
-      "name": "番茄",
-      "unit": "100g",
-      "calories": 18.0,
-      "carbs": 3.9,
-      "protein": 0.9,
-      "fat": 0.2,
-      "category": "蔬菜"
-    },
-    {
-      "name": "素鲍鱼",
-      "unit": "100g",
-      "calories": 85.0,
-      "carbs": 10.0,
-      "protein": 8.0,
-      "fat": 1.5,
-      "category": "蔬菜"
-    },
-    {
-      "name": "西兰花",
-      "unit": "100g",
-      "calories": 34.0,
-      "carbs": 6.6,
-      "protein": 2.8,
-      "fat": 0.4,
-      "category": "蔬菜"
-    },
-    {
-      "name": "黄瓜",
-      "unit": "100g",
-      "calories": 15.0,
-      "carbs": 2.9,
-      "protein": 0.7,
-      "fat": 0.2,
-      "category": "蔬菜"
-    },
-    {
-      "name": "酱油",
-      "unit": "10ml",
-      "calories": 5.0,
-      "carbs": 0.8,
-      "protein": 0.6,
-      "fat": 0.0,
-      "category": "调味料"
-    },
-    {
-      "name": "食用油",
-      "unit": "10ml",
-      "calories": 88.0,
-      "carbs": 0.0,
-      "protein": 0.0,
-      "fat": 10.0,
-      "category": "调味料"
-    },
-    {
-      "name": "巧克力",
-      "unit": "100g",
-      "calories": 546.0,
-      "carbs": 59.4,
-      "protein": 4.9,
-      "fat": 31.3,
-      "category": "零食"
-    },
-    {
-      "name": "薯片",
-      "unit": "100g",
-      "calories": 536.0,
-      "carbs": 49.7,
-      "protein": 5.8,
-      "fat": 34.6,
-      "category": "零食"
-    },
-    {
-      "name": "可乐（330ml）",
-      "unit": "330ml",
-      "calories": 139.0,
-      "carbs": 35.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "category": "饮品"
-    },
-    {
-      "name": "拿铁（中杯）",
-      "unit": "1杯约350ml",
-      "calories": 175.0,
-      "carbs": 15.0,
-      "protein": 9.0,
-      "fat": 9.0,
-      "category": "饮品"
-    },
-    {
-      "name": "白开水",
-      "unit": "500ml",
-      "calories": 0.0,
-      "carbs": 0.0,
-      "protein": 0.0,
-      "fat": 0.0,
-      "category": "饮品"
-    },
-    {
-      "name": "魔爪能量饮料",
-      "unit": "330ml",
-      "calories": 29.0,
-      "carbs": 6.9,
-      "protein": 0.0,
-      "fat": 0.0,
-      "category": "饮品"
     }
   ],
   "status": {
     "has_today": true,
     "has_yesterday": false,
     "today": "2026-08-02",
-    "is_active": true
+    "is_active": true,
+    "is_training_day": true
   },
-  "health_score": null
+  "health_score": {
+    "today": {
+      "date": "2026-08-02",
+      "nutrition_score": 43,
+      "nutrition_detail": "热量 1885/1972 kcal (20/20); 蛋白 102.8/150g (10/15); 饮水 1780/2000ml (13/15)",
+      "exercise_score": 30,
+      "exercise_detail": "训练量 8120kg (20/20); 组数 14 (10/10)",
+      "bonus_score": 13,
+      "bonus_detail": "数据完整性 (10/10); 体脂 25.4%（历史不足2次）(3/10)",
+      "total_score": 86,
+      "grade": "🌟 S",
+      "calories_in": 1885,
+      "calories_target": 1972,
+      "protein_in": 102.8,
+      "protein_target": 150,
+      "water_in": 1780,
+      "water_target": 2000,
+      "training_sets": 14,
+      "training_volume": 8120.0,
+      "training_cal": 399,
+      "training_duration_min": 67.2,
+      "bodyfat_pct": 25.4,
+      "is_training_day": true,
+      "bmr_floor": 1725,
+      "below_bmr": false
+    },
+    "history": [
+      {
+        "date": "2026-08-02",
+        "score": 86,
+        "grade": "🌟 S",
+        "nutrition": "热量 1885/1972 kcal (20/20); 蛋白 102.8/150g (10/15); 饮水 1780/2000ml (13/15)",
+        "exercise": "训练量 8120kg (20/20); 组数 14 (10/10)"
+      }
+    ],
+    "exported_at": "2026-08-02T22:39:07.625555"
+  },
+  "food_library": {
+    "items": [
+      {
+        "name": "小米饭",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 116.0,
+        "carbs": 25.0,
+        "protein": 2.5,
+        "fat": 0.7,
+        "category": "主食",
+        "ref_price": 0.0,
+        "total_servings": 3.5,
+        "total_grams": 350.0,
+        "source": "中国营养学会#301小米(熟重)"
+      },
+      {
+        "name": "全麦面包",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 246.0,
+        "carbs": 41.3,
+        "protein": 10.1,
+        "fat": 3.4,
+        "category": "主食",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "白米饭",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 116.0,
+        "carbs": 25.9,
+        "protein": 2.6,
+        "fat": 0.3,
+        "category": "主食",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "面条（煮）",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 110.0,
+        "carbs": 24.3,
+        "protein": 4.5,
+        "fat": 0.7,
+        "category": "主食",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "馒头",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 223.0,
+        "carbs": 44.2,
+        "protein": 7.0,
+        "fat": 1.1,
+        "category": "主食",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "牛奶（全脂）",
+        "brand": "",
+        "per_unit": "100ml",
+        "calories": 65.0,
+        "carbs": 4.9,
+        "protein": 3.0,
+        "fat": 3.5,
+        "category": "乳制品",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "蛋白粉（乳清）",
+        "brand": "",
+        "per_unit": "30g",
+        "calories": 120.0,
+        "carbs": 1.5,
+        "protein": 24.0,
+        "fat": 1.0,
+        "category": "乳制品",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "酸奶（原味）",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 72.0,
+        "carbs": 9.3,
+        "protein": 2.5,
+        "fat": 2.7,
+        "category": "乳制品",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "烤黑椒鸡腿肉拌饭",
+        "brand": "韩宫宴",
+        "per_unit": "1份（含全份红酱）",
+        "calories": 650.0,
+        "carbs": 75.0,
+        "protein": 28.0,
+        "fat": 20.0,
+        "category": "快餐",
+        "ref_price": 14.5,
+        "total_servings": 3.0,
+        "total_grams": 300.0,
+        "source": "大众点评+抖音测评估算(用户原值偏低)"
+      },
+      {
+        "name": "方便面",
+        "brand": "",
+        "per_unit": "1袋约120g",
+        "calories": 460.0,
+        "carbs": 57.0,
+        "protein": 10.0,
+        "fat": 21.0,
+        "category": "快餐",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "汉堡（鸡肉）",
+        "brand": "",
+        "per_unit": "1个",
+        "calories": 380.0,
+        "carbs": 39.0,
+        "protein": 22.0,
+        "fat": 14.0,
+        "category": "快餐",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "苹果",
+        "brand": "",
+        "per_unit": "1个约200g",
+        "calories": 104.0,
+        "carbs": 27.6,
+        "protein": 0.5,
+        "fat": 0.3,
+        "category": "水果",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "香蕉",
+        "brand": "",
+        "per_unit": "1根约120g",
+        "calories": 105.0,
+        "carbs": 27.0,
+        "protein": 1.3,
+        "fat": 0.4,
+        "category": "水果",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "鸭舌头",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 245.0,
+        "carbs": 0.5,
+        "protein": 16.6,
+        "fat": 19.7,
+        "category": "肉类",
+        "ref_price": 0.0,
+        "total_servings": 4.8,
+        "total_grams": 480.0,
+        "source": "中国营养学会 chinanutri.cn #897(生鸭舌)"
+      },
+      {
+        "name": "红烧肉",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 320.0,
+        "carbs": 6.0,
+        "protein": 11.0,
+        "fat": 26.0,
+        "category": "肉类",
+        "ref_price": 0.0,
+        "total_servings": 1.6,
+        "total_grams": 160.0,
+        "source": "Calzen+中国食物成分表(家常做法中位值)"
+      },
+      {
+        "name": "三文鱼",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 208.0,
+        "carbs": 0.0,
+        "protein": 20.4,
+        "fat": 13.6,
+        "category": "肉类",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "牛肉（瘦肉）",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 125.0,
+        "carbs": 0.2,
+        "protein": 20.2,
+        "fat": 4.2,
+        "category": "肉类",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "猪肉（五花）",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 395.0,
+        "carbs": 0.0,
+        "protein": 13.2,
+        "fat": 37.0,
+        "category": "肉类",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "鸡胸肉",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 133.0,
+        "carbs": 0.0,
+        "protein": 31.0,
+        "fat": 1.2,
+        "category": "肉类",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "鸡蛋",
+        "brand": "",
+        "per_unit": "1个约50g",
+        "calories": 70.0,
+        "carbs": 0.6,
+        "protein": 6.5,
+        "fat": 4.8,
+        "category": "肉类",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "素鲍鱼",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 35.0,
+        "carbs": 8.0,
+        "protein": 1.0,
+        "fat": 0.2,
+        "category": "蔬菜",
+        "ref_price": 0.0,
+        "total_servings": 5.0,
+        "total_grams": 500.0,
+        "source": "百度百科素鲍鱼+魔芋营养(市售魔芋型)"
+      },
+      {
+        "name": "炒时蔬",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 60.0,
+        "carbs": 5.0,
+        "protein": 2.0,
+        "fat": 3.0,
+        "category": "蔬菜",
+        "ref_price": 0.0,
+        "total_servings": 2.0,
+        "total_grams": 200.0,
+        "source": "FatSecret炒青菜+营养师共识(普通外卖)"
+      },
+      {
+        "name": "番茄",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 18.0,
+        "carbs": 3.9,
+        "protein": 0.9,
+        "fat": 0.2,
+        "category": "蔬菜",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "西兰花",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 34.0,
+        "carbs": 6.6,
+        "protein": 2.8,
+        "fat": 0.4,
+        "category": "蔬菜",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "黄瓜",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 15.0,
+        "carbs": 2.9,
+        "protein": 0.7,
+        "fat": 0.2,
+        "category": "蔬菜",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "酱油",
+        "brand": "",
+        "per_unit": "10ml",
+        "calories": 5.0,
+        "carbs": 0.8,
+        "protein": 0.6,
+        "fat": 0.0,
+        "category": "调味料",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 10.0,
+        "source": "预置"
+      },
+      {
+        "name": "食用油",
+        "brand": "",
+        "per_unit": "10ml",
+        "calories": 88.0,
+        "carbs": 0.0,
+        "protein": 0.0,
+        "fat": 10.0,
+        "category": "调味料",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "巧克力",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 546.0,
+        "carbs": 59.4,
+        "protein": 4.9,
+        "fat": 31.3,
+        "category": "零食",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "薯片",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 536.0,
+        "carbs": 49.7,
+        "protein": 5.8,
+        "fat": 34.6,
+        "category": "零食",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "可乐（330ml）",
+        "brand": "",
+        "per_unit": "330ml",
+        "calories": 139.0,
+        "carbs": 35.0,
+        "protein": 0.0,
+        "fat": 0.0,
+        "category": "饮品",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "拿铁（中杯）",
+        "brand": "",
+        "per_unit": "1杯约350ml",
+        "calories": 175.0,
+        "carbs": 15.0,
+        "protein": 9.0,
+        "fat": 9.0,
+        "category": "饮品",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "白开水",
+        "brand": "",
+        "per_unit": "500ml",
+        "calories": 0.0,
+        "carbs": 0.0,
+        "protein": 0.0,
+        "fat": 0.0,
+        "category": "饮品",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "预置"
+      },
+      {
+        "name": "魔爪能量饮料",
+        "brand": "Monster",
+        "per_unit": "330ml",
+        "calories": 100.0,
+        "carbs": 24.0,
+        "protein": 0.0,
+        "fat": 0.0,
+        "category": "饮品",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "source": "Monster官网经典版绿罐营养标签(330ml整罐)"
+      }
+    ],
+    "total_foods": 33,
+    "total_servings": 20.9,
+    "by_category": {
+      "主食": {
+        "count": 5,
+        "servings": 3.5
+      },
+      "乳制品": {
+        "count": 3,
+        "servings": 0
+      },
+      "快餐": {
+        "count": 3,
+        "servings": 3.0
+      },
+      "水果": {
+        "count": 2,
+        "servings": 0
+      },
+      "肉类": {
+        "count": 7,
+        "servings": 6.4
+      },
+      "蔬菜": {
+        "count": 5,
+        "servings": 7.0
+      },
+      "调味料": {
+        "count": 2,
+        "servings": 1.0
+      },
+      "零食": {
+        "count": 2,
+        "servings": 0
+      },
+      "饮品": {
+        "count": 4,
+        "servings": 0
+      }
+    }
+  }
 }
