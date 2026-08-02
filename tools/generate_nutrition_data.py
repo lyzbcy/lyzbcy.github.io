@@ -436,7 +436,22 @@ def main():
         for s in summaries
     )
 
-    # 10. 组装输出
+    # 10. 食物库（从 food.db 读取）
+    food_library = []
+    try:
+        food_db_path = os.path.join(WORKSPACE, "skills", "lyzbcy-nutrition-tracker", "data", "food.db")
+        if os.path.exists(food_db_path):
+            import sqlite3 as _sql
+            _conn = _sql.connect(food_db_path)
+            _c = _conn.cursor()
+            _c.execute("SELECT name, per_unit, calories, carbs, protein, fat, category FROM foods ORDER BY category, name")
+            food_library = [{"name": r[0], "unit": r[1], "calories": r[2], "carbs": r[3],
+                            "protein": r[4], "fat": r[5], "category": r[6]} for r in _c.fetchall()]
+            _conn.close()
+    except Exception:
+        pass  # 食物库不可用不影响主流程
+
+    # 11. 组装输出
     output = {
         "generated_at": datetime.now(timezone(timedelta(hours=8))).isoformat(),
         "goals": goals,
@@ -452,6 +467,7 @@ def main():
         "macros": macros_dist,
         "trend": trend,
         "summaries": summaries,
+        "food_library": food_library,
         "status": {
             "has_today": has_today,
             "has_yesterday": has_yesterday,

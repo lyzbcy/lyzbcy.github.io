@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-02T17:07:40.716460+08:00",
+  "generated_at": "2026-08-02T18:33:02.335581+08:00",
   "goals": {
     "calories": 1800,
     "water": 2000,
@@ -13,7 +13,7 @@
     },
     "avg_calories": 1253,
     "avg_protein": 41,
-    "avg_water": 950,
+    "avg_water": 1290,
     "avg_carbs": 82,
     "avg_fat": 71,
     "total_training_calories": 3465,
@@ -45,7 +45,7 @@
       "protein": 0,
       "carbs": 0,
       "fat": 0,
-      "water": 300,
+      "water": 980,
       "net_calories": 0,
       "has_fitness": false
     }
@@ -77,10 +77,10 @@
       "total_carbs": 0,
       "total_protein": 0,
       "total_fat": 0,
-      "total_water": 300,
+      "total_water": 980,
       "net_calories": 0,
       "meal_count": 0,
-      "water_entries": 1,
+      "water_entries": 3,
       "supplements": {
         "count": 0,
         "has_creatine": false,
@@ -88,7 +88,7 @@
       },
       "calorie_pct": 0,
       "protein_pct": 0,
-      "water_pct": 15.0,
+      "water_pct": 49.0,
       "has_data": true
     }
   ],
@@ -323,6 +323,15 @@
       "unit": "500ml",
       "calories": 0.0,
       "carbs": 0.0,
+      "protein": 0.0,
+      "fat": 0.0,
+      "category": "饮品"
+    },
+    {
+      "name": "魔爪能量饮料",
+      "unit": "330ml",
+      "calories": 29.0,
+      "carbs": 6.9,
       "protein": 0.0,
       "fat": 0.0,
       "category": "饮品"
