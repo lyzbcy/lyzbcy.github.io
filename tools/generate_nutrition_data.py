@@ -451,6 +451,7 @@ def main():
     except Exception:
         pass  # 食物库不可用不影响主流程
 
+
     # 11. 组装输出
     output = {
         "generated_at": datetime.now(timezone(timedelta(hours=8))).isoformat(),
@@ -475,6 +476,16 @@ def main():
             "is_active": has_today or has_yesterday
         }
     }
+
+    # 健康得分联动
+    try:
+        sys.path.insert(0, os.path.join(WORKSPACE, "skills", "lyzbcy-nutrition-tracker", "scripts"))
+        from health_score import compute_score, save_score
+        _hs = compute_score(datetime.now().strftime("%Y-%m-%d"))
+        save_score(_hs)
+        output["health_score"] = _hs
+    except Exception:
+        output["health_score"] = None
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     out_path = os.path.join(OUTPUT_DIR, "nutrition.json")
