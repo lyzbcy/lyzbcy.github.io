@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-02T22:39:07.632773+08:00",
+  "generated_at": "2026-08-03T00:02:39.677006+08:00",
   "goals": {
-    "calories": 1972,
+    "calories": 1670,
     "water": 2000,
     "protein": 150
   },
@@ -11,12 +11,12 @@
     "bmr_formulas": {
       "mifflin": 1725,
       "harris": 1799,
-      "katch": 1579
+      "katch": 1635
     },
-    "tdee": 2372,
+    "tdee": 2070,
     "bmr_floor": 1725,
-    "below_bmr": false,
-    "is_training_day": true,
+    "below_bmr": true,
+    "is_training_day": false,
     "deficit": 400
   },
   "overview": {
@@ -25,11 +25,11 @@
       "first": "2026-04-29",
       "last": "2026-08-02"
     },
-    "avg_calories": 1569,
-    "avg_protein": 72,
-    "avg_water": 1690,
-    "avg_carbs": 147,
-    "avg_fat": 65,
+    "avg_calories": 1356,
+    "avg_protein": 50,
+    "avg_water": 1640,
+    "avg_carbs": 122,
+    "avg_fat": 64,
     "total_training_calories": 5407,
     "training_days": 21,
     "compliance": {
@@ -59,24 +59,29 @@
         "date": "2026-08-02",
         "bodyfat_pct": 25.4,
         "note": "早起空腹 | 11公式交叉验证 | LBM 6法均值"
+      },
+      {
+        "date": "2026-08-03",
+        "bodyfat_pct": 21.9,
+        "note": "8/3 早起空腹 | 亚洲汉族南方人 | Deurenberg亚洲修正适用"
       }
     ]
   },
   "macros": {
     "carbs_pct": 47,
-    "protein_pct": 23,
-    "fat_pct": 30,
-    "total_cal": 1787
+    "protein_pct": 17,
+    "fat_pct": 36,
+    "total_cal": 1392
   },
   "trend": [
     {
       "date": "2026-08-02",
-      "calories": 1885,
-      "protein": 102.8,
-      "carbs": 211.3,
-      "fat": 59.0,
-      "water": 1780,
-      "net_calories": 1486,
+      "calories": 1458,
+      "protein": 58.1,
+      "carbs": 162.5,
+      "fat": 56.6,
+      "water": 1680,
+      "net_calories": 1059,
       "has_fitness": true
     }
   ],
@@ -96,29 +101,29 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 63.5,
+      "calorie_pct": 75.0,
       "protein_pct": 27.3,
       "water_pct": 80.0,
       "has_data": true
     },
     {
       "date": "2026-08-02",
-      "total_calories": 1885,
-      "total_carbs": 211.3,
-      "total_protein": 102.8,
-      "total_fat": 59.0,
-      "total_water": 1780,
-      "net_calories": 1486,
-      "meal_count": 5,
-      "water_entries": 6,
+      "total_calories": 1458,
+      "total_carbs": 162.5,
+      "total_protein": 58.1,
+      "total_fat": 56.6,
+      "total_water": 1680,
+      "net_calories": 1059,
+      "meal_count": 2,
+      "water_entries": 5,
       "supplements": {
         "count": 0,
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 95.6,
-      "protein_pct": 68.5,
-      "water_pct": 89.0,
+      "calorie_pct": 87.3,
+      "protein_pct": 38.7,
+      "water_pct": 84.0,
       "has_data": true,
       "fitness": {
         "total_volume": 8120.0,
@@ -144,48 +149,48 @@
     }
   ],
   "status": {
-    "has_today": true,
-    "has_yesterday": false,
-    "today": "2026-08-02",
+    "has_today": false,
+    "has_yesterday": true,
+    "today": "2026-08-03",
     "is_active": true,
-    "is_training_day": true
+    "is_training_day": false
   },
   "health_score": {
     "today": {
-      "date": "2026-08-02",
-      "nutrition_score": 43,
-      "nutrition_detail": "热量 1885/1972 kcal (20/20); 蛋白 102.8/150g (10/15); 饮水 1780/2000ml (13/15)",
-      "exercise_score": 30,
-      "exercise_detail": "训练量 8120kg (20/20); 组数 14 (10/10)",
-      "bonus_score": 13,
-      "bonus_detail": "数据完整性 (10/10); 体脂 25.4%（历史不足2次）(3/10)",
-      "total_score": 86,
-      "grade": "🌟 S",
-      "calories_in": 1885,
-      "calories_target": 1972,
-      "protein_in": 102.8,
+      "date": "2026-08-03",
+      "nutrition_score": 0,
+      "nutrition_detail": "热量 0/1670 kcal (0/20); 蛋白 0/150g (0/15); 饮水 0/2000ml (0/15)",
+      "exercise_score": 0,
+      "exercise_detail": "今日无训练 (0/20); 组数 0 (0/10)",
+      "bonus_score": 10,
+      "bonus_detail": "数据完整性 (0/10); 体脂趋势 -3.5% (10/10)",
+      "total_score": 10,
+      "grade": "💀 D",
+      "calories_in": 0,
+      "calories_target": 1670,
+      "protein_in": 0,
       "protein_target": 150,
-      "water_in": 1780,
+      "water_in": 0,
       "water_target": 2000,
-      "training_sets": 14,
-      "training_volume": 8120.0,
-      "training_cal": 399,
-      "training_duration_min": 67.2,
-      "bodyfat_pct": 25.4,
-      "is_training_day": true,
+      "training_sets": 0,
+      "training_volume": 0,
+      "training_cal": 0,
+      "training_duration_min": 0,
+      "bodyfat_pct": 21.9,
+      "is_training_day": false,
       "bmr_floor": 1725,
-      "below_bmr": false
+      "below_bmr": true
     },
     "history": [
       {
         "date": "2026-08-02",
-        "score": 86,
-        "grade": "🌟 S",
-        "nutrition": "热量 1885/1972 kcal (20/20); 蛋白 102.8/150g (10/15); 饮水 1780/2000ml (13/15)",
+        "score": 72,
+        "grade": "😊 A",
+        "nutrition": "热量 1458/1972 kcal (10/20); 蛋白 58.1/150g (6/15); 饮水 1680/2000ml (13/15)",
         "exercise": "训练量 8120kg (20/20); 组数 14 (10/10)"
       }
     ],
-    "exported_at": "2026-08-02T22:39:07.625555"
+    "exported_at": "2026-08-03T00:02:39.671028"
   },
   "food_library": {
     "items": [
@@ -199,8 +204,8 @@
         "fat": 0.7,
         "category": "主食",
         "ref_price": 0.0,
-        "total_servings": 3.5,
-        "total_grams": 350.0,
+        "total_servings": 2.5,
+        "total_grams": 250.0,
         "source": "中国营养学会#301小米(熟重)"
       },
       {
@@ -311,8 +316,8 @@
         "fat": 20.0,
         "category": "快餐",
         "ref_price": 14.5,
-        "total_servings": 3.0,
-        "total_grams": 300.0,
+        "total_servings": 1.0,
+        "total_grams": 100.0,
         "source": "大众点评+抖音测评估算(用户原值偏低)"
       },
       {
@@ -381,8 +386,8 @@
         "fat": 19.7,
         "category": "肉类",
         "ref_price": 0.0,
-        "total_servings": 4.8,
-        "total_grams": 480.0,
+        "total_servings": 0.8,
+        "total_grams": 80.0,
         "source": "中国营养学会 chinanutri.cn #897(生鸭舌)"
       },
       {
@@ -395,8 +400,8 @@
         "fat": 26.0,
         "category": "肉类",
         "ref_price": 0.0,
-        "total_servings": 1.6,
-        "total_grams": 160.0,
+        "total_servings": 0.6,
+        "total_grams": 60.0,
         "source": "Calzen+中国食物成分表(家常做法中位值)"
       },
       {
@@ -479,8 +484,8 @@
         "fat": 0.2,
         "category": "蔬菜",
         "ref_price": 0.0,
-        "total_servings": 5.0,
-        "total_grams": 500.0,
+        "total_servings": 2.0,
+        "total_grams": 200.0,
         "source": "百度百科素鲍鱼+魔芋营养(市售魔芋型)"
       },
       {
@@ -493,8 +498,8 @@
         "fat": 3.0,
         "category": "蔬菜",
         "ref_price": 0.0,
-        "total_servings": 2.0,
-        "total_grams": 200.0,
+        "total_servings": 1.0,
+        "total_grams": 100.0,
         "source": "FatSecret炒青菜+营养师共识(普通外卖)"
       },
       {
@@ -653,11 +658,11 @@
       }
     ],
     "total_foods": 33,
-    "total_servings": 20.9,
+    "total_servings": 8.9,
     "by_category": {
       "主食": {
         "count": 5,
-        "servings": 3.5
+        "servings": 2.5
       },
       "乳制品": {
         "count": 3,
@@ -665,7 +670,7 @@
       },
       "快餐": {
         "count": 3,
-        "servings": 3.0
+        "servings": 1.0
       },
       "水果": {
         "count": 2,
@@ -673,11 +678,11 @@
       },
       "肉类": {
         "count": 7,
-        "servings": 6.4
+        "servings": 1.4
       },
       "蔬菜": {
         "count": 5,
-        "servings": 7.0
+        "servings": 3.0
       },
       "调味料": {
         "count": 2,
