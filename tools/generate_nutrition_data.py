@@ -48,6 +48,28 @@ except Exception:
 def parse_date(s):
     return datetime.fromisoformat(s).date() if isinstance(s, str) else s
 
+
+def _self_heal_permissions():
+    """
+    权限自愈：扫描 nutrition 目录，把所有 .json 文件权限设为 644（所有人可读）。
+    防止 root 手动改文件后 owner/权限变更导致 ubuntu cron 读不了（历史 bug）。
+    只动权限不动 owner——chown 需要 root 权限，ubuntu cron 跑不了，所以靠 chmod 644 让其他用户可读。
+    """
+    import glob
+    healed = 0
+    for pattern in [os.path.join(NUTRITION_DIR, "*.json"),
+                    os.path.join(FITNESS_DIR, "*.jsonl"),
+                    os.path.join(FITNESS_DIR, "*.json")]:
+        for f in glob.glob(pattern):
+            try:
+                mode = os.stat(f).st_mode & 0o777
+                if mode != 0o644:
+                    os.chmod(f, 0o644)
+                    healed += 1
+            except OSError:
+                pass
+    return healed
+
 def estimate_calorie_burn(records_jsonl_path, exercises_data=None, weight_kg=None):
     """
     每日训练消耗 — v2 统一走 body_composition.compute_training_burn。
@@ -547,6 +569,11 @@ def _load_food_library():
 
 
 def main():
+    # 0. 权限自愈（防止 root 改文件后 ubuntu cron 读不了，历史 bug）
+    healed = _self_heal_permissions()
+    if healed:
+        print(f"🔧 权限自愈：修正了 {healed} 个文件的权限为 644", file=sys.stderr)
+
     # 1. 加载营养数据
     daily_data, goals = load_daily_nutrition(NUTRITION_DIR)
     cfg_path = os.path.join(NUTRITION_DIR, "config.json")
