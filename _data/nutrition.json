@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-03T22:05:02.247900+08:00",
+  "generated_at": "2026-08-03T22:37:12.964046+08:00",
   "goals": {
     "calories": 1670,
     "water": 2000,
@@ -10,7 +10,8 @@
     "bmr": 1725,
     "bmr_formulas": {
       "mifflin": 1725,
-      "harris": 1799
+      "harris": 1799,
+      "katch": 1635
     },
     "tdee": 2070,
     "bmr_floor": 1725,
@@ -19,20 +20,20 @@
     "deficit": 400
   },
   "overview": {
-    "recorded_days": 2,
+    "recorded_days": 3,
     "date_range": {
       "first": "2026-04-29",
       "last": "2026-08-03"
     },
-    "avg_calories": 1380,
-    "avg_protein": 59,
-    "avg_water": 1675,
-    "avg_carbs": 140,
-    "avg_fat": 51,
+    "avg_calories": 1473,
+    "avg_protein": 69,
+    "avg_water": 1677,
+    "avg_carbs": 148,
+    "avg_fat": 56,
     "total_training_calories": 5415,
     "training_days": 22,
     "compliance": {
-      "calorie": 50,
+      "calorie": 67,
       "protein": 0,
       "water": 100
     }
@@ -53,23 +54,39 @@
     ]
   },
   "bodyfat": {
-    "history": []
+    "history": [
+      {
+        "date": "2026-08-03",
+        "bodyfat_pct": 21.9,
+        "note": "8/3 早起空腹 | 亚洲汉族南方人 | Deurenberg亚洲修正适用"
+      }
+    ]
   },
   "macros": {
-    "carbs_pct": 57,
+    "carbs_pct": 49,
     "protein_pct": 22,
-    "fat_pct": 21,
-    "total_cal": 1388
+    "fat_pct": 29,
+    "total_cal": 1490
   },
   "trend": [
     {
+      "date": "2026-08-02",
+      "calories": 1458,
+      "protein": 58.1,
+      "carbs": 162.5,
+      "fat": 56.6,
+      "water": 1680,
+      "net_calories": 1059,
+      "has_fitness": true
+    },
+    {
       "date": "2026-08-03",
-      "calories": 1507,
-      "protein": 76.5,
-      "carbs": 199.0,
-      "fat": 31.8,
+      "calories": 1707,
+      "protein": 106.5,
+      "carbs": 200.5,
+      "fat": 40.0,
       "water": 1750,
-      "net_calories": 1499,
+      "net_calories": 1699,
       "has_fitness": true
     }
   ],
@@ -95,22 +112,63 @@
       "has_data": true
     },
     {
+      "date": "2026-08-02",
+      "total_calories": 1458,
+      "total_carbs": 162.5,
+      "total_protein": 58.1,
+      "total_fat": 56.6,
+      "total_water": 1680,
+      "net_calories": 1059,
+      "meal_count": 2,
+      "water_entries": 5,
+      "supplements": {
+        "count": 0,
+        "has_creatine": false,
+        "has_protein": false
+      },
+      "calorie_pct": 87.3,
+      "protein_pct": 38.7,
+      "water_pct": 84.0,
+      "has_data": true,
+      "fitness": {
+        "total_volume": 8120.0,
+        "sets": 14,
+        "estimated_min": 67.2,
+        "active_min": 8.2,
+        "calories_burned": 399,
+        "calories_net": 298,
+        "by_type": {
+          "compound": {
+            "sets": 7,
+            "min": 33.6,
+            "cal": 252
+          },
+          "isolation": {
+            "sets": 7,
+            "min": 33.6,
+            "cal": 147
+          }
+        },
+        "method": "MET-endTime"
+      }
+    },
+    {
       "date": "2026-08-03",
-      "total_calories": 1507,
-      "total_carbs": 199.0,
-      "total_protein": 76.5,
-      "total_fat": 31.8,
+      "total_calories": 1707,
+      "total_carbs": 200.5,
+      "total_protein": 106.5,
+      "total_fat": 40.0,
       "total_water": 1750,
-      "net_calories": 1499,
-      "meal_count": 4,
+      "net_calories": 1699,
+      "meal_count": 5,
       "water_entries": 4,
       "supplements": {
         "count": 0,
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 90.2,
-      "protein_pct": 51.0,
+      "calorie_pct": 102.2,
+      "protein_pct": 71.0,
       "water_pct": 87.5,
       "has_data": true,
       "fitness": {
@@ -133,12 +191,55 @@
   ],
   "status": {
     "has_today": true,
-    "has_yesterday": false,
+    "has_yesterday": true,
     "today": "2026-08-03",
     "is_active": true,
     "is_training_day": false
   },
-  "health_score": null,
+  "health_score": {
+    "today": {
+      "date": "2026-08-03",
+      "nutrition_score": 44,
+      "nutrition_detail": "热量 1707/1670 kcal (20/20); 蛋白 106.5/150g (11/15); 饮水 1750/2000ml (13/15)",
+      "exercise_score": 0,
+      "exercise_detail": "今日无训练 (0/20); 组数 1 (0/10)",
+      "bonus_score": 11,
+      "bonus_detail": "数据完整性 (8/10); 体脂 21.9%（历史不足2次）(3/10)",
+      "total_score": 55,
+      "grade": "😐 B",
+      "calories_in": 1707,
+      "calories_target": 1670,
+      "protein_in": 106.5,
+      "protein_target": 150,
+      "water_in": 1750,
+      "water_target": 2000,
+      "training_sets": 1,
+      "training_volume": 0,
+      "training_cal": 8,
+      "training_duration_min": 1.0,
+      "bodyfat_pct": 21.9,
+      "is_training_day": false,
+      "bmr_floor": 1725,
+      "below_bmr": true
+    },
+    "history": [
+      {
+        "date": "2026-08-02",
+        "score": 72,
+        "grade": "😊 A",
+        "nutrition": "热量 1458/1972 kcal (10/20); 蛋白 58.1/150g (6/15); 饮水 1680/2000ml (13/15)",
+        "exercise": "训练量 8120kg (20/20); 组数 14 (10/10)"
+      },
+      {
+        "date": "2026-08-03",
+        "score": 55,
+        "grade": "😐 B",
+        "nutrition": "热量 1707/1670 kcal (20/20); 蛋白 106.5/150g (11/15); 饮水 1750/2000ml (13/15)",
+        "exercise": "今日无训练 (0/20); 组数 1 (0/10)"
+      }
+    ],
+    "exported_at": "2026-08-03T22:37:12.957318"
+  },
   "food_library": {
     "items": [
       {
@@ -378,6 +479,20 @@
         "total_servings": 0,
         "total_grams": 0,
         "source": "预置"
+      },
+      {
+        "name": "麻辣腿",
+        "brand": "特之园",
+        "per_unit": "100g",
+        "calories": 200.0,
+        "carbs": 1.5,
+        "protein": 30.0,
+        "fat": 8.2,
+        "category": "肉类",
+        "ref_price": 8.0,
+        "total_servings": 1.0,
+        "total_grams": 100.0,
+        "source": "包装营养成分表"
       },
       {
         "name": "鸭舌头",
@@ -688,8 +803,8 @@
         "source": "Monster官网经典版绿罐营养标签(330ml整罐)"
       }
     ],
-    "total_foods": 39,
-    "total_servings": 14.9,
+    "total_foods": 40,
+    "total_servings": 15.9,
     "by_category": {
       "主食": {
         "count": 5,
@@ -708,8 +823,8 @@
         "servings": 0
       },
       "肉类": {
-        "count": 7,
-        "servings": 1.4
+        "count": 8,
+        "servings": 2.4
       },
       "蔬菜": {
         "count": 5,
