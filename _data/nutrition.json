@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-03T00:18:09.706071+08:00",
+  "generated_at": "2026-08-03T22:05:02.247900+08:00",
   "goals": {
     "calories": 1670,
     "water": 2000,
@@ -10,8 +10,7 @@
     "bmr": 1725,
     "bmr_formulas": {
       "mifflin": 1725,
-      "harris": 1799,
-      "katch": 1635
+      "harris": 1799
     },
     "tdee": 2070,
     "bmr_floor": 1725,
@@ -23,15 +22,15 @@
     "recorded_days": 2,
     "date_range": {
       "first": "2026-04-29",
-      "last": "2026-08-02"
+      "last": "2026-08-03"
     },
-    "avg_calories": 1356,
-    "avg_protein": 50,
-    "avg_water": 1640,
-    "avg_carbs": 122,
-    "avg_fat": 64,
-    "total_training_calories": 5407,
-    "training_days": 21,
+    "avg_calories": 1380,
+    "avg_protein": 59,
+    "avg_water": 1675,
+    "avg_carbs": 140,
+    "avg_fat": 51,
+    "total_training_calories": 5415,
+    "training_days": 22,
     "compliance": {
       "calorie": 50,
       "protein": 0,
@@ -54,29 +53,23 @@
     ]
   },
   "bodyfat": {
-    "history": [
-      {
-        "date": "2026-08-03",
-        "bodyfat_pct": 21.9,
-        "note": "8/3 早起空腹 | 亚洲汉族南方人 | Deurenberg亚洲修正适用"
-      }
-    ]
+    "history": []
   },
   "macros": {
-    "carbs_pct": 47,
-    "protein_pct": 17,
-    "fat_pct": 36,
-    "total_cal": 1392
+    "carbs_pct": 57,
+    "protein_pct": 22,
+    "fat_pct": 21,
+    "total_cal": 1388
   },
   "trend": [
     {
-      "date": "2026-08-02",
-      "calories": 1458,
-      "protein": 58.1,
-      "carbs": 162.5,
-      "fat": 56.6,
-      "water": 1680,
-      "net_calories": 1059,
+      "date": "2026-08-03",
+      "calories": 1507,
+      "protein": 76.5,
+      "carbs": 199.0,
+      "fat": 31.8,
+      "water": 1750,
+      "net_calories": 1499,
       "has_fitness": true
     }
   ],
@@ -102,41 +95,36 @@
       "has_data": true
     },
     {
-      "date": "2026-08-02",
-      "total_calories": 1458,
-      "total_carbs": 162.5,
-      "total_protein": 58.1,
-      "total_fat": 56.6,
-      "total_water": 1680,
-      "net_calories": 1059,
-      "meal_count": 2,
-      "water_entries": 5,
+      "date": "2026-08-03",
+      "total_calories": 1507,
+      "total_carbs": 199.0,
+      "total_protein": 76.5,
+      "total_fat": 31.8,
+      "total_water": 1750,
+      "net_calories": 1499,
+      "meal_count": 4,
+      "water_entries": 4,
       "supplements": {
         "count": 0,
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 87.3,
-      "protein_pct": 38.7,
-      "water_pct": 84.0,
+      "calorie_pct": 90.2,
+      "protein_pct": 51.0,
+      "water_pct": 87.5,
       "has_data": true,
       "fitness": {
-        "total_volume": 8120.0,
-        "sets": 14,
-        "estimated_min": 67.2,
-        "active_min": 8.2,
-        "calories_burned": 399,
-        "calories_net": 298,
+        "total_volume": 0.0,
+        "sets": 1,
+        "estimated_min": 1.0,
+        "active_min": 0.5,
+        "calories_burned": 8,
+        "calories_net": 6,
         "by_type": {
           "compound": {
-            "sets": 7,
-            "min": 33.6,
-            "cal": 252
-          },
-          "isolation": {
-            "sets": 7,
-            "min": 33.6,
-            "cal": 147
+            "sets": 1,
+            "min": 1.0,
+            "cal": 8
           }
         },
         "method": "MET-endTime"
@@ -144,56 +132,13 @@
     }
   ],
   "status": {
-    "has_today": false,
-    "has_yesterday": true,
+    "has_today": true,
+    "has_yesterday": false,
     "today": "2026-08-03",
     "is_active": true,
     "is_training_day": false
   },
-  "health_score": {
-    "today": {
-      "date": "2026-08-03",
-      "nutrition_score": 0,
-      "nutrition_detail": "热量 0/1670 kcal (0/20); 蛋白 0/150g (0/15); 饮水 0/2000ml (0/15)",
-      "exercise_score": 0,
-      "exercise_detail": "今日无训练 (0/20); 组数 0 (0/10)",
-      "bonus_score": 3,
-      "bonus_detail": "数据完整性 (0/10); 体脂 21.9%（历史不足2次）(3/10)",
-      "total_score": 3,
-      "grade": "💀 D",
-      "calories_in": 0,
-      "calories_target": 1670,
-      "protein_in": 0,
-      "protein_target": 150,
-      "water_in": 0,
-      "water_target": 2000,
-      "training_sets": 0,
-      "training_volume": 0,
-      "training_cal": 0,
-      "training_duration_min": 0,
-      "bodyfat_pct": 21.9,
-      "is_training_day": false,
-      "bmr_floor": 1725,
-      "below_bmr": true
-    },
-    "history": [
-      {
-        "date": "2026-08-02",
-        "score": 72,
-        "grade": "😊 A",
-        "nutrition": "热量 1458/1972 kcal (10/20); 蛋白 58.1/150g (6/15); 饮水 1680/2000ml (13/15)",
-        "exercise": "训练量 8120kg (20/20); 组数 14 (10/10)"
-      },
-      {
-        "date": "2026-08-03",
-        "score": 3,
-        "grade": "💀 D",
-        "nutrition": "热量 0/1670 kcal (0/20); 蛋白 0/150g (0/15); 饮水 0/2000ml (0/15)",
-        "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
-      }
-    ],
-    "exported_at": "2026-08-03T00:18:09.696339"
-  },
+  "health_score": null,
   "food_library": {
     "items": [
       {
@@ -267,6 +212,20 @@
         "source": "预置"
       },
       {
+        "name": "美盾牦牛奶粉",
+        "brand": "美盾",
+        "per_unit": "10g",
+        "calories": 49.0,
+        "carbs": 4.0,
+        "protein": 2.5,
+        "fat": 2.8,
+        "category": "乳制品",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 10.0,
+        "source": "用户估算"
+      },
+      {
         "name": "牛奶（全脂）",
         "brand": "",
         "per_unit": "100ml",
@@ -309,6 +268,20 @@
         "source": "预置"
       },
       {
+        "name": "吉士蛋麦满分",
+        "brand": "麦当劳",
+        "per_unit": "1个",
+        "calories": 290.0,
+        "carbs": 33.0,
+        "protein": 16.0,
+        "fat": 11.0,
+        "category": "快餐",
+        "ref_price": 5.5,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "source": "用户"
+      },
+      {
         "name": "烤黑椒鸡腿肉拌饭",
         "brand": "韩宫宴",
         "per_unit": "1份（含全份红酱）",
@@ -321,6 +294,34 @@
         "total_servings": 1.0,
         "total_grams": 100.0,
         "source": "大众点评+抖音测评估算(用户原值偏低)"
+      },
+      {
+        "name": "番茄沙葱腿肉面",
+        "brand": "和府捞面",
+        "per_unit": "1碗",
+        "calories": 590.0,
+        "carbs": 90.0,
+        "protein": 24.0,
+        "fat": 9.0,
+        "category": "快餐",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "source": "星星布丁实测"
+      },
+      {
+        "name": "西红柿炒鸡蛋盖码饭",
+        "brand": "湘八爷",
+        "per_unit": "1份",
+        "calories": 480.0,
+        "carbs": 58.0,
+        "protein": 28.0,
+        "fat": 8.0,
+        "category": "快餐",
+        "ref_price": 8.9,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "source": "用户提供"
       },
       {
         "name": "方便面",
@@ -547,6 +548,20 @@
         "source": "预置"
       },
       {
+        "name": "BD冰红茶味肌酸粉",
+        "brand": "BD",
+        "per_unit": "3g",
+        "calories": 8.0,
+        "carbs": 2.0,
+        "protein": 0.0,
+        "fat": 0.0,
+        "category": "调味料",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 3.0,
+        "source": "用户估算"
+      },
+      {
         "name": "酱油",
         "brand": "",
         "per_unit": "10ml",
@@ -601,6 +616,20 @@
         "total_servings": 0,
         "total_grams": 0,
         "source": "预置"
+      },
+      {
+        "name": "优品豆浆",
+        "brand": "麦当劳",
+        "per_unit": "1杯",
+        "calories": 90.0,
+        "carbs": 12.0,
+        "protein": 6.0,
+        "fat": 1.0,
+        "category": "饮品",
+        "ref_price": 2.1,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "source": "用户"
       },
       {
         "name": "可乐（330ml）",
@@ -659,20 +688,20 @@
         "source": "Monster官网经典版绿罐营养标签(330ml整罐)"
       }
     ],
-    "total_foods": 33,
-    "total_servings": 8.9,
+    "total_foods": 39,
+    "total_servings": 14.9,
     "by_category": {
       "主食": {
         "count": 5,
         "servings": 2.5
       },
       "乳制品": {
-        "count": 3,
-        "servings": 0
+        "count": 4,
+        "servings": 1.0
       },
       "快餐": {
-        "count": 3,
-        "servings": 1.0
+        "count": 6,
+        "servings": 4.0
       },
       "水果": {
         "count": 2,
@@ -687,16 +716,16 @@
         "servings": 3.0
       },
       "调味料": {
-        "count": 2,
-        "servings": 1.0
+        "count": 3,
+        "servings": 2.0
       },
       "零食": {
         "count": 2,
         "servings": 0
       },
       "饮品": {
-        "count": 4,
-        "servings": 0
+        "count": 5,
+        "servings": 1.0
       }
     }
   }
