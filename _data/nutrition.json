@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-09T22:05:01.880485+08:00",
+  "generated_at": "2026-08-09T23:28:17.569565+08:00",
   "goals": {
     "calories": 1951,
     "water": 2000,
@@ -81,6 +81,97 @@
         "note": "8/6 晚间 | 亚洲汉族南方人"
       }
     ]
+  },
+  "body_composition": {
+    "history": [
+      {
+        "date": "2026-08-03",
+        "weight": 75.0,
+        "bodyfat_pct": 21.9,
+        "ffm": {
+          "formulas": {
+            "boer": 57.3,
+            "hume": 53.4,
+            "katch": 58.6
+          },
+          "avg": 56.4
+        },
+        "smm": {
+          "formulas": {
+            "lee": 32.6,
+            "heymsfield": 27.6,
+            "janmahasatian": 32.4
+          },
+          "avg": 30.9
+        },
+        "tbw": {
+          "formulas": {
+            "watson": 43.8,
+            "mellits": 44.4,
+            "pace": 41.3
+          },
+          "avg": 43.2
+        }
+      },
+      {
+        "date": "2026-08-06",
+        "weight": 75.0,
+        "bodyfat_pct": 22.1,
+        "ffm": {
+          "formulas": {
+            "boer": 57.3,
+            "hume": 53.4,
+            "katch": 58.4
+          },
+          "avg": 56.4
+        },
+        "smm": {
+          "formulas": {
+            "lee": 32.6,
+            "heymsfield": 27.6,
+            "janmahasatian": 32.4
+          },
+          "avg": 30.9
+        },
+        "tbw": {
+          "formulas": {
+            "watson": 43.8,
+            "mellits": 44.4,
+            "pace": 41.3
+          },
+          "avg": 43.2
+        }
+      }
+    ],
+    "latest": {
+      "date": "2026-08-06",
+      "weight": 75.0,
+      "bodyfat_pct": 22.1,
+      "ffm": {
+        "formulas": {
+          "boer": 57.3,
+          "hume": 53.4,
+          "katch": 58.4
+        },
+        "avg": 56.4
+      },
+      "smm": {
+        "formulas": {
+          "lee": 32.6,
+          "heymsfield": 27.6,
+          "janmahasatian": 32.4
+        },
+        "avg": 30.9
+      },
+      "tbw": {
+        "formulas": {
+          "watson": 43.8,
+          "mellits": 44.4,
+          "pace": 41.3
+        },
+        "avg": 43.2
+      }
+    }
   },
   "macros": {
     "carbs_pct": 49,
@@ -544,7 +635,7 @@
         "exercise": "训练量 3882kg (19/20); 组数 11 (10/10)"
       }
     ],
-    "exported_at": "2026-08-09T22:05:01.874366"
+    "exported_at": "2026-08-09T23:28:17.559931"
   },
   "food_library": {
     "items": [

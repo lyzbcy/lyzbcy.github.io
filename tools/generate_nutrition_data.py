@@ -183,6 +183,45 @@ def get_bodyfat_history(nutrition_dir):
     return sorted(bodyfat_records, key=lambda x: x["date"])
 
 
+def get_body_composition_history():
+    """读 skills config.json 的 bodyMeasurementHistory, 对每条体测算 FFM/SMM/TBW.
+    返回 [{date, weight, bodyfat_pct, ffm, smm, tbw}, ...] 按日期升序."""
+    cfg_path = "/home/openclaw-shared/skills/lyzbcy-nutrition-tracker/config.json"
+    if not os.path.exists(cfg_path):
+        return []
+    try:
+        with open(cfg_path) as f:
+            cfg = json.load(f)
+    except Exception:
+        return []
+    height = cfg.get("height")
+    history = cfg.get("bodyMeasurementHistory", [])
+    if not height or not history:
+        return []
+    out = []
+    for e in history:
+        w = e.get("weight")
+        bf = e.get("bodyfat_pct")
+        if not w:
+            continue
+        ffm = bc.compute_lbm(height, w, bf) if bc else None
+        smm = bc.compute_smm(height, w, 25, "male", bf) if bc else None
+        tbw = bc.compute_tbw(height, w, 25, "male", ffm["avg"] if ffm else None) if bc else None
+        rec = {"date": e["date"], "weight": w}
+        if bf is not None:
+            rec["bodyfat_pct"] = bf
+        if ffm:
+            rec["ffm"] = ffm
+        if smm:
+            rec["smm"] = smm
+        if tbw:
+            rec["tbw"] = tbw
+        out.append(rec)
+    return sorted(out, key=lambda x: x["date"])
+
+
+
+
 def load_daily_nutrition(nutrition_dir):
     """加载所有日期的营养数据"""
     if not os.path.isdir(nutrition_dir):
@@ -538,15 +577,20 @@ def _load_food_library():
         conn.close()
         items = []
         total_servings_all = 0.0
+        total_spending_all = 0.0
         for r in rows:
             srv = r["total_servings"] or 0
+            price = r["ref_price"] or 0
             total_servings_all += srv
+            cum_spend = round(price * srv, 2)
+            total_spending_all += cum_spend
             items.append({
                 "name": r["name"], "brand": r["brand"], "per_unit": r["per_unit"],
                 "calories": r["calories"], "carbs": r["carbs"], "protein": r["protein"],
                 "fat": r["fat"], "category": r["category"], "ref_price": r["ref_price"],
                 "total_servings": round(srv, 1),
                 "total_grams": round(r["total_grams"] or 0, 0),
+                "cumulative_spending": cum_spend,
                 "source": r["source"] or "预置",
             })
         # 按分类汇总
@@ -560,6 +604,7 @@ def _load_food_library():
             "items": items,
             "total_foods": len(items),
             "total_servings": round(total_servings_all, 1),
+            "total_spending": round(total_spending_all, 2),
             "by_category": {k: {"count": v["count"], "servings": round(v["servings"], 1)}
                             for k, v in by_category.items()},
         }
@@ -608,6 +653,7 @@ def main():
 
     # 3. 体脂历史
     bodyfat = get_bodyfat_history(NUTRITION_DIR)
+    body_comp_history = get_body_composition_history()
     latest_bodyfat_pct = bodyfat[-1]["bodyfat_pct"] if bodyfat else None
 
     # 4. ▼ v2 动态热量目标
@@ -661,6 +707,10 @@ def main():
         },
         "bodyfat": {
             "history": bodyfat
+        },
+        "body_composition": {
+            "history": body_comp_history,
+            "latest": body_comp_history[-1] if body_comp_history else None
         },
         "macros": macros_dist,
         "trend": trend,
