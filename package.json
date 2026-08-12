@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "个人网站本地预览",
   "scripts": {
-    "preview:local": "node local-preview-server.js"
+    "preview:local": "node local-preview-server.js",
+    "test": "python3 -m unittest discover -s test -p 'test_*.py'"
   }
 }
