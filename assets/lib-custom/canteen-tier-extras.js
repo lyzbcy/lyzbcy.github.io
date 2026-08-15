@@ -206,7 +206,7 @@
       foot.textContent = '🕯 灰色划线 = 已歇业（成为回忆）｜ ? = 疑似歇业待确认 ｜ 数据截至 2026-08 ｜ © 捞鱼 ｜ 完整版见博客';
       wrap.appendChild(foot);
     } else {
-      body.innerHTML = '<div class="cte-poster__empty" style="font-size:18px;letter-spacing:4px;color:#c9b98d;">数据筹备中 · 敬请期待</div>';
+      body.innerHTML = '<div class="cte-poster__empty" style="font-size:18px;letter-spacing:4px;color:#c9b98d;"><a href="/posts/江南大学外卖从夯到拉排名/" style="color:#c0392b;">外卖篇已上线 👉 点这里看外卖从夯到拉排名</a></div>';
       var foot2 = document.createElement('div'); foot2.className = 'cte-poster__foot';
       foot2.textContent = '© 捞鱼 ｜ 完整版见博客';
       wrap.appendChild(foot2);
