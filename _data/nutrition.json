@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-15T15:43:03.012468+08:00",
+  "generated_at": "2026-08-15T22:05:02.199785+08:00",
   "goals": {
     "calories": 1954,
     "water": 2000,
@@ -25,17 +25,17 @@
       "first": "2026-04-29",
       "last": "2026-08-15"
     },
-    "avg_calories": 1712,
-    "avg_protein": 91,
-    "avg_water": 1984,
-    "avg_carbs": 198,
-    "avg_fat": 59,
+    "avg_calories": 1802,
+    "avg_protein": 96,
+    "avg_water": 2037,
+    "avg_carbs": 207,
+    "avg_fat": 64,
     "total_training_calories": 6985,
     "training_days": 28,
     "compliance": {
-      "calorie": 67,
+      "calorie": 73,
       "protein": 13,
-      "water": 93
+      "water": 100
     }
   },
   "weight": {
@@ -184,10 +184,10 @@
     }
   },
   "macros": {
-    "carbs_pct": 45,
+    "carbs_pct": 44,
     "protein_pct": 23,
-    "fat_pct": 32,
-    "total_cal": 1797
+    "fat_pct": 33,
+    "total_cal": 1999
   },
   "trend": [
     {
@@ -322,12 +322,12 @@
     },
     {
       "date": "2026-08-15",
-      "calories": 720,
-      "protein": 42.0,
-      "carbs": 78.0,
-      "fat": 26.0,
-      "water": 1330,
-      "net_calories": 233,
+      "calories": 2075,
+      "protein": 110.6,
+      "carbs": 220.6,
+      "fat": 89.4,
+      "water": 2130,
+      "net_calories": 1588,
       "has_fitness": true
     }
   ],
@@ -776,22 +776,22 @@
     },
     {
       "date": "2026-08-15",
-      "total_calories": 720,
-      "total_carbs": 78.0,
-      "total_protein": 42.0,
-      "total_fat": 26.0,
-      "total_water": 1330,
-      "net_calories": 233,
-      "meal_count": 1,
-      "water_entries": 5,
+      "total_calories": 2075,
+      "total_carbs": 220.6,
+      "total_protein": 110.6,
+      "total_fat": 89.4,
+      "total_water": 2130,
+      "net_calories": 1588,
+      "meal_count": 3,
+      "water_entries": 9,
       "supplements": {
         "count": 0,
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 36.8,
-      "protein_pct": 28.0,
-      "water_pct": 66.5,
+      "calorie_pct": 106.2,
+      "protein_pct": 73.7,
+      "water_pct": 106.5,
       "has_data": true,
       "fitness": {
         "total_volume": 5315.0,
@@ -831,19 +831,19 @@
   "health_score": {
     "today": {
       "date": "2026-08-15",
-      "nutrition_score": 15,
-      "nutrition_detail": "热量 720/1954 kcal (1/20); 蛋白 42.0/150g (4/15); 饮水 1330/2000ml (10/15)",
+      "nutrition_score": 44,
+      "nutrition_detail": "热量 2075/1954 kcal (18/20); 蛋白 110.6/150g (11/15); 饮水 2130/2000ml (15/15)",
       "exercise_score": 30,
       "exercise_detail": "训练量 5315kg (20/20); 组数 14 (10/10)",
       "bonus_score": 10,
       "bonus_detail": "数据完整性 (10/10); 体脂趋势 +0.2% (0/10)",
-      "total_score": 55,
-      "grade": "😐 B",
-      "calories_in": 720,
+      "total_score": 84,
+      "grade": "😊 A",
+      "calories_in": 2075,
       "calories_target": 1954,
-      "protein_in": 42.0,
+      "protein_in": 110.6,
       "protein_target": 150,
-      "water_in": 1330,
+      "water_in": 2130,
       "water_target": 2000,
       "training_sets": 14,
       "training_volume": 5315.0,
@@ -954,7 +954,7 @@
         "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
       }
     ],
-    "exported_at": "2026-08-15T15:43:03.001276"
+    "exported_at": "2026-08-15T22:05:02.190228"
   },
   "food_library": {
     "items": [
@@ -1197,6 +1197,36 @@
         "total_grams": 0,
         "cumulative_spending": 0,
         "source": "预置"
+      },
+      {
+        "name": "牛约堡 黑椒鸡块",
+        "brand": "牛约堡",
+        "per_unit": "1盒",
+        "calories": 133.0,
+        "carbs": 17.0,
+        "protein": 6.0,
+        "fat": 6.0,
+        "category": "小食",
+        "ref_price": 0.0,
+        "total_servings": 3.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户估算"
+      },
+      {
+        "name": "牛约堡 奥尔良翅根",
+        "brand": "牛约堡",
+        "per_unit": "1个",
+        "calories": 125.0,
+        "carbs": 2.0,
+        "protein": 8.0,
+        "fat": 10.0,
+        "category": "小食",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户估算"
       },
       {
         "name": "轻盈版鸡肉帕尼尼",
@@ -1662,6 +1692,36 @@
         "total_grams": 0,
         "cumulative_spending": 0,
         "source": "预置"
+      },
+      {
+        "name": "牛约堡 奥尔良鸡腿堡",
+        "brand": "牛约堡",
+        "per_unit": "1个",
+        "calories": 350.0,
+        "carbs": 40.0,
+        "protein": 18.0,
+        "fat": 14.0,
+        "category": "汉堡",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户估算"
+      },
+      {
+        "name": "牛约堡 恰巴塔板烧鸡腿堡",
+        "brand": "牛约堡",
+        "per_unit": "1个",
+        "calories": 350.0,
+        "carbs": 40.0,
+        "protein": 18.0,
+        "fat": 14.0,
+        "category": "汉堡",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户估算"
       },
       {
         "name": "卤鸡腿",
@@ -2579,6 +2639,21 @@
         "source": "用户"
       },
       {
+        "name": "超盒算纯牛奶",
+        "brand": "超盒算",
+        "per_unit": "200ml",
+        "calories": 131.0,
+        "carbs": 9.6,
+        "protein": 6.6,
+        "fat": 7.4,
+        "category": "饮品",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 200.0,
+        "cumulative_spending": 0.0,
+        "source": "用户提供营养成分表"
+      },
+      {
         "name": "银耳汤",
         "brand": "",
         "per_unit": "1碗200ml",
@@ -2684,8 +2759,8 @@
         "source": "预置"
       }
     ],
-    "total_foods": 115,
-    "total_servings": 171.4,
+    "total_foods": 120,
+    "total_servings": 178.4,
     "total_spending": 180.47,
     "by_category": {
       "主食": {
@@ -2696,6 +2771,10 @@
         "count": 5,
         "servings": 14.5
       },
+      "小食": {
+        "count": 2,
+        "servings": 4.0
+      },
       "快餐": {
         "count": 27,
         "servings": 33.0
@@ -2703,6 +2782,10 @@
       "水果": {
         "count": 4,
         "servings": 7.9
+      },
+      "汉堡": {
+        "count": 2,
+        "servings": 2.0
       },
       "肉类": {
         "count": 17,
@@ -2725,8 +2808,8 @@
         "servings": 0
       },
       "饮品": {
-        "count": 18,
-        "servings": 25.3
+        "count": 19,
+        "servings": 26.3
       }
     }
   },
@@ -2737,17 +2820,17 @@
       "label": "W33",
       "range": "8/10-8/16",
       "days_recorded": 6,
-      "total_calories_in": 10958.5,
+      "total_calories_in": 12313.5,
       "total_calories_burned": 694,
       "bmr_weekly": 10272,
-      "energy_balance": -8,
-      "avg_daily_calories": 1826,
-      "avg_daily_protein": 105,
-      "avg_daily_water": 1908,
-      "total_protein": 628.8,
-      "total_carbs": 1267.6,
-      "total_fat": 379.2,
-      "total_water": 11450,
+      "energy_balance": 1348,
+      "avg_daily_calories": 2052,
+      "avg_daily_protein": 116,
+      "avg_daily_water": 2042,
+      "total_protein": 697.4,
+      "total_carbs": 1410.2,
+      "total_fat": 442.6,
+      "total_water": 12250,
       "avg_weight": 73.75,
       "weight_change": -0.15,
       "status": "正常",
