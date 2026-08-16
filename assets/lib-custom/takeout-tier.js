@@ -303,7 +303,13 @@
       }
     });
 
-    stalls.forEach((stall) => {
+    const tierOrderLocal = tierOrder;
+    stalls
+      .slice()
+      .sort((a, b) =>
+        tierOrderLocal.indexOf(a.tier) - tierOrderLocal.indexOf(b.tier) ||
+        b.rating - a.rating)
+      .forEach((stall) => {
       const container = tierItems[stall.tier];
       if (!container) return;
 
