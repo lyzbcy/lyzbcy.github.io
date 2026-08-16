@@ -158,7 +158,6 @@
       note: '',
     },
     {
-      {
       name: '【外卖】食拌焗·拌饭简餐便当',
       tier: 'NPC',
       tierLabel: 'NPC · 店铺得分 2.80',
