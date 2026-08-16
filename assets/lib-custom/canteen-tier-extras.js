@@ -36,10 +36,10 @@
 
   /* 歇业名单（按卡名字符串匹配，可自行增删） */
   var CLOSED = [
-    { match: '陈凤祥' }
+    { match: '陈凤祥' }, { match: '其根' }
   ];
   var UNCERTAIN = [
-    { match: '杨铭宇' }, { match: '张亮' }, { match: '李记重庆鸡公煲' },
+    { match: '杨铭宇' }, { match: '李记重庆鸡公煲' },
     { match: '小姐姐' }, { match: '五花火锅鸡' }
   ];
 
@@ -131,8 +131,6 @@
       }
     }, 100);
 
-    anchor.parentNode.insertBefore(imgPoster('/assets/img/posters/poster-takeout.png',
-      '/posts/江南大学外卖从夯到拉排名/', '外卖一图流 · 点击查看大图，长按可直接保存分享'), anchor);
     anchor.parentNode.insertBefore(imgPoster('/assets/img/posters/poster-dine.png',
       '/assets/img/posters/poster-dine.png', '堂食一图流 · 点击查看大图，长按可直接保存分享'), anchor);
 
