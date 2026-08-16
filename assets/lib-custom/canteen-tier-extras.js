@@ -40,7 +40,7 @@
   ];
   var UNCERTAIN = [
     { match: '杨铭宇' }, { match: '李记重庆鸡公煲' },
-    { match: '小姐姐' }
+    { match: '小姐姐' }, { match: '摇滚炒鸡' }
   ];
 
   var CSS = [
