@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-15T22:05:02.199785+08:00",
+  "generated_at": "2026-08-16T22:05:01.204234+08:00",
   "goals": {
     "calories": 1954,
     "water": 2000,
@@ -20,21 +20,21 @@
     "deficit": 400
   },
   "overview": {
-    "recorded_days": 15,
+    "recorded_days": 16,
     "date_range": {
       "first": "2026-04-29",
-      "last": "2026-08-15"
+      "last": "2026-08-16"
     },
-    "avg_calories": 1802,
-    "avg_protein": 96,
-    "avg_water": 2037,
-    "avg_carbs": 207,
+    "avg_calories": 1808,
+    "avg_protein": 95,
+    "avg_water": 2031,
+    "avg_carbs": 210,
     "avg_fat": 64,
-    "total_training_calories": 6985,
-    "training_days": 28,
+    "total_training_calories": 7466,
+    "training_days": 29,
     "compliance": {
-      "calorie": 73,
-      "protein": 13,
+      "calorie": 75,
+      "protein": 12,
       "water": 100
     }
   },
@@ -184,22 +184,12 @@
     }
   },
   "macros": {
-    "carbs_pct": 44,
-    "protein_pct": 23,
-    "fat_pct": 33,
-    "total_cal": 1999
+    "carbs_pct": 46,
+    "protein_pct": 22,
+    "fat_pct": 32,
+    "total_cal": 2049
   },
   "trend": [
-    {
-      "date": "2026-08-02",
-      "calories": 1458,
-      "protein": 58.1,
-      "carbs": 162.5,
-      "fat": 56.6,
-      "water": 1680,
-      "net_calories": 1093,
-      "has_fitness": true
-    },
     {
       "date": "2026-08-03",
       "calories": 1707,
@@ -328,6 +318,16 @@
       "fat": 89.4,
       "water": 2130,
       "net_calories": 1588,
+      "has_fitness": true
+    },
+    {
+      "date": "2026-08-16",
+      "calories": 1892,
+      "protein": 84.1,
+      "carbs": 242.4,
+      "fat": 68.9,
+      "water": 1930,
+      "net_calories": 1411,
       "has_fitness": true
     }
   ],
@@ -819,49 +819,88 @@
         },
         "method": "MET-endTime"
       }
+    },
+    {
+      "date": "2026-08-16",
+      "total_calories": 1892,
+      "total_carbs": 242.4,
+      "total_protein": 84.1,
+      "total_fat": 68.9,
+      "total_water": 1930,
+      "net_calories": 1411,
+      "meal_count": 4,
+      "water_entries": 6,
+      "supplements": {
+        "count": 0,
+        "has_creatine": false,
+        "has_protein": false
+      },
+      "calorie_pct": 96.8,
+      "protein_pct": 56.1,
+      "water_pct": 96.5,
+      "has_data": true,
+      "fitness": {
+        "total_volume": 5480.0,
+        "sets": 14,
+        "estimated_min": 86.5,
+        "active_min": 8.7,
+        "calories_burned": 481,
+        "calories_net": 354,
+        "by_type": {
+          "compound": {
+            "sets": 3,
+            "min": 18.5,
+            "cal": 136
+          },
+          "unknown": {
+            "sets": 7,
+            "min": 43.2,
+            "cal": 239
+          },
+          "isolation": {
+            "sets": 4,
+            "min": 24.7,
+            "cal": 106
+          }
+        },
+        "method": "MET-endTime"
+      }
     }
   ],
   "status": {
     "has_today": true,
     "has_yesterday": true,
-    "today": "2026-08-15",
+    "today": "2026-08-16",
     "is_active": true,
     "is_training_day": true
   },
   "health_score": {
     "today": {
-      "date": "2026-08-15",
-      "nutrition_score": 44,
-      "nutrition_detail": "热量 2075/1954 kcal (18/20); 蛋白 110.6/150g (11/15); 饮水 2130/2000ml (15/15)",
+      "date": "2026-08-16",
+      "nutrition_score": 42,
+      "nutrition_detail": "热量 1892/1954 kcal (20/20); 蛋白 84.1/150g (8/15); 饮水 1930/2000ml (14/15)",
       "exercise_score": 30,
-      "exercise_detail": "训练量 5315kg (20/20); 组数 14 (10/10)",
+      "exercise_detail": "训练量 5480kg (20/20); 组数 14 (10/10)",
       "bonus_score": 10,
       "bonus_detail": "数据完整性 (10/10); 体脂趋势 +0.2% (0/10)",
-      "total_score": 84,
+      "total_score": 82,
       "grade": "😊 A",
-      "calories_in": 2075,
+      "calories_in": 1892,
       "calories_target": 1954,
-      "protein_in": 110.6,
+      "protein_in": 84.1,
       "protein_target": 150,
-      "water_in": 2130,
+      "water_in": 1930,
       "water_target": 2000,
       "training_sets": 14,
-      "training_volume": 5315.0,
-      "training_cal": 487,
-      "training_duration_min": 89.6,
+      "training_volume": 5480,
+      "training_cal": 481,
+      "training_duration_min": 86.5,
       "bodyfat_pct": 22.1,
       "is_training_day": true,
       "bmr_floor": 1712,
       "below_bmr": false
     },
     "history": [
-      {
-        "date": "2026-08-01",
-        "score": 0,
-        "grade": "💀 D",
-        "nutrition": "热量 0/1657 kcal (0/20); 蛋白 0/150g (0/15); 饮水 0/2000ml (0/15)",
-        "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
-      },
       {
         "date": "2026-08-02",
         "score": 72,
@@ -952,9 +991,16 @@
         "grade": "⚠️ C",
         "nutrition": "热量 2218.5/1657 kcal (10/20); 蛋白 149.1/150g (15/15); 饮水 1130/2000ml (8/15)",
         "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
+      },
+      {
+        "date": "2026-08-15",
+        "score": 84,
+        "grade": "😊 A",
+        "nutrition": "热量 2075/1954 kcal (18/20); 蛋白 110.6/150g (11/15); 饮水 2130/2000ml (15/15)",
+        "exercise": "训练量 5315kg (20/20); 组数 14 (10/10)"
       }
     ],
-    "exported_at": "2026-08-15T22:05:02.190228"
+    "exported_at": "2026-08-16T22:05:01.197921"
   },
   "food_library": {
     "items": [
@@ -1304,6 +1350,21 @@
         "source": "用户"
       },
       {
+        "name": "厚府牛油拌饭 点吧不会后悔的牛油拌饭",
+        "brand": "",
+        "per_unit": "1份",
+        "calories": 750.0,
+        "carbs": 96.0,
+        "protein": 22.0,
+        "fat": 32.0,
+        "category": "快餐",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户"
+      },
+      {
         "name": "原味微辣螺蛳粉(螺判官)",
         "brand": "",
         "per_unit": "1份",
@@ -1536,6 +1597,21 @@
         "carbs": 4.0,
         "protein": 18.0,
         "fat": 10.0,
+        "category": "快餐",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户"
+      },
+      {
+        "name": "食拌焗拌饭简餐便当 盐葱鸡排拌饭",
+        "brand": "",
+        "per_unit": "1份",
+        "calories": 680.0,
+        "carbs": 86.0,
+        "protein": 32.0,
+        "fat": 28.0,
         "category": "快餐",
         "ref_price": 0.0,
         "total_servings": 1.0,
@@ -2393,8 +2469,8 @@
         "fat": 1.5,
         "category": "补剂",
         "ref_price": 0.0,
-        "total_servings": 3.0,
-        "total_grams": 90.0,
+        "total_servings": 4.0,
+        "total_grams": 120.0,
         "cumulative_spending": 0.0,
         "source": "用户"
       },
@@ -2483,8 +2559,8 @@
         "fat": 0.0,
         "category": "饮品",
         "ref_price": 0.0,
-        "total_servings": 7.0,
-        "total_grams": 2310.0,
+        "total_servings": 8.0,
+        "total_grams": 2640.0,
         "cumulative_spending": 0.0,
         "source": "Monster官网经典版绿罐营养标签(330ml整罐)"
       },
@@ -2502,6 +2578,21 @@
         "total_grams": 1600.0,
         "cumulative_spending": 12.67,
         "source": "用户"
+      },
+      {
+        "name": "超盒算纯牛奶",
+        "brand": "超盒算",
+        "per_unit": "200ml",
+        "calories": 131.0,
+        "carbs": 9.6,
+        "protein": 6.6,
+        "fat": 7.4,
+        "category": "饮品",
+        "ref_price": 0.0,
+        "total_servings": 2.0,
+        "total_grams": 400.0,
+        "cumulative_spending": 0.0,
+        "source": "用户提供营养成分表"
       },
       {
         "name": "QQ美莓奶茶(一点点/大杯/五分糖)",
@@ -2546,6 +2637,21 @@
         "total_servings": 1.0,
         "total_grams": 0,
         "cumulative_spending": 2.1,
+        "source": "用户"
+      },
+      {
+        "name": "娃哈哈格瓦斯",
+        "brand": "",
+        "per_unit": "530ml",
+        "calories": 186.0,
+        "carbs": 40.8,
+        "protein": 0.0,
+        "fat": 0.0,
+        "category": "饮品",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 530.0,
+        "cumulative_spending": 0.0,
         "source": "用户"
       },
       {
@@ -2637,21 +2743,6 @@
         "total_grams": 700.0,
         "cumulative_spending": 0.0,
         "source": "用户"
-      },
-      {
-        "name": "超盒算纯牛奶",
-        "brand": "超盒算",
-        "per_unit": "200ml",
-        "calories": 131.0,
-        "carbs": 9.6,
-        "protein": 6.6,
-        "fat": 7.4,
-        "category": "饮品",
-        "ref_price": 0.0,
-        "total_servings": 1.0,
-        "total_grams": 200.0,
-        "cumulative_spending": 0.0,
-        "source": "用户提供营养成分表"
       },
       {
         "name": "银耳汤",
@@ -2759,8 +2850,8 @@
         "source": "预置"
       }
     ],
-    "total_foods": 120,
-    "total_servings": 178.4,
+    "total_foods": 123,
+    "total_servings": 184.4,
     "total_spending": 180.47,
     "by_category": {
       "主食": {
@@ -2776,8 +2867,8 @@
         "servings": 4.0
       },
       "快餐": {
-        "count": 27,
-        "servings": 33.0
+        "count": 29,
+        "servings": 35.0
       },
       "水果": {
         "count": 4,
@@ -2797,7 +2888,7 @@
       },
       "补剂": {
         "count": 1,
-        "servings": 3.0
+        "servings": 4.0
       },
       "调味料": {
         "count": 3,
@@ -2808,123 +2899,9 @@
         "servings": 0
       },
       "饮品": {
-        "count": 19,
-        "servings": 26.3
+        "count": 20,
+        "servings": 29.3
       }
-    }
-  },
-  "weekly": {
-    "current_week": {
-      "week_start": "2026-08-10",
-      "week_end": "2026-08-16",
-      "label": "W33",
-      "range": "8/10-8/16",
-      "days_recorded": 6,
-      "total_calories_in": 12313.5,
-      "total_calories_burned": 694,
-      "bmr_weekly": 10272,
-      "energy_balance": 1348,
-      "avg_daily_calories": 2052,
-      "avg_daily_protein": 116,
-      "avg_daily_water": 2042,
-      "total_protein": 697.4,
-      "total_carbs": 1410.2,
-      "total_fat": 442.6,
-      "total_water": 12250,
-      "avg_weight": 73.75,
-      "weight_change": -0.15,
-      "status": "正常",
-      "anomaly_reason": null
-    },
-    "completed_weeks": [
-      {
-        "week_start": "2026-04-27",
-        "week_end": "2026-05-03",
-        "label": "W18",
-        "range": "4/27-5/3",
-        "days_recorded": 1,
-        "total_calories_in": 1253,
-        "total_calories_burned": 0,
-        "bmr_weekly": 1712,
-        "energy_balance": -459,
-        "avg_daily_calories": 1253,
-        "avg_daily_protein": 41,
-        "avg_daily_water": 1600,
-        "total_protein": 41,
-        "total_carbs": 82,
-        "total_fat": 71,
-        "total_water": 1600,
-        "avg_weight": null,
-        "weight_change": null,
-        "status": "正常",
-        "anomaly_reason": null
-      },
-      {
-        "week_start": "2026-07-27",
-        "week_end": "2026-08-02",
-        "label": "W31",
-        "range": "7/27-8/2",
-        "days_recorded": 1,
-        "total_calories_in": 1458,
-        "total_calories_burned": 647,
-        "bmr_weekly": 1712,
-        "energy_balance": -901,
-        "avg_daily_calories": 1458,
-        "avg_daily_protein": 58,
-        "avg_daily_water": 1680,
-        "total_protein": 58.1,
-        "total_carbs": 162.5,
-        "total_fat": 56.6,
-        "total_water": 1680,
-        "avg_weight": 75.0,
-        "weight_change": null,
-        "status": "正常",
-        "anomaly_reason": null
-      },
-      {
-        "week_start": "2026-08-03",
-        "week_end": "2026-08-09",
-        "label": "W32",
-        "range": "8/3-8/9",
-        "days_recorded": 7,
-        "total_calories_in": 12008.5,
-        "total_calories_burned": 996,
-        "bmr_weekly": 11984,
-        "energy_balance": -972,
-        "avg_daily_calories": 1716,
-        "avg_daily_protein": 92,
-        "avg_daily_water": 2147,
-        "total_protein": 642.0,
-        "total_carbs": 1456.7,
-        "total_fat": 384.65,
-        "total_water": 15030,
-        "avg_weight": 73.9,
-        "weight_change": -1.1,
-        "status": "正常",
-        "anomaly_reason": null
-      }
-    ],
-    "last_week": {
-      "week_start": "2026-08-03",
-      "week_end": "2026-08-09",
-      "label": "W32",
-      "range": "8/3-8/9",
-      "days_recorded": 7,
-      "total_calories_in": 12008.5,
-      "total_calories_burned": 996,
-      "bmr_weekly": 11984,
-      "energy_balance": -972,
-      "avg_daily_calories": 1716,
-      "avg_daily_protein": 92,
-      "avg_daily_water": 2147,
-      "total_protein": 642.0,
-      "total_carbs": 1456.7,
-      "total_fat": 384.65,
-      "total_water": 15030,
-      "avg_weight": 73.9,
-      "weight_change": -1.1,
-      "status": "正常",
-      "anomaly_reason": null
     }
   }
 }
