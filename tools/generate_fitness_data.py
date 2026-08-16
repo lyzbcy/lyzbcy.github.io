@@ -8,6 +8,25 @@ from collections import defaultdict
 
 WORKSPACE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+# ===== 动作名归一化 & 引体向上负重/辅助标注（2026-08-16）=====
+# 哈克深蹲 = 正向哈克深蹲（同一动作，历史两种叫法）
+EXERCISE_ALIASES = {
+    "哈克深蹲": "正向哈克深蹲",
+}
+
+def normalize_exercise(name):
+    return EXERCISE_ALIASES.get(name, name)
+
+def label_pullup_pr(ex_name, weight, note):
+    """引体向上家族 PR：区分 辅助/负重/自重，防止 60kg 辅助被误读为大重量"""
+    if "引体" not in ex_name:
+        return ex_name
+    if "辅助" in (note or ""):
+        return ex_name + "（辅助）"
+    if weight and weight > 0:
+        return ex_name + "（负重）"
+    return ex_name + "（自重）"
+
 def load_jsonl(path):
     records = []
     with open(path) as f:
@@ -139,6 +158,10 @@ def main():
     records = load_jsonl(os.path.join(WORKSPACE, "fitness", "records.jsonl"))
     # 防御：跳过缺 date 字段的脏记录（增量手写 JSONL 可能偶发漏字段）
     records = [r for r in records if r.get("date")]
+    # 动作名归一化（别名合并）
+    for r in records:
+        if r.get("exercise"):
+            r["exercise"] = normalize_exercise(r["exercise"])
     with open(os.path.join(WORKSPACE, "fitness", "config.json")) as f:
         config = json.load(f)
     with open(os.path.join(WORKSPACE, "fitness", "exercises.json")) as f:
@@ -198,8 +221,9 @@ def main():
     prs = []
     for muscle_group, ex_dict in config.get("personalRecords", {}).items():
         for ex_name, pr_data in ex_dict.items():
+            ex_name = normalize_exercise(ex_name.replace("_", " "))
             prs.append({
-                "exercise": ex_name.replace("_", " "),
+                "exercise": label_pullup_pr(ex_name, pr_data.get("weight", 0), pr_data.get("note", "")),
                 "muscle_group": muscle_group,
                 "weight": pr_data.get("weight", 0),
                 "reps": pr_data.get("reps", 0),

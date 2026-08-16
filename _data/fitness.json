@@ -525,19 +525,11 @@
       "volume": 1200
     },
     {
-      "exercise": "哈克深蹲",
-      "muscle_group": "legs",
-      "weight": 90,
-      "reps": 13,
-      "note": "未测极限",
-      "volume": 1170
-    },
-    {
       "exercise": "正向哈克深蹲",
       "muscle_group": "legs",
       "weight": 110,
       "reps": 9,
-      "note": "极限",
+      "note": "极限；此前记作\"哈克深蹲\"的 90kg×13（未测极限）为同一动作，已并入",
       "volume": 990
     },
     {
@@ -669,7 +661,7 @@
       "volume": 366
     },
     {
-      "exercise": "单手引体向上",
+      "exercise": "单手引体向上（辅助）",
       "muscle_group": "back",
       "weight": 60,
       "reps": 6,
@@ -797,7 +789,7 @@
       "volume": 112.5
     },
     {
-      "exercise": "引体向上",
+      "exercise": "引体向上（自重）",
       "muscle_group": "back",
       "weight": 0,
       "reps": 11,
@@ -1033,14 +1025,14 @@
       "total_volume": 1355.0
     },
     {
-      "name": "宽距引体向上",
+      "name": "宽距引体向上（负重纪录15kg）",
       "total_sets": 17,
-      "max_weight": 15,
+      "max_weight": 0,
       "max_reps": 7,
       "last_date": "2026-08-15",
       "last_weight": 0,
       "last_reps": 5,
-      "total_volume": 50.0
+      "total_volume": 0.0
     },
     {
       "name": "分动式卧推",
