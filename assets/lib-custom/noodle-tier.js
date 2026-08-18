@@ -40,13 +40,6 @@
       bgImage: imageBasePath + encodeURIComponent('番茄肉酱拌面-茄皇.jpeg'),
     },
     {
-      name: '山椒肥牛高人拉面【杨掌柜】',
-      tier: '夯',
-      tierLabel: '夯 · 6❤️',
-      rating: 5,
-      description: '山椒肥牛味加卤蛋，酸酸甜甜美味至极。只加了1/3油包但依然非常有味道，细面条口感极佳，加白醋后更是酸酸甜甜。全透明塑料盒包装，参考价5.9元，热量440kcal（面饼全+粉包全+油包1/3）。',
-    },
-    {
       name: '牛肉面【茄皇】',
       tier: '顶级',
       tierLabel: '顶级 · 5❤️',
@@ -93,6 +86,14 @@
       rating: 4,
       description: '经典无需多言',
       bgImage: imageBasePath + encodeURIComponent('老坛酸菜牛肉面-统一.png'),
+    },
+    {
+      name: '山椒肥牛高人拉面【杨掌柜】',
+      tier: '顶级',
+      tierLabel: '顶级 · 5❤️',
+      rating: 4,
+      description: '山椒肥牛味带卤蛋。只加1/3油包依然有味，加白醋后偏酸甜，细面。全透明塑料盒包装，参考价5.9元，热量440kcal（面饼全+粉包全+油包1/3）。',
+      bgImage: imageBasePath + encodeURIComponent('山椒肥牛高人拉面-杨掌柜.jpeg'),
     },
     {
       name: '酸酸辣辣豚骨汤面【今麦郎一桶半】',
@@ -252,6 +253,7 @@
       tierLabel: 'NPC · 3❤️',
       rating: 2,
       description: '减脂期只加了一半番茄包和花生，番茄味不够浓郁——一半因为加不够，一半因为本身就不够浓。油包减半后油脂仍然远高于蛋白质，不如送卤蛋的藤椒味有营养，参考价5.9元，热量490kcal。',
+      bgImage: imageBasePath + encodeURIComponent('浓情番茄高人拉面-杨掌柜.jpeg'),
     },
     {
       name: '香菜面',
