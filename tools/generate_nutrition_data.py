@@ -208,6 +208,9 @@ def get_body_composition_history():
         smm = bc.compute_smm(height, w, 25, "male", bf) if bc else None
         tbw = bc.compute_tbw(height, w, 25, "male", ffm["avg"] if ffm else None) if bc else None
         rec = {"date": e["date"], "weight": w}
+        for g in ("neck", "waist", "hip", "whr", "whtr"):
+            if e.get(g) is not None:
+                rec[g] = e[g]
         if bf is not None:
             rec["bodyfat_pct"] = bf
         if ffm:
