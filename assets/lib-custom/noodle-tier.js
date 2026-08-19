@@ -256,6 +256,14 @@
       bgImage: imageBasePath + encodeURIComponent('浓情番茄高人拉面-杨掌柜.jpeg'),
     },
     {
+      name: '魔小饱方便魔芋凉面',
+      tier: 'NPC',
+      tierLabel: 'NPC · 3❤️',
+      rating: 2,
+      description: '参考价6.5元，热量65kcal。魔芋面很有劲道，卡路里很少。料包全加对我来说有点辣，说话都辣辣的。量太少了吃不饱，饱腹感相当于一碗小的合味道。吃魔芋面没有吃淀粉面那么开心，心理满足感不够。营养方面既然卡路里少了也别想有多少蛋白质了。味道还可以，香菜味/辣味比较浓郁。如果红烧牛肉面吃腻了可能会来吃这个，但一包解决不了，至少得吃两包。',
+      bgImage: imageBasePath + encodeURIComponent('魔小饱方便魔芋凉面.jpg'),
+    },
+    {
       name: '香菜面',
       tier: '拉完了',
       tierLabel: '拉完了 · 史',
