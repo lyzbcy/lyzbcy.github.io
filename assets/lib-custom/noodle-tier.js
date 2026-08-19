@@ -48,7 +48,15 @@
       bgImage: imageBasePath + encodeURIComponent('山椒肥牛高人拉面-杨掌柜.jpeg'),
     },
     {
-      name: '牛肉面【茄皇】',
+      name: '高人拉面港式肥汁加吸汁爆蛋【杨掌柜】',
+      tier: '夯',
+      tierLabel: '夯 · 5.5❤️',
+      rating: 5,
+      description: '参考价5.9元，热量542kcal（含面饼+料包+吸汁爆蛋）。非油炸拉面，非常值得一试！汤的味道就像吃臭豆腐时上面淋的那层很美味的港味卤酱，吃起来非常好吃！吸汁爆蛋就是把蛋汁做成的压缩蛋吸水变大，虽然营养上不如完整卤蛋，但口感很不错。虽然偏爱藤椒的麻麻味道，但这个肯定超过五星守门员酸菜牛肉面。',
+      bgImage: imageBasePath + encodeURIComponent('高人拉面港式肥汁味-杨掌柜.jpg'),
+    },
+    {
+      name: "牛肉面【茄皇】",
       tier: '顶级',
       tierLabel: '顶级 · 5❤️',
       rating: 4,
