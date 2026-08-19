@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AirPods 小助手 · 点一下，AirPods 就连上</title>
+<meta name="description" content="给 Windows 的一口甜：一键连接 AirPods、优先级、三态托盘图标、星星布丁小宠物。单文件 2.6MB，纯本地零上传。">
+<style>
+  :root{
+    --bg:#FBF9F4; --card:#FFFFFF; --ink:#3D3A35; --sub:#8A8178;
+    --honey:#C89B5A; --honey-l:#D4A967; --sage:#7FA88C;
+    --line:rgba(0,0,0,.07);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,"SF Pro Display","Segoe UI Variable Display","Segoe UI","Microsoft YaHei UI",system-ui,sans-serif;
+    color:var(--ink);background:
+    radial-gradient(900px 420px at 85% -80px, rgba(212,169,103,.13), transparent 65%),
+    radial-gradient(700px 380px at 8% 12%, rgba(212,169,103,.07), transparent 60%),
+    var(--bg);
+    line-height:1.65}
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px}
+  a{color:var(--honey);text-decoration:none}
+
+  /* hero */
+  header{padding:76px 0 44px;text-align:center}
+  .logo{width:96px;height:96px;border-radius:26px;box-shadow:0 16px 40px rgba(200,155,90,.28);
+    border:3px solid #fff;margin-bottom:22px}
+  h1{font-size:40px;font-weight:700;letter-spacing:-.5px}
+  h1 .en{display:block;font-size:14px;font-weight:500;color:var(--sub);letter-spacing:3px;margin-top:6px}
+  .tagline{margin:18px 0 6px;font-size:19px;color:var(--ink)}
+  .tagline b{color:var(--honey)}
+  .chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:16px 0 30px}
+  .chip{font-size:12.5px;background:#fff;border:1px solid var(--line);border-radius:999px;
+    padding:6px 14px;color:var(--sub);box-shadow:0 1px 3px rgba(0,0,0,.04)}
+  .cta{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(180deg,var(--honey-l),var(--honey));
+    color:#fff;font-size:16px;font-weight:600;border-radius:999px;padding:14px 34px;
+    box-shadow:0 10px 26px rgba(200,155,90,.38), inset 0 1px 0 rgba(255,255,255,.45);
+    transition:transform .2s cubic-bezier(.25,.1,.25,1),box-shadow .2s}
+  .cta:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(200,155,90,.46), inset 0 1px 0 rgba(255,255,255,.5)}
+  .cta:active{transform:scale(.97)}
+  .cta.ghost{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:0 2px 8px rgba(0,0,0,.05)}
+  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .free{margin-top:14px;font-size:12.5px;color:var(--sub)}
+
+  /* sections */
+  section{padding:52px 0}
+  h2{font-size:26px;font-weight:700;text-align:center;margin-bottom:8px;letter-spacing:-.3px}
+  .sub{ text-align:center;color:var(--sub);font-size:14px;margin-bottom:34px}
+
+  /* compare table */
+  table{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid var(--line);
+    border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.04);font-size:14.5px}
+  th{background:#F6F1E7;text-align:left;padding:13px 18px;font-weight:600;color:var(--ink)}
+  td{padding:13px 18px;border-top:1px solid var(--line);color:var(--sub)}
+  td:first-child{color:var(--ink);font-weight:600;width:110px}
+  td.good{color:var(--sage);font-weight:600}
+
+  /* feature grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:16px}
+  .f{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 20px;
+    box-shadow:0 1px 3px rgba(0,0,0,.04);transition:transform .2s cubic-bezier(.25,.1,.25,1),box-shadow .2s}
+  .f:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.07)}
+  .f .ico{font-size:26px;margin-bottom:10px}
+  .f b{display:block;font-size:15.5px;margin-bottom:6px}
+  .f p{font-size:13.5px;color:var(--sub)}
+
+  /* shots */
+  .shots{display:flex;gap:22px;justify-content:center;align-items:flex-start;flex-wrap:wrap}
+  .shot{background:#fff;border:1px solid var(--line);border-radius:18px;padding:10px;
+    box-shadow:0 14px 36px rgba(0,0,0,.09)}
+  .shot img{display:block;border-radius:12px;max-width:100%}
+  .shot figcaption{text-align:center;font-size:12.5px;color:var(--sub);padding:10px 4px 4px}
+
+  /* note */
+  .note{background:#fff;border:1px solid var(--line);border-left:4px solid var(--honey);
+    border-radius:12px;padding:18px 20px;font-size:14px;color:var(--sub)}
+  .note b{color:var(--ink)}
+
+  footer{padding:40px 0 56px;text-align:center;font-size:13px;color:var(--sub)}
+  footer .hearts{color:var(--honey)}
+  @media (max-width:640px){ h1{font-size:30px} table{font-size:13px} }
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <img class="logo" src="assets/img/airpods-buddy/logo.png" alt="AirPods 小助手">
+  <h1>AirPods 小助手<span class="en">AIRPODS&nbsp;BUDDY</span></h1>
+  <p class="tagline">给 Windows 的一口甜：<b>点一下，AirPods 就连上。</b></p>
+  <div class="chips">
+    <span class="chip">🍪 单文件 2.6MB</span><span class="chip">🔓 免安装</span>
+    <span class="chip">🔒 纯本地零上传</span><span class="chip">🆓 免费开源 MIT</span>
+  </div>
+  <div class="cta-row">
+    <a class="cta" href="https://github.com/lyzbcy/BluetoothDeviceConnector/releases/latest">⬇️ 免费下载</a>
+    <a class="cta ghost" href="https://github.com/lyzbcy/BluetoothDeviceConnector">⭐ GitHub 源码</a>
+  </div>
+  <p class="free">解压即用，无需安装 · 耳机配对过一次就行</p>
+</header>
+
+<section class="wrap">
+  <h2>为什么需要它？</h2>
+  <p class="sub">iPhone 连 AirPods：开盖弹窗点一下。Windows：<b>没有弹窗</b>，每次都要翻设置。</p>
+  <table>
+    <tr><th></th><th>Windows 原生</th><th>AirPods 小助手</th></tr>
+    <tr><td>连接</td><td>设置 → 蓝牙 → 找设备 → 点连接（4~5 步）</td><td class="good">单击托盘图标 / 点一下大圆钮（1 步）</td></tr>
+    <tr><td>多副耳机</td><td>每次自己找哪个是哪个</td><td class="good">按你的优先级自动挑（▲▼ 排序）</td></tr>
+    <tr><td>断开</td><td>再进设置点断开</td><td class="good">右键托盘 → 一键断开全部</td></tr>
+    <tr><td>音质</td><td>容易连成低音质通话模式</td><td class="good">默认 A2DP+HFP 完整模式</td></tr>
+    <tr><td>常驻</td><td>无</td><td class="good">托盘常驻 + 开机自启</td></tr>
+  </table>
+</section>
+
+<section class="wrap">
+  <h2>她还会陪你等连接 🧚</h2>
+  <p class="sub">点一下托盘，星星布丁从右下角弹出来——桌面级透明，全帧动画。</p>
+  <div class="shots">
+    <figure class="shot"><img src="assets/img/airpods-buddy/pet-pop.png" width="380" alt="星星布丁小宠物弹窗"><figcaption>等待张望 → 连上开心跳跃撒 💕 → 断开挥手拜拜</figcaption></figure>
+    <figure class="shot"><img src="assets/img/airpods-buddy/app-ui.png" width="300" alt="应用界面"><figcaption>奶油黄白 Apple 风界面 · 三态托盘图标</figcaption></figure>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>小而全</h2>
+  <p class="sub">2.6MB 单文件，零依赖零后台服务，不上传任何数据。</p>
+  <div class="grid">
+    <div class="f"><div class="ico">🚀</div><b>一键连接 / 断开</b><p>左键单击托盘直接切换；界面大圆钮一点即连。</p></div>
+    <div class="f"><div class="ico">🥇</div><b>设备优先级</b><p>苹果设备默认排前，其他耳机不捣乱，▲▼ 随心调序。</p></div>
+    <div class="f"><div class="ico">🔵</div><b>三态托盘图标</b><p>可爱脸=未连 · 心动脸+绿环=已连 · 加油脸+旋转弧=连接中。</p></div>
+    <div class="f"><div class="ico">🎨</div><b>Apple 风界面</b><p>奶油黄白+蜂蜜金，macOS 级克制质感，长名字优雅截断。</p></div>
+    <div class="f"><div class="ico">🔒</div><b>纯本地</b><p>不联网上传任何数据，唯一网络行为是检查新版本。</p></div>
+    <div class="f"><div class="ico">🔄</div><b>自动更新</b><p>有新版弹窗一键升级，日志全记在本地可审计。</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="note">
+    <b>ℹ️ 关于降噪/通透切换：</b>Windows 用户态无法访问 Apple 的控制通道（需要内核驱动，
+    可用 <a href="https://github.com/steam3d/MagicPods-Windows">MagicPods</a> 方案），
+    菜单内已诚实说明并指路。<b>Mac 版</b>不存在此限制——防自动跳走看门狗开发中。
+  </div>
+</section>
+
+<section class="wrap" style="text-align:center">
+  <h2>准备好了吗</h2>
+  <p class="sub">三步上手：下载 → 解压双击 → 以后点一下就连。</p>
+  <a class="cta" href="https://github.com/lyzbcy/BluetoothDeviceConnector/releases/latest">⬇️ 免费下载 AirPodsBuddy</a>
+</section>
+
+<footer class="wrap">
+  <p>由 <span class="hearts">捞鱼 &amp; 星星布丁</span> 用爱发电 💕 ·
+    <a href="https://github.com/lyzbcy/BluetoothDeviceConnector">GitHub</a> · MIT</p>
+  <p style="margin-top:6px;font-size:12px">致谢：ChromuSx/BluetoothDeviceConnector · thqby/WebView2-AHK · librepods</p>
+</footer>
+
+</body>
+</html>
