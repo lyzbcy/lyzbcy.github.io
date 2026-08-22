@@ -123,12 +123,15 @@
     var overlay = document.getElementById('password-overlay') ||
                   document.getElementById('partial-overlay');
     if (!overlay) return;
-    document.body.style.overflow = 'hidden';
+    // 整页遮罩（#password-overlay）才锁滚动+自动聚焦；
+    // partial 模式只锁页面中一小块，公开内容仍需正常阅读和滚动
+    var isPartial = overlay.id === 'partial-overlay';
+    if (!isPartial) document.body.style.overflow = 'hidden';
 
     var input = document.getElementById('password-input') ||
                 document.getElementById('partial-password-input');
     if (input) {
-      setTimeout(function () { input.focus(); }, 800);
+      if (!isPartial) setTimeout(function () { input.focus(); }, 800);
       input.addEventListener('keypress', function (e) {
         if (e.key === 'Enter') { e.preventDefault(); window.checkPassword(); }
       });
