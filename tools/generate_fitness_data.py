@@ -342,6 +342,52 @@ def main():
             "total_volume": round(exercise_volume[ex], 1)
         })
 
+
+    # ── 有氧聚合（action: cardio / vo2max / session_summary）──
+    cardios = [r for r in records if r.get("action") == "cardio"]
+    vo2s = [r for r in records if r.get("action") == "vo2max"]
+    hist_strength = [r for r in records if r.get("action") == "session_summary"]
+
+    cardio_by_type = defaultdict(lambda: {"count": 0, "minutes": 0.0, "kcal": 0.0, "km": 0.0})
+    for c in cardios:
+        t = c.get("exercise", "其他")
+        cardio_by_type[t]["count"] += 1
+        cardio_by_type[t]["minutes"] += c.get("durationMin", 0)
+        cardio_by_type[t]["kcal"] += c.get("activeKcal", 0) or 0
+        cardio_by_type[t]["km"] += c.get("distanceKm", 0) or 0
+    cardio_types = [
+        {"type": t, "count": v["count"], "minutes": round(v["minutes"], 1),
+         "kcal": round(v["kcal"], 1), "km": round(v["km"], 2)}
+        for t, v in sorted(cardio_by_type.items(), key=lambda x: -x[1]["count"])
+    ]
+    # 近12次有氧明细（看板用）
+    cardio_recent = sorted(cardios, key=lambda x: x["date"], reverse=True)[:12]
+    cardio_recent = [{
+        "date": c["date"], "exercise": c.get("exercise", ""),
+        "duration_min": c.get("durationMin"), "distance_km": c.get("distanceKm"),
+        "avg_hr": c.get("avgHr"), "intensity": c.get("intensity"),
+        "active_kcal": c.get("activeKcal"), "strokes": c.get("strokes")
+    } for c in cardio_recent]
+    vo2_sorted = sorted(vo2s, key=lambda x: x["date"])
+    cardio_section = {
+        "total_sessions": len(cardios),
+        "total_minutes": round(sum(c.get("durationMin", 0) for c in cardios), 1),
+        "total_kcal": round(sum(c.get("activeKcal", 0) or 0 for c in cardios), 1),
+        "total_km": round(sum(c.get("distanceKm", 0) or 0 for c in cardios), 2),
+        "first_date": cardios[0]["date"] if cardios else None,
+        "last_date": cardios[-1]["date"] if cardios else None,
+        "by_type": cardio_types,
+        "recent": cardio_recent,
+        "vo2max": {
+            "first": vo2_sorted[0]["value"] if vo2_sorted else None,
+            "latest": vo2_sorted[-1]["value"] if vo2_sorted else None,
+            "latest_date": vo2_sorted[-1]["date"] if vo2_sorted else None,
+            "history": [{"date": v["date"], "value": v["value"]} for v in vo2_sorted],
+        },
+        "history_strength_sessions": len(hist_strength),
+        "history_strength_minutes": round(sum(h.get("durationMin", 0) for h in hist_strength), 1),
+    }
+
     # ── 营养联动 ──
     nutrition_link = get_nutrition_snapshot(WORKSPACE)
 
@@ -369,7 +415,8 @@ def main():
         "muscle_balance": muscle_balance,
         "volume_trend": volume_trend,
         "exercises": exercise_metrics,
-        "nutrition_link": nutrition_link
+        "nutrition_link": nutrition_link,
+        "cardio": cardio_section
     }
 
     out_path = os.path.join(WORKSPACE, "lyzbcy.github.io", "_data", "fitness.json")
