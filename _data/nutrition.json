@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-22T22:05:01.919839+08:00",
+  "generated_at": "2026-08-23T22:05:02.201164+08:00",
   "goals": {
-    "calories": 1628,
+    "calories": 1924,
     "water": 2000,
     "protein": 150
   },
@@ -13,29 +13,29 @@
       "harris": 1753,
       "katch": 1594
     },
-    "tdee": 2028,
+    "tdee": 2324,
     "bmr_floor": 1690,
-    "below_bmr": true,
-    "is_training_day": false,
+    "below_bmr": false,
+    "is_training_day": true,
     "deficit": 400
   },
   "overview": {
-    "recorded_days": 21,
+    "recorded_days": 23,
     "date_range": {
       "first": "2026-04-29",
-      "last": "2026-08-21"
+      "last": "2026-08-23"
     },
-    "avg_calories": 1889,
-    "avg_protein": 99,
-    "avg_water": 2065,
-    "avg_carbs": 222,
-    "avg_fat": 67,
-    "total_training_calories": 7986,
-    "training_days": 31,
+    "avg_calories": 1929,
+    "avg_protein": 101,
+    "avg_water": 2027,
+    "avg_carbs": 221,
+    "avg_fat": 70,
+    "total_training_calories": 8188,
+    "training_days": 32,
     "compliance": {
-      "calorie": 90,
-      "protein": 14,
-      "water": 100
+      "calorie": 87,
+      "protein": 17,
+      "water": 96
     }
   },
   "weight": {
@@ -44,8 +44,33 @@
       "weight": 71.55,
       "unit": "kg"
     },
-    "change": -3.5,
+    "change": -0.5,
     "history": [
+      {
+        "date": "2023-08-26",
+        "weight": 72.0,
+        "unit": "kg"
+      },
+      {
+        "date": "2025-03-16",
+        "weight": 70.3,
+        "unit": "kg"
+      },
+      {
+        "date": "2025-05-13",
+        "weight": 68.0,
+        "unit": "kg"
+      },
+      {
+        "date": "2025-08-10",
+        "weight": 67.0,
+        "unit": "kg"
+      },
+      {
+        "date": "2025-12-12",
+        "weight": 70.3,
+        "unit": "kg"
+      },
       {
         "date": "2026-08-02",
         "weight": 75.0,
@@ -258,22 +283,12 @@
     }
   },
   "macros": {
-    "carbs_pct": 48,
-    "protein_pct": 20,
-    "fat_pct": 32,
-    "total_cal": 2136
+    "carbs_pct": 45,
+    "protein_pct": 21,
+    "fat_pct": 34,
+    "total_cal": 2199
   },
   "trend": [
-    {
-      "date": "2026-08-09",
-      "calories": 1562,
-      "protein": 105.9,
-      "carbs": 141.8,
-      "fat": 65.4,
-      "water": 1700,
-      "net_calories": 1213,
-      "has_fitness": true
-    },
     {
       "date": "2026-08-10",
       "calories": 2264.5,
@@ -393,6 +408,26 @@
       "water": 2816,
       "net_calories": 1839,
       "has_fitness": true
+    },
+    {
+      "date": "2026-08-22",
+      "calories": 2600,
+      "protein": 113.0,
+      "carbs": 210.0,
+      "fat": 140.0,
+      "water": 1700,
+      "net_calories": 2600,
+      "has_fitness": false
+    },
+    {
+      "date": "2026-08-23",
+      "calories": 2100,
+      "protein": 122.0,
+      "carbs": 218.0,
+      "fat": 66.0,
+      "water": 1550,
+      "net_calories": 1898,
+      "has_fitness": true
     }
   ],
   "summaries": [
@@ -411,7 +446,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 77.0,
+      "calorie_pct": 65.1,
       "protein_pct": 27.3,
       "water_pct": 80.0,
       "has_data": true
@@ -431,7 +466,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 89.6,
+      "calorie_pct": 75.8,
       "protein_pct": 38.7,
       "water_pct": 84.0,
       "has_data": true,
@@ -477,7 +512,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 104.9,
+      "calorie_pct": 88.7,
       "protein_pct": 71.0,
       "water_pct": 87.5,
       "has_data": true,
@@ -513,7 +548,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 102.4,
+      "calorie_pct": 86.7,
       "protein_pct": 59.5,
       "water_pct": 104.5,
       "has_data": true,
@@ -549,7 +584,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 112.4,
+      "calorie_pct": 95.1,
       "protein_pct": 62.2,
       "water_pct": 112.5,
       "has_data": true,
@@ -595,7 +630,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 131.5,
+      "calorie_pct": 111.3,
       "protein_pct": 59.9,
       "water_pct": 90.5,
       "has_data": true
@@ -615,7 +650,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 129.0,
+      "calorie_pct": 109.2,
       "protein_pct": 77.4,
       "water_pct": 161.5,
       "has_data": true,
@@ -661,7 +696,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 61.4,
+      "calorie_pct": 52.0,
       "protein_pct": 27.4,
       "water_pct": 110.0,
       "has_data": true
@@ -681,7 +716,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 95.9,
+      "calorie_pct": 81.2,
       "protein_pct": 70.6,
       "water_pct": 85.0,
       "has_data": true,
@@ -727,7 +762,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 139.1,
+      "calorie_pct": 117.7,
       "protein_pct": 71.9,
       "water_pct": 87.0,
       "has_data": true
@@ -747,7 +782,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 108.3,
+      "calorie_pct": 91.6,
       "protein_pct": 63.9,
       "water_pct": 125.0,
       "has_data": true,
@@ -793,7 +828,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 119.6,
+      "calorie_pct": 101.2,
       "protein_pct": 75.7,
       "water_pct": 90.5,
       "has_data": true
@@ -813,7 +848,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 114.9,
+      "calorie_pct": 97.2,
       "protein_pct": 80.3,
       "water_pct": 113.5,
       "has_data": true
@@ -833,7 +868,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 147.1,
+      "calorie_pct": 124.5,
       "protein_pct": 99.4,
       "water_pct": 90.0,
       "has_data": true
@@ -853,7 +888,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 127.5,
+      "calorie_pct": 107.8,
       "protein_pct": 73.7,
       "water_pct": 106.5,
       "has_data": true,
@@ -899,7 +934,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 116.2,
+      "calorie_pct": 98.3,
       "protein_pct": 56.1,
       "water_pct": 96.5,
       "has_data": true,
@@ -945,7 +980,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 130.5,
+      "calorie_pct": 110.4,
       "protein_pct": 65.5,
       "water_pct": 102.0,
       "has_data": true
@@ -965,7 +1000,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 128.6,
+      "calorie_pct": 108.8,
       "protein_pct": 75.9,
       "water_pct": 101.0,
       "has_data": true
@@ -985,7 +1020,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 140.2,
+      "calorie_pct": 118.7,
       "protein_pct": 89.9,
       "water_pct": 92.5,
       "has_data": true
@@ -1005,7 +1040,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 127.5,
+      "calorie_pct": 107.9,
       "protein_pct": 70.2,
       "water_pct": 107.5,
       "has_data": true,
@@ -1051,7 +1086,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 133.0,
+      "calorie_pct": 112.5,
       "protein_pct": 74.9,
       "water_pct": 140.8,
       "has_data": true,
@@ -1081,49 +1116,108 @@
         },
         "method": "MET-endTime"
       }
+    },
+    {
+      "date": "2026-08-22",
+      "total_calories": 2600,
+      "total_carbs": 210.0,
+      "total_protein": 113.0,
+      "total_fat": 140.0,
+      "total_water": 1700,
+      "net_calories": 2600,
+      "meal_count": 2,
+      "water_entries": 1,
+      "supplements": {
+        "count": 0,
+        "has_creatine": false,
+        "has_protein": false
+      },
+      "calorie_pct": 135.1,
+      "protein_pct": 75.3,
+      "water_pct": 85.0,
+      "has_data": true
+    },
+    {
+      "date": "2026-08-23",
+      "total_calories": 2100,
+      "total_carbs": 218.0,
+      "total_protein": 122.0,
+      "total_fat": 66.0,
+      "total_water": 1550,
+      "net_calories": 1898,
+      "meal_count": 4,
+      "water_entries": 4,
+      "supplements": {
+        "count": 0,
+        "has_creatine": false,
+        "has_protein": false
+      },
+      "calorie_pct": 109.1,
+      "protein_pct": 81.3,
+      "water_pct": 77.5,
+      "has_data": true,
+      "fitness": {
+        "total_volume": 4836.5,
+        "sets": 8,
+        "estimated_min": 41.8,
+        "active_min": 4.5,
+        "calories_burned": 202,
+        "calories_net": 143,
+        "by_type": {
+          "compound": {
+            "sets": 1,
+            "min": 5.2,
+            "cal": 37
+          },
+          "unknown": {
+            "sets": 2,
+            "min": 10.4,
+            "cal": 56
+          },
+          "isolation": {
+            "sets": 5,
+            "min": 26.1,
+            "cal": 109
+          }
+        },
+        "method": "MET-endTime"
+      }
     }
   ],
   "status": {
-    "has_today": false,
+    "has_today": true,
     "has_yesterday": true,
-    "today": "2026-08-22",
+    "today": "2026-08-23",
     "is_active": true,
-    "is_training_day": false
+    "is_training_day": true
   },
   "health_score": {
     "today": {
-      "date": "2026-08-22",
-      "nutrition_score": 0,
-      "nutrition_detail": "热量 0/1628 kcal (0/20); 蛋白 0/150g (0/15); 饮水 0/2000ml (0/15)",
-      "exercise_score": 0,
-      "exercise_detail": "今日无训练 (0/20); 组数 0 (0/10)",
-      "bonus_score": 7,
-      "bonus_detail": "数据完整性 (0/10); 体脂趋势 -1.1% (7/10)",
-      "total_score": 7,
-      "grade": "💀 D",
-      "calories_in": 0,
-      "calories_target": 1628,
-      "protein_in": 0,
+      "date": "2026-08-23",
+      "nutrition_score": 40,
+      "nutrition_detail": "热量 2100/1924 kcal (16/20); 蛋白 122.0/150g (12/15); 饮水 1550/2000ml (12/15)",
+      "exercise_score": 30,
+      "exercise_detail": "训练量 4836kg (20/20); 组数 8 (10/10)",
+      "bonus_score": 17,
+      "bonus_detail": "数据完整性 (10/10); 体脂趋势 -1.1% (7/10)",
+      "total_score": 87,
+      "grade": "🌟 S",
+      "calories_in": 2100,
+      "calories_target": 1924,
+      "protein_in": 122.0,
       "protein_target": 150,
-      "water_in": 0,
+      "water_in": 1550,
       "water_target": 2000,
-      "training_sets": 0,
-      "training_volume": 0,
-      "training_cal": 0,
-      "training_duration_min": 0,
+      "training_sets": 8,
+      "training_volume": 4836.5,
+      "training_cal": 202,
+      "training_duration_min": 41.8,
       "bodyfat_pct": 20.8,
-      "is_training_day": false,
+      "is_training_day": true,
       "bmr_floor": 1690,
-      "below_bmr": true
+      "below_bmr": false
     },
     "history": [
-      {
-        "date": "2026-08-08",
-        "score": 35,
-        "grade": "⚠️ C",
-        "nutrition": "热量 1000/1650 kcal (8/20); 蛋白 41.1/150g (4/15); 饮水 2200/2000ml (15/15)",
-        "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
-      },
       {
         "date": "2026-08-09",
         "score": 76,
@@ -1214,9 +1308,16 @@
         "grade": "🌟 S",
         "nutrition": "热量 2165/1924 kcal (15/20); 蛋白 112.4/150g (11/15); 饮水 2816/2000ml (15/15)",
         "exercise": "训练量 3730kg (19/20); 组数 14 (10/10)"
+      },
+      {
+        "date": "2026-08-22",
+        "score": 7,
+        "grade": "💀 D",
+        "nutrition": "热量 0/1628 kcal (0/20); 蛋白 0/150g (0/15); 饮水 0/2000ml (0/15)",
+        "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
       }
     ],
-    "exported_at": "2026-08-22T22:05:01.908991"
+    "exported_at": "2026-08-23T22:05:02.190173"
   },
   "food_library": {
     "items": [
@@ -1611,6 +1712,21 @@
         "source": "用户提供"
       },
       {
+        "name": "贵州侗娘牛肉蘸水菜套餐",
+        "brand": "",
+        "per_unit": "1份",
+        "calories": 645.0,
+        "carbs": 78.0,
+        "protein": 36.0,
+        "fat": 18.0,
+        "category": "快餐",
+        "ref_price": 0.0,
+        "total_servings": 2.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户估算（牛肉片+虾滑+蔬菜+米饭+蘸酱）"
+      },
+      {
         "name": "中薯条",
         "brand": "麦当劳",
         "per_unit": "1份",
@@ -1684,6 +1800,51 @@
         "total_grams": 0,
         "cumulative_spending": 5.5,
         "source": "用户"
+      },
+      {
+        "name": "周六自助晚餐",
+        "brand": "",
+        "per_unit": "1份",
+        "calories": 1100.0,
+        "carbs": 90.0,
+        "protein": 50.0,
+        "fat": 60.0,
+        "category": "快餐",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户估算"
+      },
+      {
+        "name": "周六韩餐午餐",
+        "brand": "",
+        "per_unit": "1份",
+        "calories": 1200.0,
+        "carbs": 80.0,
+        "protein": 60.0,
+        "fat": 65.0,
+        "category": "快餐",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户估算"
+      },
+      {
+        "name": "周日午餐",
+        "brand": "",
+        "per_unit": "1份",
+        "calories": 800.0,
+        "carbs": 60.0,
+        "protein": 50.0,
+        "fat": 30.0,
+        "category": "快餐",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户估算，待补充"
       },
       {
         "name": "土豆烧鸡块",
@@ -3186,6 +3347,21 @@
         "source": "用户估算"
       },
       {
+        "name": "周六蛋糕",
+        "brand": "",
+        "per_unit": "1份",
+        "calories": 300.0,
+        "carbs": 40.0,
+        "protein": 3.0,
+        "fat": 15.0,
+        "category": "零食",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户估算"
+      },
+      {
         "name": "零食（未知）",
         "brand": "",
         "per_unit": "1份",
@@ -3349,6 +3525,21 @@
         "total_grams": 500.0,
         "cumulative_spending": 0.0,
         "source": "产品营养表"
+      },
+      {
+        "name": "无糖魔爪能量饮料",
+        "brand": "",
+        "per_unit": "330ml",
+        "calories": 10.0,
+        "carbs": 2.0,
+        "protein": 0.0,
+        "fat": 0.0,
+        "category": "饮品",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 330.0,
+        "cumulative_spending": 0.0,
+        "source": "Monster官方营养数据"
       },
       {
         "name": "海带清汤",
@@ -3546,8 +3737,8 @@
         "source": "预置"
       }
     ],
-    "total_foods": 155,
-    "total_servings": 248.0,
+    "total_foods": 161,
+    "total_servings": 255.0,
     "total_spending": 221.47,
     "by_category": {
       "主食": {
@@ -3563,8 +3754,8 @@
         "servings": 4.0
       },
       "快餐": {
-        "count": 37,
-        "servings": 46.8
+        "count": 41,
+        "servings": 51.8
       },
       "水果": {
         "count": 6,
@@ -3591,12 +3782,12 @@
         "servings": 4.0
       },
       "零食": {
-        "count": 4,
-        "servings": 2.2
+        "count": 5,
+        "servings": 3.2
       },
       "饮品": {
-        "count": 21,
-        "servings": 45.3
+        "count": 22,
+        "servings": 46.3
       }
     }
   }
