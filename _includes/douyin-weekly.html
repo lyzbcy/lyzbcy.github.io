@@ -101,7 +101,7 @@
     });
   }
 
-  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
+  function esc(s) { return String(s == null ? "" : s).replace(/[\u0026\u003c\u003e\u0022]/g, function (c) {
     return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 
   function row(i, n) {
