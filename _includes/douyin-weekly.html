@@ -64,7 +64,7 @@
   var cache = {};
   var currentKey = null;
 
-  function isoWeek(d) { // d: Date → [year, week]
+  function isoWeek(d) { 
     var t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
     var day = t.getUTCDay() || 7;
     t.setUTCDate(t.getUTCDate() + 4 - day);
@@ -73,7 +73,7 @@
     return [t.getUTCFullYear(), week];
   }
 
-  // 近 12 周列表(倒序:最新在前)
+  
   var weeks = [];
   var today = new Date();
   for (var i = 0; i < 12; i++) {
@@ -106,7 +106,7 @@
 
   function row(i, n) {
     var rank = '<span class="dwk-rank' + (n <= 3 ? " r" + n : "") + '">' + n + "</span>";
-    // 注意:<img 必须拆开写 — Chirky 的图片插件会改写 JS 字符串里的完整 <img 标签导致语法崩溃
+    
     var cover = i.cover ? '<im' + 'g src="' + i.cover + '" class="dwk-cover" loading="lazy" alt="">'
       : '<span class="dwk-cover"></span>';
     var go = i.url ? '<a class="dwk-go" href="' + i.url + '" target="_blank" rel="noopener">看视频 →</a>'
@@ -155,7 +155,7 @@
   function mountGiscus(d) {
     giscusBox.innerHTML = "";
     var s = document.createElement("script");
-    s.src = "https://giscus.app/client.js";
+    s.src = "https:
     ["data-repo|lyzbcy/lyzbcy.github.io",
      "data-repo-id|R_kgDOQMgcsQ",
      "data-category|Announcements",
@@ -173,7 +173,7 @@
     giscusBox.appendChild(s);
   }
 
-  // 构建周条
+  
   weeks.forEach(function (w, idx) {
     var b = document.createElement("button");
     b.type = "button";
@@ -181,7 +181,7 @@
     b.title = w[0] + " 年第 " + w[1] + " 周";
     b.onclick = function () { load(w, b); };
     cal.appendChild(b);
-    if (idx === 0) load(w, b); // 默认最新周
+    if (idx === 0) load(w, b); 
   });
 })();
 </script>
