@@ -181,7 +181,13 @@
     b.title = w[0] + " 年第 " + w[1] + " 周";
     b.onclick = function () { load(w, b); };
     cal.appendChild(b);
-    if (idx === 0) load(w, b); 
   });
+  (function pickDefault(i) {
+    if (i >= weeks.length) { main.innerHTML = '<p class="dwk-empty">暂无周报(每周六 12:00 生成)<\/p>'; return; }
+    fetch("/assets/weekly/" + key(weeks[i]) + ".json").then(function (r) {
+      if (r.ok) load(weeks[i], cal.children[i]);
+      else { cal.children[i].classList.add("off"); pickDefault(i + 1); }
+    }).catch(function () { cal.children[i].classList.add("off"); pickDefault(i + 1); });
+  })(0);
 })();
 </script>
