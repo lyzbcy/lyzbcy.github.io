@@ -272,6 +272,14 @@
       bgImage: imageBasePath + encodeURIComponent('魔小饱方便魔芋凉面.jpg'),
     },
     {
+      name: '日清意面牛油莫罗勒风味杯面【日清】',
+      tier: '拉完了',
+      tierLabel: '拉完了 · 2❤️',
+      rating: 1,
+      description: '光说味道其实可以给3星，但参考价7元且吃不饱。既然是小杯就得按合味道的标准来要求。牛油果风味虽然颜色看着低，但实际吃着挺好吃的，只是没太吃出牛油果的味道，没有特别惊艳。综合考虑性价比，最终2星。',
+      bgImage: imageBasePath + encodeURIComponent('日清意面牛油莫罗勒杯面-日清.jpeg'),
+    },
+    {
       name: '香菜面',
       tier: '拉完了',
       tierLabel: '拉完了 · 史',

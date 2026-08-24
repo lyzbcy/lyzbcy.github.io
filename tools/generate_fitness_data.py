@@ -183,6 +183,8 @@ def main():
             sessions_by_date[d]["split"] = r.get("session", "")
         elif r.get("action") == "session_end":
             sessions_by_date[d]["end"] = r
+            if sessions_by_date[d]["start"] is None:
+                sessions_by_date[d]["split"] = r.get("session", "")
         elif r.get("action") == "set":
             sessions_by_date[d]["sets"].append(r)
 
@@ -195,12 +197,21 @@ def main():
         total_sets = len(sess["sets"])
         total_volume = sum(s.get("weight", 0) * s.get("reps", 0) for s in sess["sets"])
         exercises_done = list(set(s["exercise"] for s in sess["sets"]))
-        # 估算时长
-        if sess["start"] and sess["end"]:
+        # 估算时长：有 session_start 用 start→end，没有则用首组→end
+        if sess["end"]:
             try:
-                start_ts = datetime.fromisoformat(sess["start"]["ts"].replace("Z", "+00:00")).replace(tzinfo=None)
                 end_ts = datetime.fromisoformat(sess["end"]["ts"].replace("Z", "+00:00")).replace(tzinfo=None)
-                duration_min = round((end_ts - start_ts).total_seconds() / 60)
+                if sess["start"]:
+                    start_ts = datetime.fromisoformat(sess["start"]["ts"].replace("Z", "+00:00")).replace(tzinfo=None)
+                elif sess["sets"]:
+                    # 无 session_start 时用第一组 set 的时间戳
+                    start_ts = datetime.fromisoformat(sess["sets"][0]["ts"].replace("Z", "+00:00")).replace(tzinfo=None)
+                else:
+                    start_ts = None
+                if start_ts:
+                    duration_min = round((end_ts - start_ts).total_seconds() / 60)
+                else:
+                    duration_min = None
             except:
                 duration_min = None
         else:
@@ -214,7 +225,7 @@ def main():
             "total_volume": round(total_volume, 1),
             "exercises": exercises_done,
             "duration_min": duration_min,
-            "note": sess["start"].get("note", "") if sess["start"] else ""
+            "note": sess["start"].get("note", "") if sess["start"] else (sess["end"].get("note", "") if sess["end"] else "")
         })
 
     # PR 列表（从 config 提取）
