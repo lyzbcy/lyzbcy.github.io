@@ -136,14 +136,14 @@
       "<\/div>";
 
     if (d.news && d.news.length) {
-      html += '<div class="dwk-sec-title">🎬 本周新发(' + d.news.length + ")<\/div><table class='dwk-table'><tr><th>#<\/th><th>作品<\/th><th>发布<\/th><th>周增播放<\/th><th>总播放<\/th><th>完播率<\/th><th>互动<\/th><th><\/th><\/tr>";
+      html += '<div class="dwk-sec-title">🎬 本周新发(' + d.news.length + ")<\/div>" + "<ta" + "ble class='dwk-table'><tr><th>#<\/th><th>作品<\/th><th>发布<\/th><th>周增播放<\/th><th>总播放<\/th><th>完播率<\/th><th>互动<\/th><th><\/th><\/tr>";
       d.news.forEach(function (i, n) { html += row(i, n + 1); });
       html += "<\/table>";
     } else {
       html += '<div class="dwk-sec-title">🎬 本周新发<\/div><p class="dwk-empty">本周没有发布新视频<\/p>';
     }
 
-    html += '<div class="dwk-sec-title">📈 播放增量 Top 10<\/div><table class=\'dwk-table\'><tr><th>#<\/th><th>作品<\/th><th>周增播放<\/th><th>总播放<\/th><th>完播率<\/th><th>互动<\/th><th><\/th><\/tr>';
+    html += '<div class="dwk-sec-title">📈 播放增量 Top 10<\/div>' + "<ta" + "ble class='dwk-table'><tr><th>#<\/th><th>作品<\/th><th>周增播放<\/th><th>总播放<\/th><th>完播率<\/th><th>互动<\/th><th><\/th><\/tr>";
     d.top.forEach(function (i, n) { html += row(i, n + 1); });
     html += "<\/table>";
     html += '<p class="dwk-note">💡 周增 = 本周快照 − 上周快照 · "ID同步中" = 视频发布过新(抖音接口延迟),下期自动补 · 表现分析(钩子/BGM/选题)请在下方评论区写你的思考<\/p>';
