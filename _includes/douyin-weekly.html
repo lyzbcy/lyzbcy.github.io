@@ -106,7 +106,8 @@
 
   function row(i, n) {
     var rank = '<span class="dwk-rank' + (n <= 3 ? " r" + n : "") + '">' + n + "</span>";
-    var cover = i.cover ? '<img src="' + i.cover + '" class="dwk-cover" loading="lazy" alt="">'
+    // 注意:<img 必须拆开写 — Chirky 的图片插件会改写 JS 字符串里的完整 <img 标签导致语法崩溃
+    var cover = i.cover ? '<im' + 'g src="' + i.cover + '" class="dwk-cover" loading="lazy" alt="">'
       : '<span class="dwk-cover"></span>';
     var go = i.url ? '<a class="dwk-go" href="' + i.url + '" target="_blank" rel="noopener">看视频 →</a>'
       : '<span class="dwk-go gray">ID同步中</span>';
