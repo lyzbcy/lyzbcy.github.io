@@ -1,0 +1,77 @@
+<h1 id="lyzbcy-blog-update--博客更新总入口">lyzbcy-blog-update — 博客更新总入口</h1>
+
+<p>本 skill 的权威位置在 <strong>lyzbcy.github.io 仓库 <code class="language-plaintext highlighter-rouge">skills/lyzbcy-blog-update/</code></strong>,
+随仓库一起版本化,任何 AI(小龙虾/周五涵/ZCode)更新本博客前必读。</p>
+
+<h2 id="-三条铁律先记住再往下读">🔒 三条铁律(先记住再往下读)</h2>
+
+<ol>
+  <li><strong>改哪个页面,就先读哪个页面的 <code class="language-plaintext highlighter-rouge">references/</code> 细则</strong>,没读禁止动手。
+页面细则 = 数据在哪个文件、格式长什么样、图片怎么找、哪些是禁区。</li>
+  <li><strong>档位、星级、评价文案 = 用户原话,AI 无权修改/降档/润色</strong>,
+即使觉得”太夸张”——那是用户的排名,不是 AI 的。拿不准就问用户,别猜。</li>
+  <li><strong>改了数据就必须同步重绘一图流海报</strong>(跑仓库现成脚本),
+禁止自己新写渲染脚本/手 P 图。历史教训:劣质重绘毁排版(808KB→173KB 翻车)。</li>
+</ol>
+
+<h2 id="-页面细则目录渐进式披露改哪个读哪个">📖 页面细则目录(渐进式披露:改哪个读哪个)</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>页面</th>
+      <th>细则文件</th>
+      <th>数据源</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>方便面从夯到拉排名</td>
+      <td><a href="references/noodle-tier.md">references/noodle-tier.md</a></td>
+      <td><code class="language-plaintext highlighter-rouge">assets/lib-custom/noodle-tier.js</code></td>
+    </tr>
+    <tr>
+      <td>外卖从夯到拉排名</td>
+      <td><a href="references/takeout-tier.md">references/takeout-tier.md</a></td>
+      <td><code class="language-plaintext highlighter-rouge">assets/lib-custom/takeout-tier.js</code></td>
+    </tr>
+    <tr>
+      <td>健身/营养/抖音周报看板</td>
+      <td><a href="references/dashboards.md">references/dashboards.md</a></td>
+      <td><code class="language-plaintext highlighter-rouge">tools/generate_*.py</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="-通用更新流程">✅ 通用更新流程</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>1. 读对应页面 references/ 细则
+2. 拿到用户原话评价(查会话/直接问),禁止 AI 编写评价
+3. 按细则改数据文件(格式照抄相邻条目)
+4. 找图(按细则的图片来源/大小/命名/盲测核验要求)
+5. 同步:文章底部隐藏文本 + 重绘一图流海报(跑现成脚本)
+6. git add 本页相关文件(别全仓 add),commit 格式照细则,push
+7. 等 ~90s(Pages 构建+CDN)再验证线上
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="-绝对禁止">🚫 绝对禁止</h2>
+
+<ul>
+  <li>✗ 凭记忆/历史经验直接改,跳过 references 细则</li>
+  <li>✗ 修改/降档/润色用户评价文案</li>
+  <li>✗ 动本次任务之外的任何文章</li>
+  <li>✗ 自写渲染脚本、改脚本布局参数/颜色/字体</li>
+  <li>✗ 不确定时自作主张——先问用户</li>
+</ul>
+
+<h2 id="-相关知识">📚 相关知识</h2>
+
+<p>踩坑速查表与技术栈见仓库 <code class="language-plaintext highlighter-rouge">docs/INDEX.md</code>(必查坑速查,命中就读对应 pitfalls 文档)。
+推送链路见 <code class="language-plaintext highlighter-rouge">docs/howto/push-pipeline.md</code>(铁律:走服务器 ubuntu 身份 push,别本地直连)。</p>
