@@ -21,6 +21,7 @@
 | Playwright(Python) | `page.evaluate` 只收**一个** arg,多参数打包成对象 | [pitfalls/ops.md](pitfalls/ops.md) |
 | 抓抖音数据 | `item_performance` API 对新视频**延迟~1天**→假ID无封面,次日自愈 | [pitfalls/ops.md](pitfalls/ops.md) |
 | 线上验证 404/旧内容 | Pages 构建排队+CDN 传播慢,**等 90s 再验**,别急着判失败 | [pitfalls/ops.md](pitfalls/ops.md) |
+| Agent 更新博客 | AGENTS.md 写了规则 ≠ 会执行:flash 模型循环打转+指令过载+记忆误导;关键规范必须做成独立 skill(仓库 skills/lyzbcy-blog-update/) | [pitfalls/agent-context.md](pitfalls/agent-context.md) |
 
 ## 🖥️ 技术栈与架构
 
