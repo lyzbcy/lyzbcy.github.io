@@ -1,0 +1,186 @@
+<!-- douyin-weekly.html — 周报折叠组件(默认收起):日历选周 + 深色紧凑渲染 + 动态评论区 -->
+<!-- 数据源: /assets/weekly/W{year}-{ww}.json (weekly-report.py 每周六 12:00 生成) -->
+
+<details class="dwk-fold" id="dwk-fold">
+  <summary style="cursor:pointer;font-size:1.05rem;font-weight:700;padding:12px 0">
+    📊 抖音数据周报 <small style="font-weight:400;opacity:.6">(每周六 12:00 更新 · 点击展开)</small>
+  </summary>
+  <div class="dwk-body">
+
+    <!-- 周选择:日历式周条(近12周) -->
+    <div class="dwk-calendar" id="dwk-cal" role="tablist" aria-label="选择周报"></div>
+
+    <!-- 渲染区 -->
+    <div id="dwk-main"><p class="dwk-empty">加载中…</p></div>
+
+    <!-- 评论区(giscus,term 跟随选周) -->
+    <div class="dwk-sec-title">💬 本周复盘留言板</div>
+    <div id="dwk-giscus"></div>
+  </div>
+</details>
+
+<style>
+.dwk-fold{border:1px solid rgba(254,44,85,.3);border-radius:14px;padding:2px 18px;margin:2.2rem 0;background:rgba(254,44,85,.05)}
+.dwk-fold[open]{padding-bottom:18px}
+.dwk-fold summary::-webkit-details-marker{color:#fe2c55}
+.dwk-body{padding-top:6px}
+.dwk-cal{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 16px}
+.dwk-cal button{border:1px solid rgba(255,255,255,.15);background:transparent;color:inherit;border-radius:9px;padding:6px 10px;font-size:.8rem;cursor:pointer;transition:all .15s}
+.dwk-cal button:hover{border-color:#fe2c55}
+.dwk-cal button.on{background:#fe2c55;color:#fff;border-color:#fe2c55;font-weight:700}
+.dwk-cal button.off{opacity:.35;cursor:default}
+.dwk-cal .mon{font-size:.68rem;opacity:.6;display:block}
+.dwk-hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:12px 0}
+.dwk-hero .c{background:linear-gradient(135deg,#fe2c55,#ff7a95);border-radius:12px;padding:14px;color:#fff}
+.dwk-hero .c .n{font-size:1.7rem;font-weight:800}
+.dwk-hero .c .l{font-size:.75rem;opacity:.9}
+.dwk-hero .c .s{font-size:.7rem;opacity:.8;margin-top:2px}
+.dwk-sec-title{font-size:1.02rem;font-weight:700;margin:1.4rem 0 .5rem;border-left:3px solid #fe2c55;padding-left:8px}
+.dwk-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.dwk-table th{text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;opacity:.55;padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.12)}
+.dwk-table td{padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.07);vertical-align:middle}
+.dwk-table tr.wl{cursor:pointer}
+.dwk-table tr.wl:hover{background:rgba(254,44,85,.07)}
+.dwk-cover{width:44px;height:28px;object-fit:cover;border-radius:5px;background:#333;display:block;flex:none}
+.dwk-tcell{display:flex;gap:8px;align-items:center;min-width:0;max-width:300px}
+.dwk-tcell b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.dwk-rank{display:inline-block;min-width:20px;text-align:center;border-radius:6px;font-size:.72rem;font-weight:700;padding:2px 5px;background:rgba(255,255,255,.1)}
+.dwk-rank.r1{background:#fbbc05;color:#000}.dwk-rank.r2{background:#c0c0c0;color:#000}.dwk-rank.r3{background:#cd7f32;color:#000}
+.dwk-go{font-size:.7rem;background:#fe2c55;color:#fff;border-radius:12px;padding:4px 10px;white-space:nowrap}
+.dwk-go.gray{background:#777}
+.dwk-prog{display:inline-block;width:52px;height:6px;border-radius:3px;background:rgba(255,255,255,.12);vertical-align:middle;margin-right:5px;overflow:hidden}
+.dwk-prog i{display:block;height:100%;background:linear-gradient(90deg,#fe2c55,#ff7a95)}
+.dwk-badge{font-size:.66rem;background:rgba(254,44,85,.15);color:#ff7a95;border-radius:6px;padding:1px 6px;margin-left:5px}
+.dwk-empty{opacity:.6;padding:16px 0}
+.dwk-note{font-size:.75rem;opacity:.55;margin-top:10px}
+.dwk-red{color:#fe2c55;font-weight:700}
+</style>
+
+<script>
+(function () {
+  var cal = document.getElementById("dwk-cal");
+  var main = document.getElementById("dwk-main");
+  var giscusBox = document.getElementById("dwk-giscus");
+  var cache = {};
+  var currentKey = null;
+
+  function isoWeek(d) { // d: Date → [year, week]
+    var t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+    var day = t.getUTCDay() || 7;
+    t.setUTCDate(t.getUTCDate() + 4 - day);
+    var y0 = new Date(Date.UTC(t.getUTCFullYear(), 0, 1));
+    var week = Math.ceil(((t - y0) / 86400000 + 1) / 7);
+    return [t.getUTCFullYear(), week];
+  }
+
+  // 近 12 周列表(倒序:最新在前)
+  var weeks = [];
+  var today = new Date();
+  for (var i = 0; i < 12; i++) {
+    var d = new Date(today.getTime() - i * 7 * 86400000);
+    weeks.push(isoWeek(d));
+  }
+
+  function key(w) { return "W" + w[0] + "-" + String(w[1]).padStart(2, "0"); }
+
+  function load(w, btn) {
+    var k = key(w);
+    currentKey = k;
+    document.querySelectorAll(".dwk-cal button").forEach(function (b) { b.classList.remove("on"); });
+    if (btn) btn.classList.add("on");
+    main.innerHTML = '<p class="dwk-empty">加载中…</p>';
+    if (cache[k]) { render(cache[k]); return; }
+    fetch("/assets/weekly/" + k + ".json").then(function (r) {
+      if (!r.ok) throw 0;
+      return r.json();
+    }).then(function (d) {
+      cache[k] = d; if (currentKey === k) render(d);
+    }).catch(function () {
+      if (currentKey === k) main.innerHTML = '<p class="dwk-empty">该周周报不存在(每周六 12:00 生成)</p>';
+      if (btn) btn.classList.add("off");
+    });
+  }
+
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  function row(i, n) {
+    var rank = '<span class="dwk-rank' + (n <= 3 ? " r" + n : "") + '">' + n + "</span>";
+    var cover = i.cover ? '<img src="' + i.cover + '" class="dwk-cover" loading="lazy" alt="">'
+      : '<span class="dwk-cover"></span>';
+    var go = i.url ? '<a class="dwk-go" href="' + i.url + '" target="_blank" rel="noopener">看视频 →</a>'
+      : '<span class="dwk-go gray">ID同步中</span>';
+    return '<tr' + (i.url ? ' class="wl" onclick="window.open(\'' + i.url + '\',\'_blank\')"' : "") + ">" +
+      "<td>" + rank + "</td>" +
+      '<td><div class="dwk-tcell">' + cover + "<b>" + esc(i.title) + (i.is_new ? '<span class="dwk-badge">本周新发</span>' : "") + "</b></div></td>" +
+      (i.pub ? '<td style="font-size:.72rem;opacity:.7">' + esc(i.pub) + "</td>" : "") +
+      '<td><span class="dwk-red">+' + i.d_plays.toLocaleString() + "</span></td>" +
+      "<td>" + i.plays.toLocaleString() + "</td>" +
+      '<td><span class="dwk-prog"><i style="width:' + Math.min(i.finish, 100) + '%"></i></span>' + i.finish + "%</td>" +
+      "<td>+" + i.d_interact + "</td>" +
+      "<td>" + go + "</td></tr>";
+  }
+
+  function render(d) {
+    var h = d.hero;
+    var prevS = h.avg_finish_prev != null ? "上周 " + h.avg_finish_prev + "%" : "";
+    var html =
+      '<div style="font-size:.85rem;opacity:.75;margin:4px 0 2px">' + esc(d.period) +
+      " · 视频 " + d.video_count + " 个 · 生成于 " + esc(d.generated_at) + "</div>" +
+      '<div class="dwk-hero">' +
+      '<div class="c"><div class="n">' + h.d_plays.toLocaleString() + '</div><div class="l">本周新增播放</div></div>' +
+      '<div class="c"><div class="n">+' + h.d_interact.toLocaleString() + '</div><div class="l">新增互动</div></div>' +
+      '<div class="c"><div class="n">' + h.new_count + '</div><div class="l">本周新发视频</div></div>' +
+      '<div class="c"><div class="n">' + h.avg_finish + '%</div><div class="l">平均完播率</div><div class="s">' + prevS + "</div></div>" +
+      "</div>";
+
+    if (d.news && d.news.length) {
+      html += '<div class="dwk-sec-title">🎬 本周新发(' + d.news.length + ")</div><table class='dwk-table'><tr><th>#</th><th>作品</th><th>发布</th><th>周增播放</th><th>总播放</th><th>完播率</th><th>互动</th><th></th></tr>";
+      d.news.forEach(function (i, n) { html += row(i, n + 1); });
+      html += "</table>";
+    } else {
+      html += '<div class="dwk-sec-title">🎬 本周新发</div><p class="dwk-empty">本周没有发布新视频</p>';
+    }
+
+    html += '<div class="dwk-sec-title">📈 播放增量 Top 10</div><table class=\'dwk-table\'><tr><th>#</th><th>作品</th><th>周增播放</th><th>总播放</th><th>完播率</th><th>互动</th><th></th></tr>';
+    d.top.forEach(function (i, n) { html += row(i, n + 1); });
+    html += "</table>";
+    html += '<p class="dwk-note">💡 周增 = 本周快照 − 上周快照 · "ID同步中" = 视频发布过新(抖音接口延迟),下期自动补 · 表现分析(钩子/BGM/选题)请在下方评论区写你的思考</p>';
+
+    main.innerHTML = html;
+    mountGiscus(d);
+  }
+
+  function mountGiscus(d) {
+    giscusBox.innerHTML = "";
+    var s = document.createElement("script");
+    s.src = "https://giscus.app/client.js";
+    ["data-repo|lyzbcy/lyzbcy.github.io",
+     "data-repo-id|R_kgDOQMgcsQ",
+     "data-category|Announcements",
+     "data-category-id|DIC_kwDOQMgcsc4DCIAs",
+     "data-mapping|specific",
+     "data-term|抖音周报-" + d.year + "-W" + String(d.week).padStart(2, "0"),
+     "data-strict|0",
+     "data-reactions-enabled|1",
+     "data-input-position|bottom",
+     "data-theme|preferred_color_scheme",
+     "data-lang|zh-CN"].forEach(function (p) {
+      var kv = p.split("|"); s.setAttribute(kv[0], kv[1]);
+    });
+    s.setAttribute("crossorigin", "anonymous"); s.async = true;
+    giscusBox.appendChild(s);
+  }
+
+  // 构建周条
+  weeks.forEach(function (w, idx) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.innerHTML = '<span class="mon">' + String(w[0]).slice(2) + '</span>第' + w[1] + "周";
+    b.title = w[0] + " 年第 " + w[1] + " 周";
+    b.onclick = function () { load(w, b); };
+    cal.appendChild(b);
+    if (idx === 0) load(w, b); // 默认最新周
+  });
+})();
+</script>
