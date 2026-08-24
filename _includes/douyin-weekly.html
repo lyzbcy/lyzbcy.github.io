@@ -88,7 +88,7 @@
     currentKey = k;
     document.querySelectorAll(".dwk-cal button").forEach(function (b) { b.classList.remove("on"); });
     if (btn) btn.classList.add("on");
-    main.innerHTML = '<p class="dwk-empty">加载中…</p>';
+    main.innerHTML = '<p class="dwk-empty">加载中…<\/p>';
     if (cache[k]) { render(cache[k]); return; }
     fetch("/assets/weekly/" + k + ".json").then(function (r) {
       if (!r.ok) throw 0;
@@ -96,7 +96,7 @@
     }).then(function (d) {
       cache[k] = d; if (currentKey === k) render(d);
     }).catch(function () {
-      if (currentKey === k) main.innerHTML = '<p class="dwk-empty">该周周报不存在(每周六 12:00 生成)</p>';
+      if (currentKey === k) main.innerHTML = '<p class="dwk-empty">该周周报不存在(每周六 12:00 生成)<\/p>';
       if (btn) btn.classList.add("off");
     });
   }
@@ -105,21 +105,21 @@
     return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 
   function row(i, n) {
-    var rank = '<span class="dwk-rank' + (n <= 3 ? " r" + n : "") + '">' + n + "</span>";
+    var rank = '<span class="dwk-rank' + (n <= 3 ? " r" + n : "") + '">' + n + "<\/span>";
     
     var cover = i.cover ? '<im' + 'g src="' + i.cover + '" class="dwk-cover" loading="lazy" alt="">'
-      : '<span class="dwk-cover"></span>';
-    var go = i.url ? '<a class="dwk-go" href="' + i.url + '" target="_blank" rel="noopener">看视频 →</a>'
-      : '<span class="dwk-go gray">ID同步中</span>';
+      : '<span class="dwk-cover"><\/span>';
+    var go = i.url ? '<a class="dwk-go" href="' + i.url + '" target="_blank" rel="noopener">看视频 →<\/a>'
+      : '<span class="dwk-go gray">ID同步中<\/span>';
     return '<tr' + (i.url ? ' class="wl" onclick="window.open(\'' + i.url + '\',\'_blank\')"' : "") + ">" +
-      "<td>" + rank + "</td>" +
-      '<td><div class="dwk-tcell">' + cover + "<b>" + esc(i.title) + (i.is_new ? '<span class="dwk-badge">本周新发</span>' : "") + "</b></div></td>" +
-      (i.pub ? '<td style="font-size:.72rem;opacity:.7">' + esc(i.pub) + "</td>" : "") +
-      '<td><span class="dwk-red">+' + i.d_plays.toLocaleString() + "</span></td>" +
-      "<td>" + i.plays.toLocaleString() + "</td>" +
-      '<td><span class="dwk-prog"><i style="width:' + Math.min(i.finish, 100) + '%"></i></span>' + i.finish + "%</td>" +
-      "<td>+" + i.d_interact + "</td>" +
-      "<td>" + go + "</td></tr>";
+      "<td>" + rank + "<\/td>" +
+      '<td><div class="dwk-tcell">' + cover + "<b>" + esc(i.title) + (i.is_new ? '<span class="dwk-badge">本周新发<\/span>' : "") + "<\/b><\/div><\/td>" +
+      (i.pub ? '<td style="font-size:.72rem;opacity:.7">' + esc(i.pub) + "<\/td>" : "") +
+      '<td><span class="dwk-red">+' + i.d_plays.toLocaleString() + "<\/span><\/td>" +
+      "<td>" + i.plays.toLocaleString() + "<\/td>" +
+      '<td><span class="dwk-prog"><i style="width:' + Math.min(i.finish, 100) + '%"><\/i><\/span>' + i.finish + "%<\/td>" +
+      "<td>+" + i.d_interact + "<\/td>" +
+      "<td>" + go + "<\/td><\/tr>";
   }
 
   function render(d) {
@@ -127,26 +127,26 @@
     var prevS = h.avg_finish_prev != null ? "上周 " + h.avg_finish_prev + "%" : "";
     var html =
       '<div style="font-size:.85rem;opacity:.75;margin:4px 0 2px">' + esc(d.period) +
-      " · 视频 " + d.video_count + " 个 · 生成于 " + esc(d.generated_at) + "</div>" +
+      " · 视频 " + d.video_count + " 个 · 生成于 " + esc(d.generated_at) + "<\/div>" +
       '<div class="dwk-hero">' +
-      '<div class="c"><div class="n">' + h.d_plays.toLocaleString() + '</div><div class="l">本周新增播放</div></div>' +
-      '<div class="c"><div class="n">+' + h.d_interact.toLocaleString() + '</div><div class="l">新增互动</div></div>' +
-      '<div class="c"><div class="n">' + h.new_count + '</div><div class="l">本周新发视频</div></div>' +
-      '<div class="c"><div class="n">' + h.avg_finish + '%</div><div class="l">平均完播率</div><div class="s">' + prevS + "</div></div>" +
-      "</div>";
+      '<div class="c"><div class="n">' + h.d_plays.toLocaleString() + '<\/div><div class="l">本周新增播放<\/div><\/div>' +
+      '<div class="c"><div class="n">+' + h.d_interact.toLocaleString() + '<\/div><div class="l">新增互动<\/div><\/div>' +
+      '<div class="c"><div class="n">' + h.new_count + '<\/div><div class="l">本周新发视频<\/div><\/div>' +
+      '<div class="c"><div class="n">' + h.avg_finish + '%<\/div><div class="l">平均完播率<\/div><div class="s">' + prevS + "<\/div><\/div>" +
+      "<\/div>";
 
     if (d.news && d.news.length) {
-      html += '<div class="dwk-sec-title">🎬 本周新发(' + d.news.length + ")</div><table class='dwk-table'><tr><th>#</th><th>作品</th><th>发布</th><th>周增播放</th><th>总播放</th><th>完播率</th><th>互动</th><th></th></tr>";
+      html += '<div class="dwk-sec-title">🎬 本周新发(' + d.news.length + ")<\/div><table class='dwk-table'><tr><th>#<\/th><th>作品<\/th><th>发布<\/th><th>周增播放<\/th><th>总播放<\/th><th>完播率<\/th><th>互动<\/th><th><\/th><\/tr>";
       d.news.forEach(function (i, n) { html += row(i, n + 1); });
-      html += "</table>";
+      html += "<\/table>";
     } else {
-      html += '<div class="dwk-sec-title">🎬 本周新发</div><p class="dwk-empty">本周没有发布新视频</p>';
+      html += '<div class="dwk-sec-title">🎬 本周新发<\/div><p class="dwk-empty">本周没有发布新视频<\/p>';
     }
 
-    html += '<div class="dwk-sec-title">📈 播放增量 Top 10</div><table class=\'dwk-table\'><tr><th>#</th><th>作品</th><th>周增播放</th><th>总播放</th><th>完播率</th><th>互动</th><th></th></tr>';
+    html += '<div class="dwk-sec-title">📈 播放增量 Top 10<\/div><table class=\'dwk-table\'><tr><th>#<\/th><th>作品<\/th><th>周增播放<\/th><th>总播放<\/th><th>完播率<\/th><th>互动<\/th><th><\/th><\/tr>';
     d.top.forEach(function (i, n) { html += row(i, n + 1); });
-    html += "</table>";
-    html += '<p class="dwk-note">💡 周增 = 本周快照 − 上周快照 · "ID同步中" = 视频发布过新(抖音接口延迟),下期自动补 · 表现分析(钩子/BGM/选题)请在下方评论区写你的思考</p>';
+    html += "<\/table>";
+    html += '<p class="dwk-note">💡 周增 = 本周快照 − 上周快照 · "ID同步中" = 视频发布过新(抖音接口延迟),下期自动补 · 表现分析(钩子/BGM/选题)请在下方评论区写你的思考<\/p>';
 
     main.innerHTML = html;
     mountGiscus(d);
@@ -177,7 +177,7 @@
   weeks.forEach(function (w, idx) {
     var b = document.createElement("button");
     b.type = "button";
-    b.innerHTML = '<span class="mon">' + String(w[0]).slice(2) + '</span>第' + w[1] + "周";
+    b.innerHTML = '<span class="mon">' + String(w[0]).slice(2) + '<\/span>第' + w[1] + "周";
     b.title = w[0] + " 年第 " + w[1] + " 周";
     b.onclick = function () { load(w, b); };
     cal.appendChild(b);
