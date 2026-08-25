@@ -144,6 +144,11 @@
 
   function render() {
     var list = (DATA && DATA.competitions) || [];
+    /* 已结束的直接不渲染(用户规则:不要已截止的比赛;endsAt 是估算值,到期即隐藏) */
+    list = list.filter(function (c) {
+      var d = daysLeft(c.endsAt);
+      return d == null || d >= 0;
+    });
     var filtered = list.filter(passFilters);
     var main = filtered.filter(function (c) { return c.type !== 'dev'; });
     var dev = filtered.filter(function (c) { return c.type === 'dev'; });

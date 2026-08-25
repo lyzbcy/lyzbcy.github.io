@@ -29,14 +29,20 @@
 - 去重:competehub 优先(字段全),lablab 按标题规范比对剔除重复
 - 想加新源:在 update-aicoding.mjs 里写 `fetchXxx()` 返回统一 schema,main() 里合并
 
-## 三级筛选口径(用户拍板的严口径)
+## 三级筛选口径(2026-08-25 二次调整:用户反馈主区太少)
 
-1. `ai_coding` — vibe coding / Cursor/Copilot/Claude Code 等 AI 辅助编程赛(**主区精选**)
+1. `ai_coding` — **主区精选**,包含:
+   - vibe coding / Cursor/Copilot/Claude Code 等字面 AI 编程赛
+   - **AI 构建类升级**:标题含 AI/Agent/LLM/GPT/Claude/Agentic 强信号的黑客松
+     (2026 年 AI 黑客松的实际工作方式就是用 AI 编程构建;**只看标题不看 tags**,
+     "Machine Learning/AI" 泛 tag 满天飞不能作为依据)
 2. `pure_coding` — 传统编程/算法赛(ICPC、code golf 等)(**主区精选**)
-3. `dev` — 开发者向构建赛(Shipaton、通用 hackathon)(**折叠区**)
+3. `dev` — 其余开发者向构建赛(Shipaton、普通 hackathon)(**折叠区**)
 
-正则白/黑名单在 `AI_CODING_STRONG` / `PURE_CODING_STRONG` / `DEV_PATTERNS` / `NEGATIVE`。
-**改口径只改这里,别在 JSON 上打补丁。**
+正则白/黑名单在 `AI_CODING_STRONG` / `PURE_CODING_STRONG` / `DEV_PATTERNS` /
+`NEGATIVE` / `AI_BUILD_IN_TITLE`。**改口径只改这里,别在 JSON 上打补丁。**
+
+**已结束的比赛**:前端渲染直接剔除(daysLeft < 0 不显示),数据层每日更新时同样丢弃。
 
 ## 前端筛选(用户需求 v2)
 
@@ -65,6 +71,11 @@ bash /home/openclaw-shared/lyzbcy.github.io/tools/aicoding/run-daily.sh
 
 ## 踩坑记录
 
+- 2026-08-25 **lablab 列表骨架会覆盖历史富数据**:列表只有 name+url,直接 spread 覆盖
+  会把详情页补过的奖金/日期清空 —— 主循环做了字段级合并(null 时保留旧值);
+  且详情页回填队列同时纳入"新活动 + 已知但缺字段的"(每天上限 6)
+- 2026-08-25 **lablab 详情页奖金提取**:取**第一个 ≥500** 的 $ 金额;
+  "$1/$100" 是页面杂音,首个大额通常才是主奖金(Alpaca $6,000/AMD $5,000 验证)
 - 2026-08-25 **lablab 的 Cloudflare 挡 node fetch 的 TLS 指纹**(完整 Chrome 头反被识别),
   fetchPage 已内置 curl 子进程降级通道,Windows Git Bash/Linux 服务器均有 curl
 - 2026-08-25 **id 迁移坑**:v1 裸 slug → v2 `source:slug`,prevMap 归一化时
