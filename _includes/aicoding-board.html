@@ -1,5 +1,5 @@
-<!-- AI Coding 比赛看板 — 骨架与样式
-     数据: assets/data/aicoding.json(每日由 tools/aicoding/update-aicoding.mjs 更新)
+<!-- AI Coding 比赛看板 — 骨架与样式 v2(多源+筛选)
+     数据: assets/data/aicoding.json(每日由 tools/aicoding/update-aicoding.mjs 多源更新)
      逻辑: assets/lib-custom/aicoding-board.js(外链,绕开构建链改写;渲染全用 DOM API)
      教训依据: docs/pitfalls/jekyll-build.md 内联 script 会被构建链丢弃 -->
 
@@ -11,7 +11,7 @@
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text; margin-bottom: 10px;
 }
-.aic-hero p { font-size: 0.98rem; opacity: 0.65; max-width: 560px; margin: 0 auto; }
+.aic-hero p { font-size: 0.98rem; opacity: 0.65; max-width: 620px; margin: 0 auto; }
 
 .aic-stats {
   display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
@@ -25,21 +25,31 @@
 .aic-stat b { display: block; font-size: 1.35rem; line-height: 1.2; }
 .aic-stat span { font-size: 0.75rem; opacity: 0.6; }
 
-.aic-toolbar {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-  gap: 10px; margin: 18px 0 6px;
+.aic-toolbar { margin: 18px 0 4px; }
+.aic-toolbar-row {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 8px;
 }
-.aic-sort-group { display: inline-flex; border-radius: 10px; overflow: hidden; border: 1px solid rgba(125,125,125,0.3); }
-.aic-sort-btn {
-  padding: 6px 14px; font-size: 0.85rem; cursor: pointer; border: none;
-  background: transparent; color: inherit; opacity: 0.65;
+.aic-row-label { font-size: 0.78rem; opacity: 0.55; flex-shrink: 0; min-width: 3.2em; }
+.aic-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.aic-chip-btn {
+  padding: 4px 12px; font-size: 0.8rem; cursor: pointer; border-radius: 999px;
+  border: 1px solid rgba(125,125,125,0.3); background: transparent;
+  color: inherit; opacity: 0.7; transition: all .2s;
 }
-.aic-sort-btn.active { background: rgba(79, 113, 219, 0.18); opacity: 1; font-weight: 600; }
-.aic-updated { font-size: 0.78rem; opacity: 0.5; }
+.aic-chip-btn:hover { opacity: 1; border-color: rgba(79,113,219,0.5); }
+.aic-chip-btn.active {
+  background: rgba(79,113,219,0.18); opacity: 1; font-weight: 650;
+  border-color: rgba(79,113,219,0.6);
+}
+.aic-chip-btn.wuxi.active {
+  background: rgba(5,150,105,0.15); border-color: rgba(5,150,105,0.55);
+}
+.aic-updated { font-size: 0.78rem; opacity: 0.5; margin-left: auto; }
+.aic-match-count { font-size: 0.78rem; opacity: 0.6; }
 
 .aic-section-title {
   display: flex; align-items: center; gap: 8px;
-  font-size: 1.12rem; font-weight: 700; margin: 26px 0 4px;
+  font-size: 1.12rem; font-weight: 700; margin: 22px 0 4px;
 }
 .aic-section-title small { font-weight: 400; opacity: 0.55; font-size: 0.8rem; }
 
@@ -74,6 +84,8 @@
   border: 1px solid rgba(125,125,125,0.25); opacity: 0.85;
 }
 .aic-chip.prize { color: #b45309; border-color: rgba(180,83,9,.4); background: rgba(180,83,9,.08); font-weight: 650; }
+.aic-chip.cn { color: #b91c1c; border-color: rgba(185,28,28,.35); background: rgba(185,28,28,.06); }
+.aic-chip.commute { color: #059669; border-color: rgba(5,150,105,.4); background: rgba(5,150,105,.08); font-weight: 650; }
 .aic-chip.online { opacity: 0.7; }
 
 .aic-countdown { display: flex; align-items: baseline; gap: 7px; font-size: 0.8rem; }
@@ -94,17 +106,45 @@ details.aic-more summary { cursor: pointer; font-weight: 650; padding: 6px 0; }
 
 <div class="aic-hero">
   <h1>🏆 AI Coding 比赛看板</h1>
-  <p>全球正在报名的 AI 辅助编程 &amp; 纯 Coding 竞赛,每天早上 9:30 自动更新,按截止时间排序</p>
+  <p>全球正在报名的 AI 辅助编程 &amp; 纯 Coding 竞赛 · 多源聚合每日 9:30 自动更新 · 支持按线上/线下、截止时间、中国城市、无锡通勤圈筛选</p>
 </div>
 
 <div class="aic-stats" id="aic-stats"></div>
 
-<div class="aic-toolbar">
-  <div class="aic-sort-group" role="group" aria-label="排序方式">
-    <button class="aic-sort-btn active" data-sort="deadline" type="button">⏳ 按截止</button>
-    <button class="aic-sort-btn" data-sort="prize" type="button">💰 按奖金</button>
+<div class="aic-toolbar" id="aic-toolbar">
+  <div class="aic-toolbar-row">
+    <span class="aic-row-label">排序</span>
+    <div class="aic-chips" role="group" aria-label="排序方式">
+      <button class="aic-chip-btn active" data-sort="deadline" type="button">⏳ 按截止</button>
+      <button class="aic-chip-btn" data-sort="prize" type="button">💰 按奖金</button>
+    </div>
+    <span class="aic-updated" id="aic-updated">加载中…</span>
   </div>
-  <div class="aic-updated" id="aic-updated">加载中…</div>
+  <div class="aic-toolbar-row">
+    <span class="aic-row-label">形式</span>
+    <div class="aic-chips" role="group" aria-label="线上或线下">
+      <button class="aic-chip-btn active" data-mode="all" type="button">全部</button>
+      <button class="aic-chip-btn" data-mode="online" type="button">🖥 线上</button>
+      <button class="aic-chip-btn" data-mode="offline" type="button">🏙 线下</button>
+    </div>
+  </div>
+  <div class="aic-toolbar-row">
+    <span class="aic-row-label">截止</span>
+    <div class="aic-chips" role="group" aria-label="截止时间">
+      <button class="aic-chip-btn active" data-deadline="all" type="button">全部</button>
+      <button class="aic-chip-btn" data-deadline="7" type="button">⏰ 7 天内</button>
+      <button class="aic-chip-btn" data-deadline="30" type="button">📅 30 天内</button>
+      <button class="aic-chip-btn" data-deadline="90" type="button">🗓 90 天内</button>
+    </div>
+  </div>
+  <div class="aic-toolbar-row">
+    <span class="aic-row-label">地点</span>
+    <div class="aic-chips" id="aic-city-chips" role="group" aria-label="地点筛选">
+      <button class="aic-chip-btn active" data-city="all" type="button">全部地点</button>
+      <button class="aic-chip-btn wuxi" data-city="wuxi600" type="button">🚄 无锡通勤 ≤600</button>
+    </div>
+    <span class="aic-match-count" id="aic-match-count"></span>
+  </div>
 </div>
 
 <div class="aic-section-title">🤖 AI Coding 精选 <small>vibe coding / AI 辅助编程 / 传统编程赛</small></div>
@@ -116,12 +156,13 @@ details.aic-more summary { cursor: pointer; font-weight: 650; padding: 6px 0; }
 </details>
 
 <div class="aic-empty" id="aic-empty" style="display:none">
-  主区暂无进行中的 AI Coding 比赛 — 数据每天更新,好比赛正在路上 🚀
+  当前筛选条件下暂无比赛 — 试试放宽形式/时间/地点筛选 🎯
 </div>
 
 <p class="aic-note">
-  数据来源:<a href="https://www.competehub.dev" target="_blank" rel="noopener">AI赛事通 (competehub.dev)</a> 公开列表页,仅作引用聚合,每场比赛附原文链接<br>
-  截止时间为抓取日推算的估算值,报名前请以官方页面为准
+  数据来源:<a href="https://www.competehub.dev" target="_blank" rel="noopener">AI赛事通</a> +
+  <a href="https://lablab.ai/ai-hackathons" target="_blank" rel="noopener">lablab.ai</a> 公开页面,仅作引用聚合,每场比赛附原文链接<br>
+  截止时间为抓取日推算的估算值;🚄通勤圈按无锡出发高铁二等座单程估算,报名前请以 12306 及官方页面为准
 </p>
 
 <script src="{{ '/assets/lib-custom/aicoding-board.js' | relative_url }}" defer></script>
