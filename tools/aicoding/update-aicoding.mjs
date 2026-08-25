@@ -138,6 +138,16 @@ const DEV_PATTERNS = [
   /(app|web|software|game|dev|startup)\s+(challenge|competition|contest)/i,
   /ship.*(athon|jam|challenge)/i, /(challenge|contest)\s+for\s+(developer|builder)/i,
 ];
+/* AI 构建类升级(2026-08-25 用户反馈主区太少):
+   标题含 AI/Agent/LLM 等强信号的黑客松 = 用 AI 编程构建,升入 ai_coding 精选。
+   只看标题不看 tags —— "Machine Learning/AI" 这种泛 tag 满天飞,凭它升级会误伤 */
+const AI_BUILD_IN_TITLE = [
+  /\bai\b.{0,25}(hackathon|challenge|builder|app|code|agents?)/i,
+  /(hackathon|challenge|jam|builder|agents?).{0,25}\bai\b/i,
+  /\bagents?\b.{0,20}(hackathon|challenge|build)/i,
+  /\bagentic\b/i,
+  /\b(llm|gpt|claude|gemini|copilot)\b/i,
+];
 const DEV_EXCLUDE = [
   /bio|genom|protein|molec/i, /health|medic|clinic/i, /robot|embodied|drone/i,
   /ar\s*\/?\s*vr|metaverse/i, /market|brand|growth/i, /art\b|music|film|video|design\s+challenge/i,
@@ -161,7 +171,9 @@ function classify(title, category, tags) {
   });
   if (hit(AI_CODING_STRONG)) return 'ai_coding';
   if (hit(PURE_CODING_STRONG)) return 'pure_coding';
-  if (DEV_PATTERNS.some(re => re.test(blob)) && !DEV_EXCLUDE.some(re => re.test(blob))) return 'dev';
+  if (DEV_PATTERNS.some(re => re.test(blob)) && !DEV_EXCLUDE.some(re => re.test(blob))) {
+    return AI_BUILD_IN_TITLE.some(re => re.test(title)) ? 'ai_coding' : 'dev';
+  }
   return null;
 }
 
@@ -318,8 +330,9 @@ async function fetchLablab(today, knownIds) {
   }
   console.log(`  [lablab] 列表页: ${comps.size} 个活动`);
 
-  /* 2) 新活动进详情页补字段(每天最多 6 个,控请求量;老活动用历史数据) */
-  const fresh = [...comps.values()].filter(c => !knownIds.has(c.id)).slice(0, 6);
+  /* 2) 进详情页补字段:新活动 + 已知但缺日期/奖金的(每天上限 6 个,控请求量) */
+  const fresh = [...comps.values()].filter(c =>
+    !knownIds.has(c.id) || (c.endsAt == null && c.prize == null)).slice(0, 6);
   for (const c of fresh) {
     const html = await fetchPage(c.url, 2, LABLAB_UA);
     if (!html) continue;
@@ -336,7 +349,10 @@ async function fetchLablab(today, knownIds) {
         if (locText) Object.assign(c, normalizeCity(locText)), c.location = locText;
       }
     }
-    const pz = (html.match(/\$[\d,]+/g) || [])[0];
+    /* 奖金:取详情页第一个 ≥500 的 $ 金额 —— "$1/$100" 杂音滤掉,
+       首个出现的正经金额通常是主奖金(Alpaca $6,000/AMD $5,000 均验证) */
+    const all = (html.match(/\$\d{1,3}(,\d{3})*(\.\d+)?/g) || []);
+    const pz = all.find(s => Number(s.replace(/[^0-9]/g, '')) >= 500);
     if (pz) Object.assign(c, parsePrize(pz));
     console.log(`  [lablab] 详情: ${c.title.slice(0, 40)} → ${c.endsAt || '?'} ${pz || ''}`);
     await new Promise(r => setTimeout(r, 900));
@@ -387,7 +403,13 @@ async function main() {
     const type = classify(c.title, c.category, c.tags);
     if (!type) { dropped.push([c.title, `${c.category}/${c.tags[0] || '-'}`]); continue; }
     const old = prevMap.get(c.id);
-    keep({ ...c, type, firstSeen: old?.firstSeen || todayIso });
+    /* 字段级合并:本次为 null(未知)时保留历史值 —— lablab 列表骨架只有 name+url,
+       直接覆盖会把详情页补过的奖金/日期清掉(2026-08-25 踩坑) */
+    const rec = { ...old, ...c };
+    if (old) for (const k of Object.keys(old)) {
+      if (rec[k] == null && old[k] != null) rec[k] = old[k];
+    }
+    keep({ ...rec, type, firstSeen: old?.firstSeen || todayIso });
   }
   /* 历史保留:未再见到但未过期的(列表波动防闪失) */
   for (const old of prevMap.values()) {
