@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>关于捞鱼 🐟 · 捞鱼工作室</title>
-<meta name="description" content="捞鱼的个人推广页：一个弱小但有梦想的开发者。表情包、赞赏码、粉丝群，还有给 AirPods 小助手点个 star 的入口。">
+<title>关于 AirPods 小助手 · 捞鱼工作室</title>
+<meta name="description" content="AirPods 小助手的专属介绍页：关于捞鱼、表情包、赞赏码、粉丝群，一键反馈直达专属讨论区。">
 <link rel="icon" type="image/png" href="assets/img/airpods-buddy/logo-192.png">
 <style>
   :root{
@@ -50,18 +50,25 @@
     padding:9px 20px;opacity:0;pointer-events:none;transition:.25s}
   .fr-toast.show{opacity:1;transform:translate(-50%,0)}
 
-  header{padding:72px 0 30px;text-align:center}
-  .avatar{width:118px;height:118px;border-radius:50%;object-fit:cover;border:4px solid #fff;
-    box-shadow:var(--shadow-l);animation:pop .7s cubic-bezier(.25,.9,.3,1.2)}
+  /* 返回条 */
+  .back{display:inline-flex;align-items:center;gap:7px;margin-top:20px;font-size:13px;font-weight:600;
+    color:var(--sub);text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:999px;
+    padding:7px 16px;box-shadow:var(--shadow-s);transition:transform .2s,box-shadow .2s,color .2s}
+  .back:hover{transform:translateY(-1px);box-shadow:var(--shadow-m);color:var(--honey)}
+
+  header{padding:26px 0 26px;text-align:center}
+  .logo{width:74px;height:74px;border-radius:20px;border:3px solid #fff;box-shadow:var(--shadow-l);
+    animation:pop .7s cubic-bezier(.25,.9,.3,1.2)}
   @keyframes pop{0%{transform:scale(.3);opacity:0}60%{transform:scale(1.06)}100%{transform:scale(1)}}
-  h1{font-size:32px;font-weight:800;letter-spacing:-.5px;margin-top:20px}
+  h1{font-size:26px;font-weight:800;letter-spacing:-.4px;margin-top:16px}
+  h1 .of{color:var(--sub);font-weight:600;font-size:18px}
   .studio{display:inline-block;font-size:11.5px;font-weight:700;color:var(--honey);
     background:rgba(220,168,95,.13);border-radius:999px;padding:3px 12px;margin-top:10px}
-  .desc{margin-top:14px;font-size:15px;color:var(--sub)}
+  .desc{margin-top:12px;font-size:14px;color:var(--sub)}
 
-  section{padding:30px 0}
+  section{padding:26px 0}
   h2{font-size:19px;font-weight:800;text-align:center;letter-spacing:-.3px;margin-bottom:6px}
-  .sub{text-align:center;font-size:13px;color:var(--sub);margin-bottom:24px}
+  .sub{text-align:center;font-size:13px;color:var(--sub);margin-bottom:22px}
 
   .card{background:var(--card);border:1px solid var(--line);border-radius:20px;
     box-shadow:var(--shadow-m);padding:26px 26px 24px;margin-bottom:16px}
@@ -69,6 +76,7 @@
   .home-row .emoji{font-size:30px}
   .home-row b{font-size:16px}
   .home-row p{font-size:13px;color:var(--sub)}
+  .avatar{width:64px;height:64px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:var(--shadow-m)}
   .btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:#fff;
     background:linear-gradient(180deg,var(--honey-l),var(--honey));border-radius:999px;padding:11px 24px;
     box-shadow:0 8px 22px rgba(190,138,72,.38);text-decoration:none;transition:transform .2s}
@@ -93,7 +101,7 @@
   .fb .tip{font-size:11.5px;color:#B8AE9F;margin-top:10px;line-height:1.6}
   .fb .tip a{font-weight:600}
 
-  footer{padding:34px 0 50px;text-align:center;font-size:12.5px;color:var(--sub)}
+  footer{padding:30px 0 46px;text-align:center;font-size:12.5px;color:var(--sub)}
   footer a{color:inherit}
   @media (max-width:560px){
     .fr-widget{right:10px;top:10px}
@@ -114,24 +122,29 @@
 </div>
 <div class="fr-toast" id="frToast"></div>
 
+<div class="wrap">
+  <a class="back" href="airpods-buddy.html">← 回到 AirPods 小助手</a>
+</div>
+
 <header class="wrap">
-  <img class="avatar" src="https://s41.ax1x.com/2025/12/05/pZmPZPH.png" alt="捞鱼的头像">
-  <h1>🐟 捞鱼</h1>
-  <div class="studio">捞鱼工作室</div>
-  <p class="desc">一个弱小但有梦想的开发者</p>
+  <img class="logo" src="assets/img/airpods-buddy/logo-192.png" alt="AirPods 小助手">
+  <h1>关于这枚小助手 <span class="of">与</span> 它的作者</h1>
+  <div class="studio">捞鱼工作室 出品</div>
+  <p class="desc">给 Windows 的一口甜，由 🐟 捞鱼 用爱发电</p>
 </header>
 
 <main class="wrap">
 
   <section>
     <div class="card home-row">
-      <span class="emoji">🏠</span>
+      <img class="avatar" src="https://s41.ax1x.com/2025/12/05/pZmPZPH.png" alt="捞鱼的头像">
       <div style="flex:1;min-width:200px">
-        <b>了解更多关于捞鱼</b>
-        <p>个人主页 · lyzbcy.github.io</p>
+        <b>🐟 捞鱼</b>
+        <p>一个弱小但有梦想的开发者</p>
       </div>
-      <a class="btn" href="https://lyzbcy.github.io/" target="_blank" rel="noopener">去看看 →</a>
+      <a class="btn ghost" href="https://lyzbcy.github.io/" target="_blank" rel="noopener">🏠 了解更多关于捞鱼</a>
     </div>
+    <p class="sub" style="margin:10px 0 0">个人主页 · lyzbcy.github.io</p>
   </section>
 
   <section>
@@ -146,7 +159,7 @@
 
   <section>
     <div class="card star-card">
-      <p class="big">你愿意给我点一个 <span class="hl">⭐ star</span> 嘛？<br>这对我很有帮助！</p>
+      <p class="big">你喜欢 AirPods 小助手吗？<br>愿意给我点一个 <span class="hl">⭐ star</span> 嘛？这对我很有帮助！</p>
       <div class="star-actions">
         <a class="btn" href="https://github.com/lyzbcy/AirPods-Windows" target="_blank" rel="noopener">⭐ 给 AirPods 小助手点 star</a>
         <a class="btn ghost" href="https://github.com/lyzbcy" target="_blank" rel="noopener">🗂 捞鱼的全部项目源码</a>
@@ -156,10 +169,10 @@
 
   <section>
     <div class="card fb">
-      <h2 style="text-align:left;margin-bottom:4px">💬 直接对捞鱼说</h2>
+      <h2 style="text-align:left;margin-bottom:4px">💬 对小助手说两句</h2>
       <p style="font-size:12.5px;color:var(--sub);margin-bottom:14px">
         登录 GitHub 后在下方输入框<b>一键发送</b>——直接发进
-        <a href="https://github.com/lyzbcy/lyzbcy.github.io/discussions/6" target="_blank" rel="noopener">「用户反馈讨论区」</a>，
+        <a href="https://github.com/lyzbcy/lyzbcy.github.io/discussions/6" target="_blank" rel="noopener">「AirPods 小助手专属反馈区」</a>，
         不跳转、不复制，发完就能看到自己的留言。
       </p>
       <div class="giscus-box">
@@ -181,33 +194,21 @@
       </div>
       <p class="tip">若上方评论区没显示，多半是仓库还没安装 giscus 应用（一次性操作）：
         <a href="https://github.com/apps/giscus" target="_blank" rel="noopener">点此安装</a>，装好后刷新本页即可。
-        也可以直接去 <a href="https://github.com/lyzbcy/lyzbcy.github.io/discussions/6" target="_blank" rel="noopener">反馈讨论帖</a> 留言，或扫上方<b>粉丝群</b>二维码在群里说。</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="card home-row" style="margin-bottom:0">
-      <span class="emoji">🎧</span>
-      <div style="flex:1;min-width:200px">
-        <b>AirPods 小助手</b>
-        <p>点一下，AirPods 就连上</p>
-      </div>
-      <a class="btn ghost" href="airpods-buddy.html">← 回产品页</a>
+        也可以直接去 <a href="https://github.com/lyzbcy/lyzbcy.github.io/discussions/6" target="_blank" rel="noopener">专属反馈帖</a> 留言，或扫上方<b>粉丝群</b>二维码在群里说。</p>
     </div>
   </section>
 
 </main>
 
 <footer class="wrap">
-  <p>由 <b>捞鱼工作室</b> 制作 · 用爱发电 💛</p>
+  <p>AirPods 小助手 · <a href="airpods-buddy.html">回产品页</a> · 由 <b>捞鱼工作室</b> 用爱发电 💛</p>
 </footer>
 
 <script>
-/* ================= 强制刷新组件（同产品页规则） ================= */
-const PAGE_VER="1.1.0";
+/* ================= 强制刷新组件（子页独立版本号） ================= */
+const PAGE_VER="1.0.0";
 const PAGE_LOG=[
-  {v:"1.1.0",d:"08-26",t:"反馈区升级为 giscus 一键发送：登录后直接发到 GitHub 反馈讨论区，不再复制/跳转"},
-  {v:"1.0.0",d:"08-26",t:"推广页首版上线：二维码 / star / 反馈入口"},
+  {v:"1.0.0",d:"08-26",t:"AirPods 小助手专属介绍子页上线（原通用推广页下线）：专属风格 + 专属反馈讨论区"},
 ];
 (function(){
   const list=document.getElementById('frList');
@@ -235,15 +236,13 @@ document.getElementById('frRefresh').addEventListener('click',async function(){
     const html=await res.text();
     const m=html.match(/PAGE_VER\s*=\s*"([^"]+)"/);
     if(!m||m[1]===PAGE_VER)return;
-    const key='laoyu_autorefreshed';
+    const key='ababout_autorefreshed';
     if(sessionStorage.getItem(key))return;
     sessionStorage.setItem(key,'1');
     frToast('🆕 检测到新版本，正在刷新…');
     setTimeout(()=>location.replace(location.pathname+'?v='+encodeURIComponent(m[1])),600);
   }catch(e){}
 })();
-
-/* 反馈区已升级为 giscus 零后端评论区：登录后页内一键发送到 Discussions#6，不再复制/跳转 */
 </script>
 
 </body>
