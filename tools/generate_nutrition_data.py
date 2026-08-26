@@ -146,6 +146,9 @@ def get_bodyweight_history(records_jsonl_path):
             except:
                 continue
             if r.get("action") == "bodyweight" and r.get("date"):
+                wv = r.get("value", r.get("weight", 0)) or 0
+                if wv <= 0:
+                    continue  # 防御：跳过无体重值/0的脏记录（字段名写错时不进历史）
                 weights.append({
                     "date": r["date"],
                     "weight": r.get("value", 0),
