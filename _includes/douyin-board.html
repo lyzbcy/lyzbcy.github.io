@@ -39,12 +39,29 @@
 .douyin-board .dy-card-title { font-size: 14px; font-weight: 700; color: #1f2937; margin-bottom: 4px; }
 .douyin-board .dy-card-sub { font-size: 12px; color: var(--dy-light); margin-bottom: 14px; }
 
-.douyin-board .dy-bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 150px; padding: 20px 4px 0; border-bottom: 1px solid #e5e7eb; margin-bottom: 8px; }
-.douyin-board .dy-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; }
-.douyin-board .dy-bar { width: 100%; max-width: 40px; background: linear-gradient(180deg, var(--dy-red) 0%, #fca5a5 100%); border-radius: 4px 4px 0 0; position: relative; min-height: 4px; }
-.douyin-board .dy-bar-current { background: linear-gradient(180deg, #dc2626, #fca5a5) !important; box-shadow: 0 0 0 2px rgba(239,68,68,0.2); }
-.douyin-board .dy-bar-value { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 10px; color: var(--dy-gray); white-space: nowrap; }
-.douyin-board .dy-bar-label { font-size: 11px; color: var(--dy-light); }
+/* 趋势图：上=累计折线 下=每日新增柱（纯 SVG，文字不会换行） */
+.douyin-board .dy-trend-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.douyin-board .dy-trend-svg { display: block; width: 100%; min-width: 620px; height: auto; }
+.douyin-board .dy-trend-svg .tgrid { stroke: #f3f4f6; stroke-width: 1; }
+.douyin-board .dy-trend-svg .tbase { stroke: #e5e7eb; stroke-width: 1; }
+.douyin-board .dy-trend-svg .tzero { stroke: #9ca3af; stroke-width: 1; }
+.douyin-board .dy-trend-svg .ttick { font-size: 9px; fill: var(--dy-light); }
+.douyin-board .dy-trend-svg .tdate { font-size: 10.5px; fill: var(--dy-gray); }
+.douyin-board .dy-trend-svg .tdate-hot { fill: var(--dy-red); font-weight: 700; }
+.douyin-board .dy-trend-svg .tbar { fill: url(#dyTrendGrad); }
+.douyin-board .dy-trend-svg .tbar:hover { fill-opacity: 0.8; }
+.douyin-board .dy-trend-svg .tbar-neg { fill: #9ca3af; }
+.douyin-board .dy-trend-svg .tbar-neg:hover { fill-opacity: 0.8; }
+.douyin-board .dy-trend-svg .tbar-last { fill: #dc2626; }
+.douyin-board .dy-trend-svg .tval { font-size: 9px; fill: var(--dy-gray); }
+.douyin-board .dy-trend-svg .tval-neg { fill: #6b7280; }
+.douyin-board .dy-trend-svg .tval-last { fill: #dc2626; font-weight: 700; }
+.douyin-board .dy-trend-svg .tline { fill: none; stroke: #ff6b35; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.douyin-board .dy-trend-svg .tarea { fill: #ff6b35; fill-opacity: 0.07; }
+.douyin-board .dy-trend-svg .tdot { fill: #ff6b35; stroke: #fff; stroke-width: 1.2; }
+.douyin-board .dy-trend-svg .tdot:hover { stroke: #dc2626; }
+.douyin-board .dy-trend-svg .tdot-last { fill: #dc2626; stroke: #fff; stroke-width: 1.5; }
+.douyin-board .dy-trend-svg .tlastval { font-size: 10px; font-weight: 700; fill: #dc2626; }
 
 /* 内容质量散点象限图 */
 .douyin-board .dy-scatter-wrap { position: relative; width: 100%; padding-bottom: 75%; margin: 8px 0; }
@@ -159,20 +176,150 @@
 <!-- ===== 趋势 ===== -->
 <div class="dy-card">
   <div class="dy-card-title">📈 总播放量趋势</div>
-  <div class="dy-card-sub">近 {{ site.data.douyin.trend | size }} 天累计播放量变化</div>
+  <div class="dy-card-sub">近 {{ site.data.douyin.trend | size }} 个采集日 · 柱 = 较前一日新增播放 · 线 = 累计播放量</div>
   {% assign trend = site.data.douyin.trend %}
   {% if trend.size >= 2 %}
-  {% assign max_play = trend | map: "play" | sort | last | default: 1 %}
-  <div class="dy-bar-chart">
+  {% comment %} 第一遍：算每日增量的最大正/负值、累计峰值 {% endcomment %}
+  {% assign prev_play = 0 %}
+  {% assign max_pos = 0 %}
+  {% assign max_neg = 0 %}
+  {% assign max_play = 1 %}
+  {% assign has_neg = false %}
+  {% for t in trend %}
+    {% if t.play > max_play %}{% assign max_play = t.play %}{% endif %}
+    {% unless forloop.first %}
+      {% assign d = t.play | minus: prev_play %}
+      {% if d > max_pos %}{% assign max_pos = d %}{% endif %}
+      {% if d < 0 %}
+        {% assign has_neg = true %}
+        {% assign dn = d | times: -1 %}
+        {% if dn > max_neg %}{% assign max_neg = dn %}{% endif %}
+      {% endif %}
+    {% endunless %}
+    {% assign prev_play = t.play %}
+  {% endfor %}
+  {% if max_pos == 0 %}{% assign max_pos = 1 %}{% endif %}
+  {% if max_neg == 0 %}{% assign max_neg = 1 %}{% endif %}
+  {% assign n_pts = trend | size %}
+  {% assign nm1 = n_pts | minus: 1 %}
+  {% assign stepf = 800.0 | divided_by: nm1 %}
+  {% assign barw = stepf | times: 0.62 %}
+  {% if barw > 26 %}{% assign barw = 26 %}{% endif %}
+  {% if barw < 3 %}{% assign barw = 3 %}{% endif %}
+  {% assign halfw = barw | divided_by: 2.0 %}
+  {% assign max_posf = max_pos | times: 1.0 %}
+  {% assign max_negf = max_neg | times: 1.0 %}
+  {% assign max_playf = max_play | times: 1.0 %}
+  <div class="dy-trend-wrap">
+  <svg class="dy-trend-svg" viewBox="0 0 860 348" preserveAspectRatio="xMidYMid meet" role="img" aria-label="总播放量趋势：上方为累计播放量折线，下方为每日新增播放柱状图">
+    <defs>
+      <linearGradient id="dyTrendGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#fe2c55"/>
+        <stop offset="100%" stop-color="#ff8a9b"/>
+      </linearGradient>
+    </defs>
+    <!-- 上面板网格：累计（0 基线 150，半值 83，峰值 16） -->
+    <line class="tgrid" x1="46" y1="16" x2="846" y2="16"/>
+    <line class="tgrid" x1="46" y1="83" x2="846" y2="83"/>
+    <line class="tbase" x1="46" y1="150" x2="846" y2="150"/>
+    <text class="ttick" x="42" y="19" text-anchor="end">{{ max_play | divided_by: 1000.0 | round: 0 }}k</text>
+    <text class="ttick" x="42" y="86" text-anchor="end">{{ max_play | divided_by: 2000.0 | round: 0 }}k</text>
+    <text class="ttick" x="42" y="153" text-anchor="end">0</text>
+    <!-- 下面板网格：日增（正区顶 196，零线 266，负区底 298） -->
+    <line class="tgrid" x1="46" y1="196" x2="846" y2="196"/>
+    <text class="ttick" x="42" y="199" text-anchor="end">+{{ max_pos | divided_by: 1000.0 | round: 1 }}k</text>
+    <line class="tzero" x1="46" y1="266" x2="846" y2="266"/>
+    <text class="ttick" x="42" y="269" text-anchor="end">0</text>
+    {% if has_neg %}
+    <line class="tgrid" x1="46" y1="298" x2="846" y2="298"/>
+    <text class="ttick" x="42" y="311" text-anchor="end">-{{ max_neg | divided_by: 1000.0 | round: 1 }}k</text>
+    {% endif %}
+    {% comment %} 第二遍：累计折线取点 + 每日新增柱 + 日期 {% endcomment %}
+    {% assign pts = "" %}
+    {% assign prev_play = 0 %}
+    {% assign lastx = 46 %}
+    {% assign lasty = 150 %}
     {% for t in trend %}
-    {% assign pct = t.play | times: 100.0 | divided_by: max_play | round: 0 %}
-    <div class="dy-bar-col">
-      <div class="dy-bar{% if forloop.last %} dy-bar-current{% endif %}" style="height: {{ pct }}%">
-        <span class="dy-bar-value">{{ t.play | divided_by: 1000.0 | round: 1 }}k</span>
-      </div>
-      <div class="dy-bar-label">{{ t.date | slice: 5, 5 }}{% if forloop.last %}🔥{% endif %}</div>
-    </div>
+      {% assign x = forloop.index0 | times: stepf | plus: 46 | round: 1 %}
+      {% assign yv = t.play | divided_by: max_playf | times: 134 | round: 1 %}
+      {% assign ly = 150 | minus: yv %}
+      {% assign pts = pts | append: x | append: "," | append: ly | append: " " %}
+      {% assign lastx = x %}
+      {% assign lasty = ly %}
+      {% unless forloop.first %}
+        {% assign xr = x | minus: halfw | round: 1 %}
+        {% assign d = t.play | minus: prev_play %}
+        {% if d >= 0 %}
+          {% assign h = d | divided_by: max_posf | times: 70 | round: 1 %}
+          {% if d > 0 and h < 1 %}{% assign h = 1 %}{% endif %}
+          {% if d > 0 %}
+          <rect class="tbar{% if forloop.last %} tbar-last{% endif %}" x="{{ xr }}" y="{{ 266 | minus: h }}" width="{{ barw | round: 1 }}" height="{{ h }}">
+            <title>{{ t.date }} · 较前一日 +{{ d }} · 累计 {{ t.play }}</title>
+          </rect>
+          {% endif %}
+          {% if n_pts <= 24 or forloop.last %}
+            <text class="tval{% if forloop.last %} tval-last{% endif %}" x="{{ x }}" y="{{ 262 | minus: h }}" text-anchor="middle">{% if d >= 1000 %}+{{ d | divided_by: 1000.0 | round: 1 }}k{% else %}+{{ d }}{% endif %}</text>
+          {% else %}
+            {% assign par = forloop.index0 | modulo: 2 %}
+            {% if par == 0 %}
+            <text class="tval" x="{{ x }}" y="{{ 262 | minus: h }}" text-anchor="middle">{% if d >= 1000 %}+{{ d | divided_by: 1000.0 | round: 1 }}k{% else %}+{{ d }}{% endif %}</text>
+            {% endif %}
+          {% endif %}
+        {% else %}
+          {% assign dn = d | times: -1 %}
+          {% assign h = dn | divided_by: max_negf | times: 30 | round: 1 %}
+          {% if h < 1 %}{% assign h = 1 %}{% endif %}
+          <rect class="tbar-neg" x="{{ xr }}" y="266" width="{{ barw | round: 1 }}" height="{{ h }}">
+            <title>{{ t.date }} · 较前一日 {{ d }}（作品减少/被删）· 累计 {{ t.play }}</title>
+          </rect>
+          {% if n_pts <= 24 or forloop.last %}
+            <text class="tval-neg" x="{{ x }}" y="{{ 275 | plus: h }}" text-anchor="middle">{{ d | divided_by: 1000.0 | round: 1 }}k</text>
+          {% else %}
+            {% assign par = forloop.index0 | modulo: 2 %}
+            {% if par == 0 %}
+            <text class="tval-neg" x="{{ x }}" y="{{ 275 | plus: h }}" text-anchor="middle">{{ d | divided_by: 1000.0 | round: 1 }}k</text>
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      {% endunless %}
+      {% assign prev_play = t.play %}
+      {% comment %} 日期标签：斜排不换行，点多时隔一个显示 {% endcomment %}
+      {% if n_pts <= 24 or forloop.last %}
+        <text class="tdate{% if forloop.last %} tdate-hot{% endif %}" x="{{ x }}" y="322" text-anchor="end" transform="rotate(-38 {{ x }} 322)">{{ t.date | slice: 5, 5 }}{% if forloop.last %}🔥{% endif %}</text>
+      {% else %}
+        {% assign par = forloop.index0 | modulo: 2 %}
+        {% if par == 0 %}
+        <text class="tdate" x="{{ x }}" y="322" text-anchor="end" transform="rotate(-38 {{ x }} 322)">{{ t.date | slice: 5, 5 }}</text>
+        {% endif %}
+      {% endif %}
     {% endfor %}
+    <polygon class="tarea" points="46,150 {{ pts }}{{ lastx }},150"/>
+    <polyline class="tline" points="{{ pts }}"/>
+    {% comment %} 第三遍：折线数据点（画在线上方，含悬停明细） {% endcomment %}
+    {% assign prev_play = 0 %}
+    {% for t in trend %}
+      {% assign x = forloop.index0 | times: stepf | plus: 46 | round: 1 %}
+      {% assign yv = t.play | divided_by: max_playf | times: 134 | round: 1 %}
+      {% assign ly = 150 | minus: yv %}
+      {% if forloop.last %}
+        <circle class="tdot tdot-last" cx="{{ x }}" cy="{{ ly }}" r="4">
+          <title>{{ t.date }} · 累计 {{ t.play }}</title>
+        </circle>
+        <text class="tlastval" x="{{ x }}" y="{{ ly | minus: 8 }}" text-anchor="middle">{{ t.play | divided_by: 1000.0 | round: 1 }}k</text>
+      {% else %}
+        <circle class="tdot" cx="{{ x }}" cy="{{ ly }}" r="2.6">
+          <title>{{ t.date }} · 累计 {{ t.play }}</title>
+        </circle>
+      {% endif %}
+      {% assign prev_play = t.play %}
+    {% endfor %}
+  </svg>
+  </div>
+  <div class="dy-legend">
+    <div class="dy-legend-item"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:linear-gradient(180deg,#fe2c55,#ff8a9b);"></span>较前一日新增播放（左轴）</div>
+    <div class="dy-legend-item"><span style="display:inline-block;width:16px;height:3px;border-radius:2px;background:#ff6b35;vertical-align:middle;"></span>累计播放量（上轴）</div>
+    <div class="dy-legend-item">灰柱在 0 线下方 = 作品被删/隐藏导致减少</div>
+    <div class="dy-legend-item">悬停柱和圆点看每日明细</div>
   </div>
   {% else %}
   <p style="color:var(--dy-light);font-size:12px;text-align:center;padding:20px 0;">数据积累中，需连续采集多天后显示趋势</p>
