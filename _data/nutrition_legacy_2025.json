@@ -1,0 +1,63 @@
+{
+  "_comment": "2025年12月减脂期的历史体测/体重数据，来源：旧文「12月减脂记录」。服务器 cron 只重生成 nutrition.json，不会动本文件；模板渲染时按日期与 live 数据去重合并（live 优先）。smm/ffm/tbw 为 InBody 实测值，非公式估算。",
+  "weight_history": [
+    { "date": "2025-11-17", "weight": 70.6, "unit": "kg", "source": "InBody 初始体测" },
+    { "date": "2025-12-07", "weight": 70.6, "unit": "kg", "source": "12月减脂记录·每日追踪" },
+    { "date": "2025-12-10", "weight": 69.9, "unit": "kg", "source": "12月减脂记录·每日追踪" },
+    { "date": "2025-12-12", "weight": 70.35, "unit": "kg", "source": "12月减脂记录·每日追踪" },
+    { "date": "2025-12-17", "weight": 69.55, "unit": "kg", "source": "12月减脂记录·每日追踪" },
+    { "date": "2025-12-19", "weight": 69.6, "unit": "kg", "source": "12月减脂记录·每日追踪" },
+    { "date": "2025-12-22", "weight": 69.05, "unit": "kg", "source": "12月减脂记录·每日追踪" },
+    { "date": "2025-12-23", "weight": 67.75, "unit": "kg", "source": "12月减脂记录·每日追踪" },
+    { "date": "2025-12-25", "weight": 67.85, "unit": "kg", "source": "12月减脂记录·每日追踪" },
+    { "date": "2025-12-28", "weight": 66.6, "unit": "kg", "source": "InBody 复测（教练填表日期有误，实际12.28）" }
+  ],
+  "body_composition_history": [
+    {
+      "date": "2025-11-17",
+      "weight": 70.6,
+      "waist": 78.3,
+      "hip": 94.4,
+      "whr": 0.82,
+      "bodyfat_pct": 14.9,
+      "smm": { "avg": 33.0, "source": "InBody 骨骼肌实测" },
+      "fat_mass": 10.1,
+      "note": "初始体测（InBody）。目标体脂12%"
+    },
+    {
+      "date": "2025-12-12",
+      "waist": 77.6,
+      "hip": 94.0,
+      "whr": 0.83,
+      "chest": 90.0,
+      "thigh": 59.0,
+      "calf": 36.2,
+      "arm": 31.2,
+      "note": "围度实测（较初始：腰-0.7 臀-0.4）"
+    },
+    {
+      "date": "2025-12-17",
+      "waist": 76.6,
+      "hip": 93.9,
+      "whr": 0.82,
+      "chest": 92.7,
+      "thigh": 57.3,
+      "calf": 36.0,
+      "arm": 30.4,
+      "note": "围度实测（较初始：腰-1.7 臀-0.5）"
+    },
+    {
+      "date": "2025-12-28",
+      "weight": 66.6,
+      "bodyfat_pct": 15.3,
+      "smm": { "avg": 32.0, "source": "InBody 骨骼肌实测" },
+      "ffm": { "avg": 56.4, "source": "InBody 去脂体重实测（正常范围48.1~59.9）" },
+      "tbw": { "avg": 41.2, "source": "InBody 身体水分实测（正常范围37.0~45.3）" },
+      "whr": 0.80,
+      "bmi": 22.3,
+      "bmr": 1589,
+      "fat_mass": 10.2,
+      "note": "InBody 复测：健康评估80分，肌肉控制0.0，脂肪控制-0.2。23天冲刺期结束：体重-4.0kg"
+    }
+  ]
+}

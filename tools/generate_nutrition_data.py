@@ -208,7 +208,7 @@ def get_body_composition_history():
         smm = bc.compute_smm(height, w, 25, "male", bf) if bc else None
         tbw = bc.compute_tbw(height, w, 25, "male", ffm["avg"] if ffm else None) if bc else None
         rec = {"date": e["date"], "weight": w}
-        for g in ("neck", "waist", "hip", "whr", "whtr"):
+        for g in ("neck", "waist", "hip", "whr", "whtr", "chest", "thigh", "calf", "arm"):
             if e.get(g) is not None:
                 rec[g] = e[g]
         if bf is not None:
