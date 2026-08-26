@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-26T22:05:01.523090+08:00",
+  "generated_at": "2026-08-27T00:06:00.305412+08:00",
   "goals": {
     "calories": 1800,
     "water": 2000,
@@ -134,6 +134,11 @@
         "date": "2026-08-18",
         "bodyfat_pct": 20.8,
         "note": "8/18 体测 | 亚洲汉族南方人"
+      },
+      {
+        "date": "2026-08-27",
+        "bodyfat_pct": 20.7,
+        "note": "8/26 晚间测量，训练后吃完饭"
       }
     ]
   },
@@ -240,37 +245,73 @@
           },
           "avg": 42.3
         }
+      },
+      {
+        "date": "2026-08-27",
+        "weight": 72.6,
+        "neck": 36.9,
+        "waist": 84.0,
+        "hip": 97.0,
+        "whr": 0.866,
+        "whtr": 0.488,
+        "arm": 33.0,
+        "bodyfat_pct": 20.7,
+        "ffm": {
+          "formulas": {
+            "boer": 56.3,
+            "hume": 52.6,
+            "katch": 57.6
+          },
+          "avg": 55.5
+        },
+        "smm": {
+          "formulas": {
+            "lee": 32.0,
+            "heymsfield": 27.0,
+            "janmahasatian": 31.9
+          },
+          "avg": 30.3
+        },
+        "tbw": {
+          "formulas": {
+            "watson": 43.0,
+            "mellits": 43.4,
+            "pace": 40.6
+          },
+          "avg": 42.3
+        }
       }
     ],
     "latest": {
-      "date": "2026-08-18",
-      "weight": 72.4,
-      "neck": 37.0,
-      "waist": 84.2,
-      "hip": 99.0,
-      "whr": 0.851,
-      "whtr": 0.49,
-      "bodyfat_pct": 20.8,
+      "date": "2026-08-27",
+      "weight": 72.6,
+      "neck": 36.9,
+      "waist": 84.0,
+      "hip": 97.0,
+      "whr": 0.866,
+      "whtr": 0.488,
+      "arm": 33.0,
+      "bodyfat_pct": 20.7,
       "ffm": {
         "formulas": {
-          "boer": 56.2,
+          "boer": 56.3,
           "hume": 52.6,
-          "katch": 57.3
+          "katch": 57.6
         },
-        "avg": 55.4
+        "avg": 55.5
       },
       "smm": {
         "formulas": {
-          "lee": 31.9,
+          "lee": 32.0,
           "heymsfield": 27.0,
-          "janmahasatian": 31.8
+          "janmahasatian": 31.9
         },
-        "avg": 30.2
+        "avg": 30.3
       },
       "tbw": {
         "formulas": {
           "watson": 43.0,
-          "mellits": 43.3,
+          "mellits": 43.4,
           "pace": 40.6
         },
         "avg": 42.3
@@ -278,22 +319,12 @@
     }
   },
   "macros": {
-    "carbs_pct": 47,
+    "carbs_pct": 46,
     "protein_pct": 21,
-    "fat_pct": 32,
-    "total_cal": 2148
+    "fat_pct": 33,
+    "total_cal": 2136
   },
   "trend": [
-    {
-      "date": "2026-08-13",
-      "calories": 1870,
-      "protein": 120.5,
-      "carbs": 211.0,
-      "fat": 57.2,
-      "water": 2270,
-      "net_calories": 1870,
-      "has_fitness": false
-    },
     {
       "date": "2026-08-14",
       "calories": 2394.5,
@@ -1058,37 +1089,37 @@
     }
   ],
   "status": {
-    "has_today": true,
+    "has_today": false,
     "has_yesterday": true,
-    "today": "2026-08-26",
+    "today": "2026-08-27",
     "is_active": true,
-    "is_training_day": true
+    "is_training_day": false
   },
   "health_score": {
     "today": {
-      "date": "2026-08-26",
-      "nutrition_score": 45,
-      "nutrition_detail": "热量 1865/1924 kcal (20/20); 蛋白 103.9/150g (10/15); 饮水 2330/2000ml (15/15)",
-      "exercise_score": 8,
-      "exercise_detail": "训练量 800kg (4/20); 组数 3 (4/10)",
-      "bonus_score": 17,
-      "bonus_detail": "数据完整性 (10/10); 体脂趋势 -1.1% (7/10)",
-      "total_score": 70,
-      "grade": "😊 A",
-      "calories_in": 1865,
-      "calories_target": 1924,
-      "protein_in": 103.9,
+      "date": "2026-08-27",
+      "nutrition_score": 0,
+      "nutrition_detail": "热量 0/1628 kcal (0/20); 蛋白 0/150g (0/15); 饮水 0/2000ml (0/15)",
+      "exercise_score": 0,
+      "exercise_detail": "今日无训练 (0/20); 组数 0 (0/10)",
+      "bonus_score": 7,
+      "bonus_detail": "数据完整性 (0/10); 体脂趋势 -1.2% (7/10)",
+      "total_score": 7,
+      "grade": "💀 D",
+      "calories_in": 0,
+      "calories_target": 1628,
+      "protein_in": 0,
       "protein_target": 150,
-      "water_in": 2330,
+      "water_in": 0,
       "water_target": 2000,
-      "training_sets": 3,
-      "training_volume": 800,
-      "training_cal": 213,
-      "training_duration_min": 29.8,
-      "bodyfat_pct": 20.8,
-      "is_training_day": true,
+      "training_sets": 0,
+      "training_volume": 0,
+      "training_cal": 0,
+      "training_duration_min": 0,
+      "bodyfat_pct": 20.7,
+      "is_training_day": false,
       "bmr_floor": 1690,
-      "below_bmr": false
+      "below_bmr": true
     },
     "history": [
       {
@@ -1190,7 +1221,7 @@
         "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
       }
     ],
-    "exported_at": "2026-08-26T22:05:01.515992"
+    "exported_at": "2026-08-27T00:06:00.297114"
   },
   "food_library": {
     "items": [
