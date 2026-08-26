@@ -169,6 +169,47 @@
     background:linear-gradient(180deg,#FBF4E7,#F6EEDD);border-bottom:1px solid var(--line-2);font-size:12px;color:var(--sub)}
   .win-bar .glyphs{display:flex;gap:12px;color:#B8AE9F;font-size:11px}
   .win img{display:block;width:100%}
+  /* ===== 应用界面·前端模拟演示 ===== */
+  .app{background:linear-gradient(180deg,#FDFAF4,#FBF7EE);padding:14px 16px 12px;font-size:13px}
+  .app-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .app-title{font-weight:700;font-size:13.5px}
+  .app-refresh{border:none;background:rgba(220,168,95,.14);color:var(--honey);width:26px;height:26px;
+    border-radius:8px;cursor:pointer;font-size:14px;line-height:1;transition:transform .5s,background .2s}
+  .app-refresh:hover{background:rgba(220,168,95,.25)}
+  .app-refresh.spin{transform:rotate(360deg)}
+  .app-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .app-list .dev{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line-2);
+    border-radius:12px;padding:9px 12px;transition:opacity .25s}
+  .app-list .dev.ghosted{opacity:.35}
+  .dev .dot{width:9px;height:9px;border-radius:50%;background:#D6CCBB;flex:none;transition:background .3s,box-shadow .3s}
+  .dev.on .dot{background:var(--sage);box-shadow:0 0 0 3px rgba(94,154,115,.18)}
+  .dev-name{flex:1;min-width:0;font-weight:600;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .dev-ops{display:flex;gap:2px}
+  .dev-ops .op{border:none;background:transparent;color:#C4BBA9;font-size:9px;padding:3px 4px;cursor:pointer;border-radius:5px;
+    transition:color .15s,background .15s}
+  .dev-ops .op:hover{color:var(--honey);background:rgba(220,168,95,.12)}
+  .dev-st{font-size:11px;color:#B8AE9F;font-weight:600;flex:none}
+  .dev.on .dev-st{color:var(--sage)}
+  .app-cta{display:flex;justify-content:center;padding:16px 0 10px}
+  .bigbtn{position:relative;width:92px;height:92px;border-radius:50%;border:none;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+    font-family:inherit;transition:transform .2s cubic-bezier(.25,.1,.25,1),box-shadow .3s,background .3s}
+  .bigbtn:hover{transform:translateY(-2px)}
+  .bigbtn:active{transform:scale(.95)}
+  .bigbtn.off{background:linear-gradient(180deg,var(--honey-l),var(--honey));color:#fff;
+    box-shadow:0 10px 26px rgba(190,138,72,.42), inset 0 1px 0 rgba(255,255,255,.45)}
+  .bigbtn.off:hover{box-shadow:0 14px 32px rgba(190,138,72,.5), inset 0 1px 0 rgba(255,255,255,.5)}
+  .bigbtn.loading{background:#fff;color:var(--honey);border:2px solid rgba(220,168,95,.5)}
+  .bigbtn.on{background:linear-gradient(180deg,#71BB8C,var(--sage));color:#fff;
+    box-shadow:0 10px 26px rgba(94,154,115,.42), inset 0 1px 0 rgba(255,255,255,.4)}
+  .big-ico{font-size:26px;line-height:1}
+  .bigbtn.loading .big-ico{display:none}
+  .big-lb{font-size:11px;font-weight:700;letter-spacing:.5px}
+  .big-ring{position:absolute;inset:-2px;border-radius:50%;display:none}
+  .bigbtn.loading .big-ring{display:block;border:2.5px solid rgba(220,168,95,.22);border-top-color:var(--honey);
+    animation:bigring .8s linear infinite}
+  @keyframes bigring{to{transform:rotate(360deg)}}
+  .app-foot{display:flex;justify-content:space-between;font-size:10.5px;color:#C4BBA9;margin-top:8px}
   .win-cap{text-align:center;font-size:12.5px;color:var(--sub);padding:11px 8px;border-top:1px solid var(--line-2)}
   .tray-wrap{display:flex;flex-direction:column;gap:13px}
   .tray-item{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);
@@ -323,8 +364,39 @@
   <div class="duo">
     <figure class="win">
       <div class="win-bar"><span>AirPods 小助手</span><span class="glyphs"><span>─</span><span>▢</span><span>✕</span></span></div>
-      <img src="assets/img/airpods-buddy/app-ui.png" width="316" alt="应用界面：设备列表与大圆连接钮">
-      <figcaption class="win-cap">设备列表 · 优先级排序 · 一点即连</figcaption>
+      <div class="app" id="appMock">
+        <div class="app-head">
+          <span class="app-title">🎧 我的设备</span>
+          <button class="app-refresh" id="appRefresh" title="刷新设备列表">⟳</button>
+        </div>
+        <ul class="app-list" id="appList">
+          <li class="dev" id="dev1">
+            <span class="dot" id="dev1Dot"></span>
+            <span class="dev-name">🧚 星星布丁的 AirPods Pro</span>
+            <span class="dev-ops">
+              <button class="op" data-mv="up" title="优先级上移">▲</button><button class="op" data-mv="dn" title="优先级下移">▼</button>
+            </span>
+            <span class="dev-st" id="dev1St">未连接</span>
+          </li>
+          <li class="dev" id="dev2">
+            <span class="dot"></span>
+            <span class="dev-name">🎧 捞鱼的头戴耳机</span>
+            <span class="dev-ops">
+              <button class="op" data-mv="up" title="优先级上移">▲</button><button class="op" data-mv="dn" title="优先级下移">▼</button>
+            </span>
+            <span class="dev-st">未连接</span>
+          </li>
+        </ul>
+        <div class="app-cta">
+          <button class="bigbtn off" id="appBigBtn" aria-label="一键连接或断开">
+            <span class="big-ring"></span>
+            <span class="big-ico" id="appBigIco">🔌</span>
+            <span class="big-lb" id="appBigLb">点我连接</span>
+          </button>
+        </div>
+        <div class="app-foot"><span>A2DP + HFP 完整音质</span><span>v1.8.4 · 纯本地</span></div>
+      </div>
+      <figcaption class="win-cap">↑ 前端模拟演示（可点击）· 设备名均为虚构</figcaption>
     </figure>
     <div class="tray-wrap">
       <div class="tray-item" id="trayDemo1">
@@ -402,8 +474,9 @@
    规则：每次改页面必须更新 PAGE_VER。
    打开页面时核对远端版本号，不一致则本会话内自动强刷一次；
    用 sessionStorage 防重复刷新（刷完仍不一致就不再刷，杜绝死循环）。 */
-const PAGE_VER="2.0.0";
+const PAGE_VER="2.1.0";
 const PAGE_LOG=[
+  {v:"2.1.0",d:"08-26",t:"应用界面改为前端模拟演示（原真实截图含真实设备名，已删除）；界面可点击：连接三态流转 + 优先级排序"},
   {v:"2.0.0",d:"08-26",t:"页面焕新：星星布丁精灵图动画演示、三态托盘图标、关于作者入口、新增一键强制刷新组件"},
   {v:"1.0.0",d:"08-19",t:"产品页首版上线"},
 ];
@@ -569,6 +642,48 @@ const petPre=new Image();
 petPre.onload=()=>{sprite.style.backgroundImage="url('assets/img/airpods-buddy/pet-sheet.webp')";petSetState('idle');petAutoStory();};
 petPre.onerror=()=>{bubble.textContent='(精灵图加载失败)';};
 petPre.src='assets/img/airpods-buddy/pet-sheet.webp';
+
+/* ================= 应用界面·前端模拟演示 =================
+   还原真实应用的布局手感：设备列表（优先级可调）+ 大圆连接钮三态。
+   设备名均为虚构，不含任何真实信息。 */
+(function(){
+  const big=document.getElementById('appBigBtn'),ico=document.getElementById('appBigIco'),
+        lb=document.getElementById('appBigLb'),dev1=document.getElementById('dev1'),
+        dev1St=document.getElementById('dev1St');
+  let st='off',t=null;
+  function set(s){
+    st=s;clearTimeout(t);big.className='bigbtn '+s;
+    if(s==='off'){ico.textContent='🔌';lb.textContent='点我连接';
+      dev1.classList.remove('on');dev1St.textContent='未连接';}
+    else if(s==='loading'){lb.textContent='连接中';dev1St.textContent='连接中…';}
+    else{ico.textContent='💚';lb.textContent='已连接 · 点我断开';
+      dev1.classList.add('on');dev1St.textContent='已连接 · A2DP';}
+  }
+  big.addEventListener('click',()=>{
+    if(st==='off'){set('loading');t=setTimeout(()=>set('on'),1300);}
+    else if(st==='on'){set('off');}
+  });
+  /* 优先级 ▲▼：真的会调换顺序 */
+  document.querySelectorAll('#appList .op').forEach(b=>b.addEventListener('click',e=>{
+    e.stopPropagation();
+    const li=b.closest('.dev'),list=document.getElementById('appList');
+    const items=[...list.children],i=items.indexOf(li);
+    const j=b.dataset.mv==='up'?i-1:i+1;
+    if(j<0||j>=items.length)return;
+    li.classList.add('ghosted');
+    setTimeout(()=>{
+      b.dataset.mv==='up'?list.insertBefore(li,items[j]):list.insertBefore(items[j],li);
+      li.classList.remove('ghosted');
+    },140);
+  }));
+  /* 刷新按钮：转一圈 + 列表闪一下 */
+  const rf=document.getElementById('appRefresh');
+  rf.addEventListener('click',()=>{
+    rf.classList.remove('spin');void rf.offsetWidth;rf.classList.add('spin');
+    [...document.getElementById('appList').children].forEach(li=>{
+      li.classList.add('ghosted');setTimeout(()=>li.classList.remove('ghosted'),420);});
+  });
+})();
 </script>
 
 </body>
