@@ -88,14 +88,10 @@
   .star-card .big .hl{color:var(--honey)}
   .star-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
 
-  .fb textarea{width:100%;min-height:88px;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;
-    font:inherit;font-size:13.5px;color:var(--ink);background:#FDFAF4;resize:vertical;outline:none;transition:border-color .2s}
-  .fb textarea:focus{border-color:var(--honey-l)}
-  .fb .row{display:flex;gap:10px;justify-content:flex-end;margin-top:12px;flex-wrap:wrap}
-  .fb .tip{font-size:11.5px;color:#B8AE9F;margin-top:8px;line-height:1.6}
+  .fb .giscus-box{margin:4px 0 2px;border-radius:14px;overflow:hidden}
+  .fb .giscus-box iframe{border:0;width:100%}
+  .fb .tip{font-size:11.5px;color:#B8AE9F;margin-top:10px;line-height:1.6}
   .fb .tip a{font-weight:600}
-  #fbOk{display:none;margin-top:12px;background:rgba(94,154,115,.1);border:1px solid rgba(94,154,115,.3);
-    color:var(--sage);font-size:13px;font-weight:600;border-radius:12px;padding:10px 14px;text-align:center}
 
   footer{padding:34px 0 50px;text-align:center;font-size:12.5px;color:var(--sub)}
   footer a{color:inherit}
@@ -161,14 +157,31 @@
   <section>
     <div class="card fb">
       <h2 style="text-align:left;margin-bottom:4px">💬 直接对捞鱼说</h2>
-      <p style="font-size:12.5px;color:var(--sub);margin-bottom:12px">不用注册、不用找入口——写下你想说的，一键带去反馈区。</p>
-      <textarea id="fbText" placeholder="比如：小助手真好用！/ 这里有个小 bug…/ 想要 xx 功能"></textarea>
-      <div class="row">
-        <button class="btn ghost" id="fbCopy" style="cursor:pointer">📋 复制</button>
-        <button class="btn" id="fbGo" style="cursor:pointer">🚀 去发送</button>
+      <p style="font-size:12.5px;color:var(--sub);margin-bottom:14px">
+        登录 GitHub 后在下方输入框<b>一键发送</b>——直接发进
+        <a href="https://github.com/lyzbcy/lyzbcy.github.io/discussions/6" target="_blank" rel="noopener">「用户反馈讨论区」</a>，
+        不跳转、不复制，发完就能看到自己的留言。
+      </p>
+      <div class="giscus-box">
+        <script src="https://giscus.app/client.js"
+                data-repo="lyzbcy/lyzbcy.github.io"
+                data-repo-id="R_kgDOQMgcsQ"
+                data-category="General"
+                data-category-id="DIC_kwDOQMgcsc4DCIAt"
+                data-mapping="number"
+                data-term="6"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="light"
+                data-lang="zh-CN"
+                crossorigin="anonymous"
+                async></script>
       </div>
-      <div id="fbOk">✓ 已复制 &amp; 新窗口已打开，粘贴（Ctrl+V）即可发送</div>
-      <p class="tip">「去发送」会把这段话<b>自动复制</b>并打开 GitHub 反馈页（<a href="https://github.com/lyzbcy/AirPods-Windows/issues/new" target="_blank" rel="noopener">Issues 反馈区</a>，登录 GitHub 后粘贴即可）；不想登录的话，扫上方<b>粉丝群</b>二维码直接在群里说也行。</p>
+      <p class="tip">若上方评论区没显示，多半是仓库还没安装 giscus 应用（一次性操作）：
+        <a href="https://github.com/apps/giscus" target="_blank" rel="noopener">点此安装</a>，装好后刷新本页即可。
+        也可以直接去 <a href="https://github.com/lyzbcy/lyzbcy.github.io/discussions/6" target="_blank" rel="noopener">反馈讨论帖</a> 留言，或扫上方<b>粉丝群</b>二维码在群里说。</p>
     </div>
   </section>
 
@@ -191,8 +204,9 @@
 
 <script>
 /* ================= 强制刷新组件（同产品页规则） ================= */
-const PAGE_VER="1.0.0";
+const PAGE_VER="1.1.0";
 const PAGE_LOG=[
+  {v:"1.1.0",d:"08-26",t:"反馈区升级为 giscus 一键发送：登录后直接发到 GitHub 反馈讨论区，不再复制/跳转"},
   {v:"1.0.0",d:"08-26",t:"推广页首版上线：二维码 / star / 反馈入口"},
 ];
 (function(){
@@ -229,38 +243,7 @@ document.getElementById('frRefresh').addEventListener('click',async function(){
   }catch(e){}
 })();
 
-/* ================= 反馈直达：复制 + 打开 Issues =================
-   注意：clipboard API 在部分环境（webview/未授权）可能挂起不返回，
-   必须加超时竞争 + execCommand 兜底，否则后续提示永远不出现。 */
-(function(){
-  const txt=document.getElementById('fbText'),ok=document.getElementById('fbOk');
-  function withTimeout(p,ms){
-    return Promise.race([p,new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),ms))]);
-  }
-  async function copyIt(){
-    const v=txt.value.trim()||'（来自推广页的问候 👋）';
-    try{
-      await withTimeout(navigator.clipboard.writeText(v),1200);
-      return {v,ok:true};
-    }catch(e){
-      let done=false;
-      try{txt.select();done=document.execCommand('copy');}catch(e2){}
-      return {v,ok:done};
-    }
-  }
-  document.getElementById('fbCopy').addEventListener('click',async()=>{
-    const r=await copyIt();
-    frToast(r.ok?'📋 已复制，去哪粘贴都行':'⚠️ 浏览器拦截了自动复制，请手动全选复制');
-  });
-  document.getElementById('fbGo').addEventListener('click',async()=>{
-    const r=await copyIt();
-    ok.textContent=r.ok
-      ?'✓ 已复制 & 新窗口已打开，粘贴（Ctrl+V）即可发送'
-      :'⚠️ 自动复制被拦截：新窗口已打开，请回来全选复制再粘贴';
-    ok.style.display='block';
-    window.open('https://github.com/lyzbcy/AirPods-Windows/issues/new','_blank','noopener');
-  });
-})();
+/* 反馈区已升级为 giscus 零后端评论区：登录后页内一键发送到 Discussions#6，不再复制/跳转 */
 </script>
 
 </body>
