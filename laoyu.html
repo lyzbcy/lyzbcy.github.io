@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>关于捞鱼 🐟 · 捞鱼工作室</title>
+<meta name="description" content="捞鱼的个人推广页：一个弱小但有梦想的开发者。表情包、赞赏码、粉丝群，还有给 AirPods 小助手点个 star 的入口。">
+<link rel="icon" type="image/png" href="assets/img/airpods-buddy/logo-192.png">
+<style>
+  :root{
+    --bg:#FAF6EF; --card:#fff; --ink:#2E2A24; --sub:#8A7F73;
+    --honey:#BE8A48; --honey-l:#DCA85F; --sage:#5E9A73;
+    --line:rgba(46,42,36,.08); --line-2:rgba(46,42,36,.05);
+    --shadow-s:0 1px 3px rgba(46,42,36,.05), 0 1px 2px rgba(46,42,36,.03);
+    --shadow-m:0 6px 24px rgba(46,42,36,.07), 0 2px 6px rgba(46,42,36,.04);
+    --shadow-l:0 18px 48px rgba(120,86,40,.16);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,"SF Pro Display","Segoe UI Variable Display","Segoe UI","Microsoft YaHei UI",system-ui,sans-serif;
+    color:var(--ink);background:
+    radial-gradient(900px 420px at 85% -100px, rgba(220,168,95,.15), transparent 65%),
+    radial-gradient(700px 380px at 5% 20%, rgba(220,168,95,.08), transparent 60%),
+    var(--bg);
+    line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px}
+  a{color:var(--honey)}
+
+  /* 强制刷新组件（与产品页同款） */
+  .fr-widget{position:fixed;top:14px;right:14px;z-index:99;display:flex;gap:8px;align-items:flex-start}
+  .fr-pill{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--ink);
+    background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:999px;padding:7px 13px;
+    box-shadow:var(--shadow-s);cursor:pointer;backdrop-filter:blur(8px)}
+  .fr-refresh{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:#fff;
+    background:linear-gradient(180deg,var(--honey-l),var(--honey));border:none;border-radius:999px;padding:8px 14px;
+    box-shadow:0 4px 14px rgba(190,138,72,.35);cursor:pointer;transition:transform .15s}
+  .fr-refresh:hover{transform:translateY(-1px)}
+  .fr-refresh:active{transform:scale(.96)}
+  .fr-refresh.spin{animation:frspin .8s linear}
+  @keyframes frspin{to{transform:rotate(360deg)}}
+  .fr-panel{position:absolute;top:44px;right:0;width:280px;background:#fff;border:1px solid var(--line);
+    border-radius:16px;box-shadow:var(--shadow-l);padding:15px;font-size:13px}
+  .fr-panel b{display:block;font-size:13.5px;margin-bottom:8px}
+  .fr-panel ul{list-style:none}
+  .fr-panel li{padding:7px 0;border-top:1px solid var(--line-2);color:var(--sub)}
+  .fr-panel li .v{display:inline-block;font-size:11px;font-weight:700;color:var(--honey);
+    background:rgba(220,168,95,.14);border-radius:6px;padding:1px 7px;margin-right:7px}
+  .fr-hint{margin-top:9px;padding-top:8px;border-top:1px dashed var(--line);font-size:11.5px;color:#B8AE9F;line-height:1.6}
+  .fr-toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,16px);z-index:100;
+    background:rgba(46,42,36,.92);color:#fff;font-size:13px;font-weight:600;border-radius:999px;
+    padding:9px 20px;opacity:0;pointer-events:none;transition:.25s}
+  .fr-toast.show{opacity:1;transform:translate(-50%,0)}
+
+  header{padding:72px 0 30px;text-align:center}
+  .avatar{width:118px;height:118px;border-radius:50%;object-fit:cover;border:4px solid #fff;
+    box-shadow:var(--shadow-l);animation:pop .7s cubic-bezier(.25,.9,.3,1.2)}
+  @keyframes pop{0%{transform:scale(.3);opacity:0}60%{transform:scale(1.06)}100%{transform:scale(1)}}
+  h1{font-size:32px;font-weight:800;letter-spacing:-.5px;margin-top:20px}
+  .studio{display:inline-block;font-size:11.5px;font-weight:700;color:var(--honey);
+    background:rgba(220,168,95,.13);border-radius:999px;padding:3px 12px;margin-top:10px}
+  .desc{margin-top:14px;font-size:15px;color:var(--sub)}
+
+  section{padding:30px 0}
+  h2{font-size:19px;font-weight:800;text-align:center;letter-spacing:-.3px;margin-bottom:6px}
+  .sub{text-align:center;font-size:13px;color:var(--sub);margin-bottom:24px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;
+    box-shadow:var(--shadow-m);padding:26px 26px 24px;margin-bottom:16px}
+  .home-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .home-row .emoji{font-size:30px}
+  .home-row b{font-size:16px}
+  .home-row p{font-size:13px;color:var(--sub)}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:#fff;
+    background:linear-gradient(180deg,var(--honey-l),var(--honey));border-radius:999px;padding:11px 24px;
+    box-shadow:0 8px 22px rgba(190,138,72,.38);text-decoration:none;transition:transform .2s}
+  .btn:hover{transform:translateY(-2px);color:#fff}
+  .btn.ghost{background:#fff;color:var(--honey);border:1.5px solid rgba(190,138,72,.4);box-shadow:var(--shadow-s)}
+
+  .qrs{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+  .qr{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-m);
+    padding:22px 16px 18px;text-align:center;transition:transform .2s,box-shadow .2s}
+  .qr:hover{transform:translateY(-4px);box-shadow:var(--shadow-l)}
+  .qr img{width:132px;height:132px;object-fit:cover;border-radius:14px;border:1px solid var(--line-2)}
+  .qr b{display:block;font-size:15px;margin-top:12px}
+  .qr p{font-size:12px;color:var(--sub);margin-top:2px}
+
+  .star-card{text-align:center}
+  .star-card .big{font-size:17px;font-weight:700;line-height:1.6}
+  .star-card .big .hl{color:var(--honey)}
+  .star-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+
+  .fb textarea{width:100%;min-height:88px;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;
+    font:inherit;font-size:13.5px;color:var(--ink);background:#FDFAF4;resize:vertical;outline:none;transition:border-color .2s}
+  .fb textarea:focus{border-color:var(--honey-l)}
+  .fb .row{display:flex;gap:10px;justify-content:flex-end;margin-top:12px;flex-wrap:wrap}
+  .fb .tip{font-size:11.5px;color:#B8AE9F;margin-top:8px;line-height:1.6}
+  .fb .tip a{font-weight:600}
+  #fbOk{display:none;margin-top:12px;background:rgba(94,154,115,.1);border:1px solid rgba(94,154,115,.3);
+    color:var(--sage);font-size:13px;font-weight:600;border-radius:12px;padding:10px 14px;text-align:center}
+
+  footer{padding:34px 0 50px;text-align:center;font-size:12.5px;color:var(--sub)}
+  footer a{color:inherit}
+  @media (max-width:560px){
+    .fr-widget{right:10px;top:10px}
+    .fr-panel{width:min(280px,calc(100vw - 20px))}
+  }
+</style>
+</head>
+<body>
+
+<div class="fr-widget">
+  <button class="fr-pill" id="frLogBtn"><span>📄</span><span id="frLabel">更新日志</span></button>
+  <button class="fr-refresh" id="frRefresh">⚡ 一键刷新</button>
+  <div class="fr-panel" id="frPanel" hidden>
+    <b>📋 更新日志</b>
+    <ul id="frList"></ul>
+    <p class="fr-hint">💛 静态页面常有缓存，请勤点「一键刷新」拿最新版。</p>
+  </div>
+</div>
+<div class="fr-toast" id="frToast"></div>
+
+<header class="wrap">
+  <img class="avatar" src="https://s41.ax1x.com/2025/12/05/pZmPZPH.png" alt="捞鱼的头像">
+  <h1>🐟 捞鱼</h1>
+  <div class="studio">捞鱼工作室</div>
+  <p class="desc">一个弱小但有梦想的开发者</p>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <div class="card home-row">
+      <span class="emoji">🏠</span>
+      <div style="flex:1;min-width:200px">
+        <b>了解更多关于捞鱼</b>
+        <p>个人主页 · lyzbcy.github.io</p>
+      </div>
+      <a class="btn" href="https://lyzbcy.github.io/" target="_blank" rel="noopener">去看看 →</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>来都来了，扫一个呗 🥺</h2>
+    <p class="sub">长按 / 截图识别也可以</p>
+    <div class="qrs">
+      <div class="qr"><img src="assets/img/promo/qq-group.jpg" alt="粉丝群二维码"><b>粉丝群</b><p>一起摸鱼聊技术</p></div>
+      <div class="qr"><img src="assets/img/promo/reward-qr.jpg" alt="赞赏码二维码"><b>赞赏码</b><p>请我喝杯奶茶 🧋</p></div>
+      <div class="qr"><img src="assets/img/promo/sticker-qr.png" alt="微信表情包二维码"><b>表情包</b><p>超可爱快收藏</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="card star-card">
+      <p class="big">你愿意给我点一个 <span class="hl">⭐ star</span> 嘛？<br>这对我很有帮助！</p>
+      <div class="star-actions">
+        <a class="btn" href="https://github.com/lyzbcy/AirPods-Windows" target="_blank" rel="noopener">⭐ 给 AirPods 小助手点 star</a>
+        <a class="btn ghost" href="https://github.com/lyzbcy" target="_blank" rel="noopener">🗂 捞鱼的全部项目源码</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="card fb">
+      <h2 style="text-align:left;margin-bottom:4px">💬 直接对捞鱼说</h2>
+      <p style="font-size:12.5px;color:var(--sub);margin-bottom:12px">不用注册、不用找入口——写下你想说的，一键带去反馈区。</p>
+      <textarea id="fbText" placeholder="比如：小助手真好用！/ 这里有个小 bug…/ 想要 xx 功能"></textarea>
+      <div class="row">
+        <button class="btn ghost" id="fbCopy" style="cursor:pointer">📋 复制</button>
+        <button class="btn" id="fbGo" style="cursor:pointer">🚀 去发送</button>
+      </div>
+      <div id="fbOk">✓ 已复制 &amp; 新窗口已打开，粘贴（Ctrl+V）即可发送</div>
+      <p class="tip">「去发送」会把这段话<b>自动复制</b>并打开 GitHub 反馈页（<a href="https://github.com/lyzbcy/AirPods-Windows/issues/new" target="_blank" rel="noopener">Issues 反馈区</a>，登录 GitHub 后粘贴即可）；不想登录的话，扫上方<b>粉丝群</b>二维码直接在群里说也行。</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="card home-row" style="margin-bottom:0">
+      <span class="emoji">🎧</span>
+      <div style="flex:1;min-width:200px">
+        <b>AirPods 小助手</b>
+        <p>点一下，AirPods 就连上</p>
+      </div>
+      <a class="btn ghost" href="airpods-buddy.html">← 回产品页</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <p>由 <b>捞鱼工作室</b> 制作 · 用爱发电 💛</p>
+</footer>
+
+<script>
+/* ================= 强制刷新组件（同产品页规则） ================= */
+const PAGE_VER="1.0.0";
+const PAGE_LOG=[
+  {v:"1.0.0",d:"08-26",t:"推广页首版上线：二维码 / star / 反馈入口"},
+];
+(function(){
+  const list=document.getElementById('frList');
+  document.getElementById('frLabel').textContent='更新 '+PAGE_LOG[0].d;
+  list.innerHTML=PAGE_LOG.map(x=>`<li><span class="v">v${x.v}</span>${x.d} · ${x.t}</li>`).join('');
+  const btn=document.getElementById('frLogBtn'),panel=document.getElementById('frPanel');
+  btn.addEventListener('click',e=>{e.stopPropagation();panel.hidden=!panel.hidden;});
+  document.addEventListener('click',e=>{if(!panel.hidden&&!panel.contains(e.target))panel.hidden=true;});
+})();
+let frToastT=null;
+function frToast(msg){
+  const t=document.getElementById('frToast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(frToastT);frToastT=setTimeout(()=>t.classList.remove('show'),2200);
+}
+document.getElementById('frRefresh').addEventListener('click',async function(){
+  this.classList.remove('spin');void this.offsetWidth;this.classList.add('spin');
+  frToast('⚡ 正在强制刷新…');
+  try{await fetch(location.pathname,{cache:'reload'});}catch(e){}
+  setTimeout(()=>location.reload(),250);
+});
+(async function(){
+  try{
+    if(location.protocol==='file:')return;
+    const res=await fetch(location.pathname+'?_vc='+Date.now(),{cache:'no-store'});
+    const html=await res.text();
+    const m=html.match(/PAGE_VER\s*=\s*"([^"]+)"/);
+    if(!m||m[1]===PAGE_VER)return;
+    const key='laoyu_autorefreshed';
+    if(sessionStorage.getItem(key))return;
+    sessionStorage.setItem(key,'1');
+    frToast('🆕 检测到新版本，正在刷新…');
+    setTimeout(()=>location.replace(location.pathname+'?v='+encodeURIComponent(m[1])),600);
+  }catch(e){}
+})();
+
+/* ================= 反馈直达：复制 + 打开 Issues =================
+   注意：clipboard API 在部分环境（webview/未授权）可能挂起不返回，
+   必须加超时竞争 + execCommand 兜底，否则后续提示永远不出现。 */
+(function(){
+  const txt=document.getElementById('fbText'),ok=document.getElementById('fbOk');
+  function withTimeout(p,ms){
+    return Promise.race([p,new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),ms))]);
+  }
+  async function copyIt(){
+    const v=txt.value.trim()||'（来自推广页的问候 👋）';
+    try{
+      await withTimeout(navigator.clipboard.writeText(v),1200);
+      return {v,ok:true};
+    }catch(e){
+      let done=false;
+      try{txt.select();done=document.execCommand('copy');}catch(e2){}
+      return {v,ok:done};
+    }
+  }
+  document.getElementById('fbCopy').addEventListener('click',async()=>{
+    const r=await copyIt();
+    frToast(r.ok?'📋 已复制，去哪粘贴都行':'⚠️ 浏览器拦截了自动复制，请手动全选复制');
+  });
+  document.getElementById('fbGo').addEventListener('click',async()=>{
+    const r=await copyIt();
+    ok.textContent=r.ok
+      ?'✓ 已复制 & 新窗口已打开，粘贴（Ctrl+V）即可发送'
+      :'⚠️ 自动复制被拦截：新窗口已打开，请回来全选复制再粘贴';
+    ok.style.display='block';
+    window.open('https://github.com/lyzbcy/AirPods-Windows/issues/new','_blank','noopener');
+  });
+})();
+</script>
+
+</body>
+</html>
