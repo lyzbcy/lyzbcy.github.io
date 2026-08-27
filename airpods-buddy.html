@@ -98,7 +98,7 @@
   <div style="display:flex;gap:10px;justify-content:center;align-items:flex-end">
      <img src="assets/img/airpods-buddy/st-happy.png" width="52" style="transform:rotate(-8deg)" alt="开心">
      <img class="logo" src="assets/img/airpods-buddy/logo.png" alt="AirPods 小助手">
-     <img src="assets/img/airpods-buddy/st-love.png" width="52" style="rotate(8deg)" alt="恋爱">
+     <img src="assets/img/airpods-buddy/st-love.png" width="52" style="transform:rotate(8deg)" alt="恋爱">
    </div>
   <h1>AirPods 小助手<span class="en">AIRPODS&nbsp;BUDDY</span></h1>
   <p class="tagline">给 Windows 的一口甜：<b>点一下，AirPods 就连上。</b></p>
@@ -130,14 +130,14 @@
   <h2>她还会陪你等连接 🧚</h2>
   <p class="sub">点一下托盘，星星布丁从右下角弹出来——桌面级透明，全帧动画。</p>
   <div class="shots">
-    <figure class="shot"><img src="assets/img/airpods-buddy/pet-pop.png" width="380" alt="星星布丁小宠物弹窗"><figcaption>等待张望 → 连上开心跳跃撒 💕 → 断开挥手拜拜</figcaption></figure>
+    <figure class="shot"><img src="assets/img/airpods-buddy/pet-showcase.png" width="380" alt="星星布丁小宠物三姿态"><figcaption>等待张望 → 连上开心跳跃撒 💕 → 断开挥手拜拜</figcaption></figure>
     <figure class="shot"><img src="assets/img/airpods-buddy/app-ui.png" width="300" alt="应用界面"><figcaption>奶油黄白 Apple 风界面 · 三态托盘图标</figcaption></figure>
   </div>
 </section>
 
 <section class="wrap">
   <h2>小而全</h2>
-  <p class="sub">2.6MB 单文件，零依赖零后台服务，不上传任何数据。</p>
+  <p class="sub">3.4MB 单文件，零依赖零后台服务，不上传任何数据。</p>
   <div class="grid">
     <div class="f"><div class="ico">🚀</div><b>一键连接 / 断开</b><p>左键单击托盘直接切换；界面大圆钮一点即连。</p></div>
     <div class="f"><div class="ico">🥇</div><b>设备优先级</b><p>苹果设备默认排前，其他耳机不捣乱，▲▼ 随心调序。</p></div>
@@ -190,7 +190,7 @@
 
 <script>
 /* ===== 强制刷新组件（规范：版本核对+防死循环+一键刷新） ===== */
-const PAGE_VERSION = "v1.8.4";
+const PAGE_VERSION = "v1.9.0";
 (function(){
   fetch('https://api.github.com/repos/lyzbcy/AirPods-Windows/releases/latest')
     .then(function(r){return r.json()}).then(function(d){
