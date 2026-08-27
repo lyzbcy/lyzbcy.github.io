@@ -280,6 +280,14 @@
       bgImage: imageBasePath + encodeURIComponent('日清意面牛油莫罗勒杯面-日清.jpeg'),
     },
     {
+      name: '日清UFO飞碟炒面虾仁炒面风味【日清】',
+      tier: 'NPC',
+      tierLabel: 'NPC · 3❤️',
+      rating: 2,
+      description: '参考价6.9元，热量520kcal，蛋白质10.3g，脂肪25.6g，碳水66.9g。毕竟是海鲜味，但实在没什么料，就一些菜包和油包，拌里面没什么料，味道很一般。好吃全来自于油比较重，稍微还有一点海鲜的腥味。作为方便面不算便宜，料又太少了。',
+      bgImage: imageBasePath + encodeURIComponent('日清UFO飞碟炒面虾仁炒面风味-日清.jpeg'),
+    },
+    {
       name: '香菜面',
       tier: '拉完了',
       tierLabel: '拉完了 · 史',
