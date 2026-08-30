@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-29T22:05:01.682104+08:00",
+  "generated_at": "2026-08-30T22:05:01.873314+08:00",
   "goals": {
     "calories": 1939,
     "water": 2000,
@@ -30,8 +30,8 @@
     "avg_water": 2025,
     "avg_carbs": 227,
     "avg_fat": 69,
-    "total_training_calories": 8843,
-    "training_days": 35,
+    "total_training_calories": 9206,
+    "training_days": 36,
     "compliance": {
       "calorie": 86,
       "protein": 18,
@@ -331,22 +331,12 @@
     }
   },
   "macros": {
-    "carbs_pct": 50,
-    "protein_pct": 21,
+    "carbs_pct": 51,
+    "protein_pct": 20,
     "fat_pct": 29,
-    "total_cal": 1977
+    "total_cal": 1941
   },
   "trend": [
-    {
-      "date": "2026-08-16",
-      "calories": 1892,
-      "protein": 84.1,
-      "carbs": 242.4,
-      "fat": 68.9,
-      "water": 1930,
-      "net_calories": 1418,
-      "has_fitness": true
-    },
     {
       "date": "2026-08-17",
       "calories": 2124,
@@ -1356,45 +1346,38 @@
   ],
   "status": {
     "has_today": false,
-    "has_yesterday": true,
-    "today": "2026-08-29",
-    "is_active": true,
+    "has_yesterday": false,
+    "today": "2026-08-30",
+    "is_active": false,
     "is_training_day": true
   },
   "health_score": {
     "today": {
-      "date": "2026-08-29",
+      "date": "2026-08-30",
       "nutrition_score": 0,
       "nutrition_detail": "热量 0/1939 kcal (0/20); 蛋白 0/150g (0/15); 饮水 0/2000ml (0/15)",
-      "exercise_score": 28,
-      "exercise_detail": "训练量 3525kg (18/20); 组数 8 (10/10)",
+      "exercise_score": 22,
+      "exercise_detail": "训练量 2911kg (15/20); 组数 6 (7/10)",
       "bonus_score": 9,
       "bonus_detail": "数据完整性 (2/10); 体脂趋势 -1.2% (7/10)",
-      "total_score": 37,
-      "grade": "⚠️ C",
+      "total_score": 31,
+      "grade": "💀 D",
       "calories_in": 0,
       "calories_target": 1939,
       "protein_in": 0,
       "protein_target": 150,
       "water_in": 0,
       "water_target": 2000,
-      "training_sets": 8,
-      "training_volume": 3525,
-      "training_cal": 116,
-      "training_duration_min": 19.0,
+      "training_sets": 6,
+      "training_volume": 2911,
+      "training_cal": 363,
+      "training_duration_min": 50.0,
       "bodyfat_pct": 20.7,
       "is_training_day": true,
       "bmr_floor": 1701,
       "below_bmr": false
     },
     "history": [
-      {
-        "date": "2026-08-15",
-        "score": 84,
-        "grade": "😊 A",
-        "nutrition": "热量 2075/1954 kcal (18/20); 蛋白 110.6/150g (11/15); 饮水 2130/2000ml (15/15)",
-        "exercise": "训练量 5315kg (20/20); 组数 14 (10/10)"
-      },
       {
         "date": "2026-08-16",
         "score": 82,
@@ -1485,9 +1468,16 @@
         "grade": "⚠️ C",
         "nutrition": "热量 1049/1641 kcal (9/20); 蛋白 50.5/150g (5/15); 饮水 1050/2000ml (8/15)",
         "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
+      },
+      {
+        "date": "2026-08-29",
+        "score": 37,
+        "grade": "⚠️ C",
+        "nutrition": "热量 0/1939 kcal (0/20); 蛋白 0/150g (0/15); 饮水 0/2000ml (0/15)",
+        "exercise": "训练量 3525kg (18/20); 组数 8 (10/10)"
       }
     ],
-    "exported_at": "2026-08-29T22:05:01.671662"
+    "exported_at": "2026-08-30T22:05:01.862786"
   },
   "food_library": {
     "items": [
