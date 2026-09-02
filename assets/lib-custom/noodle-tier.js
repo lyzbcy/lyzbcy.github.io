@@ -288,6 +288,14 @@
       bgImage: imageBasePath + encodeURIComponent('日清UFO飞碟炒面虾仁炒面风味-日清.jpeg'),
     },
     {
+      name: '辣白菜辛拉面【农心】',
+      tier: 'NPC',
+      tierLabel: 'NPC · 3❤️',
+      rating: 2,
+      description: '参考价4-5元，热量436kcal，蛋白质14.6g，脂肪11.8g，碳水66.4g。按包买也要四五块钱，感觉没什么肉，味道一般般，还不如红烧牛肉面。亮点可能就是面稍微好吃点。',
+      bgImage: imageBasePath + encodeURIComponent('农心辣白菜辛拉面-农心.png'),
+    },
+    {
       name: '香菜面',
       tier: '拉完了',
       tierLabel: '拉完了 · 史',
