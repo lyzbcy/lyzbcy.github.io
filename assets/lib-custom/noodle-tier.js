@@ -176,6 +176,14 @@
       bgImage: imageBasePath + encodeURIComponent('罗宋汤面-汤达人.jpeg'),
     },
     {
+      name: '黄焖鸡米饭【田小花】',
+      tier: '人上人',
+      tierLabel: '人上人 · 4❤️',
+      rating: 3,
+      description: '很入味，比方便面入味多了。自热煮得很好，料包连汤带水，还有一小碗汤特别鲜。性价比一般，9块接近10块不如点外卖。品牌不大，科技与狠活未知。但只需要冷水，比方便面还方便。米饭实心密度大，七分饱。综合评分比老坛酸菜牛肉面低0.1分，四星守门员。',
+      bgImage: imageBasePath + encodeURIComponent('黄焖鸡米饭-田小花.jpeg'),
+    },
+    {
       name: '红烧牛肉面【康师傅】',
       tier: '人上人',
       tierLabel: '人上人 · 4❤️',
