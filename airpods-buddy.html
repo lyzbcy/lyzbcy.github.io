@@ -444,6 +444,8 @@
   <div class="steps">
     <div class="step"><span class="n">1</span><b>⬇️ 下载</b><p>一个 3.4MB 的 zip，GitHub 直链</p></div>
     <div class="step"><span class="n">2</span><b>📂 解压双击</b><p>免安装，即刻常驻托盘</p></div>
+    <!-- SmartScreen 提示 -->
+    <div class="step" style="grid-column:1/-1;background:#FFF9EC"><span class="n" style="background:#8A9BB8">🛡</span><b>首次运行提示？</b><p>若 Windows 弹蓝色「已保护你的电脑」：点<b>更多信息</b> → <b>仍要运行</b> 即可（开源软件，代码全部可审计）</p></div>
     <div class="step"><span class="n">3</span><b>🎧 点一下就连</b><p>从此告别翻设置</p></div>
   </div>
   <div class="dl-row">
@@ -474,8 +476,9 @@
    规则：每次改页面必须更新 PAGE_VER。
    打开页面时核对远端版本号，不一致则本会话内自动强刷一次；
    用 sessionStorage 防重复刷新（刷完仍不一致就不再刷，杜绝死循环）。 */
-const PAGE_VER="2.2.1";
+const PAGE_VER="2.2.2";
 const PAGE_LOG=[
+  {v:"2.2.2",d:"09-06",t:"新增 SmartScreen 首次运行提示说明（更多信息→仍要运行）；应用 v1.9.5 带设置项上线"},
   {v:"2.2.1",d:"08-27",t:"修复：一次误发布把本页覆盖成了简化版（静态截图），已整体回滚——恢复可交互应用界面模拟演示（连接三态/优先级排序/宠物动画/托盘演示）"},
   {v:"2.2.0",d:"08-26",t:"关于入口改为本软件专属子页 airpods-buddy-about.html（专属风格+专属反馈讨论区，通用推广页下线）"},
   {v:"2.1.0",d:"08-26",t:"应用界面改为前端模拟演示（原真实截图含真实设备名，已删除）；界面可点击：连接三态流转 + 优先级排序"},
