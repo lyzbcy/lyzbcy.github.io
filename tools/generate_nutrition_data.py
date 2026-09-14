@@ -146,6 +146,9 @@ def get_bodyweight_history(records_jsonl_path):
             except:
                 continue
             if r.get("action") == "bodyweight" and r.get("date"):
+                wv = r.get("value", r.get("weight", 0)) or 0
+                if wv <= 0:
+                    continue  # 防御：跳过无体重值/0的脏记录（字段名写错时不进历史）
                 weights.append({
                     "date": r["date"],
                     "weight": r.get("value", 0),
@@ -208,7 +211,7 @@ def get_body_composition_history():
         smm = bc.compute_smm(height, w, 25, "male", bf) if bc else None
         tbw = bc.compute_tbw(height, w, 25, "male", ffm["avg"] if ffm else None) if bc else None
         rec = {"date": e["date"], "weight": w}
-        for g in ("neck", "waist", "hip", "whr", "whtr"):
+        for g in ("neck", "waist", "hip", "whr", "whtr", "chest", "thigh", "calf", "arm"):
             if e.get(g) is not None:
                 rec[g] = e[g]
         if bf is not None:

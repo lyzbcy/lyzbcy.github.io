@@ -176,6 +176,14 @@
       bgImage: imageBasePath + encodeURIComponent('罗宋汤面-汤达人.jpeg'),
     },
     {
+      name: '黄焖鸡米饭【田小花】',
+      tier: '人上人',
+      tierLabel: '人上人 · 4❤️',
+      rating: 3,
+      description: '很入味，比方便面入味多了。自热煮得很好，料包连汤带水，还有一小碗汤特别鲜。性价比一般，9块接近10块不如点外卖。品牌不大，科技与狠活未知。但只需要冷水，比方便面还方便。米饭实心密度大，七分饱。综合评分比老坛酸菜牛肉面低0.1分。',
+      bgImage: imageBasePath + encodeURIComponent('黄焖鸡米饭-田小花.jpeg'),
+    },
+    {
       name: '红烧牛肉面【康师傅】',
       tier: '人上人',
       tierLabel: '人上人 · 4❤️',
@@ -278,6 +286,22 @@
       rating: 2,
       description: '光说味道其实可以给4星，但参考价7元且吃不饱。既然是小杯就得按合味道的标准来要求。牛油果风味虽然颜色看着低，但实际吃着挺好吃的，只是没太吃出牛油果的味道，没有特别惊艳。综合考虑性价比，最终3星。',
       bgImage: imageBasePath + encodeURIComponent('日清意面牛油莫罗勒杯面-日清.jpeg'),
+    },
+    {
+      name: '日清UFO飞碟炒面虾仁炒面风味【日清】',
+      tier: 'NPC',
+      tierLabel: 'NPC · 3❤️',
+      rating: 2,
+      description: '参考价6.9元，热量520kcal，蛋白质10.3g，脂肪25.6g，碳水66.9g。毕竟是海鲜味，但实在没什么料，就一些菜包和油包，拌里面没什么料，味道很一般。好吃全来自于油比较重，稍微还有一点海鲜的腥味。作为方便面不算便宜，料又太少了。',
+      bgImage: imageBasePath + encodeURIComponent('日清UFO飞碟炒面虾仁炒面风味-日清.jpeg'),
+    },
+    {
+      name: '辣白菜辛拉面【农心】',
+      tier: 'NPC',
+      tierLabel: 'NPC · 3❤️',
+      rating: 2,
+      description: '参考价4-5元，热量436kcal，蛋白质14.6g，脂肪11.8g，碳水66.4g。按包买也要四五块钱，感觉没什么肉，味道一般般，还不如红烧牛肉面。亮点可能就是面稍微好吃点。',
+      bgImage: imageBasePath + encodeURIComponent('农心辣白菜辛拉面-农心.png'),
     },
     {
       name: '香菜面',
