@@ -97,6 +97,9 @@ const PROJECTS = [
   { name: "禅道22.5 chart模块SQL注入", route: "本地审计0day", channel: "补天通用通道",
     date: "09-13 ~ 09-14", hours: 9, tokensM: 1.2, income: null, incomeNote: "在审 QTVA-2026-10964993",
     status: "pending", statusText: "高危区间 ¥3000-10000 · 审核中" },
+  { name: "禅道22.5 ajaxGetList未授权泄露", route: "本地审计0day", channel: "补天通用通道",
+    date: "09-14", hours: 3, tokensM: 0.9, income: null, incomeNote: "提交中(表单已填,等人工点提交)",
+    status: "pending", statusText: "信息泄露 · 第二洞" },
   { name: "MaxKB 网页同步SSRF验证", route: "本地审计0day", channel: "补天通用通道(未达提交)",
     date: "09-14", hours: 2.5, tokensM: 0.5, income: 0, incomeNote: "¥0（沙箱已缓解）",
     status: "zero", statusText: "负结果止损 · 内网全拦截" },
@@ -107,7 +110,7 @@ const PROJECTS = [
     date: "09-13 ~ 09-14", hours: 12, tokensM: 2.8, income: 0, incomeNote: "¥0（上线后广告分成）",
     status: "building", statusText: "AI美术版完成 · 等appid提审" }
 ];
-const UPDATED = "2026-09-13 23:10";
+const UPDATED = "2026-09-15 00:20";
 /* ================================================= */
 
 const fmtH = h => h + "h";
