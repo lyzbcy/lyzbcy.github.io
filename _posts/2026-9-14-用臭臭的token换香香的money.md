@@ -102,9 +102,12 @@ const PROJECTS = [
     status: "zero", statusText: "负结果止损 · 内网全拦截" },
   { name: "若依主线+禅道二洞快扫", route: "本地审计0day", channel: "补天通用通道(未达提交)",
     date: "09-14", hours: 1, tokensM: 0.2, income: 0, incomeNote: "¥0（无新注入面）",
-    status: "zero", statusText: "负结果止损 · 历史点已修" }
+    status: "zero", statusText: "负结果止损 · 历史点已修" },
+  { name: "消消哒（小游戏·睡后资产线）", route: "产品开发", channel: "抖音/微信/QQ小游戏",
+    date: "09-13 ~ 09-14", hours: 12, tokensM: 2.8, income: 0, incomeNote: "¥0（上线后广告分成）",
+    status: "building", statusText: "AI美术版完成 · 等appid提审" }
 ];
-const UPDATED = "2026-09-14 12:05";
+const UPDATED = "2026-09-13 23:10";
 /* ================================================= */
 
 const fmtH = h => h + "h";
