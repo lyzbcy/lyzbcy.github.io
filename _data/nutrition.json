@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-14T01:00:01.932612+08:00",
+  "generated_at": "2026-09-14T22:05:01.430683+08:00",
   "goals": {
     "calories": 1640,
     "water": 2000,
@@ -20,22 +20,22 @@
     "deficit": 400
   },
   "overview": {
-    "recorded_days": 40,
+    "recorded_days": 41,
     "date_range": {
       "first": "2026-04-29",
-      "last": "2026-09-13"
+      "last": "2026-09-14"
     },
     "avg_calories": 2011,
-    "avg_protein": 103,
-    "avg_water": 1939,
-    "avg_carbs": 235,
+    "avg_protein": 104,
+    "avg_water": 1926,
+    "avg_carbs": 233,
     "avg_fat": 72,
     "total_training_calories": 11016,
     "training_days": 43,
     "compliance": {
-      "calorie": 92,
-      "protein": 28,
-      "water": 88
+      "calorie": 93,
+      "protein": 27,
+      "water": 85
     }
   },
   "weight": {
@@ -347,9 +347,9 @@
   },
   "macros": {
     "carbs_pct": 45,
-    "protein_pct": 21,
-    "fat_pct": 34,
-    "total_cal": 2198
+    "protein_pct": 22,
+    "fat_pct": 33,
+    "total_cal": 2156
   },
   "trend": [
     {
@@ -461,6 +461,16 @@
       "water": 1780,
       "net_calories": 2839,
       "has_fitness": true
+    },
+    {
+      "date": "2026-09-14",
+      "calories": 1981,
+      "protein": 119,
+      "carbs": 190.2,
+      "fat": 73.8,
+      "water": 1400,
+      "net_calories": 1981,
+      "has_fitness": false
     }
   ],
   "summaries": [
@@ -1718,10 +1728,30 @@
         },
         "method": "MET-endTime"
       }
+    },
+    {
+      "date": "2026-09-14",
+      "total_calories": 1981,
+      "total_carbs": 190.2,
+      "total_protein": 119,
+      "total_fat": 73.8,
+      "total_water": 1400,
+      "net_calories": 1981,
+      "meal_count": 5,
+      "water_entries": 3,
+      "supplements": {
+        "count": 0,
+        "has_creatine": false,
+        "has_protein": false
+      },
+      "calorie_pct": 120.8,
+      "protein_pct": 79.3,
+      "water_pct": 70.0,
+      "has_data": true
     }
   ],
   "status": {
-    "has_today": false,
+    "has_today": true,
     "has_yesterday": true,
     "today": "2026-09-14",
     "is_active": true,
@@ -1730,19 +1760,19 @@
   "health_score": {
     "today": {
       "date": "2026-09-14",
-      "nutrition_score": 0,
-      "nutrition_detail": "热量 0/1640 kcal (0/20); 蛋白 0/150g (0/15); 饮水 0/2000ml (0/15)",
+      "nutrition_score": 36,
+      "nutrition_detail": "热量 1981/1640 kcal (14/20); 蛋白 119/150g (12/15); 饮水 1400/2000ml (10/15)",
       "exercise_score": 0,
       "exercise_detail": "今日无训练 (0/20); 组数 0 (0/10)",
-      "bonus_score": 7,
-      "bonus_detail": "数据完整性 (0/10); 体脂趋势 -1.2% (7/10)",
-      "total_score": 7,
-      "grade": "💀 D",
-      "calories_in": 0,
+      "bonus_score": 15,
+      "bonus_detail": "数据完整性 (8/10); 体脂趋势 -1.2% (7/10)",
+      "total_score": 51,
+      "grade": "⚠️ C",
+      "calories_in": 1981,
       "calories_target": 1640,
-      "protein_in": 0,
+      "protein_in": 119,
       "protein_target": 150,
-      "water_in": 0,
+      "water_in": 1400,
       "water_target": 2000,
       "training_sets": 0,
       "training_volume": 0,
@@ -1853,7 +1883,7 @@
         "exercise": "今日无训练 (0/20); 组数 2 (0/10)"
       }
     ],
-    "exported_at": "2026-09-14T01:00:01.921236"
+    "exported_at": "2026-09-14T22:05:01.418908"
   },
   "food_library": {
     "items": [
@@ -1867,8 +1897,8 @@
         "fat": 0.3,
         "category": "主食",
         "ref_price": 0.0,
-        "total_servings": 38.0,
-        "total_grams": 3950.0,
+        "total_servings": 39.0,
+        "total_grams": 4050.0,
         "cumulative_spending": 0.0,
         "source": "预置"
       },
@@ -2203,6 +2233,21 @@
         "source": "用户"
       },
       {
+        "name": "雀巢奶球",
+        "brand": "雀巢",
+        "per_unit": "1颗约5ml",
+        "calories": 15.0,
+        "carbs": 0.6,
+        "protein": 0.3,
+        "fat": 1.3,
+        "category": "乳制品",
+        "ref_price": 0.0,
+        "total_servings": 5.0,
+        "total_grams": 25.0,
+        "cumulative_spending": 0.0,
+        "source": "用户"
+      },
+      {
         "name": "君乐宝新鲜酸奶",
         "brand": "",
         "per_unit": "125g/袋",
@@ -2216,21 +2261,6 @@
         "total_grams": 500.0,
         "cumulative_spending": 0.0,
         "source": "用户提供标准营养数据"
-      },
-      {
-        "name": "雀巢奶球",
-        "brand": "雀巢",
-        "per_unit": "1颗约5ml",
-        "calories": 15.0,
-        "carbs": 0.6,
-        "protein": 0.3,
-        "fat": 1.3,
-        "category": "乳制品",
-        "ref_price": 0.0,
-        "total_servings": 4.0,
-        "total_grams": 20.0,
-        "cumulative_spending": 0.0,
-        "source": "用户"
       },
       {
         "name": "蛋白粉（乳清）",
@@ -3832,8 +3862,8 @@
         "fat": 0.5,
         "category": "汤品",
         "ref_price": 0.0,
-        "total_servings": 1.0,
-        "total_grams": 200.0,
+        "total_servings": 2.0,
+        "total_grams": 400.0,
         "cumulative_spending": 0.0,
         "source": "用户估算"
       },
@@ -4196,6 +4226,21 @@
         "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户"
+      },
+      {
+        "name": "清汤牛肉水煮菜",
+        "brand": "",
+        "per_unit": "1份",
+        "calories": 280.0,
+        "carbs": 14.0,
+        "protein": 26.0,
+        "fat": 12.0,
+        "category": "肉类",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "cumulative_spending": 0,
+        "source": "用户自估"
       },
       {
         "name": "牛肉（瘦肉）",
@@ -4976,6 +5021,21 @@
         "total_grams": 12.0,
         "cumulative_spending": 0.0,
         "source": "用户估算"
+      },
+      {
+        "name": "蘸水调料",
+        "brand": "",
+        "per_unit": "1份",
+        "calories": 110.0,
+        "carbs": 3.0,
+        "protein": 1.0,
+        "fat": 11.0,
+        "category": "调味料",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户自估"
       },
       {
         "name": "酱油",
@@ -5788,17 +5848,17 @@
         "source": "预置"
       }
     ],
-    "total_foods": 262,
-    "total_servings": 489.7,
+    "total_foods": 264,
+    "total_servings": 493.7,
     "total_spending": 271.97,
     "by_category": {
       "主食": {
         "count": 21,
-        "servings": 66.2
+        "servings": 67.2
       },
       "乳制品": {
         "count": 9,
-        "servings": 36.4
+        "servings": 37.4
       },
       "家常菜": {
         "count": 22,
@@ -5822,10 +5882,10 @@
       },
       "汤品": {
         "count": 1,
-        "servings": 1.0
+        "servings": 2.0
       },
       "肉类": {
-        "count": 27,
+        "count": 28,
         "servings": 54.8
       },
       "蔬菜": {
@@ -5837,8 +5897,8 @@
         "servings": 17.5
       },
       "调味料": {
-        "count": 3,
-        "servings": 5.0
+        "count": 4,
+        "servings": 6.0
       },
       "零食": {
         "count": 19,
