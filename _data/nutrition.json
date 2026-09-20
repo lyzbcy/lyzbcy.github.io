@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-20T22:05:02.049700+08:00",
+  "generated_at": "2026-09-21T01:00:01.989160+08:00",
   "goals": {
     "calories": 1640,
     "water": 2000,
@@ -347,9 +347,9 @@
   },
   "macros": {
     "carbs_pct": 43,
-    "protein_pct": 24,
-    "fat_pct": 33,
-    "total_cal": 1805
+    "protein_pct": 23,
+    "fat_pct": 34,
+    "total_cal": 1789
   },
   "trend": [
     {
@@ -1881,28 +1881,28 @@
     }
   ],
   "status": {
-    "has_today": true,
+    "has_today": false,
     "has_yesterday": true,
-    "today": "2026-09-20",
+    "today": "2026-09-21",
     "is_active": true,
     "is_training_day": false
   },
   "health_score": {
     "today": {
-      "date": "2026-09-20",
-      "nutrition_score": 31,
-      "nutrition_detail": "热量 1990/1640 kcal (14/20); 蛋白 93.5/150g (9/15); 饮水 1100/2000ml (8/15)",
+      "date": "2026-09-21",
+      "nutrition_score": 0,
+      "nutrition_detail": "热量 0/1640 kcal (0/20); 蛋白 0/150g (0/15); 饮水 0/2000ml (0/15)",
       "exercise_score": 0,
       "exercise_detail": "今日无训练 (0/20); 组数 0 (0/10)",
-      "bonus_score": 15,
-      "bonus_detail": "数据完整性 (8/10); 体脂趋势 -1.2% (7/10)",
-      "total_score": 46,
-      "grade": "⚠️ C",
-      "calories_in": 1990,
+      "bonus_score": 7,
+      "bonus_detail": "数据完整性 (0/10); 体脂趋势 -1.2% (7/10)",
+      "total_score": 7,
+      "grade": "💀 D",
+      "calories_in": 0,
       "calories_target": 1640,
-      "protein_in": 93.5,
+      "protein_in": 0,
       "protein_target": 150,
-      "water_in": 1100,
+      "water_in": 0,
       "water_target": 2000,
       "training_sets": 0,
       "training_volume": 0,
@@ -1914,13 +1914,6 @@
       "below_bmr": true
     },
     "history": [
-      {
-        "date": "2026-09-05",
-        "score": 7,
-        "grade": "💀 D",
-        "nutrition": "热量 0/1640 kcal (0/20); 蛋白 0/150g (0/15); 饮水 0/2000ml (0/15)",
-        "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
-      },
       {
         "date": "2026-09-06",
         "score": 11,
@@ -2011,9 +2004,16 @@
         "grade": "💀 D",
         "nutrition": "热量 482/1640 kcal (0/20); 蛋白 49.2/150g (5/15); 饮水 500/2000ml (4/15)",
         "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
+      },
+      {
+        "date": "2026-09-20",
+        "score": 46,
+        "grade": "⚠️ C",
+        "nutrition": "热量 1990/1640 kcal (14/20); 蛋白 93.5/150g (9/15); 饮水 1100/2000ml (8/15)",
+        "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
       }
     ],
-    "exported_at": "2026-09-20T22:05:02.036616"
+    "exported_at": "2026-09-21T01:00:01.980957"
   },
   "food_library": {
     "items": [
