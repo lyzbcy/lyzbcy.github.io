@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-21T22:05:01.966582+08:00",
+  "generated_at": "2026-09-21T22:31:28.971104+08:00",
   "goals": {
     "calories": 1640,
     "water": 2000,
@@ -25,11 +25,11 @@
       "first": "2026-04-29",
       "last": "2026-09-21"
     },
-    "avg_calories": 2244,
-    "avg_protein": 114,
+    "avg_calories": 2006,
+    "avg_protein": 104,
     "avg_water": 1832,
-    "avg_carbs": 268,
-    "avg_fat": 78,
+    "avg_carbs": 232,
+    "avg_fat": 72,
     "total_training_calories": 11016,
     "training_days": 43,
     "compliance": {
@@ -346,10 +346,10 @@
     }
   },
   "macros": {
-    "carbs_pct": 52,
-    "protein_pct": 20,
-    "fat_pct": 28,
-    "total_cal": 3602
+    "carbs_pct": 46,
+    "protein_pct": 22,
+    "fat_pct": 32,
+    "total_cal": 1949
   },
   "trend": [
     {
@@ -484,12 +484,12 @@
     },
     {
       "date": "2026-09-21",
-      "calories": 14331,
-      "protein": 610.2,
-      "carbs": 2123.8,
-      "fat": 394.3,
+      "calories": 2891,
+      "protein": 126.2,
+      "carbs": 407.8,
+      "fat": 86.3,
       "water": 1000,
-      "net_calories": 14331,
+      "net_calories": 2891,
       "has_fitness": false
     }
   ],
@@ -1891,21 +1891,21 @@
     },
     {
       "date": "2026-09-21",
-      "total_calories": 14331,
-      "total_carbs": 2123.8,
-      "total_protein": 610.2,
-      "total_fat": 394.3,
+      "total_calories": 2891,
+      "total_carbs": 407.8,
+      "total_protein": 126.2,
+      "total_fat": 86.3,
       "total_water": 1000,
-      "net_calories": 14331,
-      "meal_count": 5,
+      "net_calories": 2891,
+      "meal_count": 6,
       "water_entries": 2,
       "supplements": {
         "count": 0,
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 873.8,
-      "protein_pct": 406.8,
+      "calorie_pct": 176.3,
+      "protein_pct": 84.1,
       "water_pct": 50.0,
       "has_data": true
     }
@@ -1920,17 +1920,17 @@
   "health_score": {
     "today": {
       "date": "2026-09-21",
-      "nutrition_score": 23,
-      "nutrition_detail": "热量 14331/1640 kcal (0/20); 蛋白 610.2/150g (15/15); 饮水 1000/2000ml (8/15)",
+      "nutrition_score": 21,
+      "nutrition_detail": "热量 2891/1640 kcal (0/20); 蛋白 126.2/150g (13/15); 饮水 1000/2000ml (8/15)",
       "exercise_score": 0,
       "exercise_detail": "今日无训练 (0/20); 组数 0 (0/10)",
       "bonus_score": 15,
       "bonus_detail": "数据完整性 (8/10); 体脂趋势 -1.2% (7/10)",
-      "total_score": 38,
+      "total_score": 36,
       "grade": "⚠️ C",
-      "calories_in": 14331,
+      "calories_in": 2891,
       "calories_target": 1640,
-      "protein_in": 610.2,
+      "protein_in": 126.2,
       "protein_target": 150,
       "water_in": 1000,
       "water_target": 2000,
@@ -2043,25 +2043,10 @@
         "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
       }
     ],
-    "exported_at": "2026-09-21T22:05:01.954383"
+    "exported_at": "2026-09-21T22:31:28.962724"
   },
   "food_library": {
     "items": [
-      {
-        "name": "全家福水饺（鲜东北饺子馆）",
-        "brand": "鲜东北饺子馆·红星大都会店",
-        "per_unit": "24个",
-        "calories": 520.0,
-        "carbs": 78.0,
-        "protein": 22.0,
-        "fat": 14.0,
-        "category": "主食",
-        "ref_price": 13.08,
-        "total_servings": 24.0,
-        "total_grams": 0,
-        "cumulative_spending": 313.92,
-        "source": "用户"
-      },
       {
         "name": "杂粮米饭",
         "brand": "",
@@ -2136,6 +2121,21 @@
         "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户估算（油包1/2，¥4）"
+      },
+      {
+        "name": "全家福水饺（鲜东北饺子馆）",
+        "brand": "鲜东北饺子馆·红星大都会店",
+        "per_unit": "1份24个",
+        "calories": 520.0,
+        "carbs": 78.0,
+        "protein": 22.0,
+        "fat": 14.0,
+        "category": "主食",
+        "ref_price": 13.08,
+        "total_servings": 2.0,
+        "total_grams": 0,
+        "cumulative_spending": 26.16,
+        "source": "用户"
       },
       {
         "name": "粉丝（泡发）",
@@ -6489,12 +6489,12 @@
       }
     ],
     "total_foods": 296,
-    "total_servings": 531.1,
-    "total_spending": 611.87,
+    "total_servings": 509.1,
+    "total_spending": 324.11,
     "by_category": {
       "主食": {
         "count": 26,
-        "servings": 53.4
+        "servings": 31.4
       },
       "乳制品": {
         "count": 9,
