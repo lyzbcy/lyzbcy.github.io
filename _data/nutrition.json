@@ -1,50 +1,50 @@
 {
-  "generated_at": "2026-09-21T23:05:46.101372+08:00",
+  "generated_at": "2026-09-22T22:05:02.059829+08:00",
   "goals": {
-    "calories": 1640,
+    "calories": 1955,
     "water": 2000,
     "protein": 150
   },
   "goals_meta": {
     "dynamic": true,
-    "bmr": 1700,
+    "bmr": 1713,
     "bmr_formulas": {
-      "mifflin": 1700,
-      "harris": 1765,
-      "katch": 1611
+      "mifflin": 1713,
+      "harris": 1783,
+      "katch": 1634
     },
-    "tdee": 2040,
-    "bmr_floor": 1700,
-    "below_bmr": true,
-    "is_training_day": false,
+    "tdee": 2355,
+    "bmr_floor": 1713,
+    "below_bmr": false,
+    "is_training_day": true,
     "deficit": 400
   },
   "overview": {
-    "recorded_days": 48,
+    "recorded_days": 49,
     "date_range": {
       "first": "2026-04-29",
-      "last": "2026-09-21"
+      "last": "2026-09-22"
     },
-    "avg_calories": 1984,
+    "avg_calories": 1990,
     "avg_protein": 103,
-    "avg_water": 1832,
-    "avg_carbs": 229,
+    "avg_water": 1836,
+    "avg_carbs": 230,
     "avg_fat": 71,
-    "total_training_calories": 11016,
-    "training_days": 43,
+    "total_training_calories": 11538,
+    "training_days": 44,
     "compliance": {
-      "calorie": 92,
+      "calorie": 82,
       "protein": 27,
-      "water": 79
+      "water": 80
     }
   },
   "weight": {
     "latest": {
-      "date": "2026-09-03",
-      "weight": 72.45,
+      "date": "2026-09-22",
+      "weight": 73.8,
       "unit": "kg"
     },
-    "change": 0.5,
+    "change": 1.8,
     "history": [
       {
         "date": "2023-08-26",
@@ -139,6 +139,11 @@
       {
         "date": "2026-09-03",
         "weight": 72.45,
+        "unit": "kg"
+      },
+      {
+        "date": "2026-09-22",
+        "weight": 73.8,
         "unit": "kg"
       }
     ]
@@ -346,22 +351,12 @@
     }
   },
   "macros": {
-    "carbs_pct": 45,
-    "protein_pct": 23,
+    "carbs_pct": 46,
+    "protein_pct": 22,
     "fat_pct": 32,
-    "total_cal": 1799
+    "total_cal": 1841
   },
   "trend": [
-    {
-      "date": "2026-09-08",
-      "calories": 1620,
-      "protein": 72.0,
-      "carbs": 203.5,
-      "fat": 56.2,
-      "water": 2280,
-      "net_calories": 1338,
-      "has_fitness": true
-    },
     {
       "date": "2026-09-09",
       "calories": 2808,
@@ -389,7 +384,7 @@
       "carbs": 260.6,
       "fat": 72.6,
       "water": 1000,
-      "net_calories": 2044,
+      "net_calories": 2040,
       "has_fitness": true
     },
     {
@@ -399,7 +394,7 @@
       "carbs": 191.4,
       "fat": 39.3,
       "water": 630,
-      "net_calories": 661,
+      "net_calories": 648,
       "has_fitness": true
     },
     {
@@ -409,7 +404,7 @@
       "carbs": 241.8,
       "fat": 148.3,
       "water": 1780,
-      "net_calories": 2839,
+      "net_calories": 2838,
       "has_fitness": true
     },
     {
@@ -491,6 +486,16 @@
       "water": 1000,
       "net_calories": 1851,
       "has_fitness": false
+    },
+    {
+      "date": "2026-09-22",
+      "calories": 2279,
+      "protein": 114.25,
+      "carbs": 289.9,
+      "fat": 78.05,
+      "water": 2030,
+      "net_calories": 1965,
+      "has_fitness": true
     }
   ],
   "summaries": [
@@ -509,7 +514,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 76.4,
+      "calorie_pct": 64.1,
       "protein_pct": 27.3,
       "water_pct": 80.0,
       "has_data": true
@@ -521,7 +526,7 @@
       "total_protein": 58.1,
       "total_fat": 56.6,
       "total_water": 1680,
-      "net_calories": 1099,
+      "net_calories": 1092,
       "meal_count": 2,
       "water_entries": 5,
       "supplements": {
@@ -529,7 +534,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 88.9,
+      "calorie_pct": 74.6,
       "protein_pct": 38.7,
       "water_pct": 84.0,
       "has_data": true,
@@ -538,23 +543,23 @@
         "sets": 14,
         "estimated_min": 67.2,
         "active_min": 8.2,
-        "calories_burned": 359,
-        "calories_net": 262,
+        "calories_burned": 366,
+        "calories_net": 267,
         "by_type": {
           "compound": {
             "sets": 4,
             "min": 19.2,
-            "cal": 139
+            "cal": 142
           },
           "isolation": {
             "sets": 7,
             "min": 33.6,
-            "cal": 142
+            "cal": 145
           },
           "unknown": {
             "sets": 3,
             "min": 14.4,
-            "cal": 78
+            "cal": 80
           }
         },
         "method": "MET-endTime"
@@ -575,7 +580,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 104.1,
+      "calorie_pct": 87.3,
       "protein_pct": 71.0,
       "water_pct": 87.5,
       "has_data": true,
@@ -611,7 +616,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 101.7,
+      "calorie_pct": 85.3,
       "protein_pct": 59.5,
       "water_pct": 104.5,
       "has_data": true,
@@ -639,7 +644,7 @@
       "total_protein": 93.3,
       "total_fat": 48.35,
       "total_water": 2250,
-      "net_calories": 1592,
+      "net_calories": 1588,
       "meal_count": 5,
       "water_entries": 8,
       "supplements": {
@@ -647,7 +652,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 111.6,
+      "calorie_pct": 93.6,
       "protein_pct": 62.2,
       "water_pct": 112.5,
       "has_data": true,
@@ -656,23 +661,23 @@
         "sets": 11,
         "estimated_min": 42.0,
         "active_min": 7.3,
-        "calories_burned": 238,
-        "calories_net": 177,
+        "calories_burned": 242,
+        "calories_net": 180,
         "by_type": {
           "compound": {
             "sets": 4,
             "min": 15.3,
-            "cal": 111
+            "cal": 113
           },
           "unknown": {
             "sets": 3,
             "min": 11.5,
-            "cal": 62
+            "cal": 63
           },
           "isolation": {
             "sets": 4,
             "min": 15.3,
-            "cal": 65
+            "cal": 66
           }
         },
         "method": "MET-endTime"
@@ -693,7 +698,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 130.5,
+      "calorie_pct": 109.5,
       "protein_pct": 59.9,
       "water_pct": 90.5,
       "has_data": true
@@ -705,7 +710,7 @@
       "total_protein": 116.1,
       "total_fat": 64.35,
       "total_water": 3230,
-      "net_calories": 1724,
+      "net_calories": 1718,
       "meal_count": 7,
       "water_entries": 7,
       "supplements": {
@@ -713,7 +718,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 128.1,
+      "calorie_pct": 107.4,
       "protein_pct": 77.4,
       "water_pct": 161.5,
       "has_data": true,
@@ -722,23 +727,23 @@
         "sets": 17,
         "estimated_min": 63.0,
         "active_min": 9.4,
-        "calories_burned": 376,
-        "calories_net": 285,
+        "calories_burned": 383,
+        "calories_net": 290,
         "by_type": {
           "compound": {
             "sets": 9,
             "min": 33.4,
-            "cal": 242
+            "cal": 246
           },
           "isolation": {
             "sets": 6,
             "min": 22.2,
-            "cal": 94
+            "cal": 96
           },
           "unknown": {
             "sets": 2,
             "min": 7.4,
-            "cal": 40
+            "cal": 41
           }
         },
         "method": "MET-endTime"
@@ -759,7 +764,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 61.0,
+      "calorie_pct": 51.2,
       "protein_pct": 27.4,
       "water_pct": 110.0,
       "has_data": true
@@ -771,7 +776,7 @@
       "total_protein": 105.9,
       "total_fat": 65.4,
       "total_water": 1700,
-      "net_calories": 1209,
+      "net_calories": 1202,
       "meal_count": 4,
       "water_entries": 4,
       "supplements": {
@@ -779,7 +784,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 95.2,
+      "calorie_pct": 79.9,
       "protein_pct": 70.6,
       "water_pct": 85.0,
       "has_data": true,
@@ -788,23 +793,23 @@
         "sets": 15,
         "estimated_min": 72.0,
         "active_min": 8.3,
-        "calories_burned": 353,
-        "calories_net": 249,
+        "calories_burned": 360,
+        "calories_net": 254,
         "by_type": {
           "compound": {
             "sets": 3,
             "min": 14.4,
-            "cal": 104
+            "cal": 106
           },
           "isolation": {
             "sets": 11,
             "min": 52.8,
-            "cal": 223
+            "cal": 227
           },
           "unknown": {
             "sets": 1,
             "min": 4.8,
-            "cal": 26
+            "cal": 27
           }
         },
         "method": "MET-endTime"
@@ -825,7 +830,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 138.1,
+      "calorie_pct": 115.8,
       "protein_pct": 71.9,
       "water_pct": 87.0,
       "has_data": true
@@ -837,7 +842,7 @@
       "total_protein": 95.8,
       "total_fat": 58.55,
       "total_water": 2500,
-      "net_calories": 1558,
+      "net_calories": 1556,
       "meal_count": 4,
       "water_entries": 9,
       "supplements": {
@@ -845,7 +850,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 107.5,
+      "calorie_pct": 90.2,
       "protein_pct": 63.9,
       "water_pct": 125.0,
       "has_data": true,
@@ -854,23 +859,23 @@
         "sets": 12,
         "estimated_min": 36.1,
         "active_min": 7.7,
-        "calories_burned": 204,
-        "calories_net": 151,
+        "calories_burned": 207,
+        "calories_net": 154,
         "by_type": {
           "compound": {
             "sets": 4,
             "min": 12.0,
-            "cal": 87
+            "cal": 89
           },
           "unknown": {
             "sets": 4,
             "min": 12.0,
-            "cal": 65
+            "cal": 67
           },
           "isolation": {
             "sets": 4,
             "min": 12.0,
-            "cal": 51
+            "cal": 52
           }
         },
         "method": "MET-endTime"
@@ -891,7 +896,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 118.7,
+      "calorie_pct": 99.6,
       "protein_pct": 75.7,
       "water_pct": 90.5,
       "has_data": true
@@ -911,7 +916,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 114.0,
+      "calorie_pct": 95.7,
       "protein_pct": 80.3,
       "water_pct": 113.5,
       "has_data": true
@@ -931,7 +936,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 146.0,
+      "calorie_pct": 122.5,
       "protein_pct": 99.4,
       "water_pct": 90.0,
       "has_data": true
@@ -943,7 +948,7 @@
       "total_protein": 110.6,
       "total_fat": 89.4,
       "total_water": 2130,
-      "net_calories": 1596,
+      "net_calories": 1587,
       "meal_count": 3,
       "water_entries": 9,
       "supplements": {
@@ -951,7 +956,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 126.5,
+      "calorie_pct": 106.1,
       "protein_pct": 73.7,
       "water_pct": 106.5,
       "has_data": true,
@@ -960,23 +965,23 @@
         "sets": 14,
         "estimated_min": 89.6,
         "active_min": 8.4,
-        "calories_burned": 479,
-        "calories_net": 349,
+        "calories_burned": 488,
+        "calories_net": 356,
         "by_type": {
           "compound": {
             "sets": 4,
             "min": 25.6,
-            "cal": 186
+            "cal": 189
           },
           "unknown": {
             "sets": 3,
             "min": 19.2,
-            "cal": 104
+            "cal": 106
           },
           "isolation": {
             "sets": 7,
             "min": 44.8,
-            "cal": 189
+            "cal": 193
           }
         },
         "method": "MET-endTime"
@@ -989,7 +994,7 @@
       "total_protein": 84.1,
       "total_fat": 68.9,
       "total_water": 1930,
-      "net_calories": 1419,
+      "net_calories": 1410,
       "meal_count": 4,
       "water_entries": 6,
       "supplements": {
@@ -997,7 +1002,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 115.4,
+      "calorie_pct": 96.8,
       "protein_pct": 56.1,
       "water_pct": 96.5,
       "has_data": true,
@@ -1006,23 +1011,23 @@
         "sets": 14,
         "estimated_min": 86.5,
         "active_min": 8.7,
-        "calories_burned": 473,
-        "calories_net": 348,
+        "calories_burned": 482,
+        "calories_net": 355,
         "by_type": {
           "compound": {
             "sets": 3,
             "min": 18.5,
-            "cal": 134
+            "cal": 137
           },
           "unknown": {
             "sets": 7,
             "min": 43.2,
-            "cal": 235
+            "cal": 239
           },
           "isolation": {
             "sets": 4,
             "min": 24.7,
-            "cal": 104
+            "cal": 106
           }
         },
         "method": "MET-endTime"
@@ -1043,7 +1048,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 129.5,
+      "calorie_pct": 108.6,
       "protein_pct": 65.5,
       "water_pct": 102.0,
       "has_data": true
@@ -1063,7 +1068,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 127.6,
+      "calorie_pct": 107.1,
       "protein_pct": 75.9,
       "water_pct": 101.0,
       "has_data": true
@@ -1083,7 +1088,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 139.2,
+      "calorie_pct": 116.8,
       "protein_pct": 89.9,
       "water_pct": 92.5,
       "has_data": true
@@ -1095,7 +1100,7 @@
       "total_protein": 105.3,
       "total_fat": 69.2,
       "total_water": 2150,
-      "net_calories": 1572,
+      "net_calories": 1562,
       "meal_count": 5,
       "water_entries": 8,
       "supplements": {
@@ -1103,7 +1108,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 126.6,
+      "calorie_pct": 106.2,
       "protein_pct": 70.2,
       "water_pct": 107.5,
       "has_data": true,
@@ -1112,23 +1117,23 @@
         "sets": 15,
         "estimated_min": 89.0,
         "active_min": 8.2,
-        "calories_burned": 505,
-        "calories_net": 376,
+        "calories_burned": 515,
+        "calories_net": 383,
         "by_type": {
           "compound": {
             "sets": 6,
             "min": 35.6,
-            "cal": 258
+            "cal": 263
           },
           "unknown": {
             "sets": 3,
             "min": 17.8,
-            "cal": 97
+            "cal": 99
           },
           "isolation": {
             "sets": 6,
             "min": 35.6,
-            "cal": 151
+            "cal": 153
           }
         },
         "method": "MET-endTime"
@@ -1141,7 +1146,7 @@
       "total_protein": 112.4,
       "total_fat": 76.2,
       "total_water": 2816,
-      "net_calories": 1835,
+      "net_calories": 1829,
       "meal_count": 7,
       "water_entries": 9,
       "supplements": {
@@ -1149,7 +1154,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 132.0,
+      "calorie_pct": 110.7,
       "protein_pct": 74.9,
       "water_pct": 140.8,
       "has_data": true,
@@ -1158,18 +1163,18 @@
         "sets": 14,
         "estimated_min": 56.7,
         "active_min": 7.8,
-        "calories_burned": 330,
-        "calories_net": 248,
+        "calories_burned": 336,
+        "calories_net": 253,
         "by_type": {
           "compound": {
             "sets": 7,
             "min": 28.4,
-            "cal": 205
+            "cal": 209
           },
           "isolation": {
             "sets": 6,
             "min": 24.3,
-            "cal": 103
+            "cal": 105
           },
           "unknown": {
             "sets": 1,
@@ -1195,7 +1200,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 158.5,
+      "calorie_pct": 133.0,
       "protein_pct": 75.3,
       "water_pct": 85.0,
       "has_data": true
@@ -1207,7 +1212,7 @@
       "total_protein": 125.0,
       "total_fat": 74.0,
       "total_water": 2050,
-      "net_calories": 2099,
+      "net_calories": 2095,
       "meal_count": 5,
       "water_entries": 5,
       "supplements": {
@@ -1215,7 +1220,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 140.5,
+      "calorie_pct": 117.9,
       "protein_pct": 83.3,
       "water_pct": 102.5,
       "has_data": true,
@@ -1224,23 +1229,23 @@
         "sets": 8,
         "estimated_min": 41.8,
         "active_min": 4.5,
-        "calories_burned": 205,
-        "calories_net": 144,
+        "calories_burned": 209,
+        "calories_net": 147,
         "by_type": {
           "compound": {
             "sets": 1,
             "min": 5.2,
-            "cal": 38
+            "cal": 39
           },
           "unknown": {
             "sets": 2,
             "min": 10.4,
-            "cal": 57
+            "cal": 58
           },
           "isolation": {
             "sets": 5,
             "min": 26.1,
-            "cal": 110
+            "cal": 112
           }
         },
         "method": "MET-endTime"
@@ -1261,7 +1266,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 138.6,
+      "calorie_pct": 116.3,
       "protein_pct": 65.6,
       "water_pct": 102.5,
       "has_data": true
@@ -1273,7 +1278,7 @@
       "total_protein": 128.9,
       "total_fat": 46.9,
       "total_water": 2330,
-      "net_calories": 1874,
+      "net_calories": 1870,
       "meal_count": 6,
       "water_entries": 6,
       "supplements": {
@@ -1281,7 +1286,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 126.6,
+      "calorie_pct": 106.2,
       "protein_pct": 85.9,
       "water_pct": 116.5,
       "has_data": true,
@@ -1290,13 +1295,13 @@
         "sets": 6,
         "estimated_min": 27.9,
         "active_min": 3.8,
-        "calories_burned": 202,
-        "calories_net": 162,
+        "calories_burned": 206,
+        "calories_net": 165,
         "by_type": {
           "compound": {
             "sets": 6,
             "min": 27.9,
-            "cal": 202
+            "cal": 206
           }
         },
         "method": "MET-endTime"
@@ -1309,7 +1314,7 @@
       "total_protein": 103.9,
       "total_fat": 55.8,
       "total_water": 2330,
-      "net_calories": 1649,
+      "net_calories": 1645,
       "meal_count": 7,
       "water_entries": 6,
       "supplements": {
@@ -1317,7 +1322,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 113.7,
+      "calorie_pct": 95.4,
       "protein_pct": 69.3,
       "water_pct": 116.5,
       "has_data": true,
@@ -1326,13 +1331,13 @@
         "sets": 3,
         "estimated_min": 29.8,
         "active_min": 1.8,
-        "calories_burned": 216,
-        "calories_net": 173,
+        "calories_burned": 220,
+        "calories_net": 176,
         "by_type": {
           "compound": {
             "sets": 3,
             "min": 29.8,
-            "cal": 216
+            "cal": 220
           }
         },
         "method": "MET-endTime"
@@ -1353,7 +1358,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 153.0,
+      "calorie_pct": 128.3,
       "protein_pct": 69.2,
       "water_pct": 91.0,
       "has_data": true
@@ -1373,7 +1378,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 64.0,
+      "calorie_pct": 53.7,
       "protein_pct": 33.7,
       "water_pct": 52.5,
       "has_data": true
@@ -1393,7 +1398,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 158.6,
+      "calorie_pct": 133.0,
       "protein_pct": 51.4,
       "water_pct": 97.5,
       "has_data": true
@@ -1405,7 +1410,7 @@
       "total_protein": 131.5,
       "total_fat": 91.2,
       "total_water": 2590,
-      "net_calories": 2010,
+      "net_calories": 2005,
       "meal_count": 6,
       "water_entries": 8,
       "supplements": {
@@ -1413,7 +1418,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 138.7,
+      "calorie_pct": 116.4,
       "protein_pct": 87.7,
       "water_pct": 129.5,
       "has_data": true,
@@ -1422,23 +1427,23 @@
         "sets": 10,
         "estimated_min": 51.0,
         "active_min": 6.2,
-        "calories_burned": 265,
-        "calories_net": 191,
+        "calories_burned": 270,
+        "calories_net": 194,
         "by_type": {
           "unknown": {
             "sets": 3,
             "min": 15.3,
-            "cal": 83
+            "cal": 85
           },
           "compound": {
             "sets": 2,
             "min": 10.2,
-            "cal": 74
+            "cal": 75
           },
           "isolation": {
             "sets": 5,
             "min": 25.5,
-            "cal": 108
+            "cal": 110
           }
         },
         "method": "MET-endTime"
@@ -1459,7 +1464,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 123.8,
+      "calorie_pct": 103.8,
       "protein_pct": 58.2,
       "water_pct": 106.5,
       "has_data": true
@@ -1471,7 +1476,7 @@
       "total_protein": 136.1,
       "total_fat": 64.3,
       "total_water": 2410,
-      "net_calories": 1889,
+      "net_calories": 1883,
       "meal_count": 5,
       "water_entries": 7,
       "supplements": {
@@ -1479,7 +1484,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 135.3,
+      "calorie_pct": 113.5,
       "protein_pct": 90.7,
       "water_pct": 120.5,
       "has_data": true,
@@ -1488,23 +1493,23 @@
         "sets": 5,
         "estimated_min": 65.0,
         "active_min": 3.0,
-        "calories_burned": 330,
-        "calories_net": 235,
+        "calories_burned": 336,
+        "calories_net": 240,
         "by_type": {
           "compound": {
             "sets": 1,
             "min": 13.0,
-            "cal": 94
+            "cal": 96
           },
           "isolation": {
             "sets": 3,
             "min": 39.0,
-            "cal": 165
+            "cal": 168
           },
           "unknown": {
             "sets": 1,
             "min": 13.0,
-            "cal": 71
+            "cal": 72
           }
         },
         "method": "MET-endTime"
@@ -1525,7 +1530,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 153.0,
+      "calorie_pct": 128.4,
       "protein_pct": 79.6,
       "water_pct": 114.5,
       "has_data": true
@@ -1545,7 +1550,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 80.4,
+      "calorie_pct": 67.4,
       "protein_pct": 36.7,
       "water_pct": 38.6,
       "has_data": true
@@ -1557,7 +1562,7 @@
       "total_protein": 72.0,
       "total_fat": 56.2,
       "total_water": 2280,
-      "net_calories": 1338,
+      "net_calories": 1333,
       "meal_count": 5,
       "water_entries": 5,
       "supplements": {
@@ -1565,7 +1570,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 98.8,
+      "calorie_pct": 82.9,
       "protein_pct": 48.0,
       "water_pct": 114.0,
       "has_data": true,
@@ -1574,13 +1579,13 @@
         "sets": 6,
         "estimated_min": 38.9,
         "active_min": 3.7,
-        "calories_burned": 282,
-        "calories_net": 225,
+        "calories_burned": 287,
+        "calories_net": 229,
         "by_type": {
           "compound": {
             "sets": 6,
             "min": 38.9,
-            "cal": 282
+            "cal": 287
           }
         },
         "method": "MET-endTime"
@@ -1601,7 +1606,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 171.2,
+      "calorie_pct": 143.6,
       "protein_pct": 97.5,
       "water_pct": 82.5,
       "has_data": true
@@ -1621,7 +1626,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 136.6,
+      "calorie_pct": 114.6,
       "protein_pct": 87.7,
       "water_pct": 70.0,
       "has_data": true
@@ -1633,7 +1638,7 @@
       "total_protein": 134.8,
       "total_fat": 72.6,
       "total_water": 1000,
-      "net_calories": 2044,
+      "net_calories": 2040,
       "meal_count": 6,
       "water_entries": 3,
       "supplements": {
@@ -1641,7 +1646,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 136.6,
+      "calorie_pct": 114.6,
       "protein_pct": 89.9,
       "water_pct": 50.0,
       "has_data": true,
@@ -1650,18 +1655,18 @@
         "sets": 7,
         "estimated_min": 43.1,
         "active_min": 4.3,
-        "calories_burned": 197,
-        "calories_net": 135,
+        "calories_burned": 201,
+        "calories_net": 137,
         "by_type": {
           "isolation": {
             "sets": 5,
             "min": 30.8,
-            "cal": 130
+            "cal": 132
           },
           "unknown": {
             "sets": 2,
             "min": 12.3,
-            "cal": 67
+            "cal": 68
           }
         },
         "method": "MET-endTime"
@@ -1674,7 +1679,7 @@
       "total_protein": 81.4,
       "total_fat": 39.3,
       "total_water": 630,
-      "net_calories": 661,
+      "net_calories": 648,
       "meal_count": 5,
       "water_entries": 3,
       "supplements": {
@@ -1682,7 +1687,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 85.2,
+      "calorie_pct": 71.5,
       "protein_pct": 54.3,
       "water_pct": 31.5,
       "has_data": true,
@@ -1691,23 +1696,23 @@
         "sets": 12,
         "estimated_min": 122.0,
         "active_min": 7.8,
-        "calories_burned": 737,
-        "calories_net": 560,
+        "calories_burned": 750,
+        "calories_net": 570,
         "by_type": {
           "compound": {
             "sets": 6,
             "min": 61.0,
-            "cal": 442
+            "cal": 450
           },
           "unknown": {
             "sets": 3,
             "min": 30.5,
-            "cal": 166
+            "cal": 169
           },
           "isolation": {
             "sets": 3,
             "min": 30.5,
-            "cal": 129
+            "cal": 131
           }
         },
         "method": "MET-endTime"
@@ -1720,7 +1725,7 @@
       "total_protein": 142.0,
       "total_fat": 148.3,
       "total_water": 1780,
-      "net_calories": 2839,
+      "net_calories": 2838,
       "meal_count": 3,
       "water_entries": 3,
       "supplements": {
@@ -1728,7 +1733,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 174.0,
+      "calorie_pct": 145.9,
       "protein_pct": 94.7,
       "water_pct": 89.0,
       "has_data": true,
@@ -1737,13 +1742,13 @@
         "sets": 2,
         "estimated_min": 2.0,
         "active_min": 1.3,
-        "calories_burned": 14,
+        "calories_burned": 15,
         "calories_net": 12,
         "by_type": {
           "compound": {
             "sets": 2,
             "min": 2.0,
-            "cal": 14
+            "cal": 15
           }
         },
         "method": "MET-endTime"
@@ -1764,7 +1769,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 120.8,
+      "calorie_pct": 101.3,
       "protein_pct": 79.3,
       "water_pct": 70.0,
       "has_data": true
@@ -1784,7 +1789,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 126.6,
+      "calorie_pct": 106.2,
       "protein_pct": 75.5,
       "water_pct": 95.0,
       "has_data": true
@@ -1804,7 +1809,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 120.5,
+      "calorie_pct": 101.1,
       "protein_pct": 68.7,
       "water_pct": 92.5,
       "has_data": true
@@ -1824,7 +1829,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 91.0,
+      "calorie_pct": 76.4,
       "protein_pct": 89.3,
       "water_pct": 40.0,
       "has_data": true
@@ -1844,7 +1849,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 178.2,
+      "calorie_pct": 149.5,
       "protein_pct": 91.5,
       "water_pct": 90.0,
       "has_data": true
@@ -1864,7 +1869,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 29.4,
+      "calorie_pct": 24.7,
       "protein_pct": 32.8,
       "water_pct": 25.0,
       "has_data": true
@@ -1884,7 +1889,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 121.3,
+      "calorie_pct": 101.8,
       "protein_pct": 62.3,
       "water_pct": 55.0,
       "has_data": true
@@ -1904,53 +1909,87 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 112.9,
+      "calorie_pct": 94.7,
       "protein_pct": 54.8,
       "water_pct": 50.0,
       "has_data": true
+    },
+    {
+      "date": "2026-09-22",
+      "total_calories": 2279,
+      "total_carbs": 289.9,
+      "total_protein": 114.25,
+      "total_fat": 78.05,
+      "total_water": 2030,
+      "net_calories": 1965,
+      "meal_count": 5,
+      "water_entries": 6,
+      "supplements": {
+        "count": 0,
+        "has_creatine": false,
+        "has_protein": false
+      },
+      "calorie_pct": 116.6,
+      "protein_pct": 76.2,
+      "water_pct": 101.5,
+      "has_data": true,
+      "fitness": {
+        "total_volume": 2240.0,
+        "sets": 8,
+        "estimated_min": 46.9,
+        "active_min": 5.3,
+        "calories_burned": 314,
+        "calories_net": 244,
+        "by_type": {
+          "compound": {
+            "sets": 5,
+            "min": 29.3,
+            "cal": 216
+          },
+          "unknown": {
+            "sets": 3,
+            "min": 17.6,
+            "cal": 97
+          }
+        },
+        "method": "MET-endTime"
+      }
     }
   ],
   "status": {
     "has_today": true,
     "has_yesterday": true,
-    "today": "2026-09-21",
+    "today": "2026-09-22",
     "is_active": true,
-    "is_training_day": false
+    "is_training_day": true
   },
   "health_score": {
     "today": {
-      "date": "2026-09-21",
-      "nutrition_score": 31,
-      "nutrition_detail": "热量 1851/1640 kcal (15/20); 蛋白 82.2/150g (8/15); 饮水 1000/2000ml (8/15)",
-      "exercise_score": 0,
-      "exercise_detail": "今日无训练 (0/20); 组数 0 (0/10)",
-      "bonus_score": 15,
-      "bonus_detail": "数据完整性 (8/10); 体脂趋势 -1.2% (7/10)",
-      "total_score": 46,
-      "grade": "⚠️ C",
-      "calories_in": 1851,
-      "calories_target": 1640,
-      "protein_in": 82.2,
+      "date": "2026-09-22",
+      "nutrition_score": 39,
+      "nutrition_detail": "热量 2279/1955 kcal (13/20); 蛋白 114.25/150g (11/15); 饮水 2030/2000ml (15/15)",
+      "exercise_score": 21,
+      "exercise_detail": "训练量 2240kg (11/20); 组数 8 (10/10)",
+      "bonus_score": 17,
+      "bonus_detail": "数据完整性 (10/10); 体脂趋势 -1.2% (7/10)",
+      "total_score": 77,
+      "grade": "😊 A",
+      "calories_in": 2279,
+      "calories_target": 1955,
+      "protein_in": 114.25,
       "protein_target": 150,
-      "water_in": 1000,
+      "water_in": 2030,
       "water_target": 2000,
-      "training_sets": 0,
-      "training_volume": 0,
-      "training_cal": 0,
-      "training_duration_min": 0,
+      "training_sets": 8,
+      "training_volume": 2240.0,
+      "training_cal": 314,
+      "training_duration_min": 46.9,
       "bodyfat_pct": 20.7,
-      "is_training_day": false,
-      "bmr_floor": 1700,
-      "below_bmr": true
+      "is_training_day": true,
+      "bmr_floor": 1713,
+      "below_bmr": false
     },
     "history": [
-      {
-        "date": "2026-09-08",
-        "score": 7,
-        "grade": "💀 D",
-        "nutrition": "热量 0/1640 kcal (0/20); 蛋白 0/150g (0/15); 饮水 0/2000ml (0/15)",
-        "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
-      },
       {
         "date": "2026-09-09",
         "score": 44,
@@ -2041,12 +2080,34 @@
         "grade": "⚠️ C",
         "nutrition": "热量 1331/1640 kcal (12/20); 蛋白 60.2/150g (6/15); 饮水 1000/2000ml (8/15)",
         "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
+      },
+      {
+        "date": "2026-09-22",
+        "score": 7,
+        "grade": "💀 D",
+        "nutrition": "热量 0/1640 kcal (0/20); 蛋白 0/150g (0/15); 饮水 0/2000ml (0/15)",
+        "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
       }
     ],
-    "exported_at": "2026-09-21T23:05:46.093011"
+    "exported_at": "2026-09-22T22:05:02.042908"
   },
   "food_library": {
     "items": [
+      {
+        "name": "白米饭",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 116.0,
+        "carbs": 25.9,
+        "protein": 2.6,
+        "fat": 0.3,
+        "category": "主食",
+        "ref_price": 0.0,
+        "total_servings": 62.2,
+        "total_grams": 6220.0,
+        "cumulative_spending": 0.0,
+        "source": "预置"
+      },
       {
         "name": "杂粮米饭",
         "brand": "",
@@ -2072,10 +2133,40 @@
         "fat": 2.0,
         "category": "主食",
         "ref_price": 0.0,
-        "total_servings": 4.0,
-        "total_grams": 70.0,
+        "total_servings": 3.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户"
+      },
+      {
+        "name": "肉包",
+        "brand": "",
+        "per_unit": "1个",
+        "calories": 200.0,
+        "carbs": 24.0,
+        "protein": 9.5,
+        "fat": 7.5,
+        "category": "主食",
+        "ref_price": 2.0,
+        "total_servings": 3.0,
+        "total_grams": 0,
+        "cumulative_spending": 6.0,
+        "source": "用户自估"
+      },
+      {
+        "name": "菜包",
+        "brand": "",
+        "per_unit": "1个",
+        "calories": 150.0,
+        "carbs": 28.0,
+        "protein": 4.0,
+        "fat": 3.0,
+        "category": "主食",
+        "ref_price": 2.0,
+        "total_servings": 3.0,
+        "total_grams": 0,
+        "cumulative_spending": 6.0,
+        "source": "用户自估"
       },
       {
         "name": "马大姐蛋皮吐司",
@@ -2123,17 +2214,47 @@
         "source": "用户估算（油包1/2，¥4）"
       },
       {
-        "name": "粉丝（泡发）",
-        "brand": "",
-        "per_unit": "100g",
-        "calories": 138.0,
-        "carbs": 34.0,
-        "protein": 0.5,
-        "fat": 0.2,
+        "name": "杨掌柜山椒肥牛高人拉面",
+        "brand": "杨掌柜",
+        "per_unit": "1份",
+        "calories": 440.0,
+        "carbs": 58.0,
+        "protein": 9.0,
+        "fat": 12.0,
         "category": "主食",
         "ref_price": 0.0,
-        "total_servings": 1.6,
-        "total_grams": 160.0,
+        "total_servings": 2.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "产品营养表按实际投料折算"
+      },
+      {
+        "name": "皮蛋瘦肉粥(食堂)",
+        "brand": "",
+        "per_unit": "1杯",
+        "calories": 70.0,
+        "carbs": 10.0,
+        "protein": 4.5,
+        "fat": 1.5,
+        "category": "主食",
+        "ref_price": 2.0,
+        "total_servings": 2.0,
+        "total_grams": 0,
+        "cumulative_spending": 4.0,
+        "source": "用户自估"
+      },
+      {
+        "name": "红薯",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 86.0,
+        "carbs": 20.0,
+        "protein": 1.6,
+        "fat": 0.1,
+        "category": "主食",
+        "ref_price": 0.0,
+        "total_servings": 1.3,
+        "total_grams": 130.0,
         "cumulative_spending": 0.0,
         "source": "通用营养数据"
       },
@@ -2151,21 +2272,6 @@
         "total_grams": 120.0,
         "cumulative_spending": 0.0,
         "source": "用户"
-      },
-      {
-        "name": "红薯",
-        "brand": "",
-        "per_unit": "100g",
-        "calories": 86.0,
-        "carbs": 20.0,
-        "protein": 1.6,
-        "fat": 0.1,
-        "category": "主食",
-        "ref_price": 0.0,
-        "total_servings": 1.1,
-        "total_grams": 110.0,
-        "cumulative_spending": 0.0,
-        "source": "通用营养数据"
       },
       {
         "name": "公司食堂午餐",
@@ -2198,19 +2304,34 @@
         "source": "用户"
       },
       {
-        "name": "杨掌柜山椒肥牛高人拉面",
-        "brand": "杨掌柜",
-        "per_unit": "1份",
-        "calories": 440.0,
-        "carbs": 58.0,
-        "protein": 9.0,
-        "fat": 12.0,
+        "name": "杨掌柜粉面菜蛋螺蛳粉味（整桶208g）",
+        "brand": "",
+        "per_unit": "1桶208g",
+        "calories": 610.0,
+        "carbs": 85.5,
+        "protein": 17.7,
+        "fat": 22.5,
         "category": "主食",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 0,
+        "total_grams": 208.0,
         "cumulative_spending": 0.0,
-        "source": "产品营养表按实际投料折算"
+        "source": "用户（桶身营养表）"
+      },
+      {
+        "name": "杨掌柜螺蛳粉味干面饼（无调料）",
+        "brand": "",
+        "per_unit": "1块65g",
+        "calories": 200.0,
+        "carbs": 28.0,
+        "protein": 5.5,
+        "fat": 7.3,
+        "category": "主食",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 65.0,
+        "cumulative_spending": 0.0,
+        "source": "用户（桶身营养表折算）"
       },
       {
         "name": "杨掌柜高人拉面浓情番茄味",
@@ -2226,36 +2347,6 @@
         "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户估算"
-      },
-      {
-        "name": "泡面~自助小碗",
-        "brand": "",
-        "per_unit": "1碗",
-        "calories": 400.0,
-        "carbs": 52.0,
-        "protein": 8.0,
-        "fat": 17.0,
-        "category": "主食",
-        "ref_price": 0.0,
-        "total_servings": 1.0,
-        "total_grams": 0,
-        "cumulative_spending": 0.0,
-        "source": "通用泡面数据~估"
-      },
-      {
-        "name": "燕麦片(原味)",
-        "brand": "",
-        "per_unit": "1包35g",
-        "calories": 152.0,
-        "carbs": 26.1,
-        "protein": 2.3,
-        "fat": 3.7,
-        "category": "主食",
-        "ref_price": 0.0,
-        "total_servings": 1.0,
-        "total_grams": 35.0,
-        "cumulative_spending": 0.0,
-        "source": "用户"
       },
       {
         "name": "蒸红薯南瓜",
@@ -2318,6 +2409,21 @@
         "source": "用户"
       },
       {
+        "name": "粉丝（泡发）",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 138.0,
+        "carbs": 34.0,
+        "protein": 0.5,
+        "fat": 0.2,
+        "category": "主食",
+        "ref_price": 0.0,
+        "total_servings": 0.8,
+        "total_grams": 80.0,
+        "cumulative_spending": 0.0,
+        "source": "通用营养数据"
+      },
+      {
         "name": "全麦面包",
         "brand": "",
         "per_unit": "100g",
@@ -2333,64 +2439,34 @@
         "source": "预置"
       },
       {
-        "name": "白米饭",
+        "name": "泡面~自助小碗",
         "brand": "",
-        "per_unit": "100g",
-        "calories": 116.0,
-        "carbs": 25.9,
-        "protein": 2.6,
-        "fat": 0.3,
+        "per_unit": "1碗",
+        "calories": 400.0,
+        "carbs": 52.0,
+        "protein": 8.0,
+        "fat": 17.0,
         "category": "主食",
         "ref_price": 0.0,
         "total_servings": 0,
         "total_grams": 0,
         "cumulative_spending": 0,
-        "source": "预置"
+        "source": "通用泡面数据~估"
       },
       {
-        "name": "皮蛋瘦肉粥(食堂)",
+        "name": "燕麦片(原味)",
         "brand": "",
-        "per_unit": "1杯",
-        "calories": 70.0,
-        "carbs": 10.0,
-        "protein": 4.5,
-        "fat": 1.5,
+        "per_unit": "1包35g",
+        "calories": 152.0,
+        "carbs": 26.1,
+        "protein": 2.3,
+        "fat": 3.7,
         "category": "主食",
-        "ref_price": 2.0,
+        "ref_price": 0.0,
         "total_servings": 0,
         "total_grams": 0,
-        "cumulative_spending": 0.0,
-        "source": "用户自估"
-      },
-      {
-        "name": "肉包",
-        "brand": "",
-        "per_unit": "1个",
-        "calories": 200.0,
-        "carbs": 24.0,
-        "protein": 9.5,
-        "fat": 7.5,
-        "category": "主食",
-        "ref_price": 2.0,
-        "total_servings": 0,
-        "total_grams": 0,
-        "cumulative_spending": 0.0,
-        "source": "用户自估"
-      },
-      {
-        "name": "菜包",
-        "brand": "",
-        "per_unit": "1个",
-        "calories": 150.0,
-        "carbs": 28.0,
-        "protein": 4.0,
-        "fat": 3.0,
-        "category": "主食",
-        "ref_price": 2.0,
-        "total_servings": 0,
-        "total_grams": 0,
-        "cumulative_spending": 0.0,
-        "source": "用户自估"
+        "cumulative_spending": 0,
+        "source": "用户"
       },
       {
         "name": "面条（煮）",
@@ -2423,21 +2499,6 @@
         "source": "预置"
       },
       {
-        "name": "超盒算纯牛奶",
-        "brand": "",
-        "per_unit": "200ml",
-        "calories": 131.0,
-        "carbs": 9.6,
-        "protein": 6.6,
-        "fat": 7.4,
-        "category": "乳制品",
-        "ref_price": 0.0,
-        "total_servings": 17.0,
-        "total_grams": 3400.0,
-        "cumulative_spending": 0.0,
-        "source": "用户(星星布丁记忆)"
-      },
-      {
         "name": "美盾牦牛奶粉",
         "brand": "美盾",
         "per_unit": "1勺5g",
@@ -2447,10 +2508,25 @@
         "fat": 1.4,
         "category": "乳制品",
         "ref_price": 0.0,
-        "total_servings": 11.5,
-        "total_grams": 105.0,
+        "total_servings": 18.0,
+        "total_grams": 25.0,
         "cumulative_spending": 0.0,
         "source": "用户"
+      },
+      {
+        "name": "超盒算纯牛奶",
+        "brand": "",
+        "per_unit": "200ml",
+        "calories": 131.0,
+        "carbs": 9.6,
+        "protein": 6.6,
+        "fat": 7.4,
+        "category": "乳制品",
+        "ref_price": 0.0,
+        "total_servings": 18.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户(星星布丁记忆)"
       },
       {
         "name": "雀巢奶球",
@@ -2462,8 +2538,8 @@
         "fat": 1.3,
         "category": "乳制品",
         "ref_price": 0.0,
-        "total_servings": 6.0,
-        "total_grams": 30.0,
+        "total_servings": 9.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户"
       },
@@ -2477,8 +2553,8 @@
         "fat": 5.3,
         "category": "乳制品",
         "ref_price": 0.0,
-        "total_servings": 4.0,
-        "total_grams": 500.0,
+        "total_servings": 3.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户提供标准营养数据"
       },
@@ -2492,8 +2568,8 @@
         "fat": 1.0,
         "category": "乳制品",
         "ref_price": 0.0,
-        "total_servings": 1.0,
-        "total_grams": 30.0,
+        "total_servings": 2.0,
+        "total_grams": 60.0,
         "cumulative_spending": 0.0,
         "source": "预置"
       },
@@ -2507,8 +2583,8 @@
         "fat": 11.8,
         "category": "乳制品",
         "ref_price": 0.0,
-        "total_servings": 0.7,
-        "total_grams": 70.0,
+        "total_servings": 0.3,
+        "total_grams": 30.0,
         "cumulative_spending": 0.0,
         "source": "用户"
       },
@@ -2567,7 +2643,7 @@
         "fat": 7.0,
         "category": "家常菜",
         "ref_price": 0.0,
-        "total_servings": 3.0,
+        "total_servings": 2.0,
         "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户估算（食堂份量，肥肉不吃）"
@@ -2582,25 +2658,10 @@
         "fat": 7.0,
         "category": "家常菜",
         "ref_price": 0.0,
-        "total_servings": 3.0,
-        "total_grams": 300.0,
+        "total_servings": 2.0,
+        "total_grams": 200.0,
         "cumulative_spending": 0.0,
         "source": "用户估算"
-      },
-      {
-        "name": "煎蛋（油煎）",
-        "brand": "",
-        "per_unit": "1个",
-        "calories": 100.0,
-        "carbs": 1.0,
-        "protein": 7.0,
-        "fat": 7.0,
-        "category": "家常菜",
-        "ref_price": 0.0,
-        "total_servings": 2.0,
-        "total_grams": 0,
-        "cumulative_spending": 0.0,
-        "source": "用户估算（陈香贵加煎蛋）"
       },
       {
         "name": "毛豆炒肉丝",
@@ -2618,6 +2679,21 @@
         "source": "AI估算"
       },
       {
+        "name": "红烧冬瓜",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 60.0,
+        "carbs": 6.0,
+        "protein": 1.2,
+        "fat": 3.3,
+        "category": "家常菜",
+        "ref_price": 0.0,
+        "total_servings": 1.2,
+        "total_grams": 120.0,
+        "cumulative_spending": 0.0,
+        "source": "用户"
+      },
+      {
         "name": "包菜炒肉丝",
         "brand": "",
         "per_unit": "1份",
@@ -2633,19 +2709,19 @@
         "source": "小老板自估"
       },
       {
-        "name": "咖喱花菜",
+        "name": "咖喱花菜(少油)",
         "brand": "",
         "per_unit": "1份",
-        "calories": 100.0,
-        "carbs": 10.0,
-        "protein": 4.0,
-        "fat": 5.0,
+        "calories": 75.0,
+        "carbs": 8.0,
+        "protein": 3.0,
+        "fat": 3.0,
         "category": "家常菜",
         "ref_price": 0.0,
         "total_servings": 1.0,
         "total_grams": 0,
         "cumulative_spending": 0.0,
-        "source": "用户估算"
+        "source": "用户估算(少油)"
       },
       {
         "name": "土豆烧肉块（去肥）",
@@ -2661,6 +2737,36 @@
         "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "小老板自估（挑肥肉）"
+      },
+      {
+        "name": "山药炒肉片（只吃山药瘦肉）",
+        "brand": "",
+        "per_unit": "1份约100g",
+        "calories": 125.0,
+        "carbs": 11.3,
+        "protein": 8.2,
+        "fat": 5.2,
+        "category": "家常菜",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 100.0,
+        "cumulative_spending": 0.0,
+        "source": "用户"
+      },
+      {
+        "name": "手撕包菜",
+        "brand": "",
+        "per_unit": "1份约120g",
+        "calories": 110.0,
+        "carbs": 7.0,
+        "protein": 4.5,
+        "fat": 7.2,
+        "category": "家常菜",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户"
       },
       {
         "name": "洋葱芹菜炒肉",
@@ -2693,6 +2799,21 @@
         "source": "用户估算"
       },
       {
+        "name": "煎蛋（油煎）",
+        "brand": "",
+        "per_unit": "1个",
+        "calories": 100.0,
+        "carbs": 1.0,
+        "protein": 7.0,
+        "fat": 7.0,
+        "category": "家常菜",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户估算（陈香贵加煎蛋）"
+      },
+      {
         "name": "白菜炖粉丝",
         "brand": "",
         "per_unit": "1份",
@@ -2718,7 +2839,7 @@
         "category": "家常菜",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 120.0,
+        "total_grams": 100.0,
         "cumulative_spending": 0.0,
         "source": "用户估算"
       },
@@ -2738,13 +2859,13 @@
         "source": "小老板自估（沥油汤）"
       },
       {
-        "name": "笋干青椒炒牛肉",
+        "name": "笋干青椒炒牛肉(瘦)",
         "brand": "",
         "per_unit": "1份",
-        "calories": 170.0,
-        "carbs": 8.0,
-        "protein": 18.0,
-        "fat": 7.0,
+        "calories": 140.0,
+        "carbs": 7.0,
+        "protein": 16.0,
+        "fat": 5.0,
         "category": "家常菜",
         "ref_price": 0.0,
         "total_servings": 1.0,
@@ -2753,19 +2874,34 @@
         "source": "用户估算"
       },
       {
-        "name": "红烧鸡块",
+        "name": "红烧鸡块(去皮)",
         "brand": "",
         "per_unit": "1份",
-        "calories": 210.0,
-        "carbs": 6.0,
-        "protein": 16.0,
-        "fat": 14.0,
+        "calories": 145.0,
+        "carbs": 4.0,
+        "protein": 14.0,
+        "fat": 8.0,
         "category": "家常菜",
         "ref_price": 0.0,
         "total_servings": 1.0,
         "total_grams": 0,
         "cumulative_spending": 0.0,
-        "source": "用户估算"
+        "source": "用户估算(去皮)"
+      },
+      {
+        "name": "花菜炒肉（只吃花菜瘦肉）",
+        "brand": "",
+        "per_unit": "1份约100g",
+        "calories": 110.0,
+        "carbs": 6.1,
+        "protein": 7.8,
+        "fat": 6.4,
+        "category": "家常菜",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 100.0,
+        "cumulative_spending": 0.0,
+        "source": "用户"
       },
       {
         "name": "茄子烧肉",
@@ -2808,7 +2944,7 @@
         "category": "家常菜",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 120.0,
+        "total_grams": 100.0,
         "cumulative_spending": 0.0,
         "source": "用户估算"
       },
@@ -2823,7 +2959,7 @@
         "category": "家常菜",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 120.0,
+        "total_grams": 100.0,
         "cumulative_spending": 0.0,
         "source": "用户估算"
       },
@@ -2853,9 +2989,24 @@
         "category": "家常菜",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 120.0,
+        "total_grams": 100.0,
         "cumulative_spending": 0.0,
         "source": "用户估算"
+      },
+      {
+        "name": "青椒炒肉片（去肥留1小块）",
+        "brand": "",
+        "per_unit": "1份约80g",
+        "calories": 142.0,
+        "carbs": 3.2,
+        "protein": 14.5,
+        "fat": 7.8,
+        "category": "家常菜",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 80.0,
+        "cumulative_spending": 0.0,
+        "source": "用户"
       },
       {
         "name": "香煎大鸡腿（带皮，食堂煎制）",
@@ -2873,42 +3024,12 @@
         "source": "用户(食堂估算)"
       },
       {
-        "name": "咖喱花菜(少油)",
+        "name": "咖喱花菜",
         "brand": "",
         "per_unit": "1份",
-        "calories": 75.0,
-        "carbs": 8.0,
-        "protein": 3.0,
-        "fat": 3.0,
-        "category": "家常菜",
-        "ref_price": 0.0,
-        "total_servings": 0,
-        "total_grams": 0,
-        "cumulative_spending": 0,
-        "source": "用户估算(少油)"
-      },
-      {
-        "name": "手撕包菜",
-        "brand": "",
-        "per_unit": "1份约120g",
-        "calories": 110.0,
-        "carbs": 7.0,
-        "protein": 4.5,
-        "fat": 7.2,
-        "category": "家常菜",
-        "ref_price": 0.0,
-        "total_servings": 0,
-        "total_grams": 0,
-        "cumulative_spending": 0,
-        "source": "用户"
-      },
-      {
-        "name": "笋干青椒炒牛肉(瘦)",
-        "brand": "",
-        "per_unit": "1份",
-        "calories": 140.0,
-        "carbs": 7.0,
-        "protein": 16.0,
+        "calories": 100.0,
+        "carbs": 10.0,
+        "protein": 4.0,
         "fat": 5.0,
         "category": "家常菜",
         "ref_price": 0.0,
@@ -2918,19 +3039,34 @@
         "source": "用户估算"
       },
       {
-        "name": "红烧鸡块(去皮)",
+        "name": "笋干青椒炒牛肉",
         "brand": "",
         "per_unit": "1份",
-        "calories": 145.0,
-        "carbs": 4.0,
-        "protein": 14.0,
-        "fat": 8.0,
+        "calories": 170.0,
+        "carbs": 8.0,
+        "protein": 18.0,
+        "fat": 7.0,
         "category": "家常菜",
         "ref_price": 0.0,
         "total_servings": 0,
         "total_grams": 0,
         "cumulative_spending": 0,
-        "source": "用户估算(去皮)"
+        "source": "用户估算"
+      },
+      {
+        "name": "红烧鸡块",
+        "brand": "",
+        "per_unit": "1份",
+        "calories": 210.0,
+        "carbs": 6.0,
+        "protein": 16.0,
+        "fat": 14.0,
+        "category": "家常菜",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "cumulative_spending": 0,
+        "source": "用户估算"
       },
       {
         "name": "牛约堡 黑椒鸡块",
@@ -2972,24 +3108,9 @@
         "fat": 11.0,
         "category": "快餐",
         "ref_price": 6.0,
-        "total_servings": 14.0,
+        "total_servings": 16.0,
         "total_grams": 0,
-        "cumulative_spending": 84.0,
-        "source": "用户"
-      },
-      {
-        "name": "太阳蛋(KFC)",
-        "brand": "",
-        "per_unit": "1个",
-        "calories": 100.0,
-        "carbs": 1.0,
-        "protein": 7.0,
-        "fat": 7.0,
-        "category": "快餐",
-        "ref_price": 0.0,
-        "total_servings": 6.0,
-        "total_grams": 0,
-        "cumulative_spending": 0.0,
+        "cumulative_spending": 96.0,
         "source": "用户"
       },
       {
@@ -3002,7 +3123,7 @@
         "fat": 10.0,
         "category": "快餐",
         "ref_price": 0.0,
-        "total_servings": 5.0,
+        "total_servings": 7.0,
         "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户"
@@ -3038,17 +3159,32 @@
         "source": "用户"
       },
       {
-        "name": "番茄炒蛋（食堂浇头）",
+        "name": "吉士蛋麦满分",
+        "brand": "麦当劳",
+        "per_unit": "1个",
+        "calories": 290.0,
+        "carbs": 33.0,
+        "protein": 16.0,
+        "fat": 11.0,
+        "category": "快餐",
+        "ref_price": 5.5,
+        "total_servings": 4.0,
+        "total_grams": 0,
+        "cumulative_spending": 22.0,
+        "source": "用户"
+      },
+      {
+        "name": "太阳蛋(KFC)",
         "brand": "",
-        "per_unit": "1份",
-        "calories": 120.0,
-        "carbs": 8.0,
-        "protein": 6.0,
-        "fat": 8.0,
+        "per_unit": "1个",
+        "calories": 100.0,
+        "carbs": 1.0,
+        "protein": 7.0,
+        "fat": 7.0,
         "category": "快餐",
         "ref_price": 0.0,
         "total_servings": 4.0,
-        "total_grams": 200.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户"
       },
@@ -3083,6 +3219,21 @@
         "source": "用户估算"
       },
       {
+        "name": "番茄炒蛋（食堂浇头）",
+        "brand": "",
+        "per_unit": "1份",
+        "calories": 120.0,
+        "carbs": 8.0,
+        "protein": 6.0,
+        "fat": 8.0,
+        "category": "快餐",
+        "ref_price": 0.0,
+        "total_servings": 3.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户"
+      },
+      {
         "name": "贵州侗娘牛肉蘸水菜套餐",
         "brand": "",
         "per_unit": "1份",
@@ -3098,21 +3249,6 @@
         "source": "用户估算（牛肉片+虾滑+蔬菜+米饭+蘸酱）"
       },
       {
-        "name": "吉士蛋麦满分",
-        "brand": "麦当劳",
-        "per_unit": "1个",
-        "calories": 290.0,
-        "carbs": 33.0,
-        "protein": 16.0,
-        "fat": 11.0,
-        "category": "快餐",
-        "ref_price": 5.5,
-        "total_servings": 2.0,
-        "total_grams": 0,
-        "cumulative_spending": 11.0,
-        "source": "用户"
-      },
-      {
         "name": "土豆烧鸡块",
         "brand": "食堂",
         "per_unit": "1份",
@@ -3120,36 +3256,6 @@
         "carbs": 12.0,
         "protein": 20.0,
         "fat": 18.0,
-        "category": "快餐",
-        "ref_price": 0.0,
-        "total_servings": 2.0,
-        "total_grams": 0,
-        "cumulative_spending": 0.0,
-        "source": "用户"
-      },
-      {
-        "name": "湘八爷清淡例汤",
-        "brand": "",
-        "per_unit": "1份",
-        "calories": 0.0,
-        "carbs": 0.0,
-        "protein": 0.0,
-        "fat": 0.0,
-        "category": "快餐",
-        "ref_price": 0.0,
-        "total_servings": 2.0,
-        "total_grams": 0,
-        "cumulative_spending": 0.0,
-        "source": "用户"
-      },
-      {
-        "name": "雪菜粥(KFC)",
-        "brand": "",
-        "per_unit": "1份",
-        "calories": 170.0,
-        "carbs": 28.0,
-        "protein": 5.0,
-        "fat": 3.0,
         "category": "快餐",
         "ref_price": 0.0,
         "total_servings": 2.0,
@@ -3190,7 +3296,7 @@
       {
         "name": "全家福水饺",
         "brand": "鲜东北饺子馆(红星大都会店)",
-        "per_unit": "24个/份",
+        "per_unit": "1份(24个)",
         "calories": 520.0,
         "carbs": 78.0,
         "protein": 22.0,
@@ -3291,6 +3397,21 @@
         "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户"
+      },
+      {
+        "name": "吸汁爆蛋",
+        "brand": "",
+        "per_unit": "1个",
+        "calories": 132.0,
+        "carbs": 5.0,
+        "protein": 7.5,
+        "fat": 1.8,
+        "category": "快餐",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户估算"
       },
       {
         "name": "周六自助晚餐",
@@ -3458,21 +3579,6 @@
         "source": "用户"
       },
       {
-        "name": "方便面",
-        "brand": "",
-        "per_unit": "1袋约120g",
-        "calories": 460.0,
-        "carbs": 57.0,
-        "protein": 10.0,
-        "fat": 21.0,
-        "category": "快餐",
-        "ref_price": 0.0,
-        "total_servings": 1.0,
-        "total_grams": 120.0,
-        "cumulative_spending": 0.0,
-        "source": "预置"
-      },
-      {
         "name": "日清UFO飞碟炒面虾仁炒面风味",
         "brand": "",
         "per_unit": "1盒",
@@ -3548,13 +3654,13 @@
         "source": "用户提供，单人牛肉小火锅正常进食量估算"
       },
       {
-        "name": "湘八爷酸豆角+海带丝(少量)",
+        "name": "湘八爷清淡例汤",
         "brand": "",
         "per_unit": "1份",
-        "calories": 10.0,
-        "carbs": 1.5,
-        "protein": 0.5,
-        "fat": 0.2,
+        "calories": 0.0,
+        "carbs": 0.0,
+        "protein": 0.0,
+        "fat": 0.0,
         "category": "快餐",
         "ref_price": 0.0,
         "total_servings": 1.0,
@@ -3573,7 +3679,7 @@
         "category": "快餐",
         "ref_price": 14.5,
         "total_servings": 1.0,
-        "total_grams": 100.0,
+        "total_grams": 0,
         "cumulative_spending": 14.5,
         "source": "大众点评+抖音测评估算(用户原值偏低)"
       },
@@ -3603,7 +3709,7 @@
         "category": "快餐",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 294.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户提供包装营养表"
       },
@@ -3758,21 +3864,6 @@
         "source": "用户"
       },
       {
-        "name": "陈香贵牛肉面(两碗加量)",
-        "brand": "",
-        "per_unit": "1份",
-        "calories": 760.0,
-        "carbs": 92.0,
-        "protein": 42.0,
-        "fat": 24.0,
-        "category": "快餐",
-        "ref_price": 0.0,
-        "total_servings": 1.0,
-        "total_grams": 0,
-        "cumulative_spending": 0.0,
-        "source": "用户"
-      },
-      {
         "name": "青椒洋葱炒肉",
         "brand": "",
         "per_unit": "1份",
@@ -3786,21 +3877,6 @@
         "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户估算"
-      },
-      {
-        "name": "食拌焗拌饭简餐便当 盐葱鸡排拌饭",
-        "brand": "",
-        "per_unit": "1份",
-        "calories": 680.0,
-        "carbs": 86.0,
-        "protein": 32.0,
-        "fat": 28.0,
-        "category": "快餐",
-        "ref_price": 0.0,
-        "total_servings": 1.0,
-        "total_grams": 0,
-        "cumulative_spending": 0.0,
-        "source": "用户"
       },
       {
         "name": "香脆薯饼",
@@ -3908,19 +3984,19 @@
         "source": "用户"
       },
       {
-        "name": "吸汁爆蛋",
+        "name": "方便面",
         "brand": "",
-        "per_unit": "1个",
-        "calories": 132.0,
-        "carbs": 5.0,
-        "protein": 7.5,
-        "fat": 1.8,
+        "per_unit": "1袋约120g",
+        "calories": 460.0,
+        "carbs": 57.0,
+        "protein": 10.0,
+        "fat": 21.0,
         "category": "快餐",
         "ref_price": 0.0,
         "total_servings": 0,
         "total_grams": 0,
         "cumulative_spending": 0,
-        "source": "用户估算"
+        "source": "预置"
       },
       {
         "name": "椰果(一点点)",
@@ -3930,6 +4006,21 @@
         "carbs": 0.0,
         "protein": 0.0,
         "fat": 0.0,
+        "category": "快餐",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "cumulative_spending": 0,
+        "source": "用户"
+      },
+      {
+        "name": "湘八爷酸豆角+海带丝(少量)",
+        "brand": "",
+        "per_unit": "1份",
+        "calories": 10.0,
+        "carbs": 1.5,
+        "protein": 0.5,
+        "fat": 0.2,
         "category": "快餐",
         "ref_price": 0.0,
         "total_servings": 0,
@@ -3983,6 +4074,51 @@
         "source": "用户"
       },
       {
+        "name": "陈香贵牛肉面(两碗加量)",
+        "brand": "",
+        "per_unit": "1份",
+        "calories": 760.0,
+        "carbs": 92.0,
+        "protein": 42.0,
+        "fat": 24.0,
+        "category": "快餐",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "cumulative_spending": 0,
+        "source": "用户"
+      },
+      {
+        "name": "雪菜粥(KFC)",
+        "brand": "",
+        "per_unit": "1份",
+        "calories": 170.0,
+        "carbs": 28.0,
+        "protein": 5.0,
+        "fat": 3.0,
+        "category": "快餐",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "cumulative_spending": 0,
+        "source": "用户"
+      },
+      {
+        "name": "食拌焗拌饭简餐便当 盐葱鸡排拌饭",
+        "brand": "",
+        "per_unit": "1份",
+        "calories": 680.0,
+        "carbs": 86.0,
+        "protein": 32.0,
+        "fat": 28.0,
+        "category": "快餐",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "cumulative_spending": 0,
+        "source": "用户"
+      },
+      {
         "name": "黑糖粉粿(一点点)",
         "brand": "",
         "per_unit": "1份",
@@ -4007,10 +4143,25 @@
         "fat": 0.2,
         "category": "水果",
         "ref_price": 0.0,
-        "total_servings": 8.4,
-        "total_grams": 540.0,
+        "total_servings": 8.0,
+        "total_grams": 800.0,
         "cumulative_spending": 0.0,
         "source": "通用营养数据"
+      },
+      {
+        "name": "哈密瓜",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 34.0,
+        "carbs": 8.0,
+        "protein": 0.5,
+        "fat": 0.0,
+        "category": "水果",
+        "ref_price": 0.0,
+        "total_servings": 7.3,
+        "total_grams": 730.0,
+        "cumulative_spending": 0.0,
+        "source": "用户"
       },
       {
         "name": "西瓜片",
@@ -4028,21 +4179,6 @@
         "source": "用户"
       },
       {
-        "name": "哈密瓜",
-        "brand": "",
-        "per_unit": "100g",
-        "calories": 34.0,
-        "carbs": 8.0,
-        "protein": 0.5,
-        "fat": 0.0,
-        "category": "水果",
-        "ref_price": 0.0,
-        "total_servings": 5.9,
-        "total_grams": 490.0,
-        "cumulative_spending": 0.0,
-        "source": "用户"
-      },
-      {
         "name": "香蕉",
         "brand": "",
         "per_unit": "1根约120g",
@@ -4052,8 +4188,8 @@
         "fat": 0.4,
         "category": "水果",
         "ref_price": 0.0,
-        "total_servings": 4.0,
-        "total_grams": 480.0,
+        "total_servings": 5.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "预置"
       },
@@ -4071,21 +4207,6 @@
         "total_grams": 225.0,
         "cumulative_spending": 0.0,
         "source": "用户(包装标签)"
-      },
-      {
-        "name": "金枕榴莲",
-        "brand": "",
-        "per_unit": "100g",
-        "calories": 113.0,
-        "carbs": 13.1,
-        "protein": 1.7,
-        "fat": 6.9,
-        "category": "水果",
-        "ref_price": 0.0,
-        "total_servings": 1.4,
-        "total_grams": 142.0,
-        "cumulative_spending": 0.0,
-        "source": "用户"
       },
       {
         "name": "梨块（小碗）",
@@ -4133,21 +4254,6 @@
         "source": "通用营养数据"
       },
       {
-        "name": "菠萝",
-        "brand": "",
-        "per_unit": "100g",
-        "calories": 44.0,
-        "carbs": 10.0,
-        "protein": 0.5,
-        "fat": 0.1,
-        "category": "水果",
-        "ref_price": 0.0,
-        "total_servings": 0.4,
-        "total_grams": 40.0,
-        "cumulative_spending": 0.0,
-        "source": "通用营养数据"
-      },
-      {
         "name": "苹果",
         "brand": "",
         "per_unit": "1个约200g",
@@ -4161,6 +4267,36 @@
         "total_grams": 0,
         "cumulative_spending": 0,
         "source": "预置"
+      },
+      {
+        "name": "菠萝",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 44.0,
+        "carbs": 10.0,
+        "protein": 0.5,
+        "fat": 0.1,
+        "category": "水果",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "cumulative_spending": 0,
+        "source": "通用营养数据"
+      },
+      {
+        "name": "金枕榴莲",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 113.0,
+        "carbs": 13.1,
+        "protein": 1.7,
+        "fat": 6.9,
+        "category": "水果",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "cumulative_spending": 0,
+        "source": "用户"
       },
       {
         "name": "牛约堡 奥尔良鸡腿堡",
@@ -4202,8 +4338,8 @@
         "fat": 0.5,
         "category": "汤品",
         "ref_price": 0.0,
-        "total_servings": 2.0,
-        "total_grams": 400.0,
+        "total_servings": 1.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户估算"
       },
@@ -4217,25 +4353,10 @@
         "fat": 1.0,
         "category": "肉类",
         "ref_price": 0.0,
-        "total_servings": 9.2,
-        "total_grams": 240.0,
+        "total_servings": 12.0,
+        "total_grams": 1200.0,
         "cumulative_spending": 0.0,
         "source": "用户估算（8只中等≈120g，112kcal，P22g）"
-      },
-      {
-        "name": "卤鸡腿",
-        "brand": "",
-        "per_unit": "1个约120g",
-        "calories": 170.0,
-        "carbs": 1.0,
-        "protein": 23.0,
-        "fat": 8.0,
-        "category": "肉类",
-        "ref_price": 0.0,
-        "total_servings": 7.0,
-        "total_grams": 860.0,
-        "cumulative_spending": 0.0,
-        "source": "用户"
       },
       {
         "name": "油焖大虾",
@@ -4268,6 +4389,36 @@
         "source": "Calzen+中国食物成分表(家常做法中位值)"
       },
       {
+        "name": "卤鸡腿（小鸡腿/琵琶腿）",
+        "brand": "",
+        "per_unit": "1个约70g",
+        "calories": 100.0,
+        "carbs": 0.0,
+        "protein": 14.0,
+        "fat": 5.0,
+        "category": "肉类",
+        "ref_price": 4.0,
+        "total_servings": 4.0,
+        "total_grams": 0,
+        "cumulative_spending": 16.0,
+        "source": "用户"
+      },
+      {
+        "name": "卤鸡腿",
+        "brand": "",
+        "per_unit": "1个约120g",
+        "calories": 170.0,
+        "carbs": 1.0,
+        "protein": 23.0,
+        "fat": 8.0,
+        "category": "肉类",
+        "ref_price": 0.0,
+        "total_servings": 3.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户"
+      },
+      {
         "name": "牛蛙(中辣锅)",
         "brand": "",
         "per_unit": "100g",
@@ -4281,21 +4432,6 @@
         "total_grams": 300.0,
         "cumulative_spending": 0.0,
         "source": "估算:牛蛙瘦肉84kcal/100g+辣锅油脂"
-      },
-      {
-        "name": "自助烤肉~鸡翅中",
-        "brand": "",
-        "per_unit": "1个",
-        "calories": 80.0,
-        "carbs": 1.0,
-        "protein": 7.0,
-        "fat": 5.5,
-        "category": "肉类",
-        "ref_price": 0.0,
-        "total_servings": 3.0,
-        "total_grams": 0,
-        "cumulative_spending": 0.0,
-        "source": "中国食物成分表-鸡翅烤后估"
       },
       {
         "name": "麻辣腿",
@@ -4313,36 +4449,6 @@
         "source": "包装营养成分表"
       },
       {
-        "name": "鲍鱼（鲜）",
-        "brand": "",
-        "per_unit": "100g",
-        "calories": 84.0,
-        "carbs": 5.4,
-        "protein": 14.4,
-        "fat": 1.8,
-        "category": "肉类",
-        "ref_price": 0.0,
-        "total_servings": 2.8,
-        "total_grams": 280.0,
-        "cumulative_spending": 0.0,
-        "source": "通用营养数据"
-      },
-      {
-        "name": "肉丸（猪肉）",
-        "brand": "",
-        "per_unit": "100g",
-        "calories": 200.0,
-        "carbs": 6.0,
-        "protein": 12.0,
-        "fat": 14.0,
-        "category": "肉类",
-        "ref_price": 0.0,
-        "total_servings": 2.6,
-        "total_grams": 265.0,
-        "cumulative_spending": 0.0,
-        "source": "通用营养数据"
-      },
-      {
         "name": "五香卤蛋",
         "brand": "挑嘴老三",
         "per_unit": "1个30g",
@@ -4353,7 +4459,7 @@
         "category": "肉类",
         "ref_price": 2.0,
         "total_servings": 2.0,
-        "total_grams": 60.0,
+        "total_grams": 0,
         "cumulative_spending": 4.0,
         "source": "包装营养成分表"
       },
@@ -4373,49 +4479,19 @@
         "source": "用户估算"
       },
       {
-        "name": "猪五花肉~烤",
-        "brand": "",
-        "per_unit": "100g",
-        "calories": 280.0,
-        "carbs": 2.0,
-        "protein": 14.0,
-        "fat": 24.0,
-        "category": "肉类",
-        "ref_price": 0.0,
-        "total_servings": 2.0,
-        "total_grams": 200.0,
-        "cumulative_spending": 0.0,
-        "source": "中国食物成分表-五花肉烤后估"
-      },
-      {
-        "name": "鸡蛋",
-        "brand": "",
-        "per_unit": "1个约50g",
-        "calories": 70.0,
-        "carbs": 0.6,
-        "protein": 6.5,
-        "fat": 4.8,
-        "category": "肉类",
-        "ref_price": 0.0,
-        "total_servings": 2.0,
-        "total_grams": 100.0,
-        "cumulative_spending": 0.0,
-        "source": "预置"
-      },
-      {
-        "name": "烤牛肉~肥瘦",
+        "name": "肉丸（猪肉）",
         "brand": "",
         "per_unit": "100g",
         "calories": 200.0,
-        "carbs": 1.0,
-        "protein": 18.0,
+        "carbs": 6.0,
+        "protein": 12.0,
         "fat": 14.0,
         "category": "肉类",
         "ref_price": 0.0,
-        "total_servings": 1.5,
-        "total_grams": 150.0,
+        "total_servings": 1.6,
+        "total_grams": 165.0,
         "cumulative_spending": 0.0,
-        "source": "中国食物成分表-牛肉烤后估"
+        "source": "通用营养数据"
       },
       {
         "name": "黑鱼片(中辣锅)",
@@ -4463,6 +4539,21 @@
         "source": "用户"
       },
       {
+        "name": "清汤牛肉水煮菜",
+        "brand": "",
+        "per_unit": "1份",
+        "calories": 280.0,
+        "carbs": 14.0,
+        "protein": 26.0,
+        "fat": 12.0,
+        "category": "肉类",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户自估"
+      },
+      {
         "name": "炸肉丸子",
         "brand": "",
         "per_unit": "小份",
@@ -4476,6 +4567,21 @@
         "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户估算"
+      },
+      {
+        "name": "炸鸡腿（带皮）",
+        "brand": "",
+        "per_unit": "1个约120g",
+        "calories": 290.0,
+        "carbs": 12.0,
+        "protein": 24.0,
+        "fat": 16.0,
+        "category": "肉类",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户"
       },
       {
         "name": "爆炒大虾",
@@ -4523,6 +4629,21 @@
         "source": "用户"
       },
       {
+        "name": "鸡蛋",
+        "brand": "",
+        "per_unit": "1个约50g",
+        "calories": 70.0,
+        "carbs": 0.6,
+        "protein": 6.5,
+        "fat": 4.8,
+        "category": "肉类",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "预置"
+      },
+      {
         "name": "黄焖鸡块",
         "brand": "",
         "per_unit": "150g（含汤汁）",
@@ -4533,7 +4654,7 @@
         "category": "肉类",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 150.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户估算"
       },
@@ -4566,6 +4687,21 @@
         "total_grams": 80.0,
         "cumulative_spending": 0.0,
         "source": "用户"
+      },
+      {
+        "name": "鲍鱼（鲜）",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 84.0,
+        "carbs": 5.4,
+        "protein": 14.4,
+        "fat": 1.8,
+        "category": "肉类",
+        "ref_price": 0.0,
+        "total_servings": 0.8,
+        "total_grams": 80.0,
+        "cumulative_spending": 0.0,
+        "source": "通用营养数据"
       },
       {
         "name": "鸡胸肉",
@@ -4628,49 +4764,19 @@
         "source": "预置"
       },
       {
-        "name": "卤鸡腿（小鸡腿/琵琶腿）",
+        "name": "烤牛肉~肥瘦",
         "brand": "",
-        "per_unit": "1个约70g",
-        "calories": 100.0,
-        "carbs": 0.0,
-        "protein": 14.0,
-        "fat": 5.0,
-        "category": "肉类",
-        "ref_price": 4.0,
-        "total_servings": 0,
-        "total_grams": 0,
-        "cumulative_spending": 0.0,
-        "source": "用户"
-      },
-      {
-        "name": "清汤牛肉水煮菜",
-        "brand": "",
-        "per_unit": "1份",
-        "calories": 280.0,
-        "carbs": 14.0,
-        "protein": 26.0,
-        "fat": 12.0,
+        "per_unit": "100g",
+        "calories": 200.0,
+        "carbs": 1.0,
+        "protein": 18.0,
+        "fat": 14.0,
         "category": "肉类",
         "ref_price": 0.0,
         "total_servings": 0,
         "total_grams": 0,
         "cumulative_spending": 0,
-        "source": "用户自估"
-      },
-      {
-        "name": "炸鸡腿（带皮）",
-        "brand": "",
-        "per_unit": "1个约120g",
-        "calories": 290.0,
-        "carbs": 12.0,
-        "protein": 24.0,
-        "fat": 16.0,
-        "category": "肉类",
-        "ref_price": 0.0,
-        "total_servings": 0,
-        "total_grams": 0,
-        "cumulative_spending": 0,
-        "source": "用户"
+        "source": "中国食物成分表-牛肉烤后估"
       },
       {
         "name": "牛肉（瘦肉）",
@@ -4688,6 +4794,21 @@
         "source": "预置"
       },
       {
+        "name": "猪五花肉~烤",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 280.0,
+        "carbs": 2.0,
+        "protein": 14.0,
+        "fat": 24.0,
+        "category": "肉类",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "cumulative_spending": 0,
+        "source": "中国食物成分表-五花肉烤后估"
+      },
+      {
         "name": "猪肉（五花）",
         "brand": "",
         "per_unit": "100g",
@@ -4703,6 +4824,21 @@
         "source": "预置"
       },
       {
+        "name": "自助烤肉~鸡翅中",
+        "brand": "",
+        "per_unit": "1个",
+        "calories": 80.0,
+        "carbs": 1.0,
+        "protein": 7.0,
+        "fat": 5.5,
+        "category": "肉类",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "cumulative_spending": 0,
+        "source": "中国食物成分表-鸡翅烤后估"
+      },
+      {
         "name": "清炒青菜",
         "brand": "",
         "per_unit": "1份",
@@ -4712,23 +4848,8 @@
         "fat": 3.0,
         "category": "蔬菜",
         "ref_price": 0.0,
-        "total_servings": 8.0,
-        "total_grams": 80.0,
-        "cumulative_spending": 0.0,
-        "source": "用户"
-      },
-      {
-        "name": "包菜炒粉丝（食堂）",
-        "brand": "",
-        "per_unit": "100g",
-        "calories": 140.0,
-        "carbs": 20.0,
-        "protein": 3.0,
-        "fat": 6.0,
-        "category": "蔬菜",
-        "ref_price": 0.0,
-        "total_servings": 2.9,
-        "total_grams": 285.0,
+        "total_servings": 4.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户"
       },
@@ -4763,6 +4884,21 @@
         "source": "常识估算"
       },
       {
+        "name": "番茄炒菜花",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 60.0,
+        "carbs": 8.0,
+        "protein": 3.0,
+        "fat": 2.0,
+        "category": "蔬菜",
+        "ref_price": 0.0,
+        "total_servings": 2.2,
+        "total_grams": 220.0,
+        "cumulative_spending": 0.0,
+        "source": "用户"
+      },
+      {
         "name": "干锅花菜",
         "brand": "",
         "per_unit": "1份",
@@ -4788,7 +4924,7 @@
         "category": "蔬菜",
         "ref_price": 0.0,
         "total_servings": 2.0,
-        "total_grams": 240.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户"
       },
@@ -4818,7 +4954,7 @@
         "category": "蔬菜",
         "ref_price": 0.0,
         "total_servings": 2.0,
-        "total_grams": 250.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户"
       },
@@ -4883,6 +5019,21 @@
         "source": "用户"
       },
       {
+        "name": "包菜炒粉丝（食堂）",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 140.0,
+        "carbs": 20.0,
+        "protein": 3.0,
+        "fat": 6.0,
+        "category": "蔬菜",
+        "ref_price": 0.0,
+        "total_servings": 1.9,
+        "total_grams": 185.0,
+        "cumulative_spending": 0.0,
+        "source": "用户"
+      },
+      {
         "name": "芹菜炒肉",
         "brand": "",
         "per_unit": "100g",
@@ -4894,6 +5045,21 @@
         "ref_price": 0.0,
         "total_servings": 1.8,
         "total_grams": 180.0,
+        "cumulative_spending": 0.0,
+        "source": "用户"
+      },
+      {
+        "name": "青椒烧茄子",
+        "brand": "",
+        "per_unit": "120g",
+        "calories": 145.0,
+        "carbs": 10.0,
+        "protein": 2.0,
+        "fat": 10.0,
+        "category": "蔬菜",
+        "ref_price": 0.0,
+        "total_servings": 1.8,
+        "total_grams": 210.0,
         "cumulative_spending": 0.0,
         "source": "用户"
       },
@@ -4913,21 +5079,6 @@
         "source": "AI估算"
       },
       {
-        "name": "莴笋",
-        "brand": "",
-        "per_unit": "100g",
-        "calories": 15.0,
-        "carbs": 3.0,
-        "protein": 1.0,
-        "fat": 0.1,
-        "category": "蔬菜",
-        "ref_price": 0.0,
-        "total_servings": 1.3,
-        "total_grams": 130.0,
-        "cumulative_spending": 0.0,
-        "source": "通用营养数据"
-      },
-      {
         "name": "凉拌酸辣冬瓜",
         "brand": "",
         "per_unit": "100g",
@@ -4941,21 +5092,6 @@
         "total_grams": 110.0,
         "cumulative_spending": 0.0,
         "source": "AI估算"
-      },
-      {
-        "name": "番茄炒菜花",
-        "brand": "",
-        "per_unit": "100g",
-        "calories": 60.0,
-        "carbs": 8.0,
-        "protein": 3.0,
-        "fat": 2.0,
-        "category": "蔬菜",
-        "ref_price": 0.0,
-        "total_servings": 1.1,
-        "total_grams": 110.0,
-        "cumulative_spending": 0.0,
-        "source": "用户"
       },
       {
         "name": "凉拌千张杂蔬",
@@ -4988,6 +5124,21 @@
         "source": "用户估算"
       },
       {
+        "name": "凉拌杂蔬",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 75.0,
+        "carbs": 9.0,
+        "protein": 1.5,
+        "fat": 3.5,
+        "category": "蔬菜",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 100.0,
+        "cumulative_spending": 0.0,
+        "source": "用户"
+      },
+      {
         "name": "凉拌豆芽腐竹木耳",
         "brand": "",
         "per_unit": "1份60g",
@@ -4998,7 +5149,7 @@
         "category": "蔬菜",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 60.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户自估"
       },
@@ -5198,6 +5349,21 @@
         "source": "用户"
       },
       {
+        "name": "红烧嫩豆腐",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 90.0,
+        "carbs": 4.0,
+        "protein": 7.0,
+        "fat": 5.0,
+        "category": "蔬菜",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 100.0,
+        "cumulative_spending": 0.0,
+        "source": "用户"
+      },
+      {
         "name": "红烧萝卜",
         "brand": "",
         "per_unit": "1份",
@@ -5268,7 +5434,7 @@
         "category": "蔬菜",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 150.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户"
       },
@@ -5298,7 +5464,7 @@
         "category": "蔬菜",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 60.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户自估"
       },
@@ -5318,21 +5484,6 @@
         "source": "用户"
       },
       {
-        "name": "青椒烧茄子",
-        "brand": "",
-        "per_unit": "120g",
-        "calories": 145.0,
-        "carbs": 10.0,
-        "protein": 2.0,
-        "fat": 10.0,
-        "category": "蔬菜",
-        "ref_price": 0.0,
-        "total_servings": 1.0,
-        "total_grams": 120.0,
-        "cumulative_spending": 0.0,
-        "source": "用户"
-      },
-      {
         "name": "麻婆豆腐",
         "brand": "",
         "per_unit": "1份70g",
@@ -5343,9 +5494,24 @@
         "category": "蔬菜",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 70.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户自估"
+      },
+      {
+        "name": "贝贝南瓜",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 91.0,
+        "carbs": 20.0,
+        "protein": 2.6,
+        "fat": 0.3,
+        "category": "蔬菜",
+        "ref_price": 0.0,
+        "total_servings": 0.9,
+        "total_grams": 85.0,
+        "cumulative_spending": 0.0,
+        "source": "通用营养数据"
       },
       {
         "name": "圣女果",
@@ -5468,34 +5634,19 @@
         "source": "常识估算，酱腌菜"
       },
       {
-        "name": "贝贝南瓜",
+        "name": "莴笋",
         "brand": "",
         "per_unit": "100g",
-        "calories": 91.0,
-        "carbs": 20.0,
-        "protein": 2.6,
-        "fat": 0.3,
+        "calories": 15.0,
+        "carbs": 3.0,
+        "protein": 1.0,
+        "fat": 0.1,
         "category": "蔬菜",
         "ref_price": 0.0,
-        "total_servings": 0.1,
-        "total_grams": 5.0,
+        "total_servings": 0.3,
+        "total_grams": 30.0,
         "cumulative_spending": 0.0,
         "source": "通用营养数据"
-      },
-      {
-        "name": "凉拌杂蔬",
-        "brand": "",
-        "per_unit": "100g",
-        "calories": 75.0,
-        "carbs": 9.0,
-        "protein": 1.5,
-        "fat": 3.5,
-        "category": "蔬菜",
-        "ref_price": 0.0,
-        "total_servings": 0,
-        "total_grams": 0,
-        "cumulative_spending": 0,
-        "source": "用户"
       },
       {
         "name": "番茄",
@@ -5511,21 +5662,6 @@
         "total_grams": 0,
         "cumulative_spending": 0,
         "source": "预置"
-      },
-      {
-        "name": "红烧嫩豆腐",
-        "brand": "",
-        "per_unit": "100g",
-        "calories": 90.0,
-        "carbs": 4.0,
-        "protein": 7.0,
-        "fat": 5.0,
-        "category": "蔬菜",
-        "ref_price": 0.0,
-        "total_servings": 0,
-        "total_grams": 0,
-        "cumulative_spending": 0,
-        "source": "用户"
       },
       {
         "name": "西兰花",
@@ -5567,8 +5703,8 @@
         "fat": 1.5,
         "category": "补剂",
         "ref_price": 0.0,
-        "total_servings": 20.5,
-        "total_grams": 615.0,
+        "total_servings": 19.5,
+        "total_grams": 585.0,
         "cumulative_spending": 0.0,
         "source": "用户"
       },
@@ -5582,8 +5718,8 @@
         "fat": 0.0,
         "category": "调味料",
         "ref_price": 0.0,
-        "total_servings": 4.0,
-        "total_grams": 12.0,
+        "total_servings": 5.7,
+        "total_grams": 17.0,
         "cumulative_spending": 0.0,
         "source": "用户估算"
       },
@@ -5612,9 +5748,9 @@
         "fat": 0.0,
         "category": "调味料",
         "ref_price": 0.0,
-        "total_servings": 1.0,
-        "total_grams": 10.0,
-        "cumulative_spending": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "cumulative_spending": 0,
         "source": "预置"
       },
       {
@@ -5633,21 +5769,6 @@
         "source": "预置"
       },
       {
-        "name": "桂格牛奶高钙营养麦片",
-        "brand": "",
-        "per_unit": "1包30g",
-        "calories": 123.0,
-        "carbs": 21.0,
-        "protein": 1.2,
-        "fat": 3.4,
-        "category": "零食",
-        "ref_price": 0.0,
-        "total_servings": 2.0,
-        "total_grams": 60.0,
-        "cumulative_spending": 0.0,
-        "source": "用户"
-      },
-      {
         "name": "超盒算牛肉馅饼",
         "brand": "",
         "per_unit": "1个(75g)",
@@ -5658,9 +5779,24 @@
         "category": "零食",
         "ref_price": 0.0,
         "total_servings": 2.0,
-        "total_grams": 150.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户估算(空气炸锅无油)"
+      },
+      {
+        "name": "海底捞小薯条",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 557.0,
+        "carbs": 55.6,
+        "protein": 4.8,
+        "fat": 34.8,
+        "category": "零食",
+        "ref_price": 0.0,
+        "total_servings": 1.4,
+        "total_grams": 140.0,
+        "cumulative_spending": 0.0,
+        "source": "用户提供"
       },
       {
         "name": "正南奇北怪味胡豆",
@@ -5693,28 +5829,13 @@
         "source": "用户估算"
       },
       {
-        "name": "好丽友派",
+        "name": "桂格牛奶高钙营养麦片",
         "brand": "",
-        "per_unit": "1个",
-        "calories": 155.0,
+        "per_unit": "1包30g",
+        "calories": 123.0,
         "carbs": 21.0,
-        "protein": 2.0,
-        "fat": 7.0,
-        "category": "零食",
-        "ref_price": 0.0,
-        "total_servings": 1.0,
-        "total_grams": 0,
-        "cumulative_spending": 0.0,
-        "source": "用户"
-      },
-      {
-        "name": "甜醅子",
-        "brand": "",
-        "per_unit": "1份",
-        "calories": 110.0,
-        "carbs": 24.0,
-        "protein": 2.0,
-        "fat": 1.0,
+        "protein": 1.2,
+        "fat": 3.4,
         "category": "零食",
         "ref_price": 0.0,
         "total_servings": 1.0,
@@ -5748,7 +5869,7 @@
         "category": "零食",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 30.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "通用估算(30g标准火腿肠)"
       },
@@ -5793,7 +5914,7 @@
         "category": "零食",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 50.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户"
       },
@@ -5843,21 +5964,6 @@
         "source": "用户提供"
       },
       {
-        "name": "海底捞小薯条",
-        "brand": "",
-        "per_unit": "100g",
-        "calories": 557.0,
-        "carbs": 55.6,
-        "protein": 4.8,
-        "fat": 34.8,
-        "category": "零食",
-        "ref_price": 0.0,
-        "total_servings": 0.3,
-        "total_grams": 30.0,
-        "cumulative_spending": 0.0,
-        "source": "用户提供"
-      },
-      {
         "name": "膨化零食",
         "brand": "",
         "per_unit": "100g",
@@ -5871,6 +5977,21 @@
         "total_grams": 25.0,
         "cumulative_spending": 0.0,
         "source": "常识估算，薯片/膨化食品"
+      },
+      {
+        "name": "好丽友派",
+        "brand": "",
+        "per_unit": "1个",
+        "calories": 155.0,
+        "carbs": 21.0,
+        "protein": 2.0,
+        "fat": 7.0,
+        "category": "零食",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "cumulative_spending": 0,
+        "source": "用户"
       },
       {
         "name": "巧克力",
@@ -5903,6 +6024,21 @@
         "source": "用户"
       },
       {
+        "name": "甜醅子",
+        "brand": "",
+        "per_unit": "1份",
+        "calories": 110.0,
+        "carbs": 24.0,
+        "protein": 2.0,
+        "fat": 1.0,
+        "category": "零食",
+        "ref_price": 0.0,
+        "total_servings": 0,
+        "total_grams": 0,
+        "cumulative_spending": 0,
+        "source": "用户"
+      },
+      {
         "name": "甜醅子(小份)",
         "brand": "",
         "per_unit": "1份",
@@ -5927,9 +6063,9 @@
         "fat": 2.25,
         "category": "饮品",
         "ref_price": 2.0,
-        "total_servings": 17.3,
-        "total_grams": 4900.0,
-        "cumulative_spending": 34.67,
+        "total_servings": 21.7,
+        "total_grams": 0,
+        "cumulative_spending": 43.33,
         "source": "用户"
       },
       {
@@ -5942,8 +6078,8 @@
         "fat": 0.0,
         "category": "饮品",
         "ref_price": 0.0,
-        "total_servings": 14.0,
-        "total_grams": 4620.0,
+        "total_servings": 13.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "Monster官网经典版绿罐营养标签(330ml整罐)"
       },
@@ -5958,7 +6094,7 @@
         "category": "饮品",
         "ref_price": 0.0,
         "total_servings": 9.0,
-        "total_grams": 900.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户提供"
       },
@@ -5973,7 +6109,7 @@
         "category": "饮品",
         "ref_price": 0.0,
         "total_servings": 6.0,
-        "total_grams": 600.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "瓶身营养成分表：每100ml 80kJ≈19kcal，碳水4.5g"
       },
@@ -5988,24 +6124,9 @@
         "category": "饮品",
         "ref_price": 0.0,
         "total_servings": 5.0,
-        "total_grams": 500.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户提供"
-      },
-      {
-        "name": "无糖魔爪能量饮料",
-        "brand": "",
-        "per_unit": "330ml",
-        "calories": 10.0,
-        "carbs": 2.0,
-        "protein": 0.0,
-        "fat": 0.0,
-        "category": "饮品",
-        "ref_price": 0.0,
-        "total_servings": 5.0,
-        "total_grams": 1650.0,
-        "cumulative_spending": 0.0,
-        "source": "Monster官方营养数据"
       },
       {
         "name": "美汁源果粒奶优原味",
@@ -6021,6 +6142,36 @@
         "total_grams": 450.0,
         "cumulative_spending": 0.0,
         "source": "瓶身标签"
+      },
+      {
+        "name": "无糖魔爪能量饮料",
+        "brand": "",
+        "per_unit": "330ml",
+        "calories": 10.0,
+        "carbs": 2.0,
+        "protein": 0.0,
+        "fat": 0.0,
+        "category": "饮品",
+        "ref_price": 0.0,
+        "total_servings": 4.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "Monster官方营养数据"
+      },
+      {
+        "name": "茶派水蜜桃(减糖版)",
+        "brand": "",
+        "per_unit": "1瓶500ml",
+        "calories": 114.0,
+        "carbs": 28.0,
+        "protein": 0.0,
+        "fat": 0.0,
+        "category": "饮品",
+        "ref_price": 0.0,
+        "total_servings": 4.0,
+        "total_grams": 500.0,
+        "cumulative_spending": 0.0,
+        "source": "用户"
       },
       {
         "name": "优品豆浆",
@@ -6048,7 +6199,7 @@
         "category": "饮品",
         "ref_price": 0.0,
         "total_servings": 2.0,
-        "total_grams": 600.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "KFC中国菜单/冰甜豆浆同款"
       },
@@ -6063,7 +6214,7 @@
         "category": "饮品",
         "ref_price": 0.0,
         "total_servings": 2.0,
-        "total_grams": 660.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户历史记录（2026-09-01）"
       },
@@ -6078,7 +6229,7 @@
         "category": "饮品",
         "ref_price": 0.0,
         "total_servings": 1.7,
-        "total_grams": 830.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "产品营养表"
       },
@@ -6093,7 +6244,7 @@
         "category": "饮品",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 400.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户"
       },
@@ -6123,7 +6274,7 @@
         "category": "饮品",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 500.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户"
       },
@@ -6138,7 +6289,7 @@
         "category": "饮品",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 620.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "估算:参考中国食物成分表啤酒~34kcal/100ml"
       },
@@ -6158,6 +6309,21 @@
         "source": "用户估算"
       },
       {
+        "name": "冰生椰拿铁",
+        "brand": "",
+        "per_unit": "1杯约350ml",
+        "calories": 200.0,
+        "carbs": 25.0,
+        "protein": 4.0,
+        "fat": 9.0,
+        "category": "饮品",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 350.0,
+        "cumulative_spending": 0.0,
+        "source": "AI估算-市场参考"
+      },
+      {
         "name": "娃哈哈格瓦斯",
         "brand": "",
         "per_unit": "530ml",
@@ -6168,7 +6334,7 @@
         "category": "饮品",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 530.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户"
       },
@@ -6183,7 +6349,7 @@
         "category": "饮品",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 500.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户提供"
       },
@@ -6213,7 +6379,7 @@
         "category": "饮品",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 500.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户提供"
       },
@@ -6243,7 +6409,7 @@
         "category": "饮品",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 500.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户提供"
       },
@@ -6258,7 +6424,7 @@
         "category": "饮品",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 500.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户估算"
       },
@@ -6273,7 +6439,7 @@
         "category": "饮品",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 500.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "营养成分表（每100ml:171kJ/P0.6/F1.6/C6/糖4.5/钠40mg）"
       },
@@ -6303,7 +6469,7 @@
         "category": "饮品",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 450.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户"
       },
@@ -6318,7 +6484,7 @@
         "category": "饮品",
         "ref_price": 22.0,
         "total_servings": 1.0,
-        "total_grams": 400.0,
+        "total_grams": 0,
         "cumulative_spending": 22.0,
         "source": "用户"
       },
@@ -6333,7 +6499,7 @@
         "category": "饮品",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 700.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户"
       },
@@ -6348,7 +6514,7 @@
         "category": "饮品",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 200.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户"
       },
@@ -6393,7 +6559,7 @@
         "category": "饮品",
         "ref_price": 0.0,
         "total_servings": 1.0,
-        "total_grams": 250.0,
+        "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户"
       },
@@ -6456,38 +6622,23 @@
         "total_grams": 0,
         "cumulative_spending": 0,
         "source": "预置"
-      },
-      {
-        "name": "茶派水蜜桃(减糖版)",
-        "brand": "",
-        "per_unit": "1瓶500ml",
-        "calories": 114.0,
-        "carbs": 28.0,
-        "protein": 0.0,
-        "fat": 0.0,
-        "category": "饮品",
-        "ref_price": 0.0,
-        "total_servings": 0,
-        "total_grams": 0,
-        "cumulative_spending": 0,
-        "source": "用户"
       }
     ],
-    "total_foods": 295,
-    "total_servings": 507.1,
-    "total_spending": 297.95,
+    "total_foods": 302,
+    "total_servings": 583.2,
+    "total_spending": 361.61,
     "by_category": {
       "主食": {
-        "count": 25,
-        "servings": 29.4
+        "count": 27,
+        "servings": 99.0
       },
       "乳制品": {
         "count": 9,
-        "servings": 40.4
+        "servings": 50.5
       },
       "家常菜": {
-        "count": 25,
-        "servings": 26.3
+        "count": 29,
+        "servings": 28.5
       },
       "小食": {
         "count": 2,
@@ -6495,11 +6646,11 @@
       },
       "快餐": {
         "count": 69,
-        "servings": 107.7
+        "servings": 104.7
       },
       "水果": {
         "count": 11,
-        "servings": 31.3
+        "servings": 31.5
       },
       "汉堡": {
         "count": 2,
@@ -6507,31 +6658,31 @@
       },
       "汤品": {
         "count": 1,
-        "servings": 2.0
+        "servings": 1.0
       },
       "肉类": {
         "count": 33,
-        "servings": 62.2
+        "servings": 56.5
       },
       "蔬菜": {
         "count": 57,
-        "servings": 69.2
+        "servings": 67.9
       },
       "补剂": {
         "count": 1,
-        "servings": 20.5
+        "servings": 19.5
       },
       "调味料": {
         "count": 4,
-        "servings": 6.5
+        "servings": 7.2
       },
       "零食": {
         "count": 19,
-        "servings": 15.9
+        "servings": 14.0
       },
       "饮品": {
-        "count": 37,
-        "servings": 89.5
+        "count": 38,
+        "servings": 96.9
       }
     }
   }
