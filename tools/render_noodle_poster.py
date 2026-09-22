@@ -6,7 +6,8 @@ render_noodle_poster.py — 方便面一图流渲染器 v2 (2026-08-18 ZCode 重
 用法: python3 tools/render_noodle_poster.py
   数据源: assets/lib-custom/noodle-tier.js (用 node 导出)
   图片库: assets/image library/noodle-tier-images/
-  顶部/底部区: 复用旧海报烘焙素材(卡通/标题胶囊/引流条), 保证风格不走样
+  顶部/底部区: 使用一次性烘焙素材 assets/img/posters/noodle-assets/{head,tail}.png
+  (源:2026-08-24原版海报含卡通女孩/引流条), 不再从成品图反复裁切, 杜绝自反馈膨胀
   输出: assets/img/posters/poster-noodle.png
 
 改排名/新增条目后重跑本脚本即可更新一图流 (git push 前跑)。
@@ -16,7 +17,9 @@ import json, math, os, re, subprocess, sys, tempfile
 
 REPO = "/home/openclaw-shared/lyzbcy.github.io"
 JS = os.path.join(REPO, "assets/lib-custom/noodle-tier.js")
-OLD_PNG = os.path.join(REPO, "assets/img/posters/poster-noodle.png")   # 旧海报(素材源)
+ASSETS = os.path.join(REPO, "assets/img/posters/noodle-assets")
+HEAD_PNG = os.path.join(ASSETS, "head.png")   # 固定头部素材(标题+卡通女孩)
+TAIL_PNG = os.path.join(ASSETS, "tail.png")   # 固定尾部素材(引流条+水印)
 OUT = os.path.join(REPO, "assets/img/posters/poster-noodle.png")   # 直接覆盖; 搞坏了 git checkout 恢复
 IMGDIR = os.path.join(REPO, "assets/image library/noodle-tier-images")
 FONT_BOLD = "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc"
@@ -45,7 +48,7 @@ node_code = (
     "eval('var imageBasePath=\"\";var encodeURIComponent=function(s){return s};var noodles=['+m[1]+']');"
     "console.log(JSON.stringify(noodles.map(n=>({name:n.name,tier:n.tier,"
     "hearts:parseInt((n.tierLabel||'').match(/(\\d+)/)||[0]),desc:n.description,"
-    "img:(n.bgImage||'').match(/'([^']+)'/)?((n.bgImage||'').match(/'([^']+)'/)[1]):null}))))"
+    "img:(n.bgImage||'')||null}))))"
 ) % JS
 r = subprocess.run(["node", "-e", node_code], capture_output=True, text=True)
 if r.returncode != 0:
@@ -85,29 +88,19 @@ total_h = 340 + 24  # 顶部 + 顶 margin
 for t in TIER_ORDER:
     total_h += BANNER_H + BANNER_GAP + len(groups[t]) * (CARD_H + CARD_GAP)
 total_h += 40  # 底部区前留白
-old = Image.open(OLD_PNG).convert("RGB")
-old.load()  # 先载入内存(输出会覆盖同一文件)
-# 底部素材: 扫描旧图找引流胶囊起点 (y 3400-3722 中间大范围深色)
-footer_y = None
-for y in range(3400, old.height):
-    row = old.crop((200, y, 880, y+1)).resize((1, 1))
-    p = row.getpixel((0, 0))
-    if 0.3*p[0]+0.6*p[1]+0.1*p[2] < 150:
-        footer_y = y - 6  # 上方留 6px 呼吸
-        break
-if footer_y is None:
-    footer_y = old.height - 160
-footer_crop = old.crop((0, footer_y, W, old.height))
+head = Image.open(HEAD_PNG).convert("RGB")
+tail = Image.open(TAIL_PNG).convert("RGB")
+footer_crop = tail
 total_h += footer_crop.height
-print(f"顶部340 底部素材 y={footer_y}~{old.height} (高{footer_crop.height}) 总高 {total_h}")
+print(f"顶部{head.height} 底部素材(固定烘焙) 高{footer_crop.height} 总高 {total_h}")
 
 # ── 7. 画布 ──
 canvas = Image.new("RGB", (W, total_h), CREAM)
 draw = ImageDraw.Draw(canvas)
 
 # 顶部复用 + 副标题改款数
-canvas.paste(old.crop((0, 0, W, 340)), (0, 0))
-bg = old.getpixel((140, 300))  # 采样副标题行背景
+canvas.paste(head.crop((0, 0, W, 340)), (0, 0))
+bg = head.getpixel((140, 300))  # 采样副标题行背景
 draw.rectangle([260, 280, 820, 330], fill=bg)
 sub = "捞鱼亲测 · %d 款" % len(noodles)
 f_sub = F(30, True)
