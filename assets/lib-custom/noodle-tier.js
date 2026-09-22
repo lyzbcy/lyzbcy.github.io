@@ -48,6 +48,14 @@
       bgImage: imageBasePath + encodeURIComponent('山椒肥牛高人拉面-杨掌柜.jpeg'),
     },
     {
+      name: '粉面菜蛋螺蛳粉味【杨掌柜】',
+      tier: '夯',
+      tierLabel: '夯 · 5.8❤️',
+      rating: 5,
+      description: '好吃程度跟山椒肥牛味并排，参考价5.5元，也有卤蛋。不仅有面饼还有粉丝，面饼小一点，总量比高人拉面高一点点。小笋闻着不是很臭，宿舍里吃得开心，算一个优点（现在很多人吃螺蛳粉都选无臭的）。辣度对不太能吃辣的我来说稍微有点辣了，但还是挺喜欢吃。主观打分降0.2分。热量810kcal（整桶208g+追加同款干面饼65g，不加额外调料）。',
+      bgImage: imageBasePath + encodeURIComponent('粉面菜蛋螺蛳粉味-杨掌柜.jpeg'),
+    },
+    {
       name: '高人拉面港式肥汁加吸汁爆蛋【杨掌柜】',
       tier: '夯',
       tierLabel: '夯 · 5.5❤️',
