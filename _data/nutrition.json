@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T22:05:01.731522+08:00",
+  "generated_at": "2026-09-24T09:56:08.124219+08:00",
   "goals": {
     "calories": 1656,
     "water": 2000,
@@ -20,21 +20,21 @@
     "deficit": 400
   },
   "overview": {
-    "recorded_days": 50,
+    "recorded_days": 51,
     "date_range": {
       "first": "2026-04-29",
-      "last": "2026-09-23"
+      "last": "2026-09-24"
     },
-    "avg_calories": 1987,
-    "avg_protein": 104,
+    "avg_calories": 1954,
+    "avg_protein": 102,
     "avg_water": 1811,
-    "avg_carbs": 229,
-    "avg_fat": 71,
+    "avg_carbs": 226,
+    "avg_fat": 70,
     "total_training_calories": 11556,
     "training_days": 45,
     "compliance": {
-      "calorie": 90,
-      "protein": 26,
+      "calorie": 88,
+      "protein": 25,
       "water": 78
     }
   },
@@ -351,22 +351,12 @@
     }
   },
   "macros": {
-    "carbs_pct": 45,
-    "protein_pct": 22,
-    "fat_pct": 33,
-    "total_cal": 1829
+    "carbs_pct": 46,
+    "protein_pct": 20,
+    "fat_pct": 34,
+    "total_cal": 1679
   },
   "trend": [
-    {
-      "date": "2026-09-10",
-      "calories": 2241,
-      "protein": 131.5,
-      "carbs": 269.9,
-      "fat": 71.9,
-      "water": 1400,
-      "net_calories": 2241,
-      "has_fitness": false
-    },
     {
       "date": "2026-09-11",
       "calories": 2241,
@@ -496,6 +486,16 @@
       "water": 600,
       "net_calories": 1818,
       "has_fitness": true
+    },
+    {
+      "date": "2026-09-24",
+      "calories": 320,
+      "protein": 19.0,
+      "carbs": 42.0,
+      "fat": 10.0,
+      "water": 0,
+      "net_calories": 320,
+      "has_fitness": false
     }
   ],
   "summaries": [
@@ -1990,49 +1990,62 @@
         },
         "method": "MET-endTime"
       }
+    },
+    {
+      "date": "2026-09-24",
+      "total_calories": 320,
+      "total_carbs": 42.0,
+      "total_protein": 19.0,
+      "total_fat": 10.0,
+      "total_water": 0,
+      "net_calories": 320,
+      "meal_count": 1,
+      "water_entries": 0,
+      "supplements": {
+        "count": 0,
+        "has_creatine": false,
+        "has_protein": false
+      },
+      "calorie_pct": 19.3,
+      "protein_pct": 12.7,
+      "water_pct": 0,
+      "has_data": true
     }
   ],
   "status": {
     "has_today": true,
     "has_yesterday": true,
-    "today": "2026-09-23",
+    "today": "2026-09-24",
     "is_active": true,
     "is_training_day": false
   },
   "health_score": {
     "today": {
-      "date": "2026-09-23",
-      "nutrition_score": 31,
-      "nutrition_detail": "热量 1836/1656 kcal (16/20); 蛋白 106.7/150g (11/15); 饮水 600/2000ml (4/15)",
+      "date": "2026-09-24",
+      "nutrition_score": 2,
+      "nutrition_detail": "热量 320/1656 kcal (0/20); 蛋白 19.0/150g (2/15); 饮水 0/2000ml (0/15)",
       "exercise_score": 0,
-      "exercise_detail": "今日无训练 (0/20); 组数 2 (0/10)",
-      "bonus_score": 15,
-      "bonus_detail": "数据完整性 (8/10); 体脂趋势 -1.2% (7/10)",
-      "total_score": 46,
-      "grade": "⚠️ C",
-      "calories_in": 1836,
+      "exercise_detail": "今日无训练 (0/20); 组数 0 (0/10)",
+      "bonus_score": 12,
+      "bonus_detail": "数据完整性 (5/10); 体脂趋势 -1.2% (7/10)",
+      "total_score": 14,
+      "grade": "💀 D",
+      "calories_in": 320,
       "calories_target": 1656,
-      "protein_in": 106.7,
+      "protein_in": 19.0,
       "protein_target": 150,
-      "water_in": 600,
+      "water_in": 0,
       "water_target": 2000,
-      "training_sets": 2,
-      "training_volume": 840.0,
-      "training_cal": 18,
-      "training_duration_min": 4.3,
+      "training_sets": 0,
+      "training_volume": 0,
+      "training_cal": 0,
+      "training_duration_min": 0,
       "bodyfat_pct": 20.7,
       "is_training_day": false,
       "bmr_floor": 1713,
       "below_bmr": true
     },
     "history": [
-      {
-        "date": "2026-09-09",
-        "score": 44,
-        "grade": "⚠️ C",
-        "nutrition": "热量 1428/1640 kcal (20/20); 蛋白 97.2/150g (10/15); 饮水 300/2000ml (2/15)",
-        "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
-      },
       {
         "date": "2026-09-10",
         "score": 47,
@@ -2123,9 +2136,16 @@
         "grade": "💀 D",
         "nutrition": "热量 0/1640 kcal (0/20); 蛋白 0/150g (0/15); 饮水 0/2000ml (0/15)",
         "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
+      },
+      {
+        "date": "2026-09-23",
+        "score": 46,
+        "grade": "⚠️ C",
+        "nutrition": "热量 1836/1656 kcal (16/20); 蛋白 106.7/150g (11/15); 饮水 600/2000ml (4/15)",
+        "exercise": "今日无训练 (0/20); 组数 2 (0/10)"
       }
     ],
-    "exported_at": "2026-09-23T22:05:01.719274"
+    "exported_at": "2026-09-24T09:56:08.116317"
   },
   "food_library": {
     "items": [
@@ -3210,6 +3230,36 @@
         "source": "用户"
       },
       {
+        "name": "太阳蛋(KFC)",
+        "brand": "",
+        "per_unit": "1个",
+        "calories": 100.0,
+        "carbs": 1.0,
+        "protein": 7.0,
+        "fat": 7.0,
+        "category": "快餐",
+        "ref_price": 0.0,
+        "total_servings": 5.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户"
+      },
+      {
+        "name": "皮蛋瘦肉粥(KFC)",
+        "brand": "",
+        "per_unit": "1碗",
+        "calories": 220.0,
+        "carbs": 41.0,
+        "protein": 12.0,
+        "fat": 3.0,
+        "category": "快餐",
+        "ref_price": 0.0,
+        "total_servings": 5.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户"
+      },
+      {
         "name": "西红柿炒鸡蛋盖码饭",
         "brand": "湘八爷",
         "per_unit": "1份",
@@ -3252,36 +3302,6 @@
         "total_servings": 4.0,
         "total_grams": 0,
         "cumulative_spending": 22.0,
-        "source": "用户"
-      },
-      {
-        "name": "太阳蛋(KFC)",
-        "brand": "",
-        "per_unit": "1个",
-        "calories": 100.0,
-        "carbs": 1.0,
-        "protein": 7.0,
-        "fat": 7.0,
-        "category": "快餐",
-        "ref_price": 0.0,
-        "total_servings": 4.0,
-        "total_grams": 0,
-        "cumulative_spending": 0.0,
-        "source": "用户"
-      },
-      {
-        "name": "皮蛋瘦肉粥(KFC)",
-        "brand": "",
-        "per_unit": "1碗",
-        "calories": 220.0,
-        "carbs": 41.0,
-        "protein": 12.0,
-        "fat": 3.0,
-        "category": "快餐",
-        "ref_price": 0.0,
-        "total_servings": 4.0,
-        "total_grams": 0,
-        "cumulative_spending": 0.0,
         "source": "用户"
       },
       {
@@ -6841,7 +6861,7 @@
       }
     ],
     "total_foods": 314,
-    "total_servings": 608.4,
+    "total_servings": 610.4,
     "total_spending": 361.61,
     "by_category": {
       "主食": {
@@ -6862,7 +6882,7 @@
       },
       "快餐": {
         "count": 70,
-        "servings": 106.7
+        "servings": 108.7
       },
       "水果": {
         "count": 11,
