@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T22:05:01.773249+08:00",
+  "generated_at": "2026-09-25T22:05:01.494062+08:00",
   "goals": {
     "calories": 1656,
     "water": 2000,
@@ -20,22 +20,22 @@
     "deficit": 400
   },
   "overview": {
-    "recorded_days": 51,
+    "recorded_days": 52,
     "date_range": {
       "first": "2026-04-29",
-      "last": "2026-09-24"
+      "last": "2026-09-25"
     },
-    "avg_calories": 1984,
+    "avg_calories": 1973,
     "avg_protein": 103,
-    "avg_water": 1799,
-    "avg_carbs": 230,
+    "avg_water": 1772,
+    "avg_carbs": 229,
     "avg_fat": 71,
     "total_training_calories": 11556,
     "training_days": 45,
     "compliance": {
       "calorie": 90,
       "protein": 25,
-      "water": 76
+      "water": 75
     }
   },
   "weight": {
@@ -351,22 +351,12 @@
     }
   },
   "macros": {
-    "carbs_pct": 48,
+    "carbs_pct": 50,
     "protein_pct": 20,
-    "fat_pct": 32,
-    "total_cal": 1892
+    "fat_pct": 30,
+    "total_cal": 1689
   },
   "trend": [
-    {
-      "date": "2026-09-11",
-      "calories": 2241,
-      "protein": 134.8,
-      "carbs": 260.6,
-      "fat": 72.6,
-      "water": 1000,
-      "net_calories": 2040,
-      "has_fitness": true
-    },
     {
       "date": "2026-09-12",
       "calories": 1398,
@@ -495,6 +485,16 @@
       "fat": 55.9,
       "water": 1200,
       "net_calories": 1831,
+      "has_fitness": false
+    },
+    {
+      "date": "2026-09-25",
+      "calories": 1447,
+      "protein": 81.2,
+      "carbs": 201.6,
+      "fat": 36.2,
+      "water": 390,
+      "net_calories": 1447,
       "has_fitness": false
     }
   ],
@@ -2010,31 +2010,51 @@
       "protein_pct": 48.9,
       "water_pct": 60.0,
       "has_data": true
+    },
+    {
+      "date": "2026-09-25",
+      "total_calories": 1447,
+      "total_carbs": 201.6,
+      "total_protein": 81.2,
+      "total_fat": 36.2,
+      "total_water": 390,
+      "net_calories": 1447,
+      "meal_count": 7,
+      "water_entries": 2,
+      "supplements": {
+        "count": 0,
+        "has_creatine": false,
+        "has_protein": false
+      },
+      "calorie_pct": 87.4,
+      "protein_pct": 54.1,
+      "water_pct": 19.5,
+      "has_data": true
     }
   ],
   "status": {
     "has_today": true,
     "has_yesterday": true,
-    "today": "2026-09-24",
+    "today": "2026-09-25",
     "is_active": true,
     "is_training_day": false
   },
   "health_score": {
     "today": {
-      "date": "2026-09-24",
-      "nutrition_score": 32,
-      "nutrition_detail": "热量 1831/1656 kcal (16/20); 蛋白 73.4/150g (7/15); 饮水 1200/2000ml (9/15)",
+      "date": "2026-09-25",
+      "nutrition_score": 31,
+      "nutrition_detail": "热量 1447/1656 kcal (20/20); 蛋白 81.2/150g (8/15); 饮水 390/2000ml (3/15)",
       "exercise_score": 0,
       "exercise_detail": "今日无训练 (0/20); 组数 0 (0/10)",
-      "bonus_score": 15,
-      "bonus_detail": "数据完整性 (8/10); 体脂趋势 -1.2% (7/10)",
-      "total_score": 47,
+      "bonus_score": 12,
+      "bonus_detail": "数据完整性 (5/10); 体脂趋势 -1.2% (7/10)",
+      "total_score": 43,
       "grade": "⚠️ C",
-      "calories_in": 1831,
+      "calories_in": 1447,
       "calories_target": 1656,
-      "protein_in": 73.4,
+      "protein_in": 81.2,
       "protein_target": 150,
-      "water_in": 1200,
+      "water_in": 390,
       "water_target": 2000,
       "training_sets": 0,
       "training_volume": 0,
@@ -2046,20 +2066,6 @@
       "below_bmr": true
     },
     "history": [
-      {
-        "date": "2026-09-10",
-        "score": 47,
-        "grade": "⚠️ C",
-        "nutrition": "热量 2241/1640 kcal (9/20); 蛋白 131.5/150g (13/15); 饮水 1400/2000ml (10/15)",
-        "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
-      },
-      {
-        "date": "2026-09-11",
-        "score": 77,
-        "grade": "😊 A",
-        "nutrition": "热量 2241/1938 kcal (14/20); 蛋白 134.8/150g (13/15); 饮水 1000/2000ml (8/15)",
-        "exercise": "训练量 3681kg (18/20); 组数 7 (7/10)"
-      },
       {
         "date": "2026-09-12",
         "score": 66,
@@ -2143,9 +2149,23 @@
         "grade": "⚠️ C",
         "nutrition": "热量 1836/1656 kcal (16/20); 蛋白 106.7/150g (11/15); 饮水 600/2000ml (4/15)",
         "exercise": "今日无训练 (0/20); 组数 2 (0/10)"
+      },
+      {
+        "date": "2026-09-24",
+        "score": 47,
+        "grade": "⚠️ C",
+        "nutrition": "热量 1831/1656 kcal (16/20); 蛋白 73.4/150g (7/15); 饮水 1200/2000ml (9/15)",
+        "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
+      },
+      {
+        "date": "2026-09-25",
+        "score": 15,
+        "grade": "💀 D",
+        "nutrition": "热量 375/1656 kcal (0/20); 蛋白 25.5/150g (3/15); 饮水 0/2000ml (0/15)",
+        "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
       }
     ],
-    "exported_at": "2026-09-24T22:05:01.759901"
+    "exported_at": "2026-09-25T22:05:01.482074"
   },
   "food_library": {
     "items": [
@@ -2159,8 +2179,8 @@
         "fat": 0.3,
         "category": "主食",
         "ref_price": 0.0,
-        "total_servings": 65.5,
-        "total_grams": 6550.0,
+        "total_servings": 69.1,
+        "total_grams": 6906.0,
         "cumulative_spending": 0.0,
         "source": "预置"
       },
@@ -2493,6 +2513,21 @@
         "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户"
+      },
+      {
+        "name": "鸡头米（鲜芡实，加少量糖）",
+        "brand": "",
+        "per_unit": "1碗",
+        "calories": 150.0,
+        "carbs": 33.0,
+        "protein": 4.0,
+        "fat": 0.5,
+        "category": "主食",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "AI估算（鲜芡实一碗约80g+少量糖）"
       },
       {
         "name": "粉丝（泡发）",
@@ -4385,6 +4420,21 @@
         "source": "用户估算"
       },
       {
+        "name": "梨（大个）",
+        "brand": "",
+        "per_unit": "1个",
+        "calories": 110.0,
+        "carbs": 27.0,
+        "protein": 1.0,
+        "fat": 0.5,
+        "category": "水果",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "中国食物成分表（大梨约250g）"
+      },
+      {
         "name": "红心火龙果",
         "brand": "",
         "per_unit": "1份",
@@ -4514,8 +4564,8 @@
         "fat": 1.0,
         "category": "肉类",
         "ref_price": 0.0,
-        "total_servings": 13.3,
-        "total_grams": 1330.0,
+        "total_servings": 13.8,
+        "total_grams": 1378.0,
         "cumulative_spending": 0.0,
         "source": "用户估算（8只中等≈120g，112kcal，P22g）"
       },
@@ -4563,6 +4613,21 @@
         "total_grams": 0,
         "cumulative_spending": 16.0,
         "source": "用户"
+      },
+      {
+        "name": "鸡蛋",
+        "brand": "",
+        "per_unit": "1个约50g",
+        "calories": 70.0,
+        "carbs": 0.6,
+        "protein": 6.5,
+        "fat": 4.8,
+        "category": "肉类",
+        "ref_price": 0.0,
+        "total_servings": 4.0,
+        "total_grams": 150.0,
+        "cumulative_spending": 0.0,
+        "source": "预置"
       },
       {
         "name": "卤鸡腿",
@@ -4850,21 +4915,6 @@
         "source": "用户"
       },
       {
-        "name": "鸡蛋",
-        "brand": "",
-        "per_unit": "1个约50g",
-        "calories": 70.0,
-        "carbs": 0.6,
-        "protein": 6.5,
-        "fat": 4.8,
-        "category": "肉类",
-        "ref_price": 0.0,
-        "total_servings": 1.0,
-        "total_grams": 0,
-        "cumulative_spending": 0.0,
-        "source": "预置"
-      },
-      {
         "name": "黄焖鸡块",
         "brand": "",
         "per_unit": "150g（含汤汁）",
@@ -4908,6 +4958,21 @@
         "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户估算"
+      },
+      {
+        "name": "油焖大虾（带汤汁）",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 120.0,
+        "carbs": 4.0,
+        "protein": 12.0,
+        "fat": 6.0,
+        "category": "肉类",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 99.0,
+        "cumulative_spending": 0.0,
+        "source": "AI估算参考"
       },
       {
         "name": "去皮鸡腿肉",
@@ -4985,6 +5050,66 @@
         "source": "AI估算"
       },
       {
+        "name": "鲍鱼",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 84.0,
+        "carbs": 6.6,
+        "protein": 12.6,
+        "fat": 0.8,
+        "category": "肉类",
+        "ref_price": 0.0,
+        "total_servings": 0.4,
+        "total_grams": 38.0,
+        "cumulative_spending": 0.0,
+        "source": "中国食物成分表"
+      },
+      {
+        "name": "鲍鱼（带粉丝）",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 110.0,
+        "carbs": 10.0,
+        "protein": 10.0,
+        "fat": 3.0,
+        "category": "肉类",
+        "ref_price": 0.0,
+        "total_servings": 0.3,
+        "total_grams": 29.0,
+        "cumulative_spending": 0.0,
+        "source": "AI估算参考"
+      },
+      {
+        "name": "牛肉（瘦肉）",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 125.0,
+        "carbs": 0.2,
+        "protein": 20.2,
+        "fat": 4.2,
+        "category": "肉类",
+        "ref_price": 0.0,
+        "total_servings": 0.2,
+        "total_grams": 25.0,
+        "cumulative_spending": 0.0,
+        "source": "预置"
+      },
+      {
+        "name": "牛肉粒",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 140.0,
+        "carbs": 2.0,
+        "protein": 21.0,
+        "fat": 5.0,
+        "category": "肉类",
+        "ref_price": 0.0,
+        "total_servings": 0.1,
+        "total_grams": 12.0,
+        "cumulative_spending": 0.0,
+        "source": "AI估算参考"
+      },
+      {
         "name": "三文鱼",
         "brand": "",
         "per_unit": "100g",
@@ -5013,21 +5138,6 @@
         "total_grams": 0,
         "cumulative_spending": 0,
         "source": "中国食物成分表-牛肉烤后估"
-      },
-      {
-        "name": "牛肉（瘦肉）",
-        "brand": "",
-        "per_unit": "100g",
-        "calories": 125.0,
-        "carbs": 0.2,
-        "protein": 20.2,
-        "fat": 4.2,
-        "category": "肉类",
-        "ref_price": 0.0,
-        "total_servings": 0,
-        "total_grams": 0,
-        "cumulative_spending": 0,
-        "source": "预置"
       },
       {
         "name": "猪五花肉~烤",
@@ -5915,6 +6025,21 @@
         "source": "用户"
       },
       {
+        "name": "西兰花",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 34.0,
+        "carbs": 6.6,
+        "protein": 2.8,
+        "fat": 0.4,
+        "category": "蔬菜",
+        "ref_price": 0.0,
+        "total_servings": 0.5,
+        "total_grams": 49.0,
+        "cumulative_spending": 0.0,
+        "source": "预置"
+      },
+      {
         "name": "山药",
         "brand": "",
         "per_unit": "100g",
@@ -5960,6 +6085,66 @@
         "source": "通用营养数据"
       },
       {
+        "name": "花菜",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 24.0,
+        "carbs": 4.6,
+        "protein": 2.1,
+        "fat": 0.2,
+        "category": "蔬菜",
+        "ref_price": 0.0,
+        "total_servings": 0.3,
+        "total_grams": 29.0,
+        "cumulative_spending": 0.0,
+        "source": "中国食物成分表"
+      },
+      {
+        "name": "长豇豆",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 29.0,
+        "carbs": 5.9,
+        "protein": 2.6,
+        "fat": 0.2,
+        "category": "蔬菜",
+        "ref_price": 0.0,
+        "total_servings": 0.2,
+        "total_grams": 19.0,
+        "cumulative_spending": 0.0,
+        "source": "中国食物成分表"
+      },
+      {
+        "name": "白萝卜",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 21.0,
+        "carbs": 5.0,
+        "protein": 0.9,
+        "fat": 0.1,
+        "category": "蔬菜",
+        "ref_price": 0.0,
+        "total_servings": 0.1,
+        "total_grams": 6.0,
+        "cumulative_spending": 0.0,
+        "source": "中国食物成分表"
+      },
+      {
+        "name": "胡萝卜",
+        "brand": "",
+        "per_unit": "100g",
+        "calories": 39.0,
+        "carbs": 8.8,
+        "protein": 1.0,
+        "fat": 0.2,
+        "category": "蔬菜",
+        "ref_price": 0.0,
+        "total_servings": 0.1,
+        "total_grams": 6.0,
+        "cumulative_spending": 0.0,
+        "source": "中国食物成分表"
+      },
+      {
         "name": "番茄",
         "brand": "",
         "per_unit": "100g",
@@ -5967,21 +6152,6 @@
         "carbs": 3.9,
         "protein": 0.9,
         "fat": 0.2,
-        "category": "蔬菜",
-        "ref_price": 0.0,
-        "total_servings": 0,
-        "total_grams": 0,
-        "cumulative_spending": 0,
-        "source": "预置"
-      },
-      {
-        "name": "西兰花",
-        "brand": "",
-        "per_unit": "100g",
-        "calories": 34.0,
-        "carbs": 6.6,
-        "protein": 2.8,
-        "fat": 0.4,
         "category": "蔬菜",
         "ref_price": 0.0,
         "total_servings": 0,
@@ -6168,6 +6338,21 @@
         "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户"
+      },
+      {
+        "name": "珍馐集酥皮牛肉馅饼",
+        "brand": "",
+        "per_unit": "1片(100g)",
+        "calories": 255.0,
+        "carbs": 31.7,
+        "protein": 9.0,
+        "fat": 10.2,
+        "category": "零食",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 100.0,
+        "cumulative_spending": 0.0,
+        "source": "用户（包装营养表，空气炸锅无额外放油）"
       },
       {
         "name": "脆脆鲨（芝士焗土豆味）",
@@ -6980,13 +7165,13 @@
         "source": "预置"
       }
     ],
-    "total_foods": 322,
-    "total_servings": 624.4,
+    "total_foods": 333,
+    "total_servings": 637.6,
     "total_spending": 361.61,
     "by_category": {
       "主食": {
-        "count": 30,
-        "servings": 105.8
+        "count": 31,
+        "servings": 110.4
       },
       "乳制品": {
         "count": 10,
@@ -7005,8 +7190,8 @@
         "servings": 110.7
       },
       "水果": {
-        "count": 11,
-        "servings": 32.1
+        "count": 12,
+        "servings": 33.1
       },
       "汉堡": {
         "count": 2,
@@ -7017,12 +7202,12 @@
         "servings": 1.0
       },
       "肉类": {
-        "count": 38,
-        "servings": 66.8
+        "count": 42,
+        "servings": 72.3
       },
       "蔬菜": {
-        "count": 62,
-        "servings": 75.5
+        "count": 66,
+        "servings": 76.7
       },
       "补剂": {
         "count": 1,
@@ -7033,8 +7218,8 @@
         "servings": 8.2
       },
       "零食": {
-        "count": 19,
-        "servings": 14.0
+        "count": 20,
+        "servings": 15.0
       },
       "饮品": {
         "count": 40,
