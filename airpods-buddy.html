@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AirPods 小助手 · 点一下，AirPods 就连上</title>
-<meta name="description" content="AirPods 小助手 Windows v1.9.20：一键连接、可见的连接进度、三态托盘图标和星星布丁小宠物。默认本地运行，反馈日志由你确认后发送。">
+<meta name="description" content="AirPods 小助手 Windows v1.9.21：一键连接、可见的连接与断开进度、三态托盘图标和星星布丁小宠物。默认本地运行，反馈日志由你确认后发送。">
 <meta property="og:title" content="AirPods 小助手 · 点一下，AirPods 就连上">
-<meta property="og:description" content="Windows v1.9.20：一键连接 AirPods，等待时看得到阶段和原因。默认本地运行，反馈日志由你确认后发送。">
+<meta property="og:description" content="Windows v1.9.21：一键连接 AirPods，星星布丁陪你看连接与断开的阶段和等待时间。默认本地运行，反馈日志由你确认后发送。">
 <meta property="og:image" content="https://lyzbcy.github.io/assets/img/airpods-buddy/star-budding-192.png">
 <meta property="og:image:alt" content="星星布丁 · AirPods 小助手">
 <link rel="icon" type="image/png" href="assets/img/airpods-buddy/star-budding-192.png">
@@ -304,10 +304,10 @@
     <span class="chip">🔒 默认本地运行</span><span class="chip">🆓 免费开源 MIT</span>
   </div>
   <div class="cta-row">
-    <a class="cta" href="https://github.com/lyzbcy/AirPods-Windows/releases/download/v1.9.20/AirPodsBuddy-Windows.zip">⬇️ 下载 v1.9.20</a>
+    <a class="cta" href="https://github.com/lyzbcy/AirPods-Windows/releases/download/v1.9.21/AirPodsBuddy-Windows.zip">⬇️ 下载 v1.9.21</a>
     <a class="cta ghost" href="https://github.com/lyzbcy/AirPods-Windows">⭐ GitHub 源码</a>
   </div>
-  <p class="ver-line">v<b>1.9.20</b> · 2026-09-27 发布 · <a href="https://github.com/lyzbcy/AirPods-Windows/releases/tag/v1.9.20">查看更新与已知问题</a></p>
+  <p class="ver-line">v<b>1.9.21</b> · 2026-09-27 发布 · <a href="https://github.com/lyzbcy/AirPods-Windows/releases/tag/v1.9.21">查看更新与已知问题</a></p>
 </header>
 
 <section class="wrap rv">
@@ -325,9 +325,9 @@
 </section>
 
 <section class="wrap rv">
-  <span class="eyebrow">CUTE · 她还会陪你等连接</span>
-  <h2>点一下托盘，星星布丁弹出来 🧚</h2>
-  <p class="sub">下面是<b>应用里真实的精灵图动画</b>——桌面级透明、逐帧手绘，等待、撒花、拜拜样样都会。</p>
+  <span class="eyebrow">CUTE · 她陪你等连接和断开</span>
+  <h2>连接或断开，星星布丁都陪你等 🧚</h2>
+  <p class="sub">下方演示使用<b>应用内的精灵图素材</b>；实际操作时，桌面右下角会持续显示状态、阶段和已等待时间，直到本次操作结束。</p>
 
   <div class="desk" id="desk">
     <span class="desk-hint">🖱 试试下面的按钮，或点右下角托盘</span>
@@ -424,7 +424,7 @@
   <div class="grid">
     <div class="f"><div class="ico">🚀</div><b>一键连接 / 断开</b><p>左键单击托盘直接切换；界面大圆钮一点即连。</p></div>
     <div class="f"><div class="ico">🥇</div><b>设备优先级</b><p>苹果设备默认排前，其他耳机不捣乱，▲▼ 随心调序。</p></div>
-    <div class="f"><div class="ico">🧚</div><b>星星布丁小宠物</b><p>连接时从右下角弹出，全帧动画陪你等，连上撒 💕。</p></div>
+    <div class="f"><div class="ico">🧚</div><b>星星布丁小宠物</b><p>连接与断开时都在右下角陪你等，显示阶段与已等待时间，结束后再退场。</p></div>
     <div class="f"><div class="ico">🎨</div><b>Apple 风界面</b><p>奶油黄白+蜂蜜金，macOS 级克制质感，长名字优雅截断。</p></div>
     <div class="f"><div class="ico">🔒</div><b>反馈可控</b><p>日志保存在本地；只有你确认附日志并提交反馈时才会发送。</p></div>
     <div class="f"><div class="ico">🔄</div><b>自动更新</b><p>有新版弹窗一键升级；缺 WebView2 运行时会自动装好。</p></div>
@@ -433,11 +433,11 @@
 
 <section class="wrap rv">
   <div class="note">
-    <b>ℹ️ v1.9.20 使用提示：</b>连接或断开耗时较长时，界面会显示当前阶段与已等待时间；“已连接”仍请以实际试听为准。
+    <b>ℹ️ v1.9.21 使用提示：</b>连接或断开耗时较长时，星星布丁和界面会显示当前阶段与已等待时间；“已连接”仍请以实际试听为准。
     少数 Windows 蓝牙环境可能显示已连接但没有耳机播放端点。先检查 Windows 声音输出；系统连接也失败时，可手动关开电脑蓝牙，仍失败再尝试重新配对或重启。
     应用不会自动重置整机蓝牙或删除配对。AirPods 5 的部分已配对名称识别已改进，但该型号尚未完成真机验证，LE-only 连接暂不支持。
     遇到问题请在应用首页使用“问题反馈（可附日志）”，帮助我们定位。
-    <a href="https://github.com/lyzbcy/AirPods-Windows/releases/tag/v1.9.20">查看完整发布说明</a>。
+    <a href="https://github.com/lyzbcy/AirPods-Windows/releases/tag/v1.9.21">查看完整发布说明</a>。
   </div>
 </section>
 
@@ -453,14 +453,14 @@
   <span class="eyebrow">READY · 准备好了吗</span>
   <h2>三步上手，一劳永逸</h2>
   <div class="steps">
-    <div class="step"><span class="n">1</span><b>⬇️ 下载</b><p>从 GitHub 下载 v1.9.20 ZIP</p></div>
+    <div class="step"><span class="n">1</span><b>⬇️ 下载</b><p>从 GitHub 下载 v1.9.21 ZIP</p></div>
     <div class="step"><span class="n">2</span><b>📂 解压双击</b><p>免安装，即刻常驻托盘</p></div>
     <!-- SmartScreen 提示 -->
     <div class="step" style="grid-column:1/-1;background:#FFF9EC"><span class="n" style="background:#8A9BB8">🛡</span><b>首次运行提示？</b><p>若 Windows 弹蓝色「已保护你的电脑」：点<b>更多信息</b> → <b>仍要运行</b> 即可（开源软件，代码全部可审计）</p></div>
     <div class="step"><span class="n">3</span><b>🎧 点一下就连</b><p>从此告别翻设置</p></div>
   </div>
   <div class="dl-row">
-    <a class="cta" href="https://github.com/lyzbcy/AirPods-Windows/releases/download/v1.9.20/AirPodsBuddy-Windows.zip">⬇️ 下载 AirPodsBuddy v1.9.20</a>
+    <a class="cta" href="https://github.com/lyzbcy/AirPods-Windows/releases/download/v1.9.21/AirPodsBuddy-Windows.zip">⬇️ 下载 AirPodsBuddy v1.9.21</a>
     <p class="ver-line" style="margin-top:14px">觉得好用的话，<a href="https://github.com/lyzbcy/AirPods-Windows" target="_blank" rel="noopener">去 GitHub 给个 ⭐ star</a> 呗，这对捞鱼很有帮助 🥺</p>
   </div>
 </section>
@@ -487,8 +487,9 @@
    规则：每次改页面必须更新 PAGE_VER。
    打开页面时核对远端版本号，不一致则本会话内自动强刷一次；
    用 sessionStorage 防重复刷新（刷完仍不一致就不再刷，杜绝死循环）。 */
-const PAGE_VER="2.2.7";
+const PAGE_VER="2.2.8";
 const PAGE_LOG=[
+  {v:"2.2.8",d:"09-27",t:"应用 v1.9.21 正式版：连接与断开时星星布丁持续陪伴，展示当前阶段与已等待时间；下载入口和已知问题说明同步到新版。"},
   {v:"2.2.7",d:"09-27",t:"官网主视觉、网页图标和分享预览统一换成应用内的星星布丁形象。"},
   {v:"2.2.6",d:"09-27",t:"应用 v1.9.20 正式版：连接/断开阶段和等待原因可见，减少无声时误报可播放；首页统一问题反馈并可由用户确认附日志。偶发 Windows 蓝牙连接/播放异常及 AirPods 5 未完整验证已公开说明；应用不再自动关开整机蓝牙。"},
   {v:"2.2.4",d:"09-21",t:"应用 v1.9.12 上线：曾加入蓝牙自动自救、麦克风切换和断开核实；自动关开整机蓝牙的旧行为已在 v1.9.20 取消。"},
