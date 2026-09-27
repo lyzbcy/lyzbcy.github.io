@@ -7,8 +7,9 @@
 <meta name="description" content="AirPods 小助手 Windows v1.9.20：一键连接、可见的连接进度、三态托盘图标和星星布丁小宠物。默认本地运行，反馈日志由你确认后发送。">
 <meta property="og:title" content="AirPods 小助手 · 点一下，AirPods 就连上">
 <meta property="og:description" content="Windows v1.9.20：一键连接 AirPods，等待时看得到阶段和原因。默认本地运行，反馈日志由你确认后发送。">
-<meta property="og:image" content="https://lyzbcy.github.io/assets/img/airpods-buddy/logo-192.png">
-<link rel="icon" type="image/png" href="assets/img/airpods-buddy/logo-192.png">
+<meta property="og:image" content="https://lyzbcy.github.io/assets/img/airpods-buddy/star-budding-192.png">
+<meta property="og:image:alt" content="星星布丁 · AirPods 小助手">
+<link rel="icon" type="image/png" href="assets/img/airpods-buddy/star-budding-192.png">
 <style>
   :root{
     --bg:#FAF6EF; --card:#FFFFFF; --ink:#2E2A24; --sub:#8A7F73;
@@ -295,7 +296,7 @@
 <div class="fr-toast" id="frToast"></div>
 
 <header class="wrap">
-  <img class="logo" src="assets/img/airpods-buddy/logo-192.png" alt="AirPods 小助手">
+  <img class="logo" src="assets/img/airpods-buddy/star-budding-192.png" alt="星星布丁 · AirPods 小助手">
   <h1>AirPods 小助手<span class="en">AIRPODS&nbsp;BUDDY</span></h1>
   <p class="tagline">给 Windows 的一口甜：<b>点一下，AirPods 就连上。</b></p>
   <div class="chips">
@@ -486,8 +487,9 @@
    规则：每次改页面必须更新 PAGE_VER。
    打开页面时核对远端版本号，不一致则本会话内自动强刷一次；
    用 sessionStorage 防重复刷新（刷完仍不一致就不再刷，杜绝死循环）。 */
-const PAGE_VER="2.2.6";
+const PAGE_VER="2.2.7";
 const PAGE_LOG=[
+  {v:"2.2.7",d:"09-27",t:"官网主视觉、网页图标和分享预览统一换成应用内的星星布丁形象。"},
   {v:"2.2.6",d:"09-27",t:"应用 v1.9.20 正式版：连接/断开阶段和等待原因可见，减少无声时误报可播放；首页统一问题反馈并可由用户确认附日志。偶发 Windows 蓝牙连接/播放异常及 AirPods 5 未完整验证已公开说明；应用不再自动关开整机蓝牙。"},
   {v:"2.2.4",d:"09-21",t:"应用 v1.9.12 上线：曾加入蓝牙自动自救、麦克风切换和断开核实；自动关开整机蓝牙的旧行为已在 v1.9.20 取消。"},
   {v:"2.2.3",d:"09-21",t:"应用 v1.9.10 上线：全新「问题反馈」（选类型+说明，完整日志文件直达开发者群）与「提意见」分家；AirPods 5（LE 音频）连接指引；二维码点击放大；弹窗滚动；设置保存修复"},
