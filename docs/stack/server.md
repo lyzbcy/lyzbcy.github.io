@@ -43,3 +43,12 @@
 - 小红书登录态:`/home/ubuntu/.openclaw/xhs-profile`
 - LLM:`~/.openclaw/openclaw.json` → models.providers.ws-claw-corp
 - 磁盘:根分区 90%+,大文件操作前必查 `df -h`
+
+## Laoyu launcher analytics (2026-09-29)
+
+- Dedicated system user: `laoyu-stats`; unit: `laoyu-analytics.service`.
+- Python stdlib + SQLite; loopback `127.0.0.1:18773`. Code `/opt/laoyu-analytics`, state `/var/lib/laoyu-analytics`; root-only environment `/etc/laoyu-analytics.env`. Never print environment values.
+- MemoryMax 64 MiB, CPUQuota 10%, TasksMax 16; database page limit 32 MiB (WAL extra); 32-day daily HMAC dedup, 400-day totals; 10,000 installations/day limit. No access logs or heartbeats.
+- Opt-in active installations, not people or all downloads. `/health` does not count. Owner uses SSH: `python3 /opt/laoyu-analytics/owner_stats.py` (aggregate JSON only). Admin HTTP stays loopback-only.
+- Public HTTPS pending: :443 belongs to existing DERP with self-signed IP certificate; nginx :80/:8080 unchanged. Do not replace DERP or distribute insecure HTTP endpoints.
+- Verified Windows client over temporary SSH tunnel, daily dedup and auth. Isolated test row removed. Initial footprint about 11 MB RAM and under 120 KB code/data.

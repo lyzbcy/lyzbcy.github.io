@@ -69,3 +69,7 @@ openclaw 常有进行中改动(未 commit),douyin-push 的 rebase 会报"index c
 本地 Bash 工具 spawn /bin/zsh 失败(ENOENT,系统级故障)时,`mcp node_repl` 的
 child_process(exec/execFile/ssh)不经过本地 shell,是完整备用执行通道(本页操作即全程用它完成)。
 
+
+## Windows SSH fallback (2026-09-29)
+
+Native Windows OpenSSH exited 255 without a banner in this environment. Git for Windows OpenSSH worked with the existing askpass pattern. Keep passwords in process memory/environment only; never place passwords in command arguments or saved scripts. Use a writable explicit UserKnownHostsFile with accept-new, preserving mismatch checks. Long PowerShell-to-SSH command arguments may silently truncate: transfer in chunks below 5 KB and verify SHA-256 before enabling a service.
