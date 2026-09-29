@@ -30,3 +30,9 @@
 ## Launcher 0.4.1 (2026-09-29)
 
 Per owner request, anonymous daily analytics defaults to enabled for new installations, with a visible off switch. Existing saved opt-out stays preserved; the owner explicitly enabled their current installation. AirPods portable ZIP is verified, safely extracted and associated locally; never automatically executed. Public package: laoyu-software-center-0.4.1-win-x64.zip, 114253997 bytes, SHA-256 688bd4292da38a29265ad1804b178b4ddc5f06c271d506d08928219fb9288551. Previous 0.4.0 package retained for existing links.
+
+## Launcher 0.5.0 (2026-09-29)
+
+Public downloads now include an LZMA self-extracting EXE (76,118,320 bytes) and standard ZIP (104,257,707 bytes). Original 0.4.x links retained. EXE only extracts to an empty folder; it does not execute applications automatically. Digests are listed in downloads/SHA256SUMS.txt. Existing server limit of 2 MiB/s per connection and 3 connections per IP remains.
+
+/downloads/ now permits credential-free cross-origin GET/HEAD (Access-Control-Allow-Origin: *) so the WSHOTO entry can measure HTTP response time from the user's browser. Analytics/admin routes are unchanged. Public GitHub binary distribution is explicitly authorized by the owner; source and entry backup repositories remain private. Third-party GHFast / GH-Proxy routes are optional and can fail. The launcher verifies files against the original release SHA-256. Browser CORS failures are displayed as unmeasurable; no fabricated latency.
