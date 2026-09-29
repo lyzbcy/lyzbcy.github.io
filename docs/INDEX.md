@@ -34,6 +34,8 @@
 - [howto/novnc-login.md](howto/novnc-login.md) — noVNC 人工登录浏览器(多道风控关卡都能过)
 - [howto/push-pipeline.md](howto/push-pipeline.md) — 博客/skill 推送链路(为什么及如何走服务器推)
 
+- [howto/laoyu-launcher-https.md](howto/laoyu-launcher-https.md) — 启动器公网 IP HTTPS、短期证书自动续期、公开下载及资源限制
+
 ## 📅 大事记(为什么是现在这样)
 
 - 2026-08-02 openclaw 从 root 迁移到 ubuntu(漏迁抖音看板 cron 等,详见 `未决问题-迁移清单.md`)
