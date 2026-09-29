@@ -17,6 +17,12 @@
   "overflowCount": 0,
   "stickerCount": 6,
   "ctaCount": 2,
+  "watermark": {
+    "text": "捞鱼的博客",
+    "opacity": 24,
+    "angle": 22,
+    "count": 115
+  },
   "items": [
     {
       "name": "海鲜拉面【汤达人】",
@@ -772,7 +778,7 @@
     "assets/lib-custom/noodle-tier-extras.js": "fcae53ac66658f28c6bc7832d326b2c23469be667901ac3d40177443005fdc5d",
     "assets/lib-custom/noodle-tier.js": "c99457ee51e2f9a72fe5e79d7ea0479f5244055810a9c383d4c7cdd0f2e28a1c",
     "tools/export_tier_data.cjs": "1251997d31908182c67fcde8ee432b51bfa085a95c7304ceb50916009e8a97fa",
-    "tools/generate_posters.py": "9b6a7ac03c963d2c9e921246146a0bdf7208510e83516c7238f729ad9e078b15"
+    "tools/generate_posters.py": "7b98e422d90d6f17191a970ce13e1aaa086ac290a7383ec658d15e90de771adb"
   },
-  "pngSha256": "09383ddd0b9d3752b362d63a7b1b6b3f4481ade4c169ba24eca422516fc7d47d"
+  "pngSha256": "2ce1ad13e2c8c7616583a281c81d815ce6c53cccca77e070e6a4c8827b9c42d4"
 }

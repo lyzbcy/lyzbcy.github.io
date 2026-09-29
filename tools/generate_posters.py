@@ -29,6 +29,9 @@ CARD_WIDTH = (WIDTH - PAD * 2 - GAP) // 2
 PAPER, INK, MUTED = '#F6F1E7', '#292A28', '#73736C'
 TIERS = ['夯', '顶级', '人上人', 'NPC', '拉完了']
 COLORS = ['#BD352C', '#C46628', '#537653', '#647880', '#746977']
+WATERMARK_TEXT = '捞鱼的博客'
+WATERMARK_OPACITY = 24
+WATERMARK_ANGLE = 22
 STICKERS = ['第12弹-开心.png', '第12弹-心动.png', '第12弹-期待.png',
             '第37弹-呃.png', '星第3弹-呜呜.png']
 CONFIG = {
@@ -256,6 +259,24 @@ def draw_cta(painter, y, keyword):
     painter.text((WIDTH - PAD - 143, y + 28), '收藏再看', 25, '#FFE1A8', width=130, height=35)
 
 
+def add_watermark(image):
+    """Apply to the finished canvas, including cards, so a crop retains attribution."""
+    face = font(42, True)
+    stamp = Image.new('RGBA', (280, 92), (0, 0, 0, 0))
+    ImageDraw.Draw(stamp).text((14, 22), WATERMARK_TEXT, font=face, anchor='lt',
+                              fill=(80, 66, 54, WATERMARK_OPACITY))
+    stamp = stamp.rotate(WATERMARK_ANGLE, resample=Image.Resampling.BICUBIC, expand=True)
+    overlay = Image.new('RGBA', image.size, (0, 0, 0, 0))
+    count = 0
+    for row, y in enumerate(range(35, image.height, 260)):
+        for x in range(-210 if row % 2 else 30, image.width, 480):
+            overlay.alpha_composite(stamp, (x, y))
+            count += 1
+    result = Image.alpha_composite(image.convert('RGBA'), overlay).convert('RGB')
+    return result, dict(text=WATERMARK_TEXT, opacity=WATERMARK_OPACITY,
+                        angle=WATERMARK_ANGLE, count=count)
+
+
 def build_poster(kind, items):
     config = CONFIG[kind]
     y = 666
@@ -333,12 +354,14 @@ def build_poster(kind, items):
     d.line((PAD, footer_y + 326, WIDTH - PAD, footer_y + 326), fill='#D6D1C7', width=2)
     p.text((PAD, footer_y + 342), '捞鱼亲测 · 主观口味，仅供参考', 21, MUTED, width=800, height=30)
     p.text((WIDTH - PAD - 262, footer_y + 342), 'lyzbcy.github.io', 24, MUTED, width=262, height=32)
+    p.image, watermark = add_watermark(p.image)
     stream = io.BytesIO()
     p.image.save(stream, format='PNG', optimize=True)
     return stream.getvalue(), dict(schema=1, kind=kind, size=[WIDTH, height], count=len(items),
                                   tierCounts=dict(Counter(item['tier'] for item in items)),
                                   checkedTextRegions=p.text_regions, overflowCount=0,
-                                  stickerCount=1 + len(sections), ctaCount=2, items=audit_items)
+                                  stickerCount=1 + len(sections), ctaCount=2,
+                                  watermark=watermark, items=audit_items)
 
 
 def input_hashes(kind, items):
@@ -366,6 +389,10 @@ def check_outputs(kind, items, out_dir):
     actual = [(i['sourceName'], i['score']) for i in manifest['items']]
     if expected != actual or manifest['overflowCount'] or manifest['ctaCount'] != 2 or manifest['stickerCount'] < 2:
         raise ValueError(f'{kind}: 条目、评分、引流或布局验收失败')
+    watermark = manifest.get('watermark', {})
+    if (watermark.get('text') != WATERMARK_TEXT or watermark.get('opacity') != WATERMARK_OPACITY
+            or watermark.get('angle') != WATERMARK_ANGLE or watermark.get('count', 0) <= 0):
+        raise ValueError(f'{kind}: 缺少统一水印，请重新生成，不能用署名代替水印')
     with Image.open(png) as im:
         if list(im.size) != manifest['size']:
             raise ValueError(f'{kind}: 图片尺寸异常')
@@ -387,7 +414,7 @@ def main(argv=None):
         if args.check:
             for kind, items in loaded.items():
                 audit = check_outputs(kind, items, args.out_dir)
-                print(f"OK {kind}: {audit['count']} items, exact scores, 2 CTAs, {audit['stickerCount']} stickers, no overflow")
+                print(f"OK {kind}: {audit['count']} items, exact scores, 2 CTAs, {audit['stickerCount']} stickers, {audit['watermark']['count']} watermarks, no overflow")
             return 0
         # Validate/render every requested output BEFORE replacing any existing poster.
         rendered = []

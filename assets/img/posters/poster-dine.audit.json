@@ -17,6 +17,12 @@
   "overflowCount": 0,
   "stickerCount": 6,
   "ctaCount": 2,
+  "watermark": {
+    "text": "捞鱼的博客",
+    "opacity": 24,
+    "angle": 22,
+    "count": 175
+  },
   "items": [
     {
       "name": "【周边·仅早餐时段】肯德基（早餐）",
@@ -1183,7 +1189,7 @@
     "assets/lib-custom/canteen-tier-extras.js": "827f00ce3e41cbe859cd9f516c171e7fc5fdfabcd889f1aeab349cc1d4cac275",
     "assets/lib-custom/canteen-tier.js": "8905e1dd38d1f51f8a5db4d59adebae751af19d7309253c60baa7614e5167174",
     "tools/export_tier_data.cjs": "1251997d31908182c67fcde8ee432b51bfa085a95c7304ceb50916009e8a97fa",
-    "tools/generate_posters.py": "9b6a7ac03c963d2c9e921246146a0bdf7208510e83516c7238f729ad9e078b15"
+    "tools/generate_posters.py": "7b98e422d90d6f17191a970ce13e1aaa086ac290a7383ec658d15e90de771adb"
   },
-  "pngSha256": "3546341e8b437e55a0838dec5583dc9e5769f6ac397df4b0db175d5e18c1173b"
+  "pngSha256": "9b9eb8dd4a87bb14c04862af8cf04f680b258ca1bc70280a0f78ec2de9ad9fbe"
 }

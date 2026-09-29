@@ -24,7 +24,7 @@ python tools/generate_posters.py --all --check
 python -m unittest discover -s tests -p 'test_tier_posters.py'
 ```
 
-4. 打开三张 PNG，查看顶部、各档位、最长名称/简介、小数评分和底部。`--check` 成功只代表数据/文件/边界检查通过，不能替代看图。
+4. 打开三张 PNG，查看顶部、各档位、最长名称/简介、小数评分、全图平铺水印和底部。`--check` 成功只代表数据/文件/边界检查通过，不能替代看图。
 5. 提交本次数据、图片、文章及 **3 张 PNG + 3 份 `.audit.json`**。只暂存本任务相关文件。获准发布时推送，等 Pages 构建成功后核对线上海报；不要把本地成功当成已上线。
 
 ```bash
@@ -55,6 +55,7 @@ git add assets/img/posters/poster-noodle.png assets/img/posters/poster-noodle.au
 - 历史命令 `tools/render_noodle_poster.py` 只转发到统一生成器，没有自己的排版。禁止恢复旧版，禁止再从成品 PNG 裁剪头尾。
 - 字体（含许可）、Emoji 字体、七张精选微信表情包都在 `assets/img/posters/resources/`，无需访问个人电脑的表情包目录。
 - 顶部与底部均包含完整测评入口。食堂/外卖回复「江大美食」，方便面回复「方便面」，公众号统一为「捞鱼的博客」。
+- 三张图均在所有内容绘制完成后叠加「捞鱼的博客」斜向平铺浅水印，覆盖卡片，使局部裁图也保留署名。页眉/页脚署名不能代替水印；不得在更新或改版时漏掉。audit 记录水印文字、透明度、角度与数量，`--check` 会检查这些字段。
 - 用户明确要求改版时可修改这套实现并跑测试；普通数据更新只改源数据然后重绘。
 
 ## 报错怎么处理

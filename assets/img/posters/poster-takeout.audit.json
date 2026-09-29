@@ -17,6 +17,12 @@
   "overflowCount": 0,
   "stickerCount": 6,
   "ctaCount": 2,
+  "watermark": {
+    "text": "捞鱼的博客",
+    "opacity": 24,
+    "angle": 22,
+    "count": 84
+  },
   "items": [
     {
       "name": "【外卖】和府捞面",
@@ -444,7 +450,7 @@
     "assets/lib-custom/takeout-tier-extras.js": "2d4333c3c7c5745dd21b02c015356aefe7ea4d9f9fdda00ab39d9da3c037b182",
     "assets/lib-custom/takeout-tier.js": "b1393033b4b3100f54bc4536e02ae7b743f89a13c529888f7a99fda293d62cc0",
     "tools/export_tier_data.cjs": "1251997d31908182c67fcde8ee432b51bfa085a95c7304ceb50916009e8a97fa",
-    "tools/generate_posters.py": "9b6a7ac03c963d2c9e921246146a0bdf7208510e83516c7238f729ad9e078b15"
+    "tools/generate_posters.py": "7b98e422d90d6f17191a970ce13e1aaa086ac290a7383ec658d15e90de771adb"
   },
-  "pngSha256": "0efdd3c7374e45f13a68b4f2a75177d0869654ebd492893907eafa3d1b2c05db"
+  "pngSha256": "120c1b4a5b252102be255a77528f4f0cbf0aa3aba1369272706e21e61134c421"
 }

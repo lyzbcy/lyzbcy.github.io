@@ -36,6 +36,22 @@ class Scores(unittest.TestCase):
 
 
 class Layout(unittest.TestCase):
+    def test_watermark_is_visible_repeated_and_deterministic(self):
+        from PIL import Image, ImageChops
+        original = Image.new('RGB', (g.WIDTH, 1600), 'white')
+        marked, audit = g.add_watermark(original)
+        again, repeated_audit = g.add_watermark(original)
+        self.assertEqual(marked.size, original.size)
+        self.assertEqual(audit['text'], '捞鱼的博客')
+        self.assertGreater(audit['count'], 10)
+        self.assertEqual(audit, repeated_audit)
+        self.assertEqual(marked.tobytes(), again.tobytes())
+        for top in [0, 500, 1100]:
+            box = (100, top, 1200, top + 400)
+            self.assertIsNotNone(ImageChops.difference(original.crop(box), marked.crop(box)).getbbox())
+        # Attribution should remain subtle enough for the foreground text to read.
+        self.assertGreater(min(marked.getchannel('R').getextrema()), 225)
+
     def test_long_cjk_latin_and_punctuation_fit_with_ellipsis(self):
         for text in ['简介很长，不能溢出；也不能丢失省略号。' * 30,
                      'ABCDEFGHIJKLMNOPQRSTUVWXYZ /（全角）& Mixed 内容 ' * 30]:
