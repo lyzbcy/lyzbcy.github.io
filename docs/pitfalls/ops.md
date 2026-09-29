@@ -73,3 +73,7 @@ child_process(exec/execFile/ssh)不经过本地 shell,是完整备用执行通�
 ## Windows SSH fallback (2026-09-29)
 
 Native Windows OpenSSH exited 255 without a banner in this environment. Git for Windows OpenSSH worked with the existing askpass pattern. Keep passwords in process memory/environment only; never place passwords in command arguments or saved scripts. Use a writable explicit UserKnownHostsFile with accept-new, preserving mismatch checks. Long PowerShell-to-SSH command arguments may silently truncate: transfer in chunks below 5 KB and verify SHA-256 before enabling a service.
+
+## Windows GitHub large uploads (2026-09-29)
+
+Local API TLS handshakes and large uploads can stall. A temporary SSH local forward bound to 127.0.0.1 for api.github.com:443 and uploads.github.com:443 worked; preserve original TLS SNI, certificate validation and Host headers. GitHub credentials stay in the local process memory, never stored on the server. Limit binary transfer to 2 MiB/s, verify GitHub asset digests against local SHA-256, and close forwarding processes after publishing. Interrupted draft assets can remain in starter state; remove only the known incomplete asset before retrying.
