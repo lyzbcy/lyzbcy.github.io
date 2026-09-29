@@ -8,6 +8,10 @@ description: 更新 lyzbcy.github.io 博客(方便面排名、外卖排名、健
 本 skill 的权威位置在 **lyzbcy.github.io 仓库 `skills/lyzbcy-blog-update/`**,
 随仓库一起版本化,任何 AI(小龙虾/周五涵/ZCode)更新本博客前必读。
 
+**三榜一图流先读 [lyzbcy-tier-posters](../lyzbcy-tier-posters/SKILL.md)**：
+食堂、外卖、方便面统一运行 `python tools/generate_posters.py --all`，再运行
+`python tools/generate_posters.py --all --check`。旧方便面命令只是兼容转发。
+
 ## 🔒 三条铁律(先记住再往下读)
 
 1. **改哪个页面,就先读哪个页面的 `references/` 细则**,没读禁止动手。
@@ -22,6 +26,7 @@ description: 更新 lyzbcy.github.io 博客(方便面排名、外卖排名、健
 | 页面 | 细则文件 | 数据源 |
 |---|---|---|
 | 方便面从夯到拉排名 | [references/noodle-tier.md](references/noodle-tier.md) | `assets/lib-custom/noodle-tier.js` |
+| 五六食堂从夯到拉排名 | [references/canteen-tier.md](references/canteen-tier.md) | `assets/lib-custom/canteen-tier.js` |
 | 外卖从夯到拉排名 | [references/takeout-tier.md](references/takeout-tier.md) | `assets/lib-custom/takeout-tier.js` |
 | 健身/营养/抖音周报看板 | [references/dashboards.md](references/dashboards.md) | `tools/generate_*.py` |
 | AI Coding 比赛看板 | [references/aicoding-board.md](references/aicoding-board.md) | `tools/aicoding/update-aicoding.mjs` |
@@ -43,7 +48,7 @@ description: 更新 lyzbcy.github.io 博客(方便面排名、外卖排名、健
 - ✗ 凭记忆/历史经验直接改,跳过 references 细则
 - ✗ 修改/降档/润色用户评价文案
 - ✗ 动本次任务之外的任何文章
-- ✗ 自写渲染脚本、改脚本布局参数/颜色/字体
+- ✗ 普通数据更新另写一套渲染脚本；用户明确要求视觉/脚本改版时，修改统一生成器并验证
 - ✗ 不确定时自作主张——先问用户
 
 ## 📚 相关知识

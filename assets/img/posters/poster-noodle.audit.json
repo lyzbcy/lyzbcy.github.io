@@ -1,0 +1,778 @@
+{
+  "schema": 1,
+  "kind": "noodle",
+  "size": [
+    1440,
+    8475
+  ],
+  "count": 39,
+  "tierCounts": {
+    "夯": 6,
+    "顶级": 6,
+    "人上人": 11,
+    "NPC": 14,
+    "拉完了": 2
+  },
+  "checkedTextRegions": 219,
+  "overflowCount": 0,
+  "stickerCount": 6,
+  "ctaCount": 2,
+  "items": [
+    {
+      "name": "海鲜拉面【汤达人】",
+      "sourceName": "海鲜拉面【汤达人】",
+      "tier": "夯",
+      "score": "6",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "鲜香扑鼻、细小面条，极大满足",
+      "excerpt": "鲜香扑鼻、细小面条，极大满足",
+      "truncated": false,
+      "box": [
+        48,
+        776,
+        660,
+        261
+      ]
+    },
+    {
+      "name": "安徽板面-卤香牛肉板面【今麦郎】",
+      "sourceName": "安徽板面-卤香牛肉板面【今麦郎】",
+      "tier": "夯",
+      "score": "6",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "宽面这个美味 这个劲道",
+      "excerpt": "宽面这个美味 这个劲道",
+      "truncated": false,
+      "box": [
+        732,
+        776,
+        660,
+        261
+      ]
+    },
+    {
+      "name": "番茄肉酱风味拌面【茄皇】",
+      "sourceName": "番茄肉酱风味拌面【茄皇】",
+      "tier": "夯",
+      "score": "6",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "番茄味不错 作为拌面 有酱但不腻",
+      "excerpt": "番茄味不错 作为拌面 有酱但不腻",
+      "truncated": false,
+      "box": [
+        48,
+        1061,
+        660,
+        339
+      ]
+    },
+    {
+      "name": "山椒肥牛高人拉面【杨掌柜】",
+      "sourceName": "山椒肥牛高人拉面【杨掌柜】",
+      "tier": "夯",
+      "score": "6",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "山椒肥牛味加卤蛋，酸酸甜甜美味至极。只加了1/3油包但依然非常有味道，细面条口感极佳，加白醋后更是酸酸甜甜。全透明塑料盒包装，参考价5.9元，热量440kcal（面饼全+粉包全+油包1/3）。",
+      "excerpt": "山椒肥牛味加卤蛋，酸酸甜甜美味至极。只加了1/3油包但依然非常有味道，细面条口感极佳，加白醋后更是酸酸甜甜。全透明塑料盒包装，参考价5.9…",
+      "truncated": true,
+      "box": [
+        732,
+        1061,
+        660,
+        339
+      ]
+    },
+    {
+      "name": "粉面菜蛋螺蛳粉味【杨掌柜】",
+      "sourceName": "粉面菜蛋螺蛳粉味【杨掌柜】",
+      "tier": "夯",
+      "score": "5.8",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "好吃程度跟山椒肥牛味并排，参考价5.5元，也有卤蛋。不仅有面饼还有粉丝，面饼小一点，总量比高人拉面高一点点。小笋闻着不是很臭，宿舍里吃得开心，算一个优点（现在很多人吃螺蛳粉都选无臭的）。辣度对不太能吃辣的我来说稍微有点辣了，但还是挺喜欢吃。主观打分降0.2分。热量810kcal（整桶208g+追加同款干面饼65g，不加额外调料）。",
+      "excerpt": "好吃程度跟山椒肥牛味并排，参考价5.5元，也有卤蛋。不仅有面饼还有粉丝，面饼小一点，总量比高人拉面高一点点。小笋闻着不是很臭，宿舍里吃…",
+      "truncated": true,
+      "box": [
+        48,
+        1424,
+        660,
+        339
+      ]
+    },
+    {
+      "name": "高人拉面港式肥汁加吸汁爆蛋【杨掌柜】",
+      "sourceName": "高人拉面港式肥汁加吸汁爆蛋【杨掌柜】",
+      "tier": "夯",
+      "score": "5.5",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "参考价5.9元，热量542kcal（含面饼+料包+吸汁爆蛋）。非油炸拉面，非常值得一试！汤的味道就像吃臭豆腐时上面淋的那层很美味的港味卤酱，吃起来非常好吃！吸汁爆蛋就是把蛋汁做成的压缩蛋吸水变大，虽然营养上不如完整卤蛋，但口感很不错。虽然偏爱藤椒的麻麻味道，但这个肯定超过五星守门员酸菜牛肉面。",
+      "excerpt": "参考价5.9元，热量542kcal（含面饼+料包+吸汁爆蛋）。非油炸拉面，非常值得一试！汤的味道就像吃臭豆腐时上面淋的那层很美味的港味卤酱，吃…",
+      "truncated": true,
+      "box": [
+        732,
+        1424,
+        660,
+        339
+      ]
+    },
+    {
+      "name": "牛肉面【茄皇】",
+      "sourceName": "牛肉面【茄皇】",
+      "tier": "顶级",
+      "score": "5",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "可以",
+      "excerpt": "可以",
+      "truncated": false,
+      "box": [
+        48,
+        1923,
+        660,
+        300
+      ]
+    },
+    {
+      "name": "海鲜风味【合味道】",
+      "sourceName": "海鲜风味【合味道】",
+      "tier": "顶级",
+      "score": "5",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "鲜得嘞 但是量好少 就算是大杯也吃不饱。而且面有一点坨",
+      "excerpt": "鲜得嘞 但是量好少 就算是大杯也吃不饱。而且面有一点坨",
+      "truncated": false,
+      "box": [
+        732,
+        1923,
+        660,
+        300
+      ]
+    },
+    {
+      "name": "刀削宽面-红烧牛肉面【今麦郎】",
+      "sourceName": "刀削宽面-红烧牛肉面【今麦郎】",
+      "tier": "顶级",
+      "score": "5",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "宽宽的面 形象捏 好吃捏 宽面也比较入味",
+      "excerpt": "宽宽的面 形象捏 好吃捏 宽面也比较入味",
+      "truncated": false,
+      "box": [
+        48,
+        2247,
+        660,
+        300
+      ]
+    },
+    {
+      "name": "辣牛肉汤面【汤达人】",
+      "sourceName": "辣牛肉汤面【汤达人】",
+      "tier": "顶级",
+      "score": "5",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "喝汤之前只是微微辣。微微辣+酸甜，口味很丰富。吃完后喝汤又能变成微辣，留下火辣辣的印象。",
+      "excerpt": "喝汤之前只是微微辣。微微辣+酸甜，口味很丰富。吃完后喝汤又能变成微辣，留下火辣辣的印象。",
+      "truncated": false,
+      "box": [
+        732,
+        2247,
+        660,
+        300
+      ]
+    },
+    {
+      "name": "金汤肥牛面【康师傅】",
+      "sourceName": "金汤肥牛面【康师傅】",
+      "tier": "顶级",
+      "score": "5",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "面饼挺厚，微酸微甜微微辣，最大的优点就是没什么明显缺点",
+      "excerpt": "面饼挺厚，微酸微甜微微辣，最大的优点就是没什么明显缺点",
+      "truncated": false,
+      "box": [
+        48,
+        2571,
+        660,
+        300
+      ]
+    },
+    {
+      "name": "老坛酸菜牛肉面【统一】",
+      "sourceName": "老坛酸菜牛肉面【统一】",
+      "tier": "顶级",
+      "score": "5",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "经典无需多言",
+      "excerpt": "经典无需多言",
+      "truncated": false,
+      "box": [
+        732,
+        2571,
+        660,
+        300
+      ]
+    },
+    {
+      "name": "酸酸辣辣豚骨汤面【今麦郎一桶半】",
+      "sourceName": "酸酸辣辣豚骨汤面【今麦郎一桶半】",
+      "tier": "人上人",
+      "score": "4",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "挺好吃的 我愿意经常吃 然后包装很有意思 把汤包和油包分开 这样还挺健康的",
+      "excerpt": "挺好吃的 我愿意经常吃 然后包装很有意思 把汤包和油包分开 这样还挺健康的",
+      "truncated": false,
+      "box": [
+        48,
+        3031,
+        660,
+        300
+      ]
+    },
+    {
+      "name": "鲜虾鱼板面【康师傅】",
+      "sourceName": "鲜虾鱼板面【康师傅】",
+      "tier": "人上人",
+      "score": "4",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "不如海鲜系列鲜 但是你耐不住他量大啊 很满足嘻嘻嘻",
+      "excerpt": "不如海鲜系列鲜 但是你耐不住他量大啊 很满足嘻嘻嘻",
+      "truncated": false,
+      "box": [
+        732,
+        3031,
+        660,
+        300
+      ]
+    },
+    {
+      "name": "双萝卜牛腩面【康师傅】",
+      "sourceName": "双萝卜牛腩面【康师傅】",
+      "tier": "人上人",
+      "score": "4",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "闻着有卤味 吃着却不重 蛮好 还有脆脆的双萝卜作为随机奖励。但是感觉容易吃腻 跟红烧牛肉面一样",
+      "excerpt": "闻着有卤味 吃着却不重 蛮好 还有脆脆的双萝卜作为随机奖励。但是感觉容易吃腻 跟红烧牛肉面一样",
+      "truncated": false,
+      "box": [
+        48,
+        3355,
+        660,
+        339
+      ]
+    },
+    {
+      "name": "韩式土豆排骨风味【嗦粉】",
+      "sourceName": "韩式土豆排骨风味【嗦粉】",
+      "tier": "人上人",
+      "score": "4",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "面&粉混合物挺有劲道。这个味道简直像是把妙脆角磨成粉加里面一样。竟然不难吃，还挺有味道（我不想说挺有韵味 因为零食和韵味感觉很不协调）",
+      "excerpt": "面&粉混合物挺有劲道。这个味道简直像是把妙脆角磨成粉加里面一样。竟然不难吃，还挺有味道（我不想说挺有韵味 因为零食和韵味感觉很不协…",
+      "truncated": true,
+      "box": [
+        732,
+        3355,
+        660,
+        339
+      ]
+    },
+    {
+      "name": "藤椒拌面【康师傅】",
+      "sourceName": "藤椒拌面【康师傅】",
+      "tier": "人上人",
+      "score": "4",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "相比于红烧牛肉面的拌面吃法，口味上针对拌面做了平衡性调整，但是藤椒在这个面里的点缀微乎其微，平平无奇",
+      "excerpt": "相比于红烧牛肉面的拌面吃法，口味上针对拌面做了平衡性调整，但是藤椒在这个面里的点缀微乎其微，平平无奇",
+      "truncated": false,
+      "box": [
+        48,
+        3718,
+        660,
+        339
+      ]
+    },
+    {
+      "name": "粉面菜蛋-港式肥汁【千里薯】",
+      "sourceName": "粉面菜蛋-港式肥汁【千里薯】",
+      "tier": "人上人",
+      "score": "4",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "很港式，对我来说有点太辣了，略微有点重口",
+      "excerpt": "很港式，对我来说有点太辣了，略微有点重口",
+      "truncated": false,
+      "box": [
+        732,
+        3718,
+        660,
+        339
+      ]
+    },
+    {
+      "name": "老坛泡椒牛肉面【统一】",
+      "sourceName": "老坛泡椒牛肉面【统一】",
+      "tier": "人上人",
+      "score": "4",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "模仿老坛酸菜，但只有模仿 没有超越。泡椒味有点喧宾夺主，而且没有酸菜吃",
+      "excerpt": "模仿老坛酸菜，但只有模仿 没有超越。泡椒味有点喧宾夺主，而且没有酸菜吃",
+      "truncated": false,
+      "box": [
+        48,
+        4081,
+        660,
+        300
+      ]
+    },
+    {
+      "name": "羊肉汤面【白象】",
+      "sourceName": "羊肉汤面【白象】",
+      "tier": "人上人",
+      "score": "4",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "感觉像是对标康师傅的香辣牛肉面",
+      "excerpt": "感觉像是对标康师傅的香辣牛肉面",
+      "truncated": false,
+      "box": [
+        732,
+        4081,
+        660,
+        300
+      ]
+    },
+    {
+      "name": "罗宋汤面【汤达人】",
+      "sourceName": "罗宋汤面【汤达人】",
+      "tier": "人上人",
+      "score": "4",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "酸酸甜甜，然后...没了... 没什么特点啊",
+      "excerpt": "酸酸甜甜，然后...没了... 没什么特点啊",
+      "truncated": false,
+      "box": [
+        48,
+        4405,
+        660,
+        339
+      ]
+    },
+    {
+      "name": "黄焖鸡米饭【田小花】",
+      "sourceName": "黄焖鸡米饭【田小花】",
+      "tier": "人上人",
+      "score": "4",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "很入味，比方便面入味多了。自热煮得很好，料包连汤带水，还有一小碗汤特别鲜。性价比一般，9块接近10块不如点外卖。品牌不大，科技与狠活未知。但只需要冷水，比方便面还方便。米饭实心密度大，七分饱。综合评分比老坛酸菜牛肉面低0.1分。",
+      "excerpt": "很入味，比方便面入味多了。自热煮得很好，料包连汤带水，还有一小碗汤特别鲜。性价比一般，9块接近10块不如点外卖。品牌不大，科技与狠活未…",
+      "truncated": true,
+      "box": [
+        732,
+        4405,
+        660,
+        339
+      ]
+    },
+    {
+      "name": "红烧牛肉面【康师傅】",
+      "sourceName": "红烧牛肉面【康师傅】",
+      "tier": "人上人",
+      "score": "4",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "4❤️守门员",
+      "excerpt": "4❤守门员",
+      "truncated": false,
+      "box": [
+        48,
+        4768,
+        660,
+        261
+      ]
+    },
+    {
+      "name": "铁板黑椒牛肉意大利面【怡芽】",
+      "sourceName": "铁板黑椒牛肉意大利面【怡芽】",
+      "tier": "NPC",
+      "score": "3",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "低脂高蛋白 比同品牌的番茄肉酱好吃一丢丢 但也是属于减脂期我也不会大量吃的口味",
+      "excerpt": "低脂高蛋白 比同品牌的番茄肉酱好吃一丢丢 但也是属于减脂期我也不会大量吃的口味",
+      "truncated": false,
+      "box": [
+        48,
+        5189,
+        660,
+        339
+      ]
+    },
+    {
+      "name": "经典番茄肉酱意大利面【怡芽】",
+      "sourceName": "经典番茄肉酱意大利面【怡芽】",
+      "tier": "NPC",
+      "score": "3",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "低脂高蛋白 这的确值得表扬 但就算是减脂期我也不会大量选择这个填饱肚子 因为不够好吃。感觉有点对标番茄肉酱风味拌面【茄皇】，但是它番茄酱没人家茄皇好吃",
+      "excerpt": "低脂高蛋白 这的确值得表扬 但就算是减脂期我也不会大量选择这个填饱肚子 因为不够好吃。感觉有点对标番茄肉酱风味拌面【茄皇】，但是它番茄酱…",
+      "truncated": true,
+      "box": [
+        732,
+        5189,
+        660,
+        339
+      ]
+    },
+    {
+      "name": "海鲜浓汤面【白象】",
+      "sourceName": "海鲜浓汤面【白象】",
+      "tier": "NPC",
+      "score": "3",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "细细扁扁的面条+海鲜味……这不就是泡水的波力渔趣嘛",
+      "excerpt": "细细扁扁的面条+海鲜味……这不就是泡水的波力渔趣嘛",
+      "truncated": false,
+      "box": [
+        48,
+        5552,
+        660,
+        300
+      ]
+    },
+    {
+      "name": "赤豚骨浓汤风味【合味道】",
+      "sourceName": "赤豚骨浓汤风味【合味道】",
+      "tier": "NPC",
+      "score": "3",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "不是哥们，怎么没味儿啊 看在合味道的份上才能留在3❤️ 其他牌子就扔💩里了",
+      "excerpt": "不是哥们，怎么没味儿啊 看在合味道的份上才能留在3❤ 其他牌子就扔💩里了",
+      "truncated": false,
+      "box": [
+        732,
+        5552,
+        660,
+        300
+      ]
+    },
+    {
+      "name": "兰州牛肉面【阿宽】",
+      "sourceName": "兰州牛肉面【阿宽】",
+      "tier": "NPC",
+      "score": "3",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "比兰州拉面口味稍微淡一点，面稍微没那么有嚼劲一点。你没错，错的是我们。我不喜欢吃兰州拉面…",
+      "excerpt": "比兰州拉面口味稍微淡一点，面稍微没那么有嚼劲一点。你没错，错的是我们。我不喜欢吃兰州拉面…",
+      "truncated": false,
+      "box": [
+        48,
+        5876,
+        660,
+        339
+      ]
+    },
+    {
+      "name": "老母鸡汤面【白象】",
+      "sourceName": "老母鸡汤面【白象】",
+      "tier": "NPC",
+      "score": "3",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "给我一种他明明能考100分，故意考80分的感觉，一直就差临门一脚的快感。故弄玄虚，吃得我很不爽。（就是不够鲜）",
+      "excerpt": "给我一种他明明能考100分，故意考80分的感觉，一直就差临门一脚的快感。故弄玄虚，吃得我很不爽。（就是不够鲜）",
+      "truncated": false,
+      "box": [
+        732,
+        5876,
+        660,
+        339
+      ]
+    },
+    {
+      "name": "番茄面【统一】",
+      "sourceName": "番茄面【统一】",
+      "tier": "NPC",
+      "score": "3",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "吃的时候番茄味很一般，除了番茄没什么特点",
+      "excerpt": "吃的时候番茄味很一般，除了番茄没什么特点",
+      "truncated": false,
+      "box": [
+        48,
+        6239,
+        660,
+        300
+      ]
+    },
+    {
+      "name": "番茄炖牛腩【杨掌柜】",
+      "sourceName": "番茄炖牛腩【杨掌柜】",
+      "tier": "NPC",
+      "score": "3",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "一股塑料味，卤蛋只有微微臭臭蛋，王皓说想洗了抹布没通风味",
+      "excerpt": "一股塑料味，卤蛋只有微微臭臭蛋，王皓说想洗了抹布没通风味",
+      "truncated": false,
+      "box": [
+        732,
+        6239,
+        660,
+        300
+      ]
+    },
+    {
+      "name": "番茄鸡蛋面【康师傅】",
+      "sourceName": "番茄鸡蛋面【康师傅】",
+      "tier": "NPC",
+      "score": "3",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "汤好喝，面没有特色",
+      "excerpt": "汤好喝，面没有特色",
+      "truncated": false,
+      "box": [
+        48,
+        6563,
+        660,
+        339
+      ]
+    },
+    {
+      "name": "浓情番茄味高人拉面【杨掌柜】",
+      "sourceName": "浓情番茄味高人拉面【杨掌柜】",
+      "tier": "NPC",
+      "score": "3",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "减脂期只加了一半番茄包和花生，番茄味不够浓郁——一半因为加不够，一半因为本身就不够浓。油包减半后油脂仍然远高于蛋白质，不如送卤蛋的藤椒味有营养，参考价5.9元，热量490kcal。",
+      "excerpt": "减脂期只加了一半番茄包和花生，番茄味不够浓郁——一半因为加不够，一半因为本身就不够浓。油包减半后油脂仍然远高于蛋白质，不如送卤蛋的…",
+      "truncated": true,
+      "box": [
+        732,
+        6563,
+        660,
+        339
+      ]
+    },
+    {
+      "name": "魔小饱方便魔芋凉面",
+      "sourceName": "魔小饱方便魔芋凉面",
+      "tier": "NPC",
+      "score": "3",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "参考价6.5元，热量65kcal。魔芋面很有劲道，卡路里很少。料包全加对我来说有点辣，说话都辣辣的。量太少了吃不饱，饱腹感相当于一碗小的合味道。吃魔芋面没有吃淀粉面那么开心，心理满足感不够。营养方面既然卡路里少了也别想有多少蛋白质了。味道还可以，香菜味/辣味比较浓郁。如果红烧牛肉面吃腻了可能会来吃这个，但一包解决不了，至少得吃两包。",
+      "excerpt": "参考价6.5元，热量65kcal。魔芋面很有劲道，卡路里很少。料包全加对我来说有点辣，说话都辣辣的。量太少了吃不饱，饱腹感相当于一碗小的合…",
+      "truncated": true,
+      "box": [
+        48,
+        6926,
+        660,
+        339
+      ]
+    },
+    {
+      "name": "日清意面牛油莫罗勒风味杯面【日清】",
+      "sourceName": "日清意面牛油莫罗勒风味杯面【日清】",
+      "tier": "NPC",
+      "score": "3",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "光说味道其实可以给4星，但参考价7元且吃不饱。既然是小杯就得按合味道的标准来要求。牛油果风味虽然颜色看着低，但实际吃着挺好吃的，只是没太吃出牛油果的味道，没有特别惊艳。综合考虑性价比，最终3星。",
+      "excerpt": "光说味道其实可以给4星，但参考价7元且吃不饱。既然是小杯就得按合味道的标准来要求。牛油果风味虽然颜色看着低，但实际吃着挺好吃的，只是…",
+      "truncated": true,
+      "box": [
+        732,
+        6926,
+        660,
+        339
+      ]
+    },
+    {
+      "name": "日清UFO飞碟炒面虾仁炒面风味【日清】",
+      "sourceName": "日清UFO飞碟炒面虾仁炒面风味【日清】",
+      "tier": "NPC",
+      "score": "3",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "参考价6.9元，热量520kcal，蛋白质10.3g，脂肪25.6g，碳水66.9g。毕竟是海鲜味，但实在没什么料，就一些菜包和油包，拌里面没什么料，味道很一般。好吃全来自于油比较重，稍微还有一点海鲜的腥味。作为方便面不算便宜，料又太少了。",
+      "excerpt": "参考价6.9元，热量520kcal，蛋白质10.3g，脂肪25.6g，碳水66.9g。毕竟是海鲜味，但实在没什么料，就一些菜包和油包，拌里面没什么料，味道…",
+      "truncated": true,
+      "box": [
+        48,
+        7289,
+        660,
+        339
+      ]
+    },
+    {
+      "name": "辣白菜辛拉面【农心】",
+      "sourceName": "辣白菜辛拉面【农心】",
+      "tier": "NPC",
+      "score": "3",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "参考价4-5元，热量436kcal，蛋白质14.6g，脂肪11.8g，碳水66.4g。按包买也要四五块钱，感觉没什么肉，味道一般般，还不如红烧牛肉面。亮点可能就是面稍微好吃点。",
+      "excerpt": "参考价4-5元，热量436kcal，蛋白质14.6g，脂肪11.8g，碳水66.4g。按包买也要四五块钱，感觉没什么肉，味道一般般，还不如红烧牛肉面。亮点…",
+      "truncated": true,
+      "box": [
+        732,
+        7289,
+        660,
+        339
+      ]
+    },
+    {
+      "name": "香菜面",
+      "sourceName": "香菜面",
+      "tier": "拉完了",
+      "score": "史",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "香菜味浓郁得我这个喜欢吃香菜的人都要呕的水平",
+      "excerpt": "香菜味浓郁得我这个喜欢吃香菜的人都要呕的水平",
+      "truncated": false,
+      "box": [
+        48,
+        7788,
+        660,
+        261
+      ]
+    },
+    {
+      "name": "蒜香猪骨汤面【白象】",
+      "sourceName": "蒜香猪骨汤面【白象】",
+      "tier": "拉完了",
+      "score": "史",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "？ 呕 这个怪怪的味道是想干什么 报复社会吗",
+      "excerpt": "？ 呕 这个怪怪的味道是想干什么 报复社会吗",
+      "truncated": false,
+      "box": [
+        732,
+        7788,
+        660,
+        261
+      ]
+    }
+  ],
+  "inputs": {
+    "assets/image library/noodle-tier-images/兰州牛肉面-阿宽.png": "fd7722a1d8a93efd01c81e310e780762ff2882a5e1765c9831a1fe3921c63a5b",
+    "assets/image library/noodle-tier-images/农心辣白菜辛拉面-农心.png": "eee5f5ef90ee5541051387aa478f4c0c6ec1eabda353224b1524cd4568769505",
+    "assets/image library/noodle-tier-images/刀削宽面红烧牛肉-今麦郎.jpeg": "862e40d49580339f3c8b4e16563fc8ce42db7e5be49d48e7246ee7579a88c684",
+    "assets/image library/noodle-tier-images/双萝卜牛腩面-康师傅.webp": "99b2c32513339d9666954e0fcf25010546f10b1ab96b35562bf8d7c1b1411149",
+    "assets/image library/noodle-tier-images/安徽板面-今麦郎.jpeg": "646674aa689b81e5d701706a479ca6b4f83a3e5f080ced15d4b48f09ce6478bf",
+    "assets/image library/noodle-tier-images/山椒肥牛高人拉面-杨掌柜.jpeg": "7da7286c634cbc7cac29715258421e80dfb3f9cb230eb6c629cb1717d95b1998",
+    "assets/image library/noodle-tier-images/日清UFO飞碟炒面虾仁炒面风味-日清.jpeg": "68f07fd29e3bac879b47d52b0ea1f65cfbb79af3296d64ab701fc583e64a43fc",
+    "assets/image library/noodle-tier-images/日清意面牛油莫罗勒杯面-日清.jpeg": "27f48c6a373f813649bbd6bc4265a958882b5aeb2a018c0b9f90eb31f747a6e9",
+    "assets/image library/noodle-tier-images/浓情番茄高人拉面-杨掌柜.jpeg": "d236350f6dd3cc9f55f788f321794fb1db0d0417681892b937c35ae4d23debe0",
+    "assets/image library/noodle-tier-images/海鲜拉面-汤达人.png": "b4e8b1d622d96e01899cc90964ec6008f31f560c6457c2df1810f49ad3db80e2",
+    "assets/image library/noodle-tier-images/海鲜浓汤面-白象.png": "6a020dc8d6aba1545080a18915540681550da834e94b771e05dc709db268edaa",
+    "assets/image library/noodle-tier-images/海鲜风味-合味道.jpeg": "81c73ee51faf031aba7c6d495b5cd28520f9feed126e604321071072aaf04598",
+    "assets/image library/noodle-tier-images/牛肉面-茄皇.jpeg": "efc65441e13c437bf70ba2ca9043cc94ff9b5aca08bf6f2abefdc61c7874d26f",
+    "assets/image library/noodle-tier-images/番茄炖牛腩-杨掌柜.jpeg": "28cd9de7edf32abe39788a4759b863727113ec730ac8d220b1002f70828e0365",
+    "assets/image library/noodle-tier-images/番茄肉酱意面-怡芽.jpg": "177543c6725ba07085d1668f1c4fdd636a9c740f8d02bec2cd83eff38594355e",
+    "assets/image library/noodle-tier-images/番茄肉酱拌面-茄皇.jpeg": "7a4613428f63e5f73db0f8afed95c0816e14c4a08b8a8004c9e593165428b97f",
+    "assets/image library/noodle-tier-images/番茄面-统一.jpeg": "6a7da512b345f9c71a35ce47080bc654a21b071f72688f6fdf3faf988eff704f",
+    "assets/image library/noodle-tier-images/番茄鸡蛋面-康师傅.jpeg": "1576b0fe09b07ce57e66f2a526a8c13959ec1a3bae59bc9009f010ab72ac1713",
+    "assets/image library/noodle-tier-images/粉面菜蛋港式肥汁-千里薯.jpeg": "3c22817ffff84a045e9945b57afb444161c3bfd9613946f8f7ce43c9550933cd",
+    "assets/image library/noodle-tier-images/粉面菜蛋螺蛳粉味-杨掌柜.jpeg": "8701528e56a4ed4f6b9ae1650d185747d8a033a68112ba28d88771dd2ced736c",
+    "assets/image library/noodle-tier-images/红烧牛肉面-康师傅.png": "ad8c86e0c45a95c92839f7a23b7029e700152d4c1f1fe8a521a095e3389e0891",
+    "assets/image library/noodle-tier-images/罗宋汤面-汤达人.jpeg": "eed7cd4cfc772641382fdcf01e9de19176f95c2adfe073fe7d08ef3d0e9fd348",
+    "assets/image library/noodle-tier-images/羊肉汤面-白象.jpeg": "2dbeaaf0cecc37f5dfbedd9127bf864b4dfc1edabaebaab5a35713530ed38872",
+    "assets/image library/noodle-tier-images/老坛泡椒牛肉面-统一.webp": "87a879228f89836773a3f754dc4995e0a656dd0cf12b458e44abd0a85a6bc777",
+    "assets/image library/noodle-tier-images/老坛酸菜牛肉面-统一.png": "0d423e22103b7415fc21ba67faee4bb3ff4b55d7bb1056b0cb9ce674b522e725",
+    "assets/image library/noodle-tier-images/老母鸡汤面-白象.png": "4ea1312caa32dcfbc9c0c45dc825970b8bfce3b34b3c9b451c6d027c96eff36b",
+    "assets/image library/noodle-tier-images/蒜香猪骨汤面-白象.webp": "d508dd6d3f51573f7436da989f6d78ea2ce57f4e0bc8289b96878645484f51ac",
+    "assets/image library/noodle-tier-images/藤椒拌面-康师傅.jpg": "a27174ec9723ea9fce8d210bb2f1dfec63955bfb1ea1860c3b57f84ec7f97fe9",
+    "assets/image library/noodle-tier-images/赤豚骨浓汤-合味道.jpg": "18f88742fff166bb3e362fa9c8ef9f8a5d719136c762a9e0dfe3e24237334ca9",
+    "assets/image library/noodle-tier-images/辣牛肉汤面-汤达人.jpg": "50cbaa9fe6f41352fec4bb8a50764fc0dc9c1973cb6411c62f18e7b431e5149b",
+    "assets/image library/noodle-tier-images/酸酸辣辣豚骨汤面-今麦郎一桶半.jpg": "a8084d3c98483d9b7728bdc93cf2e790fcea667cb4b077a8dcc294f0b1dc1684",
+    "assets/image library/noodle-tier-images/金汤肥牛面-康师傅.jpeg": "d900fc9d4532d7f9d9a6278f4cede88f56a644772960f1c28e9658317b14943b",
+    "assets/image library/noodle-tier-images/铁板黑椒牛肉意面-怡芽.jpg": "f7ef7799829157f807fc6b8b58fd3266035a7de61ab916346332520ad9019425",
+    "assets/image library/noodle-tier-images/韩式土豆排骨-嗦粉.jpeg": "b2c1ef9eddf2efb8f938b5826fb8ee048268255b646a9de0373bc5c403739991",
+    "assets/image library/noodle-tier-images/香菜面.jpeg": "a4e7c99e20141b42c807f42530e3634a020956f22ce149da54951c088cb1c7e8",
+    "assets/image library/noodle-tier-images/高人拉面港式肥汁味-杨掌柜.jpg": "67fb39e7904a6b1398d9d1c23c2b3bbb2c2c46cadca71a8a6c0a30623cc97037",
+    "assets/image library/noodle-tier-images/魔小饱方便魔芋凉面.jpg": "75f9ffacfde714678cb59b0fd0e0310236da729c885262aca61d24e5bba8dc0a",
+    "assets/image library/noodle-tier-images/鲜虾鱼板面-康师傅.webp": "620288c7b39d52e4ce678c3a1df5f8bb23ade2e5bf1b3168c5bf7ff19d4f2928",
+    "assets/image library/noodle-tier-images/黄焖鸡米饭-田小花.jpeg": "bdcffe5f3f901c4b6b92c281b481d1231445472d5302c0d27ada1d244c291d58",
+    "assets/img/posters/resources/fonts/NotoEmoji[wght].ttf": "de6c18832938afc99caf132b39d6a30a19bac7f2e812e28db2535b4608d27551",
+    "assets/img/posters/resources/fonts/NotoSansSC[wght].ttf": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
+    "assets/img/posters/resources/stickers/星第3弹-吃饭.png": "472d481e48f6dfad97031f325ee059d9558f2ef217ecfc9c18e4ca92bde86512",
+    "assets/img/posters/resources/stickers/星第3弹-呜呜.png": "ab6c113d4fdb394c80b9a21604c083c9927c20c8f80740e5cad8e4b7395c847f",
+    "assets/img/posters/resources/stickers/第12弹-开心.png": "f9e30edcda6e693b4eaf45c6d843dfca31269c4abb469f8a6412289f2cfd192d",
+    "assets/img/posters/resources/stickers/第12弹-心动.png": "471b9ca06998889b80a3b521e30eedc851965c59de8ff80f86774caf6f14b6f6",
+    "assets/img/posters/resources/stickers/第12弹-期待.png": "200fa353636757febd39283acbd9ac7465cac1bcd43f3cefeaab7f233aecf7b8",
+    "assets/img/posters/resources/stickers/第37弹-呃.png": "dca987bf738d5e6a4f5345c57415567cfcc5b89af86a283497fe0e0b223d210f",
+    "assets/lib-custom/noodle-tier-extras.js": "fcae53ac66658f28c6bc7832d326b2c23469be667901ac3d40177443005fdc5d",
+    "assets/lib-custom/noodle-tier.js": "c99457ee51e2f9a72fe5e79d7ea0479f5244055810a9c383d4c7cdd0f2e28a1c",
+    "tools/export_tier_data.cjs": "1251997d31908182c67fcde8ee432b51bfa085a95c7304ceb50916009e8a97fa",
+    "tools/generate_posters.py": "9b6a7ac03c963d2c9e921246146a0bdf7208510e83516c7238f729ad9e078b15"
+  },
+  "pngSha256": "09383ddd0b9d3752b362d63a7b1b6b3f4481ade4c169ba24eca422516fc7d47d"
+}

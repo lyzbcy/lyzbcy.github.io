@@ -32,4 +32,4 @@
 ## 开源出去的
 
 - 小红书评论回复 → github.com/lyzbcy/laoyu-miaomiao-tools v1.6.0(MIT)
-- 一图流生成器 → 博客仓库 tools/generate_posters.py + render_noodle_poster.py
+- 一图流生成器 → 博客仓库 tools/generate_posters.py；统一规范 skills/lyzbcy-tier-posters/SKILL.md；render_noodle_poster.py 仅兼容转发

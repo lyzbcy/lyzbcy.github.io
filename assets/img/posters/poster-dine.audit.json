@@ -1,0 +1,1189 @@
+{
+  "schema": 1,
+  "kind": "dine",
+  "size": [
+    1440,
+    12989
+  ],
+  "count": 64,
+  "tierCounts": {
+    "夯": 3,
+    "顶级": 9,
+    "人上人": 16,
+    "NPC": 27,
+    "拉完了": 9
+  },
+  "checkedTextRegions": 379,
+  "overflowCount": 0,
+  "stickerCount": 6,
+  "ctaCount": 2,
+  "items": [
+    {
+      "name": "【周边·仅早餐时段】肯德基（早餐）",
+      "sourceName": "【周边·仅早餐时段】肯德基（早餐）",
+      "tier": "夯",
+      "score": "4.5",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "芝士鸡肉帕尼尼 + 冰豆浆，约 8 元。冰豆浆太好喝了！早餐品类限量供应、只在早餐时段有，和其他品类很不一样，所以单独标注。评分锚点：大家都吃过，用来校准整体打分。",
+      "excerpt": "芝士鸡肉帕尼尼 + 冰豆浆，约 8 元。冰豆浆太好喝了！早餐品类限量供应、只在早餐时段有，和其他品类很不一样，所以单独标注。评分锚点：大家…",
+      "truncated": true,
+      "box": [
+        48,
+        776,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【滨湖万象城·2.5公里】海底捞",
+      "sourceName": "【滨湖万象城·2.5公里】海底捞",
+      "tier": "夯",
+      "score": "4.5",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "最近的门店在滨湖万象城 2.5 公里（万象汇那家 5.8 公里），得打车去。正常吃基本 300～600 元，适合聚餐或约会。到了这个价格，服务和美味肯定没得说，光美味程度 4.5 星左右，加上服务，4.5 星没毛病。缺点就是远。",
+      "excerpt": "最近的门店在滨湖万象城 2.5 公里（万象汇那家 5.8 公里），得打车去。正常吃基本 300～600 元，适合聚餐或约会。到了这个价格，服务和美味肯定…",
+      "truncated": true,
+      "box": [
+        732,
+        776,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【滨湖万象汇·与流浪泡泡同地】龍歌自助小火锅",
+      "sourceName": "【滨湖万象汇·与流浪泡泡同地】龍歌自助小火锅",
+      "tier": "夯",
+      "score": "4.3",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "在滨湖万象汇（跟流浪泡泡同一个商场），得打车去（10 块出头）。一人一锅的自助小火锅，人均 57 元左右，无锡自助餐打卡人气榜第 1。品质其实跟冯宝宝肥牛小火锅差不多，但这里可以随便拿、随便吃——性价比直接把冯宝宝暴打。味道可以给 4.3 星。",
+      "excerpt": "在滨湖万象汇（跟流浪泡泡同一个商场），得打车去（10 块出头）。一人一锅的自助小火锅，人均 57 元左右，无锡自助餐打卡人气榜第 1。品质其实…",
+      "truncated": true,
+      "box": [
+        48,
+        1120,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【大悦城外围】伍夸火锅鸡",
+      "sourceName": "【大悦城外围】伍夸火锅鸡",
+      "tier": "顶级",
+      "score": "4.2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "全是鸡腿肉且块大，人均 30～40 元就能吃到很足，夏天会提供免费西瓜，涮菜种类多且新鲜，是学生聚餐的高性价比火锅鸡选择。",
+      "excerpt": "全是鸡腿肉且块大，人均 30～40 元就能吃到很足，夏天会提供免费西瓜，涮菜种类多且新鲜，是学生聚餐的高性价比火锅鸡选择。",
+      "truncated": false,
+      "box": [
+        48,
+        1600,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场二楼】拌将麻辣烫",
+      "sourceName": "【星光广场二楼】拌将麻辣烫",
+      "tier": "顶级",
+      "score": "4",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "明厨亮灶、后厨干净，食材质量好，肉质不错，丸子不是劣质“科技丸”，有爆浆肠、芝士肠等真材实料，可做干拌（酱料多，有低卡选择）、水煮（清汤/牛油锅底）、油素汁干拌，人均约20元，比一般外卖略贵但物有所值，办卡有88折，周二送一道5元菜品。",
+      "excerpt": "明厨亮灶、后厨干净，食材质量好，肉质不错，丸子不是劣质“科技丸”，有爆浆肠、芝士肠等真材实料，可做干拌（酱料多，有低卡选择）、水煮…",
+      "truncated": true,
+      "box": [
+        732,
+        1600,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场176-2010】龙涛川味火锅",
+      "sourceName": "【星光广场176-2010】龙涛川味火锅",
+      "tier": "顶级",
+      "score": "4",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "具体品类略偏火锅 / 干锅，老板人很好，对大学生打折（7～8 折），熟客甚至可以刷脸，口味顶级，整体属于“花小钱办大事”的高性价比聚餐选择。",
+      "excerpt": "具体品类略偏火锅 / 干锅，老板人很好，对大学生打折（7～8 折），熟客甚至可以刷脸，口味顶级，整体属于“花小钱办大事”的高性价比聚餐选择。",
+      "truncated": false,
+      "box": [
+        48,
+        1944,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场】重返白桦林",
+      "sourceName": "【星光广场】重返白桦林",
+      "tier": "顶级",
+      "score": "4",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "星光广场内的正餐馆，有露台，夏天晚上氛围很好，老资历喜欢去吃，味道其实一般般，整体有故事感；菜品包含无锡特色菜（如油面筋等），口味中上，价格合适且学生可打折，是招待朋友和聚餐的首选之一。",
+      "excerpt": "星光广场内的正餐馆，有露台，夏天晚上氛围很好，老资历喜欢去吃，味道其实一般般，整体有故事感；菜品包含无锡特色菜（如油面筋等），口…",
+      "truncated": true,
+      "box": [
+        732,
+        1944,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【八方汇 / 庙街附近】海成楼",
+      "sourceName": "【八方汇 / 庙街附近】海成楼",
+      "tier": "顶级",
+      "score": "4",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "东北菜为主，菜量大、实惠，人均 40～50 元可以吃到一桌大肉硬菜，忌口少，非常适合多人聚餐和大口吃肉的场景。",
+      "excerpt": "东北菜为主，菜量大、实惠，人均 40～50 元可以吃到一桌大肉硬菜，忌口少，非常适合多人聚餐和大口吃肉的场景。",
+      "truncated": false,
+      "box": [
+        48,
+        2288,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场旁】穆罕默德清真餐厅",
+      "sourceName": "【星光广场旁】穆罕默德清真餐厅",
+      "tier": "顶级",
+      "score": "4",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "新疆清真菜馆，民族风味明显，重油、重香料，辣椒和胡萝卜用量充足，综合能力强，可一人食也可聚餐，人均约 60～70 元，喜欢新疆菜的人会非常喜欢，不习惯这类风味的人需要谨慎选择。",
+      "excerpt": "新疆清真菜馆，民族风味明显，重油、重香料，辣椒和胡萝卜用量充足，综合能力强，可一人食也可聚餐，人均约 60～70 元，喜欢新疆菜的人会非…",
+      "truncated": true,
+      "box": [
+        732,
+        2288,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【大悦城】胖哥俩肉蟹煲",
+      "sourceName": "【大悦城】胖哥俩肉蟹煲",
+      "tier": "顶级",
+      "score": "4",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "标准化连锁肉蟹煲，全国各地商场都能见到，在江大周边吃并没有额外加成，更多是图方便。",
+      "excerpt": "标准化连锁肉蟹煲，全国各地商场都能见到，在江大周边吃并没有额外加成，更多是图方便。",
+      "truncated": false,
+      "box": [
+        48,
+        2632,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场】星光小屋",
+      "sourceName": "【星光广场】星光小屋",
+      "tier": "顶级",
+      "score": "4",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "韩式自助+单点结合，单人自助约 80 元（团购 70+），也可以单点；有小隔间，适合团建和聚餐，装修有氛围；有原切肉、烤菠萝等菜品，味道不错。",
+      "excerpt": "韩式自助+单点结合，单人自助约 80 元（团购 70+），也可以单点；有小隔间，适合团建和聚餐，装修有氛围；有原切肉、烤菠萝等菜品，味道不错。",
+      "truncated": false,
+      "box": [
+        732,
+        2632,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【周边·仅早餐时段】麦当劳（早餐）",
+      "sourceName": "【周边·仅早餐时段】麦当劳（早餐）",
+      "tier": "顶级",
+      "score": "4",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "吉士蛋麦满分组合（吉士蛋麦满分 + 热豆浆），约 7.5 元。麦满分胚子上有碎碎的点点，口感特别好；热豆浆一般般。仅早餐时段供应，单独标注。",
+      "excerpt": "吉士蛋麦满分组合（吉士蛋麦满分 + 热豆浆），约 7.5 元。麦满分胚子上有碎碎的点点，口感特别好；热豆浆一般般。仅早餐时段供应，单独标注。",
+      "truncated": false,
+      "box": [
+        48,
+        2976,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场】淮南牛肉汤",
+      "sourceName": "【星光广场】淮南牛肉汤",
+      "tier": "人上人",
+      "score": "3.9",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "类似沙县模式的快餐档，非连锁但这家口味不错，必点牛肉炒饭（18 元，加萝卜干特别好吃）；饭点可能要排队，人气说明实力。",
+      "excerpt": "类似沙县模式的快餐档，非连锁但这家口味不错，必点牛肉炒饭（18 元，加萝卜干特别好吃）；饭点可能要排队，人气说明实力。",
+      "truncated": false,
+      "box": [
+        48,
+        3456,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【大悦城负一楼】和府捞面（堂食）",
+      "sourceName": "【大悦城负一楼】和府捞面（堂食）",
+      "tier": "人上人",
+      "score": "3.5",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "外卖我给了 5 星——外卖赛道对手是包装破破烂烂的同行，它包装太好、味道也有堂食水准。但放到堂食赛道：外卖 20 出头，堂食怎么点都要近 30 块。虽然堂食可以无限加面，综合性价比和美味程度，3.5 星。",
+      "excerpt": "外卖我给了 5 星——外卖赛道对手是包装破破烂烂的同行，它包装太好、味道也有堂食水准。但放到堂食赛道：外卖 20 出头，堂食怎么点都要近 30 …",
+      "truncated": true,
+      "box": [
+        732,
+        3456,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【大悦城】萨莉亚",
+      "sourceName": "【大悦城】萨莉亚",
+      "tier": "人上人",
+      "score": "3",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "性价比很高的平价意式料理，没有明显竞品。有的菜挺好吃的，比如面包蘸蘑菇汤；也有难吃的，比如烤三文鱼——难吃死了！综合下来是三星守门员：人上人的及格线。",
+      "excerpt": "性价比很高的平价意式料理，没有明显竞品。有的菜挺好吃的，比如面包蘸蘑菇汤；也有难吃的，比如烤三文鱼——难吃死了！综合下来是三星守门…",
+      "truncated": true,
+      "box": [
+        48,
+        3800,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场外围】摇滚炒鸡",
+      "sourceName": "【星光广场外围】摇滚炒鸡",
+      "tier": "人上人",
+      "score": "3",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": "uncertain",
+      "description": "山东风味，机器炒制，口味统一稳定，加麻油后麻辣鲜香，地域特色明显，人均 30～40 元，整体介于人上人与顶级之间。",
+      "excerpt": "山东风味，机器炒制，口味统一稳定，加麻油后麻辣鲜香，地域特色明显，人均 30～40 元，整体介于人上人与顶级之间。",
+      "truncated": false,
+      "box": [
+        732,
+        3800,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【大悦城 B1】刘记德大火锅鸡",
+      "sourceName": "【大悦城 B1】刘记德大火锅鸡",
+      "tier": "人上人",
+      "score": "3",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "大悦城 B1 的火锅鸡店，整体体验达到入围水准，具体细节未展开描述，可视作伍夸火锅鸡的平替或补充选项。",
+      "excerpt": "大悦城 B1 的火锅鸡店，整体体验达到入围水准，具体细节未展开描述，可视作伍夸火锅鸡的平替或补充选项。",
+      "truncated": false,
+      "box": [
+        48,
+        4144,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场二楼】星光超越火锅鸡",
+      "sourceName": "【星光广场二楼】星光超越火锅鸡",
+      "tier": "人上人",
+      "score": "3",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "星光广场二楼的火锅鸡，相比伍夸火锅鸡，环境更好，有雅座，整体不那么拥挤，味道也不错，适合在星光周边就近解决聚餐需求。",
+      "excerpt": "星光广场二楼的火锅鸡，相比伍夸火锅鸡，环境更好，有雅座，整体不那么拥挤，味道也不错，适合在星光周边就近解决聚餐需求。",
+      "truncated": false,
+      "box": [
+        732,
+        4144,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【大悦城】梅里山下·觅花涧",
+      "sourceName": "【大悦城】梅里山下·觅花涧",
+      "tier": "人上人",
+      "score": "3",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "大悦城里的云南菜馆，环境精致，属于“漂亮饭”，很适合约会或请客；菜品有创意、味道不错，但价格较贵，人均约 80～90 元，更偏向氛围消费。",
+      "excerpt": "大悦城里的云南菜馆，环境精致，属于“漂亮饭”，很适合约会或请客；菜品有创意、味道不错，但价格较贵，人均约 80～90 元，更偏向氛围消费。",
+      "truncated": false,
+      "box": [
+        48,
+        4488,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场】烙印 Lao Yin",
+      "sourceName": "【星光广场】烙印 Lao Yin",
+      "tier": "人上人",
+      "score": "3",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "清吧 + 简餐类型的小酒馆，环境氛围接近顶级：灯光偏暗、人不多、安静不吵，适合晚上喝一杯调酒；餐食主打泰式风味（椰香鸡块、打抛饭、生牛肉等），有流心蛋，整体感觉比较健康，简餐人均约 25 元（外卖 / 堂食价格接近）。内部有争议，一方觉得只是普通 NPC 简餐，另一方认为结合氛围、健康程度和口味，值得人上人，综合后定级为人上人。",
+      "excerpt": "清吧 + 简餐类型的小酒馆，环境氛围接近顶级：灯光偏暗、人不多、安静不吵，适合晚上喝一杯调酒；餐食主打泰式风味（椰香鸡块、打抛饭、生…",
+      "truncated": true,
+      "box": [
+        732,
+        4488,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场】破店烧烤",
+      "sourceName": "【星光广场】破店烧烤",
+      "tier": "人上人",
+      "score": "3",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "初体验觉得一般，但晚上生意极好，人流量大说明口味受众广；整体价格便宜，还有一些没见过的特色菜品。",
+      "excerpt": "初体验觉得一般，但晚上生意极好，人流量大说明口味受众广；整体价格便宜，还有一些没见过的特色菜品。",
+      "truncated": false,
+      "box": [
+        48,
+        4832,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场】味多多脏摊麻辣串",
+      "sourceName": "【星光广场】味多多脏摊麻辣串",
+      "tier": "人上人",
+      "score": "3",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "味道不错，芝麻酱很香，价格合适，是麻辣串领域可以一试的档口。",
+      "excerpt": "味道不错，芝麻酱很香，价格合适，是麻辣串领域可以一试的档口。",
+      "truncated": false,
+      "box": [
+        732,
+        4832,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【大悦城 & 星光广场】塔斯汀中国汉堡",
+      "sourceName": "【大悦城 & 星光广场】塔斯汀中国汉堡",
+      "tier": "人上人",
+      "score": "3",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "口味不错，面皮有自己特色，在国产汉堡中有一定辨识度。",
+      "excerpt": "口味不错，面皮有自己特色，在国产汉堡中有一定辨识度。",
+      "truncated": false,
+      "box": [
+        48,
+        5176,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场】肥汁四囍",
+      "sourceName": "【星光广场】肥汁四囍",
+      "tier": "人上人",
+      "score": "3",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "酸酸甜甜，口味不错，对标“鑫花溪”，作为米线选项体验良好。但价格有点高了，这个价位不如直接去吃鑫花溪。",
+      "excerpt": "酸酸甜甜，口味不错，对标“鑫花溪”，作为米线选项体验良好。但价格有点高了，这个价位不如直接去吃鑫花溪。",
+      "truncated": false,
+      "box": [
+        732,
+        5176,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场】朱家牛肉汤",
+      "sourceName": "【星光广场】朱家牛肉汤",
+      "tier": "人上人",
+      "score": "3",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "服务好，味道正宗，是“牛肉汤该有的味道”。",
+      "excerpt": "服务好，味道正宗，是“牛肉汤该有的味道”。",
+      "truncated": false,
+      "box": [
+        48,
+        5520,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场】多多麻辣拌",
+      "sourceName": "【星光广场】多多麻辣拌",
+      "tier": "人上人",
+      "score": "3",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "有以前“月热晴”的影子（酸甜麻辣口），台面干净、菜品摆放整齐，适合单人吃，但不太适合聚餐。",
+      "excerpt": "有以前“月热晴”的影子（酸甜麻辣口），台面干净、菜品摆放整齐，适合单人吃，但不太适合聚餐。",
+      "truncated": false,
+      "box": [
+        732,
+        5520,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场】阿臻味道米粉",
+      "sourceName": "【星光广场】阿臻味道米粉",
+      "tier": "人上人",
+      "score": "3",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "正宗新疆炒米粉（新疆朋友认证），味道比普通连锁更浓烈，连锁店通常偏柔和 / 偏甜，这家虽然环境一般，但味道正。",
+      "excerpt": "正宗新疆炒米粉（新疆朋友认证），味道比普通连锁更浓烈，连锁店通常偏柔和 / 偏甜，这家虽然环境一般，但味道正。",
+      "truncated": false,
+      "box": [
+        48,
+        5864,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场】同学会东北菜",
+      "sourceName": "【星光广场】同学会东北菜",
+      "tier": "人上人",
+      "score": "3",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "海成楼的平替，离得近、价格便宜，虽然摆盘和环境不如海成楼，但人少去吃很合适。",
+      "excerpt": "海成楼的平替，离得近、价格便宜，虽然摆盘和环境不如海成楼，但人少去吃很合适。",
+      "truncated": false,
+      "box": [
+        732,
+        5864,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【大悦城负一楼】其根大碗牛",
+      "sourceName": "【大悦城负一楼】其根大碗牛",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": "closed",
+      "description": "可能是无锡特有或较少见的连锁，性价比高，约20元可以吃到肥牛饭+温泉蛋+无限畅饮酸梅汁，但整体只适合一人食，不太适合聚餐。",
+      "excerpt": "可能是无锡特有或较少见的连锁，性价比高，约20元可以吃到肥牛饭+温泉蛋+无限畅饮酸梅汁，但整体只适合一人食，不太适合聚餐。",
+      "truncated": false,
+      "box": [
+        48,
+        6344,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【大悦城负一楼】冯宝宝肥牛小火锅",
+      "sourceName": "【大悦城负一楼】冯宝宝肥牛小火锅",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "解决了“一个人想吃火锅”的痛点，食材质量不错，但环境拥挤，价格偏贵，吃饱大约需要60元以上。",
+      "excerpt": "解决了“一个人想吃火锅”的痛点，食材质量不错，但环境拥挤，价格偏贵，吃饱大约需要60元以上。",
+      "truncated": false,
+      "box": [
+        732,
+        6344,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场】辣椒炒肉",
+      "sourceName": "【星光广场】辣椒炒肉",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "刚炒出来的时候很香、很下饭，但整体属于全世界辣椒炒肉都很下饭的那一档，没有特别惊艳的点；博主甚至认为不如 22 楼那家辣椒炒肉好吃，最终给出中规中矩的 NPC。",
+      "excerpt": "刚炒出来的时候很香、很下饭，但整体属于全世界辣椒炒肉都很下饭的那一档，没有特别惊艳的点；博主甚至认为不如 22 楼那家辣椒炒肉好吃，最终…",
+      "truncated": true,
+      "box": [
+        48,
+        6688,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【大悦城】钱小奴",
+      "sourceName": "【大悦城】钱小奴",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "江大周边自助餐“权威”，价格涨到了 80～90 元，海鲜和牛肉质量一般，但在学校附近想吃爽、想要品类全，它依旧是首选；如果放在全市范围来看，只能算一般水平。",
+      "excerpt": "江大周边自助餐“权威”，价格涨到了 80～90 元，海鲜和牛肉质量一般，但在学校附近想吃爽、想要品类全，它依旧是首选；如果放在全市范围来看…",
+      "truncated": true,
+      "box": [
+        732,
+        6688,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【大悦城】新白鹿",
+      "sourceName": "【大悦城】新白鹿",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "全国连锁商场品牌，江大这边也有，整体水平与其他城市门店类似，性价比一般，适合随便吃吃，不值得专门来学校门口打卡。",
+      "excerpt": "全国连锁商场品牌，江大这边也有，整体水平与其他城市门店类似，性价比一般，适合随便吃吃，不值得专门来学校门口打卡。",
+      "truncated": false,
+      "box": [
+        48,
+        7032,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【大悦城】小菜园",
+      "sourceName": "【大悦城】小菜园",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "典型的全国性连锁门店，口味和体验较为统一，作为日常正餐可以，但在江大周边不算特别有特点。",
+      "excerpt": "典型的全国性连锁门店，口味和体验较为统一，作为日常正餐可以，但在江大周边不算特别有特点。",
+      "truncated": false,
+      "box": [
+        732,
+        7032,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【大悦城负一楼】和府捞面",
+      "sourceName": "【大悦城负一楼】和府捞面",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "全国连锁的书房风格面馆，环境舒适但价格偏贵，适合赶时间随便吃一顿。",
+      "excerpt": "全国连锁的书房风格面馆，环境舒适但价格偏贵，适合赶时间随便吃一顿。",
+      "truncated": false,
+      "box": [
+        48,
+        7376,
+        660,
+        281
+      ]
+    },
+    {
+      "name": "【大悦城负一楼】鸭血粉丝汤（胥先生）",
+      "sourceName": "【大悦城负一楼】鸭血粉丝汤（胥先生）",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "胥先生品牌的鸭血粉丝汤，口味标准化，在全国很多地方都能吃到，江大这边没有明显差异点。",
+      "excerpt": "胥先生品牌的鸭血粉丝汤，口味标准化，在全国很多地方都能吃到，江大这边没有明显差异点。",
+      "truncated": false,
+      "box": [
+        732,
+        7376,
+        660,
+        281
+      ]
+    },
+    {
+      "name": "【星光一楼】五口灶",
+      "sourceName": "【星光一楼】五口灶",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "星光一楼类似食堂的快餐档，充卡吃还行，当作日常食堂替代还可以，单次散点就比较一般。",
+      "excerpt": "星光一楼类似食堂的快餐档，充卡吃还行，当作日常食堂替代还可以，单次散点就比较一般。",
+      "truncated": false,
+      "box": [
+        48,
+        7681,
+        660,
+        281
+      ]
+    },
+    {
+      "name": "【星光广场】炸串吧",
+      "sourceName": "【星光广场】炸串吧",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "在正新鸡排隔壁屹立不倒，说明有一定实力；味道和喜姐炸串差不多，价格略便宜一点。",
+      "excerpt": "在正新鸡排隔壁屹立不倒，说明有一定实力；味道和喜姐炸串差不多，价格略便宜一点。",
+      "truncated": false,
+      "box": [
+        732,
+        7681,
+        660,
+        281
+      ]
+    },
+    {
+      "name": "【星光广场】正新鸡排",
+      "sourceName": "【星光广场】正新鸡排",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "标准连锁鸡排店，不再是当年 10 元时期的高性价比，整体性价比不高。",
+      "excerpt": "标准连锁鸡排店，不再是当年 10 元时期的高性价比，整体性价比不高。",
+      "truncated": false,
+      "box": [
+        48,
+        7986,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场】南云上品",
+      "sourceName": "【星光广场】南云上品",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "大一时的回忆，量大管饱（曾经人均能吃四碗饭），但现在看，肉是提前炸过的，不太健康，卫生一般，因此从人上人降为 NPC。",
+      "excerpt": "大一时的回忆，量大管饱（曾经人均能吃四碗饭），但现在看，肉是提前炸过的，不太健康，卫生一般，因此从人上人降为 NPC。",
+      "truncated": false,
+      "box": [
+        732,
+        7986,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场】张三炒饭",
+      "sourceName": "【星光广场】张三炒饭",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "招牌是卤肉炒饭，锅气非常足、卤肉很香，虽然偏油但吃起来很爽；缺点是油大、价格偏贵（卤肉炒饭大致在 15～16 元一份，有人甚至说要到 23 元，普遍认为只值 10～12 元），排队时间也比较久。相比另外两家海鲜炒饭（走干香路线），张三的卤肉炒饭更有特色。内部评价存在较大分歧：捞鱼认为太油、排队久、性价比一般，给到 NPC；吴彦祖和走位怪则觉得确实好吃、锅气足，倾向于人上人。最终以 2 比 1 的票数判定为 NPC，并在备注中写明：口味党觉得很香，性价比党觉得不行。",
+      "excerpt": "招牌是卤肉炒饭，锅气非常足、卤肉很香，虽然偏油但吃起来很爽；缺点是油大、价格偏贵（卤肉炒饭大致在 15～16 元一份，有人甚至说要到 23 元…",
+      "truncated": true,
+      "box": [
+        48,
+        8330,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场】杨铭宇黄焖鸡",
+      "sourceName": "【星光广场】杨铭宇黄焖鸡",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": "uncertain",
+      "description": "整体中规中矩，甚至懒得细评，有负面新闻加成，不如去大悦城吃其他黄焖鸡。",
+      "excerpt": "整体中规中矩，甚至懒得细评，有负面新闻加成，不如去大悦城吃其他黄焖鸡。",
+      "truncated": false,
+      "box": [
+        732,
+        8330,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场】陈先生海鲜炒饭",
+      "sourceName": "【星光广场】陈先生海鲜炒饭",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "上菜极慢，被明确提到这一点，因此仅列入 NPC 级别。",
+      "excerpt": "上菜极慢，被明确提到这一点，因此仅列入 NPC 级别。",
+      "truncated": false,
+      "box": [
+        48,
+        8674,
+        660,
+        281
+      ]
+    },
+    {
+      "name": "【星光广场二楼】气味餐厅",
+      "sourceName": "【星光广场二楼】气味餐厅",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "普通石锅拌饭档口，整体口味平平，属于“随便吃吃”级别。",
+      "excerpt": "普通石锅拌饭档口，整体口味平平，属于“随便吃吃”级别。",
+      "truncated": false,
+      "box": [
+        732,
+        8674,
+        660,
+        281
+      ]
+    },
+    {
+      "name": "【星光广场176-2005】大雄家咖喱屋",
+      "sourceName": "【星光广场176-2005】大雄家咖喱屋",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "整体表现普通，没有特别明显的亮点或槽点。",
+      "excerpt": "整体表现普通，没有特别明显的亮点或槽点。",
+      "truncated": false,
+      "box": [
+        48,
+        8979,
+        660,
+        281
+      ]
+    },
+    {
+      "name": "【星光广场】小姐姐（杂物+螺蛳粉）",
+      "sourceName": "【星光广场】小姐姐（杂物+螺蛳粉）",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": "uncertain",
+      "description": "卖杂物和螺蛳粉，在区域内属于“一家独大”，但口味本身比较一般，不值得专门去。",
+      "excerpt": "卖杂物和螺蛳粉，在区域内属于“一家独大”，但口味本身比较一般，不值得专门去。",
+      "truncated": false,
+      "box": [
+        732,
+        8979,
+        660,
+        281
+      ]
+    },
+    {
+      "name": "【星光广场】酱骨头",
+      "sourceName": "【星光广场】酱骨头",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "酱骨头档口，整体味道尚可但不出挑，归入普通区。",
+      "excerpt": "酱骨头档口，整体味道尚可但不出挑，归入普通区。",
+      "truncated": false,
+      "box": [
+        48,
+        9284,
+        660,
+        281
+      ]
+    },
+    {
+      "name": "【星光广场】金年任韩式饭",
+      "sourceName": "【星光广场】金年任韩式饭",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "韩式饭快餐店，口味平平，适合就近解决一餐。",
+      "excerpt": "韩式饭快餐店，口味平平，适合就近解决一餐。",
+      "truncated": false,
+      "box": [
+        732,
+        9284,
+        660,
+        281
+      ]
+    },
+    {
+      "name": "【星光广场】云苗苗·生烫牛肉米线",
+      "sourceName": "【星光广场】云苗苗·生烫牛肉米线",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "普通牛肉米粉档口，整体无功无过。",
+      "excerpt": "普通牛肉米粉档口，整体无功无过。",
+      "truncated": false,
+      "box": [
+        48,
+        9589,
+        660,
+        281
+      ]
+    },
+    {
+      "name": "【星光广场】小娟阿姨板面",
+      "sourceName": "【星光广场】小娟阿姨板面",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "有“满 16 送鸡腿”的活动，但板面口味太一般，整体只在 NPC 水平。",
+      "excerpt": "有“满 16 送鸡腿”的活动，但板面口味太一般，整体只在 NPC 水平。",
+      "truncated": false,
+      "box": [
+        732,
+        9589,
+        660,
+        281
+      ]
+    },
+    {
+      "name": "【星光广场二楼】张亮麻辣烫",
+      "sourceName": "【星光广场二楼】张亮麻辣烫",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "全国连锁麻辣烫，口味和体验比较标准化，在江大周边不算特别出彩。2026-08 有同学反馈已搬到星光广场二楼继续营业。",
+      "excerpt": "全国连锁麻辣烫，口味和体验比较标准化，在江大周边不算特别出彩。2026-08 有同学反馈已搬到星光广场二楼继续营业。",
+      "truncated": false,
+      "box": [
+        48,
+        9894,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场西边老店】李记重庆鸡公煲",
+      "sourceName": "【星光广场西边老店】李记重庆鸡公煲",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": "uncertain",
+      "description": "西边老店，整体中规中矩，没有特别明显的亮点。",
+      "excerpt": "西边老店，整体中规中矩，没有特别明显的亮点。",
+      "truncated": false,
+      "box": [
+        732,
+        9894,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场】福宇记黄焖鸡",
+      "sourceName": "【星光广场】福宇记黄焖鸡",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "普通黄焖鸡档口，味道一般，作为日常选择可以，但不值得特意打卡。",
+      "excerpt": "普通黄焖鸡档口，味道一般，作为日常选择可以，但不值得特意打卡。",
+      "truncated": false,
+      "box": [
+        48,
+        10238,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【大悦城一楼商场外围】牛约堡",
+      "sourceName": "【大悦城一楼商场外围】牛约堡",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "汉堡连锁。堂食真的不行——虽然有几张桌子，但在那儿吃肯定很别扭，只适合拿回去吃。味道一般般，本来想给 2.5 星，但毕竟是哪儿都能吃到的连锁，就按 2 星算。突出的点是性价比：截至 2026 年 8 月依然很能打，单人餐 16.6 元，双人六件套 24.9 元——双人餐可以吃成巨人观。整体感觉不如汉堡王。",
+      "excerpt": "汉堡连锁。堂食真的不行——虽然有几张桌子，但在那儿吃肯定很别扭，只适合拿回去吃。味道一般般，本来想给 2.5 星，但毕竟是哪儿都能吃到的…",
+      "truncated": true,
+      "box": [
+        732,
+        10238,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【无锡万象汇·与龙哥同地】流浪泡泡",
+      "sourceName": "【无锡万象汇·与龙哥同地】流浪泡泡",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "各店水平不一，一开始印象很差，但无锡万象汇这家（跟龍歌同一个地方，全名\"流浪泡泡·破破烂烂的烤肉\"）比较好：有韩国那种泡面台，很多泡面随便选，吃的也不错。65 元左右挺实惠，就是没什么海鲜。跟钱小奴排一档：钱小奴离得近、降到 80 元了，肯定比流浪泡泡好一些；去流浪泡泡算上打车也要七八十，所以同级。",
+      "excerpt": "各店水平不一，一开始印象很差，但无锡万象汇这家（跟龍歌同一个地方，全名\"流浪泡泡·破破烂烂的烤肉\"）比较好：有韩国那种泡面台，很多泡面…",
+      "truncated": true,
+      "box": [
+        48,
+        10582,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【大悦城负一楼】清膳记药膳鸡",
+      "sourceName": "【大悦城负一楼】清膳记药膳鸡",
+      "tier": "拉完了",
+      "score": "1.9",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "先声明：有的人就是喜欢中药味，我只是不喜欢才给这么低。档内按星级排序，1.9 星排在 1 星前面。药膳鸡单人餐 44 元，有的人喜欢它的中药味，但我不太喜欢，不好意思，只能给 1.9 星。小菜自助，但至少我去的那天小菜卫生质量一般、都是很一般的蔬菜。吃肯定能吃饱——44 块钱去哪家连锁店正常吃都能吃饱。一股中药味，不喜欢。",
+      "excerpt": "先声明：有的人就是喜欢中药味，我只是不喜欢才给这么低。档内按星级排序，1.9 星排在 1 星前面。药膳鸡单人餐 44 元，有的人喜欢它的中药味，但…",
+      "truncated": true,
+      "box": [
+        48,
+        11062,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【大悦城】快乐爱斯米",
+      "sourceName": "【大悦城】快乐爱斯米",
+      "tier": "拉完了",
+      "score": "1",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "品类太少，性价比偏低。2026 年已改版：不再是 36 元随便吃，不点寿喜烧套餐里的肉基本拿不到什么，正常吃肉要 60 多元——这个价钱不如去吃流浪泡泡或者龙哥。本来也只有 1 星，没有再降的空间了。",
+      "excerpt": "品类太少，性价比偏低。2026 年已改版：不再是 36 元随便吃，不点寿喜烧套餐里的肉基本拿不到什么，正常吃肉要 60 多元——这个价钱不如去吃流…",
+      "truncated": true,
+      "box": [
+        732,
+        11062,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【大悦城】韩右右",
+      "sourceName": "【大悦城】韩右右",
+      "tier": "拉完了",
+      "score": "1",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "卫生状况堪忧，有吃完拉肚子的经历反馈，肉质也偏差，出现“咬不动”的情况，整体不推荐。",
+      "excerpt": "卫生状况堪忧，有吃完拉肚子的经历反馈，肉质也偏差，出现“咬不动”的情况，整体不推荐。",
+      "truncated": false,
+      "box": [
+        48,
+        11406,
+        660,
+        281
+      ]
+    },
+    {
+      "name": "【星光广场】心福口福里脊饼",
+      "sourceName": "【星光广场】心福口福里脊饼",
+      "tier": "拉完了",
+      "score": "1",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "整体体验较差，被归入拉完了，仅作为避雷参考。",
+      "excerpt": "整体体验较差，被归入拉完了，仅作为避雷参考。",
+      "truncated": false,
+      "box": [
+        732,
+        11406,
+        660,
+        281
+      ]
+    },
+    {
+      "name": "【星光广场】罗罐中米粉",
+      "sourceName": "【星光广场】罗罐中米粉",
+      "tier": "拉完了",
+      "score": "1",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "量比周真真多，但不好吃，因此直接归入拉完了。",
+      "excerpt": "量比周真真多，但不好吃，因此直接归入拉完了。",
+      "truncated": false,
+      "box": [
+        48,
+        11711,
+        660,
+        242
+      ]
+    },
+    {
+      "name": "【星光广场】河南滋补烩面",
+      "sourceName": "【星光广场】河南滋补烩面",
+      "tier": "拉完了",
+      "score": "1",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "难吃，对不起价格，被归入拉完了。",
+      "excerpt": "难吃，对不起价格，被归入拉完了。",
+      "truncated": false,
+      "box": [
+        732,
+        11711,
+        660,
+        242
+      ]
+    },
+    {
+      "name": "【星光广场】陈凤祥肠粉店",
+      "sourceName": "【星光广场】陈凤祥肠粉店",
+      "tier": "拉完了",
+      "score": "1",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": "closed",
+      "description": "装修前是平庸肠粉（NPC），装修后主打的猪脚饭极难吃（饭一口没动），整体直接跌入拉完了。",
+      "excerpt": "装修前是平庸肠粉（NPC），装修后主打的猪脚饭极难吃（饭一口没动），整体直接跌入拉完了。",
+      "truncated": false,
+      "box": [
+        48,
+        11977,
+        660,
+        281
+      ]
+    },
+    {
+      "name": "【星光广场】老宁波干菜",
+      "sourceName": "【星光广场】老宁波干菜",
+      "tier": "拉完了",
+      "score": "1",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "店面极脏，地板黏、桌面不及时收拾，消毒柜不开，菜品不新鲜，被列入避雷名单。",
+      "excerpt": "店面极脏，地板黏、桌面不及时收拾，消毒柜不开，菜品不新鲜，被列入避雷名单。",
+      "truncated": false,
+      "box": [
+        732,
+        11977,
+        660,
+        281
+      ]
+    },
+    {
+      "name": "【星光广场】辣心上麻辣香锅",
+      "sourceName": "【星光广场】辣心上麻辣香锅",
+      "tier": "拉完了",
+      "score": "1",
+      "scoreSource": "rating",
+      "estimated": false,
+      "status": null,
+      "description": "自助 23 元一位看似便宜，但肉是假肉 / 合成肉，品质极差，不如去吃普通快餐。",
+      "excerpt": "自助 23 元一位看似便宜，但肉是假肉 / 合成肉，品质极差，不如去吃普通快餐。",
+      "truncated": false,
+      "box": [
+        48,
+        12282,
+        660,
+        281
+      ]
+    }
+  ],
+  "inputs": {
+    "assets/img/posters/resources/fonts/NotoEmoji[wght].ttf": "de6c18832938afc99caf132b39d6a30a19bac7f2e812e28db2535b4608d27551",
+    "assets/img/posters/resources/fonts/NotoSansSC[wght].ttf": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
+    "assets/img/posters/resources/stickers/星第3弹-呜呜.png": "ab6c113d4fdb394c80b9a21604c083c9927c20c8f80740e5cad8e4b7395c847f",
+    "assets/img/posters/resources/stickers/第12弹-开心.png": "f9e30edcda6e693b4eaf45c6d843dfca31269c4abb469f8a6412289f2cfd192d",
+    "assets/img/posters/resources/stickers/第12弹-心动.png": "471b9ca06998889b80a3b521e30eedc851965c59de8ff80f86774caf6f14b6f6",
+    "assets/img/posters/resources/stickers/第12弹-期待.png": "200fa353636757febd39283acbd9ac7465cac1bcd43f3cefeaab7f233aecf7b8",
+    "assets/img/posters/resources/stickers/第35弹-吸溜.png": "87697a50cb7e2058eef97ddecab737d0a446afdade18ae7f25587d28cb29c7cd",
+    "assets/img/posters/resources/stickers/第37弹-呃.png": "dca987bf738d5e6a4f5345c57415567cfcc5b89af86a283497fe0e0b223d210f",
+    "assets/lib-custom/canteen-tier-extras.js": "827f00ce3e41cbe859cd9f516c171e7fc5fdfabcd889f1aeab349cc1d4cac275",
+    "assets/lib-custom/canteen-tier.js": "8905e1dd38d1f51f8a5db4d59adebae751af19d7309253c60baa7614e5167174",
+    "tools/export_tier_data.cjs": "1251997d31908182c67fcde8ee432b51bfa085a95c7304ceb50916009e8a97fa",
+    "tools/generate_posters.py": "9b6a7ac03c963d2c9e921246146a0bdf7208510e83516c7238f729ad9e078b15"
+  },
+  "pngSha256": "3546341e8b437e55a0838dec5583dc9e5769f6ac397df4b0db175d5e18c1173b"
+}

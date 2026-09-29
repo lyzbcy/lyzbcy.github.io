@@ -36,3 +36,4 @@ _data/encryption_secrets.yml
 *.bak
 *.bak-*
 __pycache__/
+.venv-posters/

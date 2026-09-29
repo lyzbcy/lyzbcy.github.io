@@ -31,6 +31,20 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Verify ranking posters
+        run: |
+          python -m pip install -r tools/requirements-posters.txt
+          python -m unittest discover -s tests -p 'test_tier_posters.py'
+          python tools/generate_posters.py --all --check
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
