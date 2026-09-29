@@ -47,6 +47,7 @@ git add assets/img/posters/poster-noodle.png assets/img/posters/poster-noodle.au
 - 食堂名称纠正、已歇业/疑似歇业从 `canteen-tier-extras.js` 读取；外卖疑似歇业从 `takeout-tier-extras.js` 读取。更新源名单，不在生成器复制名单。
 - 名称完整换行，卡片高度随名称增长；简介最多三行，按真实字宽截断并加「…」，完整评价仍在文章中。不要为了塞进卡片缩写或润色评价。
 - 食堂/外卖档内顺序跟随网页的 rating 降序（同分保留原数组次序），方便面保留原数组顺序；评分文字仍按上表取原始精确值。
+- 外卖海报只读取 `stalls` 顶层店铺。具体菜品只能放在对应店铺的 `dishes` 数组，供点击店铺后的详情卡使用；禁止把 `dishes[].name` 拼进海报名称或首页榜单。
 
 ## 只有一套生成实现
 
