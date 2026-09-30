@@ -559,13 +559,13 @@ def _load_health_score():
     try:
         r = subprocess.run(
             ["python3", HEALTH_SCORE_SCRIPT, "export"],
-            capture_output=True, text=True, timeout=30
+            capture_output=True, text=True, timeout=60, check=True
         )
         if r.returncode == 0 and r.stdout.strip():
             return json.loads(r.stdout)
-    except Exception:
-        pass
-    return None
+        raise ValueError("health score export returned no data")
+    except (subprocess.SubprocessError, OSError, ValueError) as exc:
+        raise RuntimeError("健康评分刷新失败，停止生成营养看板") from exc
 
 
 def _load_food_library():

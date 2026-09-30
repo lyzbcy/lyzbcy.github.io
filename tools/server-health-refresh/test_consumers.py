@@ -40,5 +40,8 @@ class ConsumerTests(unittest.TestCase):
                 {'action':'bodyweight','date':'2026-09-01','value':73.2},
                 {'action':'bodyweight','date':'2026-09-02','value':0}]))
             self.assertEqual([r['weight'] for r in module.get_bodyweight_history(str(p))],[73.1,73.2])
+    def test_nutrition_export_failure_stops_generation(self):
+        with patch.object(module.os.path,'exists',return_value=True), patch.object(module.subprocess,'run',side_effect=subprocess.CalledProcessError(1,['export'])):
+            with self.assertRaises(RuntimeError): module._load_health_score()
 
 if __name__=='__main__': unittest.main()
