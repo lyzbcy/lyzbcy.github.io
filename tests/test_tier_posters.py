@@ -21,6 +21,16 @@ class Scores(unittest.TestCase):
         for number in ['3.83', '3.65', '4.90']:
             self.assertEqual(g.exact_score(self.item(f'顶级 · 店铺得分 {number}', 3.8), 'takeout')[0], number)
 
+    def test_drink_anchors_keep_author_scores(self):
+        rows = g.load_items('drink')
+        anchors = {row['name']: row for row in rows if row.get('anchor')}
+        self.assertEqual({name: (item['tier'], item['score']) for name, item in anchors.items()}, {
+            '糖量减半的茉莉奶绿': ('顶级', '5'),
+            '统一阿萨姆标准原味奶茶': ('人上人', '4'),
+            '红牛': ('NPC', '3'),
+        })
+        self.assertEqual(len(rows), 7)
+
     def test_canteen_does_not_parse_year_as_score(self):
         self.assertEqual(g.exact_score(self.item('NPC · 2026-08 下调', 2), 'dine'), ('2', 'rating'))
         self.assertEqual(g.exact_score(self.item('人上人 · 3.9 星', 3), 'dine')[0], '3.9')

@@ -8,8 +8,8 @@ description: 更新 lyzbcy.github.io 博客(方便面排名、外卖排名、健
 本 skill 的权威位置在 **lyzbcy.github.io 仓库 `skills/lyzbcy-blog-update/`**,
 随仓库一起版本化,任何 AI(小龙虾/周五涵/ZCode)更新本博客前必读。
 
-**三榜一图流先读 [lyzbcy-tier-posters](../lyzbcy-tier-posters/SKILL.md)**：
-食堂、外卖、方便面统一运行 `python tools/generate_posters.py --all`，再运行
+**从夯到拉一图流先读 [lyzbcy-tier-posters](../lyzbcy-tier-posters/SKILL.md)**：
+食堂、外卖、方便面、饮料奶茶统一运行 `python tools/generate_posters.py --all`，再运行
 `python tools/generate_posters.py --all --check`。旧方便面命令只是兼容转发。
 
 ## 🔒 三条铁律(先记住再往下读)
@@ -30,6 +30,7 @@ description: 更新 lyzbcy.github.io 博客(方便面排名、外卖排名、健
 | 方便面从夯到拉排名 | [references/noodle-tier.md](references/noodle-tier.md) | `assets/lib-custom/noodle-tier.js` |
 | 五六食堂从夯到拉排名 | [references/canteen-tier.md](references/canteen-tier.md) | `assets/lib-custom/canteen-tier.js` |
 | 外卖从夯到拉排名 | [references/takeout-tier.md](references/takeout-tier.md) | `assets/lib-custom/takeout-tier.js` |
+| 所有的饮料和奶茶从夯到拉排名 | [references/drink-tier.md](references/drink-tier.md) | `assets/lib-custom/drink-tier.js` |
 | 健身/营养/抖音周报看板 | [references/dashboards.md](references/dashboards.md) | `tools/generate_*.py` |
 | AI Coding 比赛看板 | [references/aicoding-board.md](references/aicoding-board.md) | `tools/aicoding/update-aicoding.mjs` |
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""三榜唯一一图流生成器。python tools/generate_posters.py --all；详见仓库 skill。"""
+"""从夯到拉一图流统一生成器。python tools/generate_posters.py --all。"""
 from __future__ import annotations
 
 import argparse
@@ -41,6 +41,8 @@ CONFIG = {
                     unit='家', keyword='江大美食', sticker='第12弹-期待.png'),
     'noodle': dict(stem='noodle', title='方便面', subtitle='一碗一碗吃出来的口味榜',
                    unit='款', keyword='方便面', sticker='星第3弹-吃饭.png'),
+    'drink': dict(stem='drink', title='所有的饮料和奶茶', subtitle='喝过才来排 · 能量饮料与奶茶都在这里',
+                  unit='款', keyword='饮料奶茶', sticker='第12弹-心动.png'),
 }
 
 
@@ -367,7 +369,10 @@ def build_poster(kind, items):
 def input_hashes(kind, items):
     stem = CONFIG[kind]['stem']
     files = [ROOT / 'tools/generate_posters.py', ROOT / 'tools/export_tier_data.cjs',
-             ROOT / f'assets/lib-custom/{stem}-tier.js', ROOT / f'assets/lib-custom/{stem}-tier-extras.js', FONT_PATH, EMOJI_FONT_PATH]
+             ROOT / f'assets/lib-custom/{stem}-tier.js', FONT_PATH, EMOJI_FONT_PATH]
+    extras = ROOT / f'assets/lib-custom/{stem}-tier-extras.js'
+    if extras.is_file():
+        files.append(extras)
     names = {CONFIG[kind]['sticker'], *STICKERS}
     files.extend(RESOURCES / 'stickers' / name for name in sorted(names))
     if kind == 'noodle':
@@ -403,7 +408,7 @@ def check_outputs(kind, items, out_dir):
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     group = parser.add_mutually_exclusive_group()
-    group.add_argument('--all', action='store_true', help='生成三个榜单（默认）')
+    group.add_argument('--all', action='store_true', help='生成全部榜单（默认）')
     group.add_argument('--kind', choices=CONFIG, help='只生成指定榜单')
     parser.add_argument('--check', action='store_true', help='检查图片、原始数据与验收记录一致，不写文件')
     parser.add_argument('--out-dir', type=Path, default=ROOT / 'assets/img/posters')

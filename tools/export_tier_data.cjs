@@ -37,13 +37,13 @@ function readArray(file, name, optional = false) {
 }
 
 function exportData(root, kind) {
-  if (!['dine', 'takeout', 'noodle'].includes(kind)) throw new Error(`Unknown ranking: ${kind}`);
+  if (!['dine', 'takeout', 'noodle', 'drink'].includes(kind)) throw new Error(`Unknown ranking: ${kind}`);
   const stem = kind === 'dine' ? 'canteen' : kind;
   const source = path.join(root, 'assets/lib-custom', stem + '-tier.js');
   const extras = path.join(root, 'assets/lib-custom', stem + '-tier-extras.js');
-  const items = readArray(source, kind === 'noodle' ? 'noodles' : 'stalls');
+  const items = readArray(source, kind === 'noodle' ? 'noodles' : kind === 'drink' ? 'drinks' : 'stalls');
   const rules = Object.fromEntries(['NAME_FIXES', 'NAME_OVERRIDES', 'CLOSED', 'UNCERTAIN']
-    .map(name => [name, readArray(extras, name, true)]));
+    .map(name => [name, fs.existsSync(extras) ? readArray(extras, name, true) : []]));
   for (const item of items) {
     item.sourceName = item.name;
     const override = rules.NAME_OVERRIDES.find(r => item.name.includes(r.match));

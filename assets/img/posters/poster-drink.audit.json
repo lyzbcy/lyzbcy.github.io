@@ -1,0 +1,165 @@
+{
+  "schema": 1,
+  "kind": "drink",
+  "size": [
+    1440,
+    2635
+  ],
+  "count": 7,
+  "tierCounts": {
+    "顶级": 3,
+    "人上人": 2,
+    "NPC": 2
+  },
+  "checkedTextRegions": 53,
+  "overflowCount": 0,
+  "stickerCount": 4,
+  "ctaCount": 2,
+  "watermark": {
+    "text": "捞鱼的博客",
+    "opacity": 24,
+    "angle": 22,
+    "count": 35
+  },
+  "items": [
+    {
+      "name": "糖量减半的茉莉奶绿",
+      "sourceName": "糖量减半的茉莉奶绿",
+      "tier": "顶级",
+      "score": "5",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "顶级守门员。味道不错；不像原味阿萨姆喝久了容易晕、容易腻，而且糖量减半，稍微健康一点点。",
+      "excerpt": "顶级守门员。味道不错；不像原味阿萨姆喝久了容易晕、容易腻，而且糖量减半，稍微健康一点点。",
+      "truncated": false,
+      "box": [
+        48,
+        776,
+        660,
+        243
+      ]
+    },
+    {
+      "name": "魔爪 白魔爪（芒果菠萝味）",
+      "sourceName": "魔爪 白魔爪（芒果菠萝味）",
+      "tier": "顶级",
+      "score": "4.7",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "我觉得比红魔爪还好喝一点，基本上没有怪味，气泡刺激舌头，很带劲。可以给到 4.7 星。",
+      "excerpt": "我觉得比红魔爪还好喝一点，基本上没有怪味，气泡刺激舌头，很带劲。可以给到 4.7 星。",
+      "truncated": false,
+      "box": [
+        732,
+        776,
+        660,
+        243
+      ]
+    },
+    {
+      "name": "魔爪 红魔爪（百香果番石榴味）",
+      "sourceName": "魔爪 红魔爪（百香果番石榴味）",
+      "tier": "顶级",
+      "score": "4.5",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "好喝好喝，没有怪味。酸酸甜甜，气泡还会刺激舌头，很带劲。如果红牛算 3 星，红魔爪可以给到 4.5 星。",
+      "excerpt": "好喝好喝，没有怪味。酸酸甜甜，气泡还会刺激舌头，很带劲。如果红牛算 3 星，红魔爪可以给到 4.5 星。",
+      "truncated": false,
+      "box": [
+        48,
+        1043,
+        660,
+        282
+      ]
+    },
+    {
+      "name": "娃哈哈 格瓦斯",
+      "sourceName": "娃哈哈 格瓦斯",
+      "tier": "人上人",
+      "score": "4.3",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "其实没有什么运动补剂的效果。硬要说的话，可能只是补充快碳，而且一杯的碳水也不高。但相比于冰红茶那种骗人的“减糖冰红茶”（一杯糖分有五六十克），它的糖分少一点，还行。格瓦斯算小众饮料，味道因人而异；有的人受不了这个味道，但我个人觉得挺好喝的，可以给到 4.3 星。",
+      "excerpt": "其实没有什么运动补剂的效果。硬要说的话，可能只是补充快碳，而且一杯的碳水也不高。但相比于冰红茶那种骗人的“减糖冰红茶”（一杯糖分有…",
+      "truncated": true,
+      "box": [
+        48,
+        1485,
+        660,
+        282
+      ]
+    },
+    {
+      "name": "统一阿萨姆标准原味奶茶",
+      "sourceName": "统一阿萨姆标准原味奶茶",
+      "tier": "人上人",
+      "score": "4",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "人上人守门员，4 星。原味阿萨姆喝久了容易晕、容易腻。",
+      "excerpt": "人上人守门员，4 星。原味阿萨姆喝久了容易晕、容易腻。",
+      "truncated": false,
+      "box": [
+        732,
+        1485,
+        660,
+        282
+      ]
+    },
+    {
+      "name": "红牛",
+      "sourceName": "红牛",
+      "tier": "NPC",
+      "score": "3",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "评分锚点，中规中矩的能量饮料，没有特别突出的点。大家都喝过，以它作为 NPC 守门员，基准 3 星。",
+      "excerpt": "评分锚点，中规中矩的能量饮料，没有特别突出的点。大家都喝过，以它作为 NPC 守门员，基准 3 星。",
+      "truncated": false,
+      "box": [
+        48,
+        1927,
+        660,
+        282
+      ]
+    },
+    {
+      "name": "魔爪 黑魔爪（原味）",
+      "sourceName": "魔爪 黑魔爪（原味）",
+      "tier": "NPC",
+      "score": "3",
+      "scoreSource": "tierLabel",
+      "estimated": false,
+      "status": null,
+      "description": "原味，带微微微微的橡皮泥味。和红牛一个档位，3 星水平。",
+      "excerpt": "原味，带微微微微的橡皮泥味。和红牛一个档位，3 星水平。",
+      "truncated": false,
+      "box": [
+        732,
+        1927,
+        660,
+        282
+      ]
+    }
+  ],
+  "inputs": {
+    "assets/img/posters/resources/fonts/NotoEmoji[wght].ttf": "de6c18832938afc99caf132b39d6a30a19bac7f2e812e28db2535b4608d27551",
+    "assets/img/posters/resources/fonts/NotoSansSC[wght].ttf": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
+    "assets/img/posters/resources/stickers/星第3弹-呜呜.png": "ab6c113d4fdb394c80b9a21604c083c9927c20c8f80740e5cad8e4b7395c847f",
+    "assets/img/posters/resources/stickers/第12弹-开心.png": "f9e30edcda6e693b4eaf45c6d843dfca31269c4abb469f8a6412289f2cfd192d",
+    "assets/img/posters/resources/stickers/第12弹-心动.png": "471b9ca06998889b80a3b521e30eedc851965c59de8ff80f86774caf6f14b6f6",
+    "assets/img/posters/resources/stickers/第12弹-期待.png": "200fa353636757febd39283acbd9ac7465cac1bcd43f3cefeaab7f233aecf7b8",
+    "assets/img/posters/resources/stickers/第37弹-呃.png": "dca987bf738d5e6a4f5345c57415567cfcc5b89af86a283497fe0e0b223d210f",
+    "assets/lib-custom/drink-tier.js": "47e4a74b34858e4901dd0145b3b241478b321ce26f922d8de79e0a5db3fc832e",
+    "tools/export_tier_data.cjs": "f1efbc6794e76ea4052450c7ae5ffce20baf8bed854d613b3e7eea6bfd45924f",
+    "tools/generate_posters.py": "25dc6485ff942b2fccc0c5e93afc2c159bcc100a61803ec735f6080b0dd3db92"
+  },
+  "pngSha256": "cfd1cd92e6eebe108fd810ae809bf46d06758fd687dd91b4a2ccf9e226f17a03"
+}
