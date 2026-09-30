@@ -3,37 +3,39 @@
   "kind": "dine",
   "size": [
     1440,
-    12989
+    12606
   ],
   "count": 64,
   "tierCounts": {
-    "夯": 3,
-    "顶级": 9,
+    "夯": 2,
+    "顶级": 10,
     "人上人": 16,
     "NPC": 27,
     "拉完了": 9
   },
-  "checkedTextRegions": 379,
+  "checkedTextRegions": 384,
   "overflowCount": 0,
   "stickerCount": 6,
   "ctaCount": 2,
+  "anchorBadgeCount": 5,
   "watermark": {
     "text": "捞鱼的博客",
     "opacity": 24,
     "angle": 22,
-    "count": 175
+    "count": 171
   },
   "items": [
     {
-      "name": "【周边·仅早餐时段】肯德基（早餐）",
-      "sourceName": "【周边·仅早餐时段】肯德基（早餐）",
+      "name": "【滨湖万象城·2.5公里】海底捞",
+      "sourceName": "【滨湖万象城·2.5公里】海底捞",
       "tier": "夯",
       "score": "4.5",
       "scoreSource": "tierLabel",
+      "anchor": false,
       "estimated": false,
       "status": null,
-      "description": "芝士鸡肉帕尼尼 + 冰豆浆，约 8 元。冰豆浆太好喝了！早餐品类限量供应、只在早餐时段有，和其他品类很不一样，所以单独标注。评分锚点：大家都吃过，用来校准整体打分。",
-      "excerpt": "芝士鸡肉帕尼尼 + 冰豆浆，约 8 元。冰豆浆太好喝了！早餐品类限量供应、只在早餐时段有，和其他品类很不一样，所以单独标注。评分锚点：大家…",
+      "description": "最近的门店在滨湖万象城 2.5 公里（万象汇那家 5.8 公里），得打车去。正常吃基本 300～600 元，适合聚餐或约会。到了这个价格，服务和美味肯定没得说，光美味程度 4.5 星左右，加上服务，4.5 星没毛病。缺点就是远。",
+      "excerpt": "最近的门店在滨湖万象城 2.5 公里（万象汇那家 5.8 公里），得打车去。正常吃基本 300～600 元，适合聚餐或约会。到了这个价格，服务和美味肯定…",
       "truncated": true,
       "box": [
         48,
@@ -43,15 +45,16 @@
       ]
     },
     {
-      "name": "【滨湖万象城·2.5公里】海底捞",
-      "sourceName": "【滨湖万象城·2.5公里】海底捞",
+      "name": "【周边·仅早餐时段】肯德基（早餐）",
+      "sourceName": "【周边·仅早餐时段】肯德基（早餐）",
       "tier": "夯",
       "score": "4.5",
       "scoreSource": "tierLabel",
+      "anchor": true,
       "estimated": false,
       "status": null,
-      "description": "最近的门店在滨湖万象城 2.5 公里（万象汇那家 5.8 公里），得打车去。正常吃基本 300～600 元，适合聚餐或约会。到了这个价格，服务和美味肯定没得说，光美味程度 4.5 星左右，加上服务，4.5 星没毛病。缺点就是远。",
-      "excerpt": "最近的门店在滨湖万象城 2.5 公里（万象汇那家 5.8 公里），得打车去。正常吃基本 300～600 元，适合聚餐或约会。到了这个价格，服务和美味肯定…",
+      "description": "芝士鸡肉帕尼尼 + 冰豆浆，约 8 元。冰豆浆太好喝了！早餐品类限量供应、只在早餐时段有，和其他品类很不一样，所以单独标注。评分锚点：大家都吃过，用来校准整体打分。",
+      "excerpt": "芝士鸡肉帕尼尼 + 冰豆浆，约 8 元。冰豆浆太好喝了！早餐品类限量供应、只在早餐时段有，和其他品类很不一样，所以单独标注。评分锚点：大家…",
       "truncated": true,
       "box": [
         732,
@@ -63,9 +66,10 @@
     {
       "name": "【滨湖万象汇·与流浪泡泡同地】龍歌自助小火锅",
       "sourceName": "【滨湖万象汇·与流浪泡泡同地】龍歌自助小火锅",
-      "tier": "夯",
+      "tier": "顶级",
       "score": "4.3",
       "scoreSource": "tierLabel",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "在滨湖万象汇（跟流浪泡泡同一个商场），得打车去（10 块出头）。一人一锅的自助小火锅，人均 57 元左右，无锡自助餐打卡人气榜第 1。品质其实跟冯宝宝肥牛小火锅差不多，但这里可以随便拿、随便吃——性价比直接把冯宝宝暴打。味道可以给 4.3 星。",
@@ -73,7 +77,7 @@
       "truncated": true,
       "box": [
         48,
-        1120,
+        1256,
         660,
         320
       ]
@@ -84,32 +88,15 @@
       "tier": "顶级",
       "score": "4.2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "全是鸡腿肉且块大，人均 30～40 元就能吃到很足，夏天会提供免费西瓜，涮菜种类多且新鲜，是学生聚餐的高性价比火锅鸡选择。",
       "excerpt": "全是鸡腿肉且块大，人均 30～40 元就能吃到很足，夏天会提供免费西瓜，涮菜种类多且新鲜，是学生聚餐的高性价比火锅鸡选择。",
       "truncated": false,
       "box": [
-        48,
-        1600,
-        660,
-        320
-      ]
-    },
-    {
-      "name": "【星光广场二楼】拌将麻辣烫",
-      "sourceName": "【星光广场二楼】拌将麻辣烫",
-      "tier": "顶级",
-      "score": "4",
-      "scoreSource": "rating",
-      "estimated": false,
-      "status": null,
-      "description": "明厨亮灶、后厨干净，食材质量好，肉质不错，丸子不是劣质“科技丸”，有爆浆肠、芝士肠等真材实料，可做干拌（酱料多，有低卡选择）、水煮（清汤/牛油锅底）、油素汁干拌，人均约20元，比一般外卖略贵但物有所值，办卡有88折，周二送一道5元菜品。",
-      "excerpt": "明厨亮灶、后厨干净，食材质量好，肉质不错，丸子不是劣质“科技丸”，有爆浆肠、芝士肠等真材实料，可做干拌（酱料多，有低卡选择）、水煮…",
-      "truncated": true,
-      "box": [
         732,
-        1600,
+        1256,
         660,
         320
       ]
@@ -120,6 +107,7 @@
       "tier": "顶级",
       "score": "4",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "具体品类略偏火锅 / 干锅，老板人很好，对大学生打折（7～8 折），熟客甚至可以刷脸，口味顶级，整体属于“花小钱办大事”的高性价比聚餐选择。",
@@ -127,7 +115,7 @@
       "truncated": false,
       "box": [
         48,
-        1944,
+        1600,
         660,
         320
       ]
@@ -138,6 +126,7 @@
       "tier": "顶级",
       "score": "4",
       "scoreSource": "tierLabel",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "星光广场内的正餐馆，有露台，夏天晚上氛围很好，老资历喜欢去吃，味道其实一般般，整体有故事感；菜品包含无锡特色菜（如油面筋等），口味中上，价格合适且学生可打折，是招待朋友和聚餐的首选之一。",
@@ -145,7 +134,7 @@
       "truncated": true,
       "box": [
         732,
-        1944,
+        1600,
         660,
         320
       ]
@@ -156,6 +145,7 @@
       "tier": "顶级",
       "score": "4",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "东北菜为主，菜量大、实惠，人均 40～50 元可以吃到一桌大肉硬菜，忌口少，非常适合多人聚餐和大口吃肉的场景。",
@@ -163,6 +153,63 @@
       "truncated": false,
       "box": [
         48,
+        1944,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【大悦城】胖哥俩肉蟹煲",
+      "sourceName": "【大悦城】胖哥俩肉蟹煲",
+      "tier": "顶级",
+      "score": "4",
+      "scoreSource": "tierLabel",
+      "anchor": false,
+      "estimated": false,
+      "status": null,
+      "description": "标准化连锁肉蟹煲，全国各地商场都能见到，在江大周边吃并没有额外加成，更多是图方便。",
+      "excerpt": "标准化连锁肉蟹煲，全国各地商场都能见到，在江大周边吃并没有额外加成，更多是图方便。",
+      "truncated": false,
+      "box": [
+        732,
+        1944,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场】星光小屋",
+      "sourceName": "【星光广场】星光小屋",
+      "tier": "顶级",
+      "score": "4",
+      "scoreSource": "rating",
+      "anchor": false,
+      "estimated": false,
+      "status": null,
+      "description": "韩式自助+单点结合，单人自助约 80 元（团购 70+），也可以单点；有小隔间，适合团建和聚餐，装修有氛围；有原切肉、烤菠萝等菜品，味道不错。",
+      "excerpt": "韩式自助+单点结合，单人自助约 80 元（团购 70+），也可以单点；有小隔间，适合团建和聚餐，装修有氛围；有原切肉、烤菠萝等菜品，味道不错。",
+      "truncated": false,
+      "box": [
+        48,
+        2288,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【星光广场二楼】拌将麻辣烫",
+      "sourceName": "【星光广场二楼】拌将麻辣烫",
+      "tier": "顶级",
+      "score": "4",
+      "scoreSource": "rating",
+      "anchor": true,
+      "estimated": false,
+      "status": null,
+      "description": "明厨亮灶、后厨干净，食材质量好，肉质不错，丸子不是劣质“科技丸”，有爆浆肠、芝士肠等真材实料，可做干拌（酱料多，有低卡选择）、水煮（清汤/牛油锅底）、油素汁干拌，人均约20元，比一般外卖略贵但物有所值，办卡有88折，周二送一道5元菜品。",
+      "excerpt": "明厨亮灶、后厨干净，食材质量好，肉质不错，丸子不是劣质“科技丸”，有爆浆肠、芝士肠等真材实料，可做干拌（酱料多，有低卡选择）、水煮…",
+      "truncated": true,
+      "box": [
+        732,
         2288,
         660,
         320
@@ -174,49 +221,14 @@
       "tier": "顶级",
       "score": "4",
       "scoreSource": "rating",
+      "anchor": true,
       "estimated": false,
       "status": null,
       "description": "新疆清真菜馆，民族风味明显，重油、重香料，辣椒和胡萝卜用量充足，综合能力强，可一人食也可聚餐，人均约 60～70 元，喜欢新疆菜的人会非常喜欢，不习惯这类风味的人需要谨慎选择。",
       "excerpt": "新疆清真菜馆，民族风味明显，重油、重香料，辣椒和胡萝卜用量充足，综合能力强，可一人食也可聚餐，人均约 60～70 元，喜欢新疆菜的人会非…",
       "truncated": true,
       "box": [
-        732,
-        2288,
-        660,
-        320
-      ]
-    },
-    {
-      "name": "【大悦城】胖哥俩肉蟹煲",
-      "sourceName": "【大悦城】胖哥俩肉蟹煲",
-      "tier": "顶级",
-      "score": "4",
-      "scoreSource": "tierLabel",
-      "estimated": false,
-      "status": null,
-      "description": "标准化连锁肉蟹煲，全国各地商场都能见到，在江大周边吃并没有额外加成，更多是图方便。",
-      "excerpt": "标准化连锁肉蟹煲，全国各地商场都能见到，在江大周边吃并没有额外加成，更多是图方便。",
-      "truncated": false,
-      "box": [
         48,
-        2632,
-        660,
-        320
-      ]
-    },
-    {
-      "name": "【星光广场】星光小屋",
-      "sourceName": "【星光广场】星光小屋",
-      "tier": "顶级",
-      "score": "4",
-      "scoreSource": "rating",
-      "estimated": false,
-      "status": null,
-      "description": "韩式自助+单点结合，单人自助约 80 元（团购 70+），也可以单点；有小隔间，适合团建和聚餐，装修有氛围；有原切肉、烤菠萝等菜品，味道不错。",
-      "excerpt": "韩式自助+单点结合，单人自助约 80 元（团购 70+），也可以单点；有小隔间，适合团建和聚餐，装修有氛围；有原切肉、烤菠萝等菜品，味道不错。",
-      "truncated": false,
-      "box": [
-        732,
         2632,
         660,
         320
@@ -228,14 +240,15 @@
       "tier": "顶级",
       "score": "4",
       "scoreSource": "tierLabel",
+      "anchor": true,
       "estimated": false,
       "status": null,
       "description": "吉士蛋麦满分组合（吉士蛋麦满分 + 热豆浆），约 7.5 元。麦满分胚子上有碎碎的点点，口感特别好；热豆浆一般般。仅早餐时段供应，单独标注。",
       "excerpt": "吉士蛋麦满分组合（吉士蛋麦满分 + 热豆浆），约 7.5 元。麦满分胚子上有碎碎的点点，口感特别好；热豆浆一般般。仅早餐时段供应，单独标注。",
       "truncated": false,
       "box": [
-        48,
-        2976,
+        732,
+        2632,
         660,
         320
       ]
@@ -246,6 +259,7 @@
       "tier": "人上人",
       "score": "3.9",
       "scoreSource": "tierLabel",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "类似沙县模式的快餐档，非连锁但这家口味不错，必点牛肉炒饭（18 元，加萝卜干特别好吃）；饭点可能要排队，人气说明实力。",
@@ -253,7 +267,7 @@
       "truncated": false,
       "box": [
         48,
-        3456,
+        3112,
         660,
         320
       ]
@@ -264,6 +278,7 @@
       "tier": "人上人",
       "score": "3.5",
       "scoreSource": "tierLabel",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "外卖我给了 5 星——外卖赛道对手是包装破破烂烂的同行，它包装太好、味道也有堂食水准。但放到堂食赛道：外卖 20 出头，堂食怎么点都要近 30 块。虽然堂食可以无限加面，综合性价比和美味程度，3.5 星。",
@@ -271,25 +286,7 @@
       "truncated": true,
       "box": [
         732,
-        3456,
-        660,
-        320
-      ]
-    },
-    {
-      "name": "【大悦城】萨莉亚",
-      "sourceName": "【大悦城】萨莉亚",
-      "tier": "人上人",
-      "score": "3",
-      "scoreSource": "rating",
-      "estimated": false,
-      "status": null,
-      "description": "性价比很高的平价意式料理，没有明显竞品。有的菜挺好吃的，比如面包蘸蘑菇汤；也有难吃的，比如烤三文鱼——难吃死了！综合下来是三星守门员：人上人的及格线。",
-      "excerpt": "性价比很高的平价意式料理，没有明显竞品。有的菜挺好吃的，比如面包蘸蘑菇汤；也有难吃的，比如烤三文鱼——难吃死了！综合下来是三星守门…",
-      "truncated": true,
-      "box": [
-        48,
-        3800,
+        3112,
         660,
         320
       ]
@@ -300,14 +297,15 @@
       "tier": "人上人",
       "score": "3",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": "uncertain",
       "description": "山东风味，机器炒制，口味统一稳定，加麻油后麻辣鲜香，地域特色明显，人均 30～40 元，整体介于人上人与顶级之间。",
       "excerpt": "山东风味，机器炒制，口味统一稳定，加麻油后麻辣鲜香，地域特色明显，人均 30～40 元，整体介于人上人与顶级之间。",
       "truncated": false,
       "box": [
-        732,
-        3800,
+        48,
+        3456,
         660,
         320
       ]
@@ -318,14 +316,15 @@
       "tier": "人上人",
       "score": "3",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "大悦城 B1 的火锅鸡店，整体体验达到入围水准，具体细节未展开描述，可视作伍夸火锅鸡的平替或补充选项。",
       "excerpt": "大悦城 B1 的火锅鸡店，整体体验达到入围水准，具体细节未展开描述，可视作伍夸火锅鸡的平替或补充选项。",
       "truncated": false,
       "box": [
-        48,
-        4144,
+        732,
+        3456,
         660,
         320
       ]
@@ -336,14 +335,15 @@
       "tier": "人上人",
       "score": "3",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "星光广场二楼的火锅鸡，相比伍夸火锅鸡，环境更好，有雅座，整体不那么拥挤，味道也不错，适合在星光周边就近解决聚餐需求。",
       "excerpt": "星光广场二楼的火锅鸡，相比伍夸火锅鸡，环境更好，有雅座，整体不那么拥挤，味道也不错，适合在星光周边就近解决聚餐需求。",
       "truncated": false,
       "box": [
-        732,
-        4144,
+        48,
+        3800,
         660,
         320
       ]
@@ -354,14 +354,15 @@
       "tier": "人上人",
       "score": "3",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "大悦城里的云南菜馆，环境精致，属于“漂亮饭”，很适合约会或请客；菜品有创意、味道不错，但价格较贵，人均约 80～90 元，更偏向氛围消费。",
       "excerpt": "大悦城里的云南菜馆，环境精致，属于“漂亮饭”，很适合约会或请客；菜品有创意、味道不错，但价格较贵，人均约 80～90 元，更偏向氛围消费。",
       "truncated": false,
       "box": [
-        48,
-        4488,
+        732,
+        3800,
         660,
         320
       ]
@@ -372,14 +373,15 @@
       "tier": "人上人",
       "score": "3",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "清吧 + 简餐类型的小酒馆，环境氛围接近顶级：灯光偏暗、人不多、安静不吵，适合晚上喝一杯调酒；餐食主打泰式风味（椰香鸡块、打抛饭、生牛肉等），有流心蛋，整体感觉比较健康，简餐人均约 25 元（外卖 / 堂食价格接近）。内部有争议，一方觉得只是普通 NPC 简餐，另一方认为结合氛围、健康程度和口味，值得人上人，综合后定级为人上人。",
       "excerpt": "清吧 + 简餐类型的小酒馆，环境氛围接近顶级：灯光偏暗、人不多、安静不吵，适合晚上喝一杯调酒；餐食主打泰式风味（椰香鸡块、打抛饭、生…",
       "truncated": true,
       "box": [
-        732,
-        4488,
+        48,
+        4144,
         660,
         320
       ]
@@ -390,14 +392,15 @@
       "tier": "人上人",
       "score": "3",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "初体验觉得一般，但晚上生意极好，人流量大说明口味受众广；整体价格便宜，还有一些没见过的特色菜品。",
       "excerpt": "初体验觉得一般，但晚上生意极好，人流量大说明口味受众广；整体价格便宜，还有一些没见过的特色菜品。",
       "truncated": false,
       "box": [
-        48,
-        4832,
+        732,
+        4144,
         660,
         320
       ]
@@ -408,16 +411,17 @@
       "tier": "人上人",
       "score": "3",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "味道不错，芝麻酱很香，价格合适，是麻辣串领域可以一试的档口。",
       "excerpt": "味道不错，芝麻酱很香，价格合适，是麻辣串领域可以一试的档口。",
       "truncated": false,
       "box": [
-        732,
-        4832,
+        48,
+        4488,
         660,
-        320
+        281
       ]
     },
     {
@@ -426,16 +430,17 @@
       "tier": "人上人",
       "score": "3",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "口味不错，面皮有自己特色，在国产汉堡中有一定辨识度。",
       "excerpt": "口味不错，面皮有自己特色，在国产汉堡中有一定辨识度。",
       "truncated": false,
       "box": [
-        48,
-        5176,
+        732,
+        4488,
         660,
-        320
+        281
       ]
     },
     {
@@ -444,14 +449,15 @@
       "tier": "人上人",
       "score": "3",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "酸酸甜甜，口味不错，对标“鑫花溪”，作为米线选项体验良好。但价格有点高了，这个价位不如直接去吃鑫花溪。",
       "excerpt": "酸酸甜甜，口味不错，对标“鑫花溪”，作为米线选项体验良好。但价格有点高了，这个价位不如直接去吃鑫花溪。",
       "truncated": false,
       "box": [
-        732,
-        5176,
+        48,
+        4793,
         660,
         320
       ]
@@ -462,14 +468,15 @@
       "tier": "人上人",
       "score": "3",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "服务好，味道正宗，是“牛肉汤该有的味道”。",
       "excerpt": "服务好，味道正宗，是“牛肉汤该有的味道”。",
       "truncated": false,
       "box": [
-        48,
-        5520,
+        732,
+        4793,
         660,
         320
       ]
@@ -480,14 +487,15 @@
       "tier": "人上人",
       "score": "3",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "有以前“月热晴”的影子（酸甜麻辣口），台面干净、菜品摆放整齐，适合单人吃，但不太适合聚餐。",
       "excerpt": "有以前“月热晴”的影子（酸甜麻辣口），台面干净、菜品摆放整齐，适合单人吃，但不太适合聚餐。",
       "truncated": false,
       "box": [
-        732,
-        5520,
+        48,
+        5137,
         660,
         320
       ]
@@ -498,14 +506,15 @@
       "tier": "人上人",
       "score": "3",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "正宗新疆炒米粉（新疆朋友认证），味道比普通连锁更浓烈，连锁店通常偏柔和 / 偏甜，这家虽然环境一般，但味道正。",
       "excerpt": "正宗新疆炒米粉（新疆朋友认证），味道比普通连锁更浓烈，连锁店通常偏柔和 / 偏甜，这家虽然环境一般，但味道正。",
       "truncated": false,
       "box": [
-        48,
-        5864,
+        732,
+        5137,
         660,
         320
       ]
@@ -516,14 +525,34 @@
       "tier": "人上人",
       "score": "3",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "海成楼的平替，离得近、价格便宜，虽然摆盘和环境不如海成楼，但人少去吃很合适。",
       "excerpt": "海成楼的平替，离得近、价格便宜，虽然摆盘和环境不如海成楼，但人少去吃很合适。",
       "truncated": false,
       "box": [
+        48,
+        5481,
+        660,
+        320
+      ]
+    },
+    {
+      "name": "【大悦城】萨莉亚",
+      "sourceName": "【大悦城】萨莉亚",
+      "tier": "人上人",
+      "score": "3",
+      "scoreSource": "rating",
+      "anchor": true,
+      "estimated": false,
+      "status": null,
+      "description": "性价比很高的平价意式料理，没有明显竞品。有的菜挺好吃的，比如面包蘸蘑菇汤；也有难吃的，比如烤三文鱼——难吃死了！综合下来是三星守门员：人上人的及格线。",
+      "excerpt": "性价比很高的平价意式料理，没有明显竞品。有的菜挺好吃的，比如面包蘸蘑菇汤；也有难吃的，比如烤三文鱼——难吃死了！综合下来是三星守门…",
+      "truncated": true,
+      "box": [
         732,
-        5864,
+        5481,
         660,
         320
       ]
@@ -534,6 +563,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": "closed",
       "description": "可能是无锡特有或较少见的连锁，性价比高，约20元可以吃到肥牛饭+温泉蛋+无限畅饮酸梅汁，但整体只适合一人食，不太适合聚餐。",
@@ -541,7 +571,7 @@
       "truncated": false,
       "box": [
         48,
-        6344,
+        5961,
         660,
         320
       ]
@@ -552,6 +582,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "解决了“一个人想吃火锅”的痛点，食材质量不错，但环境拥挤，价格偏贵，吃饱大约需要60元以上。",
@@ -559,7 +590,7 @@
       "truncated": false,
       "box": [
         732,
-        6344,
+        5961,
         660,
         320
       ]
@@ -570,6 +601,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "刚炒出来的时候很香、很下饭，但整体属于全世界辣椒炒肉都很下饭的那一档，没有特别惊艳的点；博主甚至认为不如 22 楼那家辣椒炒肉好吃，最终给出中规中矩的 NPC。",
@@ -577,7 +609,7 @@
       "truncated": true,
       "box": [
         48,
-        6688,
+        6305,
         660,
         320
       ]
@@ -588,6 +620,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "江大周边自助餐“权威”，价格涨到了 80～90 元，海鲜和牛肉质量一般，但在学校附近想吃爽、想要品类全，它依旧是首选；如果放在全市范围来看，只能算一般水平。",
@@ -595,7 +628,7 @@
       "truncated": true,
       "box": [
         732,
-        6688,
+        6305,
         660,
         320
       ]
@@ -606,6 +639,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "全国连锁商场品牌，江大这边也有，整体水平与其他城市门店类似，性价比一般，适合随便吃吃，不值得专门来学校门口打卡。",
@@ -613,7 +647,7 @@
       "truncated": false,
       "box": [
         48,
-        7032,
+        6649,
         660,
         320
       ]
@@ -624,6 +658,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "典型的全国性连锁门店，口味和体验较为统一，作为日常正餐可以，但在江大周边不算特别有特点。",
@@ -631,7 +666,7 @@
       "truncated": false,
       "box": [
         732,
-        7032,
+        6649,
         660,
         320
       ]
@@ -642,6 +677,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "全国连锁的书房风格面馆，环境舒适但价格偏贵，适合赶时间随便吃一顿。",
@@ -649,7 +685,7 @@
       "truncated": false,
       "box": [
         48,
-        7376,
+        6993,
         660,
         281
       ]
@@ -660,6 +696,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "胥先生品牌的鸭血粉丝汤，口味标准化，在全国很多地方都能吃到，江大这边没有明显差异点。",
@@ -667,7 +704,7 @@
       "truncated": false,
       "box": [
         732,
-        7376,
+        6993,
         660,
         281
       ]
@@ -678,6 +715,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "星光一楼类似食堂的快餐档，充卡吃还行，当作日常食堂替代还可以，单次散点就比较一般。",
@@ -685,7 +723,7 @@
       "truncated": false,
       "box": [
         48,
-        7681,
+        7298,
         660,
         281
       ]
@@ -696,6 +734,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "在正新鸡排隔壁屹立不倒，说明有一定实力；味道和喜姐炸串差不多，价格略便宜一点。",
@@ -703,7 +742,7 @@
       "truncated": false,
       "box": [
         732,
-        7681,
+        7298,
         660,
         281
       ]
@@ -714,6 +753,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "标准连锁鸡排店，不再是当年 10 元时期的高性价比，整体性价比不高。",
@@ -721,7 +761,7 @@
       "truncated": false,
       "box": [
         48,
-        7986,
+        7603,
         660,
         320
       ]
@@ -732,6 +772,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "大一时的回忆，量大管饱（曾经人均能吃四碗饭），但现在看，肉是提前炸过的，不太健康，卫生一般，因此从人上人降为 NPC。",
@@ -739,7 +780,7 @@
       "truncated": false,
       "box": [
         732,
-        7986,
+        7603,
         660,
         320
       ]
@@ -750,6 +791,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "招牌是卤肉炒饭，锅气非常足、卤肉很香，虽然偏油但吃起来很爽；缺点是油大、价格偏贵（卤肉炒饭大致在 15～16 元一份，有人甚至说要到 23 元，普遍认为只值 10～12 元），排队时间也比较久。相比另外两家海鲜炒饭（走干香路线），张三的卤肉炒饭更有特色。内部评价存在较大分歧：捞鱼认为太油、排队久、性价比一般，给到 NPC；吴彦祖和走位怪则觉得确实好吃、锅气足，倾向于人上人。最终以 2 比 1 的票数判定为 NPC，并在备注中写明：口味党觉得很香，性价比党觉得不行。",
@@ -757,7 +799,7 @@
       "truncated": true,
       "box": [
         48,
-        8330,
+        7947,
         660,
         320
       ]
@@ -768,6 +810,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": "uncertain",
       "description": "整体中规中矩，甚至懒得细评，有负面新闻加成，不如去大悦城吃其他黄焖鸡。",
@@ -775,7 +818,7 @@
       "truncated": false,
       "box": [
         732,
-        8330,
+        7947,
         660,
         320
       ]
@@ -786,6 +829,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "上菜极慢，被明确提到这一点，因此仅列入 NPC 级别。",
@@ -793,7 +837,7 @@
       "truncated": false,
       "box": [
         48,
-        8674,
+        8291,
         660,
         281
       ]
@@ -804,6 +848,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "普通石锅拌饭档口，整体口味平平，属于“随便吃吃”级别。",
@@ -811,7 +856,7 @@
       "truncated": false,
       "box": [
         732,
-        8674,
+        8291,
         660,
         281
       ]
@@ -822,6 +867,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "整体表现普通，没有特别明显的亮点或槽点。",
@@ -829,7 +875,7 @@
       "truncated": false,
       "box": [
         48,
-        8979,
+        8596,
         660,
         281
       ]
@@ -840,6 +886,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": "uncertain",
       "description": "卖杂物和螺蛳粉，在区域内属于“一家独大”，但口味本身比较一般，不值得专门去。",
@@ -847,7 +894,7 @@
       "truncated": false,
       "box": [
         732,
-        8979,
+        8596,
         660,
         281
       ]
@@ -858,6 +905,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "酱骨头档口，整体味道尚可但不出挑，归入普通区。",
@@ -865,7 +913,7 @@
       "truncated": false,
       "box": [
         48,
-        9284,
+        8901,
         660,
         281
       ]
@@ -876,6 +924,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "韩式饭快餐店，口味平平，适合就近解决一餐。",
@@ -883,7 +932,7 @@
       "truncated": false,
       "box": [
         732,
-        9284,
+        8901,
         660,
         281
       ]
@@ -894,6 +943,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "普通牛肉米粉档口，整体无功无过。",
@@ -901,7 +951,7 @@
       "truncated": false,
       "box": [
         48,
-        9589,
+        9206,
         660,
         281
       ]
@@ -912,6 +962,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "有“满 16 送鸡腿”的活动，但板面口味太一般，整体只在 NPC 水平。",
@@ -919,7 +970,7 @@
       "truncated": false,
       "box": [
         732,
-        9589,
+        9206,
         660,
         281
       ]
@@ -930,6 +981,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "全国连锁麻辣烫，口味和体验比较标准化，在江大周边不算特别出彩。2026-08 有同学反馈已搬到星光广场二楼继续营业。",
@@ -937,7 +989,7 @@
       "truncated": false,
       "box": [
         48,
-        9894,
+        9511,
         660,
         320
       ]
@@ -948,6 +1000,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": "uncertain",
       "description": "西边老店，整体中规中矩，没有特别明显的亮点。",
@@ -955,7 +1008,7 @@
       "truncated": false,
       "box": [
         732,
-        9894,
+        9511,
         660,
         320
       ]
@@ -966,6 +1019,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "普通黄焖鸡档口，味道一般，作为日常选择可以，但不值得特意打卡。",
@@ -973,7 +1027,7 @@
       "truncated": false,
       "box": [
         48,
-        10238,
+        9855,
         660,
         320
       ]
@@ -984,6 +1038,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "汉堡连锁。堂食真的不行——虽然有几张桌子，但在那儿吃肯定很别扭，只适合拿回去吃。味道一般般，本来想给 2.5 星，但毕竟是哪儿都能吃到的连锁，就按 2 星算。突出的点是性价比：截至 2026 年 8 月依然很能打，单人餐 16.6 元，双人六件套 24.9 元——双人餐可以吃成巨人观。整体感觉不如汉堡王。",
@@ -991,7 +1046,7 @@
       "truncated": true,
       "box": [
         732,
-        10238,
+        9855,
         660,
         320
       ]
@@ -1002,6 +1057,7 @@
       "tier": "NPC",
       "score": "2",
       "scoreSource": "tierLabel",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "各店水平不一，一开始印象很差，但无锡万象汇这家（跟龍歌同一个地方，全名\"流浪泡泡·破破烂烂的烤肉\"）比较好：有韩国那种泡面台，很多泡面随便选，吃的也不错。65 元左右挺实惠，就是没什么海鲜。跟钱小奴排一档：钱小奴离得近、降到 80 元了，肯定比流浪泡泡好一些；去流浪泡泡算上打车也要七八十，所以同级。",
@@ -1009,7 +1065,7 @@
       "truncated": true,
       "box": [
         48,
-        10582,
+        10199,
         660,
         320
       ]
@@ -1020,6 +1076,7 @@
       "tier": "拉完了",
       "score": "1.9",
       "scoreSource": "tierLabel",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "先声明：有的人就是喜欢中药味，我只是不喜欢才给这么低。档内按星级排序，1.9 星排在 1 星前面。药膳鸡单人餐 44 元，有的人喜欢它的中药味，但我不太喜欢，不好意思，只能给 1.9 星。小菜自助，但至少我去的那天小菜卫生质量一般、都是很一般的蔬菜。吃肯定能吃饱——44 块钱去哪家连锁店正常吃都能吃饱。一股中药味，不喜欢。",
@@ -1027,7 +1084,7 @@
       "truncated": true,
       "box": [
         48,
-        11062,
+        10679,
         660,
         320
       ]
@@ -1038,6 +1095,7 @@
       "tier": "拉完了",
       "score": "1",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "品类太少，性价比偏低。2026 年已改版：不再是 36 元随便吃，不点寿喜烧套餐里的肉基本拿不到什么，正常吃肉要 60 多元——这个价钱不如去吃流浪泡泡或者龙哥。本来也只有 1 星，没有再降的空间了。",
@@ -1045,7 +1103,7 @@
       "truncated": true,
       "box": [
         732,
-        11062,
+        10679,
         660,
         320
       ]
@@ -1056,6 +1114,7 @@
       "tier": "拉完了",
       "score": "1",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "卫生状况堪忧，有吃完拉肚子的经历反馈，肉质也偏差，出现“咬不动”的情况，整体不推荐。",
@@ -1063,7 +1122,7 @@
       "truncated": false,
       "box": [
         48,
-        11406,
+        11023,
         660,
         281
       ]
@@ -1074,6 +1133,7 @@
       "tier": "拉完了",
       "score": "1",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "整体体验较差，被归入拉完了，仅作为避雷参考。",
@@ -1081,7 +1141,7 @@
       "truncated": false,
       "box": [
         732,
-        11406,
+        11023,
         660,
         281
       ]
@@ -1092,6 +1152,7 @@
       "tier": "拉完了",
       "score": "1",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "量比周真真多，但不好吃，因此直接归入拉完了。",
@@ -1099,7 +1160,7 @@
       "truncated": false,
       "box": [
         48,
-        11711,
+        11328,
         660,
         242
       ]
@@ -1110,6 +1171,7 @@
       "tier": "拉完了",
       "score": "1",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "难吃，对不起价格，被归入拉完了。",
@@ -1117,7 +1179,7 @@
       "truncated": false,
       "box": [
         732,
-        11711,
+        11328,
         660,
         242
       ]
@@ -1128,6 +1190,7 @@
       "tier": "拉完了",
       "score": "1",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": "closed",
       "description": "装修前是平庸肠粉（NPC），装修后主打的猪脚饭极难吃（饭一口没动），整体直接跌入拉完了。",
@@ -1135,7 +1198,7 @@
       "truncated": false,
       "box": [
         48,
-        11977,
+        11594,
         660,
         281
       ]
@@ -1146,6 +1209,7 @@
       "tier": "拉完了",
       "score": "1",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "店面极脏，地板黏、桌面不及时收拾，消毒柜不开，菜品不新鲜，被列入避雷名单。",
@@ -1153,7 +1217,7 @@
       "truncated": false,
       "box": [
         732,
-        11977,
+        11594,
         660,
         281
       ]
@@ -1164,6 +1228,7 @@
       "tier": "拉完了",
       "score": "1",
       "scoreSource": "rating",
+      "anchor": false,
       "estimated": false,
       "status": null,
       "description": "自助 23 元一位看似便宜，但肉是假肉 / 合成肉，品质极差，不如去吃普通快餐。",
@@ -1171,7 +1236,7 @@
       "truncated": false,
       "box": [
         48,
-        12282,
+        11899,
         660,
         281
       ]
@@ -1187,9 +1252,9 @@
     "assets/img/posters/resources/stickers/第35弹-吸溜.png": "87697a50cb7e2058eef97ddecab737d0a446afdade18ae7f25587d28cb29c7cd",
     "assets/img/posters/resources/stickers/第37弹-呃.png": "dca987bf738d5e6a4f5345c57415567cfcc5b89af86a283497fe0e0b223d210f",
     "assets/lib-custom/canteen-tier-extras.js": "827f00ce3e41cbe859cd9f516c171e7fc5fdfabcd889f1aeab349cc1d4cac275",
-    "assets/lib-custom/canteen-tier.js": "8905e1dd38d1f51f8a5db4d59adebae751af19d7309253c60baa7614e5167174",
+    "assets/lib-custom/canteen-tier.js": "bfd701226e634a55cbb15ec297b2c5accfc34784a7ea5a333a7b3dec9d089feb",
     "tools/export_tier_data.cjs": "f1efbc6794e76ea4052450c7ae5ffce20baf8bed854d613b3e7eea6bfd45924f",
-    "tools/generate_posters.py": "25dc6485ff942b2fccc0c5e93afc2c159bcc100a61803ec735f6080b0dd3db92"
+    "tools/generate_posters.py": "80b816ff70b71e2a0ecbf69b604ae862a6393c6647fcdd69709a3a1cdccd6954"
   },
-  "pngSha256": "9b9eb8dd4a87bb14c04862af8cf04f680b258ca1bc70280a0f78ec2de9ad9fbe"
+  "pngSha256": "d1f7635b8c5a32be4fc5b0f3f37944b99b3b40cdb2cdc73531d0d99ef9f1d6b0"
 }

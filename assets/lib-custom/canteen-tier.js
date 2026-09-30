@@ -19,6 +19,7 @@
       tier: '顶级',
       tierLabel: '顶级 · 四星守门员',
       rating: 4,
+      anchor: true,
       description:
         '明厨亮灶、后厨干净，食材质量好，肉质不错，丸子不是劣质“科技丸”，有爆浆肠、芝士肠等真材实料，可做干拌（酱料多，有低卡选择）、水煮（清汤/牛油锅底）、油素汁干拌，人均约20元，比一般外卖略贵但物有所值，办卡有88折，周二送一道5元菜品。',
       pros: [
@@ -35,6 +36,7 @@
       tier: '人上人',
       tierLabel: '人上人 · 三星守门员',
       rating: 3,
+      anchor: true,
       description:
         '性价比很高的平价意式料理，没有明显竞品。有的菜挺好吃的，比如面包蘸蘑菇汤；也有难吃的，比如烤三文鱼——难吃死了！综合下来是三星守门员：人上人的及格线。',
       pros: ['价格便宜、选择多', '在同价位意式料理中没有明显竞品'],
@@ -182,6 +184,7 @@
       tier: '顶级',
       tierLabel: '顶级 · 四星守门员（新同学尝新疆菜的及格线）',
       rating: 4,
+      anchor: true,
       description:
         '新疆清真菜馆，民族风味明显，重油、重香料，辣椒和胡萝卜用量充足，综合能力强，可一人食也可聚餐，人均约 60～70 元，喜欢新疆菜的人会非常喜欢，不习惯这类风味的人需要谨慎选择。',
       pros: [
@@ -683,6 +686,7 @@
       tier: '夯',
       tierLabel: '夯 · 早餐评分锚点（4.5 星）',
       rating: 4.5,
+      anchor: true,
       description:
         '芝士鸡肉帕尼尼 + 冰豆浆，约 8 元。冰豆浆太好喝了！早餐品类限量供应、只在早餐时段有，和其他品类很不一样，所以单独标注。评分锚点：大家都吃过，用来校准整体打分。',
       pros: ['冰豆浆太好喝了', '8 元早餐组合性价比高'],
@@ -694,6 +698,7 @@
       tier: '顶级',
       tierLabel: '顶级 · 早餐评分锚点（4 星）',
       rating: 4,
+      anchor: true,
       description:
         '吉士蛋麦满分组合（吉士蛋麦满分 + 热豆浆），约 7.5 元。麦满分胚子上有碎碎的点点，口感特别好；热豆浆一般般。仅早餐时段供应，单独标注。',
       pros: ['麦满分胚子口感特别好', '7.5 元组合便宜'],
@@ -724,8 +729,8 @@
     },
     {
       name: '【滨湖万象汇·与流浪泡泡同地】龍歌自助小火锅',
-      tier: '夯',
-      tierLabel: '夯 · 4.3 星（性价比自助）',
+      tier: '顶级',
+      tierLabel: '顶级 · 4.3 星（性价比自助）',
       rating: 4.3,
       description:
         '在滨湖万象汇（跟流浪泡泡同一个商场），得打车去（10 块出头）。一人一锅的自助小火锅，人均 57 元左右，无锡自助餐打卡人气榜第 1。品质其实跟冯宝宝肥牛小火锅差不多，但这里可以随便拿、随便吃——性价比直接把冯宝宝暴打。味道可以给 4.3 星。',
@@ -864,7 +869,7 @@
     tierOrder.forEach((tier) => {
       const tierStalls = Object.values(canteenData).filter(
         (item) => item.tier === tier
-      );
+      ).sort(TierOrdering.compare);
       if (!tierStalls.length) return;
       tierStalls.forEach((data) => {
         html += `<h3>${data.name} · ${data.tierLabel}</h3>`;
@@ -885,12 +890,9 @@
       }
     });
 
-    const tierOrderLocal = tierOrder;
     stalls
       .slice()
-      .sort((a, b) =>
-        tierOrderLocal.indexOf(a.tier) - tierOrderLocal.indexOf(b.tier) ||
-        b.rating - a.rating)
+      .sort(TierOrdering.compare)
       .forEach((stall) => {
       const container = tierItems[stall.tier];
       if (!container) return;
@@ -908,6 +910,14 @@
       label.className = 'spot-card__name';
       label.textContent = stall.name;
       card.appendChild(label);
+
+      if (stall.anchor) {
+        card.classList.add('spot-card--anchor');
+        const mark = document.createElement('span');
+        mark.className = 'spot-card__anchor';
+        mark.textContent = '守门员';
+        card.appendChild(mark);
+      }
 
       container.appendChild(card);
     });

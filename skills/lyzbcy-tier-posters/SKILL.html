@@ -89,8 +89,10 @@ git add assets/img/posters/poster-drink.png assets/img/posters/poster-drink.audi
   <li>方便面原评「史」按定性原评展示，不能自行换成 1 星或 2 星。未知评分格式会报错，查源数据或问作者，不要猜。</li>
   <li>食堂名称纠正、已歇业/疑似歇业从 <code class="language-plaintext highlighter-rouge">canteen-tier-extras.js</code> 读取；外卖疑似歇业从 <code class="language-plaintext highlighter-rouge">takeout-tier-extras.js</code> 读取。更新源名单，不在生成器复制名单。</li>
   <li>名称完整换行，卡片高度随名称增长；简介最多三行，按真实字宽截断并加「…」，完整评价仍在文章中。不要为了塞进卡片缩写或润色评价。</li>
-  <li>食堂/外卖/饮料档内顺序跟随网页的 rating 降序（同分保留原数组次序），方便面保留原数组顺序；评分文字仍按上表取原始精确值。</li>
-  <li>饮料奶茶榜的锚点：红牛 NPC 3 星、统一阿萨姆标准原味奶茶人上人 4 星、糖量减半的茉莉奶绿顶级 5 星。旧条目的档位和评分仍按用户原评，不因新锚点自行重排。</li>
+  <li>四榜档内按原始精确分数降序；同分时普通条目在前、守门员在后，其余保持源数组次序。网页共用 <code class="language-plaintext highlighter-rouge">assets/lib-custom/tier-ordering.js</code>，海报使用相同规则。</li>
+  <li>饮料奶茶榜的锚点：红牛 NPC 3 星、统一阿萨姆标准原味奶茶人上人 4 星、减糖的茉莉奶绿顶级 5 星。白魔爪 4.7 星、红魔爪 4.5 星已按作者新要求移到人上人；瑞幸高蛋白莓果酸奶饮由作者最新指定为顶级 5.2 星。</li>
+  <li>作者于 2026-09-30 明确规定：守门员是本档最低分，位于本档最后；有多个守门员时同分并一起排在末尾。低于本档守门员的条目需在源 JS 中下移，检查下一档门槛，保留原评分和评价，不抬分。没有守门员的档位不能自行发明门槛；质量线导致的低档仍保留。生成器发现低于守门员的条目会报错，不能只把角标移到末尾掩盖档位错误。</li>
+  <li>四榜源数据中明确标注 <code class="language-plaintext highlighter-rouge">anchor: true</code> 的守门员/评分锚点，在网页产品卡右上角和一图流海报卡右上角都显示「守门员」。更新锚点时同步检查两处；不能仅在评价文字里提到。</li>
   <li>外卖海报只读取 <code class="language-plaintext highlighter-rouge">stalls</code> 顶层店铺。具体菜品只能放在对应店铺的 <code class="language-plaintext highlighter-rouge">dishes</code> 数组，供点击店铺后的详情卡使用；禁止把 <code class="language-plaintext highlighter-rouge">dishes[].name</code> 拼进海报名称或首页榜单。</li>
 </ul>
 
