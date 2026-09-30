@@ -109,6 +109,7 @@
       tier: '顶级',
       tierLabel: '顶级 · 店铺得分 4.00',
       rating: 4,
+      anchor: true,
       description:
         '评分锚点店之一。汉堡皮很好吃，可乐也喜欢，套餐价格有一定浮动。',
       pros: ['汉堡皮有特色、好吃', '可乐好喝', '三件套性价比可以'],
@@ -125,8 +126,8 @@
     },
     {
       name: '【外卖】张山野云南野生菌炒饭',
-      tier: '顶级',
-      tierLabel: '顶级 · 店铺得分 3.90',
+      tier: '人上人',
+      tierLabel: '人上人 · 店铺得分 3.90',
       rating: 3.9,
       description:
         '味道的确还可以，里面有虾仁等真料，但稍微有点油。问题是“科技与狠活”可能加得比较多，经常吃身体可能受不了。',
@@ -144,9 +145,9 @@
     },
     {
       name: '【外卖】螺判官螺蛳粉',
-      tier: '顶级',
-      tierLabel: '顶级 · 店铺得分 3.83',
-      rating: 3.8,
+      tier: '人上人',
+      tierLabel: '人上人 · 店铺得分 3.83',
+      rating: 3.83,
       description:
         '气味和味道都还好，但稍微有点太油。加炸蛋后体验明显提升。店铺得分 = 50%×(3.0+4.1)/2 + 50%×4.1 = 3.83。',
       pros: ['堂食外卖都在线的选择', '加炸蛋后体验明显提升', '平台上偶尔有超低价'],
@@ -169,8 +170,8 @@
     },
     {
       name: '【外卖】韩宫宴炭火烤肉',
-      tier: '顶级',
-      tierLabel: '顶级 · 店铺得分 3.80',
+      tier: '人上人',
+      tierLabel: '人上人 · 店铺得分 3.80',
       rating: 3.8,
       description:
         '正常的营养拌饭，各营养比较全，味道也还行，也不太油。问题是哪儿都能吃到，而且量不算多，3.8 星。',
@@ -267,6 +268,7 @@
       tier: '人上人',
       tierLabel: '人上人 · 店铺得分 3.30',
       rating: 3.3,
+      anchor: true,
       description:
         '人尽皆知的评分锚点店之一。健康、油少、量也还可以，但味道一般般，单凭味道 3.3 星。',
       pros: ['健康、油少', '量还可以', '全国标配，出品稳定'],
@@ -451,8 +453,8 @@
     },
     {
       name: '【外卖】陈香贵兰州牛肉面',
-      tier: '人上人',
-      tierLabel: '人上人 · 店铺得分 3.15',
+      tier: 'NPC',
+      tierLabel: 'NPC · 店铺得分 3.15',
       rating: 3.15,
       description:
         '兰州牛肉拉面本来就好吃，味道没毛病，单说味道在人上人到顶尖之间。肉给得挺足的，但面稍微有点少。正常价偏贵，其他外卖十几块，它拿 30 块的一份去跟人家竞争，本身就有点赖皮。',
@@ -607,7 +609,7 @@
     tierOrder.forEach((tier) => {
       const tierStalls = Object.values(canteenData).filter(
         (item) => item.tier === tier
-      );
+      ).sort(TierOrdering.compare);
       if (!tierStalls.length) return;
       tierStalls.forEach((data) => {
         html += `<h3>${data.name} · ${data.tierLabel}</h3>`;
@@ -628,12 +630,9 @@
       }
     });
 
-    const tierOrderLocal = tierOrder;
     stalls
       .slice()
-      .sort((a, b) =>
-        tierOrderLocal.indexOf(a.tier) - tierOrderLocal.indexOf(b.tier) ||
-        b.rating - a.rating)
+      .sort(TierOrdering.compare)
       .forEach((stall) => {
       const container = tierItems[stall.tier];
       if (!container) return;
@@ -651,6 +650,14 @@
       label.className = 'spot-card__name';
       label.textContent = stall.name;
       card.appendChild(label);
+
+      if (stall.anchor) {
+        card.classList.add('spot-card--anchor');
+        const mark = document.createElement('span');
+        mark.className = 'spot-card__anchor';
+        mark.textContent = '守门员';
+        card.appendChild(mark);
+      }
 
       container.appendChild(card);
     });

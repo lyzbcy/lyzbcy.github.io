@@ -5,28 +5,37 @@
   const drinks = [
     {
       name: '魔爪 白魔爪（芒果菠萝味）',
-      tier: '顶级',
-      tierLabel: '顶级 · 4.7 星',
+      tier: '人上人',
+      tierLabel: '人上人 · 4.7 星',
       rating: 4.7,
       category: '能量饮料',
       description: '我觉得比红魔爪还好喝一点，基本上没有怪味，气泡刺激舌头，很带劲。可以给到 4.7 星。',
     },
     {
       name: '魔爪 红魔爪（百香果番石榴味）',
-      tier: '顶级',
-      tierLabel: '顶级 · 4.5 星',
+      tier: '人上人',
+      tierLabel: '人上人 · 4.5 星',
       rating: 4.5,
       category: '能量饮料',
       description: '好喝好喝，没有怪味。酸酸甜甜，气泡还会刺激舌头，很带劲。如果红牛算 3 星，红魔爪可以给到 4.5 星。',
     },
     {
-      name: '糖量减半的茉莉奶绿',
+      name: '减糖的茉莉奶绿',
       tier: '顶级',
       tierLabel: '顶级 · 5 星 · 守门员',
       rating: 5,
       category: '奶茶',
       description: '顶级守门员。味道不错；不像原味阿萨姆喝久了容易晕、容易腻，而且糖量减半，稍微健康一点点。',
       anchor: true,
+    },
+    {
+      name: '瑞幸 高蛋白莓果酸奶饮',
+      tier: '顶级',
+      tierLabel: '顶级 · 5.2 星',
+      rating: 5.2,
+      category: '酸奶饮',
+      price: '参考价 15 元',
+      description: '参考价 15 元。我选的是不另外加糖，加了牛奶燕麦爆珠。我觉得不另外加糖会更健康一点，这一杯的蛋白质含量大约有 20g。因为没有另外加糖，喝下来的味道其实一般般，吃不出什么味道。但吃到里面不知道是什么筋，感觉像是莓果筋的地方，那会特别有滋味儿（也可能是我没摇匀）。总体来说主打一个健康。这个价格与其让我喝别的奶茶，其实也是喝个滋味嘛，这个既有滋味又健康。如果不另外加糖，对滋味会有点影响；但如果再加糖，就违背了它健康的初衷和卖点了。我觉得它应该跟“QQ美眉奶茶”是一个等级的，它们都能排到顶级。总体来说，我给 5.2 颗星吧。',
     },
     {
       name: '娃哈哈 格瓦斯',
@@ -82,6 +91,7 @@
     title.textContent = drink.name;
     body.innerHTML = '<span class="detail-badge">' + escapeHtml(drink.tierLabel) + '</span>' +
       '<p class="detail-category">' + escapeHtml(drink.category) + '</p>' +
+      (drink.price ? '<p class="detail-price">' + escapeHtml(drink.price) + '</p>' : '') +
       '<p class="detail-review">' + escapeHtml(drink.description) + '</p>';
     modal.classList.add('show');
     document.body.style.overflow = 'hidden';
@@ -103,8 +113,7 @@
       const items = row.querySelector('.tier-items');
       if (tier && items) rows.set(tier, items);
     });
-    drinks.slice().sort((a, b) => tierOrder.indexOf(a.tier) - tierOrder.indexOf(b.tier) ||
-      (Number.isFinite(b.rating) ? b.rating : -1) - (Number.isFinite(a.rating) ? a.rating : -1))
+    drinks.slice().sort(TierOrdering.compare)
       .forEach((drink) => {
         const target = rows.get(drink.tier);
         if (!target) return;
@@ -118,6 +127,7 @@
         name.textContent = drink.name;
         card.appendChild(name);
         if (drink.anchor) {
+          card.classList.add('spot-card--anchor');
           const mark = document.createElement('span');
           mark.className = 'spot-card__anchor';
           mark.textContent = '守门员';
@@ -133,10 +143,11 @@
     const details = document.querySelector('.content-section');
     if (details) {
       details.innerHTML = '<h2>饮料和奶茶详细测评</h2>' + tierOrder.map((tier) => {
-        const group = drinks.filter((drink) => drink.tier === tier);
+        const group = drinks.filter((drink) => drink.tier === tier).sort(TierOrdering.compare);
         if (!group.length) return '';
         return '<h3>' + escapeHtml(tier) + '</h3>' + group.map((drink) =>
           '<h4>' + escapeHtml(drink.name) + ' · ' + escapeHtml(drink.tierLabel) + '</h4>' +
+          (drink.price ? '<p>' + escapeHtml(drink.price) + '</p>' : '') +
           '<p>' + escapeHtml(drink.description) + '</p>').join('');
       }).join('');
     }

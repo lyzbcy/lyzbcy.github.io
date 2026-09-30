@@ -25,11 +25,44 @@ class Scores(unittest.TestCase):
         rows = g.load_items('drink')
         anchors = {row['name']: row for row in rows if row.get('anchor')}
         self.assertEqual({name: (item['tier'], item['score']) for name, item in anchors.items()}, {
-            '糖量减半的茉莉奶绿': ('顶级', '5'),
+            '减糖的茉莉奶绿': ('顶级', '5'),
             '统一阿萨姆标准原味奶茶': ('人上人', '4'),
             '红牛': ('NPC', '3'),
         })
-        self.assertEqual(len(rows), 7)
+        self.assertEqual(len(rows), 8)
+        by_name = {row['name']: row for row in rows}
+        self.assertEqual((by_name['魔爪 白魔爪（芒果菠萝味）']['tier'],
+                          by_name['魔爪 白魔爪（芒果菠萝味）']['score']), ('人上人', '4.7'))
+        self.assertEqual((by_name['魔爪 红魔爪（百香果番石榴味）']['tier'],
+                          by_name['魔爪 红魔爪（百香果番石榴味）']['score']), ('人上人', '4.5'))
+        self.assertEqual((by_name['瑞幸 高蛋白莓果酸奶饮']['tier'],
+                          by_name['瑞幸 高蛋白莓果酸奶饮']['score']), ('顶级', '5.2'))
+
+    def test_anchor_badges_match_source_and_audit(self):
+        expected = {'dine': 5, 'takeout': 2, 'noodle': 2, 'drink': 3}
+        for kind, count in expected.items():
+            with self.subTest(kind=kind):
+                rows = g.load_items(kind)
+                self.assertEqual(sum(bool(row.get('anchor')) for row in rows), count)
+                audit = g.check_outputs(kind, rows, g.ROOT / 'assets/img/posters')
+                self.assertEqual(audit['anchorBadgeCount'], count)
+
+    def test_below_guard_score_cannot_stay_in_tier(self):
+        with self.assertRaisesRegex(ValueError, '低于顶级守门员'):
+            g.validate_anchor_floors([
+                dict(name='守门员', tier='顶级', score='5', anchor=True),
+                dict(name='低于门槛', tier='顶级', score='4.9'),
+            ])
+
+    def test_guards_are_last_in_each_tier(self):
+        for kind in g.CONFIG:
+            for tier in g.TIERS:
+                group = [r for r in g.load_items(kind) if r['tier'] == tier]
+                guards = [r for r in group if r.get('anchor')]
+                if guards:
+                    self.assertEqual(group[-len(guards):], guards, (kind, tier))
+        anchors = {r['sourceName'] for r in g.load_items('takeout') if r.get('anchor')}
+        self.assertEqual(anchors, {'【外卖】塔斯汀中国汉堡', '【外卖】沙县小吃'})
 
     def test_canteen_does_not_parse_year_as_score(self):
         self.assertEqual(g.exact_score(self.item('NPC · 2026-08 下调', 2), 'dine'), ('2', 'rating'))
@@ -102,6 +135,15 @@ class Layout(unittest.TestCase):
 
 
 class SourceData(unittest.TestCase):
+    def test_browser_and_poster_order_agree(self):
+        code = "const {exportData}=require('./tools/export_tier_data.cjs');" \
+               "const {compare}=require('./assets/lib-custom/tier-ordering.js');" \
+               "console.log(JSON.stringify(exportData(process.cwd(),process.argv[1]).sort(compare).map(r=>r.sourceName)));"
+        for kind in g.CONFIG:
+            result = subprocess.run(['node', '-e', code, kind], cwd=g.ROOT,
+                                    capture_output=True, encoding='utf-8', check=True)
+            self.assertEqual(json.loads(result.stdout), [r['sourceName'] for r in g.load_items(kind)])
+
     def test_js_reader_handles_quotes_escapes_comments_nested_arrays(self):
         source = '''const noodles = [
           {name: "double quote", description: 'it\\'s ] good' + ' concat', pros: ['x', 'y']},
@@ -125,10 +167,9 @@ class SourceData(unittest.TestCase):
                 self.assertEqual(item['score'], g.exact_score(item, kind)[0])
                 if kind == 'noodle':
                     self.assertTrue(g.image_path(item).is_file())
-            if kind != 'noodle':
-                for tier in g.TIERS:
-                    values = [r['rating'] for r in rows if r['tier'] == tier]
-                    self.assertEqual(values, sorted(values, reverse=True))
+            for tier in g.TIERS:
+                values = [g.numeric_score(r) for r in rows if r['tier'] == tier]
+                self.assertEqual(values, sorted(values, reverse=True))
 
 
 if __name__ == '__main__':

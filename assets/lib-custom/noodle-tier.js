@@ -108,6 +108,7 @@
       tier: '顶级',
       tierLabel: '顶级 · 5❤️',
       rating: 4,
+      anchor: true,
       description: '经典无需多言',
       bgImage: imageBasePath + encodeURIComponent('老坛酸菜牛肉面-统一.png'),
     },
@@ -196,6 +197,7 @@
       tier: '人上人',
       tierLabel: '人上人 · 4❤️',
       rating: 3,
+      anchor: true,
       description: '4❤️守门员',
       bgImage: imageBasePath + encodeURIComponent('红烧牛肉面-康师傅.png'),
     },
@@ -436,7 +438,7 @@
   function generateContentSectionHTML() {
     let html = '<h2>口味详细笔记</h2>';
     tierOrder.forEach(tier => {
-      const tierNoodles = Object.values(noodleData).filter(item => item.tier === tier);
+      const tierNoodles = Object.values(noodleData).filter(item => item.tier === tier).sort(TierOrdering.compare);
       if (!tierNoodles.length) return;
       tierNoodles.forEach(data => {
         html += `<h3>${data.name} · ${data.tierLabel}</h3>`;
@@ -457,7 +459,7 @@
       }
     });
 
-    noodles.forEach(noodle => {
+    noodles.slice().sort(TierOrdering.compare).forEach(noodle => {
       const container = tierItems[noodle.tier];
       if (!container) return;
 
@@ -474,6 +476,14 @@
       label.className = 'spot-card__name';
       label.textContent = noodle.name;
       card.appendChild(label);
+
+      if (noodle.anchor) {
+        card.classList.add('spot-card--anchor');
+        const mark = document.createElement('span');
+        mark.className = 'spot-card__anchor';
+        mark.textContent = '守门员';
+        card.appendChild(mark);
+      }
 
       container.appendChild(card);
     });

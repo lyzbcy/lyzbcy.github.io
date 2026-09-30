@@ -86,10 +86,27 @@ def load_items(kind: str, root: Path = ROOT) -> list[dict]:
             raise ValueError(f"{item['name']}: 缺少评价")
         item['score'], item['scoreSource'] = exact_score(item, kind)
         item['estimated'] = bool(re.search(r'[（(]估[）)]', item.get('tierLabel', '')))
-    if kind != 'noodle':
-        # Match populateTierList() in the website; stable ties retain source order.
-        items.sort(key=lambda item: (TIERS.index(item['tier']), -Decimal(str(item['rating']))))
+    validate_anchor_floors(items)
+    # Match TierOrdering.compare(): exact score descending, guards last on ties.
+    items.sort(key=lambda item: (TIERS.index(item['tier']), -numeric_score(item), bool(item.get('anchor'))))
     return items
+
+
+def numeric_score(item):
+    return Decimal(item['score']) if item['score'] != '史' else Decimal('-Infinity')
+
+
+def validate_anchor_floors(items):
+    for tier in TIERS:
+        group = [item for item in items if item['tier'] == tier]
+        floors = {numeric_score(item) for item in group if item.get('anchor')}
+        if len(floors) > 1:
+            raise ValueError(f'{tier}: 同档守门员应为相同的最低分，请核对源数据')
+        if floors:
+            floor = next(iter(floors))
+            for item in group:
+                if numeric_score(item) < floor:
+                    raise ValueError(f"{item['name']}: 低于{tier}守门员 {floor} 星，请按作者规则在源数据下移档位")
 
 
 @lru_cache(maxsize=None)
@@ -200,7 +217,7 @@ def image_path(item):
 
 def card_layout(item, kind):
     title, meta = split_name(item['name'])
-    title_width = CARD_WIDTH - 48 - (120 if kind == 'noodle' else 0)
+    title_width = CARD_WIDTH - 48 - (160 if item.get('anchor') else 120 if kind == 'noodle' else 0)
     names, _ = wrap_text(title, font(32, True), title_width)
     metas, _ = wrap_text(meta, font(23), title_width)
     intro, truncated = wrap_text(item['description'], font(27), CARD_WIDTH - 48, 3)
@@ -284,6 +301,7 @@ def build_poster(kind, items):
     y = 666
     sections = []
     audit_items = []
+    anchor_badges = 0
     for tier, color, sticker in zip(TIERS, COLORS, STICKERS):
         group = [item for item in items if item['tier'] == tier]
         if not group:
@@ -323,12 +341,21 @@ def build_poster(kind, items):
             fill = '#ECEBE6' if item['status'] == 'closed' else '#FFFFFF'
             d.rounded_rectangle((x, cy, x + CARD_WIDTH, cy + h), radius=22, fill=fill, outline='#E1DCD2', width=2)
             p.lines((x + 24, cy + 24), layout['names'], 32, 43, layout['title_width'], bold=True)
+            if item.get('anchor'):
+                badge_left = x + CARD_WIDTH - 158
+                d.rounded_rectangle((badge_left, cy + 20, x + CARD_WIDTH - 20, cy + 62),
+                                    radius=10, fill='#9C422B')
+                p.text((badge_left + 12, cy + 26), '守门员', 25, '#FFFFFF', True, 114, 32)
+                anchor_badges += 1
             my = cy + 24 + len(layout['names']) * 43 + 7
             p.lines((x + 24, my), layout['metas'], 23, 31, layout['title_width'], MUTED)
             if kind == 'noodle':
                 with Image.open(image_path(item)) as raw:
-                    thumb = ImageOps.contain(raw.convert('RGBA'), (100, 100), Image.Resampling.LANCZOS)
-                p.image.paste(thumb, (x + CARD_WIDTH - 126 + (100 - thumb.width) // 2, cy + 24), thumb)
+                    side = 76 if item.get('anchor') else 100
+                    thumb = ImageOps.contain(raw.convert('RGBA'), (side, side), Image.Resampling.LANCZOS)
+                thumb_x = x + CARD_WIDTH - (102 if item.get('anchor') else 126)
+                thumb_y = cy + (63 if item.get('anchor') else 24)
+                p.image.paste(thumb, (thumb_x + (side - thumb.width) // 2, thumb_y), thumb)
             ry = cy + layout['score_y']
             numeric = bool(re.fullmatch(r'\d+(?:\.\d+)?', item['score']))
             score_label = (f"{item['score']} 星" if numeric else f"原评：{item['score']}") + ('（估）' if item['estimated'] else '')
@@ -344,6 +371,7 @@ def build_poster(kind, items):
             p.lines((x + 24, cy + layout['description_y']), layout['intro'], 27, 39, CARD_WIDTH - 48, '#565850')
             audit_items.append(dict(name=item['name'], sourceName=item['sourceName'], tier=tier,
                                     score=item['score'], scoreSource=item['scoreSource'],
+                                    anchor=bool(item.get('anchor')),
                                     estimated=item['estimated'], status=item['status'],
                                     description=item['description'], excerpt=''.join(layout['intro']),
                                     truncated=layout['truncated'], box=[x, cy, CARD_WIDTH, h]))
@@ -363,6 +391,7 @@ def build_poster(kind, items):
                                   tierCounts=dict(Counter(item['tier'] for item in items)),
                                   checkedTextRegions=p.text_regions, overflowCount=0,
                                   stickerCount=1 + len(sections), ctaCount=2,
+                                  anchorBadgeCount=anchor_badges,
                                   watermark=watermark, items=audit_items)
 
 
@@ -394,6 +423,10 @@ def check_outputs(kind, items, out_dir):
     actual = [(i['sourceName'], i['score']) for i in manifest['items']]
     if expected != actual or manifest['overflowCount'] or manifest['ctaCount'] != 2 or manifest['stickerCount'] < 2:
         raise ValueError(f'{kind}: 条目、评分、引流或布局验收失败')
+    if manifest.get('anchorBadgeCount') != sum(bool(item.get('anchor')) for item in items):
+        raise ValueError(f'{kind}: 守门员角标数量与源数据不符')
+    if any(bool(row.get('anchor')) != bool(item.get('anchor')) for row, item in zip(manifest['items'], items)):
+        raise ValueError(f'{kind}: 守门员角标与榜单条目不匹配')
     watermark = manifest.get('watermark', {})
     if (watermark.get('text') != WATERMARK_TEXT or watermark.get('opacity') != WATERMARK_OPACITY
             or watermark.get('angle') != WATERMARK_ANGLE or watermark.get('count', 0) <= 0):
