@@ -16,3 +16,9 @@
 - 构建管线坑(Jekyll 改写内联 JS):改 `_includes/` 组件前必读 `docs/pitfalls/jekyll-build.md`
 - 周报组件的 JS 字符串里 `<table`、`</tag>`、`//注释` 都被构建管线咬过,
   见 git log 58aeeadf..fc4200c9 系列修复,别把老坑改回来
+
+## 健康分刷新维护（2026-09-30）
+
+营养和学习站必须调用同一个 health_score.py export 重算及刷新历史；不可只在缓存缺行时计算。
+部署源码、回归测试、更新与回滚步骤见 [维护手册](../../../tools/server-health-refresh/README.md)。
+三看板审查和数据库建议见 [审查记录](../../../docs/reviews/2026-09-30-dashboards.md)。

@@ -151,7 +151,7 @@ def get_bodyweight_history(records_jsonl_path):
                     continue  # 防御：跳过无体重值/0的脏记录（字段名写错时不进历史）
                 weights.append({
                     "date": r["date"],
-                    "weight": r.get("value", 0),
+                    "weight": wv,
                     "unit": r.get("unit", "kg")
                 })
 
@@ -750,7 +750,7 @@ def main():
         print(f"   🎯 动态目标: {goals['calories']} kcal "
               f"(BMR {goals_meta['bmr']} | {'训练日' if goals_meta['is_training_day'] else '休息日'}"
               f"{' ⚠️低于基础代谢' if goals_meta.get('below_bmr') else ''})")
-    if health_score:
+    if health_score and health_score.get("today"):
         print(f"   📊 健康得分: {health_score['today']['total_score']}/100 {health_score['today']['grade']}")
     if food_library:
         print(f"   🥗 食物库: {food_library['total_foods']} 种 | 累计 {food_library['total_servings']} 份")
