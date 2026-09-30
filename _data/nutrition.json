@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-30T14:41:33.994175+08:00",
+  "generated_at": "2026-09-30T22:05:03.378463+08:00",
   "goals": {
     "calories": 1652,
     "water": 2000,
@@ -25,10 +25,10 @@
       "first": "2026-04-29",
       "last": "2026-09-30"
     },
-    "avg_calories": 1958,
+    "avg_calories": 1967,
     "avg_protein": 102,
-    "avg_water": 1751,
-    "avg_carbs": 229,
+    "avg_water": 1753,
+    "avg_carbs": 230,
     "avg_fat": 70,
     "total_training_calories": 11958,
     "training_days": 47,
@@ -361,10 +361,10 @@
     }
   },
   "macros": {
-    "carbs_pct": 50,
+    "carbs_pct": 49,
     "protein_pct": 20,
-    "fat_pct": 30,
-    "total_cal": 1657
+    "fat_pct": 31,
+    "total_cal": 1736
   },
   "trend": [
     {
@@ -499,12 +499,12 @@
     },
     {
       "date": "2026-09-30",
-      "calories": 1389,
-      "protein": 81.0,
-      "carbs": 137.6,
-      "fat": 62.6,
-      "water": 1153,
-      "net_calories": 1389,
+      "calories": 1924,
+      "protein": 116.2,
+      "carbs": 183.6,
+      "fat": 88.1,
+      "water": 1273,
+      "net_calories": 1924,
       "has_fitness": false
     }
   ],
@@ -2201,22 +2201,22 @@
     },
     {
       "date": "2026-09-30",
-      "total_calories": 1389,
-      "total_carbs": 137.6,
-      "total_protein": 81.0,
-      "total_fat": 62.6,
-      "total_water": 1153,
-      "net_calories": 1389,
-      "meal_count": 2,
-      "water_entries": 2,
+      "total_calories": 1924,
+      "total_carbs": 183.6,
+      "total_protein": 116.2,
+      "total_fat": 88.1,
+      "total_water": 1273,
+      "net_calories": 1924,
+      "meal_count": 3,
+      "water_entries": 3,
       "supplements": {
         "count": 0,
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 84.1,
-      "protein_pct": 54.0,
-      "water_pct": 57.6,
+      "calorie_pct": 116.5,
+      "protein_pct": 77.5,
+      "water_pct": 63.6,
       "has_data": true
     }
   ],
@@ -2230,19 +2230,19 @@
   "health_score": {
     "today": {
       "date": "2026-09-30",
-      "nutrition_score": 31,
-      "nutrition_detail": "热量 1389/1652 kcal (14/20); 蛋白 81.0/150g (8/15); 饮水 1153/2000ml (9/15)",
+      "nutrition_score": 35,
+      "nutrition_detail": "热量 1924/1652 kcal (13/20); 蛋白 116.2/150g (12/15); 饮水 1273/2000ml (10/15)",
       "exercise_score": 0,
       "exercise_detail": "今日无训练 (0/20); 组数 0 (0/10)",
       "bonus_score": 15,
       "bonus_detail": "数据完整性 (8/10); 体脂趋势 -1.2% (7/10)",
-      "total_score": 46,
+      "total_score": 50,
       "grade": "⚠️ C",
-      "calories_in": 1389,
+      "calories_in": 1924,
       "calories_target": 1652,
-      "protein_in": 81.0,
+      "protein_in": 116.2,
       "protein_target": 150,
-      "water_in": 1153,
+      "water_in": 1273,
       "water_target": 2000,
       "training_sets": 0,
       "training_volume": 0,
@@ -2347,15 +2347,15 @@
       },
       {
         "date": "2026-09-30",
-        "score": 46,
+        "score": 50,
         "grade": "⚠️ C",
-        "nutrition": "热量 1389/1652 kcal (14/20); 蛋白 81.0/150g (8/15); 饮水 1153/2000ml (9/15)",
+        "nutrition": "热量 1924/1652 kcal (13/20); 蛋白 116.2/150g (12/15); 饮水 1273/2000ml (10/15)",
         "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
       }
     ],
     "range_start": "2026-09-17",
     "range_end": "2026-09-30",
-    "exported_at": "2026-09-30T14:41:33.964385"
+    "exported_at": "2026-09-30T22:05:03.366475"
   },
   "food_library": {
     "items": [
@@ -4308,6 +4308,21 @@
         "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户自估(荞麦面130g+鸡胸95g+蔬菜140g+日式油醋汁35g)"
+      },
+      {
+        "name": "蔓味轻食鸡牛双拼杂粮饭",
+        "brand": "",
+        "per_unit": "1份",
+        "calories": 430.0,
+        "carbs": 42.0,
+        "protein": 34.0,
+        "fat": 16.0,
+        "category": "快餐",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户"
       },
       {
         "name": "藤椒鸡腿中国汉堡(塔斯汀)",
@@ -6890,6 +6905,21 @@
         "source": "用户估算2026-09-23"
       },
       {
+        "name": "蔓味轻食牛油果酱(整份)",
+        "brand": "",
+        "per_unit": "1份",
+        "calories": 105.0,
+        "carbs": 4.0,
+        "protein": 1.2,
+        "fat": 9.5,
+        "category": "调味料",
+        "ref_price": 0.0,
+        "total_servings": 1.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户"
+      },
+      {
         "name": "酱油",
         "brand": "",
         "per_unit": "10ml",
@@ -7895,8 +7925,8 @@
         "source": "预置"
       }
     ],
-    "total_foods": 369,
-    "total_servings": 706.9,
+    "total_foods": 371,
+    "total_servings": 708.9,
     "total_spending": 370.61,
     "by_category": {
       "主食": {
@@ -7916,8 +7946,8 @@
         "servings": 4.0
       },
       "快餐": {
-        "count": 76,
-        "servings": 117.4
+        "count": 77,
+        "servings": 118.4
       },
       "水果": {
         "count": 12,
@@ -7948,8 +7978,8 @@
         "servings": 19.5
       },
       "调味料": {
-        "count": 5,
-        "servings": 9.2
+        "count": 6,
+        "servings": 10.2
       },
       "零食": {
         "count": 21,
