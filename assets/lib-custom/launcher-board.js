@@ -32,7 +32,9 @@
     add('text',{x:44,y:226},rows[0].day); add('text',{x:width-16,y:226,'text-anchor':'end'},rows.at(-1).day); host.append(svg);
   }
   async function load() {
-    const response = await fetch(root.dataset.source, {cache:'no-cache'}); if (!response.ok) throw Error('快照读取失败');
+    const source = new URL(root.dataset.source, location.href);
+    source.searchParams.set('snapshot', String(Date.now()));
+    const response = await fetch(source, {cache:'no-store'}); if (!response.ok) throw Error('快照读取失败');
     const d = await response.json(); if(d.schema_version !== 2) throw Error('快照格式不兼容');
     const stamp = new Date(d.updated_at), stale = Date.now()-stamp.getTime()>26*3600000;
     find('lb-status').textContent = `快照更新：${stamp.toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',hour12:false})}${stale?' · 更新已延迟，请稍后再看':''}`;

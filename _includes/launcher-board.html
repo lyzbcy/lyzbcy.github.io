@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ '/assets/lib-custom/launcher-board.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/lib-custom/launcher-board.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 <section id="launcher-board" class="lb" data-source="{{ '/assets/data/launcher-stats.json' | relative_url }}" aria-label="软件中心活跃数据看板">
   <header class="lb-header"><div><span class="lb-eyebrow">LAOYU SOFTWARE CENTER / OBSERVATORY</span><h2>每一次打开，都有迹可循。</h2><p>从日活到月活，观察软件中心的成长。</p></div><span class="lb-badge">每日更新 · 北京时间</span></header>
   <p id="lb-status" role="status">正在载入统计快照…</p>
@@ -7,4 +7,4 @@
   <div class="lb-tables"><div class="lb-panel"><h3>自然月去重</h3><p>一份安装，一个月只计一次。</p><div id="lb-months"></div></div><div class="lb-panel"><div class="lb-panel-head"><h3>每日记录</h3><button id="lb-export" type="button">导出 CSV ↗</button></div><div id="lb-days"></div></div></div>
   <p id="lb-coverage" class="lb-footnote"></p>
 </section>
-<script src="{{ '/assets/lib-custom/launcher-board.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/lib-custom/launcher-board.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
