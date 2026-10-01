@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-30T22:05:03.378463+08:00",
+  "generated_at": "2026-10-01T22:05:04.073802+08:00",
   "goals": {
     "calories": 1652,
     "water": 2000,
@@ -361,22 +361,12 @@
     }
   },
   "macros": {
-    "carbs_pct": 49,
-    "protein_pct": 20,
+    "carbs_pct": 48,
+    "protein_pct": 21,
     "fat_pct": 31,
-    "total_cal": 1736
+    "total_cal": 1721
   },
   "trend": [
-    {
-      "date": "2026-09-17",
-      "calories": 1493,
-      "protein": 133.9,
-      "carbs": 104.1,
-      "fat": 47.9,
-      "water": 800,
-      "net_calories": 1493,
-      "has_fitness": false
-    },
     {
       "date": "2026-09-18",
       "calories": 2923,
@@ -2221,46 +2211,15 @@
     }
   ],
   "status": {
-    "has_today": true,
+    "has_today": false,
     "has_yesterday": true,
-    "today": "2026-09-30",
+    "today": "2026-10-01",
     "is_active": true,
     "is_training_day": false
   },
   "health_score": {
-    "today": {
-      "date": "2026-09-30",
-      "nutrition_score": 35,
-      "nutrition_detail": "热量 1924/1652 kcal (13/20); 蛋白 116.2/150g (12/15); 饮水 1273/2000ml (10/15)",
-      "exercise_score": 0,
-      "exercise_detail": "今日无训练 (0/20); 组数 0 (0/10)",
-      "bonus_score": 15,
-      "bonus_detail": "数据完整性 (8/10); 体脂趋势 -1.2% (7/10)",
-      "total_score": 50,
-      "grade": "⚠️ C",
-      "calories_in": 1924,
-      "calories_target": 1652,
-      "protein_in": 116.2,
-      "protein_target": 150,
-      "water_in": 1273,
-      "water_target": 2000,
-      "training_sets": 0,
-      "training_volume": 0,
-      "training_cal": 0,
-      "training_duration_min": 0,
-      "bodyfat_pct": 20.7,
-      "is_training_day": false,
-      "bmr_floor": 1710,
-      "below_bmr": true
-    },
+    "today": null,
     "history": [
-      {
-        "date": "2026-09-17",
-        "score": 54,
-        "grade": "⚠️ C",
-        "nutrition": "热量 1493/1640 kcal (20/20); 蛋白 133.9/150g (13/15); 饮水 800/2000ml (6/15)",
-        "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
-      },
       {
         "date": "2026-09-18",
         "score": 43,
@@ -2353,9 +2312,9 @@
         "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
       }
     ],
-    "range_start": "2026-09-17",
-    "range_end": "2026-09-30",
-    "exported_at": "2026-09-30T22:05:03.366475"
+    "range_start": "2026-09-18",
+    "range_end": "2026-10-01",
+    "exported_at": "2026-10-01T22:05:04.059617"
   },
   "food_library": {
     "items": [
