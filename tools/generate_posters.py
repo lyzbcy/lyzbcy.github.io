@@ -43,6 +43,10 @@ CONFIG = {
                    unit='款', keyword='方便面', sticker='星第3弹-吃饭.png'),
     'drink': dict(stem='drink', title='所有的饮料和奶茶', subtitle='喝过才来排 · 能量饮料与奶茶都在这里',
                   unit='款', keyword='饮料奶茶', sticker='第12弹-心动.png'),
+    'huanong': dict(stem='huanong', title='华农附近美食', subtitle='2026-10-02 · 口味优先 · 麦当劳 2.5 星作基准',
+                    unit='家', keyword='华农美食', sticker='第35弹-吸溜.png',
+                    cta='完整版：lyzbcy.github.io/posts/华农附近美食从夯到拉排名/',
+                    rule='常规满分 5 星，特别好吃可给 6 星；价格为口述回忆价，以实际购买为准。'),
 }
 
 
@@ -270,11 +274,11 @@ class Painter:
         self.draw.polygon(points, fill=color)
 
 
-def draw_cta(painter, y, keyword):
+def draw_cta(painter, y, keyword, text=None):
     d = painter.draw
     d.rounded_rectangle((PAD, y, WIDTH - PAD, y + 152), radius=24, fill=INK)
     painter.text((PAD + 28, y + 24), '完整榜单测评 · 详细评价 · 持续更新', 32, '#FFF9EA', True, 1080, 40)
-    painter.text((PAD + 28, y + 80), f'微信搜公众号「捞鱼的博客」  回复「{keyword}」', 32, '#FFE1A8', width=1220, height=45)
+    painter.text((PAD + 28, y + 80), text or f'微信搜公众号「捞鱼的博客」  回复「{keyword}」', 32, '#FFE1A8', width=1220, height=45)
     painter.text((WIDTH - PAD - 143, y + 28), '收藏再看', 25, '#FFE1A8', width=130, height=35)
 
 
@@ -327,7 +331,7 @@ def build_poster(kind, items):
     p.sticker(config['sticker'], (1120, 115, 264, 280))
     p.text((PAD + 2, 420), config['subtitle'], 29, MUTED, width=920, height=42)
     p.text((WIDTH - PAD - 280, 428), f"亲测 {len(items)} {config['unit']} / 一图收藏", 25, MUTED, width=280, height=38)
-    draw_cta(p, 484, config['keyword'])
+    draw_cta(p, 484, config['keyword'], config.get('cta'))
 
     for section in sections:
         tier, color, sy = section['tier'], section['color'], section['y']
@@ -375,10 +379,11 @@ def build_poster(kind, items):
                                     estimated=item['estimated'], status=item['status'],
                                     description=item['description'], excerpt=''.join(layout['intro']),
                                     truncated=layout['truncated'], box=[x, cy, CARD_WIDTH, h]))
-    draw_cta(p, footer_y, config['keyword'])
+    draw_cta(p, footer_y, config['keyword'], config.get('cta'))
     p.text((PAD + 4, footer_y + 181), '回复「粉丝群」：交流美食，也分享 AI 工具与免费 skill', 27, INK, width=WIDTH - 2 * PAD, height=40)
     rule = ('保留原始评分，不取整。方便面有 6 星；不同榜单的评分体系不同。' if kind == 'noodle'
             else '保留原始评分，不取整。档位与星级均按作者原榜单，部分评分为估分。')
+    rule = config.get('rule', rule)
     p.text((PAD + 4, footer_y + 235), rule, 23, MUTED, width=WIDTH - 2 * PAD, height=34)
     p.text((PAD + 4, footer_y + 274), '简介为原文节选，省略处标「…」；完整评价、价格与讨论请看完整榜单。', 23, MUTED, width=WIDTH - 2 * PAD, height=34)
     d.line((PAD, footer_y + 326, WIDTH - PAD, footer_y + 326), fill='#D6D1C7', width=2)

@@ -1253,8 +1253,8 @@
     "assets/img/posters/resources/stickers/第37弹-呃.png": "dca987bf738d5e6a4f5345c57415567cfcc5b89af86a283497fe0e0b223d210f",
     "assets/lib-custom/canteen-tier-extras.js": "827f00ce3e41cbe859cd9f516c171e7fc5fdfabcd889f1aeab349cc1d4cac275",
     "assets/lib-custom/canteen-tier.js": "bfd701226e634a55cbb15ec297b2c5accfc34784a7ea5a333a7b3dec9d089feb",
-    "tools/export_tier_data.cjs": "f1efbc6794e76ea4052450c7ae5ffce20baf8bed854d613b3e7eea6bfd45924f",
-    "tools/generate_posters.py": "80b816ff70b71e2a0ecbf69b604ae862a6393c6647fcdd69709a3a1cdccd6954"
+    "tools/export_tier_data.cjs": "69b973749aa2d7d7987af137e2098db5c51d372c8712fb508536a91994fe956f",
+    "tools/generate_posters.py": "7b101fbec207f7c2e615278e9023cdcf7ee8ef6246f85817f075fa7589433be1"
   },
   "pngSha256": "d1f7635b8c5a32be4fc5b0f3f37944b99b3b40cdb2cdc73531d0d99ef9f1d6b0"
 }

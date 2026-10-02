@@ -1,0 +1,156 @@
+{
+  "schema": 1,
+  "kind": "huanong",
+  "size": [
+    1440,
+    2368
+  ],
+  "count": 6,
+  "tierCounts": {
+    "夯": 2,
+    "人上人": 2,
+    "NPC": 2
+  },
+  "checkedTextRegions": 51,
+  "overflowCount": 0,
+  "stickerCount": 4,
+  "ctaCount": 2,
+  "anchorBadgeCount": 0,
+  "watermark": {
+    "text": "捞鱼的博客",
+    "opacity": 24,
+    "angle": 22,
+    "count": 31
+  },
+  "items": [
+    {
+      "name": "金马门",
+      "sourceName": "金马门",
+      "tier": "夯",
+      "score": "6",
+      "scoreSource": "tierLabel",
+      "anchor": false,
+      "estimated": false,
+      "status": null,
+      "description": "口味的确好，虽然价格也高，但是我们这个主要还是口味排名。可以给到 6 分，6 分就是绝对的夯了。店面大，东西很多，还有一些很有意思的菜。参考价一个人约 160 元。",
+      "excerpt": "口味的确好，虽然价格也高，但是我们这个主要还是口味排名。可以给到 6 分，6 分就是绝对的夯了。店面大，东西很多，还有一些很有意思的菜…",
+      "truncated": true,
+      "box": [
+        48,
+        776,
+        660,
+        282
+      ]
+    },
+    {
+      "name": "龙哥",
+      "sourceName": "龙哥",
+      "tier": "夯",
+      "score": "4.5",
+      "scoreSource": "tierLabel",
+      "anchor": false,
+      "estimated": false,
+      "status": null,
+      "description": "味道上来说 4.5，我觉得差不多。聊到毛辣果两个人花了 100 多元时，觉得那还不如吃龙哥。",
+      "excerpt": "味道上来说 4.5，我觉得差不多。聊到毛辣果两个人花了 100 多元时，觉得那还不如吃龙哥。",
+      "truncated": false,
+      "box": [
+        732,
+        776,
+        660,
+        282
+      ]
+    },
+    {
+      "name": "波波鱼",
+      "sourceName": "波波鱼",
+      "tier": "人上人",
+      "score": "3.1",
+      "scoreSource": "tierLabel",
+      "anchor": false,
+      "estimated": false,
+      "status": null,
+      "description": "步行街吃的。主要胜在很便宜，便宜是它最大的优势。把汤浇上去很好吃，这种吃法只吃过他们一家，觉得很新颖。最初给 3 星，最后觉得比舌尖大师好吃一点，改成 3.1 星。",
+      "excerpt": "步行街吃的。主要胜在很便宜，便宜是它最大的优势。把汤浇上去很好吃，这种吃法只吃过他们一家，觉得很新颖。最初给 3 星，最后觉得比舌尖…",
+      "truncated": true,
+      "box": [
+        48,
+        1218,
+        660,
+        282
+      ]
+    },
+    {
+      "name": "舌尖大师",
+      "sourceName": "舌尖大师",
+      "tier": "人上人",
+      "score": "3",
+      "scoreSource": "tierLabel",
+      "anchor": false,
+      "estimated": false,
+      "status": null,
+      "description": "吃的是铁板烧，对具体菜品有点没印象了。感觉还没波波鱼好吃。讨论时提过 3.5 和 3.1，最后确认按 3 星整理，波波鱼比它好吃一点，给 3.1 星。",
+      "excerpt": "吃的是铁板烧，对具体菜品有点没印象了。感觉还没波波鱼好吃。讨论时提过 3.5 和 3.1，最后确认按 3 星整理，波波鱼比它好吃一点，给 3.1 星。",
+      "truncated": false,
+      "box": [
+        732,
+        1218,
+        660,
+        282
+      ]
+    },
+    {
+      "name": "麦当劳",
+      "sourceName": "麦当劳",
+      "tier": "NPC",
+      "score": "2.5",
+      "scoreSource": "tierLabel",
+      "anchor": false,
+      "estimated": false,
+      "status": null,
+      "description": "华农附近这家麦当劳作为评分基准，给 2.5 星。虽然喜欢吃板烧鸡腿堡，但整体太普通了，太普通了，也就 2.5 分。常规满分按 5 分算，特别好吃的可以给到 6 分。",
+      "excerpt": "华农附近这家麦当劳作为评分基准，给 2.5 星。虽然喜欢吃板烧鸡腿堡，但整体太普通了，太普通了，也就 2.5 分。常规满分按 5 分算，特别好吃…",
+      "truncated": true,
+      "box": [
+        48,
+        1660,
+        660,
+        282
+      ]
+    },
+    {
+      "name": "毛辣果",
+      "sourceName": "毛辣果",
+      "tier": "NPC",
+      "score": "2",
+      "scoreSource": "tierLabel",
+      "anchor": false,
+      "estimated": false,
+      "status": null,
+      "description": "不想再吃了，不想再吃了。也是自助，但是不便宜，菜也很少，肉类还要加钱，汤底也不好吃。两个人记得花了 100 多元，那还不如吃龙哥。",
+      "excerpt": "不想再吃了，不想再吃了。也是自助，但是不便宜，菜也很少，肉类还要加钱，汤底也不好吃。两个人记得花了 100 多元，那还不如吃龙哥。",
+      "truncated": false,
+      "box": [
+        732,
+        1660,
+        660,
+        282
+      ]
+    }
+  ],
+  "inputs": {
+    "assets/img/posters/resources/fonts/NotoEmoji[wght].ttf": "de6c18832938afc99caf132b39d6a30a19bac7f2e812e28db2535b4608d27551",
+    "assets/img/posters/resources/fonts/NotoSansSC[wght].ttf": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
+    "assets/img/posters/resources/stickers/星第3弹-呜呜.png": "ab6c113d4fdb394c80b9a21604c083c9927c20c8f80740e5cad8e4b7395c847f",
+    "assets/img/posters/resources/stickers/第12弹-开心.png": "f9e30edcda6e693b4eaf45c6d843dfca31269c4abb469f8a6412289f2cfd192d",
+    "assets/img/posters/resources/stickers/第12弹-心动.png": "471b9ca06998889b80a3b521e30eedc851965c59de8ff80f86774caf6f14b6f6",
+    "assets/img/posters/resources/stickers/第12弹-期待.png": "200fa353636757febd39283acbd9ac7465cac1bcd43f3cefeaab7f233aecf7b8",
+    "assets/img/posters/resources/stickers/第35弹-吸溜.png": "87697a50cb7e2058eef97ddecab737d0a446afdade18ae7f25587d28cb29c7cd",
+    "assets/img/posters/resources/stickers/第37弹-呃.png": "dca987bf738d5e6a4f5345c57415567cfcc5b89af86a283497fe0e0b223d210f",
+    "assets/lib-custom/huanong-tier-extras.js": "d7a66b78433755b69c5c652b74acf74b0f349343398e4bd9d310d830236f9d61",
+    "assets/lib-custom/huanong-tier.js": "3d3afb1f4acc3d906f979cf3fc04f2a9b9c703d970f343c73e77e6a72d91b842",
+    "tools/export_tier_data.cjs": "69b973749aa2d7d7987af137e2098db5c51d372c8712fb508536a91994fe956f",
+    "tools/generate_posters.py": "7b101fbec207f7c2e615278e9023cdcf7ee8ef6246f85817f075fa7589433be1"
+  },
+  "pngSha256": "0f9e7a590af4f95586170664856a63458a4282965815949b95e6de801192e681"
+}

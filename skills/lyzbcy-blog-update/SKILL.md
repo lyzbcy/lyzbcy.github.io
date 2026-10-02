@@ -30,6 +30,7 @@ description: 更新 lyzbcy.github.io 博客(方便面排名、外卖排名、健
 | 方便面从夯到拉排名 | [references/noodle-tier.md](references/noodle-tier.md) | `assets/lib-custom/noodle-tier.js` |
 | 五六食堂从夯到拉排名 | [references/canteen-tier.md](references/canteen-tier.md) | `assets/lib-custom/canteen-tier.js` |
 | 外卖从夯到拉排名 | [references/takeout-tier.md](references/takeout-tier.md) | `assets/lib-custom/takeout-tier.js` |
+| 华农附近美食从夯到拉排名 | [references/huanong-tier.md](references/huanong-tier.md) | `assets/lib-custom/huanong-tier.js` |
 | 所有的饮料和奶茶从夯到拉排名 | [references/drink-tier.md](references/drink-tier.md) | `assets/lib-custom/drink-tier.js` |
 | 健身/营养/抖音周报看板 | [references/dashboards.md](references/dashboards.md) | `tools/generate_*.py` |
 | AI Coding 比赛看板 | [references/aicoding-board.md](references/aicoding-board.md) | `tools/aicoding/update-aicoding.mjs` |

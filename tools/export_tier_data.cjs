@@ -37,7 +37,7 @@ function readArray(file, name, optional = false) {
 }
 
 function exportData(root, kind) {
-  if (!['dine', 'takeout', 'noodle', 'drink'].includes(kind)) throw new Error(`Unknown ranking: ${kind}`);
+  if (!['dine', 'takeout', 'noodle', 'drink', 'huanong'].includes(kind)) throw new Error(`Unknown ranking: ${kind}`);
   const stem = kind === 'dine' ? 'canteen' : kind;
   const source = path.join(root, 'assets/lib-custom', stem + '-tier.js');
   const extras = path.join(root, 'assets/lib-custom', stem + '-tier-extras.js');
