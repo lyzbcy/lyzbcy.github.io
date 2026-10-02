@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-01T22:05:04.073802+08:00",
+  "generated_at": "2026-10-02T22:05:03.739503+08:00",
   "goals": {
     "calories": 1652,
     "water": 2000,
@@ -361,22 +361,12 @@
     }
   },
   "macros": {
-    "carbs_pct": 48,
+    "carbs_pct": 47,
     "protein_pct": 21,
-    "fat_pct": 31,
-    "total_cal": 1721
+    "fat_pct": 32,
+    "total_cal": 1774
   },
   "trend": [
-    {
-      "date": "2026-09-18",
-      "calories": 2923,
-      "protein": 137.3,
-      "carbs": 300.5,
-      "fat": 125.2,
-      "water": 1800,
-      "net_calories": 2923,
-      "has_fitness": false
-    },
     {
       "date": "2026-09-19",
       "calories": 482,
@@ -2212,21 +2202,14 @@
   ],
   "status": {
     "has_today": false,
-    "has_yesterday": true,
-    "today": "2026-10-01",
-    "is_active": true,
+    "has_yesterday": false,
+    "today": "2026-10-02",
+    "is_active": false,
     "is_training_day": false
   },
   "health_score": {
     "today": null,
     "history": [
-      {
-        "date": "2026-09-18",
-        "score": 43,
-        "grade": "⚠️ C",
-        "nutrition": "热量 2923/1640 kcal (0/20); 蛋白 137.3/150g (14/15); 饮水 1800/2000ml (14/15)",
-        "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
-      },
       {
         "date": "2026-09-19",
         "score": 24,
@@ -2312,9 +2295,9 @@
         "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
       }
     ],
-    "range_start": "2026-09-18",
-    "range_end": "2026-10-01",
-    "exported_at": "2026-10-01T22:05:04.059617"
+    "range_start": "2026-09-19",
+    "range_end": "2026-10-02",
+    "exported_at": "2026-10-02T22:05:03.724875"
   },
   "food_library": {
     "items": [
