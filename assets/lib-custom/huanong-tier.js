@@ -14,6 +14,48 @@
   // 口味评分与档位由作者确认；常规满分 5 星，特别好吃可给 6 星。
   const stalls = [
     {
+      name: '虾王柴火灶甲鱼烧鸡',
+      tier: '夯',
+      tierLabel: '夯 · 5 星',
+      rating: 5,
+      photo: null,
+      description: '味道很好吃，甲鱼已经很好吃了，最终给 5 颗星。很划算，量很够，性价比拉满了。记得当时三四个人也就 200 元左右，四五个人加了点东西。',
+      pros: ['甲鱼很好吃', '量很够', '很划算，性价比拉满'],
+      cons: ['不适合一个人吃，菜的分量大'],
+      note: '约 200 元是当时多人用餐的回忆价，三四人和四五人加菜的记忆有些混在一起，不据此固定人均。具体分店及套餐内容待补。',
+      dishes: [
+        { name: '甲鱼烧鸡', review: '甲鱼已经很好吃了，味道很好吃，量很够。' },
+      ],
+    },
+    {
+      name: '楚十一',
+      tier: '夯',
+      tierLabel: '夯 · 5 星',
+      rating: 5,
+      photo: null,
+      description: '给 5 颗星。已经打出了自己的特色，有武汉特色，觉得其他地方不太吃得到。很好吃，但不适合一个人吃，一个菜分量太大了，甜品也是一大碗。',
+      pros: ['有自己的特色，有武汉特色', '很好吃', '一个菜分量很大，甜品一大碗'],
+      cons: ['不适合一个人吃，单菜分量太大'],
+      note: '单菜记得约 40–60 元，是口述回忆价，不能当作整餐人均。是否连锁只是当时的猜测，不作定论；具体菜名和分店待补。',
+      dishes: [
+        { name: '甜品（菜名待补）', review: '一大碗，分量太多了，很好吃。' },
+      ],
+    },
+    {
+      name: '曾麻子热干面',
+      tier: 'NPC',
+      tierLabel: 'NPC · 2.5 星',
+      rating: 2.5,
+      photo: null,
+      description: '最终给 2.5 分。武汉特色，可以吃一次。讨论时提过 3 星，也觉得比麦当劳好吃，但最后还是确认 2.5 就 2.5，和麦当劳的分数相同。',
+      pros: ['武汉特色，可以吃一次'],
+      cons: [],
+      note: '价格及具体分店没有在这次讨论中提到。',
+      dishes: [
+        { name: '热干面', review: '武汉特色，可以吃一次；店铺最终给 2.5 星。' },
+      ],
+    },
+    {
       name: '金马门',
       tier: '夯',
       tierLabel: '夯 · 6 星（超满分）',
@@ -80,6 +122,16 @@
       pros: [],
       cons: ['不想再吃了', '自助菜品少，肉类还要加钱', '汤底不好吃', '不便宜，两个人约 100 多元'],
       note: '两个人 100 多元是回忆价，确切实付金额记不清。按作者确认保留 NPC 档。',
+    },
+  ];
+
+  // 未提供评分的店铺先保留手记，不擅自赋分或放入档位。
+  const pendingStalls = [
+    {
+      name: '回味黑鸭煲',
+      photo: null,
+      description: '一般般，其他都还可以，喜欢吃辣的。最后回忆起双人套餐 139 元，均价约 70 元，挺划算的。',
+      note: '双人 139 元折合每人 69.5 元，按约 70 元记录。套餐菜品没有记清；公开网页的团购明细需在 App 内查看，尚未核实套餐内容及具体分店。评分待补。',
     },
   ];
 
@@ -168,6 +220,7 @@
           评分：${data.tierLabel}
         </div>
       </div>
+      ${generateStorePhoto(data)}
       <p style="font-size: 1.05em; line-height: 1.9; margin-bottom: 20px;">${data.description}</p>
       ${generateDishCards(data.dishes)}
     `;
@@ -212,6 +265,14 @@
     return html;
   }
 
+  function generateStorePhoto(data) {
+    const name = escapeHtml(data.name);
+    const media = data.photo
+      ? `<img src="${escapeHtml(data.photo)}" alt="${escapeHtml(data.photoAlt || `${data.name}实拍`)}" loading="lazy">`
+      : '<div class="store-photo__placeholder"><span>实拍图待补</span><small>店铺或菜品照片</small></div>';
+    return `<figure class="store-photo" aria-label="${name}图片区">${media}<figcaption>${name} · 实拍记录</figcaption></figure>`;
+  }
+
   function generateContentSectionHTML() {
     let html = '<h2>华农附近美食详细手记</h2>';
     tierOrder.forEach((tier) => {
@@ -224,6 +285,12 @@
         html += `<p>${data.description}</p>`;
       });
     });
+    if (pendingStalls.length) {
+      html += '<h2>待评分手记</h2>';
+      pendingStalls.forEach((data) => {
+        html += `<h3>${escapeHtml(data.name)} · 待评分</h3>${generateStorePhoto(data)}<p>${escapeHtml(data.description)}</p><p>${escapeHtml(data.note)}</p>`;
+      });
+    }
     return html;
   }
 
