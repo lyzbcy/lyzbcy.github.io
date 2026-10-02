@@ -3,15 +3,15 @@
   "kind": "huanong",
   "size": [
     1440,
-    2368
+    2980
   ],
-  "count": 6,
+  "count": 9,
   "tierCounts": {
-    "夯": 2,
+    "夯": 4,
     "人上人": 2,
-    "NPC": 2
+    "NPC": 3
   },
-  "checkedTextRegions": 51,
+  "checkedTextRegions": 66,
   "overflowCount": 0,
   "stickerCount": 4,
   "ctaCount": 2,
@@ -20,7 +20,7 @@
     "text": "捞鱼的博客",
     "opacity": 24,
     "angle": 22,
-    "count": 31
+    "count": 42
   },
   "items": [
     {
@@ -43,6 +43,44 @@
       ]
     },
     {
+      "name": "虾王柴火灶甲鱼烧鸡",
+      "sourceName": "虾王柴火灶甲鱼烧鸡",
+      "tier": "夯",
+      "score": "5",
+      "scoreSource": "tierLabel",
+      "anchor": false,
+      "estimated": false,
+      "status": null,
+      "description": "味道很好吃，甲鱼已经很好吃了，最终给 5 颗星。很划算，量很够，性价比拉满了。记得当时三四个人也就 200 元左右，四五个人加了点东西。",
+      "excerpt": "味道很好吃，甲鱼已经很好吃了，最终给 5 颗星。很划算，量很够，性价比拉满了。记得当时三四个人也就 200 元左右，四五个人加了点东西。",
+      "truncated": false,
+      "box": [
+        732,
+        776,
+        660,
+        282
+      ]
+    },
+    {
+      "name": "楚十一",
+      "sourceName": "楚十一",
+      "tier": "夯",
+      "score": "5",
+      "scoreSource": "tierLabel",
+      "anchor": false,
+      "estimated": false,
+      "status": null,
+      "description": "给 5 颗星。已经打出了自己的特色，有武汉特色，觉得其他地方不太吃得到。很好吃，但不适合一个人吃，一个菜分量太大了，甜品也是一大碗。",
+      "excerpt": "给 5 颗星。已经打出了自己的特色，有武汉特色，觉得其他地方不太吃得到。很好吃，但不适合一个人吃，一个菜分量太大了，甜品也是一大碗。",
+      "truncated": false,
+      "box": [
+        48,
+        1082,
+        660,
+        282
+      ]
+    },
+    {
       "name": "龙哥",
       "sourceName": "龙哥",
       "tier": "夯",
@@ -56,7 +94,7 @@
       "truncated": false,
       "box": [
         732,
-        776,
+        1082,
         660,
         282
       ]
@@ -75,7 +113,7 @@
       "truncated": true,
       "box": [
         48,
-        1218,
+        1524,
         660,
         282
       ]
@@ -94,7 +132,26 @@
       "truncated": false,
       "box": [
         732,
-        1218,
+        1524,
+        660,
+        282
+      ]
+    },
+    {
+      "name": "曾麻子热干面",
+      "sourceName": "曾麻子热干面",
+      "tier": "NPC",
+      "score": "2.5",
+      "scoreSource": "tierLabel",
+      "anchor": false,
+      "estimated": false,
+      "status": null,
+      "description": "最终给 2.5 分。武汉特色，可以吃一次。讨论时提过 3 星，也觉得比麦当劳好吃，但最后还是确认 2.5 就 2.5，和麦当劳的分数相同。",
+      "excerpt": "最终给 2.5 分。武汉特色，可以吃一次。讨论时提过 3 星，也觉得比麦当劳好吃，但最后还是确认 2.5 就 2.5，和麦当劳的分数相同。",
+      "truncated": false,
+      "box": [
+        48,
+        1966,
         660,
         282
       ]
@@ -112,8 +169,8 @@
       "excerpt": "华农附近这家麦当劳作为评分基准，给 2.5 星。虽然喜欢吃板烧鸡腿堡，但整体太普通了，太普通了，也就 2.5 分。常规满分按 5 分算，特别好吃…",
       "truncated": true,
       "box": [
-        48,
-        1660,
+        732,
+        1966,
         660,
         282
       ]
@@ -131,8 +188,8 @@
       "excerpt": "不想再吃了，不想再吃了。也是自助，但是不便宜，菜也很少，肉类还要加钱，汤底也不好吃。两个人记得花了 100 多元，那还不如吃龙哥。",
       "truncated": false,
       "box": [
-        732,
-        1660,
+        48,
+        2272,
         660,
         282
       ]
@@ -148,9 +205,9 @@
     "assets/img/posters/resources/stickers/第35弹-吸溜.png": "87697a50cb7e2058eef97ddecab737d0a446afdade18ae7f25587d28cb29c7cd",
     "assets/img/posters/resources/stickers/第37弹-呃.png": "dca987bf738d5e6a4f5345c57415567cfcc5b89af86a283497fe0e0b223d210f",
     "assets/lib-custom/huanong-tier-extras.js": "d7a66b78433755b69c5c652b74acf74b0f349343398e4bd9d310d830236f9d61",
-    "assets/lib-custom/huanong-tier.js": "3d3afb1f4acc3d906f979cf3fc04f2a9b9c703d970f343c73e77e6a72d91b842",
+    "assets/lib-custom/huanong-tier.js": "b467be344060dfae3e59c5f4d0d50bd1d408b9c503965e2e38c72f33ec76297e",
     "tools/export_tier_data.cjs": "69b973749aa2d7d7987af137e2098db5c51d372c8712fb508536a91994fe956f",
     "tools/generate_posters.py": "7b101fbec207f7c2e615278e9023cdcf7ee8ef6246f85817f075fa7589433be1"
   },
-  "pngSha256": "0f9e7a590af4f95586170664856a63458a4282965815949b95e6de801192e681"
+  "pngSha256": "b8c7254878f58a5a1ce1fa63a27595586b7dacb563ff2f98149eb89eb50d2fe0"
 }
