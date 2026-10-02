@@ -207,7 +207,7 @@
     "assets/lib-custom/huanong-tier-extras.js": "d7a66b78433755b69c5c652b74acf74b0f349343398e4bd9d310d830236f9d61",
     "assets/lib-custom/huanong-tier.js": "b467be344060dfae3e59c5f4d0d50bd1d408b9c503965e2e38c72f33ec76297e",
     "tools/export_tier_data.cjs": "69b973749aa2d7d7987af137e2098db5c51d372c8712fb508536a91994fe956f",
-    "tools/generate_posters.py": "7b101fbec207f7c2e615278e9023cdcf7ee8ef6246f85817f075fa7589433be1"
+    "tools/generate_posters.py": "0c1cf0a3da64322769309a2b33ddcb0b8665dab7335f126e57f349bf2f5be67c"
   },
-  "pngSha256": "b8c7254878f58a5a1ce1fa63a27595586b7dacb563ff2f98149eb89eb50d2fe0"
+  "pngSha256": "ba1669caedf045e79c122fd0c357f5bcd2160931d3760290ecb54c1af24e228a"
 }
