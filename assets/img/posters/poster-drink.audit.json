@@ -186,7 +186,7 @@
     "assets/img/posters/resources/stickers/第37弹-呃.png": "dca987bf738d5e6a4f5345c57415567cfcc5b89af86a283497fe0e0b223d210f",
     "assets/lib-custom/drink-tier.js": "3f2e8f01d857e2f47ee0ceb8dc0e58b21b42f14aaaf358ab4b3574b92255c05a",
     "tools/export_tier_data.cjs": "69b973749aa2d7d7987af137e2098db5c51d372c8712fb508536a91994fe956f",
-    "tools/generate_posters.py": "7b101fbec207f7c2e615278e9023cdcf7ee8ef6246f85817f075fa7589433be1"
+    "tools/generate_posters.py": "0c1cf0a3da64322769309a2b33ddcb0b8665dab7335f126e57f349bf2f5be67c"
   },
   "pngSha256": "52b40e8bb88273d4f4d5fcd12a96e5cb0211168e83f8932ea64f2929e42744ed"
 }

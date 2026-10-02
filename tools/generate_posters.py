@@ -45,7 +45,7 @@ CONFIG = {
                   unit='款', keyword='饮料奶茶', sticker='第12弹-心动.png'),
     'huanong': dict(stem='huanong', title='华农附近美食', subtitle='2026-10-02 · 口味优先 · 麦当劳 2.5 星作基准',
                     unit='家', keyword='华农美食', sticker='第35弹-吸溜.png',
-                    cta='完整版：lyzbcy.github.io/posts/华农附近美食从夯到拉排名/',
+                    cta='关注公众号「捞鱼的博客」，回复「华农美食」获取完整榜单',
                     rule='常规满分 5 星，特别好吃可给 6 星；价格为口述回忆价，以实际购买为准。'),
 }
 
