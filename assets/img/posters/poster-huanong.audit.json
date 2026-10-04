@@ -3,15 +3,15 @@
   "kind": "huanong",
   "size": [
     1440,
-    2980
+    3286
   ],
-  "count": 9,
+  "count": 10,
   "tierCounts": {
-    "夯": 4,
+    "夯": 5,
     "人上人": 2,
     "NPC": 3
   },
-  "checkedTextRegions": 66,
+  "checkedTextRegions": 71,
   "overflowCount": 0,
   "stickerCount": 4,
   "ctaCount": 2,
@@ -20,7 +20,7 @@
     "text": "捞鱼的博客",
     "opacity": 24,
     "angle": 22,
-    "count": 42
+    "count": 45
   },
   "items": [
     {
@@ -100,6 +100,25 @@
       ]
     },
     {
+      "name": "蛙塞牛蛙",
+      "sourceName": "蛙塞牛蛙",
+      "tier": "夯",
+      "score": "4.5",
+      "scoreSource": "tierLabel",
+      "anchor": false,
+      "estimated": false,
+      "status": null,
+      "description": "很好吃，整体味道有它自己的风味，比较独特。辛小丁说这是“酒吧牛蛙”。我们综合下来给到 4.5 颗星，单人参考价 100 元。",
+      "excerpt": "很好吃，整体味道有它自己的风味，比较独特。辛小丁说这是“酒吧牛蛙”。我们综合下来给到 4.5 颗星，单人参考价 100 元。",
+      "truncated": false,
+      "box": [
+        48,
+        1388,
+        660,
+        282
+      ]
+    },
+    {
       "name": "波波鱼",
       "sourceName": "波波鱼",
       "tier": "人上人",
@@ -113,7 +132,7 @@
       "truncated": true,
       "box": [
         48,
-        1524,
+        1830,
         660,
         282
       ]
@@ -132,7 +151,7 @@
       "truncated": false,
       "box": [
         732,
-        1524,
+        1830,
         660,
         282
       ]
@@ -151,7 +170,7 @@
       "truncated": false,
       "box": [
         48,
-        1966,
+        2272,
         660,
         282
       ]
@@ -170,7 +189,7 @@
       "truncated": true,
       "box": [
         732,
-        1966,
+        2272,
         660,
         282
       ]
@@ -189,7 +208,7 @@
       "truncated": false,
       "box": [
         48,
-        2272,
+        2578,
         660,
         282
       ]
@@ -205,9 +224,9 @@
     "assets/img/posters/resources/stickers/第35弹-吸溜.png": "87697a50cb7e2058eef97ddecab737d0a446afdade18ae7f25587d28cb29c7cd",
     "assets/img/posters/resources/stickers/第37弹-呃.png": "dca987bf738d5e6a4f5345c57415567cfcc5b89af86a283497fe0e0b223d210f",
     "assets/lib-custom/huanong-tier-extras.js": "d7a66b78433755b69c5c652b74acf74b0f349343398e4bd9d310d830236f9d61",
-    "assets/lib-custom/huanong-tier.js": "b467be344060dfae3e59c5f4d0d50bd1d408b9c503965e2e38c72f33ec76297e",
+    "assets/lib-custom/huanong-tier.js": "39fca5ec256ea4f957f74a4d26157860e0754a1c00320fbfdb926436717f8629",
     "tools/export_tier_data.cjs": "69b973749aa2d7d7987af137e2098db5c51d372c8712fb508536a91994fe956f",
-    "tools/generate_posters.py": "0c1cf0a3da64322769309a2b33ddcb0b8665dab7335f126e57f349bf2f5be67c"
+    "tools/generate_posters.py": "70242a1a1d569767d92593df89fda58df4fcbbc2477e3534f4fe971dc8877dc2"
   },
-  "pngSha256": "ba1669caedf045e79c122fd0c357f5bcd2160931d3760290ecb54c1af24e228a"
+  "pngSha256": "6863e473b20d99ec38122a67a569854e214285287cd3fa6cf78b3d4f308ce57d"
 }

@@ -818,7 +818,7 @@
     "assets/lib-custom/noodle-tier-extras.js": "fcae53ac66658f28c6bc7832d326b2c23469be667901ac3d40177443005fdc5d",
     "assets/lib-custom/noodle-tier.js": "9c81c4b0265ac28e5baece7570b373f3b094e223275698d2facc3247571e4420",
     "tools/export_tier_data.cjs": "69b973749aa2d7d7987af137e2098db5c51d372c8712fb508536a91994fe956f",
-    "tools/generate_posters.py": "0c1cf0a3da64322769309a2b33ddcb0b8665dab7335f126e57f349bf2f5be67c"
+    "tools/generate_posters.py": "70242a1a1d569767d92593df89fda58df4fcbbc2477e3534f4fe971dc8877dc2"
   },
   "pngSha256": "c193ea4fc7dcb2935b286e94f62b1ed701fb8870338b94e59cb328477b235cfd"
 }
