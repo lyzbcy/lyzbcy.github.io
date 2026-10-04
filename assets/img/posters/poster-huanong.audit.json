@@ -3,15 +3,15 @@
   "kind": "huanong",
   "size": [
     1440,
-    3286
+    3592
   ],
-  "count": 10,
+  "count": 11,
   "tierCounts": {
     "夯": 5,
-    "人上人": 2,
+    "人上人": 3,
     "NPC": 3
   },
-  "checkedTextRegions": 71,
+  "checkedTextRegions": 77,
   "overflowCount": 0,
   "stickerCount": 4,
   "ctaCount": 2,
@@ -20,7 +20,7 @@
     "text": "捞鱼的博客",
     "opacity": 24,
     "angle": 22,
-    "count": 45
+    "count": 49
   },
   "items": [
     {
@@ -30,6 +30,7 @@
       "score": "6",
       "scoreSource": "tierLabel",
       "anchor": false,
+      "locationLabel": "",
       "estimated": false,
       "status": null,
       "description": "口味的确好，虽然价格也高，但是我们这个主要还是口味排名。可以给到 6 分，6 分就是绝对的夯了。店面大，东西很多，还有一些很有意思的菜。参考价一个人约 160 元。",
@@ -49,6 +50,7 @@
       "score": "5",
       "scoreSource": "tierLabel",
       "anchor": false,
+      "locationLabel": "",
       "estimated": false,
       "status": null,
       "description": "味道很好吃，甲鱼已经很好吃了，最终给 5 颗星。很划算，量很够，性价比拉满了。记得当时三四个人也就 200 元左右，四五个人加了点东西。",
@@ -68,6 +70,7 @@
       "score": "5",
       "scoreSource": "tierLabel",
       "anchor": false,
+      "locationLabel": "",
       "estimated": false,
       "status": null,
       "description": "给 5 颗星。已经打出了自己的特色，有武汉特色，觉得其他地方不太吃得到。很好吃，但不适合一个人吃，一个菜分量太大了，甜品也是一大碗。",
@@ -81,12 +84,13 @@
       ]
     },
     {
-      "name": "龙哥",
-      "sourceName": "龙哥",
+      "name": "龙哥自助小火锅",
+      "sourceName": "龙哥自助小火锅",
       "tier": "夯",
       "score": "4.5",
       "scoreSource": "tierLabel",
       "anchor": false,
+      "locationLabel": "",
       "estimated": false,
       "status": null,
       "description": "味道上来说 4.5，我觉得差不多。聊到毛辣果两个人花了 100 多元时，觉得那还不如吃龙哥。",
@@ -106,6 +110,7 @@
       "score": "4.5",
       "scoreSource": "tierLabel",
       "anchor": false,
+      "locationLabel": "",
       "estimated": false,
       "status": null,
       "description": "很好吃，整体味道有它自己的风味，比较独特。辛小丁说这是“酒吧牛蛙”。我们综合下来给到 4.5 颗星，单人参考价 100 元。",
@@ -122,14 +127,15 @@
       "name": "波波鱼",
       "sourceName": "波波鱼",
       "tier": "人上人",
-      "score": "3.1",
+      "score": "3.5",
       "scoreSource": "tierLabel",
       "anchor": false,
+      "locationLabel": "步行街美食",
       "estimated": false,
       "status": null,
-      "description": "步行街吃的。主要胜在很便宜，便宜是它最大的优势。把汤浇上去很好吃，这种吃法只吃过他们一家，觉得很新颖。最初给 3 星，最后觉得比舌尖大师好吃一点，改成 3.1 星。",
-      "excerpt": "步行街吃的。主要胜在很便宜，便宜是它最大的优势。把汤浇上去很好吃，这种吃法只吃过他们一家，觉得很新颖。最初给 3 星，最后觉得比舌尖…",
-      "truncated": true,
+      "description": "步行街吃的。主要胜在很便宜，便宜是它最大的优势。把汤浇上去很好吃，这种吃法只吃过他们一家，觉得很新颖。2026-10-04 评分更新为 3.5 星。",
+      "excerpt": "步行街吃的。主要胜在很便宜，便宜是它最大的优势。把汤浇上去很好吃，这种吃法只吃过他们一家，觉得很新颖。2026-10-04 评分更新为 3.5 星。",
+      "truncated": false,
       "box": [
         48,
         1830,
@@ -141,17 +147,58 @@
       "name": "舌尖大师",
       "sourceName": "舌尖大师",
       "tier": "人上人",
-      "score": "3",
+      "score": "3.5",
       "scoreSource": "tierLabel",
       "anchor": false,
+      "locationLabel": "",
       "estimated": false,
       "status": null,
-      "description": "吃的是铁板烧，对具体菜品有点没印象了。感觉还没波波鱼好吃。讨论时提过 3.5 和 3.1，最后确认按 3 星整理，波波鱼比它好吃一点，给 3.1 星。",
-      "excerpt": "吃的是铁板烧，对具体菜品有点没印象了。感觉还没波波鱼好吃。讨论时提过 3.5 和 3.1，最后确认按 3 星整理，波波鱼比它好吃一点，给 3.1 星。",
+      "description": "吃的是铁板烧，对具体菜品有点没印象了。感觉还没波波鱼好吃。2026-10-04 评分更新为 3.5 星，与波波鱼同分。",
+      "excerpt": "吃的是铁板烧，对具体菜品有点没印象了。感觉还没波波鱼好吃。2026-10-04 评分更新为 3.5 星，与波波鱼同分。",
       "truncated": false,
       "box": [
         732,
         1830,
+        660,
+        282
+      ]
+    },
+    {
+      "name": "云山翘",
+      "sourceName": "云山翘",
+      "tier": "人上人",
+      "score": "3.4",
+      "scoreSource": "tierLabel",
+      "anchor": false,
+      "locationLabel": "步行街美食",
+      "estimated": false,
+      "status": null,
+      "description": "中饭吃了步行街的云山翘，两个人吃的是双人套餐，大概 45 元。小吃很好吃，分量挺多的（虽然只是碗大）。今天点的那个酸酸的，我不喜欢那个味道，要是有别的味道就好了。不过云南特色的它就是云南的味道，挺有特色的。觉得没有波波鱼好吃，给 3.4 颗星。",
+      "excerpt": "中饭吃了步行街的云山翘，两个人吃的是双人套餐，大概 45 元。小吃很好吃，分量挺多的（虽然只是碗大）。今天点的那个酸酸的，我不喜欢那个…",
+      "truncated": true,
+      "box": [
+        48,
+        2136,
+        660,
+        282
+      ]
+    },
+    {
+      "name": "麦当劳",
+      "sourceName": "麦当劳",
+      "tier": "NPC",
+      "score": "3",
+      "scoreSource": "tierLabel",
+      "anchor": false,
+      "locationLabel": "",
+      "estimated": false,
+      "status": null,
+      "description": "华农附近这家麦当劳作为评分基准，2026-10-04 更新为 3 星。虽然喜欢吃板烧鸡腿堡，但整体太普通了，太普通了。常规满分按 5 分算，特别好吃的可以给到 6 分。",
+      "excerpt": "华农附近这家麦当劳作为评分基准，2026-10-04 更新为 3 星。虽然喜欢吃板烧鸡腿堡，但整体太普通了，太普通了。常规满分按 5 分算，特别好吃的…",
+      "truncated": true,
+      "box": [
+        48,
+        2578,
         660,
         282
       ]
@@ -163,33 +210,15 @@
       "score": "2.5",
       "scoreSource": "tierLabel",
       "anchor": false,
+      "locationLabel": "",
       "estimated": false,
       "status": null,
-      "description": "最终给 2.5 分。武汉特色，可以吃一次。讨论时提过 3 星，也觉得比麦当劳好吃，但最后还是确认 2.5 就 2.5，和麦当劳的分数相同。",
-      "excerpt": "最终给 2.5 分。武汉特色，可以吃一次。讨论时提过 3 星，也觉得比麦当劳好吃，但最后还是确认 2.5 就 2.5，和麦当劳的分数相同。",
+      "description": "最终给 2.5 分。武汉特色，可以吃一次。讨论时提过 3 星，但最后还是确认 2.5 就 2.5。",
+      "excerpt": "最终给 2.5 分。武汉特色，可以吃一次。讨论时提过 3 星，但最后还是确认 2.5 就 2.5。",
       "truncated": false,
       "box": [
-        48,
-        2272,
-        660,
-        282
-      ]
-    },
-    {
-      "name": "麦当劳",
-      "sourceName": "麦当劳",
-      "tier": "NPC",
-      "score": "2.5",
-      "scoreSource": "tierLabel",
-      "anchor": false,
-      "estimated": false,
-      "status": null,
-      "description": "华农附近这家麦当劳作为评分基准，给 2.5 星。虽然喜欢吃板烧鸡腿堡，但整体太普通了，太普通了，也就 2.5 分。常规满分按 5 分算，特别好吃的可以给到 6 分。",
-      "excerpt": "华农附近这家麦当劳作为评分基准，给 2.5 星。虽然喜欢吃板烧鸡腿堡，但整体太普通了，太普通了，也就 2.5 分。常规满分按 5 分算，特别好吃…",
-      "truncated": true,
-      "box": [
         732,
-        2272,
+        2578,
         660,
         282
       ]
@@ -201,6 +230,7 @@
       "score": "2",
       "scoreSource": "tierLabel",
       "anchor": false,
+      "locationLabel": "",
       "estimated": false,
       "status": null,
       "description": "不想再吃了，不想再吃了。也是自助，但是不便宜，菜也很少，肉类还要加钱，汤底也不好吃。两个人记得花了 100 多元，那还不如吃龙哥。",
@@ -208,7 +238,7 @@
       "truncated": false,
       "box": [
         48,
-        2578,
+        2884,
         660,
         282
       ]
@@ -223,10 +253,10 @@
     "assets/img/posters/resources/stickers/第12弹-期待.png": "200fa353636757febd39283acbd9ac7465cac1bcd43f3cefeaab7f233aecf7b8",
     "assets/img/posters/resources/stickers/第35弹-吸溜.png": "87697a50cb7e2058eef97ddecab737d0a446afdade18ae7f25587d28cb29c7cd",
     "assets/img/posters/resources/stickers/第37弹-呃.png": "dca987bf738d5e6a4f5345c57415567cfcc5b89af86a283497fe0e0b223d210f",
-    "assets/lib-custom/huanong-tier-extras.js": "83d66d45a69f8a1d3649ef7742edc400bb76dd572d9b187b4b38e7a751b99b04",
-    "assets/lib-custom/huanong-tier.js": "39fca5ec256ea4f957f74a4d26157860e0754a1c00320fbfdb926436717f8629",
+    "assets/lib-custom/huanong-tier-extras.js": "9008b983f14c9150eae2fcfa66a668bf77e98cf28955479a68139e6cb93091de",
+    "assets/lib-custom/huanong-tier.js": "a0508232f44d5cdf647695d502162380186004003618e4e20b11eeabbd140fee",
     "tools/export_tier_data.cjs": "69b973749aa2d7d7987af137e2098db5c51d372c8712fb508536a91994fe956f",
-    "tools/generate_posters.py": "70242a1a1d569767d92593df89fda58df4fcbbc2477e3534f4fe971dc8877dc2"
+    "tools/generate_posters.py": "e5b951e91cacb3453199568559c70d8d6acaf40893dcd74c702d1e9c70335e7b"
   },
-  "pngSha256": "6863e473b20d99ec38122a67a569854e214285287cd3fa6cf78b3d4f308ce57d"
+  "pngSha256": "6a1ca149a85119bda2d09736190332cc3d9e1486a92fc33bdd15625a23f068c4"
 }

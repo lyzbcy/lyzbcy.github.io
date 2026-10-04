@@ -47,7 +47,7 @@
       tierLabel: 'NPC · 2.5 星',
       rating: 2.5,
       photo: null,
-      description: '最终给 2.5 分。武汉特色，可以吃一次。讨论时提过 3 星，也觉得比麦当劳好吃，但最后还是确认 2.5 就 2.5，和麦当劳的分数相同。',
+      description: '最终给 2.5 分。武汉特色，可以吃一次。讨论时提过 3 星，但最后还是确认 2.5 就 2.5。',
       pros: ['武汉特色，可以吃一次'],
       cons: [],
       note: '价格及具体分店没有在这次讨论中提到。',
@@ -71,7 +71,7 @@
       ],
     },
     {
-      name: '龙哥',
+      name: '龙哥自助小火锅',
       tier: '夯',
       tierLabel: '夯 · 4.5 星',
       rating: 4.5,
@@ -97,9 +97,10 @@
     {
       name: '波波鱼',
       tier: '人上人',
-      tierLabel: '人上人 · 3.1 星',
-      rating: 3.1,
-      description: '步行街吃的。主要胜在很便宜，便宜是它最大的优势。把汤浇上去很好吃，这种吃法只吃过他们一家，觉得很新颖。最初给 3 星，最后觉得比舌尖大师好吃一点，改成 3.1 星。',
+      tierLabel: '人上人 · 3.5 星',
+      rating: 3.5,
+      locationLabel: '步行街美食',
+      description: '步行街吃的。主要胜在很便宜，便宜是它最大的优势。把汤浇上去很好吃，这种吃法只吃过他们一家，觉得很新颖。2026-10-04 评分更新为 3.5 星。',
       pros: ['很便宜', '汤浇上去很好吃', '吃法感觉很新颖，略胜舌尖大师'],
       cons: ['整体口味没有特别惊艳，最大的优势还是便宜'],
       note: '一个人约 30 多元；两个人那次记得点了约 52–60 元，具体金额记不清。鱼的品种没有记清。',
@@ -107,24 +108,36 @@
     {
       name: '舌尖大师',
       tier: '人上人',
-      tierLabel: '人上人 · 3 星',
-      rating: 3,
-      description: '吃的是铁板烧，对具体菜品有点没印象了。感觉还没波波鱼好吃。讨论时提过 3.5 和 3.1，最后确认按 3 星整理，波波鱼比它好吃一点，给 3.1 星。',
+      tierLabel: '人上人 · 3.5 星',
+      rating: 3.5,
+      description: '吃的是铁板烧，对具体菜品有点没印象了。感觉还没波波鱼好吃。2026-10-04 评分更新为 3.5 星，与波波鱼同分。',
       pros: [],
       cons: ['口味印象不深', '感觉不如波波鱼好吃'],
       note: '价格和具体菜品待补。',
     },
     {
+      name: '云山翘',
+      tier: '人上人',
+      tierLabel: '人上人 · 3.4 星',
+      rating: 3.4,
+      locationLabel: '步行街美食',
+      photo: null,
+      description: '中饭吃了步行街的云山翘，两个人吃的是双人套餐，大概 45 元。小吃很好吃，分量挺多的（虽然只是碗大）。今天点的那个酸酸的，我不喜欢那个味道，要是有别的味道就好了。不过云南特色的它就是云南的味道，挺有特色的。觉得没有波波鱼好吃，给 3.4 颗星。',
+      pros: ['小吃很好吃', '分量挺多的（虽然只是碗大）', '云南特色，挺有特色的'],
+      cons: ['不喜欢今天点的酸酸的味道，要是有别的味道就好了', '觉得没有波波鱼好吃'],
+      note: '2026-10-04 午餐，华农步行街，双人套餐约 45 元，折合人均约 22.5 元。具体套餐菜名未提供，价格以实际购买为准。',
+    },
+    {
       name: '麦当劳',
       tier: 'NPC',
-      tierLabel: 'NPC · 2.5 星（评分基准）',
-      rating: 2.5,
-      description: '华农附近这家麦当劳作为评分基准，给 2.5 星。虽然喜欢吃板烧鸡腿堡，但整体太普通了，太普通了，也就 2.5 分。常规满分按 5 分算，特别好吃的可以给到 6 分。',
+      tierLabel: 'NPC · 3 星（评分基准）',
+      rating: 3,
+      description: '华农附近这家麦当劳作为评分基准，2026-10-04 更新为 3 星。虽然喜欢吃板烧鸡腿堡，但整体太普通了，太普通了。常规满分按 5 分算，特别好吃的可以给到 6 分。',
       pros: ['喜欢吃板烧鸡腿堡'],
       cons: ['整体太普通了，缺少惊艳感'],
-      note: '2.5 星是本篇比较口味时的基准。价格没有在这次讨论中提到。',
+      note: '3 星是本篇更新后的口味比较基准。价格没有在这次讨论中提到。',
       dishes: [
-        { name: '板烧鸡腿堡', review: '喜欢吃，但这不改变麦当劳整体太普通、店铺只给 2.5 星的评价。' },
+        { name: '板烧鸡腿堡', review: '喜欢吃，但麦当劳整体太普通；店铺评分已更新为 3 星。' },
       ],
     },
     {
@@ -235,6 +248,7 @@
         </div>
       </div>
       ${generateStorePhoto(data)}
+      ${data.locationLabel ? `<p class="store-location">${escapeHtml(data.locationLabel)}</p>` : ''}
       <p style="font-size: 1.05em; line-height: 1.9; margin-bottom: 20px;">${data.description}</p>
       ${generateDishCards(data.dishes)}
     `;
@@ -339,6 +353,14 @@
       label.className = 'spot-card__name';
       label.textContent = stall.name;
       card.appendChild(label);
+
+      if (stall.locationLabel) {
+        card.classList.add('spot-card--with-location');
+        const location = document.createElement('span');
+        location.className = 'spot-card__location';
+        location.textContent = stall.locationLabel;
+        card.appendChild(location);
+      }
 
       if (stall.anchor) {
         card.classList.add('spot-card--anchor');

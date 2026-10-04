@@ -43,7 +43,7 @@ CONFIG = {
                    unit='款', keyword='方便面', sticker='星第3弹-吃饭.png'),
     'drink': dict(stem='drink', title='所有的饮料和奶茶', subtitle='喝过才来排 · 能量饮料与奶茶都在这里',
                   unit='款', keyword='饮料奶茶', sticker='第12弹-心动.png'),
-    'huanong': dict(stem='huanong', title='华农附近美食', subtitle='2026-10-04 · 口味优先 · 麦当劳 2.5 星作基准',
+    'huanong': dict(stem='huanong', title='华农附近美食', subtitle='2026-10-04 · 口味优先 · 麦当劳 3 星作基准',
                     unit='家', keyword='华农美食', sticker='第35弹-吸溜.png',
                     cta='关注公众号「捞鱼的博客」，回复「华农美食」获取完整榜单',
                     rule='常规满分 5 星，特别好吃可给 6 星；价格为口述回忆价，以实际购买为准。'),
@@ -219,13 +219,23 @@ def image_path(item):
     return target
 
 
+def card_badges(item):
+    badges = [('守门员', '#9C422B')] if item.get('anchor') else []
+    if item.get('locationLabel'):
+        badges.append((item['locationLabel'], '#57745A'))
+    return [(label, color, max(138, math.ceil(text_width(label, font(25, True))) + 24))
+            for label, color in badges]
+
+
 def card_layout(item, kind):
     title, meta = split_name(item['name'])
-    title_width = CARD_WIDTH - 48 - (160 if item.get('anchor') else 120 if kind == 'noodle' else 0)
+    badges = card_badges(item)
+    title_width = CARD_WIDTH - 48 - (max(b[2] for b in badges) + 22 if badges else 120 if kind == 'noodle' else 0)
     names, _ = wrap_text(title, font(32, True), title_width)
     metas, _ = wrap_text(meta, font(23), title_width)
     intro, truncated = wrap_text(item['description'], font(27), CARD_WIDTH - 48, 3)
     title_height = len(names) * 43 + (len(metas) * 31 + 7 if metas else 0)
+    title_height = max(title_height, len(badges) * 52 - 9)
     score_y = 24 + max(100 if kind == 'noodle' else 0, title_height) + 16
     description_y = score_y + 58
     height = description_y + len(intro) * 39 + 24
@@ -345,11 +355,13 @@ def build_poster(kind, items):
             fill = '#ECEBE6' if item['status'] == 'closed' else '#FFFFFF'
             d.rounded_rectangle((x, cy, x + CARD_WIDTH, cy + h), radius=22, fill=fill, outline='#E1DCD2', width=2)
             p.lines((x + 24, cy + 24), layout['names'], 32, 43, layout['title_width'], bold=True)
+            for badge_index, (badge_label, badge_color, badge_width) in enumerate(card_badges(item)):
+                badge_left = x + CARD_WIDTH - 20 - badge_width
+                badge_top = cy + 20 + badge_index * 52
+                d.rounded_rectangle((badge_left, badge_top, x + CARD_WIDTH - 20, badge_top + 42),
+                                    radius=10, fill=badge_color)
+                p.text((badge_left + 12, badge_top + 6), badge_label, 25, '#FFFFFF', True, badge_width - 24, 32)
             if item.get('anchor'):
-                badge_left = x + CARD_WIDTH - 158
-                d.rounded_rectangle((badge_left, cy + 20, x + CARD_WIDTH - 20, cy + 62),
-                                    radius=10, fill='#9C422B')
-                p.text((badge_left + 12, cy + 26), '守门员', 25, '#FFFFFF', True, 114, 32)
                 anchor_badges += 1
             my = cy + 24 + len(layout['names']) * 43 + 7
             p.lines((x + 24, my), layout['metas'], 23, 31, layout['title_width'], MUTED)
@@ -376,6 +388,7 @@ def build_poster(kind, items):
             audit_items.append(dict(name=item['name'], sourceName=item['sourceName'], tier=tier,
                                     score=item['score'], scoreSource=item['scoreSource'],
                                     anchor=bool(item.get('anchor')),
+                                    locationLabel=item.get('locationLabel', ''),
                                     estimated=item['estimated'], status=item['status'],
                                     description=item['description'], excerpt=''.join(layout['intro']),
                                     truncated=layout['truncated'], box=[x, cy, CARD_WIDTH, h]))
@@ -432,6 +445,8 @@ def check_outputs(kind, items, out_dir):
         raise ValueError(f'{kind}: 守门员角标数量与源数据不符')
     if any(bool(row.get('anchor')) != bool(item.get('anchor')) for row, item in zip(manifest['items'], items)):
         raise ValueError(f'{kind}: 守门员角标与榜单条目不匹配')
+    if any(row.get('locationLabel', '') != item.get('locationLabel', '') for row, item in zip(manifest['items'], items)):
+        raise ValueError(f'{kind}: 地点角标与榜单条目不匹配')
     watermark = manifest.get('watermark', {})
     if (watermark.get('text') != WATERMARK_TEXT or watermark.get('opacity') != WATERMARK_OPACITY
             or watermark.get('angle') != WATERMARK_ANGLE or watermark.get('count', 0) <= 0):

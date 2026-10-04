@@ -129,6 +129,16 @@ class Layout(unittest.TestCase):
         with self.assertRaises(ValueError):
             g.display_text('不支持的字符\U0010ffff')
 
+    def test_location_badge_reserves_space_for_complete_name(self):
+        item = dict(name='步行街上完整且很长的店铺名称', description='原文评价。',
+                    locationLabel='步行街美食', anchor=True)
+        layout = g.card_layout(item, 'huanong')
+        self.assertEqual(''.join(layout['names']), item['name'])
+        for line in layout['names']:
+            self.assertLessEqual(g.text_width(line, g.font(32, True)), layout['title_width'])
+        self.assertGreater(layout['score_y'], 20 + 52 + 42)
+        self.assertIn('步行街美食', [badge[0] for badge in g.card_badges(item)])
+
     def test_painter_rejects_text_outside_box(self):
         with self.assertRaises(ValueError):
             g.Painter(100).text((0, 0), '太长了', 32, width=10, height=40)
