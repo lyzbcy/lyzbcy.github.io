@@ -474,7 +474,7 @@
     "assets/lib-custom/takeout-tier-extras.js": "2d4333c3c7c5745dd21b02c015356aefe7ea4d9f9fdda00ab39d9da3c037b182",
     "assets/lib-custom/takeout-tier.js": "6f8e19d432310fdf745e366e5b72c4965626bc6e10c69120eebb63c40007bc54",
     "tools/export_tier_data.cjs": "69b973749aa2d7d7987af137e2098db5c51d372c8712fb508536a91994fe956f",
-    "tools/generate_posters.py": "0c1cf0a3da64322769309a2b33ddcb0b8665dab7335f126e57f349bf2f5be67c"
+    "tools/generate_posters.py": "70242a1a1d569767d92593df89fda58df4fcbbc2477e3534f4fe971dc8877dc2"
   },
   "pngSha256": "806e912087ee1c4bc0a99b84dbdb783d81c2be9b5b765ba58c2baa4f60afeece"
 }
