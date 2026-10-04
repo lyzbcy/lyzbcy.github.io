@@ -1318,7 +1318,7 @@
     "assets/lib-custom/canteen-tier-extras.js": "827f00ce3e41cbe859cd9f516c171e7fc5fdfabcd889f1aeab349cc1d4cac275",
     "assets/lib-custom/canteen-tier.js": "bfd701226e634a55cbb15ec297b2c5accfc34784a7ea5a333a7b3dec9d089feb",
     "tools/export_tier_data.cjs": "69b973749aa2d7d7987af137e2098db5c51d372c8712fb508536a91994fe956f",
-    "tools/generate_posters.py": "e5b951e91cacb3453199568559c70d8d6acaf40893dcd74c702d1e9c70335e7b"
+    "tools/generate_posters.py": "739d92a801f984d1bdcbd66bfa5fb4376ea62d018f7987c278c69ec06dfffa5c"
   },
   "pngSha256": "d1f7635b8c5a32be4fc5b0f3f37944b99b3b40cdb2cdc73531d0d99ef9f1d6b0"
 }
