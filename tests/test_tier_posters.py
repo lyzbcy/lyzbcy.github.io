@@ -25,11 +25,11 @@ class Scores(unittest.TestCase):
         rows = g.load_items('drink')
         anchors = {row['name']: row for row in rows if row.get('anchor')}
         self.assertEqual({name: (item['tier'], item['score']) for name, item in anchors.items()}, {
-            '减糖的茉莉奶绿': ('顶级', '5'),
+            '统一阿萨姆低糖茉莉奶绿': ('顶级', '5'),
             '统一阿萨姆标准原味奶茶': ('人上人', '4'),
             '红牛': ('NPC', '3'),
         })
-        self.assertEqual(len(rows), 8)
+        self.assertEqual(len(rows), 11)
         by_name = {row['name']: row for row in rows}
         self.assertEqual((by_name['魔爪 白魔爪（芒果菠萝味）']['tier'],
                           by_name['魔爪 白魔爪（芒果菠萝味）']['score']), ('人上人', '4.7'))

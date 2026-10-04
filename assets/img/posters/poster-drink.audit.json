@@ -3,15 +3,15 @@
   "kind": "drink",
   "size": [
     1440,
-    2674
+    3247
   ],
-  "count": 8,
+  "count": 11,
   "tierCounts": {
-    "顶级": 2,
-    "人上人": 4,
+    "顶级": 4,
+    "人上人": 5,
     "NPC": 2
   },
-  "checkedTextRegions": 61,
+  "checkedTextRegions": 75,
   "overflowCount": 0,
   "stickerCount": 4,
   "ctaCount": 2,
@@ -20,7 +20,7 @@
     "text": "捞鱼的博客",
     "opacity": 24,
     "angle": 22,
-    "count": 38
+    "count": 45
   },
   "items": [
     {
@@ -43,20 +43,77 @@
       ]
     },
     {
-      "name": "减糖的茉莉奶绿",
-      "sourceName": "减糖的茉莉奶绿",
+      "name": "统一原味冰红茶",
+      "sourceName": "统一原味冰红茶",
+      "tier": "顶级",
+      "score": "5",
+      "scoreSource": "tierLabel",
+      "anchor": false,
+      "estimated": false,
+      "status": null,
+      "description": "5 颗星，参考价 3 元。要冰的。",
+      "excerpt": "5 颗星，参考价 3 元。要冰的。",
+      "truncated": false,
+      "box": [
+        732,
+        776,
+        660,
+        282
+      ]
+    },
+    {
+      "name": "茉莉柚子",
+      "sourceName": "茉莉柚子",
+      "tier": "顶级",
+      "score": "5",
+      "scoreSource": "tierLabel",
+      "anchor": false,
+      "estimated": false,
+      "status": null,
+      "description": "5 颗星。参考价跟冰红茶差不多，反正都比阿萨姆便宜。忘记是什么牌子了。如果选择一箱茉莉柚子还是一箱奶皮，我会选茉莉柚子。",
+      "excerpt": "5 颗星。参考价跟冰红茶差不多，反正都比阿萨姆便宜。忘记是什么牌子了。如果选择一箱茉莉柚子还是一箱奶皮，我会选茉莉柚子。",
+      "truncated": false,
+      "box": [
+        48,
+        1082,
+        660,
+        282
+      ]
+    },
+    {
+      "name": "统一阿萨姆低糖茉莉奶绿",
+      "sourceName": "统一阿萨姆低糖茉莉奶绿",
       "tier": "顶级",
       "score": "5",
       "scoreSource": "tierLabel",
       "anchor": true,
       "estimated": false,
       "status": null,
-      "description": "顶级守门员。味道不错；不像原味阿萨姆喝久了容易晕、容易腻，而且糖量减半，稍微健康一点点。",
-      "excerpt": "顶级守门员。味道不错；不像原味阿萨姆喝久了容易晕、容易腻，而且糖量减半，稍微健康一点点。",
+      "description": "参考价 4.5–5 元。顶级守门员，5 颗星。味道不错；不像原味阿萨姆喝久了容易晕、容易腻，而且糖量减半，稍微健康一点点。",
+      "excerpt": "参考价 4.5–5 元。顶级守门员，5 颗星。味道不错；不像原味阿萨姆喝久了容易晕、容易腻，而且糖量减半，稍微健康一点点。",
       "truncated": false,
       "box": [
         732,
-        776,
+        1082,
+        660,
+        282
+      ]
+    },
+    {
+      "name": "奶皮",
+      "sourceName": "奶皮",
+      "tier": "人上人",
+      "score": "4.9",
+      "scoreSource": "tierLabel",
+      "anchor": false,
+      "estimated": false,
+      "status": null,
+      "description": "4.9 颗星。如果选择一箱奶皮还是一箱阿萨姆，我主要不喜欢喝奶皮；如果选择一箱茉莉柚子还是一箱奶皮，我会选茉莉柚子，所以奶皮的评分就给低一点。奶皮有很多牌子，长得都差不多，我觉得“天润”这个牌子更好喝一点，现在我们喝的“西域春”感觉也一样吧。",
+      "excerpt": "4.9 颗星。如果选择一箱奶皮还是一箱阿萨姆，我主要不喜欢喝奶皮；如果选择一箱茉莉柚子还是一箱奶皮，我会选茉莉柚子，所以奶皮的评分就给低…",
+      "truncated": true,
+      "box": [
+        48,
+        1524,
         660,
         282
       ]
@@ -74,8 +131,8 @@
       "excerpt": "我觉得比红魔爪还好喝一点，基本上没有怪味，气泡刺激舌头，很带劲。可以给到 4.7 星。",
       "truncated": false,
       "box": [
-        48,
-        1218,
+        732,
+        1524,
         660,
         282
       ]
@@ -93,8 +150,8 @@
       "excerpt": "好喝好喝，没有怪味。酸酸甜甜，气泡还会刺激舌头，很带劲。如果红牛算 3 星，红魔爪可以给到 4.5 星。",
       "truncated": false,
       "box": [
-        732,
-        1218,
+        48,
+        1830,
         660,
         282
       ]
@@ -112,8 +169,8 @@
       "excerpt": "其实没有什么运动补剂的效果。硬要说的话，可能只是补充快碳，而且一杯的碳水也不高。但相比于冰红茶那种骗人的“减糖冰红茶”（一杯糖分有…",
       "truncated": true,
       "box": [
-        48,
-        1524,
+        732,
+        1830,
         660,
         282
       ]
@@ -131,10 +188,10 @@
       "excerpt": "人上人守门员，4 星。原味阿萨姆喝久了容易晕、容易腻。",
       "truncated": false,
       "box": [
-        732,
-        1524,
+        48,
+        2136,
         660,
-        282
+        243
       ]
     },
     {
@@ -151,7 +208,7 @@
       "truncated": false,
       "box": [
         48,
-        1966,
+        2539,
         660,
         282
       ]
@@ -170,7 +227,7 @@
       "truncated": false,
       "box": [
         732,
-        1966,
+        2539,
         660,
         282
       ]
@@ -184,9 +241,9 @@
     "assets/img/posters/resources/stickers/第12弹-心动.png": "471b9ca06998889b80a3b521e30eedc851965c59de8ff80f86774caf6f14b6f6",
     "assets/img/posters/resources/stickers/第12弹-期待.png": "200fa353636757febd39283acbd9ac7465cac1bcd43f3cefeaab7f233aecf7b8",
     "assets/img/posters/resources/stickers/第37弹-呃.png": "dca987bf738d5e6a4f5345c57415567cfcc5b89af86a283497fe0e0b223d210f",
-    "assets/lib-custom/drink-tier.js": "3f2e8f01d857e2f47ee0ceb8dc0e58b21b42f14aaaf358ab4b3574b92255c05a",
+    "assets/lib-custom/drink-tier.js": "82ad4fb3df2fa87d2a81708b50b7174ec226507e64a9779edbaf5e2ffce92957",
     "tools/export_tier_data.cjs": "69b973749aa2d7d7987af137e2098db5c51d372c8712fb508536a91994fe956f",
     "tools/generate_posters.py": "70242a1a1d569767d92593df89fda58df4fcbbc2477e3534f4fe971dc8877dc2"
   },
-  "pngSha256": "52b40e8bb88273d4f4d5fcd12a96e5cb0211168e83f8932ea64f2929e42744ed"
+  "pngSha256": "460adca648733a5796ca7fe335cf92d1548d725d3567d5cfaa3318e8e2d83386"
 }
