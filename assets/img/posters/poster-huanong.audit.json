@@ -223,7 +223,7 @@
     "assets/img/posters/resources/stickers/第12弹-期待.png": "200fa353636757febd39283acbd9ac7465cac1bcd43f3cefeaab7f233aecf7b8",
     "assets/img/posters/resources/stickers/第35弹-吸溜.png": "87697a50cb7e2058eef97ddecab737d0a446afdade18ae7f25587d28cb29c7cd",
     "assets/img/posters/resources/stickers/第37弹-呃.png": "dca987bf738d5e6a4f5345c57415567cfcc5b89af86a283497fe0e0b223d210f",
-    "assets/lib-custom/huanong-tier-extras.js": "d7a66b78433755b69c5c652b74acf74b0f349343398e4bd9d310d830236f9d61",
+    "assets/lib-custom/huanong-tier-extras.js": "83d66d45a69f8a1d3649ef7742edc400bb76dd572d9b187b4b38e7a751b99b04",
     "assets/lib-custom/huanong-tier.js": "39fca5ec256ea4f957f74a4d26157860e0754a1c00320fbfdb926436717f8629",
     "tools/export_tier_data.cjs": "69b973749aa2d7d7987af137e2098db5c51d372c8712fb508536a91994fe956f",
     "tools/generate_posters.py": "70242a1a1d569767d92593df89fda58df4fcbbc2477e3534f4fe971dc8877dc2"
