@@ -5,13 +5,13 @@
     1440,
     3592
   ],
-  "count": 11,
+  "count": 12,
   "tierCounts": {
     "夯": 5,
-    "人上人": 3,
+    "人上人": 4,
     "NPC": 3
   },
-  "checkedTextRegions": 79,
+  "checkedTextRegions": 84,
   "overflowCount": 0,
   "stickerCount": 4,
   "ctaCount": 2,
@@ -164,6 +164,26 @@
       ]
     },
     {
+      "name": "李炮称盘麻辣烫",
+      "sourceName": "李炮称盘麻辣烫",
+      "tier": "人上人",
+      "score": "3.5",
+      "scoreSource": "tierLabel",
+      "anchor": false,
+      "locationLabel": "",
+      "estimated": false,
+      "status": null,
+      "description": "距离我们吃已经很久了，记得味道也挺不错的。能开这么久，觉得已经能说明一定实力了。现在看团购，顶饱双人餐才 79 元，这也太便宜了！给 3.5 星，跟啵啵鱼和舌尖大师差不多，三家就应该是一类的。",
+      "excerpt": "距离我们吃已经很久了，记得味道也挺不错的。能开这么久，觉得已经能说明一定实力了。现在看团购，顶饱双人餐才 79 元，这也太便宜了！给 3.5 …",
+      "truncated": true,
+      "box": [
+        48,
+        2136,
+        660,
+        282
+      ]
+    },
+    {
       "name": "云山俏",
       "sourceName": "云山俏",
       "tier": "人上人",
@@ -177,7 +197,7 @@
       "excerpt": "中饭吃了步行街的云山俏，两个人吃的是双人套餐，大概 45 元。小吃很好吃，分量挺多的（虽然只是碗大）。今天点的那个酸酸的，我不喜欢那个…",
       "truncated": true,
       "box": [
-        48,
+        732,
         2136,
         660,
         282
@@ -253,10 +273,10 @@
     "assets/img/posters/resources/stickers/第12弹-期待.png": "200fa353636757febd39283acbd9ac7465cac1bcd43f3cefeaab7f233aecf7b8",
     "assets/img/posters/resources/stickers/第35弹-吸溜.png": "87697a50cb7e2058eef97ddecab737d0a446afdade18ae7f25587d28cb29c7cd",
     "assets/img/posters/resources/stickers/第37弹-呃.png": "dca987bf738d5e6a4f5345c57415567cfcc5b89af86a283497fe0e0b223d210f",
-    "assets/lib-custom/huanong-tier-extras.js": "1360212eef304a535bf3c5e72c03517b4f3295577fa360ef324fa1f909613d1a",
-    "assets/lib-custom/huanong-tier.js": "35b01bbe541a33e3865ba32f9faed1ba1f5dd4e0e91f885086dbf035eab75052",
+    "assets/lib-custom/huanong-tier-extras.js": "fccd4570cce57eeff315585f7f5e2f20da796849877ae3843ef8851f23c5ca35",
+    "assets/lib-custom/huanong-tier.js": "c58dab78957948d8671cbb9292984e86e35e2d0a2dc0c9008568db5f3c1cda2d",
     "tools/export_tier_data.cjs": "69b973749aa2d7d7987af137e2098db5c51d372c8712fb508536a91994fe956f",
-    "tools/generate_posters.py": "e5b951e91cacb3453199568559c70d8d6acaf40893dcd74c702d1e9c70335e7b"
+    "tools/generate_posters.py": "739d92a801f984d1bdcbd66bfa5fb4376ea62d018f7987c278c69ec06dfffa5c"
   },
-  "pngSha256": "b9741a82972f4ff7731a0a4644c59d1b8261ca67af8d6b6cc4264597aff47777"
+  "pngSha256": "46982900eb39e032eba13ebd996689d15d37d644b9b602945bdbc571ec72da60"
 }
