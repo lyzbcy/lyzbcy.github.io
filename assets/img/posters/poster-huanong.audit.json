@@ -164,8 +164,8 @@
       ]
     },
     {
-      "name": "云山翘",
-      "sourceName": "云山翘",
+      "name": "云山俏",
+      "sourceName": "云山俏",
       "tier": "人上人",
       "score": "3.4",
       "scoreSource": "tierLabel",
@@ -173,8 +173,8 @@
       "locationLabel": "步行街美食",
       "estimated": false,
       "status": null,
-      "description": "中饭吃了步行街的云山翘，两个人吃的是双人套餐，大概 45 元。小吃很好吃，分量挺多的（虽然只是碗大）。今天点的那个酸酸的，我不喜欢那个味道，要是有别的味道就好了。不过云南特色的它就是云南的味道，挺有特色的。觉得没有啵啵鱼好吃，给 3.4 颗星。",
-      "excerpt": "中饭吃了步行街的云山翘，两个人吃的是双人套餐，大概 45 元。小吃很好吃，分量挺多的（虽然只是碗大）。今天点的那个酸酸的，我不喜欢那个…",
+      "description": "中饭吃了步行街的云山俏，两个人吃的是双人套餐，大概 45 元。小吃很好吃，分量挺多的（虽然只是碗大）。今天点的那个酸酸的，我不喜欢那个味道，要是有别的味道就好了。不过云南特色的它就是云南的味道，挺有特色的。觉得没有啵啵鱼好吃，给 3.4 颗星。",
+      "excerpt": "中饭吃了步行街的云山俏，两个人吃的是双人套餐，大概 45 元。小吃很好吃，分量挺多的（虽然只是碗大）。今天点的那个酸酸的，我不喜欢那个…",
       "truncated": true,
       "box": [
         48,
@@ -253,10 +253,10 @@
     "assets/img/posters/resources/stickers/第12弹-期待.png": "200fa353636757febd39283acbd9ac7465cac1bcd43f3cefeaab7f233aecf7b8",
     "assets/img/posters/resources/stickers/第35弹-吸溜.png": "87697a50cb7e2058eef97ddecab737d0a446afdade18ae7f25587d28cb29c7cd",
     "assets/img/posters/resources/stickers/第37弹-呃.png": "dca987bf738d5e6a4f5345c57415567cfcc5b89af86a283497fe0e0b223d210f",
-    "assets/lib-custom/huanong-tier-extras.js": "9159aac4899376d0bc350fe59966b7447d505419076a0400d2db544d34831731",
-    "assets/lib-custom/huanong-tier.js": "68389b6572cf85b7ead0bf568b970a12ac7b98b07c27b01272bed567dd2f5b42",
+    "assets/lib-custom/huanong-tier-extras.js": "1360212eef304a535bf3c5e72c03517b4f3295577fa360ef324fa1f909613d1a",
+    "assets/lib-custom/huanong-tier.js": "35b01bbe541a33e3865ba32f9faed1ba1f5dd4e0e91f885086dbf035eab75052",
     "tools/export_tier_data.cjs": "69b973749aa2d7d7987af137e2098db5c51d372c8712fb508536a91994fe956f",
     "tools/generate_posters.py": "e5b951e91cacb3453199568559c70d8d6acaf40893dcd74c702d1e9c70335e7b"
   },
-  "pngSha256": "7a89df7898dad426e291cfa6729aefcb15edb1a00b52e18a0f68f7bc79b31979"
+  "pngSha256": "b9741a82972f4ff7731a0a4644c59d1b8261ca67af8d6b6cc4264597aff47777"
 }

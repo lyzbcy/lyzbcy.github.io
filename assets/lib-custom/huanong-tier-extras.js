@@ -52,9 +52,9 @@
     var wrap = document.createElement('div');
     wrap.className = 'cte-poster';
     var a = document.createElement('a');
-    a.href = '/assets/img/posters/poster-huanong.png?v=20261004c'; a.target = '_blank'; a.rel = 'noopener';
+    a.href = '/assets/img/posters/poster-huanong.png?v=20261004d'; a.target = '_blank'; a.rel = 'noopener';
     var img = document.createElement('img');
-    img.src = '/assets/img/posters/poster-huanong.png?v=20261004c';
+    img.src = '/assets/img/posters/poster-huanong.png?v=20261004d';
     img.alt = '华农附近美食从夯到拉一图流'; img.loading = 'lazy';
     a.appendChild(img); wrap.appendChild(a);
     var p = document.createElement('p');
