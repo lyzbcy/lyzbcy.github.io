@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T01:00:03.283131+08:00",
+  "generated_at": "2026-10-05T22:05:03.877762+08:00",
   "goals": {
     "calories": 1652,
     "water": 2000,
@@ -20,20 +20,20 @@
     "deficit": 400
   },
   "overview": {
-    "recorded_days": 58,
+    "recorded_days": 59,
     "date_range": {
       "first": "2026-04-29",
-      "last": "2026-09-30"
+      "last": "2026-10-05"
     },
-    "avg_calories": 1967,
-    "avg_protein": 102,
+    "avg_calories": 1946,
+    "avg_protein": 101,
     "avg_water": 1753,
-    "avg_carbs": 230,
-    "avg_fat": 70,
+    "avg_carbs": 227,
+    "avg_fat": 69,
     "total_training_calories": 11958,
     "training_days": 47,
     "compliance": {
-      "calorie": 91,
+      "calorie": 90,
       "protein": 24,
       "water": 74
     }
@@ -364,7 +364,7 @@
     "carbs_pct": 41,
     "protein_pct": 22,
     "fat_pct": 37,
-    "total_cal": 1912
+    "total_cal": 1516
   },
   "trend": [
     {
@@ -455,6 +455,16 @@
       "fat": 88.1,
       "water": 1273,
       "net_calories": 1924,
+      "has_fitness": false
+    },
+    {
+      "date": "2026-10-05",
+      "calories": 714,
+      "protein": 35.3,
+      "carbs": 69.1,
+      "fat": 34.1,
+      "water": 0,
+      "net_calories": 714,
       "has_fitness": false
     }
   ],
@@ -2168,17 +2178,61 @@
       "protein_pct": 77.5,
       "water_pct": 63.6,
       "has_data": true
+    },
+    {
+      "date": "2026-10-05",
+      "total_calories": 714,
+      "total_carbs": 69.1,
+      "total_protein": 35.3,
+      "total_fat": 34.1,
+      "total_water": 0,
+      "net_calories": 714,
+      "meal_count": 1,
+      "water_entries": 0,
+      "supplements": {
+        "count": 0,
+        "has_creatine": false,
+        "has_protein": false
+      },
+      "calorie_pct": 43.2,
+      "protein_pct": 23.5,
+      "water_pct": 0,
+      "has_data": true
     }
   ],
   "status": {
-    "has_today": false,
+    "has_today": true,
     "has_yesterday": false,
     "today": "2026-10-05",
-    "is_active": false,
+    "is_active": true,
     "is_training_day": false
   },
   "health_score": {
-    "today": null,
+    "today": {
+      "date": "2026-10-05",
+      "nutrition_score": 7,
+      "nutrition_detail": "热量 714/1652 kcal (3/20); 蛋白 35.3/150g (4/15); 饮水 0/2000ml (0/15)",
+      "exercise_score": 0,
+      "exercise_detail": "今日无训练 (0/20); 组数 0 (0/10)",
+      "bonus_score": 12,
+      "bonus_detail": "数据完整性 (5/10); 体脂趋势 -1.2% (7/10)",
+      "total_score": 19,
+      "grade": "💀 D",
+      "calories_in": 714,
+      "calories_target": 1652,
+      "protein_in": 35.3,
+      "protein_target": 150,
+      "water_in": 0,
+      "water_target": 2000,
+      "training_sets": 0,
+      "training_volume": 0,
+      "training_cal": 0,
+      "training_duration_min": 0,
+      "bodyfat_pct": 20.7,
+      "is_training_day": false,
+      "bmr_floor": 1710,
+      "below_bmr": true
+    },
     "history": [
       {
         "date": "2026-09-22",
@@ -2242,11 +2296,18 @@
         "grade": "⚠️ C",
         "nutrition": "热量 1924/1652 kcal (13/20); 蛋白 116.2/150g (12/15); 饮水 1273/2000ml (10/15)",
         "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
+      },
+      {
+        "date": "2026-10-05",
+        "score": 19,
+        "grade": "💀 D",
+        "nutrition": "热量 714/1652 kcal (3/20); 蛋白 35.3/150g (4/15); 饮水 0/2000ml (0/15)",
+        "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
       }
     ],
     "range_start": "2026-09-22",
     "range_end": "2026-10-05",
-    "exported_at": "2026-10-05T01:00:03.274320"
+    "exported_at": "2026-10-05T22:05:03.865590"
   },
   "food_library": {
     "items": [
@@ -2260,8 +2321,8 @@
         "fat": 0.3,
         "category": "主食",
         "ref_price": 0.0,
-        "total_servings": 78.8,
-        "total_grams": 7880.0,
+        "total_servings": 80.8,
+        "total_grams": 8080.0,
         "cumulative_spending": 0.0,
         "source": "预置"
       },
@@ -3571,6 +3632,21 @@
         "source": "肯德基官方单品营养累加"
       },
       {
+        "name": "吸汁炸蛋",
+        "brand": "",
+        "per_unit": "1个",
+        "calories": 232.0,
+        "carbs": 7.3,
+        "protein": 10.1,
+        "fat": 18.5,
+        "category": "快餐",
+        "ref_price": 0.0,
+        "total_servings": 2.0,
+        "total_grams": 0,
+        "cumulative_spending": 0.0,
+        "source": "用户估算2026-09-23"
+      },
+      {
         "name": "土豆烧鸡块",
         "brand": "食堂",
         "per_unit": "1份",
@@ -3734,21 +3810,6 @@
         "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户"
-      },
-      {
-        "name": "吸汁炸蛋",
-        "brand": "",
-        "per_unit": "1个",
-        "calories": 232.0,
-        "carbs": 7.3,
-        "protein": 10.1,
-        "fat": 18.5,
-        "category": "快餐",
-        "ref_price": 0.0,
-        "total_servings": 1.0,
-        "total_grams": 0,
-        "cumulative_spending": 0.0,
-        "source": "用户估算2026-09-23"
       },
       {
         "name": "吸汁爆蛋",
@@ -4981,6 +5042,21 @@
         "source": "用户估算2026-09-23"
       },
       {
+        "name": "黄焖鸡块",
+        "brand": "",
+        "per_unit": "150g（含汤汁）",
+        "calories": 250.0,
+        "carbs": 10.0,
+        "protein": 20.0,
+        "fat": 15.0,
+        "category": "肉类",
+        "ref_price": 0.0,
+        "total_servings": 2.0,
+        "total_grams": 150.0,
+        "cumulative_spending": 0.0,
+        "source": "用户估算"
+      },
+      {
         "name": "肉丸（猪肉）",
         "brand": "",
         "per_unit": "100g",
@@ -5264,21 +5340,6 @@
         "total_grams": 0,
         "cumulative_spending": 0.0,
         "source": "用户"
-      },
-      {
-        "name": "黄焖鸡块",
-        "brand": "",
-        "per_unit": "150g（含汤汁）",
-        "calories": 250.0,
-        "carbs": 10.0,
-        "protein": 20.0,
-        "fat": 15.0,
-        "category": "肉类",
-        "ref_price": 0.0,
-        "total_servings": 1.0,
-        "total_grams": 0,
-        "cumulative_spending": 0.0,
-        "source": "用户估算"
       },
       {
         "name": "黄豆芽炖鸡块",
@@ -7817,12 +7878,12 @@
       }
     ],
     "total_foods": 371,
-    "total_servings": 708.9,
+    "total_servings": 712.9,
     "total_spending": 370.61,
     "by_category": {
       "主食": {
         "count": 36,
-        "servings": 129.2
+        "servings": 131.2
       },
       "乳制品": {
         "count": 10,
@@ -7838,7 +7899,7 @@
       },
       "快餐": {
         "count": 77,
-        "servings": 118.4
+        "servings": 119.4
       },
       "水果": {
         "count": 12,
@@ -7854,7 +7915,7 @@
       },
       "肉类": {
         "count": 52,
-        "servings": 81.8
+        "servings": 82.8
       },
       "蔬菜": {
         "count": 76,
