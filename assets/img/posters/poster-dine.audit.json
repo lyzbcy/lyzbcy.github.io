@@ -13,7 +13,7 @@
     "NPC": 27,
     "拉完了": 9
   },
-  "checkedTextRegions": 384,
+  "checkedTextRegions": 386,
   "overflowCount": 0,
   "stickerCount": 6,
   "ctaCount": 2,
@@ -76,7 +76,7 @@
       "estimated": false,
       "status": null,
       "description": "在滨湖万象汇（跟流浪泡泡同一个商场），得打车去（10 块出头）。一人一锅的自助小火锅，人均 57 元左右，无锡自助餐打卡人气榜第 1。品质其实跟冯宝宝肥牛小火锅差不多，但这里可以随便拿、随便吃——性价比直接把冯宝宝暴打。味道可以给 4.3 星。",
-      "excerpt": "在滨湖万象汇（跟流浪泡泡同一个商场），得打车去（10 块出头）。一人一锅的自助小火锅，人均 57 元左右，无锡自助餐打卡人气榜第 1。品质其实…",
+      "excerpt": "在滨湖万象汇（跟流浪泡泡同一个商场），得打车去（10 块出头）。一人一锅的自助小火锅，人均 57 元左右，无锡自助餐打卡人气榜第 1。品质其…",
       "truncated": true,
       "box": [
         48,
@@ -376,8 +376,8 @@
       "estimated": false,
       "status": null,
       "description": "大悦城里的云南菜馆，环境精致，属于“漂亮饭”，很适合约会或请客；菜品有创意、味道不错，但价格较贵，人均约 80～90 元，更偏向氛围消费。",
-      "excerpt": "大悦城里的云南菜馆，环境精致，属于“漂亮饭”，很适合约会或请客；菜品有创意、味道不错，但价格较贵，人均约 80～90 元，更偏向氛围消费。",
-      "truncated": false,
+      "excerpt": "大悦城里的云南菜馆，环境精致，属于“漂亮饭”，很适合约会或请客；菜品有创意、味道不错，但价格较贵，人均约 80～90 元，更偏向氛围消…",
+      "truncated": true,
       "box": [
         732,
         3800,
@@ -490,14 +490,14 @@
       "sourceName": "【星光广场】朱家牛肉汤",
       "tier": "人上人",
       "score": "3",
-      "scoreSource": "rating",
+      "scoreSource": "tierLabel",
       "anchor": false,
       "locationLabel": "",
       "estimated": false,
       "status": null,
-      "description": "服务好，味道正宗，是“牛肉汤该有的味道”。",
-      "excerpt": "服务好，味道正宗，是“牛肉汤该有的味道”。",
-      "truncated": false,
+      "description": "家里自己开的店，没有总部。一开始搞活动吃一碗送一碗，服务特别好；肉品质不错，是真肉（血管都看得清，不是合成肉），但卖点也就肉品质了。这次吃的大份牛肉粉丝汤味道一般般，料比较少；饼也一般般，不如穆罕默德的饼。20 元吃这么一点不太划算，下次可能很少光顾了。",
+      "excerpt": "家里自己开的店，没有总部。一开始搞活动吃一碗送一碗，服务特别好；肉品质不错，是真肉（血管都看得清，不是合成肉），但卖点也就肉品质了…",
+      "truncated": true,
       "box": [
         732,
         4793,
@@ -656,7 +656,7 @@
       "estimated": false,
       "status": null,
       "description": "江大周边自助餐“权威”，价格涨到了 80～90 元，海鲜和牛肉质量一般，但在学校附近想吃爽、想要品类全，它依旧是首选；如果放在全市范围来看，只能算一般水平。",
-      "excerpt": "江大周边自助餐“权威”，价格涨到了 80～90 元，海鲜和牛肉质量一般，但在学校附近想吃爽、想要品类全，它依旧是首选；如果放在全市范围来看…",
+      "excerpt": "江大周边自助餐“权威”，价格涨到了 80～90 元，海鲜和牛肉质量一般，但在学校附近想吃爽、想要品类全，它依旧是首选；如果放在全市范围…",
       "truncated": true,
       "box": [
         732,
@@ -1316,9 +1316,9 @@
     "assets/img/posters/resources/stickers/第35弹-吸溜.png": "87697a50cb7e2058eef97ddecab737d0a446afdade18ae7f25587d28cb29c7cd",
     "assets/img/posters/resources/stickers/第37弹-呃.png": "dca987bf738d5e6a4f5345c57415567cfcc5b89af86a283497fe0e0b223d210f",
     "assets/lib-custom/canteen-tier-extras.js": "827f00ce3e41cbe859cd9f516c171e7fc5fdfabcd889f1aeab349cc1d4cac275",
-    "assets/lib-custom/canteen-tier.js": "bfd701226e634a55cbb15ec297b2c5accfc34784a7ea5a333a7b3dec9d089feb",
+    "assets/lib-custom/canteen-tier.js": "5cbd35e70102c37fce349e3b50cde59bac5bc8ebe7c3065d512aa8e393a85272",
     "tools/export_tier_data.cjs": "69b973749aa2d7d7987af137e2098db5c51d372c8712fb508536a91994fe956f",
     "tools/generate_posters.py": "739d92a801f984d1bdcbd66bfa5fb4376ea62d018f7987c278c69ec06dfffa5c"
   },
-  "pngSha256": "d1f7635b8c5a32be4fc5b0f3f37944b99b3b40cdb2cdc73531d0d99ef9f1d6b0"
+  "pngSha256": "21617b938cd55f29c2847556e7f1935d1d343f2e62b2adba2c4a72ee3ed3d1b1"
 }
