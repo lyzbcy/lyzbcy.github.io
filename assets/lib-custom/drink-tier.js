@@ -2,6 +2,7 @@
   'use strict';
 
   /* 页面与一图流共用此数组；评分只取作者明确给出的数字。 */
+  const imageBasePath = '/assets/image%20library/drink-tier-images/';
   const drinks = [
     {
       name: '魔爪 白魔爪（芒果菠萝味）',
@@ -18,6 +19,7 @@
       rating: 4.5,
       category: '能量饮料',
       description: '好喝好喝，没有怪味。酸酸甜甜，气泡还会刺激舌头，很带劲。如果红牛算 3 星，红魔爪可以给到 4.5 星。',
+      bgImage: imageBasePath + encodeURIComponent('红魔爪-Monster.jpeg'),
     },
     {
       name: '统一阿萨姆低糖茉莉奶绿',
@@ -28,6 +30,7 @@
       price: '参考价 4.5–5 元',
       description: '参考价 4.5–5 元。顶级守门员，5 颗星。味道不错；不像原味阿萨姆喝久了容易晕、容易腻，而且糖量减半，稍微健康一点点。',
       anchor: true,
+      bgImage: imageBasePath + encodeURIComponent('阿萨姆低糖茉莉奶绿-统一.png'),
     },
     {
       name: '统一原味冰红茶',
@@ -37,6 +40,7 @@
       category: '茶饮料',
       price: '参考价 3 元',
       description: '5 颗星，参考价 3 元。要冰的。',
+      bgImage: imageBasePath + encodeURIComponent('冰红茶-统一.jpeg'),
     },
     {
       name: '茉莉柚子',
@@ -46,6 +50,7 @@
       category: '茶饮料',
       price: '参考价跟冰红茶差不多，比阿萨姆便宜',
       description: '5 颗星。参考价跟冰红茶差不多，反正都比阿萨姆便宜。忘记是什么牌子了。如果选择一箱茉莉柚子还是一箱奶皮，我会选茉莉柚子。',
+      bgImage: imageBasePath + encodeURIComponent('茉莉柚子-康师傅.jpeg'),
     },
     {
       name: '奶皮',
@@ -54,6 +59,7 @@
       rating: 4.9,
       category: '其他饮料',
       description: '4.9 颗星。如果选择一箱奶皮还是一箱阿萨姆，我主要不喜欢喝奶皮；如果选择一箱茉莉柚子还是一箱奶皮，我会选茉莉柚子，所以奶皮的评分就给低一点。奶皮有很多牌子，长得都差不多，我觉得“天润”这个牌子更好喝一点，现在我们喝的“西域春”感觉也一样吧。',
+      bgImage: imageBasePath + encodeURIComponent('奶皮-天润.jpeg'),
     },
     {
       name: '古茗 超有料双倍鲜芋奶绿',
@@ -63,6 +69,7 @@
       category: '奶茶',
       price: '参考价 11 元',
       description: '大杯，去冰，5分糖，含芋泥、布丁、珍珠。好喝程度跟瑞幸高蛋白莓果酸奶饮平齐，甚至比它还好喝一点；但考虑到它脂肪多、蛋白少，没有高蛋白酸奶饮那么健康，评分往回收了一点，所以也给到 5.2 星，而且它更有性价比。',
+      bgImage: imageBasePath + encodeURIComponent('超有料双倍鲜芋奶绿-古茗.jpeg'),
     },
     {
       name: '瑞幸 高蛋白莓果酸奶饮',
@@ -89,6 +96,7 @@
       category: '奶茶',
       description: '人上人守门员，4 星。原味阿萨姆喝久了容易晕、容易腻。',
       anchor: true,
+      bgImage: imageBasePath + encodeURIComponent('阿萨姆标准原味奶茶-统一.jpeg'),
     },
     {
       name: '红牛',
@@ -98,6 +106,7 @@
       category: '能量饮料',
       description: '评分锚点，中规中矩的能量饮料，没有特别突出的点。大家都喝过，以它作为 NPC 守门员，基准 3 星。',
       anchor: true,
+      bgImage: imageBasePath + encodeURIComponent('红牛-红牛.jpeg'),
     },
     {
       name: '魔爪 黑魔爪（原味）',
@@ -106,6 +115,7 @@
       rating: 3,
       category: '能量饮料',
       description: '原味，带微微微微的橡皮泥味。和红牛一个档位，3 星水平。',
+      bgImage: imageBasePath + encodeURIComponent('黑魔爪-Monster.jpeg'),
     },
   ];
 
