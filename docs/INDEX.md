@@ -23,6 +23,8 @@
 | 线上验证 404/旧内容 | Pages 构建排队+CDN 传播慢,**等 90s 再验**,别急着判失败 | [pitfalls/ops.md](pitfalls/ops.md) |
 | Agent 更新博客 | AGENTS.md 写了规则 ≠ 会执行:flash 模型循环打转+指令过载+记忆误导;关键规范必须做成独立 skill(仓库 skills/lyzbcy-blog-update/) | [pitfalls/agent-context.md](pitfalls/agent-context.md) |
 
+| xuhuohua cloud cron | Duplicate users/old auth/headless mode: one owner, canonical auth, Headless Shell, flock | [pitfalls/xuhuohua-cron.md](pitfalls/xuhuohua-cron.md) |
+
 ## 🖥️ 技术栈与架构
 
 - [stack/server.md](stack/server.md) — 腾讯云全景:双用户结构/root vs ubuntu/服务/cron 全景/网络端口
