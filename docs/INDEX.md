@@ -26,6 +26,8 @@
 
 ## 🖥️ 技术栈与架构
 
+- [agent.md](agent.md) — 开发导航；[ci.md](ci.md) — 饮料榜固定总数断言导致构建失败的修复与验证
+
 - [stack/server.md](stack/server.md) — 腾讯云全景:双用户结构/root vs ubuntu/服务/cron 全景/网络端口
 - [stack/skills.md](stack/skills.md) — 所有 skill 清单、入口、健康状态
 - [stack/data.md](stack/data.md) — 数据资产地图:SQLite/JSON/登录态/凭证位置

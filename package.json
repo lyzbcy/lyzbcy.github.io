@@ -1,6 +1,6 @@
 {
   "name": "lyzbcy-github-io",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "个人网站本地预览",
   "scripts": {
     "preview:local": "node local-preview-server.js",

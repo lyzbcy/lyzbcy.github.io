@@ -29,8 +29,18 @@ class Scores(unittest.TestCase):
             '统一阿萨姆标准原味奶茶': ('人上人', '4'),
             '红牛': ('NPC', '3'),
         })
-        self.assertEqual(len(rows), 11)
         by_name = {row['name']: row for row in rows}
+        # The live ranking can grow; regress known author scores, not its total size.
+        expected_names = {
+            *anchors,
+            '魔爪 白魔爪（芒果菠萝味）',
+            '魔爪 红魔爪（百香果番石榴味）',
+            '瑞幸 高蛋白莓果酸奶饮',
+            '魔爪 黑魔爪（原味）',
+        }
+        self.assertTrue(expected_names <= by_name.keys(), expected_names - by_name.keys())
+        self.assertEqual((by_name['魔爪 黑魔爪（原味）']['tier'],
+                          by_name['魔爪 黑魔爪（原味）']['score']), ('NPC', '3'))
         self.assertEqual((by_name['魔爪 白魔爪（芒果菠萝味）']['tier'],
                           by_name['魔爪 白魔爪（芒果菠萝味）']['score']), ('人上人', '4.7'))
         self.assertEqual((by_name['魔爪 红魔爪（百香果番石榴味）']['tier'],
