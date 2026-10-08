@@ -3,15 +3,15 @@
   "kind": "drink",
   "size": [
     1440,
-    3247
+    3553
   ],
-  "count": 11,
+  "count": 12,
   "tierCounts": {
-    "顶级": 4,
+    "顶级": 5,
     "人上人": 5,
     "NPC": 2
   },
-  "checkedTextRegions": 75,
+  "checkedTextRegions": 80,
   "overflowCount": 0,
   "stickerCount": 4,
   "ctaCount": 2,
@@ -20,9 +20,29 @@
     "text": "捞鱼的博客",
     "opacity": 24,
     "angle": 22,
-    "count": 45
+    "count": 49
   },
   "items": [
+    {
+      "name": "古茗 超有料双倍鲜芋奶绿",
+      "sourceName": "古茗 超有料双倍鲜芋奶绿",
+      "tier": "顶级",
+      "score": "5.2",
+      "scoreSource": "tierLabel",
+      "anchor": false,
+      "locationLabel": "",
+      "estimated": false,
+      "status": null,
+      "description": "大杯，去冰，5分糖，含芋泥、布丁、珍珠。好喝程度跟瑞幸高蛋白莓果酸奶饮平齐，甚至比它还好喝一点；但考虑到它脂肪多、蛋白少，没有高蛋白酸奶饮那么健康，评分往回收了一点，所以也给到 5.2 星，而且它更有性价比。",
+      "excerpt": "大杯，去冰，5分糖，含芋泥、布丁、珍珠。好喝程度跟瑞幸高蛋白莓果酸奶饮平齐，甚至比它还好喝一点；但考虑到它脂肪多、蛋白少，没有高蛋白…",
+      "truncated": true,
+      "box": [
+        48,
+        776,
+        660,
+        282
+      ]
+    },
     {
       "name": "瑞幸 高蛋白莓果酸奶饮",
       "sourceName": "瑞幸 高蛋白莓果酸奶饮",
@@ -37,7 +57,7 @@
       "excerpt": "参考价 15 元。我选的是不另外加糖，加了牛奶燕麦爆珠。我觉得不另外加糖会更健康一点，这一杯的蛋白质含量大约有 20g。因为没有另外加糖，喝…",
       "truncated": true,
       "box": [
-        48,
+        732,
         776,
         660,
         282
@@ -57,8 +77,8 @@
       "excerpt": "5 颗星，参考价 3 元。要冰的。",
       "truncated": false,
       "box": [
-        732,
-        776,
+        48,
+        1082,
         660,
         282
       ]
@@ -77,7 +97,7 @@
       "excerpt": "5 颗星。参考价跟冰红茶差不多，反正都比阿萨姆便宜。忘记是什么牌子了。如果选择一箱茉莉柚子还是一箱奶皮，我会选茉莉柚子。",
       "truncated": false,
       "box": [
-        48,
+        732,
         1082,
         660,
         282
@@ -97,8 +117,8 @@
       "excerpt": "参考价 4.5–5 元。顶级守门员，5 颗星。味道不错；不像原味阿萨姆喝久了容易晕、容易腻，而且糖量减半，稍微健康一点点。",
       "truncated": false,
       "box": [
-        732,
-        1082,
+        48,
+        1388,
         660,
         282
       ]
@@ -118,7 +138,7 @@
       "truncated": true,
       "box": [
         48,
-        1524,
+        1830,
         660,
         282
       ]
@@ -138,7 +158,7 @@
       "truncated": false,
       "box": [
         732,
-        1524,
+        1830,
         660,
         282
       ]
@@ -158,7 +178,7 @@
       "truncated": false,
       "box": [
         48,
-        1830,
+        2136,
         660,
         282
       ]
@@ -178,7 +198,7 @@
       "truncated": true,
       "box": [
         732,
-        1830,
+        2136,
         660,
         282
       ]
@@ -198,7 +218,7 @@
       "truncated": false,
       "box": [
         48,
-        2136,
+        2442,
         660,
         243
       ]
@@ -218,7 +238,7 @@
       "truncated": false,
       "box": [
         48,
-        2539,
+        2845,
         660,
         282
       ]
@@ -238,7 +258,7 @@
       "truncated": false,
       "box": [
         732,
-        2539,
+        2845,
         660,
         282
       ]
@@ -252,9 +272,9 @@
     "assets/img/posters/resources/stickers/第12弹-心动.png": "471b9ca06998889b80a3b521e30eedc851965c59de8ff80f86774caf6f14b6f6",
     "assets/img/posters/resources/stickers/第12弹-期待.png": "200fa353636757febd39283acbd9ac7465cac1bcd43f3cefeaab7f233aecf7b8",
     "assets/img/posters/resources/stickers/第37弹-呃.png": "dca987bf738d5e6a4f5345c57415567cfcc5b89af86a283497fe0e0b223d210f",
-    "assets/lib-custom/drink-tier.js": "82ad4fb3df2fa87d2a81708b50b7174ec226507e64a9779edbaf5e2ffce92957",
+    "assets/lib-custom/drink-tier.js": "23a2834ddad064b6350c6ec0845a7fd30148b4f28d0c1ce405e95f898afdd9f5",
     "tools/export_tier_data.cjs": "69b973749aa2d7d7987af137e2098db5c51d372c8712fb508536a91994fe956f",
     "tools/generate_posters.py": "739d92a801f984d1bdcbd66bfa5fb4376ea62d018f7987c278c69ec06dfffa5c"
   },
-  "pngSha256": "ab2c0b6997667da33a6ee111e1b6e3ed38c98432a2a3c5d509a21dcd7e63fbaf"
+  "pngSha256": "92d6374e9dc6e34aa5ef4eecec6c6ea40ee00318cd1f32be4102da261c03486a"
 }
