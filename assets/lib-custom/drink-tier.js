@@ -117,6 +117,15 @@
       description: '原味，带微微微微的橡皮泥味。和红牛一个档位，3 星水平。',
       bgImage: imageBasePath + encodeURIComponent('黑魔爪-Monster.jpeg'),
     },
+    {
+      name: '超合算 小青柠饮料',
+      tier: '拉完了',
+      tierLabel: '拉完了 · 2 星',
+      rating: 2,
+      category: '其他饮料',
+      price: '参考价 4 元（盒马 4 瓶 16 元）',
+      description: '2 颗星，连 NPC 都不想给。盒马买的，4 瓶 16 元，一瓶 4 块，想退款。喝一口微苦，再喝一口辣脖子辣喉咙。包装上写添加小青柠汁大于等于 10%，但真的难喝。',
+    },
   ];
 
   const tierOrder = ['夯', '顶级', '人上人', 'NPC', '拉完了'];
