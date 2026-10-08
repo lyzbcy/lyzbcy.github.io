@@ -3,24 +3,25 @@
   "kind": "drink",
   "size": [
     1440,
-    3553
+    3995
   ],
-  "count": 12,
+  "count": 13,
   "tierCounts": {
     "顶级": 5,
     "人上人": 5,
-    "NPC": 2
+    "NPC": 2,
+    "拉完了": 1
   },
-  "checkedTextRegions": 80,
+  "checkedTextRegions": 87,
   "overflowCount": 0,
-  "stickerCount": 4,
+  "stickerCount": 5,
   "ctaCount": 2,
   "anchorBadgeCount": 3,
   "watermark": {
     "text": "捞鱼的博客",
     "opacity": 24,
     "angle": 22,
-    "count": 49
+    "count": 56
   },
   "items": [
     {
@@ -262,6 +263,26 @@
         660,
         282
       ]
+    },
+    {
+      "name": "超合算 小青柠饮料",
+      "sourceName": "超合算 小青柠饮料",
+      "tier": "拉完了",
+      "score": "2",
+      "scoreSource": "tierLabel",
+      "anchor": false,
+      "locationLabel": "",
+      "estimated": false,
+      "status": null,
+      "description": "2 颗星，连 NPC 都不想给。盒马买的，4 瓶 16 元，一瓶 4 块，想退款。喝一口微苦，再喝一口辣脖子辣喉咙。包装上写添加小青柠汁大于等于 10%，但真的难喝。",
+      "excerpt": "2 颗星，连 NPC 都不想给。盒马买的，4 瓶 16 元，一瓶 4 块，想退款。喝一口微苦，再喝一口辣脖子辣喉咙。包装上写添加小青柠汁大于等于 10%，…",
+      "truncated": true,
+      "box": [
+        48,
+        3287,
+        660,
+        282
+      ]
     }
   ],
   "inputs": {
@@ -272,9 +293,9 @@
     "assets/img/posters/resources/stickers/第12弹-心动.png": "471b9ca06998889b80a3b521e30eedc851965c59de8ff80f86774caf6f14b6f6",
     "assets/img/posters/resources/stickers/第12弹-期待.png": "200fa353636757febd39283acbd9ac7465cac1bcd43f3cefeaab7f233aecf7b8",
     "assets/img/posters/resources/stickers/第37弹-呃.png": "dca987bf738d5e6a4f5345c57415567cfcc5b89af86a283497fe0e0b223d210f",
-    "assets/lib-custom/drink-tier.js": "23a2834ddad064b6350c6ec0845a7fd30148b4f28d0c1ce405e95f898afdd9f5",
+    "assets/lib-custom/drink-tier.js": "df63189a3586a34936f6676beeb6ec049e9e9b387c2002f91d3e0e4dadc6c810",
     "tools/export_tier_data.cjs": "69b973749aa2d7d7987af137e2098db5c51d372c8712fb508536a91994fe956f",
     "tools/generate_posters.py": "739d92a801f984d1bdcbd66bfa5fb4376ea62d018f7987c278c69ec06dfffa5c"
   },
-  "pngSha256": "92d6374e9dc6e34aa5ef4eecec6c6ea40ee00318cd1f32be4102da261c03486a"
+  "pngSha256": "af15c50dba348f2850765b7cefeb657fc5f08cf64aefc15df6182e657f55c94c"
 }
