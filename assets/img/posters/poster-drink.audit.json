@@ -5,14 +5,14 @@
     1440,
     3995
   ],
-  "count": 13,
+  "count": 14,
   "tierCounts": {
-    "顶级": 5,
+    "顶级": 6,
     "人上人": 5,
     "NPC": 2,
     "拉完了": 1
   },
-  "checkedTextRegions": 87,
+  "checkedTextRegions": 92,
   "overflowCount": 0,
   "stickerCount": 5,
   "ctaCount": 2,
@@ -25,8 +25,8 @@
   },
   "items": [
     {
-      "name": "古茗 超有料双倍鲜芋奶绿",
-      "sourceName": "古茗 超有料双倍鲜芋奶绿",
+      "name": "CoCo 超有料双倍鲜芋奶绿",
+      "sourceName": "CoCo 超有料双倍鲜芋奶绿",
       "tier": "顶级",
       "score": "5.2",
       "scoreSource": "tierLabel",
@@ -65,6 +65,26 @@
       ]
     },
     {
+      "name": "瑞幸 高蛋白椰蓝酸奶饮",
+      "sourceName": "瑞幸 高蛋白椰蓝酸奶饮",
+      "tier": "顶级",
+      "score": "5.1",
+      "scoreSource": "tierLabel",
+      "anchor": false,
+      "locationLabel": "",
+      "estimated": false,
+      "status": null,
+      "description": "参考价 16 元。20 注塑、微甜，加的是原味晶球，晶球很好吃。挺好喝的，酸酸甜甜，但也没有那么酸，感觉像是几种饮料混在一起的味道。不过跟莓果酸奶饮比的话，我还是更愿意喝莓果。综合下来给到 5.1 颗星。",
+      "excerpt": "参考价 16 元。20 注塑、微甜，加的是原味晶球，晶球很好吃。挺好喝的，酸酸甜甜，但也没有那么酸，感觉像是几种饮料混在一起的味道。不过跟…",
+      "truncated": true,
+      "box": [
+        48,
+        1082,
+        660,
+        282
+      ]
+    },
+    {
       "name": "统一原味冰红茶",
       "sourceName": "统一原味冰红茶",
       "tier": "顶级",
@@ -78,7 +98,7 @@
       "excerpt": "5 颗星，参考价 3 元。要冰的。",
       "truncated": false,
       "box": [
-        48,
+        732,
         1082,
         660,
         282
@@ -98,8 +118,8 @@
       "excerpt": "5 颗星。参考价跟冰红茶差不多，反正都比阿萨姆便宜。忘记是什么牌子了。如果选择一箱茉莉柚子还是一箱奶皮，我会选茉莉柚子。",
       "truncated": false,
       "box": [
-        732,
-        1082,
+        48,
+        1388,
         660,
         282
       ]
@@ -118,15 +138,15 @@
       "excerpt": "参考价 4.5–5 元。顶级守门员，5 颗星。味道不错；不像原味阿萨姆喝久了容易晕、容易腻，而且糖量减半，稍微健康一点点。",
       "truncated": false,
       "box": [
-        48,
+        732,
         1388,
         660,
         282
       ]
     },
     {
-      "name": "奶皮",
-      "sourceName": "奶皮",
+      "name": "奶啤",
+      "sourceName": "奶啤",
       "tier": "人上人",
       "score": "4.9",
       "scoreSource": "tierLabel",
@@ -134,8 +154,8 @@
       "locationLabel": "",
       "estimated": false,
       "status": null,
-      "description": "4.9 颗星。如果选择一箱奶皮还是一箱阿萨姆，我主要不喜欢喝奶皮；如果选择一箱茉莉柚子还是一箱奶皮，我会选茉莉柚子，所以奶皮的评分就给低一点。奶皮有很多牌子，长得都差不多，我觉得“天润”这个牌子更好喝一点，现在我们喝的“西域春”感觉也一样吧。",
-      "excerpt": "4.9 颗星。如果选择一箱奶皮还是一箱阿萨姆，我主要不喜欢喝奶皮；如果选择一箱茉莉柚子还是一箱奶皮，我会选茉莉柚子，所以奶皮的评分就给低…",
+      "description": "4.9 颗星。（作者更正：是“奶啤”，啤酒的啤。）如果选择一箱奶啤还是一箱阿萨姆，我主要不喜欢喝奶啤；如果选择一箱茉莉柚子还是一箱奶啤，我会选茉莉柚子，所以奶啤的评分就给低一点。奶啤有很多牌子，长得都差不多，我觉得“天润”这个牌子更好喝一点，现在我们喝的“西域春”感觉也一样吧。",
+      "excerpt": "4.9 颗星。（作者更正：是“奶啤”，啤酒的啤。）如果选择一箱奶啤还是一箱阿萨姆，我主要不喜欢喝奶啤；如果选择一箱茉莉柚子还是一箱奶啤，…",
       "truncated": true,
       "box": [
         48,
@@ -293,9 +313,9 @@
     "assets/img/posters/resources/stickers/第12弹-心动.png": "471b9ca06998889b80a3b521e30eedc851965c59de8ff80f86774caf6f14b6f6",
     "assets/img/posters/resources/stickers/第12弹-期待.png": "200fa353636757febd39283acbd9ac7465cac1bcd43f3cefeaab7f233aecf7b8",
     "assets/img/posters/resources/stickers/第37弹-呃.png": "dca987bf738d5e6a4f5345c57415567cfcc5b89af86a283497fe0e0b223d210f",
-    "assets/lib-custom/drink-tier.js": "df63189a3586a34936f6676beeb6ec049e9e9b387c2002f91d3e0e4dadc6c810",
+    "assets/lib-custom/drink-tier.js": "8d3f41288f9466dafdd694bc7d21e1608c4801763f4c38a2e3f695a9e4d86c43",
     "tools/export_tier_data.cjs": "69b973749aa2d7d7987af137e2098db5c51d372c8712fb508536a91994fe956f",
     "tools/generate_posters.py": "739d92a801f984d1bdcbd66bfa5fb4376ea62d018f7987c278c69ec06dfffa5c"
   },
-  "pngSha256": "af15c50dba348f2850765b7cefeb657fc5f08cf64aefc15df6182e657f55c94c"
+  "pngSha256": "7c80ae43d8b67b14a838f26afae685d3b58884a94eab024d05f1f95c0b8095b8"
 }
