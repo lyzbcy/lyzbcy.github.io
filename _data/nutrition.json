@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-11T22:05:43.666726+08:00",
+  "generated_at": "2026-10-12T01:00:23.620586+08:00",
   "goals": {
     "calories": 1652,
     "water": 2000,
@@ -367,16 +367,6 @@
     "total_cal": 1608
   },
   "trend": [
-    {
-      "date": "2026-09-28",
-      "calories": 1849,
-      "protein": 110.4,
-      "carbs": 213.3,
-      "fat": 64.1,
-      "water": 1350,
-      "net_calories": 1849,
-      "has_fitness": false
-    },
     {
       "date": "2026-09-29",
       "calories": 1801,
@@ -2347,46 +2337,15 @@
     }
   ],
   "status": {
-    "has_today": true,
+    "has_today": false,
     "has_yesterday": true,
-    "today": "2026-10-11",
+    "today": "2026-10-12",
     "is_active": true,
     "is_training_day": false
   },
   "health_score": {
-    "today": {
-      "date": "2026-10-11",
-      "nutrition_score": 23,
-      "nutrition_detail": "热量 1263/1652 kcal (11/20); 蛋白 78.8/150g (8/15); 饮水 553/2000ml (4/15)",
-      "exercise_score": 0,
-      "exercise_detail": "今日无训练 (0/20); 组数 0 (0/10)",
-      "bonus_score": 15,
-      "bonus_detail": "数据完整性 (8/10); 体脂趋势 -1.2% (7/10)",
-      "total_score": 38,
-      "grade": "⚠️ C",
-      "calories_in": 1263,
-      "calories_target": 1652,
-      "protein_in": 78.8,
-      "protein_target": 150,
-      "water_in": 553,
-      "water_target": 2000,
-      "training_sets": 0,
-      "training_volume": 0,
-      "training_cal": 0,
-      "training_duration_min": 0,
-      "bodyfat_pct": 20.7,
-      "is_training_day": false,
-      "bmr_floor": 1710,
-      "below_bmr": true
-    },
+    "today": null,
     "history": [
-      {
-        "date": "2026-09-28",
-        "score": 51,
-        "grade": "⚠️ C",
-        "nutrition": "热量 1849/1650 kcal (15/20); 蛋白 110.4/150g (11/15); 饮水 1350/2000ml (10/15)",
-        "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
-      },
       {
         "date": "2026-09-29",
         "score": 88,
@@ -2451,9 +2410,9 @@
         "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
       }
     ],
-    "range_start": "2026-09-28",
-    "range_end": "2026-10-11",
-    "exported_at": "2026-10-11T22:05:43.643291"
+    "range_start": "2026-09-29",
+    "range_end": "2026-10-12",
+    "exported_at": "2026-10-12T01:00:23.595588"
   },
   "food_library": {
     "items": [
