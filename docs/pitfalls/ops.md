@@ -77,3 +77,9 @@ Native Windows OpenSSH exited 255 without a banner in this environment. Git for 
 ## Windows GitHub large uploads (2026-09-29)
 
 Local API TLS handshakes and large uploads can stall. A temporary SSH local forward bound to 127.0.0.1 for api.github.com:443 and uploads.github.com:443 worked; preserve original TLS SNI, certificate validation and Host headers. GitHub credentials stay in the local process memory, never stored on the server. Limit binary transfer to 2 MiB/s, verify GitHub asset digests against local SHA-256, and close forwarding processes after publishing. Interrupted draft assets can remain in starter state; remove only the known incomplete asset before retrying.
+
+## HireMe 登录判断与通知（2026-10-14）
+
+无效 Cookie 访问 dashboard 仍返回 HTTP 200，且访客页面仍有领取按钮。必须验证退出登录/登录注册链接，不能仅凭 200 或按钮存在判断已登录。每日领取接口重复请求返回 HTTP 400 + 精确的 already claimed 信息；其他 400 不能当成功。通知请求失败不应触发再次领取；先用 status 核对。
+
+通过 Node REPL 跑 SSH 时，工具超时会重置运行时，而此前远程步骤可能已完成。将超时设为足够的有界时长，并在重连后先回读任务状态；不要盲目重跑安装或创建 cron。

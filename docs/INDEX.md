@@ -34,6 +34,7 @@
 
 ## 📖 操作手册(howto)
 
+- [howto/hireme-checkin.md](howto/hireme-checkin.md) — HireMe 签到云端部署、09:00 cron、Cookie 更新与企业微信通知
 - [howto/novnc-login.md](howto/novnc-login.md) — noVNC 人工登录浏览器(多道风控关卡都能过)
 - [howto/push-pipeline.md](howto/push-pipeline.md) — 博客/skill 推送链路(为什么及如何走服务器推)
 

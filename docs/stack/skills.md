@@ -14,6 +14,7 @@
 | lyzbcy-nutrition-tracker | 营养看板(22:05) | ✅ 活跃 | cron_update.sh |
 | starbudding-study-tracker | 学习看板(22:15,nginx) | ✅ 活跃 | cron_update.sh |
 | lyzbcy-XiaohongshuSkills | 小红书**发布**(CDP浏览器/多账号) | ✅ 可用 | scripts/publish*.py |
+| hireme-checkin | HireMe AI 每日签到积分、登录态检查、企业微信通知 | ✅ 2026-10-14 云端实测；ubuntu cron 每日 09:00 | scripts/hireme.py checkin |
 
 ## 基建类
 
