@@ -135,7 +135,7 @@
   <div class="dy-sub">作品播放量 · 内容质量分析 · 每日自动追踪</div>
   <div class="dy-meta">
     <span>🎬 {{ ov.total_works | default: 0 }} 个作品</span>
-    <span>📊 累计 {{ ov.total_play | default: 0 }} 播放</span>
+    <span>📊 范围内合计 {{ ov.total_play | default: 0 }} 播放</span>
     <span>🔄 更新于 {{ site.data.douyin.generated_at | date: "%Y-%m-%d %H:%M" | default: "未知时间" }}</span>
   </div>
 </div>
@@ -143,12 +143,11 @@
 <!-- ===== KPI 卡片 ===== -->
 <div class="dy-kpi-grid">
   <div class="dy-kpi k1">
-    <div class="dy-label">总播放量</div>
+    <div class="dy-label">范围内作品播放量合计</div>
     <div class="dy-value">{{ ov.total_play | divided_by: 1000.0 | round: 1 }}<span class="dy-unit">k</span></div>
     <div class="dy-trend">
-      {% if ov.play_delta > 0 %}📈 昨日 +{{ ov.play_delta }}
-      {% elsif ov.play_delta < 0 %}📉 昨日 {{ ov.play_delta }}
-      {% else %}→ 暂无增量{% endif %}
+      {% if ov.previous_date %}同一作品 {% if ov.play_delta > 0 %}+{% endif %}{{ ov.play_delta }}<br>{{ ov.previous_date }} → {{ ov.last_updated }}
+      {% else %}暂无可比采集{% endif %}
     </div>
   </div>
   <div class="dy-kpi k2">
@@ -173,10 +172,11 @@
   </div>
 </div>
 
+<p class="dy-card-sub">统计范围：{{ ov.scope_label }}；合计会随作品移出范围而下降。增量仅比较两次都采集到的作品。{% if ov.previous_date %}本期移入 {{ ov.added_works }} 个（{{ ov.added_play }} 播放），移出 {{ ov.removed_works }} 个（{{ ov.removed_play }} 播放）。新作品计入移入，未混入同一作品增量。{% endif %}</p>
 <!-- ===== 趋势 ===== -->
 <div class="dy-card">
-  <div class="dy-card-title">📈 总播放量趋势</div>
-  <div class="dy-card-sub">近 {{ site.data.douyin.trend | size }} 个采集日 · 柱 = 较前一日新增播放 · 线 = 累计播放量</div>
+  <div class="dy-card-title">📈 范围内播放量与同一作品增量</div>
+  <div class="dy-card-sub">近 {{ site.data.douyin.trend | size }} 个采集日 · 柱 = 同一作品区间增量 · 线 = 范围内合计</div>
   {% assign trend = site.data.douyin.trend %}
   {% if trend.size >= 2 %}
   {% comment %} 第一遍：算每日增量的最大正/负值、累计峰值 {% endcomment %}
@@ -188,7 +188,7 @@
   {% for t in trend %}
     {% if t.play > max_play %}{% assign max_play = t.play %}{% endif %}
     {% unless forloop.first %}
-      {% assign d = t.play | minus: prev_play %}
+      {% assign d = t.play_delta | default: 0 %}
       {% if d > max_pos %}{% assign max_pos = d %}{% endif %}
       {% if d < 0 %}
         {% assign has_neg = true %}
@@ -211,7 +211,7 @@
   {% assign max_negf = max_neg | times: 1.0 %}
   {% assign max_playf = max_play | times: 1.0 %}
   <div class="dy-trend-wrap">
-  <svg class="dy-trend-svg" viewBox="0 0 860 348" preserveAspectRatio="xMidYMid meet" role="img" aria-label="总播放量趋势：上方为累计播放量折线，下方为每日新增播放柱状图">
+  <svg class="dy-trend-svg" viewBox="0 0 860 348" preserveAspectRatio="xMidYMid meet" role="img" aria-label="范围内播放量与同一作品增量：上方为统计范围内合计折线，下方为两次采集共同作品的区间增量柱状图">
     <defs>
       <linearGradient id="dyTrendGrad" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="#fe2c55"/>
@@ -248,13 +248,13 @@
       {% assign lasty = ly %}
       {% unless forloop.first %}
         {% assign xr = x | minus: halfw | round: 1 %}
-        {% assign d = t.play | minus: prev_play %}
+        {% assign d = t.play_delta | default: 0 %}
         {% if d >= 0 %}
           {% assign h = d | divided_by: max_posf | times: 70 | round: 1 %}
           {% if d > 0 and h < 1 %}{% assign h = 1 %}{% endif %}
           {% if d > 0 %}
           <rect class="tbar{% if forloop.last %} tbar-last{% endif %}" x="{{ xr }}" y="{{ 266 | minus: h }}" width="{{ barw | round: 1 }}" height="{{ h }}">
-            <title>{{ t.date }} · 较前一日 +{{ d }} · 累计 {{ t.play }}</title>
+            <title>{{ t.previous_date }} → {{ t.date }} · 同一作品增量 {{ d }} · 移入 {{ t.added_works }} 个/{{ t.added_play }} 播放 · 移出 {{ t.removed_works }} 个/{{ t.removed_play }} 播放 · 范围内合计 {{ t.play }}</title>
           </rect>
           {% endif %}
           {% if n_pts <= 24 or forloop.last %}
@@ -270,7 +270,7 @@
           {% assign h = dn | divided_by: max_negf | times: 30 | round: 1 %}
           {% if h < 1 %}{% assign h = 1 %}{% endif %}
           <rect class="tbar-neg" x="{{ xr }}" y="266" width="{{ barw | round: 1 }}" height="{{ h }}">
-            <title>{{ t.date }} · 较前一日 {{ d }}（作品减少/被删）· 累计 {{ t.play }}</title>
+            <title>{{ t.previous_date }} → {{ t.date }} · 同一作品增量 {{ d }} · 移入 {{ t.added_works }} 个/{{ t.added_play }} 播放 · 移出 {{ t.removed_works }} 个/{{ t.removed_play }} 播放 · 范围内合计 {{ t.play }}</title>
           </rect>
           {% if n_pts <= 24 or forloop.last %}
             <text class="tval-neg" x="{{ x }}" y="{{ 275 | plus: h }}" text-anchor="middle">{{ d | divided_by: 1000.0 | round: 1 }}k</text>
@@ -303,12 +303,12 @@
       {% assign ly = 150 | minus: yv %}
       {% if forloop.last %}
         <circle class="tdot tdot-last" cx="{{ x }}" cy="{{ ly }}" r="4">
-          <title>{{ t.date }} · 累计 {{ t.play }}</title>
+          <title>{{ t.date }} · 范围内合计 {{ t.play }} · {{ t.works }} 个作品</title>
         </circle>
         <text class="tlastval" x="{{ x }}" y="{{ ly | minus: 8 }}" text-anchor="middle">{{ t.play | divided_by: 1000.0 | round: 1 }}k</text>
       {% else %}
         <circle class="tdot" cx="{{ x }}" cy="{{ ly }}" r="2.6">
-          <title>{{ t.date }} · 累计 {{ t.play }}</title>
+          <title>{{ t.date }} · 范围内合计 {{ t.play }} · {{ t.works }} 个作品</title>
         </circle>
       {% endif %}
       {% assign prev_play = t.play %}
@@ -316,10 +316,10 @@
   </svg>
   </div>
   <div class="dy-legend">
-    <div class="dy-legend-item"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:linear-gradient(180deg,#fe2c55,#ff8a9b);"></span>较前一日新增播放（左轴）</div>
-    <div class="dy-legend-item"><span style="display:inline-block;width:16px;height:3px;border-radius:2px;background:#ff6b35;vertical-align:middle;"></span>累计播放量（上轴）</div>
-    <div class="dy-legend-item">灰柱在 0 线下方 = 作品被删/隐藏导致减少</div>
-    <div class="dy-legend-item">悬停柱和圆点看每日明细</div>
+    <div class="dy-legend-item"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:linear-gradient(180deg,#fe2c55,#ff8a9b);"></span>同一作品区间增量（左轴）</div>
+    <div class="dy-legend-item"><span style="display:inline-block;width:16px;height:3px;border-radius:2px;background:#ff6b35;vertical-align:middle;"></span>范围内播放量合计（上轴）</div>
+    <div class="dy-legend-item">灰柱 = 同一作品计数回调；移出范围不计入增量</div>
+    <div class="dy-legend-item">悬停查看比较日期及移入、移出明细</div>
   </div>
   {% else %}
   <p style="color:var(--dy-light);font-size:12px;text-align:center;padding:20px 0;">数据积累中，需连续采集多天后显示趋势</p>

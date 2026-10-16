@@ -32,6 +32,14 @@ class DashboardSourceTests(unittest.TestCase):
     def test_displayed_schedule_is_1020(self):
         self.assertIn("每日 10:20", self.source)
 
+    def test_growth_uses_comparable_work_metrics_and_real_dates(self):
+        self.assertIn("t.play_delta", self.source)
+        self.assertIn("t.previous_date", self.source)
+        self.assertIn("t.removed_play", self.source)
+        self.assertNotIn("作品减少/被删", self.source)
+        self.assertNotIn("较前一日", self.source)
+        self.assertNotIn("昨日", self.source)
+
 
 if __name__ == "__main__":
     unittest.main()

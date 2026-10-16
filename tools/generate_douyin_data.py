@@ -16,6 +16,7 @@ import os
 import sys
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
+from douyin_metrics import normalize_snapshots, build_trend
 
 OPENCLAW_HOME = Path(os.environ.get("OPENCLAW_HOME", "/root/.openclaw"))
 WORKSPACE = OPENCLAW_HOME / "workspace"
@@ -176,11 +177,8 @@ def main():
         print("❌ 无快照数据", file=sys.stderr)
         sys.exit(1)
 
+    snapshots = normalize_snapshots(dedup_by_date(snapshots))
     latest = snapshots[-1]
-
-    # 时间序列（用于趋势 + 增量；去重避免同一天多次跑导致重复点）
-    ts_raw = load_jsonl(WORKSPACE / "douyin" / "data" / "time_series.jsonl")
-    ts_data = dedup_by_date(ts_raw)
 
     # 作品排行（按最新播放量）+ 加评分派生字段
     raw_works = sorted(latest.get("works", []), key=lambda w: w.get("play_count", 0), reverse=True)
@@ -188,26 +186,10 @@ def main():
     for w in raw_works:
         top_works.append(score_work(w))
 
-    # 趋势（近 30 天，基于去重后的 time_series）
-    trend = [
-        {
-            "date": e.get("date"),
-            "play": e.get("total_play", 0),
-            "works": e.get("total_works", 0),
-            "comments": e.get("total_comments", 0),
-        }
-        for e in ts_data[-30:]
-    ]
-
-    # 增量：基于去重后的 time_series 倒数第二条（而不是快照倒数第二个文件）
-    if len(ts_data) >= 2:
-        prev_play = ts_data[-2].get("total_play", 0)
-        prev_comments = ts_data[-2].get("total_comments", 0)
-    else:
-        prev_play = latest.get("total_play", 0)
-        prev_comments = latest.get("total_comments", 0)
-    play_delta = latest.get("total_play", 0) - prev_play
-    comment_delta = latest.get("total_comments", 0) - prev_comments
+    trend = build_trend(snapshots)[-30:]
+    comparison = trend[-1]
+    play_delta = comparison["play_delta"]
+    comment_delta = comparison["comment_delta"]
 
     # 平均完播率/跳出率（跨所有作品，按播放量加权）
     total_play = sum(w.get("play_count", 0) for w in top_works)
@@ -227,8 +209,8 @@ def main():
             "total_play": latest.get("total_play", 0),
             "total_works": latest.get("total_works", 0),
             "total_comments": latest.get("total_comments", 0),
-            "play_delta": play_delta,
-            "comment_delta": comment_delta,
+            **{k: v for k, v in comparison.items() if k not in ("date", "play", "works", "comments")},
+            "scope_label": "近90天发布作品（以后台筛选范围为准）",
             "avg_completion_rate_5s": round(avg_completion, 4),
             "avg_bounce_rate_2s": round(avg_bounce, 4),
             "best_work": {
@@ -252,9 +234,9 @@ def main():
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
 
-    delta_str = f"+{play_delta}" if play_delta >= 0 else str(play_delta)
+    delta_str = f"{play_delta:+d}" if play_delta is not None else "暂无对比"
     print(f"✅ 已生成 {out_path}")
-    print(f"   {len(top_works)} 作品 | 总播放 {latest.get('total_play', 0)} | {delta_str} 日增")
+    print(f"   {len(top_works)} 作品 | 总播放 {latest.get('total_play', 0)} | {delta_str} 同一作品区间增量")
     print(f"   趋势点数: {len(trend)} | 平均完播率: {round(avg_completion * 100, 1)}%")
 
 
