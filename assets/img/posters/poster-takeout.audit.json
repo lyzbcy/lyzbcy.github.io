@@ -76,7 +76,7 @@
       "estimated": false,
       "status": null,
       "description": "苏锡特色牛肉粉连锁（苏州 150+ 店，无锡滨湖就这一家）。经典款简直美美死了，非常推荐没吃过的人去尝，其他几款感觉都一般般，所以是 4.9 不是满分。这家离学校 5.3 公里，运费 4.9 元，外卖会比正常贵两三块；如果附近有店，建议堂食或闲鱼代下单更便宜。",
-      "excerpt": "苏锡特色牛肉粉连锁（苏州 150+ 店，无锡滨湖就这一家）。经典款简直美美死了，非常推荐没吃过的人去尝，其他几款感觉都一般般，所以是 4.9 …",
+      "excerpt": "苏锡特色牛肉粉连锁（苏州 150+ 店，无锡滨湖就这一家）。经典款简直美美死了，非常推荐没吃过的人去尝，其他几款感觉都一般般，所以是 4.9 不…",
       "truncated": true,
       "box": [
         48,
@@ -255,8 +255,8 @@
       "locationLabel": "",
       "estimated": false,
       "status": null,
-      "description": "味道还可以，但营养一般：蛋白质偏少、油偏多；如果你爱吃油，它味道是真好，就因为油多。外卖包装有点想法：黄袋子、纸盒，勺子不是小黑勺而是给铁勺——对外卖有想法，但不多。",
-      "excerpt": "味道还可以，但营养一般：蛋白质偏少、油偏多；如果你爱吃油，它味道是真好，就因为油多。外卖包装有点想法：黄袋子、纸盒，勺子不是小黑勺…",
+      "description": "味道还可以，但营养一般：蛋白质偏少、油偏多，素菜什么都太少，主要就是吃一个油拌饭；如果你爱吃油，它味道是真好，就因为油多。口碑来说其实还行。做得很有新意：虽然塑料袋看着很国潮外卖，但里面干送你个铁勺子；而且菜不放在上面，全挪在底下，一打开一碗白米饭。对它来说 3.65 分挺高的了。",
+      "excerpt": "味道还可以，但营养一般：蛋白质偏少、油偏多，素菜什么都太少，主要就是吃一个油拌饭；如果你爱吃油，它味道是真好，就因为油多。口碑来说…",
       "truncated": true,
       "box": [
         732,
@@ -396,8 +396,8 @@
       "estimated": false,
       "status": null,
       "description": "味道和湘八爷差不多（3.3 分的水平），但人家不到 10 块钱，这家卖 17.5 还量少——性价比太差了。味道不够突出到能靠味道拉分，只能按性价比给分。",
-      "excerpt": "味道和湘八爷差不多（3.3 分的水平），但人家不到 10 块钱，这家卖 17.5 还量少——性价比太差了。味道不够突出到能靠味道拉分，只能按性价比给分。",
-      "truncated": false,
+      "excerpt": "味道和湘八爷差不多（3.3 分的水平），但人家不到 10 块钱，这家卖 17.5 还量少——性价比太差了。味道不够突出到能靠味道拉分，只能按性价比给…",
+      "truncated": true,
       "box": [
         732,
         4546,
@@ -515,9 +515,9 @@
     "assets/img/posters/resources/stickers/第12弹-期待.png": "200fa353636757febd39283acbd9ac7465cac1bcd43f3cefeaab7f233aecf7b8",
     "assets/img/posters/resources/stickers/第37弹-呃.png": "dca987bf738d5e6a4f5345c57415567cfcc5b89af86a283497fe0e0b223d210f",
     "assets/lib-custom/takeout-tier-extras.js": "2d4333c3c7c5745dd21b02c015356aefe7ea4d9f9fdda00ab39d9da3c037b182",
-    "assets/lib-custom/takeout-tier.js": "2c4b6d313eee014095238eb4b9015820dd29f415bdc450f11e4e58235cffc1ac",
+    "assets/lib-custom/takeout-tier.js": "fc872926cac92197a912ee013377628697ac0c5da3d4c2253ab911742a071fcd",
     "tools/export_tier_data.cjs": "69b973749aa2d7d7987af137e2098db5c51d372c8712fb508536a91994fe956f",
     "tools/generate_posters.py": "739d92a801f984d1bdcbd66bfa5fb4376ea62d018f7987c278c69ec06dfffa5c"
   },
-  "pngSha256": "653bf5301640744f8ebd63c11101dfff27d295c62492ed4d53005d546b695da2"
+  "pngSha256": "c6b5d33fa5ccbfc17a836fe07cf41fab95a80445f48cf0b79922d68a9c99a0bf"
 }
