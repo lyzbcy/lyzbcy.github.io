@@ -50,3 +50,14 @@ Cookie 标注到期日不等于服务端承诺有效期。当前不能从文件�
 统一人工登录与 cron 的认证位置；仅在私信页验证通过时原子保存最新 storage_state，保留最后有效备份，认证失败绝不覆盖；登录后关闭原浏览器，再以真实 cron 用户/入口做只读演练。后续评估完整持久化 profile 与 Headless Shell 的兼容性，不能直接替换已验证的浏览器模式。单次重新扫码只能恢复当前会话，不能修复维护机制。
 
 本次只读诊断，没有重发消息、覆盖登录态或修改业务代码/定时任务。
+
+## 2026-10-16 v0.14.2 会话维护修复部署
+
+- 源码与标签：lyzbcy/xuhuohua v0.14.2，fb8fbffecb9c73837cd3f350f946a8617cc35112。版本发布状态见 GitHub Release，不把标签推送当资产已发布。
+- 服务器正式安装目录 /home/ubuntu/xuhuohua-deploy 已部署认证引擎与 Skill；原 root 09:00 调度保持不变，root/ubuntu crontab 与 Cookie、config、发送 history 的摘要在部署前后完全一致。未补发消息。
+- 变更：app/auth_state.py 在私信验证后与正常结束时保存更新，原子替换、600、旧快照备份、保留 owner、拒绝覆盖其他进程的新登录。认证或风险失败不写回。人工登录与任务共用 run.lock；登录验证真实私信页，关闭完整浏览器后用统一 Headless Shell 入口独立演练。
+- 老用户：Skill 静默更新只改说明/脚本，不改执行引擎。用同版本校验 ZIP 执行 upgrade-douyin-auth.py，只更新 app/auth_state.py、app/main.py、scripts/login.py，备份放原目录 auth-upgrade-backups。工具取得任务锁并支持写入失败回滚；QQ、cron、私有状态不覆盖。
+- 证据 /home/ubuntu/xuhuohua-auth-fix-20261016：engine-tests.log 230 passed；deployment.json；离线真实 Headless Shell 的 Cookie/localStorage 写回后全新浏览器恢复通过；本地软件/部署单测 56 passed、Skill 结构与云端包隐私门禁通过。
+- 现场默认 :99 已由其他业务的 ubuntu Xvfb 占用，root x11vnc 发生 MIT-SHM BadAccess。恢复登录使用本次独立的 :98、仅回环 5901/6089，并通过 SSH 隧道；不停止其他业务 :99，不操作评论/创作者 profile。本次桌面 PID 在上述工作目录，关闭时只停止准确 PID。
+- 旧认证会话已失效，代码升级不能恢复；扫码及独立演练状态见工作目录 status.json / 本机 verification/20261016-auth-fix-status.json。不要在未扫码时宣称明早已恢复发送。
+- 已创建本聊天单次 heartbeat，计划 2026-10-17 09:15 北京时间只读核查 09:00 实际定时结果、会话写回和通知。不得自动补发或把演练当真实送达。
