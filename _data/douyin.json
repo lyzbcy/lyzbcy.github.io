@@ -1,11 +1,20 @@
 {
-  "generated_at": "2026-10-16T10:20:58.665457+08:00",
+  "generated_at": "2026-10-16T10:30:32.382234+08:00",
   "overview": {
-    "total_play": 151041,
+    "total_play": 151043,
     "total_works": 23,
     "total_comments": 428,
-    "play_delta": -1295,
-    "comment_delta": 3,
+    "previous_date": "2026-10-10",
+    "interval_days": 6,
+    "play_delta": 778,
+    "comment_delta": 0,
+    "comparable_works": 19,
+    "added_works": 4,
+    "removed_works": 1,
+    "added_play": 2779,
+    "removed_play": 4850,
+    "scope_total_delta": -1293,
+    "scope_label": "近90天发布作品（以后台筛选范围为准）",
     "avg_completion_rate_5s": 0.3685,
     "avg_bounce_rate_2s": 0.3271,
     "best_work": {
@@ -18,7 +27,7 @@
   },
   "top_works": [
     {
-      "id": 1998,
+      "id": 2065,
       "item_id": "7676868646845913256",
       "title": "Oh no 和星星布丁下围棋 星星布丁这条大龙要被我吃掉了 星星布丁很着急 我…",
       "tags": [],
@@ -42,7 +51,7 @@
       "value_sufficient": true
     },
     {
-      "id": 1988,
+      "id": 2055,
       "item_id": "7667968699497127266",
       "title": "江南大学校外商业圈美食宿舍排行～",
       "tags": [],
@@ -66,7 +75,7 @@
       "value_sufficient": true
     },
     {
-      "id": 2000,
+      "id": 2067,
       "item_id": "7677278954927066387",
       "title": "其实，这个项目也有Mac版本。你在介绍页可以选择下载它的Mac版本，或者去我的…",
       "tags": [],
@@ -90,7 +99,7 @@
       "value_sufficient": true
     },
     {
-      "id": 1993,
+      "id": 2060,
       "item_id": "7673488000722878883",
       "title": "好耶 今天HR姐姐说我的台式电脑到了",
       "tags": [],
@@ -114,7 +123,7 @@
       "value_sufficient": true
     },
     {
-      "id": 1997,
+      "id": 2064,
       "item_id": "7675012351191534902",
       "title": "狗来 汪汪汪 汪汪 汪汪汪汪 汪汪汪 汪汪 汪 汪 汪 汪 汪 汪 汪 汪汪汪…",
       "tags": [],
@@ -138,7 +147,7 @@
       "value_sufficient": true
     },
     {
-      "id": 1989,
+      "id": 2056,
       "item_id": "7669102948174460899",
       "title": "大一的时候特别喜欢尝试泡面，所以那个时候把吃过的泡面都进行了评星",
       "tags": [],
@@ -162,7 +171,7 @@
       "value_sufficient": true
     },
     {
-      "id": 1992,
+      "id": 2059,
       "item_id": "7672833579289824538",
       "title": "第一次做asmr的星星布丁 视频内容包含【咀嚼音】【纸箱敲击】【史莱姆音】，希…",
       "tags": [],
@@ -186,7 +195,7 @@
       "value_sufficient": true
     },
     {
-      "id": 1994,
+      "id": 2061,
       "item_id": "7673857878340100259",
       "title": "无文案作品",
       "tags": [
@@ -212,7 +221,7 @@
       "value_sufficient": true
     },
     {
-      "id": 1987,
+      "id": 2054,
       "item_id": "7667383612505647842",
       "title": "自用的健身ai好物分享～",
       "tags": [],
@@ -236,7 +245,7 @@
       "value_sufficient": true
     },
     {
-      "id": 2006,
+      "id": 2073,
       "item_id": "7696462267495238966",
       "title": "本视频由GPT6.1sol制作",
       "tags": [],
@@ -262,7 +271,7 @@
   ],
   "all_works": [
     {
-      "id": 1998,
+      "id": 2065,
       "item_id": "7676868646845913256",
       "title": "Oh no 和星星布丁下围棋 星星布丁这条大龙要被我吃掉了 星星布丁很着急 我…",
       "tags": [],
@@ -286,7 +295,7 @@
       "value_sufficient": true
     },
     {
-      "id": 1988,
+      "id": 2055,
       "item_id": "7667968699497127266",
       "title": "江南大学校外商业圈美食宿舍排行～",
       "tags": [],
@@ -310,7 +319,7 @@
       "value_sufficient": true
     },
     {
-      "id": 2000,
+      "id": 2067,
       "item_id": "7677278954927066387",
       "title": "其实，这个项目也有Mac版本。你在介绍页可以选择下载它的Mac版本，或者去我的…",
       "tags": [],
@@ -334,7 +343,7 @@
       "value_sufficient": true
     },
     {
-      "id": 1993,
+      "id": 2060,
       "item_id": "7673488000722878883",
       "title": "好耶 今天HR姐姐说我的台式电脑到了",
       "tags": [],
@@ -358,7 +367,7 @@
       "value_sufficient": true
     },
     {
-      "id": 1997,
+      "id": 2064,
       "item_id": "7675012351191534902",
       "title": "狗来 汪汪汪 汪汪 汪汪汪汪 汪汪汪 汪汪 汪 汪 汪 汪 汪 汪 汪 汪汪汪…",
       "tags": [],
@@ -382,7 +391,7 @@
       "value_sufficient": true
     },
     {
-      "id": 1989,
+      "id": 2056,
       "item_id": "7669102948174460899",
       "title": "大一的时候特别喜欢尝试泡面，所以那个时候把吃过的泡面都进行了评星",
       "tags": [],
@@ -406,7 +415,7 @@
       "value_sufficient": true
     },
     {
-      "id": 1992,
+      "id": 2059,
       "item_id": "7672833579289824538",
       "title": "第一次做asmr的星星布丁 视频内容包含【咀嚼音】【纸箱敲击】【史莱姆音】，希…",
       "tags": [],
@@ -430,7 +439,7 @@
       "value_sufficient": true
     },
     {
-      "id": 1994,
+      "id": 2061,
       "item_id": "7673857878340100259",
       "title": "无文案作品",
       "tags": [
@@ -456,7 +465,7 @@
       "value_sufficient": true
     },
     {
-      "id": 1987,
+      "id": 2054,
       "item_id": "7667383612505647842",
       "title": "自用的健身ai好物分享～",
       "tags": [],
@@ -480,7 +489,7 @@
       "value_sufficient": true
     },
     {
-      "id": 2006,
+      "id": 2073,
       "item_id": "7696462267495238966",
       "title": "本视频由GPT6.1sol制作",
       "tags": [],
@@ -504,7 +513,7 @@
       "value_sufficient": true
     },
     {
-      "id": 2004,
+      "id": 2071,
       "item_id": "7694615026238094754",
       "title": "用在后面的可以用在前面",
       "tags": [],
@@ -528,7 +537,7 @@
       "value_sufficient": true
     },
     {
-      "id": 1995,
+      "id": 2062,
       "item_id": "7674540847811320384",
       "title": "江大周边美食从夯到拉排名后续",
       "tags": [],
@@ -552,7 +561,7 @@
       "value_sufficient": true
     },
     {
-      "id": 2001,
+      "id": 2068,
       "item_id": "7677292068657466665",
       "title": "和女朋友的微信聊天年度报告 看年度报告好有意思 建议大家都做",
       "tags": [],
@@ -576,7 +585,7 @@
       "value_sufficient": true
     },
     {
-      "id": 1991,
+      "id": 2058,
       "item_id": "7670528866520170403",
       "title": "我用ai做了个一键清理c盘神器 别再为c盘爆满烦恼了 别再一次次大费周章在c盘…",
       "tags": [
@@ -602,7 +611,7 @@
       "value_sufficient": true
     },
     {
-      "id": 1986,
+      "id": 2053,
       "item_id": "7665715266957656162",
       "title": "秋招妙妙工具制作中",
       "tags": [
@@ -628,13 +637,13 @@
       "value_sufficient": true
     },
     {
-      "id": 2007,
-      "item_id": "xlsx_别再一个一个投网申了，「一键投递」来啦 海鲜市场10元投递1",
+      "id": 2074,
+      "item_id": "xlsx_5a20b1d0fdb524e62d4c",
       "title": "别再一个一个投网申了，「一键投递」来啦 海鲜市场10元投递10个岗位",
       "tags": [],
       "desc_full": "别再一个一个投网申了，「一键投递」来啦 海鲜市场10元投递10个岗位\nnonono\n捞鱼一键投递可以免费帮助你！",
       "publish_time": "2026-10-15 23:45:24",
-      "play_count": 563,
+      "play_count": 565,
       "avg_play_duration": 8.42,
       "completion_rate_5s": 0.3145,
       "bounce_rate_2s": 0.294,
@@ -647,12 +656,12 @@
       "follower_gain": 0,
       "cover": "",
       "engagement_score": 0.5102,
-      "quality_score": 0.2195,
-      "value_score": 0.4732,
+      "quality_score": 0.2191,
+      "value_score": 0.4726,
       "value_sufficient": true
     },
     {
-      "id": 2002,
+      "id": 2069,
       "item_id": "7679089234079116980",
       "title": "今天是享福 TV 周末可能会再更新一个 AI 漫剧的小工具 还有一个微信表情也…",
       "tags": [],
@@ -676,8 +685,8 @@
       "value_sufficient": true
     },
     {
-      "id": 2008,
-      "item_id": "xlsx_「自动续火花」已支持 qq&dy 自动续火",
+      "id": 2075,
+      "item_id": "xlsx_35e558f2c8cb78e87519",
       "title": "「自动续火花」已支持 qq&dy 自动续火",
       "tags": [],
       "desc_full": "「自动续火花」已支持 qq&dy 自动续火\n欢迎大家一起来体验~\n有任何问题都可以直接发在评论区 评论区会有小机器人出没哦",
@@ -700,7 +709,7 @@
       "value_sufficient": true
     },
     {
-      "id": 1996,
+      "id": 2063,
       "item_id": "7674974950461616738",
       "title": "【狗来】制作中",
       "tags": [],
@@ -724,7 +733,7 @@
       "value_sufficient": false
     },
     {
-      "id": 1999,
+      "id": 2066,
       "item_id": "7677276922144902427",
       "title": "这个打标工具的项目，市面上应该有一些比较成熟的APP，但作为免费的开源框架，其…",
       "tags": [],
@@ -748,7 +757,7 @@
       "value_sufficient": false
     },
     {
-      "id": 1990,
+      "id": 2057,
       "item_id": "7669844177542303022",
       "title": "泥好 我是星星布丁@🎀星星布丁🎀",
       "tags": [],
@@ -772,7 +781,7 @@
       "value_sufficient": false
     },
     {
-      "id": 2003,
+      "id": 2070,
       "item_id": "7691249784791685568",
       "title": "dot猛蹬体验中",
       "tags": [],
@@ -796,7 +805,7 @@
       "value_sufficient": false
     },
     {
-      "id": 2005,
+      "id": 2072,
       "item_id": "7696080649140161818",
       "title": "记录ai小宝贝给我带来方便的很多很多瞬间",
       "tags": [],
@@ -823,183 +832,483 @@
   "trend": [
     {
       "date": "2026-08-30",
-      "play": 263766,
-      "works": 35,
-      "comments": 658
+      "play": 263574,
+      "works": 34,
+      "comments": 658,
+      "previous_date": "2026-08-27",
+      "interval_days": 3,
+      "play_delta": 2740,
+      "comment_delta": 10,
+      "comparable_works": 33,
+      "added_works": 1,
+      "removed_works": 1,
+      "added_play": 412,
+      "removed_play": 284,
+      "scope_total_delta": 2868
     },
     {
       "date": "2026-09-02",
-      "play": 263235,
-      "works": 34,
-      "comments": 657
+      "play": 263043,
+      "works": 33,
+      "comments": 657,
+      "previous_date": "2026-08-30",
+      "interval_days": 3,
+      "play_delta": 1594,
+      "comment_delta": 2,
+      "comparable_works": 33,
+      "added_works": 0,
+      "removed_works": 1,
+      "added_play": 0,
+      "removed_play": 2125,
+      "scope_total_delta": -531
     },
     {
       "date": "2026-09-04",
-      "play": 243538,
-      "works": 32,
-      "comments": 573
+      "play": 243346,
+      "works": 31,
+      "comments": 573,
+      "previous_date": "2026-09-02",
+      "interval_days": 2,
+      "play_delta": 154,
+      "comment_delta": 0,
+      "comparable_works": 31,
+      "added_works": 0,
+      "removed_works": 2,
+      "added_play": 0,
+      "removed_play": 19851,
+      "scope_total_delta": -19697
     },
     {
       "date": "2026-09-05",
-      "play": 239992,
-      "works": 31,
-      "comments": 567
+      "play": 239800,
+      "works": 30,
+      "comments": 567,
+      "previous_date": "2026-09-04",
+      "interval_days": 1,
+      "play_delta": 206,
+      "comment_delta": 0,
+      "comparable_works": 30,
+      "added_works": 0,
+      "removed_works": 1,
+      "added_play": 0,
+      "removed_play": 3752,
+      "scope_total_delta": -3546
     },
     {
       "date": "2026-09-07",
-      "play": 239834,
-      "works": 30,
-      "comments": 563
+      "play": 239642,
+      "works": 29,
+      "comments": 563,
+      "previous_date": "2026-09-05",
+      "interval_days": 2,
+      "play_delta": 240,
+      "comment_delta": 0,
+      "comparable_works": 29,
+      "added_works": 0,
+      "removed_works": 1,
+      "added_play": 0,
+      "removed_play": 398,
+      "scope_total_delta": -158
     },
     {
       "date": "2026-09-08",
-      "play": 239908,
-      "works": 30,
-      "comments": 563
+      "play": 239716,
+      "works": 29,
+      "comments": 563,
+      "previous_date": "2026-09-07",
+      "interval_days": 1,
+      "play_delta": 74,
+      "comment_delta": 0,
+      "comparable_works": 29,
+      "added_works": 0,
+      "removed_works": 0,
+      "added_play": 0,
+      "removed_play": 0,
+      "scope_total_delta": 74
     },
     {
       "date": "2026-09-09",
-      "play": 239985,
-      "works": 30,
-      "comments": 563
+      "play": 239793,
+      "works": 29,
+      "comments": 563,
+      "previous_date": "2026-09-08",
+      "interval_days": 1,
+      "play_delta": 77,
+      "comment_delta": 0,
+      "comparable_works": 29,
+      "added_works": 0,
+      "removed_works": 0,
+      "added_play": 0,
+      "removed_play": 0,
+      "scope_total_delta": 77
     },
     {
       "date": "2026-09-11",
-      "play": 240127,
-      "works": 30,
-      "comments": 567
+      "play": 239935,
+      "works": 29,
+      "comments": 567,
+      "previous_date": "2026-09-09",
+      "interval_days": 2,
+      "play_delta": 142,
+      "comment_delta": 4,
+      "comparable_works": 29,
+      "added_works": 0,
+      "removed_works": 0,
+      "added_play": 0,
+      "removed_play": 0,
+      "scope_total_delta": 142
     },
     {
       "date": "2026-09-12",
-      "play": 236451,
-      "works": 29,
-      "comments": 565
+      "play": 236259,
+      "works": 28,
+      "comments": 565,
+      "previous_date": "2026-09-11",
+      "interval_days": 1,
+      "play_delta": 64,
+      "comment_delta": 0,
+      "comparable_works": 28,
+      "added_works": 0,
+      "removed_works": 1,
+      "added_play": 0,
+      "removed_play": 3740,
+      "scope_total_delta": -3676
     },
     {
       "date": "2026-09-13",
-      "play": 236525,
-      "works": 29,
-      "comments": 565
+      "play": 236333,
+      "works": 28,
+      "comments": 565,
+      "previous_date": "2026-09-12",
+      "interval_days": 1,
+      "play_delta": 74,
+      "comment_delta": 0,
+      "comparable_works": 28,
+      "added_works": 0,
+      "removed_works": 0,
+      "added_play": 0,
+      "removed_play": 0,
+      "scope_total_delta": 74
     },
     {
       "date": "2026-09-15",
-      "play": 221344,
-      "works": 27,
-      "comments": 529
+      "play": 221151,
+      "works": 26,
+      "comments": 529,
+      "previous_date": "2026-09-13",
+      "interval_days": 2,
+      "play_delta": 130,
+      "comment_delta": -1,
+      "comparable_works": 26,
+      "added_works": 0,
+      "removed_works": 2,
+      "added_play": 0,
+      "removed_play": 15312,
+      "scope_total_delta": -15182
     },
     {
       "date": "2026-09-16",
-      "play": 221415,
-      "works": 27,
-      "comments": 529
+      "play": 221222,
+      "works": 26,
+      "comments": 529,
+      "previous_date": "2026-09-15",
+      "interval_days": 1,
+      "play_delta": 71,
+      "comment_delta": 0,
+      "comparable_works": 26,
+      "added_works": 0,
+      "removed_works": 0,
+      "added_play": 0,
+      "removed_play": 0,
+      "scope_total_delta": 71
     },
     {
       "date": "2026-09-17",
-      "play": 220246,
-      "works": 26,
-      "comments": 517
+      "play": 220052,
+      "works": 25,
+      "comments": 517,
+      "previous_date": "2026-09-16",
+      "interval_days": 1,
+      "play_delta": 92,
+      "comment_delta": 0,
+      "comparable_works": 25,
+      "added_works": 0,
+      "removed_works": 1,
+      "added_play": 0,
+      "removed_play": 1262,
+      "scope_total_delta": -1170
     },
     {
       "date": "2026-09-18",
-      "play": 220312,
-      "works": 26,
-      "comments": 517
+      "play": 220118,
+      "works": 25,
+      "comments": 517,
+      "previous_date": "2026-09-17",
+      "interval_days": 1,
+      "play_delta": 66,
+      "comment_delta": 0,
+      "comparable_works": 25,
+      "added_works": 0,
+      "removed_works": 0,
+      "added_play": 0,
+      "removed_play": 0,
+      "scope_total_delta": 66
     },
     {
       "date": "2026-09-19",
-      "play": 219508,
-      "works": 25,
-      "comments": 519
+      "play": 219314,
+      "works": 24,
+      "comments": 519,
+      "previous_date": "2026-09-18",
+      "interval_days": 1,
+      "play_delta": 91,
+      "comment_delta": 2,
+      "comparable_works": 24,
+      "added_works": 0,
+      "removed_works": 1,
+      "added_play": 0,
+      "removed_play": 895,
+      "scope_total_delta": -804
     },
     {
       "date": "2026-09-20",
-      "play": 219673,
-      "works": 25,
-      "comments": 519
+      "play": 219478,
+      "works": 24,
+      "comments": 519,
+      "previous_date": "2026-09-19",
+      "interval_days": 1,
+      "play_delta": 164,
+      "comment_delta": 0,
+      "comparable_works": 24,
+      "added_works": 0,
+      "removed_works": 0,
+      "added_play": 0,
+      "removed_play": 0,
+      "scope_total_delta": 164
     },
     {
       "date": "2026-09-21",
-      "play": 219766,
-      "works": 25,
-      "comments": 519
+      "play": 219571,
+      "works": 24,
+      "comments": 519,
+      "previous_date": "2026-09-20",
+      "interval_days": 1,
+      "play_delta": 93,
+      "comment_delta": 0,
+      "comparable_works": 24,
+      "added_works": 0,
+      "removed_works": 0,
+      "added_play": 0,
+      "removed_play": 0,
+      "scope_total_delta": 93
     },
     {
       "date": "2026-09-23",
       "play": 173283,
       "works": 22,
-      "comments": 461
+      "comments": 461,
+      "previous_date": "2026-09-21",
+      "interval_days": 2,
+      "play_delta": 584,
+      "comment_delta": 2,
+      "comparable_works": 22,
+      "added_works": 0,
+      "removed_works": 2,
+      "added_play": 0,
+      "removed_play": 46872,
+      "scope_total_delta": -46288
     },
     {
       "date": "2026-09-24",
       "play": 173366,
       "works": 22,
-      "comments": 462
+      "comments": 462,
+      "previous_date": "2026-09-23",
+      "interval_days": 1,
+      "play_delta": 83,
+      "comment_delta": 1,
+      "comparable_works": 22,
+      "added_works": 0,
+      "removed_works": 0,
+      "added_play": 0,
+      "removed_play": 0,
+      "scope_total_delta": 83
     },
     {
       "date": "2026-09-25",
       "play": 173486,
       "works": 22,
-      "comments": 462
+      "comments": 462,
+      "previous_date": "2026-09-24",
+      "interval_days": 1,
+      "play_delta": 120,
+      "comment_delta": 0,
+      "comparable_works": 22,
+      "added_works": 0,
+      "removed_works": 0,
+      "added_play": 0,
+      "removed_play": 0,
+      "scope_total_delta": 120
     },
     {
       "date": "2026-09-28",
       "play": 174052,
       "works": 22,
-      "comments": 462
+      "comments": 462,
+      "previous_date": "2026-09-25",
+      "interval_days": 3,
+      "play_delta": 566,
+      "comment_delta": 0,
+      "comparable_works": 22,
+      "added_works": 0,
+      "removed_works": 0,
+      "added_play": 0,
+      "removed_play": 0,
+      "scope_total_delta": 566
     },
     {
       "date": "2026-10-01",
       "play": 154692,
       "works": 21,
-      "comments": 433
+      "comments": 433,
+      "previous_date": "2026-09-28",
+      "interval_days": 3,
+      "play_delta": 206,
+      "comment_delta": 1,
+      "comparable_works": 20,
+      "added_works": 1,
+      "removed_works": 2,
+      "added_play": 40,
+      "removed_play": 19606,
+      "scope_total_delta": -19360
     },
     {
       "date": "2026-10-02",
       "play": 154773,
       "works": 21,
-      "comments": 433
+      "comments": 433,
+      "previous_date": "2026-10-01",
+      "interval_days": 1,
+      "play_delta": 81,
+      "comment_delta": 0,
+      "comparable_works": 21,
+      "added_works": 0,
+      "removed_works": 0,
+      "added_play": 0,
+      "removed_play": 0,
+      "scope_total_delta": 81
     },
     {
       "date": "2026-10-04",
       "play": 151533,
       "works": 20,
-      "comments": 428
+      "comments": 428,
+      "previous_date": "2026-10-02",
+      "interval_days": 2,
+      "play_delta": 106,
+      "comment_delta": 0,
+      "comparable_works": 20,
+      "added_works": 0,
+      "removed_works": 1,
+      "added_play": 0,
+      "removed_play": 3346,
+      "scope_total_delta": -3240
     },
     {
       "date": "2026-10-05",
       "play": 151151,
       "works": 19,
-      "comments": 422
+      "comments": 422,
+      "previous_date": "2026-10-04",
+      "interval_days": 1,
+      "play_delta": 58,
+      "comment_delta": 0,
+      "comparable_works": 19,
+      "added_works": 0,
+      "removed_works": 1,
+      "added_play": 0,
+      "removed_play": 440,
+      "scope_total_delta": -382
     },
     {
       "date": "2026-10-06",
       "play": 151223,
       "works": 19,
-      "comments": 422
+      "comments": 422,
+      "previous_date": "2026-10-05",
+      "interval_days": 1,
+      "play_delta": 72,
+      "comment_delta": 0,
+      "comparable_works": 19,
+      "added_works": 0,
+      "removed_works": 0,
+      "added_play": 0,
+      "removed_play": 0,
+      "scope_total_delta": 72
     },
     {
       "date": "2026-10-07",
       "play": 151322,
       "works": 19,
-      "comments": 422
+      "comments": 422,
+      "previous_date": "2026-10-06",
+      "interval_days": 1,
+      "play_delta": 99,
+      "comment_delta": 0,
+      "comparable_works": 19,
+      "added_works": 0,
+      "removed_works": 0,
+      "added_play": 0,
+      "removed_play": 0,
+      "scope_total_delta": 99
     },
     {
       "date": "2026-10-09",
       "play": 151416,
       "works": 19,
-      "comments": 422
+      "comments": 422,
+      "previous_date": "2026-10-07",
+      "interval_days": 2,
+      "play_delta": 94,
+      "comment_delta": 0,
+      "comparable_works": 19,
+      "added_works": 0,
+      "removed_works": 0,
+      "added_play": 0,
+      "removed_play": 0,
+      "scope_total_delta": 94
     },
     {
       "date": "2026-10-10",
       "play": 152336,
       "works": 20,
-      "comments": 425
+      "comments": 425,
+      "previous_date": "2026-10-09",
+      "interval_days": 1,
+      "play_delta": 84,
+      "comment_delta": 0,
+      "comparable_works": 19,
+      "added_works": 1,
+      "removed_works": 0,
+      "added_play": 836,
+      "removed_play": 0,
+      "scope_total_delta": 920
     },
     {
       "date": "2026-10-16",
-      "play": 151041,
+      "play": 151043,
       "works": 23,
-      "comments": 428
+      "comments": 428,
+      "previous_date": "2026-10-10",
+      "interval_days": 6,
+      "play_delta": 778,
+      "comment_delta": 0,
+      "comparable_works": 19,
+      "added_works": 4,
+      "removed_works": 1,
+      "added_play": 2779,
+      "removed_play": 4850,
+      "scope_total_delta": -1293
     }
   ],
   "all_snapshots": [
