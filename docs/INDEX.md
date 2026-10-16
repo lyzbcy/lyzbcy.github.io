@@ -48,4 +48,5 @@
 - 2026-08-26 营养身体趋势 v3:跨年年份标注+12月减脂期历史合并+胸/腿/臂围度(见 `specs/2026-08-26-nutrition-body-trend-v3.md`)
 
 - 抖音看板停更、近90天统计窗口与假负增长：[排查与修复](pitfalls/douyin-dashboard-20261016.md)
-\n- [howto/ikuuu-checkin.md](howto/ikuuu-checkin.md) — iKuuu 09:00 check-in, WeCom, recovery
+
+- [howto/ikuuu-checkin.md](howto/ikuuu-checkin.md) — iKuuu 09:00 check-in, WeCom, recovery
