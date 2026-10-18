@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-17T22:05:03.816143+08:00",
+  "generated_at": "2026-10-18T22:05:03.689008+08:00",
   "goals": {
     "calories": 1652,
     "water": 2000,
@@ -361,10 +361,10 @@
     }
   },
   "macros": {
-    "carbs_pct": 50,
-    "protein_pct": 22,
-    "fat_pct": 28,
-    "total_cal": 1517
+    "carbs_pct": 49,
+    "protein_pct": 21,
+    "fat_pct": 30,
+    "total_cal": 1577
   },
   "trend": [
     {
@@ -2438,9 +2438,9 @@
   ],
   "status": {
     "has_today": false,
-    "has_yesterday": true,
-    "today": "2026-10-17",
-    "is_active": true,
+    "has_yesterday": false,
+    "today": "2026-10-18",
+    "is_active": false,
     "is_training_day": false
   },
   "health_score": {
@@ -2524,9 +2524,9 @@
         "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
       }
     ],
-    "range_start": "2026-10-04",
-    "range_end": "2026-10-17",
-    "exported_at": "2026-10-17T22:05:03.803970"
+    "range_start": "2026-10-05",
+    "range_end": "2026-10-18",
+    "exported_at": "2026-10-18T22:05:03.675263"
   },
   "food_library": {
     "items": [
