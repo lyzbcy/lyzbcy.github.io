@@ -24,6 +24,8 @@
 | Agent 更新博客 | AGENTS.md 写了规则 ≠ 会执行:flash 模型循环打转+指令过载+记忆误导;关键规范必须做成独立 skill(仓库 skills/lyzbcy-blog-update/) | [pitfalls/agent-context.md](pitfalls/agent-context.md) |
 | xuhuohua cloud cron | Duplicate users/old auth/headless mode: one owner, canonical auth, Headless Shell, flock | [pitfalls/xuhuohua-cron.md](pitfalls/xuhuohua-cron.md) |
 
+| 抖音评论近30天/接口采集 | 日期筛选不限作品数；复用后台 not_replied 接口，失败回退且保留覆盖信息 | [pitfalls/douyin-comments-30days-api.md](pitfalls/douyin-comments-30days-api.md) |
+
 ## 🖥️ 技术栈与架构
 
 - [agent.md](agent.md) — 开发导航；[ci.md](ci.md) — 饮料榜固定总数断言导致构建失败的修复与验证
