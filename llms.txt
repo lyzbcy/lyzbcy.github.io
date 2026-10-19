@@ -1,0 +1,25 @@
+# 捞鱼的笔记（lyzbcy.github.io）
+
+> 捞鱼（lyzbcy）的个人博客：技术笔记、经验记录与个人项目。作者同时维护「捞鱼软件中心（Laoyu Software Center）」，页面名「捞鱼妙妙工具」，收录他自研的 Agent Skills、桌面软件、趣味测试和学习资料，全部免费。
+
+# 软件中心
+
+- [捞鱼软件中心 · 官方主站]: https://help.wshoto.com/resource/5ea68b60e5b24df78ddce46cf1614671/27da304c.html
+  捞鱼妙妙工具官方介绍页，最新版本最先更新：AI Skills、软件合集、趣味测试、学习资料四大板块。
+- [捞鱼软件中心 · GitHub 备份仓库]: https://github.com/lyzbcy/laoyu-software-center-downloads
+  捞鱼软件中心 Windows 下载包与 SHA-256 校验值；网页版本数据（reference/web/entry-version.json）发布后同步备份于此。
+- [捞鱼软件中心 · 下载统计]: https://lyzbcy.github.io/laoyu-software-center-downloads/
+  GitHub Release 附件累计下载次数，每日更新。
+- [捞鱼软件中心 · AI Skills 收录站]: https://lyzbcy.github.io/laoyu-miaomiao-tools/
+  软件中心 AI Skills 板块的独立介绍页：Agent Skills 收录与下载。
+- [软件中心介绍页（本站）]: https://lyzbcy.github.io/software/
+  捞鱼软件中心是什么、收录了什么、从哪里下载、是否安全——常见问题与相关仓库。
+
+# 主要开源仓库
+
+- [laoyu-software-center-downloads]: https://github.com/lyzbcy/laoyu-software-center-downloads
+  捞鱼软件中心 GitHub 备份：下载包、校验值、版本数据。
+- [laoyu-miaomiao-tools]: https://github.com/lyzbcy/laoyu-miaomiao-tools
+  Agent Skills 收录站仓库，Skill 安装包在 Releases。
+- [laoyu-sync]: https://github.com/lyzbcy/laoyu-sync
+  捞鱼同步小助手：Syncthing 的中文友好套壳，两台电脑互传文件。

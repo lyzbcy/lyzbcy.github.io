@@ -1,5 +1,5 @@
+# 捞鱼的笔记（lyzbcy.github.io）— 对所有爬虫（含 AI 爬虫）开放收录
 User-agent: *
-
-Disallow: /norobots/
+Allow: /
 
 Sitemap: https://lyzbcy.github.io/sitemap.xml
