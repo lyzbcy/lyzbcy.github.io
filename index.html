@@ -5,6 +5,32 @@ layout: home
 # 首页留言板（评论区）由下方脚本动态注入
 ---
 
+<!-- 捞鱼软件中心入口：主按钮到官方主站，副链接到 GitHub 备份仓库 -->
+<style>
+.sc-entry{max-width:820px;margin:24px auto 0;padding:0 16px;}
+.sc-entry__link{display:flex;align-items:center;gap:16px;padding:18px 22px;border:1px solid rgba(128,128,128,.25);border-radius:14px;background:rgba(56,189,248,.07);text-decoration:none;color:inherit;transition:transform .15s ease,box-shadow .15s ease;}
+.sc-entry__link:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.12);text-decoration:none;}
+.sc-entry__fish{font-size:34px;line-height:1;}
+.sc-entry__text{display:flex;flex-direction:column;gap:4px;flex:1;}
+.sc-entry__text strong{font-size:1.1em;}
+.sc-entry__text span{font-size:.88em;color:#6b7280;}
+.sc-entry__cta{flex-shrink:0;font-size:.95em;color:#0ea5e9;white-space:nowrap;}
+.sc-entry__mirror{display:block;text-align:right;margin-top:6px;font-size:.82em;color:#9ca3af;}
+.sc-entry__mirror:hover{color:#0ea5e9;}
+@media (max-width:576px){.sc-entry__fish{display:none;}}
+</style>
+<div class="sc-entry">
+  <a class="sc-entry__link" href="https://help.wshoto.com/resource/5ea68b60e5b24df78ddce46cf1614671/27da304c.html">
+    <span class="sc-entry__fish">🐟</span>
+    <span class="sc-entry__text">
+      <strong>捞鱼软件中心</strong>
+      <span>捞鱼自研的 Agent Skills、桌面软件、趣味测试与学习资料合集，全部免费</span>
+    </span>
+    <span class="sc-entry__cta">进入 →</span>
+  </a>
+  <a class="sc-entry__mirror" href="https://github.com/lyzbcy/laoyu-software-center-downloads">GitHub 备份仓库（下载包 · SHA-256 校验 · 版本数据同步备份）↗</a>
+</div>
+
 <!-- 留言板：在 DOMContentLoaded 时注入到 #board 容器顶部 -->
 <div id="home-giscus-mount" style="display:none;"></div>
 <script>
