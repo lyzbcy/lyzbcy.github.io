@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from check_runtime import managed_run, acquire_lock
 import argparse
 import json
 import os
@@ -57,7 +58,7 @@ def works_needs_refresh(marker: Path) -> bool:
 
 
 def run(cmd, cwd=None, check=True):
-    result = subprocess.run(cmd, cwd=cwd, text=True, capture_output=True)
+    result = managed_run(cmd, cwd=cwd, text=True, capture_output=True, timeout=180)
     if check and result.returncode != 0:
         raise RuntimeError(
             f"命令失败: {' '.join(cmd)}\nstdout:\n{result.stdout}\nstderr:\n{result.stderr}"
@@ -87,7 +88,7 @@ def cleanup_old_logs(keep_days: int = LOG_KEEP_DAYS) -> None:
             # 从文件名 run-YYYY-MM-DD.log 解析日期
             try:
                 date_str = log_file.stem.replace("run-", "")
-                log_date = datetime.strptime(date_str, "%Y-%m-%d")
+                log_date = datetime.strptime(date_str, "%Y-%m-%d").replace(tzinfo=SH_TZ)
                 if log_date < cutoff:
                     log_file.unlink()
             except ValueError:
@@ -260,7 +261,13 @@ def main():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     collect_started_at = None
 
+    lock = acquire_lock(BASE_DIR / '.run-check.lock')
+    if lock is None:
+        print('SKIP: 已有评论检查正在执行', flush=True)
+        return
+    append_log('START | mode=' + ('collect_only' if args.collect_only else 'normal'))
     try:
+        print('阶段：频率检查', flush=True)
         if args.collect_only:
             freq_output = '只读采集验证（不写检查时间戳）'
         else:
@@ -272,6 +279,7 @@ def main():
             write_report(build_skip_report(freq_output))
             return
 
+        print('阶段：内存与作品列表检查', flush=True)
         available_mb = memory_available_mb()
         if available_mb < 200:
             append_log(f"STOP_MEMORY | available={available_mb}MB | {freq_output}")
@@ -283,17 +291,19 @@ def main():
             run(xvfb_wrap(["npm", "run", "works"]), cwd=BASE_DIR)
             marker.write_text("done\n", encoding="utf-8")  # 更新标记时间戳
 
+        print('阶段：采集近30天未回复评论（最长480秒）', flush=True)
+        append_log('STAGE | collect')
         collect_started_at = datetime.now().timestamp()
 
         # Call comments:collect via collect-comments.js proxy -> douyin-creator-tools.
         # Do NOT run comments:export with cwd=BASE_DIR: BASE_DIR package.json has no such script,
         # it just npm-errors and gets swallowed by except -> always 0 comments.
-        collect_proc = subprocess.run(
+        collect_proc = managed_run(
             xvfb_wrap(["npm", "run", "comments:collect", "--", "--days", str(args.days), "--limit", "50"] + (["--diagnostic-out", args.diagnostic_out] if args.diagnostic_out else [])),
             cwd=BASE_DIR,
             text=True,
             capture_output=True,
-            timeout=7200,
+            timeout=480,
         )
         if collect_proc.stdout:
             (OUTPUT_DIR / 'collection-latest.log').write_text(collect_proc.stdout, encoding='utf-8')
@@ -338,12 +348,13 @@ def main():
             mark_check_done()
             write_report(build_empty_report(freq_output, unreplied_payload))
             # 实时反馈：空跑一次
-            subprocess.run(
+            managed_run(
                 ["python3", str(BASE_DIR / "adjust-check-freq.py"), "--result", "empty"],
                 cwd=BASE_DIR, text=True, capture_output=True,
             )
             return
 
+        print('阶段：生成回复计划', flush=True)
         run(["python3", str(BASE_DIR / "process-comments.py")], cwd=BASE_DIR)
         plan_manifest = load_json(MANIFEST_FILE)
 
@@ -357,7 +368,8 @@ def main():
 
         for plan in plan_manifest.get("plans", []):
             plan_path = Path(plan["file"])
-            result = subprocess.run(
+            print('阶段：回复 ' + plan_path.name, flush=True)
+            result = managed_run(
                 ["npm", "run", "comments:reply", "--", str(plan_path)],
                 cwd=BASE_DIR,
                 text=True,
@@ -407,17 +419,22 @@ def main():
             f"成功={aggregate['replied_count']} | 未匹配={aggregate['unmatched_count']} | 报错={aggregate['error_count']}"
         )
         # 实时反馈：发现了未回复评论
-        subprocess.run(
+        managed_run(
             ["python3", str(BASE_DIR / "adjust-check-freq.py"), "--result", "found"],
             cwd=BASE_DIR, text=True, capture_output=True,
         )
 
     except Exception as e:
-        append_log(f"ERROR | {type(e).__name__}: {str(e)[:200]}")
+        append_log(f"ERROR | {type(e).__name__}: {str(e)[-3000:]}")
+        if isinstance(e, subprocess.TimeoutExpired):
+            detail = (str(e.output or "") + "\n" + str(e.stderr or ""))[-12000:]
+            append_log("TIMEOUT_OUTPUT | " + detail)
+            print("阶段超时，已清理本阶段全部子进程；发送结果不能推断为0。", flush=True)
         traceback.print_exc()
         raise
     finally:
         cleanup_old_logs()
+        lock.close()
 
 
 if __name__ == "__main__":

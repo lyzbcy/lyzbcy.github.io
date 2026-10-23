@@ -99,3 +99,7 @@ tail -20 ~/.openclaw/workspace/skills/lyzbcy-douyin-comment-check/logs/run-$(dat
 ## 2026-10-19 采集优化
 
 正式入口保持 run-check.py；默认 --days 30，按上海今天及前29个自然日选择全部作品，无固定作品上限。采集优先通过登录上下文请求原生 not_replied 接口，异常回退页面。只认原生未回复语义，不用公开评论推断。报告必须保留范围与覆盖信息。逐作品日志在 comments-output/collection-latest.log。排障可用 --collect-only，只读且不生成计划、不调用LLM、不发评论、不改频率。详情见博客知识库 docs/pitfalls/douyin-comments-30days-api.md。
+
+## 2026-10-23 无人值守执行保护
+入口已加整轮互斥、阶段日志与flush输出；采集最长480秒，其他阶段默认180秒。超时/父进程终止必须清理该阶段整个进程组。禁止在cron等待按Enter；出现INTERACTIVE_REQUIRED请报页面入口或人工处理问题，不直接猜登录失效。
+超时不等于0条或未发送；没有本次新鲜结果只能报结果未确认。禁止单凭调度器status=ok宣布业务成功。下一轮只走run-check.py读取最新未回复，禁止重新发送旧plan。--collect-only排障不发评论、不调用LLM、不改检查时间戳。

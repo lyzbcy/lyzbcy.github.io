@@ -32,7 +32,7 @@ class CollectionOnlyTests(unittest.TestCase):
                  patch.object(runner,'works_needs_refresh',return_value=False), \
                  patch.object(runner,'memory_available_mb',return_value=1000), \
                  patch.object(runner,'run',side_effect=AssertionError('LLM/refresh/frequency command forbidden')), \
-                 patch.object(runner.subprocess,'run',side_effect=collect) as collect_mock, \
+                 patch.object(runner,'managed_run',side_effect=collect) as collect_mock, \
                  patch.object(runner,'mark_check_done') as mark, \
                  patch.object(runner,'cleanup_old_logs'), \
                  patch.object(sys,'argv',['run-check.py','--collect-only']), \

@@ -139,6 +139,7 @@ async function main() {
     pending.add(task);task.finally(()=>pending.delete(task));
   });
   let loginExpired = false;
+  let fatalError = false;
 
   try {
     await ensureCommentPageReady(page, DEFAULT_COMMENT_PAGE_URL, {
@@ -237,6 +238,7 @@ async function main() {
       console.error('LOGIN_EXPIRED: 登录态已失效，请手动登录');
       loginExpired = true;
     } else {
+      fatalError = true;
       console.error('ERROR:', e.message);
     }
   } finally {
@@ -249,6 +251,7 @@ async function main() {
     fs.chmodSync(cachePath,0o600);
     await context.close();
     if (loginExpired) process.exit(2);
+    if (fatalError) process.exitCode = 1;
   }
 }
 
