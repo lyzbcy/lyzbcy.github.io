@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-25T22:05:03.841379+08:00",
+  "generated_at": "2026-10-26T01:00:03.951515+08:00",
   "goals": {
     "calories": 1652,
     "water": 2000,
@@ -2369,7 +2369,7 @@
   "status": {
     "has_today": false,
     "has_yesterday": false,
-    "today": "2026-10-25",
+    "today": "2026-10-26",
     "is_active": false,
     "is_training_day": false
   },
@@ -2405,9 +2405,9 @@
         "exercise": "今日无训练 (0/20); 组数 0 (0/10)"
       }
     ],
-    "range_start": "2026-10-12",
-    "range_end": "2026-10-25",
-    "exported_at": "2026-10-25T22:05:03.827727"
+    "range_start": "2026-10-13",
+    "range_end": "2026-10-26",
+    "exported_at": "2026-10-26T01:00:03.942570"
   },
   "food_library": {
     "items": [
