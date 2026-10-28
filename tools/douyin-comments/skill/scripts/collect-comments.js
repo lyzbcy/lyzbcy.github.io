@@ -1,4 +1,4 @@
-const { execFileSync } = require("node:child_process");
+const { runCreator } = require("./creator-display.js");
 const { copyFileSync, existsSync, mkdirSync, rmSync, statSync, readFileSync } = require("node:fs");
 const path = require("node:path");
 
@@ -10,14 +10,6 @@ const creatorUnrepliedFile = path.join(creatorOutputDir, "unreplied-latest.json"
 const creatorWorksFile = path.join(creatorOutputDir, "list-works.json");
 
 function main() {
-  // 确保 Xvfb 在跑（headless=false 需要 display）
-  const { execSync } = require("node:child_process");
-  try { execSync("pgrep Xvfb", { stdio: "ignore" }); } catch {
-    console.log("🖥️  启动 Xvfb :99...");
-    execSync("nohup Xvfb :99 -screen 0 1280x800x24 > /tmp/xvfb.log 2>&1 &", { stdio: "ignore" });
-    require("node:child_process").execSync("sleep 1");
-  }
-  process.env.DISPLAY = ":99";
 
   console.log("🔍 使用真实 douyin-creator-tools 采集未回复评论...");
   const startedAt = Date.now();
@@ -25,7 +17,7 @@ function main() {
     rmSync(creatorUnrepliedFile, { force: true });
   }
   // 不带 --headless，用 Xvfb 虚拟显示器绕过抖音反爬
-  execFileSync("npm", ["run", "comments:collect", "--", ...process.argv.slice(2)], {
+  runCreator("npm", ["run", "comments:collect", "--", ...process.argv.slice(2)], {
     cwd: creatorRoot,
     stdio: "inherit",
   });

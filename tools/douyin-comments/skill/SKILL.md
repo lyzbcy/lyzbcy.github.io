@@ -103,3 +103,8 @@ tail -20 ~/.openclaw/workspace/skills/lyzbcy-douyin-comment-check/logs/run-$(dat
 ## 2026-10-23 无人值守执行保护
 入口已加整轮互斥、阶段日志与flush输出；采集最长480秒，其他阶段默认180秒。超时/父进程终止必须清理该阶段整个进程组。禁止在cron等待按Enter；出现INTERACTIVE_REQUIRED请报页面入口或人工处理问题，不直接猜登录失效。
 超时不等于0条或未发送；没有本次新鲜结果只能报结果未确认。禁止单凭调度器status=ok宣布业务成功。下一轮只走run-check.py读取最新未回复，禁止重新发送旧plan。--collect-only排障不发评论、不调用LLM、不改检查时间戳。
+
+## 2026-10-28 虚拟显示器授权冲突
+今天多轮在刷新作品列表时即失败，明确错误Authorization required / Missing X server，尚未进入登录态判断，不得误报Cookie掉线。根因：三处代理通过pgrep发现任意Xvfb后，就把DISPLAY强制改为:99；当:99由xvfb-run以私有Xauthority启动时，外层另分配的DISPLAY与授权配对被破坏。
+
+修复scripts/works.js、collect-comments.js、reply-comments.js统一使用creator-display.js：用xdpyinfo实际探测继承的DISPLAY/XAUTHORITY，成功保留，失败或缺失则xvfb-run -a选择独立显示器。不会pkill全局Xvfb、放宽访问控制、重写Cookie或操作其他服务的显示器。新增四项mock覆盖可用、被拒、缺失、探测超时，原七项Python回归仍通过。只读验证不生成回复、不发评论、不改频率。
