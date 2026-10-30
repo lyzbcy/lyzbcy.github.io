@@ -15,7 +15,7 @@ python3 tools/content_dashboard.py --db /home/ubuntu/.local/share/laoyu-content/
 python3 -m unittest discover -s tests -p test_content_dashboard.py
 ```
 
-导入字段见脚本 schema：content 是内容身份，publication 是平台稿件身份，snapshot 是不可变事实。同一素材在不同平台的版本不能按标题模糊自动归并。抖音导出只按显式原生 ID 或显式 source_title 精确匹配，`xlsx_` 标识是导出来源键，不能冒充平台原生作品 ID。
+导入字段见脚本 schema：content 是内容身份，publication 是平台稿件身份，snapshot 是不可变事实。同一素材在不同平台的版本不能按标题模糊自动归并。抖音导出按显式原生 ID、显式 source_title 精确匹配，或显式标题前缀加发布时间分钟匹配；候选必须唯一，`xlsx_` 标识是导出来源键，不能冒充平台原生作品 ID。
 
 24h 与7d窗口仅接受目标时间前后1小时内的真实采样；没有采样就缺测。不插值、不补造从0开始的曲线。展示生成时间与采样时间分开。播放、阅读门槛不同，不能当跨平台去重观众。作品归因涨粉与账号净增关注分开。
 
@@ -29,3 +29,10 @@ python3 -m unittest discover -s tests -p test_content_dashboard.py
 ## 维护
 
 前端 JS/CSS 使用外部文件，避免 Jekyll 压缩器改写字符串。构建后检查生成 JSON、页面入口和手机横向表格滚动。只提交本功能文件。线上源码可能比本地旧工作区新，实施前 fetch 并使用独立工作区。
+
+
+## 服务器实际集成（2026-10-30）
+
+已在现有 `update_douyin_dashboard.sh` 校验之前加入导入/导出，并在原有commit中加入快照JSON；沿用每日10:20采集，没有增加第二个调度。备份 `update_douyin_dashboard.sh.before-content-20261030`。导出失败保留上次快照并继续原抖音流程。原有Contents API兜底脚本仍仅处理旧抖音JSON；git push失败转该兜底时，多平台快照可能暂不更新，必须依页面采样时间识别，不能宣称已实时刷新。
+
+首版已包含本期抖音后台和B站公开页的真实快照；B站等其他平台尚无服务器定时采集器，仅支持标准快照导入。

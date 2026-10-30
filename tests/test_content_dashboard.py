@@ -28,6 +28,11 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual(self.db.execute('SELECT count(*) FROM snapshot').fetchone()[0],0)
     def test_publication_identity_cannot_switch(self):
         with self.assertRaises(ValueError):m.ingest(self.db,{'publications':[dict(self.pub,account_label='other')]})
+        with self.assertRaises(ValueError):m.ingest(self.db,{'publications':[dict(self.pub,native_id='other')]})
+    def test_partial_registry_cannot_erase_confirmed_identity(self):
+        m.ingest(self.db,{'publications':[dict(self.pub,account_label=None,native_id=None,status='submitted')]})
+        p=m.export(self.db)['contents'][0]['publications'][0]
+        self.assertEqual(p['native_id'],'id');self.assertEqual(p['account_label'],'owner');self.assertEqual(p['status'],'published')
     def test_window_uses_real_aligned_sample(self):
         m.ingest(self.db,{'snapshots':[self.row(30,'2026-10-31T10:20:00+08:00')]})
         p=m.export(self.db)['contents'][0]['publications'][0]
@@ -39,6 +44,16 @@ class RegistryTests(unittest.TestCase):
         with self.assertRaises(ValueError):m.stamp('2026-10-30T10:00:00')
     def test_douyin_no_fuzzy_title_binding(self):
         self.assertEqual(m.import_douyin(self.db,{'generated_at':'2026-10-30T12:00:00+08:00','all_works':[{'title':'Test','play_count':999}]}),0)
+    def test_explicit_title_prefix_requires_minute_and_unique_row(self):
+        p=dict(self.pub,platform='douyin',source_title='Test',native_id=None)
+        # Start a separate explicitly bound platform publication.
+        p['id']='douyin';m.ingest(self.db,{'publications':[p]})
+        data={'generated_at':'2026-10-30T12:00:00+08:00','all_works':[{'title':'Test description…','publish_time':'2026-10-30 10:00:32','play_count':10}]}
+        self.assertEqual(m.import_douyin(self.db,data),1)
+        data['all_works'][0]['publish_time']='2026-10-30 09:00:32'
+        self.assertEqual(m.import_douyin(self.db,data),0)
+        data['all_works'][0]['publish_time']='2026-10-30 10:00:32';data['all_works']*=2
+        self.assertEqual(m.import_douyin(self.db,data),0)
 
 
 if __name__=='__main__':unittest.main()

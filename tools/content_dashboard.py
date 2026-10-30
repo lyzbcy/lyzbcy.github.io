@@ -58,12 +58,16 @@ def ingest(db, data):
             if row.get('published_at'):
                 row['published_at'] = stamp(row['published_at'])
             columns = ('id','content_id','platform','account_label','format','native_id','url','published_at','status','collection','activity','source_title')
-            values = [row.get(k) for k in columns]
             # Publication identity cannot silently switch to another content/account.
-            existing = db.execute('SELECT content_id,platform,account_label FROM publication WHERE id=?',(row['id'],)).fetchone()
-            if existing and tuple(existing) != tuple(row.get(k) for k in ('content_id','platform','account_label')):
-                raise ValueError('Publication identity changed')
-            db.execute('INSERT INTO publication VALUES('+','.join('?' for _ in columns)+') ON CONFLICT(id) DO UPDATE SET native_id=excluded.native_id,url=excluded.url,status=excluded.status,published_at=excluded.published_at,collection=excluded.collection,activity=excluded.activity,source_title=excluded.source_title', values)
+            existing = db.execute('SELECT content_id,platform,account_label,native_id FROM publication WHERE id=?',(row['id'],)).fetchone()
+            if existing:
+                row['account_label']=row.get('account_label') or existing['account_label']
+                if tuple(existing)[:3] != tuple(row.get(k) for k in ('content_id','platform','account_label')):
+                    raise ValueError('Publication identity changed')
+                if existing['native_id'] and row.get('native_id') and existing['native_id']!=row['native_id']:
+                    raise ValueError('Native publication identity changed')
+            values = [row.get(k) for k in columns]
+            db.execute('INSERT INTO publication VALUES('+','.join('?' for _ in columns)+') ON CONFLICT(id) DO UPDATE SET native_id=COALESCE(excluded.native_id,publication.native_id),url=COALESCE(excluded.url,publication.url),status=CASE WHEN publication.status="published" AND excluded.status="submitted" THEN publication.status ELSE excluded.status END,published_at=COALESCE(excluded.published_at,publication.published_at),collection=COALESCE(excluded.collection,publication.collection),activity=COALESCE(excluded.activity,publication.activity),source_title=COALESCE(excluded.source_title,publication.source_title)', values)
         for row in rows:
             values=(row['publication_id'],row['observed_at'],row['data_as_of'],row['source'],json.dumps(row['metrics'],sort_keys=True))
             old=db.execute('SELECT metrics,data_as_of FROM snapshot WHERE publication_id=? AND observed_at=? AND source=?',(values[0],values[1],values[3])).fetchone()
@@ -73,13 +77,25 @@ def ingest(db, data):
 
 
 def import_douyin(db, source):
-    """Only bind explicit native IDs or an explicitly registered exact source_title."""
+    """Explicit ID, exact export title, or explicit title prefix + publish minute."""
     observed=stamp(source['generated_at'])
     snapshots=[]
     for pub in db.execute("SELECT * FROM publication WHERE platform='douyin'"):
-        rows=[w for w in source.get('all_works',[]) if
-              (pub['native_id'] and str(w.get('item_id')) == pub['native_id']) or
-              (pub['source_title'] and w.get('title') == pub['source_title'])]
+        def matches(w):
+            if pub['native_id'] and str(w.get('item_id')) == pub['native_id']:
+                return True
+            if not pub['source_title']:
+                return False
+            if w.get('title') == pub['source_title']:
+                return True
+            # Export titles include a truncated description. A prefix alone is
+            # insufficient: the explicitly registered publication minute must match.
+            try:
+                minute=stamp(w['publish_time'].replace(' ','T')+'+08:00')[:16]
+                return w.get('title','').startswith(pub['source_title']+' ') and minute == pub['published_at'][:16]
+            except (ValueError,KeyError,TypeError):
+                return False
+        rows=[w for w in source.get('all_works',[]) if matches(w)]
         if len(rows) != 1:
             continue
         row=rows[0]
