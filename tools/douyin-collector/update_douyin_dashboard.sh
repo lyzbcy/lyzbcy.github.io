@@ -32,6 +32,25 @@ TODAY="$(date +%Y-%m-%d)"
 BLOG_PATH="$(find "$REPO_DIR/_posts" -maxdepth 1 -type f -name '*-抖音数据看板.md' -print -quit)"
 [ -n "$BLOG_PATH" ] || die "未找到抖音看板文章"
 
+# laoyu-content-matrix-20261031: reuse the existing schedule and private DB.
+CONTENT_EXPORT_READY=0
+CONTENT_TOOL="$REPO_DIR/tools/refresh_content_metrics.py"
+CONTENT_DB="$HOME/.local/share/laoyu-content/registry.sqlite"
+CONTENT_SNAPSHOT="$REPO_DIR/assets/data/content-dashboard.json"
+if [ -f "$CONTENT_TOOL" ] && [ -f "$CONTENT_DB" ]; then
+    CONTENT_BEFORE="$(sha256sum "$CONTENT_SNAPSHOT" 2>/dev/null | cut -d ' ' -f 1 || true)"
+    if python3 "$CONTENT_TOOL" --db "$CONTENT_DB" --platforms "${CONTENT_METRIC_PLATFORMS:-douyin}" \
+        --douyin-export "$DATA_FILE" --export "$CONTENT_SNAPSHOT" \
+        --report "$HOME/.local/share/laoyu-content/last-refresh.json"; then
+        CONTENT_EXPORT_READY=1
+    elif [ "$(sha256sum "$CONTENT_SNAPSHOT" 2>/dev/null | cut -d ' ' -f 1 || true)" != "$CONTENT_BEFORE" ]; then
+        CONTENT_EXPORT_READY=1
+        log "部分平台采集失败，发布成功采样并保留其他平台历史"
+    else
+        log "多平台采集失败，保留上次快照；原抖音看板继续"
+    fi
+fi
+
 log "校验生成数据..."
 python3 "$VALIDATE_SCRIPT" --data "$DATA_FILE"
 python3 -m unittest tests/test_douyin_dashboard.py
@@ -84,6 +103,7 @@ done
 
 # rebase 成功后（或已是最新），再 add + commit
 git add _data/douyin.json "$BLOG_PATH"
+if [ "$CONTENT_EXPORT_READY" -eq 1 ]; then git add assets/data/content-dashboard.json; fi
 git add img/douyin-covers/ 2>/dev/null || true  # 作品封面（download_covers.py 产出）
 
 if ! git diff --cached --quiet; then
