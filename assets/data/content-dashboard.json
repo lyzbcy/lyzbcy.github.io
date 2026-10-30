@@ -1,0 +1,270 @@
+{
+  "schema": 1,
+  "generated_at": "2026-10-30T13:51:40+08:00",
+  "contents": [
+    {
+      "id": "hot100-002",
+      "title": "Hot100 第二期 · 最大子数组和",
+      "series": "捞鱼学算法",
+      "cover": "/assets/img/content/hot100-002.jpg",
+      "publications": [
+        {
+          "id": "hot100-002:bilibili",
+          "content_id": "hot100-002",
+          "platform": "bilibili",
+          "account_label": "捞鱼真不吃鱼",
+          "format": "video",
+          "native_id": "BV1iTxe6dEiC",
+          "url": "https://www.bilibili.com/video/BV1iTxe6dEiC/",
+          "published_at": "2026-10-30T10:57:55+08:00",
+          "status": "published",
+          "collection": "捞鱼学算法",
+          "activity": "分享我的专业知识",
+          "source_title": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {
+            "24": null,
+            "168": null
+          }
+        },
+        {
+          "id": "hot100-002:douyin",
+          "content_id": "hot100-002",
+          "platform": "douyin",
+          "account_label": "捞鱼真不吃鱼",
+          "format": "video",
+          "native_id": null,
+          "url": null,
+          "published_at": "2026-10-30T10:51:00+08:00",
+          "status": "published",
+          "collection": "捞鱼学算法",
+          "activity": "Vibe知识大赏",
+          "source_title": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-002:douyin",
+              "observed_at": "2026-10-30T12:13:57+08:00",
+              "data_as_of": "2026-10-30T12:13:57+08:00",
+              "source": "creator-ui-review",
+              "metrics": {
+                "comments": 0,
+                "favorites": 2,
+                "follower_gain": 0,
+                "likes": 2,
+                "shares": 0,
+                "views": 58
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-002:douyin",
+            "observed_at": "2026-10-30T12:13:57+08:00",
+            "data_as_of": "2026-10-30T12:13:57+08:00",
+            "source": "creator-ui-review",
+            "metrics": {
+              "comments": 0,
+              "favorites": 2,
+              "follower_gain": 0,
+              "likes": 2,
+              "shares": 0,
+              "views": 58
+            }
+          },
+          "windows": {
+            "24": null,
+            "168": null
+          }
+        },
+        {
+          "id": "hot100-002:wechat_channels",
+          "content_id": "hot100-002",
+          "platform": "wechat_channels",
+          "account_label": "捞鱼真不吃鱼",
+          "format": "video",
+          "native_id": "export/UzFfBgAAxKiFKBM-DQSHk8zT4DCLFXKRmFKP5u3loho_9JezDQ",
+          "url": null,
+          "published_at": "2026-10-30T11:59:00+08:00",
+          "status": "published",
+          "collection": "捞鱼学算法",
+          "activity": null,
+          "source_title": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {
+            "24": null,
+            "168": null
+          }
+        },
+        {
+          "id": "hot100-002:xiaohongshu",
+          "content_id": "hot100-002",
+          "platform": "xiaohongshu",
+          "account_label": "AAA超级技工捞鱼",
+          "format": "video",
+          "native_id": "6ae40bbb00000000100102c8",
+          "url": null,
+          "published_at": "2026-10-30T11:15:00+08:00",
+          "status": "published",
+          "collection": null,
+          "activity": null,
+          "source_title": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {
+            "24": null,
+            "168": null
+          }
+        },
+        {
+          "id": "hot100-002:youtube",
+          "content_id": "hot100-002",
+          "platform": "youtube",
+          "account_label": "恩泽余",
+          "format": "video",
+          "native_id": "HEf5P0JxyqQ",
+          "url": "https://youtu.be/HEf5P0JxyqQ",
+          "published_at": null,
+          "status": "published",
+          "collection": null,
+          "activity": null,
+          "source_title": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {}
+        },
+        {
+          "id": "hot100-002:juejin",
+          "content_id": "hot100-002",
+          "platform": "juejin",
+          "account_label": "捞鱼真不吃鱼",
+          "format": "article",
+          "native_id": "7702062275410755594",
+          "url": "https://juejin.cn/post/7702062275410755594",
+          "published_at": null,
+          "status": "published",
+          "collection": null,
+          "activity": "每天一个知识点",
+          "source_title": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {}
+        },
+        {
+          "id": "hot100-002:wechat_official",
+          "content_id": "hot100-002",
+          "platform": "wechat_official",
+          "account_label": "捞鱼的博客",
+          "format": "article",
+          "native_id": "bmeiJxKU5-44Itb0CZqc3g",
+          "url": "https://mp.weixin.qq.com/s/bmeiJxKU5-44Itb0CZqc3g",
+          "published_at": "2026-10-30T13:03:00+08:00",
+          "status": "published",
+          "collection": null,
+          "activity": null,
+          "source_title": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {
+            "24": null,
+            "168": null
+          }
+        },
+        {
+          "id": "hot100-002:zhihu",
+          "content_id": "hot100-002",
+          "platform": "zhihu",
+          "account_label": "捞鱼",
+          "format": "article",
+          "native_id": "2099461241861416835",
+          "url": "https://zhuanlan.zhihu.com/p/2099461241861416835",
+          "published_at": "2026-10-30T12:11:00+08:00",
+          "status": "published",
+          "collection": null,
+          "activity": null,
+          "source_title": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {
+            "24": null,
+            "168": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "hot100-001",
+      "title": "Hot100 第一期 · LRU缓存",
+      "series": "捞鱼学算法",
+      "cover": null,
+      "publications": [
+        {
+          "id": "hot100-001:douyin",
+          "content_id": "hot100-001",
+          "platform": "douyin",
+          "account_label": "捞鱼真不吃鱼",
+          "format": "video",
+          "native_id": null,
+          "url": null,
+          "published_at": "2026-10-29T10:01:41+08:00",
+          "status": "published",
+          "collection": "捞鱼学算法",
+          "activity": null,
+          "source_title": "LRU缓存为什么能O(1)？ 刷 Hot100、准备算法面试的同学，趁刷视频歇…",
+          "snapshots": [
+            {
+              "publication_id": "hot100-001:douyin",
+              "observed_at": "2026-10-30T10:24:02+08:00",
+              "data_as_of": "2026-10-30T10:24:02+08:00",
+              "source": "douyin-creator-export",
+              "metrics": {
+                "comments": 1,
+                "favorites": 10,
+                "follower_gain": 1,
+                "likes": 28,
+                "shares": 5,
+                "views": 1899
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-001:douyin",
+            "observed_at": "2026-10-30T10:24:02+08:00",
+            "data_as_of": "2026-10-30T10:24:02+08:00",
+            "source": "douyin-creator-export",
+            "metrics": {
+              "comments": 1,
+              "favorites": 10,
+              "follower_gain": 1,
+              "likes": 28,
+              "shares": 5,
+              "views": 1899
+            }
+          },
+          "windows": {
+            "24": {
+              "publication_id": "hot100-001:douyin",
+              "observed_at": "2026-10-30T10:24:02+08:00",
+              "data_as_of": "2026-10-30T10:24:02+08:00",
+              "source": "douyin-creator-export",
+              "metrics": {
+                "comments": 1,
+                "favorites": 10,
+                "follower_gain": 1,
+                "likes": 28,
+                "shares": 5,
+                "views": 1899
+              }
+            },
+            "168": null
+          }
+        }
+      ]
+    }
+  ],
+  "definitions": {
+    "views": "平台原始播放/阅读，门槛不同，不代表跨平台去重人数",
+    "missing": "null 为未采集或不支持，不是 0",
+    "window": "24h/7d 只使用目标时点前后1小时内的真实采样"
+  }
+}

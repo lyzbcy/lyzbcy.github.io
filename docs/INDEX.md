@@ -52,3 +52,5 @@
 - 抖音看板停更、近90天统计窗口与假负增长：[排查与修复](pitfalls/douyin-dashboard-20261016.md)
 
 - [howto/ikuuu-checkin.md](howto/ikuuu-checkin.md) — iKuuu 09:00 check-in, WeCom, recovery
+
+- [howto/content-dashboard.md](howto/content-dashboard.md) — 内容与跨平台作品关联、真实采样、缺测和24h/7d窗口。

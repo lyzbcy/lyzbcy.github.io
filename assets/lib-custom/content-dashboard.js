@@ -1,0 +1,38 @@
+/* Data is generated from SQLite; all external strings are rendered as text. */
+(async function () {
+  'use strict';
+  const root = document.getElementById('content-dashboard');
+  if (!root) return;
+  const names = {douyin:'抖音',bilibili:'B站',xiaohongshu:'小红书',youtube:'YouTube',wechat_channels:'视频号',wechat_official:'微信公众号',zhihu:'知乎',juejin:'掘金'};
+  const colors=['#278eaf','#d45a75','#7d64b0','#c98228','#2b967d','#587bc3','#aa6464','#70913b'];
+  function el(tag, text, cls) {const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e;}
+  function num(x){return x===null||x===undefined?'—':new Intl.NumberFormat('zh-CN').format(x);}
+  function time(x){return x?new Date(x).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}):'待补录';}
+  function age(p){if(!p.published_at)return '时点待补录';const h=Math.max(0,(Date.now()-Date.parse(p.published_at))/36e5);return h<24?h.toFixed(1)+'小时':(h/24).toFixed(1)+'天';}
+  function sample(p, window){return window==='latest'?p.latest:p.windows[window];}
+  function svgNode(tag, attrs){const e=document.createElementNS('http://www.w3.org/2000/svg',tag);Object.entries(attrs||{}).forEach(([k,v])=>e.setAttribute(k,v));return e;}
+  try {
+    const response=await fetch(root.dataset.source,{cache:'no-cache'});if(!response.ok)throw Error('HTTP '+response.status);
+    const data=await response.json();if(data.schema!==1||!data.contents?.length)throw Error('没有内容记录');
+    root.replaceChildren();const hero=el('div',undefined,'cd-hero');hero.append(el('div','LAOYU / CONTENT OBSERVATORY','cd-kicker'),el('h2','一条内容，看看它在各个平台走了多远。'),el('p','发布记录先关联，数据按真实采样逐步补齐。'));root.append(hero);
+    const controls=el('div',undefined,'cd-controls'), contentSelect=el('select'), formatSelect=el('select'),windowSelect=el('select');
+    data.contents.forEach(c=>{const o=el('option',c.title);o.value=c.id;contentSelect.append(o);});
+    [['video','视频平台'],['article','图文平台'],['all','全部发布']].forEach(([v,t])=>{const o=el('option',t);o.value=v;formatSelect.append(o);});
+    [['latest','最新采样'],['24','发布后24小时'],['168','发布后7天']].forEach(([v,t])=>{const o=el('option',t);o.value=v;windowSelect.append(o);});
+    [['内容',contentSelect],['类型',formatSelect],['观察窗口',windowSelect]].forEach(([s,c])=>{const label=el('label',s);label.append(c);controls.append(label);});root.append(controls);
+    const view=el('div');root.append(view);
+    function draw(){
+      const content=data.contents.find(c=>c.id===contentSelect.value), pubs=content.publications.filter(p=>formatSelect.value==='all'||p.format===formatSelect.value);view.replaceChildren();
+      const chosen=el('div',undefined,'cd-chosen');if(content.cover){const img=el('img');img.src=content.cover;img.alt=content.title+'封面';chosen.append(img);}const heading=el('div');heading.append(el('h2',content.title),el('div',content.series,'cd-muted'));chosen.append(heading);view.append(chosen);
+      const stats=el('div',undefined,'cd-stats');[['发布平台',pubs.length],['有采样的平台',pubs.filter(p=>!!sample(p,windowSelect.value)).length],['待补充采样',pubs.filter(p=>!sample(p,windowSelect.value)).length]].forEach(([k,v])=>{const item=el('div',undefined,'cd-stat');item.append(el('span',k,'cd-muted'),el('strong',String(v)));stats.append(item);});view.append(stats);
+      view.append(el('div','播放与阅读口径不同，不合计为去重人数。— 表示未采集或不支持，0 才是真实零值。24小时与7天只显示目标时点前后1小时内的采样。','cd-note'));
+      const wrap=el('div',undefined,'cd-table-wrap'),table=el('table'),head=el('thead'),tr=el('tr');
+      ['平台 / 形式','状态','发布 / 距发布','播放 / 阅读','赞','评','藏','分享','归因涨粉','采样时间 / 来源','合集 / 活动'].forEach(s=>tr.append(el('th',s)));head.append(tr);table.append(head);const body=el('tbody');
+      pubs.forEach(p=>{const row=el('tr'),s=sample(p,windowSelect.value),m=s?.metrics||{};const first=el('td');if(p.url&&/^https:\/\//.test(p.url)){const a=el('a',names[p.platform]||p.platform);a.href=p.url;a.target='_blank';a.rel='noopener noreferrer';first.append(a);}else first.append(el('span',names[p.platform]||p.platform));first.append(el('div',p.format==='video'?'视频':'图文','cd-muted'));row.append(first);const status=el('td');status.append(el('span',p.status==='published'?'已发布':p.status,'cd-badge'));row.append(status);const published=el('td',time(p.published_at));published.append(el('div',age(p),'cd-muted'));row.append(published);['views','likes','comments','favorites','shares','follower_gain'].forEach(k=>row.append(el('td',num(m[k]))));const source=el('td',s?time(s.data_as_of):'等待采样');source.append(el('div',s?.source==='douyin-creator-export'?'创作者后台导出':s?.source==='creator-ui-review'?'发布阶段后台快照':'尚未接通此平台数据源','cd-muted'));if(s&&(Date.now()-Date.parse(s.data_as_of))>864e5)source.append(el('div','采样已超过24小时','cd-muted'));row.append(source);row.append(el('td',[p.collection,p.activity].filter(Boolean).join(' / ')||'—'));body.append(row);});table.append(body);wrap.append(table);view.append(wrap);
+      const chart=el('div',undefined,'cd-chart');chart.append(el('strong','按发布后时长对齐 · 播放 / 阅读'));const available=pubs.filter(p=>p.published_at&&p.snapshots.some(s=>s.metrics.views!==null&&s.metrics.views!==undefined));
+      if(!available.length)chart.append(el('div','尚无可绘制的真实采样。接通数据源后，曲线会从实际采样点开始。','cd-empty'));
+      else {const series=available.map(p=>({p,points:p.snapshots.filter(s=>Number.isFinite(s.metrics.views)).map(s=>({x:(Date.parse(s.data_as_of)-Date.parse(p.published_at))/36e5,y:s.metrics.views})).filter(s=>s.x>=0)})).filter(s=>s.points.length);const maxX=Math.max(24,...series.flatMap(s=>s.points.map(p=>p.x))),maxY=Math.max(1,...series.flatMap(s=>s.points.map(p=>p.y)));const svg=svgNode('svg',{viewBox:'0 0 680 230',role:'img','aria-label':'横轴为发布后小时，纵轴为平台原始播放或阅读，仅显示真实采样'});for(let i=0;i<=4;i++){const y=185-i*40;svg.append(svgNode('line',{x1:52,y1:y,x2:650,y2:y,stroke:'#bdcad8','stroke-opacity':'.5'}));const text=svgNode('text',{x:45,y:y+4,'text-anchor':'end',fill:'#718098','font-size':11});text.textContent=num(Math.round(maxY*i/4));svg.append(text);}series.forEach((s,i)=>{const color=colors[i%colors.length];const pts=s.points.map(p=>({x:52+p.x/maxX*598,y:185-p.y/maxY*160}));if(pts.length>1)svg.append(svgNode('polyline',{points:pts.map(p=>p.x+','+p.y).join(' '),fill:'none',stroke:color,'stroke-width':2}));pts.forEach((p,j)=>{const dot=svgNode('circle',{cx:p.x,cy:p.y,r:4,fill:color});const title=svgNode('title');title.textContent=names[s.p.platform]+' · '+s.points[j].x.toFixed(1)+'小时 · '+num(s.points[j].y);dot.append(title);svg.append(dot);});});[0,maxX/2,maxX].forEach(x=>{const t=svgNode('text',{x:52+x/maxX*598,y:211,'text-anchor':'middle',fill:'#718098','font-size':11});t.textContent=x.toFixed(0)+'h';svg.append(t);});chart.append(svg);const legend=el('div',undefined,'cd-legend');series.forEach((s,i)=>{const t=el('span'),dot=el('i',undefined,'cd-dot');dot.style.background=colors[i%colors.length];t.append(dot,document.createTextNode(names[s.p.platform]));legend.append(t);});chart.append(legend);chart.append(el('div','单个采样只显示点；缺少早期数据时不补画从0开始的曲线。','cd-muted'));}view.append(chart);view.append(el('div','展示快照生成于 '+time(data.generated_at)+'（北京时间）。生成时间不等于数据采样时间。','cd-fresh'));
+    }
+    [contentSelect,formatSelect,windowSelect].forEach(s=>s.addEventListener('change',draw));draw();
+  } catch(error){root.replaceChildren(el('p','数据暂时无法读取，请稍后重试。'+error.message));}
+})();
