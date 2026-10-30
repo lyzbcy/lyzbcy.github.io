@@ -1,7 +1,162 @@
 {
   "schema": 1,
-  "generated_at": "2026-10-30T14:04:01+08:00",
+  "generated_at": "2026-10-31T01:24:09+08:00",
   "contents": [
+    {
+      "id": "hot100-003",
+      "title": "Hot100第三期-无重复字符的最长子串-发布版",
+      "series": "捞鱼学算法",
+      "cover": null,
+      "publications": [
+        {
+          "id": "hot100-003:bilibili",
+          "content_id": "hot100-003",
+          "platform": "bilibili",
+          "account_label": "捞鱼真不吃鱼",
+          "format": "video",
+          "native_id": "BV1E2xe6FEuf",
+          "url": "https://www.bilibili.com/video/BV1E2xe6FEuf/",
+          "published_at": null,
+          "status": "published",
+          "collection": "捞鱼学算法",
+          "activity": "分享我的专业知识",
+          "source_title": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-003:bilibili",
+              "observed_at": "2026-10-31T01:24:09+08:00",
+              "data_as_of": "2026-10-31T01:24:09+08:00",
+              "source": "bilibili-public-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 1,
+                "shares": 0,
+                "views": 28
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-003:bilibili",
+            "observed_at": "2026-10-31T01:24:09+08:00",
+            "data_as_of": "2026-10-31T01:24:09+08:00",
+            "source": "bilibili-public-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 0,
+              "follower_gain": null,
+              "likes": 1,
+              "shares": 0,
+              "views": 28
+            }
+          },
+          "windows": {}
+        },
+        {
+          "id": "hot100-003:douyin",
+          "content_id": "hot100-003",
+          "platform": "douyin",
+          "account_label": "捞鱼真不吃鱼",
+          "format": "video",
+          "native_id": "7702418187379363135",
+          "url": "https://www.douyin.com/video/7702418187379363135",
+          "published_at": null,
+          "status": "published",
+          "collection": "捞鱼学算法",
+          "activity": "Vibe知识大赏",
+          "source_title": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {}
+        },
+        {
+          "id": "hot100-003:wechat_channels",
+          "content_id": "hot100-003",
+          "platform": "wechat_channels",
+          "account_label": null,
+          "format": "video",
+          "native_id": "export/UzFfBgAAxLiFcBVhIk-Gk8zT4DCLHA5gugKMowDay6ZAnm1Q8w",
+          "url": null,
+          "published_at": null,
+          "status": "published",
+          "collection": "捞鱼学算法",
+          "activity": "微信时刻 · 避坑小知识",
+          "source_title": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {}
+        },
+        {
+          "id": "hot100-003:x",
+          "content_id": "hot100-003",
+          "platform": "x",
+          "account_label": "@lyzbcy",
+          "format": "video",
+          "native_id": "2116153039988068502",
+          "url": "https://x.com/lyzbcy/status/2116153039988068502",
+          "published_at": null,
+          "status": "published",
+          "collection": "pending",
+          "activity": "creator_original_content_rewards_ineligible",
+          "source_title": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {}
+        },
+        {
+          "id": "hot100-003:xiaohongshu",
+          "content_id": "hot100-003",
+          "platform": "xiaohongshu",
+          "account_label": "AAA超级技工捞鱼",
+          "format": "video",
+          "native_id": "6ae47fc3000000001802958f",
+          "url": "https://www.xiaohongshu.com/explore/6ae47fc3000000001802958f",
+          "published_at": null,
+          "status": "published",
+          "collection": "捞鱼学算法",
+          "activity": "RED11月精选作者评选",
+          "source_title": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {}
+        },
+        {
+          "id": "hot100-003:youtube",
+          "content_id": "hot100-003",
+          "platform": "youtube",
+          "account_label": "恩泽余",
+          "format": "video",
+          "native_id": "tSzhG8JEfv8",
+          "url": "https://youtu.be/tSzhG8JEfv8",
+          "published_at": null,
+          "status": "published",
+          "collection": "捞鱼学算法",
+          "activity": "No suitable campaign entry observed in current Studio upload flow",
+          "source_title": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {}
+        },
+        {
+          "id": "hot100-003:wechat_official",
+          "content_id": "hot100-003",
+          "platform": "wechat_official",
+          "account_label": null,
+          "format": "article",
+          "native_id": null,
+          "url": null,
+          "published_at": null,
+          "status": "published_user_confirmed",
+          "collection": "捞鱼学算法",
+          "activity": "no_suitable_activity_observed_in_article_flow",
+          "source_title": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {}
+        }
+      ]
+    },
     {
       "id": "hot100-002",
       "title": "Hot100 第二期 · 最大子数组和",
@@ -31,16 +186,34 @@
                 "favorites": 2,
                 "views": 1
               }
+            },
+            {
+              "publication_id": "hot100-002:bilibili",
+              "observed_at": "2026-10-31T01:24:09+08:00",
+              "data_as_of": "2026-10-31T01:24:09+08:00",
+              "source": "bilibili-public-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 2,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 81
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-002:bilibili",
-            "observed_at": "2026-10-30T13:57:32+08:00",
-            "data_as_of": "2026-10-30T13:57:32+08:00",
-            "source": "bilibili-public-ui",
+            "observed_at": "2026-10-31T01:24:09+08:00",
+            "data_as_of": "2026-10-31T01:24:09+08:00",
+            "source": "bilibili-public-api",
             "metrics": {
+              "comments": 0,
               "favorites": 2,
-              "views": 1
+              "follower_gain": null,
+              "likes": 0,
+              "shares": 0,
+              "views": 81
             }
           },
           "windows": {
@@ -54,8 +227,8 @@
           "platform": "douyin",
           "account_label": "捞鱼真不吃鱼",
           "format": "video",
-          "native_id": null,
-          "url": null,
+          "native_id": "7702288032061263146",
+          "url": "https://www.douyin.com/video/7702288032061263146",
           "published_at": "2026-10-30T10:51:00+08:00",
           "status": "published",
           "collection": "捞鱼学算法",
@@ -121,7 +294,7 @@
           "published_at": "2026-10-30T11:59:00+08:00",
           "status": "published",
           "collection": "捞鱼学算法",
-          "activity": null,
+          "activity": "no_late_campaign_control_in_published_edit_ui",
           "source_title": null,
           "snapshots": [],
           "latest": null,
@@ -131,17 +304,34 @@
           }
         },
         {
+          "id": "hot100-002:x",
+          "content_id": "hot100-002",
+          "platform": "x",
+          "account_label": "@lyzbcy",
+          "format": "video",
+          "native_id": "2116152640908521621",
+          "url": "https://x.com/lyzbcy/status/2116152640908521621",
+          "published_at": null,
+          "status": "published",
+          "collection": "pending",
+          "activity": "creator_original_content_rewards_ineligible",
+          "source_title": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {}
+        },
+        {
           "id": "hot100-002:xiaohongshu",
           "content_id": "hot100-002",
           "platform": "xiaohongshu",
           "account_label": "AAA超级技工捞鱼",
           "format": "video",
           "native_id": "6ae40bbb00000000100102c8",
-          "url": null,
+          "url": "https://www.xiaohongshu.com/explore/6ae40bbb00000000100102c8",
           "published_at": "2026-10-30T11:15:00+08:00",
           "status": "published",
-          "collection": null,
-          "activity": null,
+          "collection": "捞鱼学算法",
+          "activity": "RED11月精选作者评选",
           "source_title": null,
           "snapshots": [],
           "latest": null,
@@ -160,8 +350,8 @@
           "url": "https://youtu.be/HEf5P0JxyqQ",
           "published_at": null,
           "status": "published",
-          "collection": null,
-          "activity": null,
+          "collection": "捞鱼学算法",
+          "activity": "No suitable campaign entry observed in current Studio upload flow",
           "source_title": null,
           "snapshots": [],
           "latest": null,
@@ -194,8 +384,8 @@
           "url": "https://mp.weixin.qq.com/s/bmeiJxKU5-44Itb0CZqc3g",
           "published_at": "2026-10-30T13:03:00+08:00",
           "status": "published",
-          "collection": null,
-          "activity": null,
+          "collection": "捞鱼学算法",
+          "activity": "no_suitable_activity_observed_in_article_flow",
           "source_title": null,
           "snapshots": [],
           "latest": null,
@@ -233,17 +423,62 @@
       "cover": null,
       "publications": [
         {
+          "id": "hot100-001:bilibili",
+          "content_id": "hot100-001",
+          "platform": "bilibili",
+          "account_label": null,
+          "format": "video",
+          "native_id": "BV1izsd6nEzx",
+          "url": "https://www.bilibili.com/video/BV1izsd6nEzx/",
+          "published_at": null,
+          "status": "published",
+          "collection": "捞鱼学算法",
+          "activity": "分享我的专业知识",
+          "source_title": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-001:bilibili",
+              "observed_at": "2026-10-31T01:24:09+08:00",
+              "data_as_of": "2026-10-31T01:24:09+08:00",
+              "source": "bilibili-public-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 1,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 109
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-001:bilibili",
+            "observed_at": "2026-10-31T01:24:09+08:00",
+            "data_as_of": "2026-10-31T01:24:09+08:00",
+            "source": "bilibili-public-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 1,
+              "follower_gain": null,
+              "likes": 0,
+              "shares": 0,
+              "views": 109
+            }
+          },
+          "windows": {}
+        },
+        {
           "id": "hot100-001:douyin",
           "content_id": "hot100-001",
           "platform": "douyin",
           "account_label": "捞鱼真不吃鱼",
           "format": "video",
-          "native_id": null,
-          "url": null,
+          "native_id": "7701904130658340137",
+          "url": "https://www.douyin.com/video/7701904130658340137",
           "published_at": "2026-10-29T10:01:41+08:00",
           "status": "published",
           "collection": "捞鱼学算法",
-          "activity": null,
+          "activity": "Vibe知识大赏",
           "source_title": "LRU缓存为什么能O(1)？ 刷 Hot100、准备算法面试的同学，趁刷视频歇…",
           "snapshots": [
             {
@@ -292,6 +527,91 @@
             },
             "168": null
           }
+        },
+        {
+          "id": "hot100-001:wechat_channels",
+          "content_id": "hot100-001",
+          "platform": "wechat_channels",
+          "account_label": null,
+          "format": "video",
+          "native_id": "export/UzFfBgAAxKKFfCR0C06Gk8zT4DCLPvmjQIh4YHoChZBDF7UjYQ",
+          "url": null,
+          "published_at": null,
+          "status": "published",
+          "collection": "捞鱼学算法",
+          "activity": "微信时刻 · 避坑小知识",
+          "source_title": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {}
+        },
+        {
+          "id": "hot100-001:x",
+          "content_id": "hot100-001",
+          "platform": "x",
+          "account_label": "@lyzbcy",
+          "format": "video",
+          "native_id": "2115642468679241763",
+          "url": "https://x.com/lyzbcy/status/2115642468679241763",
+          "published_at": null,
+          "status": "published",
+          "collection": "pending",
+          "activity": "creator_original_content_rewards_ineligible",
+          "source_title": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {}
+        },
+        {
+          "id": "hot100-001:xiaohongshu",
+          "content_id": "hot100-001",
+          "platform": "xiaohongshu",
+          "account_label": "AAA超级技工捞鱼",
+          "format": "video",
+          "native_id": "6ae2ac0100000000320214ad",
+          "url": "https://www.xiaohongshu.com/explore/6ae2ac0100000000320214ad",
+          "published_at": null,
+          "status": "published",
+          "collection": "捞鱼学算法",
+          "activity": "RED11月精选作者评选",
+          "source_title": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {}
+        },
+        {
+          "id": "hot100-001:youtube",
+          "content_id": "hot100-001",
+          "platform": "youtube",
+          "account_label": "恩泽余",
+          "format": "video",
+          "native_id": "b0U8C-pE_R0",
+          "url": "https://youtu.be/b0U8C-pE_R0",
+          "published_at": null,
+          "status": "published",
+          "collection": "捞鱼学算法",
+          "activity": "No suitable campaign entry observed in current Studio upload flow",
+          "source_title": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {}
+        },
+        {
+          "id": "hot100-001:wechat_official",
+          "content_id": "hot100-001",
+          "platform": "wechat_official",
+          "account_label": null,
+          "format": "article",
+          "native_id": null,
+          "url": null,
+          "published_at": null,
+          "status": "published_user_confirmed",
+          "collection": "捞鱼学算法",
+          "activity": "no_suitable_activity_observed_in_article_flow",
+          "source_title": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {}
         }
       ]
     }
