@@ -38,6 +38,11 @@ class RegistryTests(unittest.TestCase):
         p=m.export(self.db)['contents'][0]['publications'][0]
         self.assertEqual(p['windows']['24']['metrics']['views'],30)
         self.assertIsNone(p['windows']['168'])
+    def test_api_alias_preserves_canonical_id_and_cannot_switch(self):
+        m.ingest(self.db,{'publications':[dict(self.pub,api_native_id='counter-id')]})
+        p=m.export(self.db)['contents'][0]['publications'][0]
+        self.assertEqual(p['native_id'],'id');self.assertEqual(p['api_native_id'],'counter-id')
+        with self.assertRaises(ValueError):m.ingest(self.db,{'publications':[dict(self.pub,api_native_id='different')]})
     def test_wrong_timezone_and_nonfinite_rejected(self):
         for value in [float('nan'),float('inf'),True]:
             with self.assertRaises(ValueError):m.ingest(self.db,{'snapshots':[self.row(value)]})

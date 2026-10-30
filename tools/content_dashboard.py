@@ -27,13 +27,16 @@ def connect(path):
     CREATE TABLE IF NOT EXISTS publication(
       id TEXT PRIMARY KEY, content_id TEXT NOT NULL REFERENCES content(id), platform TEXT NOT NULL,
       account_label TEXT, format TEXT NOT NULL, native_id TEXT, url TEXT,
-      published_at TEXT, status TEXT NOT NULL, collection TEXT, activity TEXT, source_title TEXT);
+      published_at TEXT, status TEXT NOT NULL, collection TEXT, activity TEXT, source_title TEXT, api_native_id TEXT);
     CREATE UNIQUE INDEX IF NOT EXISTS native_post ON publication(platform,native_id) WHERE native_id IS NOT NULL;
     CREATE TABLE IF NOT EXISTS snapshot(
       publication_id TEXT REFERENCES publication(id), observed_at TEXT NOT NULL,
       data_as_of TEXT NOT NULL, source TEXT NOT NULL, metrics TEXT NOT NULL,
       PRIMARY KEY(publication_id,observed_at,source));
     ''')
+    if 'api_native_id' not in {r[1] for r in db.execute('PRAGMA table_info(publication)')}:
+        db.execute('ALTER TABLE publication ADD COLUMN api_native_id TEXT')
+    db.execute('CREATE UNIQUE INDEX IF NOT EXISTS api_native_post ON publication(platform,api_native_id) WHERE api_native_id IS NOT NULL')
     return db
 
 
@@ -57,17 +60,19 @@ def ingest(db, data):
             row = dict(row)
             if row.get('published_at'):
                 row['published_at'] = stamp(row['published_at'])
-            columns = ('id','content_id','platform','account_label','format','native_id','url','published_at','status','collection','activity','source_title')
+            columns = ('id','content_id','platform','account_label','format','native_id','url','published_at','status','collection','activity','source_title','api_native_id')
             # Publication identity cannot silently switch to another content/account.
-            existing = db.execute('SELECT content_id,platform,account_label,native_id FROM publication WHERE id=?',(row['id'],)).fetchone()
+            existing = db.execute('SELECT content_id,platform,account_label,native_id,api_native_id FROM publication WHERE id=?',(row['id'],)).fetchone()
             if existing:
                 row['account_label']=row.get('account_label') or existing['account_label']
                 if tuple(existing)[:3] != tuple(row.get(k) for k in ('content_id','platform','account_label')):
                     raise ValueError('Publication identity changed')
                 if existing['native_id'] and row.get('native_id') and existing['native_id']!=row['native_id']:
                     raise ValueError('Native publication identity changed')
+                if existing['api_native_id'] and row.get('api_native_id') and existing['api_native_id']!=row['api_native_id']:
+                    raise ValueError('Metric API identity changed')
             values = [row.get(k) for k in columns]
-            db.execute('INSERT INTO publication VALUES('+','.join('?' for _ in columns)+') ON CONFLICT(id) DO UPDATE SET native_id=COALESCE(excluded.native_id,publication.native_id),url=COALESCE(excluded.url,publication.url),status=CASE WHEN publication.status="published" AND excluded.status="submitted" THEN publication.status ELSE excluded.status END,published_at=COALESCE(excluded.published_at,publication.published_at),collection=COALESCE(excluded.collection,publication.collection),activity=COALESCE(excluded.activity,publication.activity),source_title=COALESCE(excluded.source_title,publication.source_title)', values)
+            db.execute('INSERT INTO publication VALUES('+','.join('?' for _ in columns)+') ON CONFLICT(id) DO UPDATE SET native_id=COALESCE(excluded.native_id,publication.native_id),api_native_id=COALESCE(excluded.api_native_id,publication.api_native_id),url=COALESCE(excluded.url,publication.url),status=CASE WHEN publication.status="published" AND excluded.status="submitted" THEN publication.status ELSE excluded.status END,published_at=COALESCE(excluded.published_at,publication.published_at),collection=COALESCE(excluded.collection,publication.collection),activity=COALESCE(excluded.activity,publication.activity),source_title=COALESCE(excluded.source_title,publication.source_title)', values)
         for row in rows:
             values=(row['publication_id'],row['observed_at'],row['data_as_of'],row['source'],json.dumps(row['metrics'],sort_keys=True))
             old=db.execute('SELECT metrics,data_as_of FROM snapshot WHERE publication_id=? AND observed_at=? AND source=?',(values[0],values[1],values[3])).fetchone()
@@ -125,7 +130,8 @@ def export(db):
             pubs.append(pub)
         content['publications']=pubs;contents.append(content)
     return {'schema':1,'generated_at':dt.datetime.now(TZ).isoformat(timespec='seconds'),'contents':contents,
-            'definitions':{'views':'平台原始播放/阅读，门槛不同，不代表跨平台去重人数','missing':'null 为未采集或不支持，不是 0','window':'24h/7d 只使用目标时点前后1小时内的真实采样'}}
+            'definitions':{'views':'平台原始播放/阅读/曝光，门槛不同，不代表跨平台去重人数','missing':'null 为未采集或不支持，不是 0','window':'24h/7d 只使用目标时点前后1小时内的真实采样',
+            'platform_views':{'x':'帖子浏览/曝光，不是视频播放','wechat_official':'当前接口为近30天阅读人数UV，不是累计阅读次数','zhihu':'内容分析PV；赞列为赞同数'}}}
 
 
 def main():

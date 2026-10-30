@@ -1,4 +1,4 @@
-"""Collect Bilibili at the current machine; import/publish on the existing server.
+"""Collect platform metrics at the current machine; import/publish on the existing server.
 
 Requires paramiko locally. Password is prompted, never saved. No new schedule.
 """
@@ -10,6 +10,7 @@ from pathlib import PurePosixPath
 import shlex
 import time
 import uuid
+import subprocess,sys,tempfile
 import paramiko
 from refresh_content_metrics import fetch_bilibili
 
@@ -30,7 +31,7 @@ try:
   def run(args):subprocess.run(args,cwd=repo,check=True,timeout=100)
   run(['git','add','--','assets/data/content-dashboard.json'])
   if subprocess.run(['git','diff','--cached','--quiet','--','assets/data/content-dashboard.json'],cwd=repo).returncode:
-   run(['git','commit','-m','data(content): refresh real Bilibili API samples','--','assets/data/content-dashboard.json'])
+   run(['git','commit','-m','data(content): refresh verified platform API samples','--','assets/data/content-dashboard.json'])
    env=os.environ.copy();env.update(GIT_CONFIG_GLOBAL='/dev/null',GIT_SSH_COMMAND='ssh -o BatchMode=yes')
    subprocess.run(['git','push','origin','main'],cwd=repo,env=env,check=True,timeout=100)
  print(json.dumps({'imported':len(json.loads(Path(payload).read_text())['snapshots']),'pushed':do_push=='1'}))
@@ -46,22 +47,40 @@ def main():
     p.add_argument('--key');p.add_argument('--repo',default='/home/openclaw-shared/lyzbcy.github.io')
     p.add_argument('--db',default='/home/ubuntu/.local/share/laoyu-content/registry.sqlite')
     p.add_argument('--push',action='store_true',help='Commit/push only the generated public snapshot')
+    mode=p.add_mutually_exclusive_group()
+    mode.add_argument('--observations',help='Import a standard verified observations JSON, without recollecting')
+    mode.add_argument('--all-platforms',action='store_true',help='Collect all nine platforms using current browser sessions, then import/publish')
+    p.add_argument('--bindings',help='Verified registration amendments for first-time identity binding')
     a=p.parse_args();start=time.monotonic()
     for value in (a.repo,a.db):
         if not PurePosixPath(value).is_absolute() or '..' in PurePosixPath(value).parts:p.error('Absolute server paths required')
     client=paramiko.SSHClient();client.load_system_host_keys();client.load_host_keys(str(__import__('pathlib').Path.home()/'.ssh/known_hosts'));client.set_missing_host_key_policy(paramiko.RejectPolicy())
     password=None if a.key else getpass.getpass('Server password (not saved): ')
     client.connect(a.host,username=a.user,password=password,key_filename=a.key,allow_agent=bool(a.key),look_for_keys=False,timeout=12)
+    client.get_transport().set_keepalive(30)
     password=None
     try:
         with client.open_sftp() as sftp:
             with sftp.open(a.repo+'/assets/data/content-dashboard.json') as f:data=json.load(f)
-            pubs=[pub for c in data['contents'] for pub in c['publications'] if pub['platform']=='bilibili' and pub['status']=='published']
-            if not pubs:raise ValueError('No registered public Bilibili IDs; refusing empty update')
-            # A failed collection leaves the server snapshot untouched.
-            with ThreadPoolExecutor(max_workers=3) as pool:rows=list(pool.map(fetch_bilibili,pubs))
+            if a.observations:
+                observation=json.loads(__import__('pathlib').Path(a.observations).read_text(encoding='utf-8'))
+            elif a.all_platforms:
+                with tempfile.TemporaryDirectory(prefix='content-metrics-') as folder:
+                    root=__import__('pathlib').Path(folder);(root/'registry.json').write_text(json.dumps(data),encoding='utf-8')
+                    command=[sys.executable,str(__import__('pathlib').Path(__file__).with_name('collect_content_browser.py')),
+                        '--snapshot',str(root/'registry.json'),'--output',str(root/'observations.json'),'--report',str(root/'report.json')]
+                    if a.bindings:command+=['--bindings',a.bindings]
+                    result=subprocess.run(command,capture_output=True,text=True,encoding='utf-8',timeout=240)
+                    if result.returncode:raise RuntimeError('Platform collection incomplete: '+result.stdout[-1500:])
+                    observation=json.loads((root/'observations.json').read_text(encoding='utf-8'))
+            else:
+                pubs=[pub for c in data['contents'] for pub in c['publications'] if pub['platform']=='bilibili' and pub['status']=='published']
+                if not pubs:raise ValueError('No registered public Bilibili IDs; refusing empty update')
+                with ThreadPoolExecutor(max_workers=3) as pool:observation={'snapshots':list(pool.map(fetch_bilibili,pubs))}
+            rows=observation.get('snapshots',[])
+            if not rows:raise ValueError('No verified observations; server snapshot unchanged')
             payload=str(PurePosixPath(a.db).parent/('api-observation-'+uuid.uuid4().hex+'.json'))
-            with sftp.open(payload,'w') as f:f.write(json.dumps({'snapshots':rows},ensure_ascii=False))
+            with sftp.open(payload,'w') as f:f.write(json.dumps(observation,ensure_ascii=False))
             owner=sftp.stat(a.db);sftp.chown(payload,owner.st_uid,owner.st_gid);sftp.chmod(payload,0o600)
         argv=['python3','-',a.repo,a.db,payload,'1' if a.push else '0']
         if a.user=='root':argv=['sudo','-u','ubuntu']+argv
