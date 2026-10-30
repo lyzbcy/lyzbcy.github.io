@@ -5,3 +5,5 @@
 #content-dashboard .cd-chosen{display:flex;gap:18px;align-items:center;margin:25px 0}#content-dashboard .cd-chosen img{width:145px;height:82px;object-fit:cover;border-radius:10px}#content-dashboard .cd-chosen h2{font-size:20px;margin:0 0 4px}@media(max-width:600px){#content-dashboard .cd-chosen{align-items:flex-start;gap:12px}#content-dashboard .cd-chosen img{width:105px;height:60px}#content-dashboard .cd-chosen h2{font-size:17px}}
 
 @media(max-width:600px){#content-dashboard .cd-controls label{display:grid;grid-template-columns:64px minmax(0,1fr);white-space:nowrap}#content-dashboard .cd-controls select{min-width:0}}
+
+#content-dashboard .cd-hero h2{color:#fff!important}
