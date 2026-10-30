@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-10-31T01:24:09+08:00",
+  "generated_at": "2026-10-31T02:40:07+08:00",
   "contents": [
     {
       "id": "hot100-003",
@@ -21,6 +21,7 @@
           "collection": "捞鱼学算法",
           "activity": "分享我的专业知识",
           "source_title": null,
+          "api_native_id": null,
           "snapshots": [
             {
               "publication_id": "hot100-003:bilibili",
@@ -35,12 +36,26 @@
                 "shares": 0,
                 "views": 28
               }
+            },
+            {
+              "publication_id": "hot100-003:bilibili",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-31T02:34:27+08:00",
+              "source": "bilibili-public-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 1,
+                "shares": 0,
+                "views": 45
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-003:bilibili",
-            "observed_at": "2026-10-31T01:24:09+08:00",
-            "data_as_of": "2026-10-31T01:24:09+08:00",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-31T02:34:27+08:00",
             "source": "bilibili-public-api",
             "metrics": {
               "comments": 0,
@@ -48,7 +63,7 @@
               "follower_gain": null,
               "likes": 1,
               "shares": 0,
-              "views": 28
+              "views": 45
             }
           },
           "windows": {}
@@ -66,8 +81,37 @@
           "collection": "捞鱼学算法",
           "activity": "Vibe知识大赏",
           "source_title": null,
-          "snapshots": [],
-          "latest": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-003:douyin",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-31T02:34:27+08:00",
+              "source": "douyin-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 2,
+                "follower_gain": null,
+                "likes": 15,
+                "shares": 2,
+                "views": 1423
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-003:douyin",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "source": "douyin-creator-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 2,
+              "follower_gain": null,
+              "likes": 15,
+              "shares": 2,
+              "views": 1423
+            }
+          },
           "windows": {}
         },
         {
@@ -78,14 +122,46 @@
           "format": "video",
           "native_id": "export/UzFfBgAAxLiFcBVhIk-Gk8zT4DCLHA5gugKMowDay6ZAnm1Q8w",
           "url": null,
-          "published_at": null,
+          "published_at": "2026-10-30T19:58:25+08:00",
           "status": "published",
           "collection": "捞鱼学算法",
           "activity": "微信时刻 · 避坑小知识",
-          "source_title": null,
-          "snapshots": [],
-          "latest": null,
-          "windows": {}
+          "source_title": "【捞鱼学算法·第3期】",
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-003:wechat_channels",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-31T02:34:27+08:00",
+              "source": "wechat-channels-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": 0,
+                "likes": 0,
+                "shares": 0,
+                "views": 0
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-003:wechat_channels",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "source": "wechat-channels-creator-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 0,
+              "follower_gain": 0,
+              "likes": 0,
+              "shares": 0,
+              "views": 0
+            }
+          },
+          "windows": {
+            "24": null,
+            "168": null
+          }
         },
         {
           "id": "hot100-003:x",
@@ -100,8 +176,37 @@
           "collection": "pending",
           "activity": "creator_original_content_rewards_ineligible",
           "source_title": null,
-          "snapshots": [],
-          "latest": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-003:x",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-31T02:34:27+08:00",
+              "source": "x-post-impressions-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 2
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-003:x",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "source": "x-post-impressions-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 0,
+              "follower_gain": null,
+              "likes": 0,
+              "shares": 0,
+              "views": 2
+            }
+          },
           "windows": {}
         },
         {
@@ -117,8 +222,37 @@
           "collection": "捞鱼学算法",
           "activity": "RED11月精选作者评选",
           "source_title": null,
-          "snapshots": [],
-          "latest": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-003:xiaohongshu",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-31T02:34:27+08:00",
+              "source": "xiaohongshu-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 1,
+                "follower_gain": null,
+                "likes": 3,
+                "shares": 0,
+                "views": 32
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-003:xiaohongshu",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "source": "xiaohongshu-creator-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 1,
+              "follower_gain": null,
+              "likes": 3,
+              "shares": 0,
+              "views": 32
+            }
+          },
           "windows": {}
         },
         {
@@ -134,8 +268,37 @@
           "collection": "捞鱼学算法",
           "activity": "No suitable campaign entry observed in current Studio upload flow",
           "source_title": null,
-          "snapshots": [],
-          "latest": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-003:youtube",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-31T02:34:27+08:00",
+              "source": "youtube-studio-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": null,
+                "views": 0
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-003:youtube",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "source": "youtube-studio-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": null,
+              "follower_gain": null,
+              "likes": 0,
+              "shares": null,
+              "views": 0
+            }
+          },
           "windows": {}
         },
         {
@@ -144,16 +307,48 @@
           "platform": "wechat_official",
           "account_label": null,
           "format": "article",
-          "native_id": null,
-          "url": null,
-          "published_at": null,
-          "status": "published_user_confirmed",
+          "native_id": "2247483806_1",
+          "url": "https://mp.weixin.qq.com/s/fJXgCFRctKHl5cIREFHoAg",
+          "published_at": "2026-10-30T21:16:12+08:00",
+          "status": "published",
           "collection": "捞鱼学算法",
           "activity": "no_suitable_activity_observed_in_article_flow",
-          "source_title": null,
-          "snapshots": [],
-          "latest": null,
-          "windows": {}
+          "source_title": "捞鱼学算法03｜重复的是b，为什么先挪a？",
+          "api_native_id": "2247483806_1",
+          "snapshots": [
+            {
+              "publication_id": "hot100-003:wechat_official",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-30T23:59:59+08:00",
+              "source": "wechat-official-30d-read-uv-api",
+              "metrics": {
+                "comments": null,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": null,
+                "shares": null,
+                "views": 5
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-003:wechat_official",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-30T23:59:59+08:00",
+            "source": "wechat-official-30d-read-uv-api",
+            "metrics": {
+              "comments": null,
+              "favorites": null,
+              "follower_gain": null,
+              "likes": null,
+              "shares": null,
+              "views": 5
+            }
+          },
+          "windows": {
+            "24": null,
+            "168": null
+          }
         }
       ]
     },
@@ -176,6 +371,7 @@
           "collection": "捞鱼学算法",
           "activity": "分享我的专业知识",
           "source_title": null,
+          "api_native_id": null,
           "snapshots": [
             {
               "publication_id": "hot100-002:bilibili",
@@ -200,12 +396,26 @@
                 "shares": 0,
                 "views": 81
               }
+            },
+            {
+              "publication_id": "hot100-002:bilibili",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-31T02:34:27+08:00",
+              "source": "bilibili-public-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 2,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 82
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-002:bilibili",
-            "observed_at": "2026-10-31T01:24:09+08:00",
-            "data_as_of": "2026-10-31T01:24:09+08:00",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-31T02:34:27+08:00",
             "source": "bilibili-public-api",
             "metrics": {
               "comments": 0,
@@ -213,7 +423,7 @@
               "follower_gain": null,
               "likes": 0,
               "shares": 0,
-              "views": 81
+              "views": 82
             }
           },
           "windows": {
@@ -234,6 +444,7 @@
           "collection": "捞鱼学算法",
           "activity": "Vibe知识大赏",
           "source_title": "这个负数为什么要留？最大子数组和",
+          "api_native_id": null,
           "snapshots": [
             {
               "publication_id": "hot100-002:douyin",
@@ -262,20 +473,34 @@
                 "shares": 0,
                 "views": 284
               }
+            },
+            {
+              "publication_id": "hot100-002:douyin",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-31T02:34:27+08:00",
+              "source": "douyin-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 2,
+                "follower_gain": null,
+                "likes": 6,
+                "shares": 0,
+                "views": 514
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-002:douyin",
-            "observed_at": "2026-10-30T13:55:22+08:00",
-            "data_as_of": "2026-10-30T13:55:22+08:00",
-            "source": "creator-ui-review",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "source": "douyin-creator-api",
             "metrics": {
               "comments": 0,
               "favorites": 2,
-              "follower_gain": 0,
-              "likes": 5,
+              "follower_gain": null,
+              "likes": 6,
               "shares": 0,
-              "views": 284
+              "views": 514
             }
           },
           "windows": {
@@ -291,13 +516,42 @@
           "format": "video",
           "native_id": "export/UzFfBgAAxKiFKBM-DQSHk8zT4DCLFXKRmFKP5u3loho_9JezDQ",
           "url": null,
-          "published_at": "2026-10-30T11:59:00+08:00",
+          "published_at": "2026-10-30T11:59:05+08:00",
           "status": "published",
           "collection": "捞鱼学算法",
           "activity": "no_late_campaign_control_in_published_edit_ui",
-          "source_title": null,
-          "snapshots": [],
-          "latest": null,
+          "source_title": "学算法、刷题面试的同学，来复习 Hot100 第53题：最大子数组和。",
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-002:wechat_channels",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-31T02:34:27+08:00",
+              "source": "wechat-channels-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": 0,
+                "likes": 1,
+                "shares": 0,
+                "views": 174
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-002:wechat_channels",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "source": "wechat-channels-creator-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 0,
+              "follower_gain": 0,
+              "likes": 1,
+              "shares": 0,
+              "views": 174
+            }
+          },
           "windows": {
             "24": null,
             "168": null
@@ -316,8 +570,37 @@
           "collection": "pending",
           "activity": "creator_original_content_rewards_ineligible",
           "source_title": null,
-          "snapshots": [],
-          "latest": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-002:x",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-31T02:34:27+08:00",
+              "source": "x-post-impressions-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 4
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-002:x",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "source": "x-post-impressions-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 0,
+              "follower_gain": null,
+              "likes": 0,
+              "shares": 0,
+              "views": 4
+            }
+          },
           "windows": {}
         },
         {
@@ -333,8 +616,37 @@
           "collection": "捞鱼学算法",
           "activity": "RED11月精选作者评选",
           "source_title": null,
-          "snapshots": [],
-          "latest": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-002:xiaohongshu",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-31T02:34:27+08:00",
+              "source": "xiaohongshu-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 1,
+                "shares": 0,
+                "views": 19
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-002:xiaohongshu",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "source": "xiaohongshu-creator-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 0,
+              "follower_gain": null,
+              "likes": 1,
+              "shares": 0,
+              "views": 19
+            }
+          },
           "windows": {
             "24": null,
             "168": null
@@ -353,8 +665,37 @@
           "collection": "捞鱼学算法",
           "activity": "No suitable campaign entry observed in current Studio upload flow",
           "source_title": null,
-          "snapshots": [],
-          "latest": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-002:youtube",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-31T02:34:27+08:00",
+              "source": "youtube-studio-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": null,
+                "views": 0
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-002:youtube",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "source": "youtube-studio-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": null,
+              "follower_gain": null,
+              "likes": 0,
+              "shares": null,
+              "views": 0
+            }
+          },
           "windows": {}
         },
         {
@@ -370,8 +711,37 @@
           "collection": null,
           "activity": "每天一个知识点",
           "source_title": null,
-          "snapshots": [],
-          "latest": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-002:juejin",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-31T02:34:27+08:00",
+              "source": "juejin-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": null,
+                "views": 4
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-002:juejin",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "source": "juejin-creator-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 0,
+              "follower_gain": null,
+              "likes": 0,
+              "shares": null,
+              "views": 4
+            }
+          },
           "windows": {}
         },
         {
@@ -382,13 +752,42 @@
           "format": "article",
           "native_id": "bmeiJxKU5-44Itb0CZqc3g",
           "url": "https://mp.weixin.qq.com/s/bmeiJxKU5-44Itb0CZqc3g",
-          "published_at": "2026-10-30T13:03:00+08:00",
+          "published_at": "2026-10-30T13:01:52+08:00",
           "status": "published",
           "collection": "捞鱼学算法",
           "activity": "no_suitable_activity_observed_in_article_flow",
-          "source_title": null,
-          "snapshots": [],
-          "latest": null,
+          "source_title": "Hot100｜最大子数组和：这个负数为什么要留？",
+          "api_native_id": "2247483796_1",
+          "snapshots": [
+            {
+              "publication_id": "hot100-002:wechat_official",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-30T23:59:59+08:00",
+              "source": "wechat-official-30d-read-uv-api",
+              "metrics": {
+                "comments": null,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": null,
+                "shares": null,
+                "views": 12
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-002:wechat_official",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-30T23:59:59+08:00",
+            "source": "wechat-official-30d-read-uv-api",
+            "metrics": {
+              "comments": null,
+              "favorites": null,
+              "follower_gain": null,
+              "likes": null,
+              "shares": null,
+              "views": 12
+            }
+          },
           "windows": {
             "24": null,
             "168": null
@@ -407,8 +806,37 @@
           "collection": null,
           "activity": null,
           "source_title": null,
-          "snapshots": [],
-          "latest": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-002:zhihu",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-31T02:34:27+08:00",
+              "source": "zhihu-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": 0,
+                "likes": 1,
+                "shares": 0,
+                "views": 0
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-002:zhihu",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "source": "zhihu-creator-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 0,
+              "follower_gain": 0,
+              "likes": 1,
+              "shares": 0,
+              "views": 0
+            }
+          },
           "windows": {
             "24": null,
             "168": null
@@ -435,6 +863,7 @@
           "collection": "捞鱼学算法",
           "activity": "分享我的专业知识",
           "source_title": null,
+          "api_native_id": null,
           "snapshots": [
             {
               "publication_id": "hot100-001:bilibili",
@@ -449,12 +878,26 @@
                 "shares": 0,
                 "views": 109
               }
+            },
+            {
+              "publication_id": "hot100-001:bilibili",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-31T02:34:27+08:00",
+              "source": "bilibili-public-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 1,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 109
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-001:bilibili",
-            "observed_at": "2026-10-31T01:24:09+08:00",
-            "data_as_of": "2026-10-31T01:24:09+08:00",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-31T02:34:27+08:00",
             "source": "bilibili-public-api",
             "metrics": {
               "comments": 0,
@@ -480,6 +923,7 @@
           "collection": "捞鱼学算法",
           "activity": "Vibe知识大赏",
           "source_title": "LRU缓存为什么能O(1)？ 刷 Hot100、准备算法面试的同学，趁刷视频歇…",
+          "api_native_id": null,
           "snapshots": [
             {
               "publication_id": "hot100-001:douyin",
@@ -494,20 +938,34 @@
                 "shares": 5,
                 "views": 1899
               }
+            },
+            {
+              "publication_id": "hot100-001:douyin",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-31T02:34:27+08:00",
+              "source": "douyin-creator-api",
+              "metrics": {
+                "comments": 2,
+                "favorites": 10,
+                "follower_gain": null,
+                "likes": 29,
+                "shares": 5,
+                "views": 1920
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-001:douyin",
-            "observed_at": "2026-10-30T10:24:02+08:00",
-            "data_as_of": "2026-10-30T10:24:02+08:00",
-            "source": "douyin-creator-export",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "source": "douyin-creator-api",
             "metrics": {
-              "comments": 1,
+              "comments": 2,
               "favorites": 10,
-              "follower_gain": 1,
-              "likes": 28,
+              "follower_gain": null,
+              "likes": 29,
               "shares": 5,
-              "views": 1899
+              "views": 1920
             }
           },
           "windows": {
@@ -536,14 +994,46 @@
           "format": "video",
           "native_id": "export/UzFfBgAAxKKFfCR0C06Gk8zT4DCLPvmjQIh4YHoChZBDF7UjYQ",
           "url": null,
-          "published_at": null,
+          "published_at": "2026-10-30T19:51:23+08:00",
           "status": "published",
           "collection": "捞鱼学算法",
           "activity": "微信时刻 · 避坑小知识",
-          "source_title": null,
-          "snapshots": [],
-          "latest": null,
-          "windows": {}
+          "source_title": "【捞鱼学算法·第1期】",
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-001:wechat_channels",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-31T02:34:27+08:00",
+              "source": "wechat-channels-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": 0,
+                "likes": 0,
+                "shares": 0,
+                "views": 86
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-001:wechat_channels",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "source": "wechat-channels-creator-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 0,
+              "follower_gain": 0,
+              "likes": 0,
+              "shares": 0,
+              "views": 86
+            }
+          },
+          "windows": {
+            "24": null,
+            "168": null
+          }
         },
         {
           "id": "hot100-001:x",
@@ -558,8 +1048,37 @@
           "collection": "pending",
           "activity": "creator_original_content_rewards_ineligible",
           "source_title": null,
-          "snapshots": [],
-          "latest": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-001:x",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-31T02:34:27+08:00",
+              "source": "x-post-impressions-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 6
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-001:x",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "source": "x-post-impressions-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 0,
+              "follower_gain": null,
+              "likes": 0,
+              "shares": 0,
+              "views": 6
+            }
+          },
           "windows": {}
         },
         {
@@ -575,8 +1094,37 @@
           "collection": "捞鱼学算法",
           "activity": "RED11月精选作者评选",
           "source_title": null,
-          "snapshots": [],
-          "latest": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-001:xiaohongshu",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-31T02:34:27+08:00",
+              "source": "xiaohongshu-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 1,
+                "follower_gain": null,
+                "likes": 1,
+                "shares": 1,
+                "views": 90
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-001:xiaohongshu",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "source": "xiaohongshu-creator-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 1,
+              "follower_gain": null,
+              "likes": 1,
+              "shares": 1,
+              "views": 90
+            }
+          },
           "windows": {}
         },
         {
@@ -592,8 +1140,37 @@
           "collection": "捞鱼学算法",
           "activity": "No suitable campaign entry observed in current Studio upload flow",
           "source_title": null,
-          "snapshots": [],
-          "latest": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-001:youtube",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-31T02:34:27+08:00",
+              "source": "youtube-studio-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": null,
+                "views": 0
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-001:youtube",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "source": "youtube-studio-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": null,
+              "follower_gain": null,
+              "likes": 0,
+              "shares": null,
+              "views": 0
+            }
+          },
           "windows": {}
         },
         {
@@ -602,23 +1179,60 @@
           "platform": "wechat_official",
           "account_label": null,
           "format": "article",
-          "native_id": null,
-          "url": null,
-          "published_at": null,
-          "status": "published_user_confirmed",
+          "native_id": "2247483805_1",
+          "url": "https://mp.weixin.qq.com/s/jtesXMI0RNGIlkz7R_Zd8Q",
+          "published_at": "2026-10-30T21:15:32+08:00",
+          "status": "published",
           "collection": "捞鱼学算法",
           "activity": "no_suitable_activity_observed_in_article_flow",
-          "source_title": null,
-          "snapshots": [],
-          "latest": null,
-          "windows": {}
+          "source_title": "捞鱼学算法01｜LRU缓存为什么能做到O(1)？",
+          "api_native_id": "2247483805_1",
+          "snapshots": [
+            {
+              "publication_id": "hot100-001:wechat_official",
+              "observed_at": "2026-10-31T02:34:27+08:00",
+              "data_as_of": "2026-10-30T23:59:59+08:00",
+              "source": "wechat-official-30d-read-uv-api",
+              "metrics": {
+                "comments": null,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": null,
+                "shares": null,
+                "views": 4
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-001:wechat_official",
+            "observed_at": "2026-10-31T02:34:27+08:00",
+            "data_as_of": "2026-10-30T23:59:59+08:00",
+            "source": "wechat-official-30d-read-uv-api",
+            "metrics": {
+              "comments": null,
+              "favorites": null,
+              "follower_gain": null,
+              "likes": null,
+              "shares": null,
+              "views": 4
+            }
+          },
+          "windows": {
+            "24": null,
+            "168": null
+          }
         }
       ]
     }
   ],
   "definitions": {
-    "views": "平台原始播放/阅读，门槛不同，不代表跨平台去重人数",
+    "views": "平台原始播放/阅读/曝光，门槛不同，不代表跨平台去重人数",
     "missing": "null 为未采集或不支持，不是 0",
-    "window": "24h/7d 只使用目标时点前后1小时内的真实采样"
+    "window": "24h/7d 只使用目标时点前后1小时内的真实采样",
+    "platform_views": {
+      "x": "帖子浏览/曝光，不是视频播放",
+      "wechat_official": "当前接口为近30天阅读人数UV，不是累计阅读次数",
+      "zhihu": "内容分析PV；赞列为赞同数"
+    }
   }
 }
