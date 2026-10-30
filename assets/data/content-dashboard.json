@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-10-30T13:51:40+08:00",
+  "generated_at": "2026-10-30T14:04:01+08:00",
   "contents": [
     {
       "id": "hot100-002",
@@ -21,8 +21,28 @@
           "collection": "捞鱼学算法",
           "activity": "分享我的专业知识",
           "source_title": null,
-          "snapshots": [],
-          "latest": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-002:bilibili",
+              "observed_at": "2026-10-30T13:57:32+08:00",
+              "data_as_of": "2026-10-30T13:57:32+08:00",
+              "source": "bilibili-public-ui",
+              "metrics": {
+                "favorites": 2,
+                "views": 1
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-002:bilibili",
+            "observed_at": "2026-10-30T13:57:32+08:00",
+            "data_as_of": "2026-10-30T13:57:32+08:00",
+            "source": "bilibili-public-ui",
+            "metrics": {
+              "favorites": 2,
+              "views": 1
+            }
+          },
           "windows": {
             "24": null,
             "168": null
@@ -40,7 +60,7 @@
           "status": "published",
           "collection": "捞鱼学算法",
           "activity": "Vibe知识大赏",
-          "source_title": null,
+          "source_title": "这个负数为什么要留？最大子数组和",
           "snapshots": [
             {
               "publication_id": "hot100-002:douyin",
@@ -55,20 +75,34 @@
                 "shares": 0,
                 "views": 58
               }
+            },
+            {
+              "publication_id": "hot100-002:douyin",
+              "observed_at": "2026-10-30T13:55:22+08:00",
+              "data_as_of": "2026-10-30T13:55:22+08:00",
+              "source": "creator-ui-review",
+              "metrics": {
+                "comments": 0,
+                "favorites": 2,
+                "follower_gain": 0,
+                "likes": 5,
+                "shares": 0,
+                "views": 284
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-002:douyin",
-            "observed_at": "2026-10-30T12:13:57+08:00",
-            "data_as_of": "2026-10-30T12:13:57+08:00",
+            "observed_at": "2026-10-30T13:55:22+08:00",
+            "data_as_of": "2026-10-30T13:55:22+08:00",
             "source": "creator-ui-review",
             "metrics": {
               "comments": 0,
               "favorites": 2,
               "follower_gain": 0,
-              "likes": 2,
+              "likes": 5,
               "shares": 0,
-              "views": 58
+              "views": 284
             }
           },
           "windows": {
