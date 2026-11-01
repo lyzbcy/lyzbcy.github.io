@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T22:05:04.413556+08:00",
+  "generated_at": "2026-11-02T01:00:03.720996+08:00",
   "goals": {
     "calories": 1664,
     "water": 2000,
@@ -2333,7 +2333,7 @@
   "status": {
     "has_today": false,
     "has_yesterday": false,
-    "today": "2026-11-01",
+    "today": "2026-11-02",
     "is_active": false,
     "is_training_day": false
   },
@@ -2355,9 +2355,9 @@
         "exercise": "训练量 4360kg (20/20); 组数 12 (10/10)"
       }
     ],
-    "range_start": "2026-10-19",
-    "range_end": "2026-11-01",
-    "exported_at": "2026-11-01T22:05:04.399328"
+    "range_start": "2026-10-20",
+    "range_end": "2026-11-02",
+    "exported_at": "2026-11-02T01:00:03.694425"
   },
   "food_library": {
     "items": [
