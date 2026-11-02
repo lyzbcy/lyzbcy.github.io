@@ -252,6 +252,15 @@ def mark_check_done():
     except Exception:
         pass
 
+def validate_collection_coverage(payload):
+    results = payload.get('workResults')
+    expected = payload.get('selection', {}).get('selectedWorks')
+    if not isinstance(results, list) or not isinstance(expected, int) or len(results) != expected:
+        raise ValueError('COLLECTION_INCOMPLETE: 作品覆盖不完整，禁止报告空评论或执行回复')
+    if payload.get('complete') is False or any(r.get('status') not in ('checked','unsupported_filter') for r in results):
+        raise ValueError('COLLECTION_INCOMPLETE: 存在失败作品，禁止报告空评论或执行回复')
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--collect-only', action='store_true', help='只采集验证，不调用 LLM、不发送、不更改检查频率')
@@ -304,6 +313,7 @@ def main():
             text=True,
             capture_output=True,
             timeout=480,
+            stdout_log=OUTPUT_DIR / 'collection-latest.log',
         )
         if collect_proc.stdout:
             (OUTPUT_DIR / 'collection-latest.log').write_text(collect_proc.stdout, encoding='utf-8')
@@ -335,6 +345,7 @@ def main():
         unreplied_payload = load_json(UNREPLIED_FILE)
         comments_list = unreplied_payload.get("comments", []) if isinstance(unreplied_payload, dict) else unreplied_payload
         unreplied_payload = {**(unreplied_payload if isinstance(unreplied_payload, dict) else {}), "count": len(comments_list), "comments": comments_list}
+        validate_collection_coverage(unreplied_payload)
         if args.collect_only:
             print(json.dumps({'mode': 'collect_only', 'count': len(comments_list), 'selection': unreplied_payload.get('selection'), 'workResults': unreplied_payload.get('workResults')}, ensure_ascii=False))
             return
@@ -425,6 +436,8 @@ def main():
         )
 
     except Exception as e:
+        if not args.collect_only:
+            write_report(f'# 抖音评论检查任务报告\n\n## 执行时间\n{now_text()}\n\n## 任务状态\nERROR\n\n## 原因\n本轮未完成（{type(e).__name__}），不能确认未回复数量或发送结果。请查看本轮 collection-latest.log 和审计日志，不使用旧计划重发。')
         append_log(f"ERROR | {type(e).__name__}: {str(e)[-3000:]}")
         if isinstance(e, subprocess.TimeoutExpired):
             detail = (str(e.output or "") + "\n" + str(e.stderr or ""))[-12000:]

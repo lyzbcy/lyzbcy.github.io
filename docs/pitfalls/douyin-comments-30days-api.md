@@ -46,3 +46,16 @@ HTTP/2 的 :authority/:method 等伪头不能传给 APIRequestContext，须剔�
 今天多轮在刷新作品列表时即失败，明确错误Authorization required / Missing X server，尚未进入登录态判断，不得误报Cookie掉线。根因：三处代理通过pgrep发现任意Xvfb后，就把DISPLAY强制改为:99；当:99由xvfb-run以私有Xauthority启动时，外层另分配的DISPLAY与授权配对被破坏。
 
 修复scripts/works.js、collect-comments.js、reply-comments.js统一使用creator-display.js：用xdpyinfo实际探测继承的DISPLAY/XAUTHORITY，成功保留，失败或缺失则xvfb-run -a选择独立显示器。不会pkill全局Xvfb、放宽访问控制、重写Cookie或操作其他服务的显示器。新增四项mock覆盖可用、被拒、缺失、探测超时，原七项Python回归仍通过。只读验证不生成回复、不发评论、不改频率。
+
+
+## 2026-11-02 作品切换超时与结果保护
+
+实证：15:08的只读检查在前7个作品连续locator.click超时，15:16触发480秒阶段保护；没有登录失效提示。随后带诊断的独立重跑可正常读取官方未回复接口，说明不能直接认定Cookie掉线。具体遮挡/页面渲染瞬态未在恢复后的现场复现，不补造根因截图。
+
+可确定的代码缺陷：作品扫描设置了25秒预算，但trigger/workCard.click与scrollIntoViewIfNeeded未传timeout，仍采用Playwright默认30秒；findTargetWorkWithRetry的第二轮又重新计时，串行处理全部作品把单次页面异常放大成整轮8分钟卡住。pending响应的Promise.allSettled也没有上限；stdout被capture_output缓存导致执行中看不到进度。
+
+生产修复：creator 0.1.1、检查封装1.0.1。点击与滚动显式传UI超时，选择重试共享20秒总预算；读取页面失败后清空当前作品观察状态、重载评论页，只重试一次，仍失败停止本轮。该恢复只用于读取/切换，绝不用于发送回复。响应body与pending等待有上限；实时collection-latest.log权限600。collector返回complete与覆盖明细，封装再次校验；不完整/失败结果不能当EMPTY或进入LLM/回复，正常轮失败刷新ERROR报告。诊断参数可保留本机错误详情和页面截图，不能公开原评论/凭据/登录profile。
+
+验证：29项Node采集/接口/日期/归一化测试、4项显示器测试、11项Python互斥/进程组/实时日志/覆盖测试，共44项通过。mock验证了首次点击失败恢复、永久失败停止、登录失效不重试、旧作品无筛选显式跳过、迟迟不结束的响应、超时日志和进程清理。部署后两次真实--collect-only在15:36:10和15:37:51完成，均18/18作品通过API检查、complete=true，发现1条待回复；未调用LLM、未发送。人设配置（persona.json）、回复数据库和频率配置哈希不变。
+
+回滚：ubuntu私有state下douyin-comments-backup-20261102/original；部署只改对应源码/测试/版本字段，保留登录态和业务数据。定时入口仍为run-check.py，不增加任务、不重发旧计划。

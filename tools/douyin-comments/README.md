@@ -14,3 +14,6 @@
 今天多轮在刷新作品列表时即失败，明确错误Authorization required / Missing X server，尚未进入登录态判断，不得误报Cookie掉线。根因：三处代理通过pgrep发现任意Xvfb后，就把DISPLAY强制改为:99；当:99由xvfb-run以私有Xauthority启动时，外层另分配的DISPLAY与授权配对被破坏。
 
 修复scripts/works.js、collect-comments.js、reply-comments.js统一使用creator-display.js：用xdpyinfo实际探测继承的DISPLAY/XAUTHORITY，成功保留，失败或缺失则xvfb-run -a选择独立显示器。不会pkill全局Xvfb、放宽访问控制、重写Cookie或操作其他服务的显示器。新增四项mock覆盖可用、被拒、缺失、探测超时，原七项Python回归仍通过。只读验证不生成回复、不发评论、不改频率。
+
+
+2026-11-02修复：生产creator0.1.1/runner1.0.1，显式点击预算、只读页面重载一次、响应等待上限、实时日志及覆盖失败保护；共44项mock/单元回归通过。此目录仍是部署覆盖层，不是完整的独立npm项目；creator文件覆盖现有creator-tools，skill文件覆盖检查封装。新增collection-e2e/collection-runtime测试；原账号、Cookie和persona不入库。详见docs/pitfalls/douyin-comments-30days-api.md。

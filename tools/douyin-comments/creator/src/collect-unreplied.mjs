@@ -27,6 +27,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
+import { recoverReadOnlyUi, settlePending, boundedResponse } from './lib/collection-runtime.mjs';
 import { selectRecentWorks } from './lib/recent-works.mjs';
 import { COMMENT_LIST_PATH, fetchUnrepliedViaApi, requestHeadersForApi } from './lib/comment-api.mjs';
 import { launchPersistentPage, DEFAULT_COMMENT_PAGE_URL, DEFAULT_USER_DATA_DIR } from './douyin-browser.mjs';
@@ -94,7 +95,7 @@ async function main() {
   const workResults = [];
   const saveOutput = (comments, extra = {}) => {
     fs.mkdirSync(path.dirname(args.outPath), {recursive: true});
-    fs.writeFileSync(args.outPath, JSON.stringify({count: comments.length, comments, selection: selection.meta, workResults, ...extra}, null, 2));
+    fs.writeFileSync(args.outPath, JSON.stringify({count: comments.length, comments, selection: selection.meta, workResults, complete:workResults.length===checkCount && workResults.every(w=>['checked','unsupported_filter'].includes(w.status)), ...extra}, null, 2));
   };
   if (!checkCount) { saveOutput([]); return; }
 
@@ -121,7 +122,7 @@ async function main() {
     if (u.origin !== 'https://creator.douyin.com' || !u.pathname.includes('comment')) return;
     const task = (async () => {
       try {
-        const body = await response.json();
+        const body = await boundedResponse(response.json());
         const key = requestKeys.get(response.request());
         if (u.pathname === COMMENT_LIST_PATH && body.status_code === 0) {
           const id = u.searchParams.get('aweme_id');
@@ -131,7 +132,7 @@ async function main() {
           const template = new URL(response.url());
           template.searchParams.set('comment_select_options', '0,not_replied');
           templateUrl = template.href;
-          templateHeaders = requestHeadersForApi(await response.request().allHeaders());
+          templateHeaders = requestHeadersForApi(await boundedResponse(response.request().allHeaders(),1500));
         }
         if (args.diagnosticPath) trace.push({path:u.pathname, method:response.request().method(), workKey:key, query:Object.fromEntries([...u.searchParams].filter(([k])=>!/token|signature|bogus|verify/i.test(k))), body});
       } catch {}
@@ -176,20 +177,27 @@ async function main() {
         };
         result = await tryApi();
         if (!result) {
-          await findTargetWorkWithRetry(page, {
-            workTitle: title, workPublishText: works[i].publishText,
-            selectWhenMatched: true, timeoutMs:25000, idleMs:2000, uiTimeoutMs:15000,
-          });
-          await page.waitForTimeout(1500);
-          const filterAvailable = await hasCommentStatusFilter(page, {timeoutMs:30000,uiTimeoutMs:8000});
-          if (!filterAvailable) {
+          const supported = await recoverReadOnlyUi(async()=>{
+            await findTargetWorkWithRetry(page, {
+              workTitle:title,workPublishText:works[i].publishText,selectWhenMatched:true,
+              timeoutMs:20000,idleMs:2000,uiTimeoutMs:8000,
+            });
+            await page.waitForTimeout(1000);
+            if (!await hasCommentStatusFilter(page,{timeoutMs:15000,uiTimeoutMs:5000})) return false;
+            const applied=await applyUnrepliedCommentsFilter(page,{timeoutMs:15000,uiTimeoutMs:5000});
+            if (!applied.applied) throw Error('未回复筛选未确认生效，禁止采集全部评论');
+            if (!await settlePending(pending)) throw Error('COMMENT_RESPONSE_TIMEOUT: 页面评论响应未完成');
+            return true;
+          },async()=>{
+            activeWorkKey=null;templateUrl=null;templateHeaders={};observations.delete(workKey);
+            await ensureCommentPageReady(page,DEFAULT_COMMENT_PAGE_URL,{navigationTimeoutMs:30000,uiTimeoutMs:10000});
+            activeWorkKey=workKey;
+          },{onRetry:error=>console.log('[UI recovery] 重新载入评论页后重试一次：'+error.message.split('\n')[0].slice(0,160))});
+          if (!supported) {
             workResults.push({title,status:'unsupported_filter'});
             console.log('跳过(旧作品不支持未回复筛选)');
             continue;
           }
-          const applied = await applyUnrepliedCommentsFilter(page, {timeoutMs:30000,uiTimeoutMs:8000});
-          if (!applied.applied) throw Error('未回复筛选未确认生效，禁止采集全部评论');
-          await Promise.allSettled([...pending]);
           const ids = observations.get(workKey);
           if (ids?.size === 1) cache[workKey] = [...ids][0];
           else if (ids?.size > 1) delete cache[workKey];
@@ -223,8 +231,16 @@ async function main() {
           loginExpired = true;
           break;
         }
-        workResults.push({title,status:'error',reason:e.message.slice(0,160)});
-        console.log(`跳过(${e.message.slice(0, 40)})`);
+        workResults.push({title,status:'error',reason:e.message.slice(0,1200)});
+        console.error('WORK_FAILED: '+e.message);
+        if (args.diagnosticPath) {
+          const stem=args.diagnosticPath.replace(/\.json$/,'');
+          fs.mkdirSync(path.dirname(stem),{recursive:true,mode:0o700});
+          await page.screenshot({path:stem+'.png',fullPage:true,timeout:5000}).catch(()=>{});
+          fs.writeFileSync(stem+'.page.json',JSON.stringify({url:page.url().split('?')[0],error:e.message,text:(await page.locator('body').innerText({timeout:1500}).catch(()=>'' )).slice(0,30000)},null,2),{mode:0o600});
+        }
+        fatalError=true;break; // never turn an incomplete collection into an empty success
+
       } finally { activeWorkKey = null; }
     }
 
@@ -242,7 +258,7 @@ async function main() {
       console.error('ERROR:', e.message);
     }
   } finally {
-    await Promise.allSettled([...pending]);
+    if (!await settlePending(pending)) console.error('COMMENT_RESPONSE_TIMEOUT: bounded shutdown');
     if (args.diagnosticPath) {fs.mkdirSync(path.dirname(args.diagnosticPath),{recursive:true,mode:0o700});fs.writeFileSync(args.diagnosticPath,JSON.stringify(trace),{mode:0o600});}
     fs.mkdirSync(path.dirname(cachePath), {recursive:true});
     const selectedKeys = new Set(works.map(w => JSON.stringify([w.title || '', w.publishText || w.publish_time || ''])));

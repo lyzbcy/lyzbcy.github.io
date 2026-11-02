@@ -25,7 +25,7 @@ class CollectionOnlyTests(unittest.TestCase):
                 self.assertIn('comments:collect', command)
                 self.assertIn('--days', command)
                 self.assertNotIn('comments:reply', command)
-                data.write_text(json.dumps({'comments':[{'username':'user','commentText':'hello'}], 'selection':{'days':30}, 'workResults':[]}))
+                data.write_text(json.dumps({'comments':[{'username':'user','commentText':'hello'}], 'selection':{'days':30,'selectedWorks':1}, 'workResults':[{'status':'checked'}], 'complete':True}))
                 os.utime(data, (time.time()+1, time.time()+1))
                 return subprocess.CompletedProcess(command,0,stdout='collected',stderr='')
             with patch.object(runner,'OUTPUT_DIR',output), patch.object(runner,'UNREPLIED_FILE',data), \
@@ -48,6 +48,19 @@ class CollectionOnlyTests(unittest.TestCase):
         self.assertIn('不支持未回复筛选 1 个',report)
         self.assertIn('检查失败 1 个',report)
         self.assertIn('不代表没有未回复评论',report)
+
+    def test_incomplete_or_failed_coverage_is_rejected_before_reply_planning(self):
+        for payload in [
+            {'selection':{'selectedWorks':2},'workResults':[{'status':'checked'}]},
+            {'selection':{'selectedWorks':1},'workResults':[{'status':'error'}]},
+            {'selection':{'selectedWorks':1},'workResults':[{'status':'checked'}],'complete':False},
+            {'comments':[]},
+        ]:
+            with self.assertRaisesRegex(ValueError,'COLLECTION_INCOMPLETE'):
+                runner.validate_collection_coverage(payload)
+
+    def test_explicit_unsupported_filter_is_coverage_not_a_false_checked_work(self):
+        runner.validate_collection_coverage({'selection':{'selectedWorks':1},'workResults':[{'status':'unsupported_filter'}],'complete':True})
 
 
 if __name__ == '__main__':

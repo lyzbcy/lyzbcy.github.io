@@ -16,6 +16,17 @@ class RuntimeTests(unittest.TestCase):
   r=managed_run([sys.executable,'-c','import sys;print(repr(sys.stdin.read()))'],timeout=2);self.assertEqual(r.returncode,0);self.assertEqual(r.stdout.strip(),"''")
  def test_preserves_exit_status_and_error(self):
   r=managed_run([sys.executable,'-c','import sys;print("failed",file=sys.stderr);sys.exit(4)']);self.assertEqual(r.returncode,4);self.assertIn('failed',r.stderr)
+ def test_live_log_retains_output_and_failure_status(self):
+  with tempfile.TemporaryDirectory() as d:
+   log=Path(d)/'live.log'
+   r=managed_run([sys.executable,'-c','import sys;print("progress",flush=True);print("failure",file=sys.stderr);sys.exit(4)'],stdout_log=log)
+   self.assertEqual(r.returncode,4);self.assertIn('progress',r.stdout);self.assertIn('failure',log.read_text());self.assertEqual(log.stat().st_mode & 0o777,0o600)
+ def test_timeout_preserves_live_partial_progress(self):
+  with tempfile.TemporaryDirectory() as d:
+   log=Path(d)/'live.log'
+   with self.assertRaises(subprocess.TimeoutExpired) as caught:
+    managed_run([sys.executable,'-c','import time;print("before-timeout",flush=True);time.sleep(20)'],timeout=.2,stdout_log=log)
+   self.assertIn('before-timeout',caught.exception.output);self.assertIn('before-timeout',log.read_text())
  def test_parent_signal_kills_group(self):
   with tempfile.TemporaryDirectory() as d:
    marker=Path(d)/'leaked';ready=Path(d)/'ready'

@@ -108,3 +108,12 @@ tail -20 ~/.openclaw/workspace/skills/lyzbcy-douyin-comment-check/logs/run-$(dat
 今天多轮在刷新作品列表时即失败，明确错误Authorization required / Missing X server，尚未进入登录态判断，不得误报Cookie掉线。根因：三处代理通过pgrep发现任意Xvfb后，就把DISPLAY强制改为:99；当:99由xvfb-run以私有Xauthority启动时，外层另分配的DISPLAY与授权配对被破坏。
 
 修复scripts/works.js、collect-comments.js、reply-comments.js统一使用creator-display.js：用xdpyinfo实际探测继承的DISPLAY/XAUTHORITY，成功保留，失败或缺失则xvfb-run -a选择独立显示器。不会pkill全局Xvfb、放宽访问控制、重写Cookie或操作其他服务的显示器。新增四项mock覆盖可用、被拒、缺失、探测超时，原七项Python回归仍通过。只读验证不生成回复、不发评论、不改频率。
+
+
+## 2026-11-02 作品切换卡顿修复
+
+生产采集器0.1.1、检查封装1.0.1。作品点击显式使用UI超时，重试共用作品总预算；页面操作失败只允许重新载入评论页后重试一次，仍失败立即停止本轮，不轮流耗尽所有作品。此恢复只适用于读取/选择作品，绝不包裹回复发送。
+
+评论响应读取、pending等待都有上限；collection-latest.log在采集中实时更新。覆盖不全/存在失败作品不能记EMPTY，也不能调用LLM或发送部分结果，下一次重新采集官方未回复状态。正常轮失败写新鲜ERROR报告，不能沿用旧NO_REPLY。--collect-only仍不生成/发送回复、不更新检查频率。
+
+需要现场时使用--diagnostic-out指向本机私有目录，可保留失败页面截图与错误详情；文件不公开、不复制登录数据。非登录类页面超时不能直接报掉线。
