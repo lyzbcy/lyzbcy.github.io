@@ -33,9 +33,12 @@ description: 更新 lyzbcy.github.io 博客(方便面排名、外卖排名、健
 | 华农附近美食从夯到拉排名 | [references/huanong-tier.md](references/huanong-tier.md) | `assets/lib-custom/huanong-tier.js` |
 | 所有的饮料和奶茶从夯到拉排名 | [references/drink-tier.md](references/drink-tier.md) | `assets/lib-custom/drink-tier.js` |
 | 健身/营养/抖音周报看板 | [references/dashboards.md](references/dashboards.md) | `tools/generate_*.py` |
+| 内容运营看板 / 最新视频登记与指标刷新 | [references/content-operations.md](references/content-operations.md) | 私有 SQLite → `tools/content_dashboard.py` → 静态快照 |
 | AI Coding 比赛看板 | [references/aicoding-board.md](references/aicoding-board.md) | `tools/aicoding/update-aicoding.mjs` |
 
 ## ✅ 通用更新流程
+
+评价、找图和重绘一图流的步骤适用于排名/海报页面；内容运营看板按其专属细则登记、采样和验证，不因更新统计而重绘海报。
 
 ```
 1. 读对应页面 references/ 细则

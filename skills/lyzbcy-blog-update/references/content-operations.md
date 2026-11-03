@@ -1,0 +1,72 @@
+# 内容运营看板：更新最新视频与真实采样
+
+适用请求：“更新看板到最新视频”“刷新各平台数据”“新一期发布后同步看板”。
+入口 `/posts/内容运营看板/`。字段、命令与平台指标口径见 [维护手册](../../../docs/howto/content-dashboard.md)；推送遵循 [服务器发布链路](../../../docs/howto/push-pipeline.md)。本文件补充实际维护中容易漏掉的判断。
+
+## 先发现漏登作品，再刷新指标
+
+现有采集器按已登记身份取数，不会自动把新视频加入看板。先比较服务器当前登记、近期投稿回执与平台真实已发布列表；“更新到最新”也包括其他栏目新发布的作品，不能只刷新原有 Hot100 条目。
+
+- 同一内容在不同平台关联 publication；只登记回执或真实列表中核实的身份，不根据另一作品的平台矩阵推断本作品也全平台发布。
+- “上传完成”“提交审核”和“公开已发布”分别记录，不能把前两者直接登记成 published。发现状态不明时保留证据并列为待核对。
+- 平台长数字 ID 保留原始字符串，如抖音 `aweme_id`、X `id_str`；不要把经 JavaScript Number 舍入后的通用 `id` 写回。公开链接只使用已核验链接或已确认的原生 ID 路由。
+- 公众号、知乎、掘金的文章记为 article；发布身份已确认但暂无指标的快手/微博等可以登记，缺测保留 null。新增 platform 时核对前端中文名称，登记平台数与采样支持数分别说明。
+- 发布时间带时区，私有来源记录保留实际精度。缺少准确时间就留空；不要用采集时间代替发布时间。视频号按已登记描述前缀和精确创建秒唯一匹配；公众号短链接、正式统计 `msg_id_item_idx` 与草稿 ID 分开，正式统计绑定使用 `api_native_id`，保留原 `native_id`。
+
+## 使用主库和既有入口，保留成功样本
+
+唯一链路：核验后的 contents/publications/snapshots 事实包 → 服务器原 SQLite 的标准 ingest/import → export → `assets/data/content-dashboard.json` → ubuntu 提交推送。
+
+服务器当前默认主库为 `/home/ubuntu/.local/share/laoyu-content/registry.sqlite`，仍应以脚本参数和实际部署为准。导入前做 SQLite 一致性备份、记录三表计数，按既有 `.refresh.lock` 单写入约定操作。公开快照恢复的本机暂存库只用于预演、生成包含新增登记的采集输入，**不上传覆盖服务器主库**。导入后比较内容/稿件/采样增量，历史样本不可改写。
+
+仅刷新已登记内容时，复用统一入口：
+
+```bash
+python tools/refresh_content_remote.py --host YOUR_SERVER --all-platforms --push
+```
+
+新内容先补标准登记；若在本机预演后采样，给采集器传入包含新登记的快照，再将核验登记与采样合成标准事实包导入。不要只修改公开生成 JSON。
+
+```bash
+python tools/collect_content_browser.py --snapshot /private/expanded-registry.json \
+  --output /private/observations.json --report /private/collector-report.json
+```
+
+**部分失败不等于没有可用数据。** 当前统一远程入口遇到采集非零退出会拒绝整包上传；独立采集器则可能已经输出其余平台的真实 samples。检查私有 report、身份、采样时间和来源后，可用既有导入模式发布其中成功数据及已核验登记：
+
+```bash
+python tools/refresh_content_remote.py --host YOUR_SERVER \
+  --observations /private/verified-facts-and-observations.json --push
+```
+
+这个模式要求至少一条真实 snapshot；仅补登记且无样本时走主库标准 import/export。不要用空样本或虚构零值绕过检查。失败平台保留最后成功样本，报告缺失原因；全部采集失败时不冒称数据已刷新。
+
+- 视频号登录过期不必阻塞其他平台的已授权更新；需要恢复登录时单独说明。B站服务器出口已知 HTTP 412 时走本机公开接口采样，不重复盲试云端入口。
+- 公众号统计有滞后。当天新文章尚未进入截至昨日的近30天 UV 列表，不代表发表失败或阅读数为0；`data_as_of` 使用统计截止日期，`observed_at` 使用实际取数时间。
+- X 是曝光，公众号是近30天阅读人数 UV；未观察到的分页稿件只能标缺失，不能宣称全量。24h/7d 窗口沿用真实采样条件。
+
+## 避免网页已刷新却还显示旧数据
+
+2026-11-03 实测：Pages 构建成功、公开 JSON 已更新，浏览器仍只显示旧条目。原因是 Chirpy service worker 的 cache-first 返回旧缓存，前端 `fetch(...,{cache:'no-cache'})` 无法绕过它。
+
+`_config.yml` 的 `pwa.cache.deny_paths` 已加入：
+
+```yaml
+- "/assets/data/content-dashboard.json"
+- "/assets/lib-custom/content-dashboard.js"
+```
+
+保留这些规则。构建后核对线上 `/assets/js/data/swconf.js` 包含这两个路径。仅看到带时间戳查询参数的 JSON 更新，不能证明正常页面已更新。
+
+旧 worker 仍可能控制当前页；新配置不会立即清除旧缓存。检查该站 service worker 是否有 waiting 版本，按网站现有更新机制激活（当前 Chirpy 支持向 waiting worker 发送 `SKIP_WAITING`），待激活清理旧缓存后正常重载。若为诊断临时绕过 service worker，完成后恢复，并再次验证正常加载。不要为刷新博客而清空其他平台登录数据。
+
+## 发布与核验只做必要工作
+
+修改前核对服务器工作区及远端最新版本；本地旧工作区可能落后且有未提交修改，以服务器当前文件为基底增量合并。仅暂存本次相关路径，以 ubuntu 经既有 SSH 路由推送，避免把其他任务的暂存或未提交文件混进提交。
+
+- 数据链路改动运行对应现有注册库、指标适配和刷新测试；只改文档检查链接和 skill 校验即可，不重复采集、造版本或重装软件。
+- 先验证对应 commit 的 Pages 工作流成功，再读取正常公开 JSON，核对生成时间、新内容身份、稿件数及采样时间。
+- 浏览器正常加载后，用 DOM/无障碍树核对内容下拉框、新一期“全部发布”行数、平台名称与封面实际加载。截图仅在版式异常或需要视觉验收时使用，避免逐平台反复截图确认。
+- 区分取数耗时、登录/准备耗时和构建/CDN 耗时；本轮成功不写成稳定时延保证。普通按需更新复用现有标签会话和刷新脚本，不新增定时任务。
+
+回执记录 commit、线上核验、主库增量、成功样本及缺测原因，供下次续接。Cookie、口令、签名请求、原始回包、投稿后台地址和私信汇总放私有区，不进公开 skill、快照或仓库。
