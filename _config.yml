@@ -147,6 +147,8 @@ pwa:
     # Usually its value is the `baseurl` of another website that
     # shares the same domain name as the current website.
     deny_paths:
+      - "/assets/data/content-dashboard.json"
+      - "/assets/lib-custom/content-dashboard.js"
       - "/assets/data/launcher-stats.json"
       - "/assets/lib-custom/launcher-board.js"
       - "/assets/lib-custom/launcher-board.css"
