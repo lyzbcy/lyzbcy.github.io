@@ -1,7 +1,427 @@
 {
   "schema": 1,
-  "generated_at": "2026-11-02T10:20:55+08:00",
+  "generated_at": "2026-11-03T09:35:49+08:00",
   "contents": [
+    {
+      "id": "hot100-004",
+      "title": "Hot100 第四期 · 两数相加",
+      "series": "捞鱼学算法",
+      "cover": "/assets/img/content/hot100-004.jpg",
+      "publications": [
+        {
+          "id": "hot100-004:bilibili",
+          "content_id": "hot100-004",
+          "platform": "bilibili",
+          "account_label": "捞鱼真不吃鱼",
+          "format": "video",
+          "native_id": "BV1nU4c6CEmr",
+          "url": "https://www.bilibili.com/video/BV1nU4c6CEmr/",
+          "published_at": "2026-11-02T19:26:44+08:00",
+          "status": "published",
+          "collection": "捞鱼学算法",
+          "activity": "vibe知识上新啦",
+          "source_title": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-004:bilibili",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "bilibili-public-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 1,
+                "follower_gain": null,
+                "likes": 1,
+                "shares": 0,
+                "views": 67
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-004:bilibili",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "source": "bilibili-public-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 1,
+              "follower_gain": null,
+              "likes": 1,
+              "shares": 0,
+              "views": 67
+            }
+          },
+          "windows": {
+            "24": null,
+            "168": null
+          }
+        },
+        {
+          "id": "hot100-004:douyin",
+          "content_id": "hot100-004",
+          "platform": "douyin",
+          "account_label": "捞鱼真不吃鱼",
+          "format": "video",
+          "native_id": "7703531556387753250",
+          "url": "https://www.douyin.com/video/7703531556387753250",
+          "published_at": "2026-11-02T19:16:59+08:00",
+          "status": "published",
+          "collection": "捞鱼学算法",
+          "activity": "Vibe知识大赏",
+          "source_title": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-004:douyin",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "douyin-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 1,
+                "follower_gain": null,
+                "likes": 2,
+                "shares": 0,
+                "views": 165
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-004:douyin",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "source": "douyin-creator-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 1,
+              "follower_gain": null,
+              "likes": 2,
+              "shares": 0,
+              "views": 165
+            }
+          },
+          "windows": {
+            "24": null,
+            "168": null
+          }
+        },
+        {
+          "id": "hot100-004:kuaishou",
+          "content_id": "hot100-004",
+          "platform": "kuaishou",
+          "account_label": "捞鱼真不吃鱼",
+          "format": "video",
+          "native_id": "3x7hkn6qbue6ej4",
+          "url": "https://www.kuaishou.com/short-video/3x7hkn6qbue6ej4",
+          "published_at": "2026-11-03T00:22:00+08:00",
+          "status": "published",
+          "collection": null,
+          "activity": null,
+          "source_title": null,
+          "api_native_id": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {
+            "24": null,
+            "168": null
+          }
+        },
+        {
+          "id": "hot100-004:wechat_channels",
+          "content_id": "hot100-004",
+          "platform": "wechat_channels",
+          "account_label": "捞鱼真不吃鱼",
+          "format": "video",
+          "native_id": "export/UzFfBgAAxLuFdG5DHnuCk8zT4DCaacfzAQ7B-FsnXA4SR8VUmA",
+          "url": null,
+          "published_at": "2026-11-03T00:19:39+08:00",
+          "status": "published",
+          "collection": "捞鱼学算法",
+          "activity": null,
+          "source_title": "用AI做视频第15天。刷Hot100、准备算法面试的同学，和小捞咪、星星布丁一起复习LeetCode第2题「两数相加」。",
+          "api_native_id": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {
+            "24": null,
+            "168": null
+          }
+        },
+        {
+          "id": "hot100-004:weibo",
+          "content_id": "hot100-004",
+          "platform": "weibo",
+          "account_label": "用户7957084692",
+          "format": "video",
+          "native_id": "RpzVBjZgl",
+          "url": "https://weibo.com/7957084692/RpzVBjZgl",
+          "published_at": null,
+          "status": "published",
+          "collection": null,
+          "activity": null,
+          "source_title": null,
+          "api_native_id": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {}
+        },
+        {
+          "id": "hot100-004:x",
+          "content_id": "hot100-004",
+          "platform": "x",
+          "account_label": "@lyzbcy",
+          "format": "video",
+          "native_id": "2117228288317981009",
+          "url": "https://x.com/lyzbcy/status/2117228288317981009",
+          "published_at": null,
+          "status": "published",
+          "collection": null,
+          "activity": null,
+          "source_title": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-004:x",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "x-post-impressions-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 1
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-004:x",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "source": "x-post-impressions-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 0,
+              "follower_gain": null,
+              "likes": 0,
+              "shares": 0,
+              "views": 1
+            }
+          },
+          "windows": {}
+        },
+        {
+          "id": "hot100-004:xiaohongshu",
+          "content_id": "hot100-004",
+          "platform": "xiaohongshu",
+          "account_label": "AAA超级技工捞鱼",
+          "format": "video",
+          "native_id": "6ae878950000000036027f40",
+          "url": "https://www.xiaohongshu.com/explore/6ae878950000000036027f40",
+          "published_at": "2026-11-02T19:48:00+08:00",
+          "status": "published",
+          "collection": "捞鱼学算法",
+          "activity": null,
+          "source_title": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-004:xiaohongshu",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "xiaohongshu-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 1,
+                "shares": 0,
+                "views": 10
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-004:xiaohongshu",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "source": "xiaohongshu-creator-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 0,
+              "follower_gain": null,
+              "likes": 1,
+              "shares": 0,
+              "views": 10
+            }
+          },
+          "windows": {
+            "24": null,
+            "168": null
+          }
+        },
+        {
+          "id": "hot100-004:youtube",
+          "content_id": "hot100-004",
+          "platform": "youtube",
+          "account_label": "恩泽余",
+          "format": "video",
+          "native_id": "tnwJdNd_GHQ",
+          "url": "https://youtu.be/tnwJdNd_GHQ",
+          "published_at": null,
+          "status": "published",
+          "collection": null,
+          "activity": null,
+          "source_title": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-004:youtube",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "youtube-studio-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": null,
+                "views": 0
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-004:youtube",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "source": "youtube-studio-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": null,
+              "follower_gain": null,
+              "likes": 0,
+              "shares": null,
+              "views": 0
+            }
+          },
+          "windows": {}
+        },
+        {
+          "id": "hot100-004:juejin",
+          "content_id": "hot100-004",
+          "platform": "juejin",
+          "account_label": "捞鱼真不吃鱼",
+          "format": "article",
+          "native_id": "7703369445847924751",
+          "url": "https://juejin.cn/post/7703369445847924751",
+          "published_at": null,
+          "status": "published",
+          "collection": null,
+          "activity": null,
+          "source_title": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-004:juejin",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "juejin-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": null,
+                "views": 6
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-004:juejin",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "source": "juejin-creator-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 0,
+              "follower_gain": null,
+              "likes": 0,
+              "shares": null,
+              "views": 6
+            }
+          },
+          "windows": {}
+        },
+        {
+          "id": "hot100-004:wechat_official",
+          "content_id": "hot100-004",
+          "platform": "wechat_official",
+          "account_label": "捞鱼的博客",
+          "format": "article",
+          "native_id": "j_EYmvPumYNdPeZZNbUQ1w",
+          "url": "https://mp.weixin.qq.com/s/j_EYmvPumYNdPeZZNbUQ1w",
+          "published_at": "2026-11-03T09:03:00+08:00",
+          "status": "published",
+          "collection": null,
+          "activity": null,
+          "source_title": null,
+          "api_native_id": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {
+            "24": null,
+            "168": null
+          }
+        },
+        {
+          "id": "hot100-004:zhihu",
+          "content_id": "hot100-004",
+          "platform": "zhihu",
+          "account_label": "捞鱼",
+          "format": "article",
+          "native_id": "2100684725278991686",
+          "url": "https://zhuanlan.zhihu.com/p/2100684725278991686",
+          "published_at": null,
+          "status": "published",
+          "collection": null,
+          "activity": null,
+          "source_title": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-004:zhihu",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "zhihu-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": 0,
+                "likes": 0,
+                "shares": 0,
+                "views": 0
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-004:zhihu",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "source": "zhihu-creator-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 0,
+              "follower_gain": 0,
+              "likes": 0,
+              "shares": 0,
+              "views": 0
+            }
+          },
+          "windows": {}
+        }
+      ]
+    },
     {
       "id": "hot100-003",
       "title": "Hot100第三期-无重复字符的最长子串-发布版",
@@ -50,12 +470,26 @@
                 "shares": 0,
                 "views": 45
               }
+            },
+            {
+              "publication_id": "hot100-003:bilibili",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "bilibili-public-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 1,
+                "shares": 0,
+                "views": 83
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-003:bilibili",
-            "observed_at": "2026-10-31T02:34:27+08:00",
-            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
             "source": "bilibili-public-api",
             "metrics": {
               "comments": 0,
@@ -63,7 +497,7 @@
               "follower_gain": null,
               "likes": 1,
               "shares": 0,
-              "views": 45
+              "views": 83
             }
           },
           "windows": {}
@@ -124,20 +558,34 @@
                 "shares": 2,
                 "views": 2268
               }
+            },
+            {
+              "publication_id": "hot100-003:douyin",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "douyin-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 4,
+                "follower_gain": null,
+                "likes": 20,
+                "shares": 2,
+                "views": 2280
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-003:douyin",
-            "observed_at": "2026-11-02T10:20:54+08:00",
-            "data_as_of": "2026-11-02T10:20:54+08:00",
-            "source": "douyin-creator-export",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "source": "douyin-creator-api",
             "metrics": {
               "comments": 0,
               "favorites": 4,
-              "follower_gain": 1,
+              "follower_gain": null,
               "likes": 20,
               "shares": 2,
-              "views": 2268
+              "views": 2280
             }
           },
           "windows": {}
@@ -219,12 +667,26 @@
                 "shares": 0,
                 "views": 2
               }
+            },
+            {
+              "publication_id": "hot100-003:x",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "x-post-impressions-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 2
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-003:x",
-            "observed_at": "2026-10-31T02:34:27+08:00",
-            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
             "source": "x-post-impressions-api",
             "metrics": {
               "comments": 0,
@@ -265,20 +727,34 @@
                 "shares": 0,
                 "views": 32
               }
+            },
+            {
+              "publication_id": "hot100-003:xiaohongshu",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "xiaohongshu-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 4,
+                "follower_gain": null,
+                "likes": 7,
+                "shares": 0,
+                "views": 119
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-003:xiaohongshu",
-            "observed_at": "2026-10-31T02:34:27+08:00",
-            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
             "source": "xiaohongshu-creator-api",
             "metrics": {
               "comments": 0,
-              "favorites": 1,
+              "favorites": 4,
               "follower_gain": null,
-              "likes": 3,
+              "likes": 7,
               "shares": 0,
-              "views": 32
+              "views": 119
             }
           },
           "windows": {}
@@ -311,12 +787,26 @@
                 "shares": null,
                 "views": 0
               }
+            },
+            {
+              "publication_id": "hot100-003:youtube",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "youtube-studio-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": null,
+                "views": 0
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-003:youtube",
-            "observed_at": "2026-10-31T02:34:27+08:00",
-            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
             "source": "youtube-studio-api",
             "metrics": {
               "comments": 0,
@@ -357,12 +847,26 @@
                 "shares": null,
                 "views": 5
               }
+            },
+            {
+              "publication_id": "hot100-003:wechat_official",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-02T23:59:59+08:00",
+              "source": "wechat-official-30d-read-uv-api",
+              "metrics": {
+                "comments": null,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": null,
+                "shares": null,
+                "views": 5
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-003:wechat_official",
-            "observed_at": "2026-10-31T02:34:27+08:00",
-            "data_as_of": "2026-10-30T23:59:59+08:00",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-02T23:59:59+08:00",
             "source": "wechat-official-30d-read-uv-api",
             "metrics": {
               "comments": null,
@@ -438,12 +942,26 @@
                 "shares": 0,
                 "views": 82
               }
+            },
+            {
+              "publication_id": "hot100-002:bilibili",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "bilibili-public-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 2,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 108
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-002:bilibili",
-            "observed_at": "2026-10-31T02:34:27+08:00",
-            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
             "source": "bilibili-public-api",
             "metrics": {
               "comments": 0,
@@ -451,7 +969,7 @@
               "follower_gain": null,
               "likes": 0,
               "shares": 0,
-              "views": 82
+              "views": 108
             }
           },
           "windows": {
@@ -557,20 +1075,34 @@
                 "shares": 0,
                 "views": 831
               }
+            },
+            {
+              "publication_id": "hot100-002:douyin",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "douyin-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 3,
+                "follower_gain": null,
+                "likes": 9,
+                "shares": 0,
+                "views": 840
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-002:douyin",
-            "observed_at": "2026-11-02T10:20:54+08:00",
-            "data_as_of": "2026-11-02T10:20:54+08:00",
-            "source": "douyin-creator-export",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "source": "douyin-creator-api",
             "metrics": {
               "comments": 0,
               "favorites": 3,
-              "follower_gain": 2,
+              "follower_gain": null,
               "likes": 9,
               "shares": 0,
-              "views": 831
+              "views": 840
             }
           },
           "windows": {
@@ -668,12 +1200,26 @@
                 "shares": 0,
                 "views": 4
               }
+            },
+            {
+              "publication_id": "hot100-002:x",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "x-post-impressions-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 4
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-002:x",
-            "observed_at": "2026-10-31T02:34:27+08:00",
-            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
             "source": "x-post-impressions-api",
             "metrics": {
               "comments": 0,
@@ -714,20 +1260,34 @@
                 "shares": 0,
                 "views": 19
               }
+            },
+            {
+              "publication_id": "hot100-002:xiaohongshu",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "xiaohongshu-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 2,
+                "follower_gain": null,
+                "likes": 2,
+                "shares": 0,
+                "views": 30
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-002:xiaohongshu",
-            "observed_at": "2026-10-31T02:34:27+08:00",
-            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
             "source": "xiaohongshu-creator-api",
             "metrics": {
               "comments": 0,
-              "favorites": 0,
+              "favorites": 2,
               "follower_gain": null,
-              "likes": 1,
+              "likes": 2,
               "shares": 0,
-              "views": 19
+              "views": 30
             }
           },
           "windows": {
@@ -763,12 +1323,26 @@
                 "shares": null,
                 "views": 0
               }
+            },
+            {
+              "publication_id": "hot100-002:youtube",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "youtube-studio-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": null,
+                "views": 0
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-002:youtube",
-            "observed_at": "2026-10-31T02:34:27+08:00",
-            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
             "source": "youtube-studio-api",
             "metrics": {
               "comments": 0,
@@ -809,12 +1383,26 @@
                 "shares": null,
                 "views": 4
               }
+            },
+            {
+              "publication_id": "hot100-002:juejin",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "juejin-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": null,
+                "views": 10
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-002:juejin",
-            "observed_at": "2026-10-31T02:34:27+08:00",
-            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
             "source": "juejin-creator-api",
             "metrics": {
               "comments": 0,
@@ -822,7 +1410,7 @@
               "follower_gain": null,
               "likes": 0,
               "shares": null,
-              "views": 4
+              "views": 10
             }
           },
           "windows": {}
@@ -855,12 +1443,26 @@
                 "shares": null,
                 "views": 12
               }
+            },
+            {
+              "publication_id": "hot100-002:wechat_official",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-02T23:59:59+08:00",
+              "source": "wechat-official-30d-read-uv-api",
+              "metrics": {
+                "comments": null,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": null,
+                "shares": null,
+                "views": 13
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-002:wechat_official",
-            "observed_at": "2026-10-31T02:34:27+08:00",
-            "data_as_of": "2026-10-30T23:59:59+08:00",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-02T23:59:59+08:00",
             "source": "wechat-official-30d-read-uv-api",
             "metrics": {
               "comments": null,
@@ -868,7 +1470,7 @@
               "follower_gain": null,
               "likes": null,
               "shares": null,
-              "views": 12
+              "views": 13
             }
           },
           "windows": {
@@ -904,12 +1506,26 @@
                 "shares": 0,
                 "views": 0
               }
+            },
+            {
+              "publication_id": "hot100-002:zhihu",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "zhihu-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": 0,
+                "likes": 1,
+                "shares": 0,
+                "views": 0
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-002:zhihu",
-            "observed_at": "2026-10-31T02:34:27+08:00",
-            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
             "source": "zhihu-creator-api",
             "metrics": {
               "comments": 0,
@@ -975,20 +1591,34 @@
                 "shares": 0,
                 "views": 109
               }
+            },
+            {
+              "publication_id": "hot100-001:bilibili",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "bilibili-public-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 2,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 110
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-001:bilibili",
-            "observed_at": "2026-10-31T02:34:27+08:00",
-            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
             "source": "bilibili-public-api",
             "metrics": {
               "comments": 0,
-              "favorites": 1,
+              "favorites": 2,
               "follower_gain": null,
               "likes": 0,
               "shares": 0,
-              "views": 109
+              "views": 110
             }
           },
           "windows": {}
@@ -1077,20 +1707,34 @@
                 "shares": 5,
                 "views": 1939
               }
+            },
+            {
+              "publication_id": "hot100-001:douyin",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "douyin-creator-api",
+              "metrics": {
+                "comments": 2,
+                "favorites": 10,
+                "follower_gain": null,
+                "likes": 29,
+                "shares": 5,
+                "views": 1942
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-001:douyin",
-            "observed_at": "2026-11-02T10:20:54+08:00",
-            "data_as_of": "2026-11-02T10:20:54+08:00",
-            "source": "douyin-creator-export",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "source": "douyin-creator-api",
             "metrics": {
               "comments": 2,
               "favorites": 10,
-              "follower_gain": 2,
+              "follower_gain": null,
               "likes": 29,
               "shares": 5,
-              "views": 1939
+              "views": 1942
             }
           },
           "windows": {
@@ -1188,12 +1832,26 @@
                 "shares": 0,
                 "views": 6
               }
+            },
+            {
+              "publication_id": "hot100-001:x",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "x-post-impressions-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 6
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-001:x",
-            "observed_at": "2026-10-31T02:34:27+08:00",
-            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
             "source": "x-post-impressions-api",
             "metrics": {
               "comments": 0,
@@ -1234,12 +1892,26 @@
                 "shares": 1,
                 "views": 90
               }
+            },
+            {
+              "publication_id": "hot100-001:xiaohongshu",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "xiaohongshu-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 1,
+                "follower_gain": null,
+                "likes": 1,
+                "shares": 1,
+                "views": 98
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-001:xiaohongshu",
-            "observed_at": "2026-10-31T02:34:27+08:00",
-            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
             "source": "xiaohongshu-creator-api",
             "metrics": {
               "comments": 0,
@@ -1247,7 +1919,7 @@
               "follower_gain": null,
               "likes": 1,
               "shares": 1,
-              "views": 90
+              "views": 98
             }
           },
           "windows": {}
@@ -1280,12 +1952,26 @@
                 "shares": null,
                 "views": 0
               }
+            },
+            {
+              "publication_id": "hot100-001:youtube",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "youtube-studio-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": null,
+                "views": 0
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-001:youtube",
-            "observed_at": "2026-10-31T02:34:27+08:00",
-            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
             "source": "youtube-studio-api",
             "metrics": {
               "comments": 0,
@@ -1326,12 +2012,26 @@
                 "shares": null,
                 "views": 4
               }
+            },
+            {
+              "publication_id": "hot100-001:wechat_official",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-02T23:59:59+08:00",
+              "source": "wechat-official-30d-read-uv-api",
+              "metrics": {
+                "comments": null,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": null,
+                "shares": null,
+                "views": 10
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-001:wechat_official",
-            "observed_at": "2026-10-31T02:34:27+08:00",
-            "data_as_of": "2026-10-30T23:59:59+08:00",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-02T23:59:59+08:00",
             "source": "wechat-official-30d-read-uv-api",
             "metrics": {
               "comments": null,
@@ -1339,13 +2039,582 @@
               "follower_gain": null,
               "likes": null,
               "shares": null,
-              "views": 4
+              "views": 10
             }
           },
           "windows": {
             "24": null,
             "168": null
           }
+        }
+      ]
+    },
+    {
+      "id": "gpt-fireman-20261031",
+      "title": "GPT给我做了个小火人，试试动作直接绷不住了",
+      "series": "AI创作记录",
+      "cover": null,
+      "publications": [
+        {
+          "id": "gpt-fireman-20261031:douyin",
+          "content_id": "gpt-fireman-20261031",
+          "platform": "douyin",
+          "account_label": "捞鱼真不吃鱼",
+          "format": "video",
+          "native_id": "7702837296436874538",
+          "url": "https://www.douyin.com/video/7702837296436874538",
+          "published_at": "2026-10-31T22:22:55+08:00",
+          "status": "published",
+          "collection": null,
+          "activity": null,
+          "source_title": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "gpt-fireman-20261031:douyin",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "douyin-creator-api",
+              "metrics": {
+                "comments": 5,
+                "favorites": 1,
+                "follower_gain": null,
+                "likes": 8,
+                "shares": 0,
+                "views": 262
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "gpt-fireman-20261031:douyin",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "source": "douyin-creator-api",
+            "metrics": {
+              "comments": 5,
+              "favorites": 1,
+              "follower_gain": null,
+              "likes": 8,
+              "shares": 0,
+              "views": 262
+            }
+          },
+          "windows": {
+            "24": null,
+            "168": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "fitness-20261102",
+      "title": "我养了个健身搭子，练完还能自动出一图流",
+      "series": "AI剪辑成长记录",
+      "cover": null,
+      "publications": [
+        {
+          "id": "fitness-20261102:douyin",
+          "content_id": "fitness-20261102",
+          "platform": "douyin",
+          "account_label": "捞鱼真不吃鱼",
+          "format": "video",
+          "native_id": "7703550946898496783",
+          "url": "https://www.douyin.com/video/7703550946898496783",
+          "published_at": "2026-11-02T20:32:17+08:00",
+          "status": "published",
+          "collection": null,
+          "activity": null,
+          "source_title": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "fitness-20261102:douyin",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "douyin-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 1,
+                "follower_gain": null,
+                "likes": 4,
+                "shares": 1,
+                "views": 125
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "fitness-20261102:douyin",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "source": "douyin-creator-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 1,
+              "follower_gain": null,
+              "likes": 4,
+              "shares": 1,
+              "views": 125
+            }
+          },
+          "windows": {
+            "24": null,
+            "168": null
+          }
+        },
+        {
+          "id": "fitness-20261102:x",
+          "content_id": "fitness-20261102",
+          "platform": "x",
+          "account_label": "@lyzbcy",
+          "format": "video",
+          "native_id": "2117247612084740109",
+          "url": "https://x.com/lyzbcy/status/2117247612084740109",
+          "published_at": "2026-11-02T21:29:01+08:00",
+          "status": "published",
+          "collection": null,
+          "activity": null,
+          "source_title": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "fitness-20261102:x",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "x-post-impressions-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 2
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "fitness-20261102:x",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "source": "x-post-impressions-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 0,
+              "follower_gain": null,
+              "likes": 0,
+              "shares": 0,
+              "views": 2
+            }
+          },
+          "windows": {
+            "24": null,
+            "168": null
+          }
+        },
+        {
+          "id": "fitness-20261102:xiaohongshu",
+          "content_id": "fitness-20261102",
+          "platform": "xiaohongshu",
+          "account_label": "AAA超级技工捞鱼",
+          "format": "video",
+          "native_id": "6ae892020000000034027baf",
+          "url": "https://www.xiaohongshu.com/explore/6ae892020000000034027baf",
+          "published_at": "2026-11-02T21:47:01+08:00",
+          "status": "published",
+          "collection": null,
+          "activity": null,
+          "source_title": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "fitness-20261102:xiaohongshu",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "xiaohongshu-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 0
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "fitness-20261102:xiaohongshu",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "source": "xiaohongshu-creator-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 0,
+              "follower_gain": null,
+              "likes": 0,
+              "shares": 0,
+              "views": 0
+            }
+          },
+          "windows": {
+            "24": null,
+            "168": null
+          }
+        },
+        {
+          "id": "fitness-20261102:wechat_official",
+          "content_id": "fitness-20261102",
+          "platform": "wechat_official",
+          "account_label": "捞鱼的博客",
+          "format": "article",
+          "native_id": "2247483816_1",
+          "url": null,
+          "published_at": null,
+          "status": "published",
+          "collection": null,
+          "activity": null,
+          "source_title": null,
+          "api_native_id": "2247483816_1",
+          "snapshots": [
+            {
+              "publication_id": "fitness-20261102:wechat_official",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-02T23:59:59+08:00",
+              "source": "wechat-official-30d-read-uv-api",
+              "metrics": {
+                "comments": null,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": null,
+                "shares": null,
+                "views": 1
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "fitness-20261102:wechat_official",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-02T23:59:59+08:00",
+            "source": "wechat-official-30d-read-uv-api",
+            "metrics": {
+              "comments": null,
+              "favorites": null,
+              "follower_gain": null,
+              "likes": null,
+              "shares": null,
+              "views": 1
+            }
+          },
+          "windows": {}
+        }
+      ]
+    },
+    {
+      "id": "ai-town-20261101",
+      "title": "手绘小镇实录：AI先去上班，我先急了",
+      "series": "AI剪辑成长记录",
+      "cover": null,
+      "publications": [
+        {
+          "id": "ai-town-20261101:bilibili",
+          "content_id": "ai-town-20261101",
+          "platform": "bilibili",
+          "account_label": "捞鱼真不吃鱼",
+          "format": "video",
+          "native_id": "BV1uYxb6eEp4",
+          "url": "https://www.bilibili.com/video/BV1uYxb6eEp4/",
+          "published_at": null,
+          "status": "published",
+          "collection": "做个小游戏",
+          "activity": null,
+          "source_title": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "ai-town-20261101:bilibili",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "bilibili-public-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 1,
+                "follower_gain": null,
+                "likes": 1,
+                "shares": 0,
+                "views": 122
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "ai-town-20261101:bilibili",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "source": "bilibili-public-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 1,
+              "follower_gain": null,
+              "likes": 1,
+              "shares": 0,
+              "views": 122
+            }
+          },
+          "windows": {}
+        },
+        {
+          "id": "ai-town-20261101:douyin",
+          "content_id": "ai-town-20261101",
+          "platform": "douyin",
+          "account_label": "捞鱼真不吃鱼 / lyzbcy_unz",
+          "format": "video",
+          "native_id": "7703207204731505930",
+          "url": "https://www.douyin.com/video/7703207204731505930",
+          "published_at": "2026-11-01T22:18:21+08:00",
+          "status": "published",
+          "collection": null,
+          "activity": null,
+          "source_title": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "ai-town-20261101:douyin",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "douyin-creator-api",
+              "metrics": {
+                "comments": 1,
+                "favorites": 8,
+                "follower_gain": null,
+                "likes": 25,
+                "shares": 2,
+                "views": 2135
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "ai-town-20261101:douyin",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "source": "douyin-creator-api",
+            "metrics": {
+              "comments": 1,
+              "favorites": 8,
+              "follower_gain": null,
+              "likes": 25,
+              "shares": 2,
+              "views": 2135
+            }
+          },
+          "windows": {
+            "24": null,
+            "168": null
+          }
+        },
+        {
+          "id": "ai-town-20261101:wechat_channels",
+          "content_id": "ai-town-20261101",
+          "platform": "wechat_channels",
+          "account_label": "捞鱼真不吃鱼",
+          "format": "video",
+          "native_id": "export/UzFfBgAAxL-FCE4-MyiAk8zT4DCL459DokwxaPhTm2sh1IfSFQ",
+          "url": null,
+          "published_at": null,
+          "status": "published",
+          "collection": "做个小游戏",
+          "activity": null,
+          "source_title": null,
+          "api_native_id": null,
+          "snapshots": [],
+          "latest": null,
+          "windows": {}
+        },
+        {
+          "id": "ai-town-20261101:x",
+          "content_id": "ai-town-20261101",
+          "platform": "x",
+          "account_label": "恩泽余/@lyzbcy",
+          "format": "video",
+          "native_id": "2116911825694630119",
+          "url": "https://x.com/lyzbcy/status/2116911825694630119",
+          "published_at": "2026-11-01T23:14:44+08:00",
+          "status": "published",
+          "collection": null,
+          "activity": null,
+          "source_title": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "ai-town-20261101:x",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "x-post-impressions-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 3
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "ai-town-20261101:x",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "source": "x-post-impressions-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 0,
+              "follower_gain": null,
+              "likes": 0,
+              "shares": 0,
+              "views": 3
+            }
+          },
+          "windows": {
+            "24": null,
+            "168": null
+          }
+        },
+        {
+          "id": "ai-town-20261101:xiaohongshu",
+          "content_id": "ai-town-20261101",
+          "platform": "xiaohongshu",
+          "account_label": "AAA超级技工捞鱼",
+          "format": "video",
+          "native_id": "6ae74a1f000000002702e4fd",
+          "url": "https://www.xiaohongshu.com/explore/6ae74a1f000000002702e4fd",
+          "published_at": null,
+          "status": "published",
+          "collection": "做个小游戏",
+          "activity": null,
+          "source_title": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "ai-town-20261101:xiaohongshu",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "xiaohongshu-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 1,
+                "shares": 0,
+                "views": 0
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "ai-town-20261101:xiaohongshu",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "source": "xiaohongshu-creator-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 0,
+              "follower_gain": null,
+              "likes": 1,
+              "shares": 0,
+              "views": 0
+            }
+          },
+          "windows": {}
+        },
+        {
+          "id": "ai-town-20261101:youtube",
+          "content_id": "ai-town-20261101",
+          "platform": "youtube",
+          "account_label": "恩泽余",
+          "format": "video",
+          "native_id": "_srIjdBsHAo",
+          "url": "https://youtu.be/_srIjdBsHAo",
+          "published_at": "2026-11-01T22:18:13+08:00",
+          "status": "published",
+          "collection": null,
+          "activity": null,
+          "source_title": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "ai-town-20261101:youtube",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-03T09:35:02+08:00",
+              "source": "youtube-studio-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": null,
+                "views": 0
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "ai-town-20261101:youtube",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "source": "youtube-studio-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": null,
+              "follower_gain": null,
+              "likes": 0,
+              "shares": null,
+              "views": 0
+            }
+          },
+          "windows": {
+            "24": null,
+            "168": null
+          }
+        },
+        {
+          "id": "ai-town-20261101:wechat_official",
+          "content_id": "ai-town-20261101",
+          "platform": "wechat_official",
+          "account_label": "捞鱼的博客",
+          "format": "article",
+          "native_id": "Xskzw8Jdia6JiGdKQdSLyg",
+          "url": "https://mp.weixin.qq.com/s/Xskzw8Jdia6JiGdKQdSLyg",
+          "published_at": null,
+          "status": "published",
+          "collection": "做个小游戏",
+          "activity": null,
+          "source_title": null,
+          "api_native_id": "2247483811_1",
+          "snapshots": [
+            {
+              "publication_id": "ai-town-20261101:wechat_official",
+              "observed_at": "2026-11-03T09:35:02+08:00",
+              "data_as_of": "2026-11-02T23:59:59+08:00",
+              "source": "wechat-official-30d-read-uv-api",
+              "metrics": {
+                "comments": null,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": null,
+                "shares": null,
+                "views": 10
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "ai-town-20261101:wechat_official",
+            "observed_at": "2026-11-03T09:35:02+08:00",
+            "data_as_of": "2026-11-02T23:59:59+08:00",
+            "source": "wechat-official-30d-read-uv-api",
+            "metrics": {
+              "comments": null,
+              "favorites": null,
+              "follower_gain": null,
+              "likes": null,
+              "shares": null,
+              "views": 10
+            }
+          },
+          "windows": {}
         }
       ]
     }

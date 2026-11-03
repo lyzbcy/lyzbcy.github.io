@@ -3,7 +3,7 @@
   'use strict';
   const root = document.getElementById('content-dashboard');
   if (!root) return;
-  const names = {x:'X',douyin:'抖音',bilibili:'B站',xiaohongshu:'小红书',youtube:'YouTube',wechat_channels:'视频号',wechat_official:'微信公众号',zhihu:'知乎',juejin:'掘金'};
+  const names = {x:'X',douyin:'抖音',bilibili:'B站',xiaohongshu:'小红书',youtube:'YouTube',wechat_channels:'视频号',wechat_official:'微信公众号',zhihu:'知乎',juejin:'掘金',kuaishou:'快手',weibo:'微博'};
   const colors=['#278eaf','#d45a75','#7d64b0','#c98228','#2b967d','#587bc3','#aa6464','#70913b'];
   function el(tag, text, cls) {const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e;}
   function num(x){return x===null||x===undefined?'—':new Intl.NumberFormat('zh-CN').format(x);}
