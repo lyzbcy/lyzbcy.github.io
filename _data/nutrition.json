@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T22:05:04.491196+08:00",
+  "generated_at": "2026-11-03T22:05:04.410422+08:00",
   "goals": {
     "calories": 1965,
     "water": 2000,
@@ -30,8 +30,8 @@
     "avg_water": 1768,
     "avg_carbs": 221,
     "avg_fat": 68,
-    "total_training_calories": 14825,
-    "training_days": 51,
+    "total_training_calories": 14870,
+    "training_days": 52,
     "compliance": {
       "calorie": 78,
       "protein": 22,
@@ -2333,20 +2333,20 @@
   "status": {
     "has_today": false,
     "has_yesterday": false,
-    "today": "2026-11-02",
+    "today": "2026-11-03",
     "is_active": false,
     "is_training_day": true
   },
   "health_score": {
     "today": {
-      "date": "2026-11-02",
+      "date": "2026-11-03",
       "nutrition_score": 0,
       "nutrition_detail": "热量 0/1965 kcal (0/20); 蛋白 0/150g (0/15); 饮水 0/2000ml (0/15)",
-      "exercise_score": 13,
-      "exercise_detail": "训练量 630kg (3/20); 组数 9 (10/10)",
+      "exercise_score": 10,
+      "exercise_detail": "训练量 0kg (0/20); 组数 8 (10/10)",
       "bonus_score": 9,
       "bonus_detail": "数据完整性 (2/10); 体脂趋势 -1.2% (7/10)",
-      "total_score": 22,
+      "total_score": 19,
       "grade": "💀 D",
       "calories_in": 0,
       "calories_target": 1965,
@@ -2354,10 +2354,10 @@
       "protein_target": 150,
       "water_in": 0,
       "water_target": 2000,
-      "training_sets": 9,
-      "training_volume": 630.0,
-      "training_cal": 265,
-      "training_duration_min": 49.9,
+      "training_sets": 8,
+      "training_volume": 0.0,
+      "training_cal": 45,
+      "training_duration_min": 8.0,
       "bodyfat_pct": 20.7,
       "is_training_day": true,
       "bmr_floor": 1720,
@@ -2384,11 +2384,18 @@
         "grade": "💀 D",
         "nutrition": "热量 0/1965 kcal (0/20); 蛋白 0/150g (0/15); 饮水 0/2000ml (0/15)",
         "exercise": "训练量 630kg (3/20); 组数 9 (10/10)"
+      },
+      {
+        "date": "2026-11-03",
+        "score": 19,
+        "grade": "💀 D",
+        "nutrition": "热量 0/1965 kcal (0/20); 蛋白 0/150g (0/15); 饮水 0/2000ml (0/15)",
+        "exercise": "训练量 0kg (0/20); 组数 8 (10/10)"
       }
     ],
-    "range_start": "2026-10-20",
-    "range_end": "2026-11-02",
-    "exported_at": "2026-11-02T22:05:04.476513"
+    "range_start": "2026-10-21",
+    "range_end": "2026-11-03",
+    "exported_at": "2026-11-03T22:05:04.396681"
   },
   "food_library": {
     "items": [
