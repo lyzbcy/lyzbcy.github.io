@@ -1,6 +1,6 @@
 ---
 name: lyzbcy-blog-update
-description: 更新 lyzbcy.github.io 博客(方便面排名、外卖排名、健身/营养看板、周报等任何页面)时必须使用。用户提到"方便面排名""从夯到拉""新增XX到排名""更新博客""改档位/星级""重绘一图流/海报"等,先读本 skill 再动手,禁止凭记忆直接改。
+description: 更新 lyzbcy.github.io 博客(方便面排名、外卖排名、健身/营养看板、周报等任何页面)时必须使用。用户提到"内容运营看板""平台数据接入""看板流量排查""方便面排名""从夯到拉""新增XX到排名""更新博客""改档位/星级""重绘一图流/海报"等,先读本 skill 再动手,禁止凭记忆直接改。
 ---
 
 # lyzbcy-blog-update — 博客更新总入口
@@ -33,7 +33,7 @@ description: 更新 lyzbcy.github.io 博客(方便面排名、外卖排名、健
 | 华农附近美食从夯到拉排名 | [references/huanong-tier.md](references/huanong-tier.md) | `assets/lib-custom/huanong-tier.js` |
 | 所有的饮料和奶茶从夯到拉排名 | [references/drink-tier.md](references/drink-tier.md) | `assets/lib-custom/drink-tier.js` |
 | 健身/营养/抖音周报看板 | [references/dashboards.md](references/dashboards.md) | `tools/generate_*.py` |
-| 内容运营看板 / 最新视频登记与指标刷新 | [references/content-operations.md](references/content-operations.md) | 私有 SQLite → `tools/content_dashboard.py` → 静态快照 |
+| 内容运营看板 / 最新视频 / 平台接入 / 流量排查 | [references/content-operations.md](references/content-operations.md) | 私有 SQLite → `tools/content_dashboard.py` → 静态快照 |
 | 表情包数据平台 / 微信验证与跨平台精选候选 | [references/sticker-dashboard.md](references/sticker-dashboard.md) | 软件同步 → 平台只读快照 → `tools/sticker-dashboard/build.py` |
 | AI Coding 比赛看板 | [references/aicoding-board.md](references/aicoding-board.md) | `tools/aicoding/update-aicoding.mjs` |
 
