@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-02T13:20:36+08:00",
+  "generated_at": "2026-11-03T12:45:03+08:00",
   "overview": {
-    "total_sessions": 51,
-    "total_sessions_recent_4w": 4,
+    "total_sessions": 52,
+    "total_sessions_recent_4w": 5,
     "avg_sessions_per_week": 2.3,
-    "total_sets": 573,
+    "total_sets": 581,
     "total_volume": 206800.0,
     "date_range": {
       "first": "2026-05-31",
-      "last": "2026-11-02"
+      "last": "2026-11-03"
     },
     "preferences": {
       "warmupSets": 2,
@@ -18,11 +18,26 @@
       "currentStatus": "上班后训练频率和强度下降，训练前无补剂（肌酸/氮泵/咖啡均已停用）",
       "adjustmentNote": "训练状态比PR数据弱，推荐重量需适当下调"
     },
-    "muscle_groups_count": 17,
-    "exercises_count": 171,
+    "muscle_groups_count": 19,
+    "exercises_count": 173,
     "fun_fact": "相当于举起了 1.4 头蓝鲸 🐋"
   },
   "sessions": [
+    {
+      "date": "2026-11-03",
+      "split": "push",
+      "split_label": "推日",
+      "total_sets": 8,
+      "total_volume": 0.0,
+      "exercises": [
+        "双头绳三头下压",
+        "双头绳面拉",
+        "绳索侧平举",
+        "自重引体向上"
+      ],
+      "duration_min": 1,
+      "note": ""
+    },
     {
       "date": "2026-11-02",
       "split": "pull",
@@ -1821,6 +1836,18 @@
       "label": "abs",
       "total_volume": 0.0,
       "percentage": 0.0
+    },
+    {
+      "group": "三头",
+      "label": "三头",
+      "total_volume": 0.0,
+      "percentage": 0.0
+    },
+    {
+      "group": "肩",
+      "label": "肩",
+      "total_volume": 0.0,
+      "percentage": 0.0
     }
   ],
   "volume_trend": [
@@ -1967,7 +1994,7 @@
     {
       "week": "2026-W45",
       "volume": 630.0,
-      "sessions": 9,
+      "sessions": 17,
       "is_current": true,
       "is_latest": true
     }
@@ -2134,6 +2161,16 @@
       "total_volume": 2885.0
     },
     {
+      "name": "绳索侧平举",
+      "total_sets": 8,
+      "max_weight": 15,
+      "max_reps": 20,
+      "last_date": "2026-11-03",
+      "last_weight": 0.0,
+      "last_reps": 16.0,
+      "total_volume": 575.0
+    },
+    {
       "name": "哑铃弯举",
       "total_sets": 8,
       "max_weight": 12.5,
@@ -2204,6 +2241,16 @@
       "total_volume": 4940.0
     },
     {
+      "name": "自重引体向上",
+      "total_sets": 6,
+      "max_weight": 0.0,
+      "max_reps": 6,
+      "last_date": "2026-11-03",
+      "last_weight": 0.0,
+      "last_reps": 6.0,
+      "total_volume": 0.0
+    },
+    {
       "name": "器械站姿胸飞鸟(中束)",
       "total_sets": 5,
       "max_weight": 42,
@@ -2232,16 +2279,6 @@
       "last_weight": 50,
       "last_reps": 10,
       "total_volume": 4500.0
-    },
-    {
-      "name": "绳索侧平举",
-      "total_sets": 5,
-      "max_weight": 15,
-      "max_reps": 20,
-      "last_date": "2026-07-26",
-      "last_weight": 15,
-      "last_reps": 15,
-      "total_volume": 575.0
     },
     {
       "name": "自重深蹲",
@@ -2392,16 +2429,6 @@
       "last_weight": 0.0,
       "last_reps": 22.0,
       "total_volume": 341.0
-    },
-    {
-      "name": "自重引体向上",
-      "total_sets": 4,
-      "max_weight": 0.0,
-      "max_reps": 6,
-      "last_date": "2026-11-02",
-      "last_weight": 0.0,
-      "last_reps": 4.0,
-      "total_volume": 0.0
     },
     {
       "name": "悍马分动式高位下拉",
@@ -2971,6 +2998,16 @@
       "last_date": "2026-11-02",
       "last_weight": 0.0,
       "last_reps": 11.0,
+      "total_volume": 0.0
+    },
+    {
+      "name": "双头绳面拉",
+      "total_sets": 2,
+      "max_weight": 0.0,
+      "max_reps": 20.0,
+      "last_date": "2026-11-03",
+      "last_weight": 0.0,
+      "last_reps": 20.0,
       "total_volume": 0.0
     },
     {
@@ -3682,6 +3719,16 @@
       "last_weight": 30.0,
       "last_reps": 22,
       "total_volume": 660.0
+    },
+    {
+      "name": "双头绳三头下压",
+      "total_sets": 1,
+      "max_weight": 0.0,
+      "max_reps": 12.0,
+      "last_date": "2026-11-03",
+      "last_weight": 0.0,
+      "last_reps": 12.0,
+      "total_volume": 0.0
     }
   ],
   "nutrition_link": {
