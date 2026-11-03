@@ -1,0 +1,45 @@
+# 表情包数据平台
+
+入口：`/posts/表情包数据平台/`。微信是测试台：用真实下载与发送筛选候选，再由用户确认精选及跨平台分发。更新页面不授权投稿、上架、修改原图、签约或改变客户端版本。不创建定时任务；当前为用户要求时手动刷新。
+
+## 数据与执行链路
+
+- 本机已安装的“表情包一键制作”正常 IPC `sync_platform_status` 刷新；当前账号由软件资源库绑定与凭据校验，不绕过身份门禁。
+- 平台全量 `home?f=json` 的 `List` 是专辑唯一名单；按 `StikerID` 去重，不把本地869条投影当成平台632套。实际数量随刷新改变，不能写死。
+- `tools/sticker-dashboard/collect.py` 复用现有 StickerEngine 的 BrowserSession，只读采集；私有原始快照必须放仓库外。
+- `tools/sticker-dashboard/build.py` 按公开字段白名单生成 `assets/data/sticker-dashboard.json`，禁止手改生成数据。
+- 页面：`_posts/2026-11-03-表情包数据平台.md`、`_includes/sticker-board.html`、`assets/sticker-dashboard/board.{js,css}`。JS 放外部文件，避免 Jekyll 重写内联脚本。
+
+## 日常刷新
+
+1. 连接本机实际安装版，确认没有正在执行的生成、投稿或同步任务。需要诊断连接时从原安装入口以 `--remote-debugging-port=9487` 启动；不为连接而结束别人的任务。连接信息只监听本机，不将端口暴露公网。
+2. 运行 `python tools/sticker-dashboard/refresh_installed.py --private-dir <仓库外私有目录>`。必须 `complete/list_complete` 且无未知状态或回写失败；不完整则保留旧公开快照并报告。
+3. `python tools/sticker-dashboard/collect.py --engine-src <源码中sticker_engine目录> --private-dir <同一私有目录>`。Python 需已有 playwright、Pillow、pydantic、keyring；可用 `--dependency-dir` 指向本机现有依赖目录，不公开设备凭据或登录态。采集完成才原子保存快照。
+4. `python tools/sticker-dashboard/build.py --private-dir <同一私有目录>`。默认仅抓累计发送前10套档案、前3套逐图预览/日报；`--preview-albums` 可调0–10，不把全库图片塞入博客。
+5. 运行 `node --check assets/sticker-dashboard/board.js`；检查全量唯一ID、真实0与缺失、日报日期、图片数量与体积；真实浏览器验证搜索、排序、20条分页、详情关闭、手机宽度与破图。
+6. 按 `docs/howto/push-pipeline.md` 走服务器ubuntu身份，只提交本页相关路径。修改已有skill前先取服务器最新版本，保留其他聊天改动。等待Pages构建，再验证实际文章和JSON时间、首屏/详情图片、浏览器错误。
+
+Windows当前素材项目为 `E:/共享/创业/01-捞鱼软件产品/sticker-maker`，实际安装在 `%LOCALAPPDATA%/Programs/sticker-maker-desktop`。原始快照和同步回执可存该项目 `verification/blog-refresh-<日期>/`，不得进入公开博客。跨设备先解析现有分类路径。
+
+## 指标口径
+
+- 累计只取 `TotalDownloadNum`、`TotalSendNum`；0保留，缺失为null，不回退近期 `DownloadNum/SendNum`。
+- `发送/下载` 是次数比，不是留存率/转化率。按次数比排名默认最低20次下载，减轻小分母影响；这不是用户评分。
+- 状态枚举依赖软件已核验规则，未知状态停止，不猜。`OpenTime` 是平台提供上架日期，不拿本地生成日期代替。
+- 总量为全平台名单；候选榜只选已上架作品。图表不把待审、驳回等数值伪装为已上架表现。
+- 单图 `stikerreport.Report` 按Md5与详情Item关联；展示 `DataTime` 原始平台日期。它是日报，不是单图累计；缺年不补造年份，不能与专辑累计相加。
+- 记录采集时间（北京时间）、平台统计日期与覆盖数。首次采集无增长；跨日才与前一次完整快照比较，同日重复构建保持已有比较基准；计数下降如实展示，不强行截为0。
+- 微信数据不能推断抖音/QQ结果。当前两套抖音上线记录截至2026-11-03，前端按精确微信平台ID映射；刷新微信不延长这份核查日期。QQ认证审核中与表情表单可进入分别记录，不能标成已获全部权限。
+
+## 图片：直链优先，少量缓存兜底
+
+- 从平台真实响应提取地址；不猜CDN、不上传完整素材库、不把Cookie或后台会话带入公开页面。
+- `collect.py` 对每张候选图用独立无登录请求、博客Referer读取并实际解码，成功才登记公开直链与核验时间。HTTP200不够：2026-11-03匿名getmedia实际返回HTML登录跳转；登录后它可能以octet-stream返回图片，因此解码比Content-Type更可靠。
+- 直链不可公开时，仅缓存前N套240px压缩WebP静态预览，原图不改。初始3套44张约392KB。前台每页20行，点击详情才请求对应图；不批量预加载。
+- 只允许明确核验的HTTPS媒体域名与路径，不能把会话参数、签名、后台管理URL或任意外链混入。新增CDN来源必须先验证，再同步修改生成器与前端白名单。微信提供的 `WxappJumpUrl` 是公开表情分享入口，允许展示；它不是登录凭据。
+- 破图显示可理解的占位，不自动把失败内容再上传全库。更新时保留旧可用快照；新增公开图片缓存有数量上限和体积记录。
+- 不公开账号邮箱、账号/设备ID、私有路径、绑定信息、收益账户、商户信息、审核敏感资料、Cookie、密码、原始平台body。构建脚本只白名单导出作品名、状态、计数、日期、含义、公开分享入口和已核验媒体。
+
+## 当前验证记录
+
+2026-11-03：软件0.6.12完整同步632套，回写失败0；平台593上架/32未通过/5预约失败/1限制投稿/1下架。累计9122下载、127063发送。第6套1665下载/85229发送，第533套877/8050。数字仅为这次快照，不作为未来固定验收值。无客户端代码修改、无公开软件发版。

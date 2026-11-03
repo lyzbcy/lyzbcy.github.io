@@ -34,11 +34,12 @@ description: 更新 lyzbcy.github.io 博客(方便面排名、外卖排名、健
 | 所有的饮料和奶茶从夯到拉排名 | [references/drink-tier.md](references/drink-tier.md) | `assets/lib-custom/drink-tier.js` |
 | 健身/营养/抖音周报看板 | [references/dashboards.md](references/dashboards.md) | `tools/generate_*.py` |
 | 内容运营看板 / 最新视频登记与指标刷新 | [references/content-operations.md](references/content-operations.md) | 私有 SQLite → `tools/content_dashboard.py` → 静态快照 |
+| 表情包数据平台 / 微信验证与跨平台精选候选 | [references/sticker-dashboard.md](references/sticker-dashboard.md) | 软件同步 → 平台只读快照 → `tools/sticker-dashboard/build.py` |
 | AI Coding 比赛看板 | [references/aicoding-board.md](references/aicoding-board.md) | `tools/aicoding/update-aicoding.mjs` |
 
 ## ✅ 通用更新流程
 
-评价、找图和重绘一图流的步骤适用于排名/海报页面；内容运营看板按其专属细则登记、采样和验证，不因更新统计而重绘海报。
+评价、找图和重绘一图流的步骤适用于排名/海报页面；内容运营看板、表情包数据平台按其专属细则采样和验证，不因更新统计而重绘海报。表情包平台默认直链优先、少量候选压缩预览兜底，不上传完整素材库。
 
 ```
 1. 读对应页面 references/ 细则

@@ -1,0 +1,14 @@
+<section id="sticker-board" aria-label="表情包数据平台" data-source="{{ '/assets/data/sticker-dashboard.json' | relative_url }}">
+  <div class="sb-hero"><span class="sb-eyebrow">星星布丁 × 捞鱼 · STICKER LAB</span><h2>让每一次发送，<br>帮我们挑出好表情。</h2><p>先在微信验证真实使用，再把值得留下的套装带到更多平台。</p><div id="sb-freshness" class="sb-freshness" role="status">正在读取最新快照…</div></div>
+  <div id="sb-error" class="sb-error" hidden></div>
+  <div id="sb-summary" class="sb-summary" aria-label="整体数据"></div>
+  <section class="sb-section"><div class="sb-section-heading"><div><span class="sb-eyebrow">先看这些</span><h3>微信验证过的候选</h3></div><p>按累计发送选出前三套，供人工精选。</p></div><div id="sb-picks" class="sb-picks"></div></section>
+  <section class="sb-section"><div class="sb-section-heading"><div><span class="sb-eyebrow">全量轻量索引</span><h3>每一套，都有迹可循</h3></div><p id="sb-coverage"></p></div>
+    <div class="sb-filters"><label>搜索套装<input id="sb-search" type="search" placeholder="名称或编号，例如 533" autocomplete="off"></label><label>排序<select id="sb-sort"><option value="sends">累计发送</option><option value="downloads">累计下载</option><option value="ratio">每次下载对应发送</option><option value="send_change">较上次发送增长</option></select></label><label>作品状态<select id="sb-status"><option value="已上架">已上架</option><option value="">全部状态</option></select></label><label>最低下载量<input id="sb-min" type="number" min="0" step="1" value="0"></label></div>
+    <p id="sb-results" class="sb-muted" aria-live="polite"></p><div class="sb-table-wrap"><table class="sb-table"><thead><tr><th scope="col">套装</th><th scope="col">累计发送</th><th scope="col">累计下载</th><th scope="col">发送 / 下载</th><th scope="col">状态</th><th scope="col">详情</th></tr></thead><tbody id="sb-rows"></tbody></table></div>
+    <nav class="sb-pagination" aria-label="套装分页"><button id="sb-prev" type="button">上一页</button><span id="sb-page"></span><button id="sb-next" type="button">下一页</button></nav>
+  </section>
+  <details class="sb-notes"><summary>数据口径与更新说明</summary><ul><li>本页展示微信表情开放平台的累计下载与累计发送快照，不代表独立用户数。发送 / 下载是次数比，不能解释成留存率或转化率。</li><li>微信作为测试台。数据靠前的套装是人工精选候选，不等于已确认精选，也不代表其他平台一定成功。</li><li>跨日更新后才显示较上次快照的增长；首次采集没有增长值。上架日期与平台数据日期以平台提供值为准。</li><li>单图发送来自平台日报，标注原始统计日期，不能与套装累计发送相加。暂无报告显示“—”，真实零值保留。</li><li>只展示少量压缩静态预览，点击详情才加载整套候选预览；其余套装保留数字索引。图片直链需经无登录和跨站访问验证；当前后台图片地址需要登录，未直接用于公开页面。</li><li>抖音与 QQ 的分发情况按核查日期记录，微信刷新不会自动推断其他平台的状态，也不会自动投稿。</li></ul><p id="sb-media-note"></p></details>
+  <dialog id="sb-dialog" aria-labelledby="sb-dialog-title"><div class="sb-dialog-head"><div><span class="sb-eyebrow">套装档案</span><h3 id="sb-dialog-title"></h3></div><button id="sb-close" type="button" aria-label="关闭套装详情">关闭 ×</button></div><div id="sb-dialog-body"></div></dialog>
+  <noscript>此看板需要 JavaScript 展示搜索、排序与分页数据。请启用 JavaScript 后查看。</noscript>
+</section>
