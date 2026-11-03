@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-11-03T10:20:42+08:00",
+  "generated_at": "2026-11-03T11:46:41+08:00",
   "contents": [
     {
       "id": "hot100-004",
@@ -36,12 +36,26 @@
                 "shares": 0,
                 "views": 67
               }
+            },
+            {
+              "publication_id": "hot100-004:bilibili",
+              "observed_at": "2026-11-03T11:41:29+08:00",
+              "data_as_of": "2026-11-03T11:41:29+08:00",
+              "source": "bilibili-public-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 1,
+                "follower_gain": null,
+                "likes": 1,
+                "shares": 0,
+                "views": 71
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-004:bilibili",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:29+08:00",
+            "data_as_of": "2026-11-03T11:41:29+08:00",
             "source": "bilibili-public-api",
             "metrics": {
               "comments": 0,
@@ -49,7 +63,7 @@
               "follower_gain": null,
               "likes": 1,
               "shares": 0,
-              "views": 67
+              "views": 71
             }
           },
           "windows": {
@@ -85,20 +99,34 @@
                 "shares": 0,
                 "views": 165
               }
+            },
+            {
+              "publication_id": "hot100-004:douyin",
+              "observed_at": "2026-11-03T11:40:45+08:00",
+              "data_as_of": "2026-11-03T11:40:45+08:00",
+              "source": "douyin-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 2,
+                "follower_gain": null,
+                "likes": 2,
+                "shares": 0,
+                "views": 201
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-004:douyin",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:40:45+08:00",
+            "data_as_of": "2026-11-03T11:40:45+08:00",
             "source": "douyin-creator-api",
             "metrics": {
               "comments": 0,
-              "favorites": 1,
+              "favorites": 2,
               "follower_gain": null,
               "likes": 2,
               "shares": 0,
-              "views": 165
+              "views": 201
             }
           },
           "windows": {
@@ -120,8 +148,36 @@
           "activity": null,
           "source_title": null,
           "api_native_id": null,
-          "snapshots": [],
-          "latest": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-004:kuaishou",
+              "observed_at": "2026-11-03T11:41:29+08:00",
+              "data_as_of": "2026-11-03T11:41:29+08:00",
+              "source": "kuaishou-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": null,
+                "views": 143
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-004:kuaishou",
+            "observed_at": "2026-11-03T11:41:29+08:00",
+            "data_as_of": "2026-11-03T11:41:29+08:00",
+            "source": "kuaishou-creator-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": null,
+              "follower_gain": null,
+              "likes": 0,
+              "shares": null,
+              "views": 143
+            }
+          },
           "windows": {
             "24": null,
             "168": null
@@ -141,8 +197,36 @@
           "activity": null,
           "source_title": "用AI做视频第15天。刷Hot100、准备算法面试的同学，和小捞咪、星星布丁一起复习LeetCode第2题「两数相加」。",
           "api_native_id": null,
-          "snapshots": [],
-          "latest": null,
+          "snapshots": [
+            {
+              "publication_id": "hot100-004:wechat_channels",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-03T11:41:09+08:00",
+              "source": "wechat-channels-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": 0,
+                "likes": 0,
+                "shares": 0,
+                "views": 108
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-004:wechat_channels",
+            "observed_at": "2026-11-03T11:41:09+08:00",
+            "data_as_of": "2026-11-03T11:41:09+08:00",
+            "source": "wechat-channels-creator-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 0,
+              "follower_gain": 0,
+              "likes": 0,
+              "shares": 0,
+              "views": 108
+            }
+          },
           "windows": {
             "24": null,
             "168": null
@@ -156,15 +240,46 @@
           "format": "video",
           "native_id": "RpzVBjZgl",
           "url": "https://weibo.com/7957084692/RpzVBjZgl",
-          "published_at": null,
+          "published_at": "2026-11-03T00:24:31+08:00",
           "status": "published",
           "collection": null,
           "activity": null,
           "source_title": null,
           "api_native_id": null,
-          "snapshots": [],
-          "latest": null,
-          "windows": {}
+          "snapshots": [
+            {
+              "publication_id": "hot100-004:weibo",
+              "observed_at": "2026-11-03T11:41:29+08:00",
+              "data_as_of": "2026-11-03T11:41:29+08:00",
+              "source": "weibo-post-read-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": 1,
+                "shares": 0,
+                "views": 77
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "hot100-004:weibo",
+            "observed_at": "2026-11-03T11:41:29+08:00",
+            "data_as_of": "2026-11-03T11:41:29+08:00",
+            "source": "weibo-post-read-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": null,
+              "follower_gain": null,
+              "likes": 1,
+              "shares": 0,
+              "views": 77
+            }
+          },
+          "windows": {
+            "24": null,
+            "168": null
+          }
         },
         {
           "id": "hot100-004:x",
@@ -194,12 +309,26 @@
                 "shares": 0,
                 "views": 1
               }
+            },
+            {
+              "publication_id": "hot100-004:x",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-03T11:41:09+08:00",
+              "source": "x-post-impressions-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 2
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-004:x",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:09+08:00",
+            "data_as_of": "2026-11-03T11:41:09+08:00",
             "source": "x-post-impressions-api",
             "metrics": {
               "comments": 0,
@@ -207,7 +336,7 @@
               "follower_gain": null,
               "likes": 0,
               "shares": 0,
-              "views": 1
+              "views": 2
             }
           },
           "windows": {}
@@ -240,12 +369,26 @@
                 "shares": 0,
                 "views": 10
               }
+            },
+            {
+              "publication_id": "hot100-004:xiaohongshu",
+              "observed_at": "2026-11-03T11:44:38+08:00",
+              "data_as_of": "2026-11-03T11:44:38+08:00",
+              "source": "xiaohongshu-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 1,
+                "shares": 0,
+                "views": 13
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-004:xiaohongshu",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:44:38+08:00",
+            "data_as_of": "2026-11-03T11:44:38+08:00",
             "source": "xiaohongshu-creator-api",
             "metrics": {
               "comments": 0,
@@ -253,7 +396,7 @@
               "follower_gain": null,
               "likes": 1,
               "shares": 0,
-              "views": 10
+              "views": 13
             }
           },
           "windows": {
@@ -269,7 +412,7 @@
           "format": "video",
           "native_id": "tnwJdNd_GHQ",
           "url": "https://youtu.be/tnwJdNd_GHQ",
-          "published_at": null,
+          "published_at": "2026-11-02T20:00:42+08:00",
           "status": "published",
           "collection": null,
           "activity": null,
@@ -289,12 +432,26 @@
                 "shares": null,
                 "views": 0
               }
+            },
+            {
+              "publication_id": "hot100-004:youtube",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-03T11:41:09+08:00",
+              "source": "youtube-studio-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": null,
+                "views": 0
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-004:youtube",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:09+08:00",
+            "data_as_of": "2026-11-03T11:41:09+08:00",
             "source": "youtube-studio-api",
             "metrics": {
               "comments": 0,
@@ -305,7 +462,10 @@
               "views": 0
             }
           },
-          "windows": {}
+          "windows": {
+            "24": null,
+            "168": null
+          }
         },
         {
           "id": "hot100-004:juejin",
@@ -335,12 +495,26 @@
                 "shares": null,
                 "views": 6
               }
+            },
+            {
+              "publication_id": "hot100-004:juejin",
+              "observed_at": "2026-11-03T11:41:29+08:00",
+              "data_as_of": "2026-11-03T11:41:29+08:00",
+              "source": "juejin-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": null,
+                "views": 6
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-004:juejin",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:29+08:00",
+            "data_as_of": "2026-11-03T11:41:29+08:00",
             "source": "juejin-creator-api",
             "metrics": {
               "comments": 0,
@@ -402,12 +576,26 @@
                 "shares": 0,
                 "views": 0
               }
+            },
+            {
+              "publication_id": "hot100-004:zhihu",
+              "observed_at": "2026-11-03T11:44:36+08:00",
+              "data_as_of": "2026-11-03T11:44:36+08:00",
+              "source": "zhihu-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": 0,
+                "likes": 0,
+                "shares": 0,
+                "views": 0
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-004:zhihu",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:44:36+08:00",
+            "data_as_of": "2026-11-03T11:44:36+08:00",
             "source": "zhihu-creator-api",
             "metrics": {
               "comments": 0,
@@ -484,12 +672,26 @@
                 "shares": 0,
                 "views": 83
               }
+            },
+            {
+              "publication_id": "hot100-003:bilibili",
+              "observed_at": "2026-11-03T11:41:29+08:00",
+              "data_as_of": "2026-11-03T11:41:29+08:00",
+              "source": "bilibili-public-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 1,
+                "shares": 0,
+                "views": 83
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-003:bilibili",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:29+08:00",
+            "data_as_of": "2026-11-03T11:41:29+08:00",
             "source": "bilibili-public-api",
             "metrics": {
               "comments": 0,
@@ -586,20 +788,34 @@
                 "shares": 2,
                 "views": 2281
               }
+            },
+            {
+              "publication_id": "hot100-003:douyin",
+              "observed_at": "2026-11-03T11:40:45+08:00",
+              "data_as_of": "2026-11-03T11:40:45+08:00",
+              "source": "douyin-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 4,
+                "follower_gain": null,
+                "likes": 20,
+                "shares": 2,
+                "views": 2282
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-003:douyin",
-            "observed_at": "2026-11-03T10:20:42+08:00",
-            "data_as_of": "2026-11-03T10:20:42+08:00",
-            "source": "douyin-creator-export",
+            "observed_at": "2026-11-03T11:40:45+08:00",
+            "data_as_of": "2026-11-03T11:40:45+08:00",
+            "source": "douyin-creator-api",
             "metrics": {
               "comments": 0,
               "favorites": 4,
-              "follower_gain": 1,
+              "follower_gain": null,
               "likes": 20,
               "shares": 2,
-              "views": 2281
+              "views": 2282
             }
           },
           "windows": {}
@@ -632,12 +848,26 @@
                 "shares": 0,
                 "views": 0
               }
+            },
+            {
+              "publication_id": "hot100-003:wechat_channels",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-03T11:41:09+08:00",
+              "source": "wechat-channels-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": 0,
+                "likes": 0,
+                "shares": 0,
+                "views": 4
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-003:wechat_channels",
-            "observed_at": "2026-10-31T02:34:27+08:00",
-            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "observed_at": "2026-11-03T11:41:09+08:00",
+            "data_as_of": "2026-11-03T11:41:09+08:00",
             "source": "wechat-channels-creator-api",
             "metrics": {
               "comments": 0,
@@ -645,7 +875,7 @@
               "follower_gain": 0,
               "likes": 0,
               "shares": 0,
-              "views": 0
+              "views": 4
             }
           },
           "windows": {
@@ -695,12 +925,26 @@
                 "shares": 0,
                 "views": 2
               }
+            },
+            {
+              "publication_id": "hot100-003:x",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-03T11:41:09+08:00",
+              "source": "x-post-impressions-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 2
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-003:x",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:09+08:00",
+            "data_as_of": "2026-11-03T11:41:09+08:00",
             "source": "x-post-impressions-api",
             "metrics": {
               "comments": 0,
@@ -755,12 +999,26 @@
                 "shares": 0,
                 "views": 119
               }
+            },
+            {
+              "publication_id": "hot100-003:xiaohongshu",
+              "observed_at": "2026-11-03T11:44:38+08:00",
+              "data_as_of": "2026-11-03T11:44:38+08:00",
+              "source": "xiaohongshu-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 4,
+                "follower_gain": null,
+                "likes": 7,
+                "shares": 0,
+                "views": 119
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-003:xiaohongshu",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:44:38+08:00",
+            "data_as_of": "2026-11-03T11:44:38+08:00",
             "source": "xiaohongshu-creator-api",
             "metrics": {
               "comments": 0,
@@ -815,12 +1073,26 @@
                 "shares": null,
                 "views": 0
               }
+            },
+            {
+              "publication_id": "hot100-003:youtube",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-03T11:41:09+08:00",
+              "source": "youtube-studio-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": null,
+                "views": 0
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-003:youtube",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:09+08:00",
+            "data_as_of": "2026-11-03T11:41:09+08:00",
             "source": "youtube-studio-api",
             "metrics": {
               "comments": 0,
@@ -875,11 +1147,25 @@
                 "shares": null,
                 "views": 5
               }
+            },
+            {
+              "publication_id": "hot100-003:wechat_official",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-02T23:59:59+08:00",
+              "source": "wechat-official-30d-read-uv-api",
+              "metrics": {
+                "comments": null,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": null,
+                "shares": null,
+                "views": 5
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-003:wechat_official",
-            "observed_at": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:09+08:00",
             "data_as_of": "2026-11-02T23:59:59+08:00",
             "source": "wechat-official-30d-read-uv-api",
             "metrics": {
@@ -970,12 +1256,26 @@
                 "shares": 0,
                 "views": 108
               }
+            },
+            {
+              "publication_id": "hot100-002:bilibili",
+              "observed_at": "2026-11-03T11:41:29+08:00",
+              "data_as_of": "2026-11-03T11:41:29+08:00",
+              "source": "bilibili-public-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 2,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 108
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-002:bilibili",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:29+08:00",
+            "data_as_of": "2026-11-03T11:41:29+08:00",
             "source": "bilibili-public-api",
             "metrics": {
               "comments": 0,
@@ -1117,17 +1417,31 @@
                 "shares": 0,
                 "views": 841
               }
+            },
+            {
+              "publication_id": "hot100-002:douyin",
+              "observed_at": "2026-11-03T11:40:45+08:00",
+              "data_as_of": "2026-11-03T11:40:45+08:00",
+              "source": "douyin-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 3,
+                "follower_gain": null,
+                "likes": 9,
+                "shares": 0,
+                "views": 841
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-002:douyin",
-            "observed_at": "2026-11-03T10:20:42+08:00",
-            "data_as_of": "2026-11-03T10:20:42+08:00",
-            "source": "douyin-creator-export",
+            "observed_at": "2026-11-03T11:40:45+08:00",
+            "data_as_of": "2026-11-03T11:40:45+08:00",
+            "source": "douyin-creator-api",
             "metrics": {
               "comments": 0,
               "favorites": 3,
-              "follower_gain": 2,
+              "follower_gain": null,
               "likes": 9,
               "shares": 0,
               "views": 841
@@ -1179,12 +1493,26 @@
                 "shares": 0,
                 "views": 174
               }
+            },
+            {
+              "publication_id": "hot100-002:wechat_channels",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-03T11:41:09+08:00",
+              "source": "wechat-channels-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": 0,
+                "likes": 1,
+                "shares": 0,
+                "views": 219
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-002:wechat_channels",
-            "observed_at": "2026-10-31T02:34:27+08:00",
-            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "observed_at": "2026-11-03T11:41:09+08:00",
+            "data_as_of": "2026-11-03T11:41:09+08:00",
             "source": "wechat-channels-creator-api",
             "metrics": {
               "comments": 0,
@@ -1192,7 +1520,7 @@
               "follower_gain": 0,
               "likes": 1,
               "shares": 0,
-              "views": 174
+              "views": 219
             }
           },
           "windows": {
@@ -1242,12 +1570,26 @@
                 "shares": 0,
                 "views": 4
               }
+            },
+            {
+              "publication_id": "hot100-002:x",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-03T11:41:09+08:00",
+              "source": "x-post-impressions-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 4
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-002:x",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:09+08:00",
+            "data_as_of": "2026-11-03T11:41:09+08:00",
             "source": "x-post-impressions-api",
             "metrics": {
               "comments": 0,
@@ -1302,12 +1644,26 @@
                 "shares": 0,
                 "views": 30
               }
+            },
+            {
+              "publication_id": "hot100-002:xiaohongshu",
+              "observed_at": "2026-11-03T11:44:38+08:00",
+              "data_as_of": "2026-11-03T11:44:38+08:00",
+              "source": "xiaohongshu-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 2,
+                "follower_gain": null,
+                "likes": 2,
+                "shares": 0,
+                "views": 30
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-002:xiaohongshu",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:44:38+08:00",
+            "data_as_of": "2026-11-03T11:44:38+08:00",
             "source": "xiaohongshu-creator-api",
             "metrics": {
               "comments": 0,
@@ -1365,12 +1721,26 @@
                 "shares": null,
                 "views": 0
               }
+            },
+            {
+              "publication_id": "hot100-002:youtube",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-03T11:41:09+08:00",
+              "source": "youtube-studio-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": null,
+                "views": 0
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-002:youtube",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:09+08:00",
+            "data_as_of": "2026-11-03T11:41:09+08:00",
             "source": "youtube-studio-api",
             "metrics": {
               "comments": 0,
@@ -1425,12 +1795,26 @@
                 "shares": null,
                 "views": 10
               }
+            },
+            {
+              "publication_id": "hot100-002:juejin",
+              "observed_at": "2026-11-03T11:41:29+08:00",
+              "data_as_of": "2026-11-03T11:41:29+08:00",
+              "source": "juejin-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": null,
+                "views": 10
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-002:juejin",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:29+08:00",
+            "data_as_of": "2026-11-03T11:41:29+08:00",
             "source": "juejin-creator-api",
             "metrics": {
               "comments": 0,
@@ -1485,11 +1869,25 @@
                 "shares": null,
                 "views": 13
               }
+            },
+            {
+              "publication_id": "hot100-002:wechat_official",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-02T23:59:59+08:00",
+              "source": "wechat-official-30d-read-uv-api",
+              "metrics": {
+                "comments": null,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": null,
+                "shares": null,
+                "views": 13
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-002:wechat_official",
-            "observed_at": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:09+08:00",
             "data_as_of": "2026-11-02T23:59:59+08:00",
             "source": "wechat-official-30d-read-uv-api",
             "metrics": {
@@ -1548,12 +1946,26 @@
                 "shares": 0,
                 "views": 0
               }
+            },
+            {
+              "publication_id": "hot100-002:zhihu",
+              "observed_at": "2026-11-03T11:44:36+08:00",
+              "data_as_of": "2026-11-03T11:44:36+08:00",
+              "source": "zhihu-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": 0,
+                "likes": 1,
+                "shares": 0,
+                "views": 0
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-002:zhihu",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:44:36+08:00",
+            "data_as_of": "2026-11-03T11:44:36+08:00",
             "source": "zhihu-creator-api",
             "metrics": {
               "comments": 0,
@@ -1633,12 +2045,26 @@
                 "shares": 0,
                 "views": 110
               }
+            },
+            {
+              "publication_id": "hot100-001:bilibili",
+              "observed_at": "2026-11-03T11:41:29+08:00",
+              "data_as_of": "2026-11-03T11:41:29+08:00",
+              "source": "bilibili-public-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 2,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 110
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-001:bilibili",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:29+08:00",
+            "data_as_of": "2026-11-03T11:41:29+08:00",
             "source": "bilibili-public-api",
             "metrics": {
               "comments": 0,
@@ -1763,17 +2189,31 @@
                 "shares": 5,
                 "views": 1942
               }
+            },
+            {
+              "publication_id": "hot100-001:douyin",
+              "observed_at": "2026-11-03T11:40:45+08:00",
+              "data_as_of": "2026-11-03T11:40:45+08:00",
+              "source": "douyin-creator-api",
+              "metrics": {
+                "comments": 2,
+                "favorites": 10,
+                "follower_gain": null,
+                "likes": 29,
+                "shares": 5,
+                "views": 1942
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-001:douyin",
-            "observed_at": "2026-11-03T10:20:42+08:00",
-            "data_as_of": "2026-11-03T10:20:42+08:00",
-            "source": "douyin-creator-export",
+            "observed_at": "2026-11-03T11:40:45+08:00",
+            "data_as_of": "2026-11-03T11:40:45+08:00",
+            "source": "douyin-creator-api",
             "metrics": {
               "comments": 2,
               "favorites": 10,
-              "follower_gain": 2,
+              "follower_gain": null,
               "likes": 29,
               "shares": 5,
               "views": 1942
@@ -1825,12 +2265,26 @@
                 "shares": 0,
                 "views": 86
               }
+            },
+            {
+              "publication_id": "hot100-001:wechat_channels",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-03T11:41:09+08:00",
+              "source": "wechat-channels-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": 0,
+                "likes": 0,
+                "shares": 0,
+                "views": 209
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-001:wechat_channels",
-            "observed_at": "2026-10-31T02:34:27+08:00",
-            "data_as_of": "2026-10-31T02:34:27+08:00",
+            "observed_at": "2026-11-03T11:41:09+08:00",
+            "data_as_of": "2026-11-03T11:41:09+08:00",
             "source": "wechat-channels-creator-api",
             "metrics": {
               "comments": 0,
@@ -1838,7 +2292,7 @@
               "follower_gain": 0,
               "likes": 0,
               "shares": 0,
-              "views": 86
+              "views": 209
             }
           },
           "windows": {
@@ -1888,12 +2342,26 @@
                 "shares": 0,
                 "views": 6
               }
+            },
+            {
+              "publication_id": "hot100-001:x",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-03T11:41:09+08:00",
+              "source": "x-post-impressions-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 6
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-001:x",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:09+08:00",
+            "data_as_of": "2026-11-03T11:41:09+08:00",
             "source": "x-post-impressions-api",
             "metrics": {
               "comments": 0,
@@ -1948,12 +2416,26 @@
                 "shares": 1,
                 "views": 98
               }
+            },
+            {
+              "publication_id": "hot100-001:xiaohongshu",
+              "observed_at": "2026-11-03T11:44:38+08:00",
+              "data_as_of": "2026-11-03T11:44:38+08:00",
+              "source": "xiaohongshu-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 1,
+                "follower_gain": null,
+                "likes": 1,
+                "shares": 1,
+                "views": 98
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-001:xiaohongshu",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:44:38+08:00",
+            "data_as_of": "2026-11-03T11:44:38+08:00",
             "source": "xiaohongshu-creator-api",
             "metrics": {
               "comments": 0,
@@ -2008,12 +2490,26 @@
                 "shares": null,
                 "views": 0
               }
+            },
+            {
+              "publication_id": "hot100-001:youtube",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-03T11:41:09+08:00",
+              "source": "youtube-studio-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": null,
+                "views": 0
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-001:youtube",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:09+08:00",
+            "data_as_of": "2026-11-03T11:41:09+08:00",
             "source": "youtube-studio-api",
             "metrics": {
               "comments": 0,
@@ -2068,11 +2564,25 @@
                 "shares": null,
                 "views": 10
               }
+            },
+            {
+              "publication_id": "hot100-001:wechat_official",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-02T23:59:59+08:00",
+              "source": "wechat-official-30d-read-uv-api",
+              "metrics": {
+                "comments": null,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": null,
+                "shares": null,
+                "views": 10
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-001:wechat_official",
-            "observed_at": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:09+08:00",
             "data_as_of": "2026-11-02T23:59:59+08:00",
             "source": "wechat-official-30d-read-uv-api",
             "metrics": {
@@ -2139,17 +2649,31 @@
                 "shares": 0,
                 "views": 264
               }
+            },
+            {
+              "publication_id": "gpt-fireman-20261031:douyin",
+              "observed_at": "2026-11-03T11:40:45+08:00",
+              "data_as_of": "2026-11-03T11:40:45+08:00",
+              "source": "douyin-creator-api",
+              "metrics": {
+                "comments": 5,
+                "favorites": 1,
+                "follower_gain": null,
+                "likes": 8,
+                "shares": 0,
+                "views": 264
+              }
             }
           ],
           "latest": {
             "publication_id": "gpt-fireman-20261031:douyin",
-            "observed_at": "2026-11-03T10:20:42+08:00",
-            "data_as_of": "2026-11-03T10:20:42+08:00",
-            "source": "douyin-creator-export",
+            "observed_at": "2026-11-03T11:40:45+08:00",
+            "data_as_of": "2026-11-03T11:40:45+08:00",
+            "source": "douyin-creator-api",
             "metrics": {
               "comments": 5,
               "favorites": 1,
-              "follower_gain": 0,
+              "follower_gain": null,
               "likes": 8,
               "shares": 0,
               "views": 264
@@ -2196,12 +2720,26 @@
                 "shares": 1,
                 "views": 125
               }
+            },
+            {
+              "publication_id": "fitness-20261102:douyin",
+              "observed_at": "2026-11-03T11:40:45+08:00",
+              "data_as_of": "2026-11-03T11:40:45+08:00",
+              "source": "douyin-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 1,
+                "follower_gain": null,
+                "likes": 4,
+                "shares": 1,
+                "views": 141
+              }
             }
           ],
           "latest": {
             "publication_id": "fitness-20261102:douyin",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:40:45+08:00",
+            "data_as_of": "2026-11-03T11:40:45+08:00",
             "source": "douyin-creator-api",
             "metrics": {
               "comments": 0,
@@ -2209,7 +2747,56 @@
               "follower_gain": null,
               "likes": 4,
               "shares": 1,
-              "views": 125
+              "views": 141
+            }
+          },
+          "windows": {
+            "24": null,
+            "168": null
+          }
+        },
+        {
+          "id": "fitness-20261102:wechat_channels",
+          "content_id": "fitness-20261102",
+          "platform": "wechat_channels",
+          "account_label": "捞鱼真不吃鱼",
+          "format": "video",
+          "native_id": "export/UzFfBgAAxKCFTCMSb1aCk8zT4DCaB7s3GESxeq1aPVdg7KqgGw",
+          "url": null,
+          "published_at": "2026-11-02T21:08:31+08:00",
+          "status": "published",
+          "collection": null,
+          "activity": null,
+          "source_title": "我养了个健身搭子，练完还能自动出一图流\n用 AI 剪视频的第15天。\n练完随口跟“小龙虾”说几句，训",
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "fitness-20261102:wechat_channels",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-03T11:41:09+08:00",
+              "source": "wechat-channels-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": 0,
+                "likes": 0,
+                "shares": 0,
+                "views": 319
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "fitness-20261102:wechat_channels",
+            "observed_at": "2026-11-03T11:41:09+08:00",
+            "data_as_of": "2026-11-03T11:41:09+08:00",
+            "source": "wechat-channels-creator-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 0,
+              "follower_gain": 0,
+              "likes": 0,
+              "shares": 0,
+              "views": 319
             }
           },
           "windows": {
@@ -2245,20 +2832,34 @@
                 "shares": 0,
                 "views": 2
               }
+            },
+            {
+              "publication_id": "fitness-20261102:x",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-03T11:41:09+08:00",
+              "source": "x-post-impressions-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 1,
+                "shares": 0,
+                "views": 3
+              }
             }
           ],
           "latest": {
             "publication_id": "fitness-20261102:x",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:09+08:00",
+            "data_as_of": "2026-11-03T11:41:09+08:00",
             "source": "x-post-impressions-api",
             "metrics": {
               "comments": 0,
               "favorites": 0,
               "follower_gain": null,
-              "likes": 0,
+              "likes": 1,
               "shares": 0,
-              "views": 2
+              "views": 3
             }
           },
           "windows": {
@@ -2294,12 +2895,26 @@
                 "shares": 0,
                 "views": 0
               }
+            },
+            {
+              "publication_id": "fitness-20261102:xiaohongshu",
+              "observed_at": "2026-11-03T11:44:38+08:00",
+              "data_as_of": "2026-11-03T11:44:38+08:00",
+              "source": "xiaohongshu-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 0
+              }
             }
           ],
           "latest": {
             "publication_id": "fitness-20261102:xiaohongshu",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:44:38+08:00",
+            "data_as_of": "2026-11-03T11:44:38+08:00",
             "source": "xiaohongshu-creator-api",
             "metrics": {
               "comments": 0,
@@ -2308,6 +2923,55 @@
               "likes": 0,
               "shares": 0,
               "views": 0
+            }
+          },
+          "windows": {
+            "24": null,
+            "168": null
+          }
+        },
+        {
+          "id": "fitness-20261102:youtube",
+          "content_id": "fitness-20261102",
+          "platform": "youtube",
+          "account_label": "恩泽余",
+          "format": "video",
+          "native_id": "MT4rW1bHTTM",
+          "url": "https://youtu.be/MT4rW1bHTTM",
+          "published_at": "2026-11-02T21:01:05+08:00",
+          "status": "published",
+          "collection": null,
+          "activity": null,
+          "source_title": null,
+          "api_native_id": null,
+          "snapshots": [
+            {
+              "publication_id": "fitness-20261102:youtube",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-03T11:41:09+08:00",
+              "source": "youtube-studio-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": 1,
+                "shares": null,
+                "views": 258
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "fitness-20261102:youtube",
+            "observed_at": "2026-11-03T11:41:09+08:00",
+            "data_as_of": "2026-11-03T11:41:09+08:00",
+            "source": "youtube-studio-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": null,
+              "follower_gain": null,
+              "likes": 1,
+              "shares": null,
+              "views": 258
             }
           },
           "windows": {
@@ -2343,11 +3007,25 @@
                 "shares": null,
                 "views": 1
               }
+            },
+            {
+              "publication_id": "fitness-20261102:wechat_official",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-02T23:59:59+08:00",
+              "source": "wechat-official-30d-read-uv-api",
+              "metrics": {
+                "comments": null,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": null,
+                "shares": null,
+                "views": 1
+              }
             }
           ],
           "latest": {
             "publication_id": "fitness-20261102:wechat_official",
-            "observed_at": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:09+08:00",
             "data_as_of": "2026-11-02T23:59:59+08:00",
             "source": "wechat-official-30d-read-uv-api",
             "metrics": {
@@ -2397,12 +3075,26 @@
                 "shares": 0,
                 "views": 122
               }
+            },
+            {
+              "publication_id": "ai-town-20261101:bilibili",
+              "observed_at": "2026-11-03T11:41:30+08:00",
+              "data_as_of": "2026-11-03T11:41:30+08:00",
+              "source": "bilibili-public-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 1,
+                "follower_gain": null,
+                "likes": 1,
+                "shares": 0,
+                "views": 122
+              }
             }
           ],
           "latest": {
             "publication_id": "ai-town-20261101:bilibili",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:30+08:00",
+            "data_as_of": "2026-11-03T11:41:30+08:00",
             "source": "bilibili-public-api",
             "metrics": {
               "comments": 0,
@@ -2457,20 +3149,34 @@
                 "shares": 2,
                 "views": 2139
               }
+            },
+            {
+              "publication_id": "ai-town-20261101:douyin",
+              "observed_at": "2026-11-03T11:40:45+08:00",
+              "data_as_of": "2026-11-03T11:40:45+08:00",
+              "source": "douyin-creator-api",
+              "metrics": {
+                "comments": 1,
+                "favorites": 8,
+                "follower_gain": null,
+                "likes": 25,
+                "shares": 2,
+                "views": 2140
+              }
             }
           ],
           "latest": {
             "publication_id": "ai-town-20261101:douyin",
-            "observed_at": "2026-11-03T10:20:42+08:00",
-            "data_as_of": "2026-11-03T10:20:42+08:00",
-            "source": "douyin-creator-export",
+            "observed_at": "2026-11-03T11:40:45+08:00",
+            "data_as_of": "2026-11-03T11:40:45+08:00",
+            "source": "douyin-creator-api",
             "metrics": {
               "comments": 1,
               "favorites": 8,
-              "follower_gain": 1,
+              "follower_gain": null,
               "likes": 25,
               "shares": 2,
-              "views": 2139
+              "views": 2140
             }
           },
           "windows": {
@@ -2486,15 +3192,46 @@
           "format": "video",
           "native_id": "export/UzFfBgAAxL-FCE4-MyiAk8zT4DCL459DokwxaPhTm2sh1IfSFQ",
           "url": null,
-          "published_at": null,
+          "published_at": "2026-11-01T22:49:09+08:00",
           "status": "published",
           "collection": "做个小游戏",
           "activity": null,
-          "source_title": null,
+          "source_title": "我画走势，AI却先去上班了……《我手绘K线，AI急哭了》试玩实录，保留原声和反应，等待片段加速，中英",
           "api_native_id": null,
-          "snapshots": [],
-          "latest": null,
-          "windows": {}
+          "snapshots": [
+            {
+              "publication_id": "ai-town-20261101:wechat_channels",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-03T11:41:09+08:00",
+              "source": "wechat-channels-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": 0,
+                "likes": 0,
+                "shares": 1,
+                "views": 179
+              }
+            }
+          ],
+          "latest": {
+            "publication_id": "ai-town-20261101:wechat_channels",
+            "observed_at": "2026-11-03T11:41:09+08:00",
+            "data_as_of": "2026-11-03T11:41:09+08:00",
+            "source": "wechat-channels-creator-api",
+            "metrics": {
+              "comments": 0,
+              "favorites": 0,
+              "follower_gain": 0,
+              "likes": 0,
+              "shares": 1,
+              "views": 179
+            }
+          },
+          "windows": {
+            "24": null,
+            "168": null
+          }
         },
         {
           "id": "ai-town-20261101:x",
@@ -2524,12 +3261,26 @@
                 "shares": 0,
                 "views": 3
               }
+            },
+            {
+              "publication_id": "ai-town-20261101:x",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-03T11:41:09+08:00",
+              "source": "x-post-impressions-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": 0,
+                "views": 3
+              }
             }
           ],
           "latest": {
             "publication_id": "ai-town-20261101:x",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:09+08:00",
+            "data_as_of": "2026-11-03T11:41:09+08:00",
             "source": "x-post-impressions-api",
             "metrics": {
               "comments": 0,
@@ -2573,12 +3324,26 @@
                 "shares": 0,
                 "views": 0
               }
+            },
+            {
+              "publication_id": "ai-town-20261101:xiaohongshu",
+              "observed_at": "2026-11-03T11:44:38+08:00",
+              "data_as_of": "2026-11-03T11:44:38+08:00",
+              "source": "xiaohongshu-creator-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": 0,
+                "follower_gain": null,
+                "likes": 1,
+                "shares": 0,
+                "views": 0
+              }
             }
           ],
           "latest": {
             "publication_id": "ai-town-20261101:xiaohongshu",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:44:38+08:00",
+            "data_as_of": "2026-11-03T11:44:38+08:00",
             "source": "xiaohongshu-creator-api",
             "metrics": {
               "comments": 0,
@@ -2619,12 +3384,26 @@
                 "shares": null,
                 "views": 0
               }
+            },
+            {
+              "publication_id": "ai-town-20261101:youtube",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-03T11:41:09+08:00",
+              "source": "youtube-studio-api",
+              "metrics": {
+                "comments": 0,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": 0,
+                "shares": null,
+                "views": 0
+              }
             }
           ],
           "latest": {
             "publication_id": "ai-town-20261101:youtube",
-            "observed_at": "2026-11-03T09:35:02+08:00",
-            "data_as_of": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:09+08:00",
+            "data_as_of": "2026-11-03T11:41:09+08:00",
             "source": "youtube-studio-api",
             "metrics": {
               "comments": 0,
@@ -2668,11 +3447,25 @@
                 "shares": null,
                 "views": 10
               }
+            },
+            {
+              "publication_id": "ai-town-20261101:wechat_official",
+              "observed_at": "2026-11-03T11:41:09+08:00",
+              "data_as_of": "2026-11-02T23:59:59+08:00",
+              "source": "wechat-official-30d-read-uv-api",
+              "metrics": {
+                "comments": null,
+                "favorites": null,
+                "follower_gain": null,
+                "likes": null,
+                "shares": null,
+                "views": 10
+              }
             }
           ],
           "latest": {
             "publication_id": "ai-town-20261101:wechat_official",
-            "observed_at": "2026-11-03T09:35:02+08:00",
+            "observed_at": "2026-11-03T11:41:09+08:00",
             "data_as_of": "2026-11-02T23:59:59+08:00",
             "source": "wechat-official-30d-read-uv-api",
             "metrics": {
@@ -2696,7 +3489,8 @@
     "platform_views": {
       "x": "帖子浏览/曝光，不是视频播放",
       "wechat_official": "当前接口为近30天阅读人数UV，不是累计阅读次数",
-      "zhihu": "内容分析PV；赞列为赞同数"
+      "zhihu": "内容分析PV；赞列为赞同数",
+      "weibo": "微博帖子阅读，不是视频播放"
     }
   }
 }

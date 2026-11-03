@@ -49,7 +49,7 @@ def main():
     p.add_argument('--push',action='store_true',help='Commit/push only the generated public snapshot')
     mode=p.add_mutually_exclusive_group()
     mode.add_argument('--observations',help='Import a standard verified observations JSON, without recollecting')
-    mode.add_argument('--all-platforms',action='store_true',help='Collect all nine platforms using current browser sessions, then import/publish')
+    mode.add_argument('--all-platforms',action='store_true',help='Collect registered platforms using current browser sessions, then import/publish')
     p.add_argument('--bindings',help='Verified registration amendments for first-time identity binding')
     a=p.parse_args();start=time.monotonic()
     for value in (a.repo,a.db):

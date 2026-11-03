@@ -131,7 +131,7 @@ def export(db):
         content['publications']=pubs;contents.append(content)
     return {'schema':1,'generated_at':dt.datetime.now(TZ).isoformat(timespec='seconds'),'contents':contents,
             'definitions':{'views':'平台原始播放/阅读/曝光，门槛不同，不代表跨平台去重人数','missing':'null 为未采集或不支持，不是 0','window':'24h/7d 只使用目标时点前后1小时内的真实采样',
-            'platform_views':{'x':'帖子浏览/曝光，不是视频播放','wechat_official':'当前接口为近30天阅读人数UV，不是累计阅读次数','zhihu':'内容分析PV；赞列为赞同数'}}}
+            'platform_views':{'x':'帖子浏览/曝光，不是视频播放','wechat_official':'当前接口为近30天阅读人数UV，不是累计阅读次数','zhihu':'内容分析PV；赞列为赞同数','weibo':'微博帖子阅读，不是视频播放'}}}
 
 
 def main():

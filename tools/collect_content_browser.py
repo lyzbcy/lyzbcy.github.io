@@ -17,7 +17,9 @@ PROFILES={
  'wechat_official':('https://mp.weixin.qq.com/','/misc/appmsganalysis'),
  'x':(None,'/UserOriginalsTimeline'),
  'zhihu':('https://www.zhihu.com/creator/analytics/content-analysis/article?tab=single','/api/v4/creators/analysis/realtime/content/list'),
- 'juejin':('https://juejin.cn/creator/home','/content_api/v1/article/list_by_user')}
+ 'juejin':('https://juejin.cn/creator/home','/content_api/v1/article/list_by_user'),
+ 'kuaishou':('https://cp.kuaishou.com/article/manage/video','/rest/cp/works/v2/video/pc/photo/list'),
+ 'weibo':(None,'/ajax/statuses/mymblog')}
 
 
 class Bridge:
@@ -39,6 +41,8 @@ def request_matches(platform,request):
     if request.get('method') not in ('GET','POST') or request.get('status') not in (200,201):return False
     url=request['url'];path=urllib.parse.urlsplit(url).path;query=urllib.parse.parse_qs(urllib.parse.urlsplit(url).query)
     if PROFILES[platform][1] not in path:return False
+    if platform=='kuaishou' and (urllib.parse.urlsplit(url).hostname!='cp.kuaishou.com' or path!=PROFILES[platform][1] or request['method']!='POST'):return False
+    if platform=='weibo' and (urllib.parse.urlsplit(url).hostname!='weibo.com' or path!=PROFILES[platform][1] or request['method']!='GET' or not query.get('uid',[''])[0].isdigit()):return False
     if platform=='zhihu' and query.get('type')!=['article']:return False
     if platform=='wechat_official' and query.get('action')!=['get_article_list']:return False
     return True
@@ -60,10 +64,14 @@ def replay(b,detail):
 
 def profile_url(platform,publications):
     url=PROFILES[platform][0]
-    if platform=='x':
+    if platform in ('x','weibo'):
         known=next((p.get('url') for p in publications if p.get('url')),None)
-        if not known:raise ValueError('Verified X profile URL required')
-        url='https://x.com/'+urllib.parse.urlsplit(known).path.strip('/').split('/')[0]
+        if not known:raise ValueError('Verified profile URL required')
+        owner=urllib.parse.urlsplit(known).path.strip('/').split('/')[0]
+        if platform=='x':url='https://x.com/'+owner
+        else:
+            if not owner.isdigit():raise ValueError('Verified Weibo numeric account URL required')
+            url='https://weibo.com/u/'+owner
     return url
 
 
@@ -75,12 +83,16 @@ def prepare_requests(b,platforms,publications):
         rows=[p for p in publications if p['platform']==platform]
         if not rows:continue
         url=profile_url(platform,rows)
-        try:b.call('find_tab',{'url':url})
-        except RuntimeError:b.call('navigate',{'url':url,'newTab':True,'group_title':'内容运营看板接口更新'})
+        try:tab=b.call('find_tab',{'url':url})
+        except RuntimeError:tab=b.call('navigate',{'url':url,'newTab':True,'group_title':'内容运营看板接口更新'})
         previous=b.call('network',{'cmd':'list'})
         seen[platform]={r['requestId'] for r in previous.get('requests',[])}
         b.call('network',{'cmd':'start'})
-        b.call('cdp',{'method':'Page.reload','params':{}})
+        # find_tab matches hosts; the existing tab may be on analytics/editor/login.
+        # Preserve MP's authenticated statistics URL and Studio's native navigation.
+        if platform not in ('youtube','wechat_official') and urllib.parse.urlsplit(tab.get('url','')).path!=urllib.parse.urlsplit(url).path:
+            b.call('navigate',{'url':url})
+        else:b.call('cdp',{'method':'Page.reload','params':{}})
     return seen
 
 
@@ -100,30 +112,67 @@ def collect_api(b,platform,publications,old_ids=None):
             b.js("(()=>{const a=[...document.querySelectorAll('a')].find(x=>(x.getAttribute('href')||'').includes('/videos'));if(a)a.click();return true})()")
         if platform=='wechat_official':
             b.js("(()=>{const a=document.querySelector('a[href*=appmsganalysis]');if(a)a.click();return true})()")
+        if platform=='zhihu':
+            # A direct deep-link reload can return the creator home. Use its
+            # native analysis navigation, then select articles rather than answers.
+            b.js("(()=>{const a=document.querySelector('a[href*=\"/creator/analytics/content-analysis/\"]');if(a)a.click();return !!a})()")
+            deadline=time.monotonic()+8
+            while time.monotonic()<deadline:
+                if b.js("(()=>{const a=document.querySelector('a[href*=\"/content-analysis/article\"]');if(a)a.click();return !!a})()"):break
+                time.sleep(.25)
         deadline=time.monotonic()+20
         while not requests and time.monotonic()<deadline:
             time.sleep(.8);requests=available()
     if not requests:raise RuntimeError('read_api_not_observed_login_or_navigation_needed')
-    best=None
+    found={};valid=False
     # A page can fetch empty draft/filter lists after the actual published list.
     # Select by verified identities rather than whichever response arrived last.
-    for request in reversed(requests[-8:]):
-        detail=b.call('network',{'cmd':'detail','requestId':request['requestId']})
-        result=detail.get('body')
-        if isinstance(result,str):result=json.loads(result)
-        if not isinstance(result,dict):continue
-        asof=None
-        if platform=='wechat_official':
-            end=int(urllib.parse.parse_qs(urllib.parse.urlsplit(detail['url']).query)['end_timestamp'][0])
-            day=dt.datetime.fromtimestamp(end,TZ).date()
-            asof=dt.datetime.combine(day,dt.time(23,59,59),TZ).isoformat()
-            if dt.datetime.fromisoformat(asof)>dt.datetime.now(TZ):raise ValueError('MP data date is newer than observation')
-        try:sample=normalize(platform,result,publications,data_as_of=asof)
-        except ValueError:continue
-        if best is None or len(sample[0])>len(best[0]):best=sample
-        if not sample[1]:return sample
-    if best is None:raise RuntimeError('fresh_api_response_missing_or_rejected')
-    return best
+    def read_responses(requests):
+        nonlocal valid
+        found.clear();valid=False
+        for request in reversed(requests[-12:]):
+          detail=b.call('network',{'cmd':'detail','requestId':request['requestId']})
+          result=detail.get('body')
+          if isinstance(result,str):result=json.loads(result)
+          if not isinstance(result,dict):continue
+          asof=None
+          if platform=='wechat_official':
+              end=int(urllib.parse.parse_qs(urllib.parse.urlsplit(detail['url']).query)['end_timestamp'][0])
+              day=dt.datetime.fromtimestamp(end,TZ).date()
+              asof=dt.datetime.combine(day,dt.time(23,59,59),TZ).isoformat()
+              if dt.datetime.fromisoformat(asof)>dt.datetime.now(TZ):raise ValueError('MP data date is newer than observation')
+          try:sample=normalize(platform,result,publications,data_as_of=asof)
+          except ValueError:continue
+          valid=True
+          # Separate native filters/pages can each cover different registered IDs.
+          # Responses are newest first; do not replace a newer sample with an older one.
+          for row in sample[0]:found.setdefault(row['publication_id'],row)
+    read_responses(requests)
+    if platform=='youtube' and len(found)<len(publications):
+        # Studio separates uploads and Shorts. Follow its own visible tab controls
+        # so the native client creates the signed read request for each format.
+        b.call('cdp',{'method':'Emulation.setFocusEmulationEnabled','params':{'enabled':True}})
+        try:
+            ready=b.js("(()=>{const tabs=[...document.querySelectorAll('tp-yt-paper-tab')];return tabs.some(e=>e.textContent.trim()==='Shorts')})()")
+            if not ready:
+                b.js("(()=>{const a=[...document.querySelectorAll('a')].find(e=>(e.getAttribute('href')||'').includes('/videos'));if(a)a.click();return !!a})()")
+                deadline=time.monotonic()+8
+                while not ready and time.monotonic()<deadline:
+                    time.sleep(.25);ready=b.js("[...document.querySelectorAll('tp-yt-paper-tab')].some(e=>e.textContent.trim()==='Shorts')")
+            if ready:
+                for labels in (['视频','Videos'],['Shorts']):
+                    before={r['requestId'] for r in available()}
+                    clicked=b.js("(()=>{const labels="+json.dumps(labels)+";const tab=[...document.querySelectorAll('tp-yt-paper-tab')].find(e=>labels.includes(e.textContent.trim()));if(!tab||tab.getAttribute('aria-selected')==='true')return false;tab.click();return true})()")
+                    if clicked:
+                        deadline=time.monotonic()+8
+                        while time.monotonic()<deadline:
+                            fresh=[r for r in available() if r['requestId'] not in before]
+                            if fresh:break
+                            time.sleep(.25)
+                read_responses(available())
+        finally:b.call('cdp',{'method':'Emulation.setFocusEmulationEnabled','params':{'enabled':False}})
+    if not valid:raise RuntimeError('fresh_api_response_missing_or_rejected')
+    return list(found.values()),[p['id'] for p in publications if p['id'] not in found]
 
 
 def main():
