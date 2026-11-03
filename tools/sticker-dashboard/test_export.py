@@ -47,5 +47,20 @@ class ExportTests(unittest.TestCase):
         self.raw['captured_at']='2026-11-04T15:00:00+08:00'
         self.raw['list']['List'][0]['TotalSendNum']='125'
         self.assertEqual(self.export()['albums'][0]['send_change'],25)
+    def test_single_dates_are_preserved_without_mixing(self):
+        md5='a'*32
+        self.raw['details']={'a':{'StikerID':'a','StikerJson':{'Item':[{'md5':md5,'meaning':{'Unit':[{'lang':'zh_cn','content':'抱抱'}]}}]}}}
+        self.raw['reports']={'a':{'Summary':{'StikerID':'a'},'Report':[{'Md5':md5,'DataTime':'11月1日','SendNum':0},{'Md5':md5,'DataTime':'11月2日','SendNum':5}]}}
+        d=self.export()
+        single=json.loads((module.ROOT/'assets/data/sticker-daily.json').read_text('utf8'))
+        self.assertEqual(len(single['rows']),2)
+        self.assertEqual({single['date_labels'][r[3]]:r[4] for r in single['rows']},{'11月1日':0,'11月2日':5})
+        detail=json.loads((module.ROOT/'assets/data/sticker-albums/a.json').read_text('utf8'))
+        self.assertIsNone(detail['stickers'][0]['daily_sends'])
+        self.assertEqual(len(detail['stickers'][0]['daily_records']),2)
+        self.assertEqual(d['albums'][0]['stickers'],[])
+    def test_duplicate_single_record_rejected(self):
+        self.raw['reports']={'a':{'Summary':{'StikerID':'a'},'Report':[{'Md5':'a'*32,'DataTime':'11月2日','SendNum':0}]*2}}
+        with self.assertRaises(ValueError):self.export()
 
 if __name__=='__main__':unittest.main()

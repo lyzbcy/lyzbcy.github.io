@@ -5,6 +5,7 @@ import hashlib
 import json
 from pathlib import Path
 import shutil
+import re
 from urllib.parse import urlsplit, parse_qs
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -29,17 +30,38 @@ def build(private_dir):
     if len({r['StikerID'] for r in rows}) != len(rows):
         raise ValueError('Duplicate platform IDs')
     albums=[]
+    single_rows=[]
+    reports_covered=0
+    report_dates=Counter()
+    shard_payloads={}
+    report_scope=raw.get('reports_collection',{})
+    if report_scope and not report_scope.get('complete'):
+        raise ValueError('Incomplete report collection cannot replace public snapshot')
+    if report_scope and any(r['StikerID'] not in raw.get('reports',{}) or r['StikerID'] not in raw.get('details',{}) for r in rows if r['Status']==7):
+        raise ValueError('Daily report scope is missing an online album')
+    shards=ROOT/'assets/data/sticker-albums'
+    shards.mkdir(parents=True,exist_ok=True)
     preview_target=ROOT/'assets/sticker-dashboard/previews'
     preview_target.mkdir(parents=True,exist_ok=True)
     for r in rows:
         sid=r['StikerID']
+        if not re.fullmatch(r'[A-Za-z0-9_-]{1,120}',sid):raise ValueError('Unsafe platform ID')
         detail=raw.get('details',{}).get(sid,{})
         if detail and detail.get('StikerID') != sid:
             raise ValueError('Detail identity mismatch')
         report=raw.get('reports',{}).get(sid,{})
         if report and report.get('Summary',{}).get('StikerID') != sid:
             raise ValueError('Report identity mismatch')
-        daily={v.get('Md5','').lower():v for v in report.get('Report',[])}
+        daily={}
+        seen=set()
+        for metric in report.get('Report',[]):
+            md5=metric.get('Md5','').lower()
+            date=metric.get('DataTime')
+            sends=count(metric.get('SendNum'))
+            if not date or sends is None or (md5,date) in seen:raise ValueError('Invalid or duplicate single-sticker metric')
+            seen.add((md5,date))
+            daily.setdefault(md5,[]).append({'date':date,'sends':sends})
+        if report:reports_covered+=1
         previews={x['index']:x for x in raw.get('previews',{}).get(sid,[])}
         stickers=[]
         for i,item in enumerate(detail.get('StikerJson',{}).get('Item',[]),1):
@@ -56,16 +78,25 @@ def build(private_dir):
                     raise ValueError('Invalid preview filename')
                 shutil.copyfile(private_dir/'previews'/filename,preview_target/filename)
                 src='/assets/sticker-dashboard/previews/'+filename
-            metric=daily.get(item.get('md5','').lower(),{})
+            records=daily.get(item.get('md5','').lower(),[])
+            metric=records[0] if len(records)==1 else {}
             stickers.append({'index':i,'meaning':unit(item.get('meaning',{})), 'preview':src,
-                             'daily_sends':count(metric.get('SendNum')), 'daily_date':metric.get('DataTime') or None})
+                             'daily_sends':metric.get('sends'), 'daily_date':metric.get('date'), 'daily_records':records})
+            for metric in records:
+                single_rows.append([sid,i,unit(item.get('meaning',{})),metric['date'],metric['sends'],src])
+                report_dates[metric['date']]+=1
+        shard_url=None
+        if stickers:
+            shard_url='/assets/data/sticker-albums/'+sid+'.json'
+            shard_payloads[sid]=json.dumps({'schema':1,'id':sid,'name':r['Name'],'stickers':stickers,'wechat_url':detail.get('WxappJumpUrl') or None},ensure_ascii=False,separators=(',',':'))
         downloads=count(r.get('TotalDownloadNum'))
         sends=count(r.get('TotalSendNum'))
         albums.append({'id':sid,'name':r['Name'],'status':STATUS.get(r['Status'],'未知状态'),
                        'downloads':downloads,'sends':sends,'ratio':round(sends/downloads,2) if downloads and sends is not None else None,
                        'opened_at':r.get('OpenTime') or None,'platform_data_at':r.get('DataTime') or None,
-                       'preview_count':len(previews),'stickers':stickers,
-                       'wechat_url': detail.get('WxappJumpUrl') or None})
+                       'preview_count':len(previews),'stickers':stickers if previews else [],
+                       'sticker_count':len(stickers),'detail_url':shard_url,
+                       'wechat_url': (detail.get('WxappJumpUrl') or None) if previews else None})
     albums.sort(key=lambda r:(-(r['sends'] or 0),-(r['downloads'] or 0),r['id']))
     # Preserve a small history of comparable full-list observations, never invent growth.
     data_path=ROOT/'assets/data/sticker-dashboard.json'
@@ -96,13 +127,30 @@ def build(private_dir):
     result={'schema':1,'captured_at':raw['captured_at'],'source':'微信表情开放平台 / 表情包一键制作',
             'source_fingerprint':hashlib.sha256(json.dumps(rows,sort_keys=True).encode()).hexdigest(),
             'summary':summary,'history':history[-90:],'albums':albums,
+            'single_metrics':{'url':'/assets/data/sticker-daily.json','albums':reports_covered,'scope':sum(r['Status']==7 for r in rows),'records':len(single_rows),'dates':dict(report_dates),'period_kind':'platform_daily'},
             'media':{'mode':'direct_first_limited_cache','direct_links':'仅采用无登录、博客Referer验证通过的图片直链',
                      'preview_albums':sum(bool(a['preview_count']) for a in albums),
                      'preview_images':sum(a['preview_count'] for a in albums),'cached_images':cached_images,'direct_images':direct_images}}
     data_path.parent.mkdir(exist_ok=True)
+    for sid,payload in shard_payloads.items():
+        shard=shards/(sid+'.json')
+        temporary=shard.with_suffix('.tmp')
+        temporary.write_text(payload,encoding='utf8')
+        temporary.replace(shard)
     tmp=data_path.with_suffix('.tmp')
     tmp.write_text(json.dumps(result,ensure_ascii=False,separators=(',',':')),encoding='utf8')
     tmp.replace(data_path)
+    single_rows.sort(key=lambda r:(-r[4],r[0],r[1],r[3]))
+    album_ids=sorted({r[0] for r in single_rows})
+    album_indices={sid:i for i,sid in enumerate(album_ids)}
+    date_labels=list(report_dates)
+    date_indices={date:i for i,date in enumerate(date_labels)}
+    compact_rows=[[album_indices[r[0]],r[1],r[2],date_indices[r[3]],r[4],r[5]] for r in single_rows]
+    singles={'schema':1,'captured_at':raw['captured_at'],'period_kind':'platform_daily','columns':['album_index','index','meaning','date_index','sends','preview'],'album_ids':album_ids,'date_labels':date_labels,'dates':dict(report_dates),'rows':compact_rows}
+    target=ROOT/'assets/data/sticker-daily.json'
+    tmp=target.with_suffix('.tmp')
+    tmp.write_text(json.dumps(singles,ensure_ascii=False,separators=(',',':')),encoding='utf8')
+    tmp.replace(target)
     print(json.dumps({'summary':summary,'media':result['media'],'json_bytes':data_path.stat().st_size},ensure_ascii=False))
 
 if __name__=='__main__':

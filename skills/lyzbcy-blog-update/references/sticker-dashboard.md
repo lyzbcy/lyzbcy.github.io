@@ -15,9 +15,10 @@
 1. 连接本机实际安装版，确认没有正在执行的生成、投稿或同步任务。需要诊断连接时从原安装入口以 `--remote-debugging-port=9487` 启动；不为连接而结束别人的任务。连接信息只监听本机，不将端口暴露公网。
 2. 运行 `python tools/sticker-dashboard/refresh_installed.py --private-dir <仓库外私有目录>`。必须 `complete/list_complete` 且无未知状态或回写失败；不完整则保留旧公开快照并报告。
 3. `python tools/sticker-dashboard/collect.py --engine-src <源码中sticker_engine目录> --private-dir <同一私有目录>`。Python 需已有 playwright、Pillow、pydantic、keyring；可用 `--dependency-dir` 指向本机现有依赖目录，不公开设备凭据或登录态。采集完成才原子保存快照。
-4. `python tools/sticker-dashboard/build.py --private-dir <同一私有目录>`。默认仅抓累计发送前10套档案、前3套逐图预览/日报；`--preview-albums` 可调0–10，不把全库图片塞入博客。
-5. 运行 `node --check assets/sticker-dashboard/board.js`；检查全量唯一ID、真实0与缺失、日报日期、图片数量与体积；真实浏览器验证搜索、排序、20条分页、详情关闭、手机宽度与破图。
-6. 按 `docs/howto/push-pipeline.md` 走服务器ubuntu身份，只提交本页相关路径。修改已有skill前先取服务器最新版本，保留其他聊天改动。等待Pages构建，再验证实际文章和JSON时间、首屏/详情图片、浏览器错误。
+4. 采集器现在读取全部已上架套装的详情与单图日报，使用软件原有Md5校验并同步本机单图缓存。图片仍只采集累计发送前3套；`--preview-albums` 可调0–10。详情最多3并发，日报串行；连续3套失败停止，不以不完整新批覆盖公开快照。
+5. `python tools/sticker-dashboard/build.py --private-dir <同一私有目录>`。专辑汇总在主JSON；`assets/data/sticker-daily.json` 是按需加载的紧凑单图数字索引；`assets/data/sticker-albums/<平台ID>.json` 按套加载详情，未点击时不请求。更新时三类数据来自同一完整采集批。
+6. 运行 `node --check assets/sticker-dashboard/board.js`；检查全量唯一ID、真实0与缺失、日报日期、图片数量与体积；真实浏览器验证搜索、排序、20条分页、详情关闭、手机宽度与破图。
+7. 按 `docs/howto/push-pipeline.md` 走服务器ubuntu身份，只提交本页相关路径。修改已有skill前先取服务器最新版本，保留其他聊天改动。等待Pages构建，再验证实际文章和JSON时间、首屏/详情图片、浏览器错误。
 
 Windows当前素材项目为 `E:/共享/创业/01-捞鱼软件产品/sticker-maker`，实际安装在 `%LOCALAPPDATA%/Programs/sticker-maker-desktop`。原始快照和同步回执可存该项目 `verification/blog-refresh-<日期>/`，不得进入公开博客。跨设备先解析现有分类路径。
 
@@ -28,6 +29,8 @@ Windows当前素材项目为 `E:/共享/创业/01-捞鱼软件产品/sticker-mak
 - 状态枚举依赖软件已核验规则，未知状态停止，不猜。`OpenTime` 是平台提供上架日期，不拿本地生成日期代替。
 - 总量为全平台名单；候选榜只选已上架作品。图表不把待审、驳回等数值伪装为已上架表现。
 - 单图 `stikerreport.Report` 按Md5与详情Item关联；展示 `DataTime` 原始平台日期。它是日报，不是单图累计；缺年不补造年份，不能与专辑累计相加。
+- 单图排行榜支持含义/套装搜索、同一统计日筛选、发送次数正反排序、最低次数和20条分页。一次只比较同一天；0是有效数据，未知或缺报告不填0。多日记录逐条保留，不用以Md5为键的单值字典静默覆盖。
+- 主JSON记录单图报告覆盖套数、范围和记录数。全量意味着当前已上架套装，不含未通过审核或未上架作品；不宣称拥有每张表情的历史累计发送。套内保留平台原始序号，默认按单图发送排序；无图片的记录用原始序号与含义定位。
 - 记录采集时间（北京时间）、平台统计日期与覆盖数。首次采集无增长；跨日才与前一次完整快照比较，同日重复构建保持已有比较基准；计数下降如实展示，不强行截为0。
 - 微信数据不能推断抖音/QQ结果。当前两套抖音上线记录截至2026-11-03，前端按精确微信平台ID映射；刷新微信不延长这份核查日期。QQ认证审核中与表情表单可进入分别记录，不能标成已获全部权限。
 

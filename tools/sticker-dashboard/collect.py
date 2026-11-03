@@ -34,6 +34,9 @@ sys.modules['sticker_engine'] = pkg
 from sticker_engine.publish.browser import BrowserSession
 from sticker_engine.publish.config import PublishConfig
 from sticker_engine.publish.platform_data import LIST_URL, parse_list, read_detail, read_json
+from sticker_engine.publish.parallel_read import iter_details_parallel
+from sticker_engine.publish.sticker_metrics import parse_report, save_snapshot
+from sticker_engine.config.paths import resolve_paths, current_platform
 from playwright.sync_api import sync_playwright
 from PIL import Image
 
@@ -94,6 +97,37 @@ with sync_playwright() as pw:
                 finally:
                     response.dispose()
             print(json.dumps({'rank': rank + 1, 'name': row['Name'], 'preview_count': len(items)}, ensure_ascii=False), flush=True)
+        # Full numeric coverage does not require downloading the full image library.
+        online=[r for r in rows if r['Status']==7]
+        ids=[r['StikerID'] for r in online]
+        missing=[sid for sid in ids if sid not in snapshot['details']]
+        for sid,detail,error in iter_details_parallel(page,missing,lambda:False,lambda m:None):
+            if error:
+                raise RuntimeError('Single-sticker detail collection incomplete; retain previous snapshot')
+            snapshot['details'][sid]=detail
+        paths=resolve_paths(current_platform())
+        binding=json.loads((paths.user_data/'resource_library/device.json').read_text('utf8'))
+        account=binding['account_id']
+        failures=0
+        for n,row in enumerate(online,1):
+            sid=row['StikerID']
+            try:
+                report=snapshot['reports'].get(sid) or read_json(page,'https://sticker.weixin.qq.com/cgi-bin/mmemoticon-bin/stikerreport?stikerid='+quote(sid)+'&f=json')
+                parsed=parse_report(report,snapshot['details'][sid],sid,row['Name'],account)
+                current=json.loads((paths.user_data/'resource_library/device.json').read_text('utf8'))
+                if current['account_id']!=account:raise RuntimeError('Bound account changed')
+                save_snapshot(paths.user_data,account,parsed)
+                snapshot['reports'][sid]=report
+                failures=0
+            except Exception as exc:
+                snapshot['errors'].append({'id':sid,'kind':'daily_report','error':type(exc).__name__})
+                failures+=1
+                if failures>=3:raise RuntimeError('Three consecutive daily report failures; retain previous public snapshot') from exc
+            if n%25==0 or n==len(online):
+                print(json.dumps({'daily_reports':n,'scope':len(online),'failures':len(snapshot['errors'])}),flush=True)
+        snapshot['reports_collection']={'scope':'all_online','requested':len(ids),'successful':sum(s in snapshot['reports'] for s in ids),'complete':all(s in snapshot['reports'] for s in ids),'captured_at':now()}
+        if not snapshot['reports_collection']['complete']:
+            raise RuntimeError('Incomplete daily reports; previous public snapshot retained')
         snapshot['finished_at'] = now()
         tmp = args.private_dir / 'platform-private.tmp'
         tmp.write_text(json.dumps(snapshot, ensure_ascii=False), encoding='utf8')
