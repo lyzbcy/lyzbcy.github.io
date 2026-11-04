@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-03T12:45:03+08:00",
+  "generated_at": "2026-11-04T12:33:08+08:00",
   "overview": {
-    "total_sessions": 52,
+    "total_sessions": 53,
     "total_sessions_recent_4w": 5,
-    "avg_sessions_per_week": 2.3,
-    "total_sets": 581,
-    "total_volume": 206800.0,
+    "avg_sessions_per_week": 2.4,
+    "total_sets": 582,
+    "total_volume": 206822.5,
     "date_range": {
       "first": "2026-05-31",
-      "last": "2026-11-03"
+      "last": "2026-11-04"
     },
     "preferences": {
       "warmupSets": 2,
@@ -23,6 +23,18 @@
     "fun_fact": "相当于举起了 1.4 头蓝鲸 🐋"
   },
   "sessions": [
+    {
+      "date": "2026-11-04",
+      "split": "shoulders",
+      "split_label": "shoulders",
+      "total_sets": 1,
+      "total_volume": 22.5,
+      "exercises": [
+        "绳索侧平举"
+      ],
+      "duration_min": 0,
+      "note": "12:23开始"
+    },
     {
       "date": "2026-11-03",
       "split": "push",
@@ -1832,6 +1844,12 @@
       "percentage": 0.7
     },
     {
+      "group": "肩",
+      "label": "肩",
+      "total_volume": 22.5,
+      "percentage": 0.0
+    },
+    {
       "group": "abs",
       "label": "abs",
       "total_volume": 0.0,
@@ -1840,12 +1858,6 @@
     {
       "group": "三头",
       "label": "三头",
-      "total_volume": 0.0,
-      "percentage": 0.0
-    },
-    {
-      "group": "肩",
-      "label": "肩",
       "total_volume": 0.0,
       "percentage": 0.0
     }
@@ -1993,8 +2005,8 @@
     },
     {
       "week": "2026-W45",
-      "volume": 630.0,
-      "sessions": 17,
+      "volume": 652.5,
+      "sessions": 18,
       "is_current": true,
       "is_latest": true
     }
@@ -2162,13 +2174,13 @@
     },
     {
       "name": "绳索侧平举",
-      "total_sets": 8,
+      "total_sets": 9,
       "max_weight": 15,
       "max_reps": 20,
-      "last_date": "2026-11-03",
-      "last_weight": 0.0,
-      "last_reps": 16.0,
-      "total_volume": 575.0
+      "last_date": "2026-11-04",
+      "last_weight": 1.5,
+      "last_reps": 15.0,
+      "total_volume": 597.5
     },
     {
       "name": "哑铃弯举",
