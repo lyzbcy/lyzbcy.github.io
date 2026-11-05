@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-04T12:33:08+08:00",
+  "generated_at": "2026-11-05T12:40:00+08:00",
   "overview": {
-    "total_sessions": 53,
-    "total_sessions_recent_4w": 5,
+    "total_sessions": 54,
+    "total_sessions_recent_4w": 6,
     "avg_sessions_per_week": 2.4,
-    "total_sets": 582,
-    "total_volume": 206822.5,
+    "total_sets": 587,
+    "total_volume": 207034.0,
     "date_range": {
       "first": "2026-05-31",
-      "last": "2026-11-04"
+      "last": "2026-11-05"
     },
     "preferences": {
       "warmupSets": 2,
@@ -19,10 +19,24 @@
       "adjustmentNote": "训练状态比PR数据弱，推荐重量需适当下调"
     },
     "muscle_groups_count": 19,
-    "exercises_count": 173,
+    "exercises_count": 174,
     "fun_fact": "相当于举起了 1.4 头蓝鲸 🐋"
   },
   "sessions": [
+    {
+      "date": "2026-11-05",
+      "split": "pull",
+      "split_label": "拉日",
+      "total_sets": 5,
+      "total_volume": 211.5,
+      "exercises": [
+        "双头绳绳索面拉",
+        "自重引体向上",
+        "龙门架绳索二头弯举"
+      ],
+      "duration_min": 7,
+      "note": ""
+    },
     {
       "date": "2026-11-04",
       "split": "shoulders",
@@ -1751,7 +1765,7 @@
       "group": "chest",
       "label": "胸",
       "total_volume": 44172.0,
-      "percentage": 21.4
+      "percentage": 21.3
     },
     {
       "group": "quads",
@@ -1834,8 +1848,8 @@
     {
       "group": "unknown",
       "label": "unknown",
-      "total_volume": 2720.0,
-      "percentage": 1.3
+      "total_volume": 2931.5,
+      "percentage": 1.4
     },
     {
       "group": "upper_chest",
@@ -2005,8 +2019,8 @@
     },
     {
       "week": "2026-W45",
-      "volume": 652.5,
-      "sessions": 18,
+      "volume": 864.0,
+      "sessions": 23,
       "is_current": true,
       "is_latest": true
     }
@@ -2233,6 +2247,16 @@
       "total_volume": 2950.0
     },
     {
+      "name": "自重引体向上",
+      "total_sets": 7,
+      "max_weight": 0.0,
+      "max_reps": 6,
+      "last_date": "2026-11-05",
+      "last_weight": 0.0,
+      "last_reps": 3.0,
+      "total_volume": 0.0
+    },
+    {
       "name": "龙门架三头直杆下压",
       "total_sets": 6,
       "max_weight": 65,
@@ -2251,16 +2275,6 @@
       "last_weight": 80.0,
       "last_reps": 9,
       "total_volume": 4940.0
-    },
-    {
-      "name": "自重引体向上",
-      "total_sets": 6,
-      "max_weight": 0.0,
-      "max_reps": 6,
-      "last_date": "2026-11-03",
-      "last_weight": 0.0,
-      "last_reps": 6.0,
-      "total_volume": 0.0
     },
     {
       "name": "器械站姿胸飞鸟(中束)",
@@ -2321,6 +2335,16 @@
       "last_weight": 50.0,
       "last_reps": 11,
       "total_volume": 2315.0
+    },
+    {
+      "name": "龙门架绳索二头弯举",
+      "total_sets": 5,
+      "max_weight": 25.0,
+      "max_reps": 30.0,
+      "last_date": "2026-11-05",
+      "last_weight": 2.5,
+      "last_reps": 30.0,
+      "total_volume": 416.0
     },
     {
       "name": "坐姿腿屈伸",
@@ -2433,16 +2457,6 @@
       "total_volume": 1850.0
     },
     {
-      "name": "龙门架绳索二头弯举",
-      "total_sets": 4,
-      "max_weight": 25.0,
-      "max_reps": 22.0,
-      "last_date": "2026-11-02",
-      "last_weight": 0.0,
-      "last_reps": 22.0,
-      "total_volume": 341.0
-    },
-    {
       "name": "悍马分动式高位下拉",
       "total_sets": 3,
       "max_weight": 30,
@@ -2551,6 +2565,16 @@
       "last_weight": 86.0,
       "last_reps": 5,
       "total_volume": 840.0
+    },
+    {
+      "name": "双头绳绳索面拉",
+      "total_sets": 3,
+      "max_weight": 6.5,
+      "max_reps": 13.0,
+      "last_date": "2026-11-05",
+      "last_weight": 6.5,
+      "last_reps": 13.0,
+      "total_volume": 136.5
     },
     {
       "name": "牧师凳二头弯举（杠型未知）",
