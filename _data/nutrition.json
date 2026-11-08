@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-07T22:05:04.778566+08:00",
+  "generated_at": "2026-11-08T22:05:04.524226+08:00",
   "goals": {
-    "calories": 1965,
+    "calories": 1664,
     "water": 2000,
     "protein": 150
   },
@@ -13,10 +13,10 @@
       "harris": 1793,
       "katch": 1646
     },
-    "tdee": 2365,
+    "tdee": 2064,
     "bmr_floor": 1720,
-    "below_bmr": false,
-    "is_training_day": true,
+    "below_bmr": true,
+    "is_training_day": false,
     "deficit": 400
   },
   "overview": {
@@ -33,7 +33,7 @@
     "total_training_calories": 15446,
     "training_days": 55,
     "compliance": {
-      "calorie": 78,
+      "calorie": 88,
       "protein": 22,
       "water": 75
     }
@@ -399,7 +399,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 63.8,
+      "calorie_pct": 75.3,
       "protein_pct": 27.3,
       "water_pct": 80.0,
       "has_data": true
@@ -419,7 +419,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 74.2,
+      "calorie_pct": 87.6,
       "protein_pct": 38.7,
       "water_pct": 84.0,
       "has_data": true,
@@ -465,7 +465,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 86.9,
+      "calorie_pct": 102.6,
       "protein_pct": 71.0,
       "water_pct": 87.5,
       "has_data": true,
@@ -501,7 +501,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 84.9,
+      "calorie_pct": 100.2,
       "protein_pct": 59.5,
       "water_pct": 104.5,
       "has_data": true,
@@ -537,7 +537,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 93.2,
+      "calorie_pct": 110.0,
       "protein_pct": 62.2,
       "water_pct": 112.5,
       "has_data": true,
@@ -583,7 +583,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 109.0,
+      "calorie_pct": 128.7,
       "protein_pct": 59.9,
       "water_pct": 90.5,
       "has_data": true
@@ -603,7 +603,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 106.9,
+      "calorie_pct": 126.2,
       "protein_pct": 77.4,
       "water_pct": 161.5,
       "has_data": true,
@@ -649,7 +649,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 50.9,
+      "calorie_pct": 60.1,
       "protein_pct": 27.4,
       "water_pct": 110.0,
       "has_data": true
@@ -669,7 +669,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 79.5,
+      "calorie_pct": 93.9,
       "protein_pct": 70.6,
       "water_pct": 85.0,
       "has_data": true,
@@ -715,7 +715,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 115.2,
+      "calorie_pct": 136.1,
       "protein_pct": 71.9,
       "water_pct": 87.0,
       "has_data": true
@@ -735,7 +735,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 89.7,
+      "calorie_pct": 105.9,
       "protein_pct": 63.9,
       "water_pct": 125.0,
       "has_data": true,
@@ -781,7 +781,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 99.1,
+      "calorie_pct": 117.0,
       "protein_pct": 75.7,
       "water_pct": 90.5,
       "has_data": true
@@ -801,7 +801,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 95.2,
+      "calorie_pct": 112.4,
       "protein_pct": 80.3,
       "water_pct": 113.5,
       "has_data": true
@@ -821,7 +821,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 121.9,
+      "calorie_pct": 143.9,
       "protein_pct": 99.4,
       "water_pct": 90.0,
       "has_data": true
@@ -841,7 +841,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 105.6,
+      "calorie_pct": 124.7,
       "protein_pct": 73.7,
       "water_pct": 106.5,
       "has_data": true,
@@ -887,7 +887,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 96.3,
+      "calorie_pct": 113.7,
       "protein_pct": 56.1,
       "water_pct": 96.5,
       "has_data": true,
@@ -933,7 +933,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 108.1,
+      "calorie_pct": 127.6,
       "protein_pct": 65.5,
       "water_pct": 102.0,
       "has_data": true
@@ -953,7 +953,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 106.5,
+      "calorie_pct": 125.8,
       "protein_pct": 75.9,
       "water_pct": 101.0,
       "has_data": true
@@ -973,7 +973,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 116.2,
+      "calorie_pct": 137.2,
       "protein_pct": 89.9,
       "water_pct": 92.5,
       "has_data": true
@@ -993,7 +993,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 105.7,
+      "calorie_pct": 124.8,
       "protein_pct": 70.2,
       "water_pct": 107.5,
       "has_data": true,
@@ -1039,7 +1039,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 110.2,
+      "calorie_pct": 130.1,
       "protein_pct": 74.9,
       "water_pct": 140.8,
       "has_data": true,
@@ -1085,7 +1085,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 132.3,
+      "calorie_pct": 156.2,
       "protein_pct": 75.3,
       "water_pct": 85.0,
       "has_data": true
@@ -1105,7 +1105,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 117.3,
+      "calorie_pct": 138.5,
       "protein_pct": 83.3,
       "water_pct": 102.5,
       "has_data": true,
@@ -1151,7 +1151,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 115.7,
+      "calorie_pct": 136.6,
       "protein_pct": 65.6,
       "water_pct": 102.5,
       "has_data": true
@@ -1171,7 +1171,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 105.6,
+      "calorie_pct": 124.8,
       "protein_pct": 85.9,
       "water_pct": 116.5,
       "has_data": true,
@@ -1207,7 +1207,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 94.9,
+      "calorie_pct": 112.1,
       "protein_pct": 69.3,
       "water_pct": 116.5,
       "has_data": true,
@@ -1243,7 +1243,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 127.7,
+      "calorie_pct": 150.8,
       "protein_pct": 69.2,
       "water_pct": 91.0,
       "has_data": true
@@ -1263,7 +1263,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 53.4,
+      "calorie_pct": 63.0,
       "protein_pct": 33.7,
       "water_pct": 52.5,
       "has_data": true
@@ -1283,7 +1283,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 132.4,
+      "calorie_pct": 156.3,
       "protein_pct": 51.4,
       "water_pct": 97.5,
       "has_data": true
@@ -1303,7 +1303,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 115.8,
+      "calorie_pct": 136.7,
       "protein_pct": 87.7,
       "water_pct": 129.5,
       "has_data": true,
@@ -1349,7 +1349,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 103.3,
+      "calorie_pct": 122.0,
       "protein_pct": 58.2,
       "water_pct": 106.5,
       "has_data": true
@@ -1369,7 +1369,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 112.9,
+      "calorie_pct": 133.4,
       "protein_pct": 90.7,
       "water_pct": 120.5,
       "has_data": true,
@@ -1415,7 +1415,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 127.7,
+      "calorie_pct": 150.8,
       "protein_pct": 79.6,
       "water_pct": 114.5,
       "has_data": true
@@ -1435,7 +1435,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 67.1,
+      "calorie_pct": 79.2,
       "protein_pct": 36.7,
       "water_pct": 38.6,
       "has_data": true
@@ -1455,7 +1455,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 139.5,
+      "calorie_pct": 164.7,
       "protein_pct": 89.3,
       "water_pct": 91.0,
       "has_data": true,
@@ -1491,7 +1491,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 82.4,
+      "calorie_pct": 97.4,
       "protein_pct": 48.0,
       "water_pct": 114.0,
       "has_data": true,
@@ -1527,7 +1527,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 142.9,
+      "calorie_pct": 168.8,
       "protein_pct": 97.5,
       "water_pct": 82.5,
       "has_data": true
@@ -1547,7 +1547,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 114.0,
+      "calorie_pct": 134.7,
       "protein_pct": 87.7,
       "water_pct": 70.0,
       "has_data": true
@@ -1567,7 +1567,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 114.0,
+      "calorie_pct": 134.7,
       "protein_pct": 89.9,
       "water_pct": 50.0,
       "has_data": true,
@@ -1608,7 +1608,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 71.1,
+      "calorie_pct": 84.0,
       "protein_pct": 54.3,
       "water_pct": 31.5,
       "has_data": true,
@@ -1654,7 +1654,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 145.2,
+      "calorie_pct": 171.5,
       "protein_pct": 94.7,
       "water_pct": 89.0,
       "has_data": true,
@@ -1690,7 +1690,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 100.8,
+      "calorie_pct": 119.1,
       "protein_pct": 79.3,
       "water_pct": 70.0,
       "has_data": true
@@ -1710,7 +1710,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 105.6,
+      "calorie_pct": 124.8,
       "protein_pct": 75.5,
       "water_pct": 95.0,
       "has_data": true
@@ -1730,7 +1730,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 100.6,
+      "calorie_pct": 118.8,
       "protein_pct": 68.7,
       "water_pct": 92.5,
       "has_data": true
@@ -1750,7 +1750,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 76.0,
+      "calorie_pct": 89.7,
       "protein_pct": 89.3,
       "water_pct": 40.0,
       "has_data": true
@@ -1770,7 +1770,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 148.8,
+      "calorie_pct": 175.7,
       "protein_pct": 91.5,
       "water_pct": 90.0,
       "has_data": true
@@ -1790,7 +1790,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 24.5,
+      "calorie_pct": 29.0,
       "protein_pct": 32.8,
       "water_pct": 25.0,
       "has_data": true
@@ -1810,7 +1810,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 101.3,
+      "calorie_pct": 119.6,
       "protein_pct": 62.3,
       "water_pct": 55.0,
       "has_data": true
@@ -1830,7 +1830,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 94.2,
+      "calorie_pct": 111.2,
       "protein_pct": 54.8,
       "water_pct": 50.0,
       "has_data": true
@@ -1850,7 +1850,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 116.0,
+      "calorie_pct": 137.0,
       "protein_pct": 76.2,
       "water_pct": 101.5,
       "has_data": true,
@@ -1891,7 +1891,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 93.4,
+      "calorie_pct": 110.3,
       "protein_pct": 71.1,
       "water_pct": 30.0,
       "has_data": true,
@@ -1927,7 +1927,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 93.2,
+      "calorie_pct": 110.0,
       "protein_pct": 48.9,
       "water_pct": 60.0,
       "has_data": true
@@ -1947,7 +1947,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 73.6,
+      "calorie_pct": 87.0,
       "protein_pct": 54.1,
       "water_pct": 19.5,
       "has_data": true
@@ -1967,7 +1967,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 86.4,
+      "calorie_pct": 102.0,
       "protein_pct": 49.3,
       "water_pct": 86.0,
       "has_data": true
@@ -1987,7 +1987,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 74.7,
+      "calorie_pct": 88.2,
       "protein_pct": 43.8,
       "water_pct": 87.5,
       "has_data": true,
@@ -2023,7 +2023,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 94.1,
+      "calorie_pct": 111.1,
       "protein_pct": 73.6,
       "water_pct": 67.5,
       "has_data": true
@@ -2043,7 +2043,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 91.7,
+      "calorie_pct": 108.2,
       "protein_pct": 62.2,
       "water_pct": 81.5,
       "has_data": true,
@@ -2089,7 +2089,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 97.9,
+      "calorie_pct": 115.6,
       "protein_pct": 77.5,
       "water_pct": 63.6,
       "has_data": true
@@ -2129,7 +2129,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 76.9,
+      "calorie_pct": 90.8,
       "protein_pct": 55.7,
       "water_pct": 106.5,
       "has_data": true,
@@ -2175,7 +2175,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 28.1,
+      "calorie_pct": 33.2,
       "protein_pct": 44.8,
       "water_pct": 108.0,
       "has_data": true
@@ -2195,7 +2195,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 84.1,
+      "calorie_pct": 99.3,
       "protein_pct": 72.4,
       "water_pct": 116.5,
       "has_data": true
@@ -2215,7 +2215,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 95.3,
+      "calorie_pct": 112.6,
       "protein_pct": 78.3,
       "water_pct": 135.5,
       "has_data": true
@@ -2235,7 +2235,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 125.3,
+      "calorie_pct": 148.0,
       "protein_pct": 115.8,
       "water_pct": 127.7,
       "has_data": true
@@ -2255,7 +2255,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 64.3,
+      "calorie_pct": 75.9,
       "protein_pct": 52.5,
       "water_pct": 27.6,
       "has_data": true
@@ -2275,7 +2275,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 93.3,
+      "calorie_pct": 110.2,
       "protein_pct": 65.4,
       "water_pct": 100.0,
       "has_data": true
@@ -2295,7 +2295,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 111.9,
+      "calorie_pct": 132.2,
       "protein_pct": 75.4,
       "water_pct": 107.5,
       "has_data": true
@@ -2315,7 +2315,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 99.0,
+      "calorie_pct": 116.9,
       "protein_pct": 68.6,
       "water_pct": 84.0,
       "has_data": true
@@ -2335,7 +2335,7 @@
         "has_creatine": false,
         "has_protein": false
       },
-      "calorie_pct": 18.2,
+      "calorie_pct": 21.5,
       "protein_pct": 14.0,
       "water_pct": 15.0,
       "has_data": true
@@ -2390,36 +2390,12 @@
   "status": {
     "has_today": false,
     "has_yesterday": false,
-    "today": "2026-11-07",
+    "today": "2026-11-08",
     "is_active": false,
-    "is_training_day": true
+    "is_training_day": false
   },
   "health_score": {
-    "today": {
-      "date": "2026-11-07",
-      "nutrition_score": 0,
-      "nutrition_detail": "热量 0/1965 kcal (0/20); 蛋白 0/150g (0/15); 饮水 0/2000ml (0/15)",
-      "exercise_score": 30,
-      "exercise_detail": "训练量 6510kg (20/20); 组数 16 (10/10)",
-      "bonus_score": 9,
-      "bonus_detail": "数据完整性 (2/10); 体脂趋势 -1.2% (7/10)",
-      "total_score": 39,
-      "grade": "⚠️ C",
-      "calories_in": 0,
-      "calories_target": 1965,
-      "protein_in": 0,
-      "protein_target": 150,
-      "water_in": 0,
-      "water_target": 2000,
-      "training_sets": 16,
-      "training_volume": 6510.0,
-      "training_cal": 538,
-      "training_duration_min": 95.0,
-      "bodyfat_pct": 20.7,
-      "is_training_day": true,
-      "bmr_floor": 1720,
-      "below_bmr": false
-    },
+    "today": null,
     "history": [
       {
         "date": "2026-10-30",
@@ -2471,9 +2447,9 @@
         "exercise": "训练量 6510kg (20/20); 组数 16 (10/10)"
       }
     ],
-    "range_start": "2026-10-25",
-    "range_end": "2026-11-07",
-    "exported_at": "2026-11-07T22:05:04.764512"
+    "range_start": "2026-10-26",
+    "range_end": "2026-11-08",
+    "exported_at": "2026-11-08T22:05:04.508461"
   },
   "food_library": {
     "items": [
