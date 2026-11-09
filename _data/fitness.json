@@ -5,7 +5,7 @@
     "total_sessions_recent_4w": 8,
     "avg_sessions_per_week": 2.4,
     "total_sets": 612,
-    "total_volume": 214915.5,
+    "total_volume": 214033.9,
     "date_range": {
       "first": "2026-05-31",
       "last": "2026-11-09"
@@ -28,7 +28,7 @@
       "split": "pull",
       "split_label": "拉日",
       "total_sets": 9,
-      "total_volume": 1371.5,
+      "total_volume": 489.9,
       "exercises": [
         "双头绳绳索三头下压",
         "双头绳绳索面拉",
@@ -36,7 +36,7 @@
         "哑铃飞鸟",
         "自重引体向上"
       ],
-      "duration_min": 1,
+      "duration_min": 17,
       "note": ""
     },
     {
@@ -627,7 +627,7 @@
       "split": "legs",
       "split_label": "腿日",
       "total_sets": 1,
-      "total_volume": 0.0,
+      "total_volume": 0,
       "exercises": [
         "自重深蹲"
       ],
@@ -1801,14 +1801,14 @@
     {
       "group": "chest",
       "label": "胸",
-      "total_volume": 44952.0,
-      "percentage": 20.8
+      "total_volume": 45224.2,
+      "percentage": 21.1
     },
     {
       "group": "quads",
       "label": "股四头肌",
       "total_volume": 29926.0,
-      "percentage": 13.9
+      "percentage": 14.0
     },
     {
       "group": "mid_back",
@@ -1826,7 +1826,7 @@
       "group": "back",
       "label": "背",
       "total_volume": 13647.0,
-      "percentage": 6.3
+      "percentage": 6.4
     },
     {
       "group": "lats",
@@ -1861,8 +1861,8 @@
     {
       "group": "biceps",
       "label": "肱二头肌",
-      "total_volume": 8060.0,
-      "percentage": 3.8
+      "total_volume": 8277.7,
+      "percentage": 3.9
     },
     {
       "group": "rear_delt",
@@ -1877,15 +1877,15 @@
       "percentage": 2.7
     },
     {
-      "group": "unknown",
-      "label": "unknown",
-      "total_volume": 4303.0,
-      "percentage": 2.0
-    },
-    {
       "group": "inner_thigh",
       "label": "大腿内侧",
       "total_volume": 2975.0,
+      "percentage": 1.4
+    },
+    {
+      "group": "unknown",
+      "label": "unknown",
+      "total_volume": 2931.5,
       "percentage": 1.4
     },
     {
@@ -2069,7 +2069,7 @@
     },
     {
       "week": "2026-W46",
-      "volume": 1371.5,
+      "volume": 489.9,
       "sessions": 9,
       "is_current": true,
       "is_latest": true
@@ -2229,10 +2229,10 @@
     {
       "name": "自重引体向上",
       "total_sets": 10,
-      "max_weight": 0.0,
+      "max_weight": 0,
       "max_reps": 7.0,
       "last_date": "2026-11-09",
-      "last_weight": 0.0,
+      "last_weight": 0,
       "last_reps": 7.0,
       "total_volume": 0.0
     },
@@ -2359,7 +2359,7 @@
     {
       "name": "自重深蹲",
       "total_sets": 5,
-      "max_weight": 0.0,
+      "max_weight": 0,
       "max_reps": 50,
       "last_date": "2026-08-29",
       "last_weight": 0,
@@ -2402,9 +2402,9 @@
       "max_weight": 6.5,
       "max_reps": 15.0,
       "last_date": "2026-11-09",
-      "last_weight": 6.5,
+      "last_weight": 0,
       "last_reps": 15.0,
-      "total_volume": 290.5
+      "total_volume": 136.5
     },
     {
       "name": "坐姿腿屈伸",
@@ -2452,7 +2452,7 @@
       "max_weight": 10,
       "max_reps": 30,
       "last_date": "2026-10-06",
-      "last_weight": 0.0,
+      "last_weight": 0,
       "last_reps": 18,
       "total_volume": 100.0
     },
@@ -2479,12 +2479,12 @@
     {
       "name": "哑铃飞鸟",
       "total_sets": 4,
-      "max_weight": 40.0,
+      "max_weight": 20.0,
       "max_reps": 17,
       "last_date": "2026-11-09",
-      "last_weight": 40.0,
+      "last_weight": 18.1436948,
       "last_reps": 15.0,
-      "total_volume": 1390.0
+      "total_volume": 1062.2
     },
     {
       "name": "对握引体向上",
@@ -2492,7 +2492,7 @@
       "max_weight": 0,
       "max_reps": 9,
       "last_date": "2026-10-31",
-      "last_weight": 0.0,
+      "last_weight": 0,
       "last_reps": 5,
       "total_volume": 0.0
     },
@@ -2729,20 +2729,20 @@
     {
       "name": "反向悬空引体向上",
       "total_sets": 2,
-      "max_weight": 0.0,
+      "max_weight": 0,
       "max_reps": 6,
       "last_date": "2026-08-02",
-      "last_weight": 0.0,
+      "last_weight": 0,
       "last_reps": 6,
       "total_volume": 0.0
     },
     {
       "name": "悬垂举腿",
       "total_sets": 2,
-      "max_weight": 0.0,
+      "max_weight": 0,
       "max_reps": 21,
       "last_date": "2026-08-02",
-      "last_weight": 0.0,
+      "last_weight": 0,
       "last_reps": 21,
       "total_volume": 0.0
     },
@@ -2862,7 +2862,7 @@
       "max_weight": 0,
       "max_reps": 7,
       "last_date": "2026-09-27",
-      "last_weight": 0.0,
+      "last_weight": 0,
       "last_reps": 5,
       "total_volume": 0.0
     },
@@ -3089,12 +3089,12 @@
     {
       "name": "哑铃二头弯举",
       "total_sets": 2,
-      "max_weight": 40.0,
+      "max_weight": 18.1436948,
       "max_reps": 12.0,
       "last_date": "2026-11-09",
-      "last_weight": 40.0,
+      "last_weight": 18.1436948,
       "last_reps": 12.0,
-      "total_volume": 571.0
+      "total_volume": 308.7
     },
     {
       "name": "坐姿器械三头下压（挂杠铃片）",
@@ -3109,10 +3109,10 @@
     {
       "name": "双头绳绳索下压",
       "total_sets": 2,
-      "max_weight": 0.0,
+      "max_weight": 0,
       "max_reps": 11.0,
       "last_date": "2026-11-02",
-      "last_weight": 0.0,
+      "last_weight": 0,
       "last_reps": 11.0,
       "total_volume": 0.0
     },
@@ -3129,10 +3129,10 @@
     {
       "name": "双头绳面拉",
       "total_sets": 2,
-      "max_weight": 0.0,
+      "max_weight": 0,
       "max_reps": 20.0,
       "last_date": "2026-11-03",
-      "last_weight": 0.0,
+      "last_weight": 0,
       "last_reps": 20.0,
       "total_volume": 0.0
     },
@@ -3149,12 +3149,12 @@
     {
       "name": "双头绳绳索三头下压",
       "total_sets": 2,
-      "max_weight": 6.5,
+      "max_weight": 0,
       "max_reps": 12.0,
       "last_date": "2026-11-09",
-      "last_weight": 6.5,
+      "last_weight": 0,
       "last_reps": 12.0,
-      "total_volume": 137.5
+      "total_volume": 0.0
     },
     {
       "name": "反向山羊挺身静态支撑",
@@ -3449,30 +3449,30 @@
     {
       "name": "引体向上（正握正常间距，半程）",
       "total_sets": 1,
-      "max_weight": 0.0,
+      "max_weight": 0,
       "max_reps": 9,
       "last_date": "2026-09-22",
-      "last_weight": 0.0,
+      "last_weight": 0,
       "last_reps": 9,
       "total_volume": 0.0
     },
     {
       "name": "弹力绳辅助引体向上",
       "total_sets": 1,
-      "max_weight": 0.0,
+      "max_weight": 0,
       "max_reps": 5,
       "last_date": "2026-09-27",
-      "last_weight": 0.0,
+      "last_weight": 0,
       "last_reps": 5,
       "total_volume": 0.0
     },
     {
       "name": "对卧窄距引体向上",
       "total_sets": 1,
-      "max_weight": 0.0,
+      "max_weight": 0,
       "max_reps": 10,
       "last_date": "2026-09-27",
-      "last_weight": 0.0,
+      "last_weight": 0,
       "last_reps": 10,
       "total_volume": 0.0
     },
@@ -3519,10 +3519,10 @@
     {
       "name": "对卧窄距引体向上（自重）",
       "total_sets": 1,
-      "max_weight": 0.0,
+      "max_weight": 0,
       "max_reps": 2,
       "last_date": "2026-10-06",
-      "last_weight": 0.0,
+      "last_weight": 0,
       "last_reps": 2,
       "total_volume": 0.0
     },
@@ -3629,10 +3629,10 @@
     {
       "name": "史密斯空杆俯身划船（半蹲贴腿滑杠）",
       "total_sets": 1,
-      "max_weight": 0.0,
+      "max_weight": 0,
       "max_reps": 12,
       "last_date": "2026-10-06",
-      "last_weight": 0.0,
+      "last_weight": 0,
       "last_reps": 12,
       "total_volume": 0.0
     },
@@ -3719,10 +3719,10 @@
     {
       "name": "器械悬垂举腿（自重）",
       "total_sets": 1,
-      "max_weight": 0.0,
+      "max_weight": 0,
       "max_reps": 22,
       "last_date": "2026-10-06",
-      "last_weight": 0.0,
+      "last_weight": 0,
       "last_reps": 22,
       "total_volume": 0.0
     },
@@ -3769,10 +3769,10 @@
     {
       "name": "绳索下压（双头绳）",
       "total_sets": 1,
-      "max_weight": 0.0,
+      "max_weight": 0,
       "max_reps": 10,
       "last_date": "2026-10-30",
-      "last_weight": 0.0,
+      "last_weight": 0,
       "last_reps": 10,
       "total_volume": 0.0
     },
