@@ -129,20 +129,16 @@
 <div class="trend-notes">⚠️ {{ ov.preferences.currentStatus }} — {{ ov.preferences.adjustmentNote }}</div>
 {%- endif -%}
 
-<!-- ── 个人记录 Top 15 ── -->
-<div class="section-title"><span>🏆</span> 个人记录 Top 15</div>
+<!-- ── 个人记录 ── -->
+<div class="section-title"><span>🏆</span> 个人纪录 · 最近达成</div>
 <div class="pr-list">
-{%- assign sorted_prs = prs | sort: "volume" | reverse -%}
-{%- assign max_pr_vol = sorted_prs[0].volume | plus: 0 -%}
-{%- for pr in sorted_prs limit: 15 -%}
-  {%- assign vol_pct = pr.volume | times: 100.0 | divided_by: max_pr_vol | round: 0 -%}
+{%- for pr in prs limit: 15 -%}
   <div class="pr-item">
-    <div class="pr-rank">{{ forloop.index }}</div>
     <div class="pr-info">
-      <div class="pr-exercise">{{ pr.exercise }}</div>
-      <div class="pr-detail">{{ pr.weight }}kg × {{ pr.reps }}{% if pr.note != "" and pr.note %} · {{ pr.note }}{% endif %}</div>
+      <div class="pr-exercise">{{ pr.exercise | escape }}</div>
+      <div class="pr-detail">{% if pr.detail and pr.detail != "" %}{{ pr.detail | escape }}{% else %}{{ pr.weight }} kg × {{ pr.reps }} 次{% endif %}{% if pr.note and pr.note != "" %} · {{ pr.note | escape }}{% endif %}</div>
     </div>
-    <div class="pr-volume">{{ pr.volume }}kg</div>
+    {% if pr.date and pr.date != "" %}<div class="pr-volume">{{ pr.date }}</div>{% endif %}
   </div>
 {%- endfor -%}
 </div>
