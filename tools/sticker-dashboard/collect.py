@@ -4,6 +4,8 @@ Raw API snapshots stay in --private-dir, outside the blog repository.
 """
 import argparse
 from collections import Counter
+from concurrent.futures import ThreadPoolExecutor
+import time
 from datetime import datetime, timedelta, timezone
 import io
 import json
@@ -33,7 +35,7 @@ pkg.resources_path = lambda: args.engine_src / 'sticker_engine/resources'
 sys.modules['sticker_engine'] = pkg
 from sticker_engine.publish.browser import BrowserSession
 from sticker_engine.publish.config import PublishConfig
-from sticker_engine.publish.platform_data import LIST_URL, parse_list, read_detail, read_json
+from sticker_engine.publish.platform_data import LIST_URL, PlatformDataError, parse_list, read_detail, read_json
 from sticker_engine.publish.parallel_read import iter_details_parallel
 from sticker_engine.publish.sticker_metrics import parse_report, save_snapshot
 from sticker_engine.config.paths import resolve_paths, current_platform
@@ -51,11 +53,30 @@ with sync_playwright() as pw:
     anonymous = pw.request.new_context(extra_http_headers={'Referer':'https://lyzbcy.github.io/'})
     try:
         page = session.start(headless=True)
-        if not session.can_reuse_session and not session.ensure_login(page):
-            raise RuntimeError('WeChat login failed; previous public snapshot retained')
-        body = read_json(page, LIST_URL)
-        rows = parse_list(body)
-        snapshot['list'] = body
+        body = None
+        if session.can_reuse_session:
+            try:
+                body = read_json(page, LIST_URL)
+            except PlatformDataError:
+                pass
+        if body is None:
+            if not session.ensure_login(page):
+                raise RuntimeError('WeChat login failed; previous public snapshot retained')
+            body = read_json(page, LIST_URL)
+        source_rows = body['List']
+        if len({r['StikerID'] for r in source_rows}) != len(source_rows):
+            raise ValueError('Duplicate platform IDs')
+        def empty_placeholder(row):
+            return (row.get('Status') == 0 and row.get('Name') == '' and not row.get('OpenTime')
+                    and all(str(row.get(k)) == '0' for k in
+                            ('TotalSendNum','TotalDownloadNum','SendNum','DownloadNum')))
+        rows = parse_list({'base_resp': body['base_resp'],
+                           'List': [r for r in source_rows if not empty_placeholder(r)]})
+        snapshot['source_list_count'] = len(source_rows)
+        snapshot['excluded_untitled_placeholder_count'] = len(source_rows)-len(rows)
+        snapshot['list'] = {'base_resp': body['base_resp'], 'List': rows}
+        print(json.dumps({'source_rows':len(source_rows),'named_albums':len(rows),
+                          'online':sum(r['Status']==7 for r in rows)}),flush=True)
         selected = sorted((r for r in rows if r['Status'] == 7),
                           key=lambda r: (int(r['TotalSendNum']), int(r['TotalDownloadNum'])), reverse=True)[:10]
         for rank, row in enumerate(selected):
@@ -108,23 +129,54 @@ with sync_playwright() as pw:
         paths=resolve_paths(current_platform())
         binding=json.loads((paths.user_data/'resource_library/device.json').read_text('utf8'))
         account=binding['account_id']
-        failures=0
-        for n,row in enumerate(online,1):
+        state = page.context.storage_state()
+        def fetch_reports(batch):
+            # A separate request context per worker; the browser login stays in memory.
+            from playwright.sync_api import sync_playwright
+            completed = []
+            with sync_playwright() as worker:
+                api = worker.request.new_context(storage_state=state)
+                try:
+                    for row in batch:
+                        sid = row['StikerID']
+                        url = 'https://sticker.weixin.qq.com/cgi-bin/mmemoticon-bin/stikerreport?stikerid=' + quote(sid) + '&f=json'
+                        for attempt in range(3):
+                            response = api.get(url, timeout=15000)
+                            try:
+                                if response.status in (429,503):
+                                    raise RuntimeError('Daily reports throttled; retained previous public data')
+                                report = response.json()
+                                if response.ok and report.get('base_resp',{}).get('ret') == 0:
+                                    completed.append((sid, report))
+                                    break
+                            finally:
+                                response.dispose()
+                            if attempt == 2:
+                                raise RuntimeError('Daily report request failed: '+sid)
+                            time.sleep(.35)
+                finally:
+                    api.dispose()
+            return completed
+        work = [r for r in online if r['StikerID'] not in snapshot['reports']]
+        with ThreadPoolExecutor(max_workers=3) as workers:
+            for offset in range(0, len(work), 30):
+                group=work[offset:offset+30]
+                for result in workers.map(fetch_reports,[group[i::3] for i in range(3)]):
+                    snapshot['reports'].update(result)
+                print(json.dumps({'daily_reports':len(snapshot['reports']),'scope':len(online)}),flush=True)
+        for row in online:
             sid=row['StikerID']
-            try:
-                report=snapshot['reports'].get(sid) or read_json(page,'https://sticker.weixin.qq.com/cgi-bin/mmemoticon-bin/stikerreport?stikerid='+quote(sid)+'&f=json')
-                parsed=parse_report(report,snapshot['details'][sid],sid,row['Name'],account)
-                current=json.loads((paths.user_data/'resource_library/device.json').read_text('utf8'))
-                if current['account_id']!=account:raise RuntimeError('Bound account changed')
-                save_snapshot(paths.user_data,account,parsed)
-                snapshot['reports'][sid]=report
-                failures=0
-            except Exception as exc:
-                snapshot['errors'].append({'id':sid,'kind':'daily_report','error':type(exc).__name__})
-                failures+=1
-                if failures>=3:raise RuntimeError('Three consecutive daily report failures; retain previous public snapshot') from exc
-            if n%25==0 or n==len(online):
-                print(json.dumps({'daily_reports':n,'scope':len(online),'failures':len(snapshot['errors'])}),flush=True)
+            report=snapshot['reports'][sid]
+            detail=snapshot['details'][sid]
+            if report.get('Summary',{}).get('StikerID') != sid:
+                raise RuntimeError('Daily report ID mismatch: '+sid)
+            if report.get('Report') == []:
+                # A successful empty report has no single-sticker data to publish.
+                continue
+            parsed=parse_report(report,detail,sid,row['Name'],account)
+            current=json.loads((paths.user_data/'resource_library/device.json').read_text('utf8'))
+            if current['account_id']!=account:raise RuntimeError('Bound account changed')
+            save_snapshot(paths.user_data,account,parsed)
         snapshot['reports_collection']={'scope':'all_online','requested':len(ids),'successful':sum(s in snapshot['reports'] for s in ids),'complete':all(s in snapshot['reports'] for s in ids),'captured_at':now()}
         if not snapshot['reports_collection']['complete']:
             raise RuntimeError('Incomplete daily reports; previous public snapshot retained')
