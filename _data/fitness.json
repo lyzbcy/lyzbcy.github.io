@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-09T12:43:19+08:00",
+  "generated_at": "2026-11-11T12:57:01+08:00",
   "overview": {
-    "total_sessions": 56,
-    "total_sessions_recent_4w": 8,
+    "total_sessions": 57,
+    "total_sessions_recent_4w": 9,
     "avg_sessions_per_week": 2.4,
-    "total_sets": 612,
-    "total_volume": 217395.4,
+    "total_sets": 619,
+    "total_volume": 218426.8,
     "date_range": {
       "first": "2026-05-31",
-      "last": "2026-11-09"
+      "last": "2026-11-11"
     },
     "preferences": {
       "warmupSets": 2,
@@ -19,10 +19,26 @@
       "adjustmentNote": "训练状态比PR数据弱，推荐重量需适当下调"
     },
     "muscle_groups_count": 20,
-    "exercises_count": 183,
-    "fun_fact": "相当于举起了 1.4 头蓝鲸 🐋"
+    "exercises_count": 184,
+    "fun_fact": "相当于举起了 1.5 头蓝鲸 🐋"
   },
   "sessions": [
+    {
+      "date": "2026-11-11",
+      "split": "push",
+      "split_label": "推日",
+      "total_sets": 7,
+      "total_volume": 1031.4,
+      "exercises": [
+        "史密斯卧推",
+        "哑铃侧平举",
+        "引体向上",
+        "悬垂举腿",
+        "绳索侧平举"
+      ],
+      "duration_min": 27,
+      "note": ""
+    },
     {
       "date": "2026-11-09",
       "split": "pull",
@@ -1166,7 +1182,7 @@
       "note": "上厕所间隙",
       "detail": "",
       "date": "",
-      "volume": 0.0
+      "volume": 0
     },
     {
       "exercise": "罗马椅侧腹",
@@ -1416,7 +1432,7 @@
       "note": "固定式悬垂举腿（双臂撑在软垫，背后有靠背）",
       "detail": "",
       "date": "",
-      "volume": 0.0
+      "volume": 0
     },
     {
       "exercise": "悍马分动式高位下拉",
@@ -1916,7 +1932,7 @@
       "note": "第一组，身体反向悬挂大剪刀，整个人悬浮拉上去「中国人会飞」视频素材",
       "detail": "",
       "date": "",
-      "volume": 0.0
+      "volume": 0
     },
     {
       "exercise": "反向山羊挺身静态支撑",
@@ -2023,14 +2039,14 @@
     {
       "group": "chest",
       "label": "胸",
-      "total_volume": 44612.0,
-      "percentage": 20.5
+      "total_volume": 45462.0,
+      "percentage": 20.8
     },
     {
       "group": "quads",
       "label": "股四头肌",
       "total_volume": 29926.0,
-      "percentage": 13.8
+      "percentage": 13.7
     },
     {
       "group": "mid_back",
@@ -2042,7 +2058,7 @@
       "group": "glutes",
       "label": "臀",
       "total_volume": 17580.0,
-      "percentage": 8.1
+      "percentage": 8.0
     },
     {
       "group": "lateral_delt",
@@ -2054,7 +2070,7 @@
       "group": "back",
       "label": "背",
       "total_volume": 13647.0,
-      "percentage": 6.3
+      "percentage": 6.2
     },
     {
       "group": "lats",
@@ -2072,7 +2088,7 @@
       "group": "triceps",
       "label": "肱三头肌",
       "total_volume": 11008.8,
-      "percentage": 5.1
+      "percentage": 5.0
     },
     {
       "group": "shoulders",
@@ -2107,8 +2123,8 @@
     {
       "group": "unknown",
       "label": "unknown",
-      "total_volume": 2481.5,
-      "percentage": 1.1
+      "total_volume": 2662.9,
+      "percentage": 1.2
     },
     {
       "group": "legs",
@@ -2291,8 +2307,8 @@
     },
     {
       "week": "2026-W46",
-      "volume": 2326.3,
-      "sessions": 9,
+      "volume": 3357.8,
+      "sessions": 16,
       "is_current": true,
       "is_latest": true
     }
@@ -2300,13 +2316,13 @@
   "exercises": [
     {
       "name": "史密斯卧推",
-      "total_sets": 23,
+      "total_sets": 25,
       "max_weight": 80.0,
-      "max_reps": 12,
-      "last_date": "2026-10-06",
-      "last_weight": 70.0,
-      "last_reps": 12,
-      "total_volume": 8435.0
+      "max_reps": 18.0,
+      "last_date": "2026-11-11",
+      "last_weight": 55.0,
+      "last_reps": 18.0,
+      "total_volume": 9285.0
     },
     {
       "name": "坐姿腿弯举",
@@ -2410,12 +2426,12 @@
     },
     {
       "name": "引体向上",
-      "total_sets": 12,
+      "total_sets": 13,
       "max_weight": 0,
       "max_reps": 8,
-      "last_date": "2026-09-08",
+      "last_date": "2026-11-11",
       "last_weight": 0,
-      "last_reps": 8,
+      "last_reps": 5.0,
       "total_volume": 0.0
     },
     {
@@ -2449,6 +2465,16 @@
       "total_volume": 6157.0
     },
     {
+      "name": "绳索侧平举",
+      "total_sets": 10,
+      "max_weight": 15.75,
+      "max_reps": 20,
+      "last_date": "2026-11-11",
+      "last_weight": 0,
+      "last_reps": 9.0,
+      "total_volume": 909.4
+    },
+    {
       "name": "自重引体向上",
       "total_sets": 10,
       "max_weight": 0,
@@ -2467,16 +2493,6 @@
       "last_weight": 60,
       "last_reps": 6,
       "total_volume": 2885.0
-    },
-    {
-      "name": "绳索侧平举",
-      "total_sets": 9,
-      "max_weight": 15.75,
-      "max_reps": 20,
-      "last_date": "2026-11-04",
-      "last_weight": 1.5,
-      "last_reps": 15.0,
-      "total_volume": 909.4
     },
     {
       "name": "哑铃弯举",
@@ -2687,6 +2703,16 @@
       "last_weight": 25,
       "last_reps": 20,
       "total_volume": 1850.0
+    },
+    {
+      "name": "悬垂举腿",
+      "total_sets": 4,
+      "max_weight": 0,
+      "max_reps": 21,
+      "last_date": "2026-11-11",
+      "last_weight": 0,
+      "last_reps": 10.0,
+      "total_volume": 0.0
     },
     {
       "name": "坐姿蹬腿训练器",
@@ -2956,16 +2982,6 @@
       "last_date": "2026-08-02",
       "last_weight": 0,
       "last_reps": 6,
-      "total_volume": 0.0
-    },
-    {
-      "name": "悬垂举腿",
-      "total_sets": 2,
-      "max_weight": 0,
-      "max_reps": 21,
-      "last_date": "2026-08-02",
-      "last_weight": 0,
-      "last_reps": 21,
       "total_volume": 0.0
     },
     {
@@ -4127,6 +4143,16 @@
       "last_weight": 45.0,
       "last_reps": 12.0,
       "total_volume": 540.0
+    },
+    {
+      "name": "哑铃侧平举",
+      "total_sets": 1,
+      "max_weight": 9.0718474,
+      "max_reps": 20.0,
+      "last_date": "2026-11-11",
+      "last_weight": 9.0718474,
+      "last_reps": 20.0,
+      "total_volume": 181.4
     }
   ],
   "nutrition_link": {
