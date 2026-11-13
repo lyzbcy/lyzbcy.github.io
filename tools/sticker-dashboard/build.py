@@ -97,6 +97,37 @@ def build(private_dir):
                        'preview_count':len(previews),'stickers':stickers if previews else [],
                        'sticker_count':len(stickers),'detail_url':shard_url,
                        'wechat_url': (detail.get('WxappJumpUrl') or None) if previews else None})
+    # 历史保留：平台单图日报只含最近统计日；旧日期逐条并入新导出，不整体覆盖。
+    # 同(专辑,单图,统计日)以新报告为准；统计日最多保留 31 个（约一个月滚动窗口）。
+    daily_target = ROOT / 'assets/data/sticker-daily.json'
+    merged_rows = list(single_rows)
+    ordered_dates = list(report_dates.keys())
+    if daily_target.exists():
+        try:
+            prev = json.loads(daily_target.read_text('utf8'))
+            prev_ids = list(prev.get('album_ids', []))
+            prev_dates = list(prev.get('date_labels', []))
+            current_keys = {(r[0], r[1], r[3]) for r in single_rows}
+            for r in prev.get('rows', []):
+                ai, idx, meaning, di, sends, preview = r
+                if not (isinstance(ai, int) and isinstance(di, int)):
+                    continue
+                if ai >= len(prev_ids) or di >= len(prev_dates):
+                    continue
+                sid, date = prev_ids[ai], prev_dates[di]
+                if (sid, idx, date) in current_keys:
+                    continue
+                merged_rows.append([sid, idx, meaning, date, sends, preview])
+                if date not in ordered_dates:
+                    ordered_dates.append(date)
+        except (ValueError, KeyError, TypeError, OSError):
+            pass
+    if len(ordered_dates) > 31:
+        keep = set(ordered_dates[:31])
+        merged_rows = [r for r in merged_rows if r[3] in keep]
+        ordered_dates = ordered_dates[:31]
+    single_rows = merged_rows
+    report_dates = Counter(r[3] for r in single_rows)
     albums.sort(key=lambda r:(-(r['sends'] or 0),-(r['downloads'] or 0),r['id']))
     # Preserve a small history of comparable full-list observations, never invent growth.
     data_path=ROOT/'assets/data/sticker-dashboard.json'
