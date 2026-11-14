@@ -177,6 +177,38 @@ with sync_playwright() as pw:
             current=json.loads((paths.user_data/'resource_library/device.json').read_text('utf8'))
             if current['account_id']!=account:raise RuntimeError('Bound account changed')
             save_snapshot(paths.user_data,account,parsed)
+        # 收益明细：incomepage 分页拉全（每套赞赏/热度），失败不阻断主采集
+        try:
+            income_url = 'https://sticker.weixin.qq.com/cgi-bin/mmemoticon-bin/incomepage'
+            start_ts, end_ts = int(time.time()), int(time.time()) + 366 * 86400
+            income_list, page_num, total_pages = [], 1, 1
+            income_summary = {}
+            while page_num <= total_pages and page_num <= 400:
+                resp = page.context.request.post(
+                    income_url, timeout=20000,
+                    multipart={'ReqType': 'all', 'StartTime': str(start_ts),
+                               'EndTime': str(end_ts), 'PageNum': str(page_num),
+                               'PageLimit': '10'})
+                body = resp.json()
+                if resp.status != 200 or body.get('base_resp', {}).get('ret') != 0:
+                    raise RuntimeError('incomepage ret != 0')
+                lst = body.get('StikerIncomeList', [])
+                income_list.extend(lst)
+                income_summary = {'total_reward_cents': body.get('TotalReward'),
+                                  'total_hot': body.get('TotalHot'),
+                                  'total_unaccounted_cents': body.get('TotalUnaccounted'),
+                                  'total_pages': total_pages}
+                total_pages = int(body.get('TotalPageNum') or 1)
+                page_num += 1
+            if page_num % 20 == 1:
+                pass
+            print(json.dumps({'income_pages': page_num - 1, 'income_records': len(income_list)}), flush=True)
+            snapshot['income'] = {'summary': income_summary, 'list': income_list,
+                                  'captured_at': now()}
+        except Exception as exc:
+            snapshot['income'] = {'error': type(exc).__name__ + ': ' + str(exc)[:80],
+                                  'captured_at': now()}
+            print(json.dumps({'income_error': str(exc)[:80]}), flush=True)
         snapshot['reports_collection']={'scope':'all_online','requested':len(ids),'successful':sum(s in snapshot['reports'] for s in ids),'complete':all(s in snapshot['reports'] for s in ids),'captured_at':now()}
         if not snapshot['reports_collection']['complete']:
             raise RuntimeError('Incomplete daily reports; previous public snapshot retained')
