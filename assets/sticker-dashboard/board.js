@@ -69,6 +69,16 @@
     const btn=$('#sb-single-load');btn.disabled=true;btn.textContent='正在读取单图数据…';
     try {const response=await fetch(data.single_metrics.url+'?at='+encodeURIComponent(data.captured_at),{credentials:'omit'});if(!response.ok)throw new Error('unavailable');const result=await response.json();if(result.schema!==1||result.period_kind!=='platform_daily'||result.captured_at!==data.captured_at)throw new Error('mismatch');singleRows=result.rows.map(r=>[result.album_ids[r[0]],r[1],r[2],result.date_labels[r[3]],r[4],r[5]]);Object.keys(result.dates).sort((a,b)=>result.dates[b]-result.dates[a]).forEach(date=>{const option=node('option',date);option.value=date;$('#sb-single-date').append(option);});$('#sb-single-panel').hidden=false;btn.hidden=true;renderSingles();}catch{btn.disabled=false;btn.textContent='单图数据暂未加载，点击重试';}
   }
+  function renderRevenue(){
+    const section=$('#sb-revenue-section'), rev=data.revenue;
+    if(!rev||!rev.leaderboard||!rev.leaderboard.length){section.hidden=false;$('#sb-rev-note').textContent='收益数据尚未采集或本次快照缺失；保留上次榜单。';return;}
+    section.hidden=false;
+    $('#sb-rev-note').textContent=`口径：收入 = 赞赏(元) + 热度(豆)/10 × 0.9。收益截至 ${rev.captured_at} 采集；总收入 ${rev.total_yuan} 元 = 赞赏 ${rev.reward_yuan} + 热度收益 ${rev.heat_income_yuan}；产生收入的套装 ${rev.albums_with_income} 套。`;
+    const rows=$('#sb-rev-rows'); rows.innerHTML='';
+    rev.leaderboard.forEach((r,i)=>{const tr=node('tr');
+      tr.append(node('td',String(i+1)),node('td',r.name),node('td',fmt(r.reward)),node('td',fmt(r.hot)),node('td',fmt(r.revenue)));
+      rows.append(tr);});
+  }
   function renderRows() {
     const pages=Math.max(1,Math.ceil(filtered.length/size)); page=Math.min(page,pages);
     const rows=$('#sb-rows'); rows.replaceChildren();
@@ -91,6 +101,7 @@
     $('#sb-freshness').textContent=`更新于 ${data.captured_at.replace('T',' ').replace('+08:00','')}（北京时间） · 手动刷新快照`;
     const s=data.summary;
     data.albums.forEach(a=>albumMap.set(a.id,a));
+    renderRevenue();
     if(data.single_metrics){$('#sb-single-coverage').textContent=`已读取 ${fmt(data.single_metrics.albums)} / ${fmt(data.single_metrics.scope)} 套已上架作品，${fmt(data.single_metrics.records)} 条单图日报记录。点击后加载数字索引，不下载全库图片。`;$('#sb-single-load').addEventListener('click',loadSingles);}else{$('#sb-single-load').hidden=true;$('#sb-single-coverage').textContent='单图日报正在补录。';}
     [['累计发送',s.sends],['累计下载',s.downloads],['已上架套装',s.statuses['已上架']||0],['有发送记录',s.used_albums]].forEach(([label,value])=>{const card=node('div',undefined,'sb-stat');card.append(node('strong',fmt(value)),node('span',label));$('#sb-summary').append(card);});
     const picks=data.albums.filter(a=>a.status==='已上架').slice(0,3),max=picks[0]?.sends||1;
