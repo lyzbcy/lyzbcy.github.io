@@ -91,9 +91,14 @@ def build(private_dir):
             shard_payloads[sid]=json.dumps({'schema':1,'id':sid,'name':r['Name'],'stickers':stickers,'wechat_url':detail.get('WxappJumpUrl') or None},ensure_ascii=False,separators=(',',':'))
         downloads=count(r.get('TotalDownloadNum'))
         sends=count(r.get('TotalSendNum'))
+        try:
+            reward_yuan_list=float(r.get('Rewards') or 0)
+        except ValueError:
+            reward_yuan_list=None
         albums.append({'id':sid,'name':r['Name'],'status':STATUS.get(r['Status'],'未知状态'),
                        'downloads':downloads,'sends':sends,'ratio':round(sends/downloads,2) if downloads and sends is not None else None,
                        'opened_at':r.get('OpenTime') or None,'platform_data_at':r.get('DataTime') or None,
+                       'reward_yuan':reward_yuan_list,
                        'preview_count':len(previews),'stickers':stickers if previews else [],
                        'sticker_count':len(stickers),'detail_url':shard_url,
                        'wechat_url': (detail.get('WxappJumpUrl') or None) if previews else None})
@@ -153,11 +158,62 @@ def build(private_dir):
              'used_albums':sum((a['sends'] or 0)>0 for a in albums)}
     point={'captured_at':raw['captured_at'],**summary}
     history=[p for p in history if p['captured_at'][:10]!=raw['captured_at'][:10]]+[point]
+    # 收益排行榜：收入 = 赞赏(元) + 热度(豆)/10 × 0.9（口径 2026-11-14 用户提供）。
+    # income 快照缺失时保留上一版排行榜，不用空数据覆盖。
+    income = raw.get('income') or {}
+    old_revenue = None
+    if data_path.exists():
+        try:
+            old_revenue = json.loads(data_path.read_text('utf8')).get('revenue')
+        except (ValueError, OSError, KeyError):
+            old_revenue = None
+    revenue_block = None
+    income_rows = income.get('list') or []
+    tips_total = sum(a.get('reward_yuan') or 0 for a in albums)
+    if income_rows and not income.get('error'):
+        reward_by_id, heat_by_id = {}, {}
+        for it in income_rows:
+            sid = it.get('StikerID')
+            if not sid:
+                continue
+            heat_by_id[sid] = heat_by_id.get(sid, 0.0) + float(it.get('Hot') or 0)
+        leaderboard = []
+        total_reward = total_heat_income = 0.0
+        for a in albums:
+            reward_yuan = round(a.get('reward_yuan') or 0.0, 2)
+            hot = heat_by_id.get(a['id'], 0.0)
+            heat_income = round(hot / 10.0 * 0.9, 2)
+            rev = round(reward_yuan + heat_income, 2)
+            a['reward_yuan'] = reward_yuan
+            a['hot_beans'] = int(hot)
+            a['revenue_yuan'] = rev
+            total_reward += reward_yuan
+            total_heat_income += heat_income
+            if rev > 0:
+                leaderboard.append({'id': a['id'], 'name': a['name'], 'revenue': rev,
+                                    'reward': reward_yuan, 'hot': int(hot)})
+        leaderboard.sort(key=lambda x: (-x['revenue'], -x['reward'], x['id']))
+        total_hot = float(income.get('summary', {}).get('total_hot') or 0)
+        account_heat = round(total_hot / 10.0 * 0.9, 2)
+        revenue_block = {'schema': 1,
+                         'formula': '收入(元) = 赞赏(元) + 热度(豆)/10 × 0.9',
+                         'captured_at': income.get('captured_at') or raw['captured_at'],
+                         'total_yuan': round(total_reward + account_heat, 2),
+                         'reward_yuan': round(total_reward, 2),
+                         'heat_income_yuan': account_heat,
+                         'total_hot': int(total_hot),
+                         'albums_with_income': sum(1 for a in albums if a.get('revenue_yuan', 0) > 0),
+                         'account_tips_note': '平台收益页按套的热度列当前全为 0，热度收益暂只能账号级展示，不参与按弹排名',
+                         'leaderboard': leaderboard[:20]}
+    else:
+        revenue_block = old_revenue
+    if revenue_block:
+        summary['revenue_yuan'] = revenue_block.get('total_yuan')
     cached_images=sum(bool(p.get('file')) for pp in raw.get('previews',{}).values() for p in pp)
     direct_images=sum(bool(p.get('public_url')) for pp in raw.get('previews',{}).values() for p in pp)
     result={'schema':1,'captured_at':raw['captured_at'],'source':'微信表情开放平台 / 表情包一键制作',
             'source_fingerprint':hashlib.sha256(json.dumps(rows,sort_keys=True).encode()).hexdigest(),
-            'summary':summary,'history':history[-90:],'albums':albums,
+            'summary':summary,'history':history[-90:],'albums':albums,'revenue':revenue_block,
             'single_metrics':{'url':'/assets/data/sticker-daily.json','albums':reports_covered,'scope':sum(r['Status']==7 for r in rows),'records':len(single_rows),'dates':dict(report_dates),'period_kind':'platform_daily'},
             'media':{'mode':'direct_first_limited_cache','direct_links':'仅采用无登录、博客Referer验证通过的图片直链',
                      'preview_albums':sum(bool(a['preview_count']) for a in albums),

@@ -180,7 +180,7 @@ with sync_playwright() as pw:
         # 收益明细：incomepage 分页拉全（每套赞赏/热度），失败不阻断主采集
         try:
             income_url = 'https://sticker.weixin.qq.com/cgi-bin/mmemoticon-bin/incomepage'
-            start_ts, end_ts = int(time.time()), int(time.time()) + 366 * 86400
+            start_ts, end_ts = 0, int(time.time()) + 366 * 86400
             income_list, page_num, total_pages = [], 1, 1
             income_summary = {}
             while page_num <= total_pages and page_num <= 400:
@@ -188,7 +188,7 @@ with sync_playwright() as pw:
                     income_url, timeout=20000,
                     multipart={'ReqType': 'all', 'StartTime': str(start_ts),
                                'EndTime': str(end_ts), 'PageNum': str(page_num),
-                               'PageLimit': '10'})
+                               'PageLimit': '50'})
                 body = resp.json()
                 if resp.status != 200 or body.get('base_resp', {}).get('ret') != 0:
                     raise RuntimeError('incomepage ret != 0')
