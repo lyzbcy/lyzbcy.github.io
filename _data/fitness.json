@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-15T17:22:01+08:00",
+  "generated_at": "2026-11-17T12:43:04+08:00",
   "overview": {
-    "total_sessions": 58,
-    "total_sessions_recent_4w": 10,
+    "total_sessions": 59,
+    "total_sessions_recent_4w": 11,
     "avg_sessions_per_week": 2.4,
-    "total_sets": 631,
-    "total_volume": 222635.8,
+    "total_sets": 639,
+    "total_volume": 223202.8,
     "date_range": {
       "first": "2026-05-31",
-      "last": "2026-11-15"
+      "last": "2026-11-17"
     },
     "preferences": {
       "warmupSets": 2,
@@ -23,6 +23,22 @@
     "fun_fact": "相当于举起了 1.5 头蓝鲸 🐋"
   },
   "sessions": [
+    {
+      "date": "2026-11-17",
+      "split": "pull",
+      "split_label": "拉日",
+      "total_sets": 8,
+      "total_volume": 567.0,
+      "exercises": [
+        "双头绳绳索下压",
+        "双头绳绳索面拉",
+        "哑铃侧平举",
+        "哑铃飞鸟（肩中束）",
+        "自重引体向上"
+      ],
+      "duration_min": 18,
+      "note": ""
+    },
     {
       "date": "2026-11-15",
       "split": "push",
@@ -2058,7 +2074,7 @@
       "group": "chest",
       "label": "胸",
       "total_volume": 46692.0,
-      "percentage": 21.2
+      "percentage": 21.0
     },
     {
       "group": "quads",
@@ -2081,8 +2097,8 @@
     {
       "group": "lateral_delt",
       "label": "肩中束",
-      "total_volume": 14212.7,
-      "percentage": 6.4
+      "total_volume": 14484.9,
+      "percentage": 6.5
     },
     {
       "group": "lats",
@@ -2135,8 +2151,8 @@
     {
       "group": "unknown",
       "label": "unknown",
-      "total_volume": 4427.9,
-      "percentage": 2.0
+      "total_volume": 4722.8,
+      "percentage": 2.1
     },
     {
       "group": "inner_thigh",
@@ -2327,6 +2343,13 @@
       "week": "2026-W46",
       "volume": 7566.8,
       "sessions": 28,
+      "is_current": false,
+      "is_latest": false
+    },
+    {
+      "week": "2026-W47",
+      "volume": 567.0,
+      "sessions": 8,
       "is_current": true,
       "is_latest": true
     }
@@ -2453,6 +2476,16 @@
       "total_volume": 0.0
     },
     {
+      "name": "自重引体向上",
+      "total_sets": 12,
+      "max_weight": 0,
+      "max_reps": 7.0,
+      "last_date": "2026-11-17",
+      "last_weight": 0,
+      "last_reps": 6.0,
+      "total_volume": 0.0
+    },
+    {
       "name": "坐姿划船",
       "total_sets": 11,
       "max_weight": 65,
@@ -2491,16 +2524,6 @@
       "last_weight": 0,
       "last_reps": 9.0,
       "total_volume": 909.4
-    },
-    {
-      "name": "自重引体向上",
-      "total_sets": 10,
-      "max_weight": 0,
-      "max_reps": 7.0,
-      "last_date": "2026-11-09",
-      "last_weight": 0,
-      "last_reps": 7.0,
-      "total_volume": 0.0
     },
     {
       "name": "坐姿推胸",
@@ -2561,6 +2584,16 @@
       "last_weight": 60,
       "last_reps": 6,
       "total_volume": 2950.0
+    },
+    {
+      "name": "双头绳绳索面拉",
+      "total_sets": 7,
+      "max_weight": 40.95,
+      "max_reps": 15.0,
+      "last_date": "2026-11-17",
+      "last_weight": 0,
+      "last_reps": 12.0,
+      "total_volume": 1106.7
     },
     {
       "name": "龙门架三头直杆下压",
@@ -2633,6 +2666,16 @@
       "total_volume": 0.0
     },
     {
+      "name": "哑铃飞鸟（肩中束）",
+      "total_sets": 5,
+      "max_weight": 22.6796185,
+      "max_reps": 17,
+      "last_date": "2026-11-17",
+      "last_weight": 22.6796185,
+      "last_reps": 12.0,
+      "total_volume": 1337.9
+    },
+    {
       "name": "绳索分体式高位下拉",
       "total_sets": 5,
       "max_weight": 100.0,
@@ -2661,16 +2704,6 @@
       "last_weight": 2.5,
       "last_reps": 30.0,
       "total_volume": 416.0
-    },
-    {
-      "name": "双头绳绳索面拉",
-      "total_sets": 5,
-      "max_weight": 40.95,
-      "max_reps": 15.0,
-      "last_date": "2026-11-09",
-      "last_weight": 40.95,
-      "last_reps": 15.0,
-      "total_volume": 1106.7
     },
     {
       "name": "坐姿腿屈伸",
@@ -2743,16 +2776,6 @@
       "total_volume": 4432.0
     },
     {
-      "name": "哑铃飞鸟（肩中束）",
-      "total_sets": 4,
-      "max_weight": 20.0,
-      "max_reps": 17,
-      "last_date": "2026-11-09",
-      "last_weight": 18.1436948,
-      "last_reps": 15.0,
-      "total_volume": 1065.7
-    },
-    {
       "name": "对握引体向上",
       "total_sets": 4,
       "max_weight": 0,
@@ -2791,6 +2814,16 @@
       "last_weight": 45.0,
       "last_reps": 10,
       "total_volume": 1850.0
+    },
+    {
+      "name": "双头绳绳索下压",
+      "total_sets": 4,
+      "max_weight": 0,
+      "max_reps": 11.0,
+      "last_date": "2026-11-17",
+      "last_weight": 0,
+      "last_reps": 8.0,
+      "total_volume": 0.0
     },
     {
       "name": "龙门架站姿卷腹",
@@ -3373,16 +3406,6 @@
       "total_volume": 1260.0
     },
     {
-      "name": "双头绳绳索下压",
-      "total_sets": 2,
-      "max_weight": 0,
-      "max_reps": 11.0,
-      "last_date": "2026-11-02",
-      "last_weight": 0,
-      "last_reps": 11.0,
-      "total_volume": 0.0
-    },
-    {
       "name": "双头绳三头下压",
       "total_sets": 2,
       "max_weight": 37.5,
@@ -3431,6 +3454,16 @@
       "last_weight": 40.95,
       "last_reps": 12.0,
       "total_volume": 866.2
+    },
+    {
+      "name": "哑铃侧平举",
+      "total_sets": 2,
+      "max_weight": 22.6796185,
+      "max_reps": 20.0,
+      "last_date": "2026-11-17",
+      "last_weight": 22.6796185,
+      "last_reps": 13.0,
+      "total_volume": 476.3
     },
     {
       "name": "分体式卧推",
@@ -4191,16 +4224,6 @@
       "last_weight": 45.0,
       "last_reps": 12.0,
       "total_volume": 540.0
-    },
-    {
-      "name": "哑铃侧平举",
-      "total_sets": 1,
-      "max_weight": 9.0718474,
-      "max_reps": 20.0,
-      "last_date": "2026-11-11",
-      "last_weight": 9.0718474,
-      "last_reps": 20.0,
-      "total_volume": 181.4
     }
   ],
   "nutrition_link": {
