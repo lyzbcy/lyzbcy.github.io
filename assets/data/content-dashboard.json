@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-11-20T10:20:58+08:00",
+  "generated_at": "2026-11-21T10:20:45+08:00",
   "contents": [
     {
       "id": "hot100-004",
@@ -323,12 +323,26 @@
                 "shares": 0,
                 "views": 305
               }
+            },
+            {
+              "publication_id": "hot100-004:douyin",
+              "observed_at": "2026-11-21T10:20:45+08:00",
+              "data_as_of": "2026-11-21T10:20:45+08:00",
+              "source": "douyin-creator-export",
+              "metrics": {
+                "comments": 0,
+                "favorites": 2,
+                "follower_gain": 0,
+                "likes": 2,
+                "shares": 0,
+                "views": 306
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-004:douyin",
-            "observed_at": "2026-11-20T10:20:58+08:00",
-            "data_as_of": "2026-11-20T10:20:58+08:00",
+            "observed_at": "2026-11-21T10:20:45+08:00",
+            "data_as_of": "2026-11-21T10:20:45+08:00",
             "source": "douyin-creator-export",
             "metrics": {
               "comments": 0,
@@ -336,7 +350,7 @@
               "follower_gain": 0,
               "likes": 2,
               "shares": 0,
-              "views": 305
+              "views": 306
             }
           },
           "windows": {
@@ -1222,12 +1236,26 @@
                 "shares": 2,
                 "views": 2311
               }
+            },
+            {
+              "publication_id": "hot100-003:douyin",
+              "observed_at": "2026-11-21T10:20:45+08:00",
+              "data_as_of": "2026-11-21T10:20:45+08:00",
+              "source": "douyin-creator-export",
+              "metrics": {
+                "comments": 0,
+                "favorites": 4,
+                "follower_gain": 1,
+                "likes": 22,
+                "shares": 2,
+                "views": 2312
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-003:douyin",
-            "observed_at": "2026-11-20T10:20:58+08:00",
-            "data_as_of": "2026-11-20T10:20:58+08:00",
+            "observed_at": "2026-11-21T10:20:45+08:00",
+            "data_as_of": "2026-11-21T10:20:45+08:00",
             "source": "douyin-creator-export",
             "metrics": {
               "comments": 0,
@@ -1235,7 +1263,7 @@
               "follower_gain": 1,
               "likes": 22,
               "shares": 2,
-              "views": 2311
+              "views": 2312
             }
           },
           "windows": {}
@@ -2061,12 +2089,26 @@
                 "shares": 0,
                 "views": 874
               }
+            },
+            {
+              "publication_id": "hot100-002:douyin",
+              "observed_at": "2026-11-21T10:20:45+08:00",
+              "data_as_of": "2026-11-21T10:20:45+08:00",
+              "source": "douyin-creator-export",
+              "metrics": {
+                "comments": 0,
+                "favorites": 3,
+                "follower_gain": 2,
+                "likes": 9,
+                "shares": 0,
+                "views": 875
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-002:douyin",
-            "observed_at": "2026-11-20T10:20:58+08:00",
-            "data_as_of": "2026-11-20T10:20:58+08:00",
+            "observed_at": "2026-11-21T10:20:45+08:00",
+            "data_as_of": "2026-11-21T10:20:45+08:00",
             "source": "douyin-creator-export",
             "metrics": {
               "comments": 0,
@@ -2074,7 +2116,7 @@
               "follower_gain": 2,
               "likes": 9,
               "shares": 0,
-              "views": 874
+              "views": 875
             }
           },
           "windows": {
@@ -3056,12 +3098,26 @@
                 "shares": 5,
                 "views": 1964
               }
+            },
+            {
+              "publication_id": "hot100-001:douyin",
+              "observed_at": "2026-11-21T10:20:45+08:00",
+              "data_as_of": "2026-11-21T10:20:45+08:00",
+              "source": "douyin-creator-export",
+              "metrics": {
+                "comments": 2,
+                "favorites": 10,
+                "follower_gain": 2,
+                "likes": 28,
+                "shares": 5,
+                "views": 1965
+              }
             }
           ],
           "latest": {
             "publication_id": "hot100-001:douyin",
-            "observed_at": "2026-11-20T10:20:58+08:00",
-            "data_as_of": "2026-11-20T10:20:58+08:00",
+            "observed_at": "2026-11-21T10:20:45+08:00",
+            "data_as_of": "2026-11-21T10:20:45+08:00",
             "source": "douyin-creator-export",
             "metrics": {
               "comments": 2,
@@ -3069,7 +3125,7 @@
               "follower_gain": 2,
               "likes": 28,
               "shares": 5,
-              "views": 1964
+              "views": 1965
             }
           },
           "windows": {
@@ -3739,12 +3795,26 @@
                 "shares": 0,
                 "views": 284
               }
+            },
+            {
+              "publication_id": "gpt-fireman-20261031:douyin",
+              "observed_at": "2026-11-21T10:20:45+08:00",
+              "data_as_of": "2026-11-21T10:20:45+08:00",
+              "source": "douyin-creator-export",
+              "metrics": {
+                "comments": 5,
+                "favorites": 1,
+                "follower_gain": 0,
+                "likes": 8,
+                "shares": 0,
+                "views": 285
+              }
             }
           ],
           "latest": {
             "publication_id": "gpt-fireman-20261031:douyin",
-            "observed_at": "2026-11-20T10:20:58+08:00",
-            "data_as_of": "2026-11-20T10:20:58+08:00",
+            "observed_at": "2026-11-21T10:20:45+08:00",
+            "data_as_of": "2026-11-21T10:20:45+08:00",
             "source": "douyin-creator-export",
             "metrics": {
               "comments": 5,
@@ -3752,7 +3822,7 @@
               "follower_gain": 0,
               "likes": 8,
               "shares": 0,
-              "views": 284
+              "views": 285
             }
           },
           "windows": {
@@ -4020,12 +4090,26 @@
                 "shares": 1,
                 "views": 544
               }
+            },
+            {
+              "publication_id": "fitness-20261102:douyin",
+              "observed_at": "2026-11-21T10:20:45+08:00",
+              "data_as_of": "2026-11-21T10:20:45+08:00",
+              "source": "douyin-creator-export",
+              "metrics": {
+                "comments": 0,
+                "favorites": 1,
+                "follower_gain": 0,
+                "likes": 6,
+                "shares": 1,
+                "views": 545
+              }
             }
           ],
           "latest": {
             "publication_id": "fitness-20261102:douyin",
-            "observed_at": "2026-11-20T10:20:58+08:00",
-            "data_as_of": "2026-11-20T10:20:58+08:00",
+            "observed_at": "2026-11-21T10:20:45+08:00",
+            "data_as_of": "2026-11-21T10:20:45+08:00",
             "source": "douyin-creator-export",
             "metrics": {
               "comments": 0,
@@ -4033,7 +4117,7 @@
               "follower_gain": 0,
               "likes": 6,
               "shares": 1,
-              "views": 544
+              "views": 545
             }
           },
           "windows": {
@@ -4659,12 +4743,26 @@
                 "shares": 2,
                 "views": 2190
               }
+            },
+            {
+              "publication_id": "ai-town-20261101:douyin",
+              "observed_at": "2026-11-21T10:20:45+08:00",
+              "data_as_of": "2026-11-21T10:20:45+08:00",
+              "source": "douyin-creator-export",
+              "metrics": {
+                "comments": 1,
+                "favorites": 8,
+                "follower_gain": 1,
+                "likes": 23,
+                "shares": 2,
+                "views": 2193
+              }
             }
           ],
           "latest": {
             "publication_id": "ai-town-20261101:douyin",
-            "observed_at": "2026-11-20T10:20:58+08:00",
-            "data_as_of": "2026-11-20T10:20:58+08:00",
+            "observed_at": "2026-11-21T10:20:45+08:00",
+            "data_as_of": "2026-11-21T10:20:45+08:00",
             "source": "douyin-creator-export",
             "metrics": {
               "comments": 1,
@@ -4672,7 +4770,7 @@
               "follower_gain": 1,
               "likes": 23,
               "shares": 2,
-              "views": 2190
+              "views": 2193
             }
           },
           "windows": {
