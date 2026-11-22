@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-22T22:05:04.703442+08:00",
+  "generated_at": "2026-11-23T01:00:04.954348+08:00",
   "goals": {
     "calories": 1664,
     "water": 2000,
@@ -2379,20 +2379,13 @@
   "status": {
     "has_today": false,
     "has_yesterday": false,
-    "today": "2026-11-22",
+    "today": "2026-11-23",
     "is_active": false,
     "is_training_day": false
   },
   "health_score": {
     "today": null,
     "history": [
-      {
-        "date": "2026-11-09",
-        "score": 31,
-        "grade": "💀 D",
-        "nutrition": "热量 0/1965 kcal (0/20); 蛋白 0/150g (0/15); 饮水 0/2000ml (0/15)",
-        "exercise": "训练量 2326kg (12/20); 组数 9 (10/10)"
-      },
       {
         "date": "2026-11-11",
         "score": 21,
@@ -2415,9 +2408,9 @@
         "exercise": "训练量 567kg (3/20); 组数 8 (10/10)"
       }
     ],
-    "range_start": "2026-11-09",
-    "range_end": "2026-11-22",
-    "exported_at": "2026-11-22T22:05:04.686867"
+    "range_start": "2026-11-10",
+    "range_end": "2026-11-23",
+    "exported_at": "2026-11-23T01:00:04.944945"
   },
   "food_library": {
     "items": [
