@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-17T12:45:44+08:00",
+  "generated_at": "2026-11-23T12:44:08+08:00",
   "overview": {
-    "total_sessions": 59,
-    "total_sessions_recent_4w": 11,
+    "total_sessions": 60,
+    "total_sessions_recent_4w": 12,
     "avg_sessions_per_week": 2.4,
-    "total_sets": 639,
-    "total_volume": 223202.8,
+    "total_sets": 644,
+    "total_volume": 223843.5,
     "date_range": {
       "first": "2026-05-31",
-      "last": "2026-11-17"
+      "last": "2026-11-23"
     },
     "preferences": {
       "warmupSets": 2,
@@ -19,10 +19,25 @@
       "adjustmentNote": "训练状态比PR数据弱，推荐重量需适当下调"
     },
     "muscle_groups_count": 20,
-    "exercises_count": 187,
+    "exercises_count": 188,
     "fun_fact": "相当于举起了 1.5 头蓝鲸 🐋"
   },
   "sessions": [
+    {
+      "date": "2026-11-23",
+      "split": "pull",
+      "split_label": "拉日",
+      "total_sets": 5,
+      "total_volume": 640.7,
+      "exercises": [
+        "哑铃侧平举",
+        "绳索弯举",
+        "自重引体向上"
+      ],
+      "duration_min": 19,
+      "volume_estimated": true,
+      "note": "训练量含器械片数等效估算"
+    },
     {
       "date": "2026-11-17",
       "split": "pull",
@@ -2074,7 +2089,7 @@
       "group": "chest",
       "label": "胸",
       "total_volume": 46692.0,
-      "percentage": 21.0
+      "percentage": 20.8
     },
     {
       "group": "quads",
@@ -2097,14 +2112,14 @@
     {
       "group": "lateral_delt",
       "label": "肩中束",
-      "total_volume": 14484.9,
-      "percentage": 6.5
+      "total_volume": 14757.1,
+      "percentage": 6.6
     },
     {
       "group": "lats",
       "label": "背阔",
       "total_volume": 13979.5,
-      "percentage": 6.3
+      "percentage": 6.2
     },
     {
       "group": "back",
@@ -2133,8 +2148,8 @@
     {
       "group": "biceps",
       "label": "肱二头肌",
-      "total_volume": 8277.7,
-      "percentage": 3.7
+      "total_volume": 8646.3,
+      "percentage": 3.9
     },
     {
       "group": "rear_delt",
@@ -2350,6 +2365,13 @@
       "week": "2026-W47",
       "volume": 567.0,
       "sessions": 8,
+      "is_current": false,
+      "is_latest": false
+    },
+    {
+      "week": "2026-W48",
+      "volume": 640.7,
+      "sessions": 5,
       "is_current": true,
       "is_latest": true
     }
@@ -2456,6 +2478,16 @@
       "total_volume": 4872.5
     },
     {
+      "name": "自重引体向上",
+      "total_sets": 14,
+      "max_weight": 0,
+      "max_reps": 7.0,
+      "last_date": "2026-11-23",
+      "last_weight": 0,
+      "last_reps": 6.0,
+      "total_volume": 0.0
+    },
+    {
       "name": "器械站姿胸飞鸟(下胸)",
       "total_sets": 13,
       "max_weight": 78,
@@ -2473,16 +2505,6 @@
       "last_date": "2026-11-11",
       "last_weight": 0,
       "last_reps": 5.0,
-      "total_volume": 0.0
-    },
-    {
-      "name": "自重引体向上",
-      "total_sets": 12,
-      "max_weight": 0,
-      "max_reps": 7.0,
-      "last_date": "2026-11-17",
-      "last_weight": 0,
-      "last_reps": 6.0,
       "total_volume": 0.0
     },
     {
@@ -2834,6 +2856,16 @@
       "last_weight": 52.5,
       "last_reps": 16.0,
       "total_volume": 1582.5
+    },
+    {
+      "name": "哑铃侧平举",
+      "total_sets": 4,
+      "max_weight": 22.6796185,
+      "max_reps": 20.0,
+      "last_date": "2026-11-23",
+      "last_weight": 11.33980925,
+      "last_reps": 12.0,
+      "total_volume": 748.4
     },
     {
       "name": "悍马分动式高位下拉",
@@ -3454,16 +3486,6 @@
       "last_weight": 40.95,
       "last_reps": 12.0,
       "total_volume": 866.2
-    },
-    {
-      "name": "哑铃侧平举",
-      "total_sets": 2,
-      "max_weight": 22.6796185,
-      "max_reps": 20.0,
-      "last_date": "2026-11-17",
-      "last_weight": 22.6796185,
-      "last_reps": 13.0,
-      "total_volume": 476.3
     },
     {
       "name": "分体式卧推",
@@ -4224,6 +4246,16 @@
       "last_weight": 45.0,
       "last_reps": 12.0,
       "total_volume": 540.0
+    },
+    {
+      "name": "绳索弯举",
+      "total_sets": 1,
+      "max_weight": 28.35,
+      "max_reps": 13.0,
+      "last_date": "2026-11-23",
+      "last_weight": 28.35,
+      "last_reps": 13.0,
+      "total_volume": 368.6
     }
   ],
   "nutrition_link": {
