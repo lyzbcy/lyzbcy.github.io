@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-25T12:38:38+08:00",
+  "generated_at": "2026-11-27T13:21:26+08:00",
   "overview": {
-    "total_sessions": 61,
-    "total_sessions_recent_4w": 13,
+    "total_sessions": 62,
+    "total_sessions_recent_4w": 14,
     "avg_sessions_per_week": 2.4,
-    "total_sets": 653,
-    "total_volume": 227255.9,
+    "total_sets": 656,
+    "total_volume": 227992.0,
     "date_range": {
       "first": "2026-05-31",
-      "last": "2026-11-25"
+      "last": "2026-11-27"
     },
     "preferences": {
       "warmupSets": 2,
@@ -23,6 +23,20 @@
     "fun_fact": "相当于举起了 1.5 头蓝鲸 🐋"
   },
   "sessions": [
+    {
+      "date": "2026-11-27",
+      "split": "push",
+      "split_label": "推日",
+      "total_sets": 3,
+      "total_volume": 736.1,
+      "exercises": [
+        "史密斯卧推",
+        "哑铃飞鸟（肩中束）",
+        "自重引体向上"
+      ],
+      "duration_min": 4,
+      "note": ""
+    },
     {
       "date": "2026-11-25",
       "split": "push",
@@ -2107,14 +2121,14 @@
     {
       "group": "chest",
       "label": "胸",
-      "total_volume": 46692.0,
-      "percentage": 20.7
+      "total_volume": 47292.0,
+      "percentage": 20.8
     },
     {
       "group": "quads",
       "label": "股四头肌",
       "total_volume": 29926.0,
-      "percentage": 13.2
+      "percentage": 13.1
     },
     {
       "group": "mid_back",
@@ -2131,8 +2145,8 @@
     {
       "group": "lateral_delt",
       "label": "肩中束",
-      "total_volume": 14836.1,
-      "percentage": 6.5
+      "total_volume": 14972.1,
+      "percentage": 6.6
     },
     {
       "group": "back",
@@ -2144,7 +2158,7 @@
       "group": "lats",
       "label": "背阔",
       "total_volume": 13979.5,
-      "percentage": 6.2
+      "percentage": 6.1
     },
     {
       "group": "hamstrings",
@@ -2389,8 +2403,8 @@
     },
     {
       "week": "2026-W48",
-      "volume": 4053.1,
-      "sessions": 14,
+      "volume": 4789.2,
+      "sessions": 17,
       "is_current": true,
       "is_latest": true
     }
@@ -2398,13 +2412,13 @@
   "exercises": [
     {
       "name": "史密斯卧推",
-      "total_sets": 25,
+      "total_sets": 26,
       "max_weight": 80.0,
       "max_reps": 18.0,
-      "last_date": "2026-11-11",
-      "last_weight": 55.0,
-      "last_reps": 18.0,
-      "total_volume": 9285.0
+      "last_date": "2026-11-27",
+      "last_weight": 40.0,
+      "last_reps": 15.0,
+      "total_volume": 9885.0
     },
     {
       "name": "坐姿器械推肩",
@@ -2457,6 +2471,16 @@
       "total_volume": 50.0
     },
     {
+      "name": "自重引体向上",
+      "total_sets": 17,
+      "max_weight": 74.61,
+      "max_reps": 10.0,
+      "last_date": "2026-11-27",
+      "last_weight": 0,
+      "last_reps": 7.0,
+      "total_volume": 1119.2
+    },
+    {
       "name": "坐姿器械飞鸟",
       "total_sets": 16,
       "max_weight": 47,
@@ -2465,16 +2489,6 @@
       "last_weight": 34.0,
       "last_reps": 20,
       "total_volume": 6756.0
-    },
-    {
-      "name": "自重引体向上",
-      "total_sets": 16,
-      "max_weight": 74.61,
-      "max_reps": 10.0,
-      "last_date": "2026-11-25",
-      "last_weight": 74.61,
-      "last_reps": 10.0,
-      "total_volume": 1119.2
     },
     {
       "name": "坐姿哑铃推肩",
@@ -2667,6 +2681,16 @@
       "total_volume": 5340.0
     },
     {
+      "name": "哑铃飞鸟（肩中束）",
+      "total_sets": 6,
+      "max_weight": 22.6796185,
+      "max_reps": 17,
+      "last_date": "2026-11-27",
+      "last_weight": 11.33980925,
+      "last_reps": 12.0,
+      "total_volume": 1474.0
+    },
+    {
       "name": "器械站姿胸飞鸟(中束)",
       "total_sets": 5,
       "max_weight": 42,
@@ -2715,16 +2739,6 @@
       "last_weight": 0,
       "last_reps": 50,
       "total_volume": 0.0
-    },
-    {
-      "name": "哑铃飞鸟（肩中束）",
-      "total_sets": 5,
-      "max_weight": 22.6796185,
-      "max_reps": 17,
-      "last_date": "2026-11-17",
-      "last_weight": 22.6796185,
-      "last_reps": 12.0,
-      "total_volume": 1337.9
     },
     {
       "name": "绳索分体式高位下拉",
